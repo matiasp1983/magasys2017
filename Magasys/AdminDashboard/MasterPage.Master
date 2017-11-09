@@ -1,0 +1,89 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage.master.cs" Inherits="PL.AdminDashboard.MasterPage" %>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAGASYS</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+    <link href="css/plugins/footable/footable.core.css" rel="stylesheet">
+    <link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <asp:ContentPlaceHolder ID="head" runat="server" />
+</head>
+<body>
+    <div id="wrapper">
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav metismenu" id="side-menu">
+                    <li class="nav-header">
+                        <div class="dropdown profile-element">
+                            <span>
+                                <img alt="imageProfile" class="img-circle" src="img/groot.jpg" />
+                            </span>
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <span class="clear"><span class="block m-t-xs"><strong class="font-bold">I am Groot</strong>
+                                </span><span class="text-muted text-xs block">Administrador <b class="caret"></b></span></span></a>
+                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                <li><a href="#">Cerrar sesión</a></li>
+                            </ul>
+                        </div>
+                        <div class="logo-element">
+                            M+
+                        </div>
+                    </li>
+                    <asp:ContentPlaceHolder ID="menu" runat="server" />
+                </ul>
+            </div>
+        </nav>
+        <div id="page-wrapper" class="gray-bg">
+            <div class="row border-bottom">
+                <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+                    <div class="navbar-header">
+                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i></a>
+                        <form role="search" class="navbar-form-custom" method="post" action="#">
+                            <div class="form-group"></div>
+                        </form>
+                    </div>
+                    <ul class="nav navbar-top-links navbar-right">
+                        <li>
+                            <a href="#">
+                                <i class="fa fa-sign-out"></i>Cerrar sesión
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <asp:ContentPlaceHolder ID="contentMaster" runat="server" />
+            <div class="footer">
+                <div class="text-center">
+                    <strong>Copyright</strong> Magasys &copy; 2017
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Mainly scripts -->
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- Custom and plugin javascript -->
+    <script src="js/inspinia.js"></script>
+    <script src="js/plugins/pace/pace.min.js"></script>
+    <!-- Input Mask-->
+    <script src="js/plugins/jasny/jasny-bootstrap.min.js"></script>
+    <!-- Data picker -->
+    <script src="js/plugins/datapicker/bootstrap-datepicker.js"></script>
+    <script src="js/plugins/datapicker/bootstrap-datepicker.es.js"></script>
+    <!-- Paginado FooTable -->
+    <script src="js/plugins/footable/footable.all.min.js"></script>    
+    <!-- Jquery Validate -->
+    <script src="js/plugins/validate/jquery.validate.js"></script>
+
+    <asp:ContentPlaceHolder ID="script" runat="server" />
+</body>
+</html>
