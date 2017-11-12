@@ -37,7 +37,8 @@ namespace PL.AdminDashboard
                     txtCodigo.Text = oProveedor.ID_PROVEEDOR.ToString();
                 if (!String.IsNullOrEmpty(oProveedor.FECHA_ALTA.ToString()))
                     txtFechaAlta.Text = oProveedor.FECHA_ALTA.ToString("dd/MM/yyyy");
-                txtCuit.Text = oProveedor.CUIT;
+                if (!String.IsNullOrEmpty(oProveedor.CUIT))
+                    txtCuit.Text = Convert.ToInt64(oProveedor.CUIT).ToString("##-########-#");
                 txtRazonSocial.Text = oProveedor.RAZON_SOCIAL;
                 txtNombre.Text = oProveedor.NOMBRE.ToString().ToUpper();
                 txtApellido.Text = oProveedor.APELLIDO.ToString().ToUpper();
@@ -60,7 +61,7 @@ namespace PL.AdminDashboard
             else
                 Response.Redirect("ProveedorListado.aspx");
         }
-        
+
         #endregion
     }
 }

@@ -101,7 +101,7 @@
                                         <span class="input-group-addon"><i class="fa fa-mobile-phone"></i></span>
                                         <asp:TextBox ID="txtTelefonoMovil" runat="server" CssClass="form-control" disabled=""></asp:TextBox>
                                     </div>
-                                    <span class="help-block m-b-none">Código de área + N°. Ej: 0351156243492.</span>
+                                    <span class="help-block m-b-none">Código de área + N°. Ej: 03516243492.</span>
                                 </div>
                             </div>
                         </div>
