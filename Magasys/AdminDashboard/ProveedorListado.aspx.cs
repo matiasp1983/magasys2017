@@ -119,11 +119,10 @@ namespace PL.AdminDashboard
         }
 
         private static bool ValidaCuit(string cuit)
-        {
-            var loCuitReplace = cuit.Replace("-", string.Empty);
-            if (long.Parse(loCuitReplace) <= 0) return false;
-            var loDigitoCalcu = Utilities.CalcularDigitoCuit(loCuitReplace);
-            var loParseSubStr = int.Parse(loCuitReplace.Substring(10));
+        {           
+            if (long.Parse(cuit) <= 0) return false;
+            var loDigitoCalcu = Utilities.CalcularDigitoCuit(cuit);
+            var loParseSubStr = int.Parse(cuit.Substring(10));
             return loDigitoCalcu == loParseSubStr;
         }
 
@@ -165,7 +164,8 @@ namespace PL.AdminDashboard
                 }
                 catch (Exception ex)
                 {
-                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.DangerModal("Error", String.Format(Message.MsjeSistemaError, ex.Message)));
+                    dvMensajeCuit.InnerHtml = MessageManager.Warning(dvMensajeCuit, ex.Message);
+                    dvMensajeCuit.Visible = true;
                 }
             }
         }

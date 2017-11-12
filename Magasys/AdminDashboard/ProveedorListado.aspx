@@ -40,7 +40,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="col-sm-10 control-label">CUIT</label>
-                                            <asp:TextBox ID="txtCuitBusqueda" runat="server" CssClass="form-control" placeholder="99-99999999-9" data-mask="99-99999999-9" MaxLength="13"></asp:TextBox>
+                                            <asp:TextBox ID="txtCuitBusqueda" runat="server" CssClass="form-control" placeholder="99999999999" MaxLength="11"></asp:TextBox>
                                         </div>
                                     </div>
                                 </div>
@@ -91,7 +91,7 @@
                                 <ContentTemplate>
                                     <div class="text-center">
                                         <div class="form-group">
-                                            <asp:TextBox ID="txtCuitAlta" runat="server" placeholder="99-99999999-9" CssClass="form-control" data-mask="99-99999999-9" MaxLength="13"></asp:TextBox>
+                                            <asp:TextBox ID="txtCuitAlta" runat="server" placeholder="99999999999" CssClass="form-control" MaxLength="11"></asp:TextBox>
                                         </div>
                                         <button type="button" id="btnCrearProveedor" runat="server" class="btn btn-info" onserverclick="BtnCrearProveedor_Click">
                                             <i class="fa fa-plus"></i>&nbsp;&nbsp;<span>Crear</span>
@@ -138,13 +138,13 @@
                                 <ItemTemplate>
                                     <tr>
                                         <td>
-                                            <asp:Label ID="lblCuit" runat="server" Text='<%#Eval("CUIT")%>'></asp:Label>
+                                            <asp:Label ID="lblCuit" runat="server" Text='<%#Convert.ToInt64(Eval("CUIT")).ToString("##-########-#")%>'></asp:Label>
                                         </td>
                                         <td>
                                             <asp:Label ID="lblRazonSocial" runat="server" Text='<%#Eval("RAZON_SOCIAL")%>'></asp:Label>
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblFechaAlta" runat="server" Text='<%#Eval("FECHA_ALTA","{0:dd/MM/yyyy}")%>'></asp:Label>
+                                            <asp:Label ID="lblFechaAlta" runat="server" Text='<%#Convert.ToDateTime(Eval("FECHA_ALTA")).ToString("dd/MM/yyyy")%>'></asp:Label>
                                         </td>
                                         <td>
                                             <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE")%>'></asp:Label>
@@ -183,6 +183,7 @@
                                             <p style="color: #797979; font-size: 16px; font-weight: 300; position: relative; text-align: center; float: none; margin: 0; padding: 0; line-height: normal;">
                                                 Se eliminará el proveedor con CUIT: <b>
                                                     <asp:Label ID="lblCuitProveedorBaja" runat="server"></asp:Label></b>.
+                                           
                                             </p>
                                         </div>
                                         <div class="modal-footer" style="text-align: center; padding-top: 0px;">

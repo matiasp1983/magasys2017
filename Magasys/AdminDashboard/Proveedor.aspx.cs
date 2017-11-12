@@ -21,6 +21,8 @@ namespace PL.AdminDashboard
 
             try
             {
+                oProveedor.CUIT = oProveedor.CUIT.ToString().Replace("-", String.Empty).Trim();
+                
                 if (oProveedor.ID_PROVEEDOR == 0)
                 {
                     var loProveedor = new ProveedorBLL().AltaProveedor(oProveedor);
@@ -105,7 +107,8 @@ namespace PL.AdminDashboard
                         txtCodigo.Text = oProveedor.ID_PROVEEDOR.ToString();
                     if (!String.IsNullOrEmpty(oProveedor.FECHA_ALTA.ToString()))
                         txtFechaAlta.Text = oProveedor.FECHA_ALTA.ToString("dd/MM/yyyy");
-                    txtCuit.Text = oProveedor.CUIT;
+                    if (!String.IsNullOrEmpty(oProveedor.CUIT))
+                        txtCuit.Text = Convert.ToInt64(oProveedor.CUIT).ToString("##-########-#");
                     txtRazonSocial.Text = oProveedor.RAZON_SOCIAL;
                     txtNombre.Text = oProveedor.NOMBRE.ToString().ToUpper();
                     txtApellido.Text = oProveedor.APELLIDO.ToString().ToUpper();
