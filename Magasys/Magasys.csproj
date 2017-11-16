@@ -162,6 +162,7 @@
     <Content Include="AdminDashboard\js\plugins\pace\pace.min.js" />
     <Content Include="AdminDashboard\js\plugins\slimscroll\jquery.slimscroll.js" />
     <Content Include="AdminDashboard\js\plugins\slimscroll\jquery.slimscroll.min.js" />
+    <Content Include="AdminDashboard\Producto.aspx" />
     <Content Include="AdminDashboard\Proveedor.aspx" />
     <Content Include="AdminDashboard\ProveedorListado.aspx" />
     <Content Include="AdminDashboard\ProveedorVisualizar.aspx" />
@@ -182,6 +183,13 @@
     </Compile>
     <Compile Include="AdminDashboard\MasterPage.Master.designer.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\Producto.aspx.cs">
+      <DependentUpon>Producto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\Producto.aspx.designer.cs">
+      <DependentUpon>Producto.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminDashboard\Proveedor.aspx.cs">
       <DependentUpon>Proveedor.aspx</DependentUpon>
