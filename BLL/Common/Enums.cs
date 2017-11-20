@@ -10,7 +10,8 @@ namespace BLL.Common
     {
         public enum Session
         {
-            Proveedor
+            Proveedor,
+            Producto
         }        
     }
 }
