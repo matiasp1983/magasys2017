@@ -249,8 +249,8 @@
             $(FormProveedor).validate({
                 rules: {
                     <%=txtRazonSocial.UniqueID%>: {
-                    required: true
-                },
+                        required: true
+                    },
                     <%=txtNombre.UniqueID%>: {
                         required: true
                     },
@@ -293,11 +293,11 @@
                     <%=txtCodigoPostal.UniqueID%>: {
                         required: true
                     }                    
-				  },
-        messages: {
+				},
+                messages: {
                     <%=txtRazonSocial.UniqueID%>: {
-                required: "Este campo es requerido."
-            },
+                        required: "Este campo es requerido."
+                    },
                     <%=txtNombre.UniqueID%>: {
                         required: "Este campo es requerido."
                     },
@@ -306,22 +306,22 @@
                     },
                     <%=txtTelefonoMovil.UniqueID%>: {
                         required: "Este campo es requerido.",
-                            number: "Ingrese un número válido."
+                        number: "Ingrese un número válido."
                     },
                     <%=txtTelefonoFijo.UniqueID%>: {
                         number: "Ingrese un número válido."
                     },
                     <%=txtEmail.UniqueID%>: {
                         required: "Este campo es requerido.",
-                            email: "Formato de correo incorrecto."
+                        email: "Formato de correo incorrecto."
                     },
                     <%=txtCalle.UniqueID%>: {
                         required: "Este campo es requerido."
                     },
                     <%=txtNumero.UniqueID%>: {
                         required: "Este campo es requerido.",
-                            number: "Ingrese un número válido.",
-                                min: "Ingrese un valor mayor o igual a 1."
+                        number: "Ingrese un número válido.",
+                        min: "Ingrese un valor mayor o igual a 1."
                     },
                     <%=txtDepartamento.UniqueID%>: {
                         required: "Este campo es requerido."
@@ -338,7 +338,7 @@
                     <%=txtCodigoPostal.UniqueID%>: {
                         required: "Este campo es requerido."
                     }
-        }
+                }
             });
         }
     </script>
