@@ -1,5 +1,6 @@
 ﻿using BLL;
 using BLL.Common;
+using NLog;
 using System;
 using System.Web.UI.WebControls;
 
@@ -44,7 +45,8 @@ namespace PL.AdminDashboard
             }
             catch (Exception ex)
             {
-                Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.DangerModal("Error", String.Format(Message.MsjeSistemaError, ex.Message)));
+                Logger logger = LogManager.GetCurrentClassLogger();
+                logger.Error(ex);
             }
 
             Session.Remove(Enums.Session.Proveedor.ToString());
@@ -91,41 +93,49 @@ namespace PL.AdminDashboard
 
         private void CargarProveedorDesdeSession()
         {
-            if (Session[Enums.Session.Proveedor.ToString()] != null)
+            try
             {
-                var oProveedor = (BLL.DAL.Proveedor)Session[Enums.Session.Proveedor.ToString()];
-                CargarProvincias((long)oProveedor.ID_PROVINCIA, (long)oProveedor.ID_LOCALIDAD);
-
-                if (oProveedor.ID_PROVEEDOR == 0)
+                if (Session[Enums.Session.Proveedor.ToString()] != null)
                 {
-                    txtCuit.Text = oProveedor.CUIT;
+                    var oProveedor = (BLL.DAL.Proveedor)Session[Enums.Session.Proveedor.ToString()];
+                    CargarProvincias((long)oProveedor.ID_PROVINCIA, (long)oProveedor.ID_LOCALIDAD);
+
+                    if (oProveedor.ID_PROVEEDOR == 0)
+                    {
+                        txtCuit.Text = oProveedor.CUIT;
+                    }
+                    else
+                    {
+                        EsModificacion();
+                        if (oProveedor.ID_PROVEEDOR > 0)
+                            txtCodigo.Text = oProveedor.ID_PROVEEDOR.ToString();
+                        if (!String.IsNullOrEmpty(oProveedor.FECHA_ALTA.ToString()))
+                            txtFechaAlta.Text = oProveedor.FECHA_ALTA.ToString("dd/MM/yyyy");
+                        if (!String.IsNullOrEmpty(oProveedor.CUIT))
+                            txtCuit.Text = Convert.ToInt64(oProveedor.CUIT).ToString("##-########-#");
+                        txtRazonSocial.Text = oProveedor.RAZON_SOCIAL;
+                        txtNombre.Text = oProveedor.NOMBRE.ToString().ToUpper();
+                        txtApellido.Text = oProveedor.APELLIDO.ToString().ToUpper();
+                        txtTelefonoMovil.Text = oProveedor.TELEFONO_MOVIL;
+                        txtTelefonoFijo.Text = oProveedor.TELEFONO_FIJO;
+                        txtEmail.Text = oProveedor.EMAIL;
+                        txtCalle.Text = oProveedor.CALLE;
+                        if (!String.IsNullOrEmpty(oProveedor.NUMERO.ToString()))
+                            txtNumero.Text = oProveedor.NUMERO.ToString();
+                        txtPiso.Text = oProveedor.PISO;
+                        txtDepartamento.Text = oProveedor.DEPARTAMENTO;
+                        txtBarrio.Text = oProveedor.BARRIO;
+                        txtCodigoPostal.Text = oProveedor.CODIGO_POSTAL;
+                    }
                 }
                 else
-                {
-                    EsModificacion();
-                    if (oProveedor.ID_PROVEEDOR > 0)
-                        txtCodigo.Text = oProveedor.ID_PROVEEDOR.ToString();
-                    if (!String.IsNullOrEmpty(oProveedor.FECHA_ALTA.ToString()))
-                        txtFechaAlta.Text = oProveedor.FECHA_ALTA.ToString("dd/MM/yyyy");
-                    if (!String.IsNullOrEmpty(oProveedor.CUIT))
-                        txtCuit.Text = Convert.ToInt64(oProveedor.CUIT).ToString("##-########-#");
-                    txtRazonSocial.Text = oProveedor.RAZON_SOCIAL;
-                    txtNombre.Text = oProveedor.NOMBRE.ToString().ToUpper();
-                    txtApellido.Text = oProveedor.APELLIDO.ToString().ToUpper();
-                    txtTelefonoMovil.Text = oProveedor.TELEFONO_MOVIL;
-                    txtTelefonoFijo.Text = oProveedor.TELEFONO_FIJO;
-                    txtEmail.Text = oProveedor.EMAIL;
-                    txtCalle.Text = oProveedor.CALLE;
-                    if (!String.IsNullOrEmpty(oProveedor.NUMERO.ToString()))
-                        txtNumero.Text = oProveedor.NUMERO.ToString();
-                    txtPiso.Text = oProveedor.PISO;
-                    txtDepartamento.Text = oProveedor.DEPARTAMENTO;
-                    txtBarrio.Text = oProveedor.BARRIO;
-                    txtCodigoPostal.Text = oProveedor.CODIGO_POSTAL;
-                }
+                    Response.Redirect("ProveedorListado.aspx");
             }
-            else
-                Response.Redirect("ProveedorListado.aspx");
+            catch (Exception ex)
+            {
+                Logger logger = LogManager.GetCurrentClassLogger();
+                logger.Error(ex);
+            }
         }
 
         private BLL.DAL.Proveedor CargarProveedorDesdeControles()
@@ -183,8 +193,8 @@ namespace PL.AdminDashboard
             }
             catch (Exception ex)
             {
-                /*Ver como se van a mostrar los mensajes de error*/
-                Response.Write(ex.Message);
+                Logger logger = LogManager.GetCurrentClassLogger();
+                logger.Error(ex);
             }
         }
 
@@ -206,8 +216,8 @@ namespace PL.AdminDashboard
             }
             catch (Exception ex)
             {
-                /*Ver como se van a mostrar los mensajes de error*/
-                Response.Write(ex.Message);
+                Logger logger = LogManager.GetCurrentClassLogger();
+                logger.Error(ex);
             }
         }
 

@@ -59,7 +59,7 @@
                                 <label class="col-sm-2 control-label">Proveedor</label>
 
                                 <div class="col-sm-10">
-                                    <asp:DropDownList ID="ddlProveedor" runat="server" CssClass="form-control m-b" AutoPostBack="True"></asp:DropDownList>
+                                    <asp:DropDownList ID="ddlProveedor" runat="server" CssClass="form-control m-b"></asp:DropDownList>
                                 </div>
                             </div>
                         </div>
@@ -68,7 +68,7 @@
                                 <label class="col-sm-2 control-label">G&eacute;nero</label>
 
                                 <div class="col-sm-10">
-                                    <asp:DropDownList ID="ddlGenero" runat="server" CssClass="form-control m-b" AutoPostBack="True"></asp:DropDownList>
+                                    <asp:DropDownList ID="ddlGenero" runat="server" CssClass="form-control m-b"></asp:DropDownList>
                                 </div>
                             </div>
                         </div>

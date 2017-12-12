@@ -127,6 +127,7 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="Filters\ProveedorFiltro.cs" />
+    <Compile Include="GeneroBLL.cs" />
     <Compile Include="LocalidadBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProveedorBLL.cs" />

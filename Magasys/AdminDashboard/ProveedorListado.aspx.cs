@@ -4,6 +4,7 @@ using BLL.Common;
 using BLL.Filters;
 using System.Web.UI.HtmlControls;
 using BLL;
+using NLog;
 
 namespace PL.AdminDashboard
 {
@@ -56,7 +57,8 @@ namespace PL.AdminDashboard
             }
             catch (Exception ex)
             {
-                Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.DangerModal("Error", String.Format(Message.MsjeSistemaError, ex.Message)));
+                Logger logger = LogManager.GetCurrentClassLogger();
+                logger.Error(ex);
             }
         }
 
@@ -70,7 +72,8 @@ namespace PL.AdminDashboard
             }
             catch (Exception ex)
             {
-                Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.DangerModal("Error", String.Format(Message.MsjeSistemaError, ex.Message)));
+                Logger logger = LogManager.GetCurrentClassLogger();
+                logger.Error(ex);
             }
         }
 
@@ -84,7 +87,8 @@ namespace PL.AdminDashboard
             }
             catch (Exception ex)
             {
-                Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.DangerModal("Error", String.Format(Message.MsjeSistemaError, ex.Message)));
+                Logger logger = LogManager.GetCurrentClassLogger();
+                logger.Error(ex);
             }
         }
 
@@ -104,7 +108,8 @@ namespace PL.AdminDashboard
             }
             catch (Exception ex)
             {
-                Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.DangerModal("Error", String.Format(Message.MsjeSistemaError, ex.Message)));
+                Logger logger = LogManager.GetCurrentClassLogger();
+                logger.Error(ex);
             }
         }
 
@@ -164,8 +169,8 @@ namespace PL.AdminDashboard
                 }
                 catch (Exception ex)
                 {
-                    dvMensajeCuit.InnerHtml = MessageManager.Warning(dvMensajeCuit, ex.Message);
-                    dvMensajeCuit.Visible = true;
+                    Logger logger = LogManager.GetCurrentClassLogger();
+                    logger.Error(ex);
                 }
             }
         }
@@ -223,7 +228,8 @@ namespace PL.AdminDashboard
             catch (Exception ex)
             {
                 lsvProveedores.DataSource = null;
-                Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.DangerModal("Error", String.Format(Message.MsjeSistemaError, ex.Message)));
+                Logger logger = LogManager.GetCurrentClassLogger();
+                logger.Error(ex);
             }
 
             lsvProveedores.DataBind();

@@ -70,6 +70,26 @@ namespace BLL
             return lstProveedores;
         }
 
+        public List<Proveedor> ObtenerProveedores()
+        {
+            List<Proveedor> lstProveedores = null;
+
+            try
+            {
+                using (var rep = new Repository<Proveedor>())
+                {
+                    lstProveedores = rep.Search(p => p.FECHA_BAJA == null);
+                    lstProveedores.Sort((x, y) => y.RAZON_SOCIAL.CompareTo(x.RAZON_SOCIAL));
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return lstProveedores;
+        }
+
         public bool AltaProveedor(Proveedor oProveedor)
         {
             var bRes = false;
