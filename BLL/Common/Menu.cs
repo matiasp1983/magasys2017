@@ -23,7 +23,7 @@ namespace BLL.Common
 
         #region Producto
 
-        private readonly string[] _seccionProductos = { "javascript:;", "fa fa-briefcase", "Productos" };
+        private readonly string[] _seccionProductos = { "javascript:;", "fa fa-newspaper-o", "Productos" };
         private readonly string[] _paginaProductoListado = { "ProductoListado.aspx", "Listado de Productos" };
         private readonly string[] _paginaProductoVisualizar = { "ProductoVisualizar.aspx" }; 
 
