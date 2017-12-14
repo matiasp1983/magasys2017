@@ -388,7 +388,7 @@
                     <div class="hr-line-dashed"></div>
                     <div class="form-group">
                         <div class="col-xs-12 col-sm-6 col-md-8"></div>
-                        <div class="col-xs-8 col-md-4" style="text-align: right">
+                        <div class="col-xs-12 col-md-4" style="text-align: right">
                             <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-success" OnClick="BtnGuardar_Click" />
                             <a id="btnCancelar" runat="server" class="btn btn-primary" onserverclick="BtnCancelar_Click">Cancelar</a>
                             <a id="btnLimpiar" runat="server" class="btn btn-warning" onserverclick="BtnLimpiar_Click">Limpiar</a>                            

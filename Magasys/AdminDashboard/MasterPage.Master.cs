@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.UI.HtmlControls;
 using BLL.Common;
+using NLog;
 
 namespace PL.AdminDashboard
 {
@@ -10,7 +11,15 @@ namespace PL.AdminDashboard
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            menu.Controls.Add(new HtmlElement { InnerHtml = new Menu().Generar() });
+            try
+            {
+                menu.Controls.Add(new HtmlElement { InnerHtml = new Menu().Generar() });
+            }
+            catch (Exception ex)
+            {
+                Logger logger = LogManager.GetCurrentClassLogger();
+                logger.Error(ex);
+            }
         }
 
         #endregion
