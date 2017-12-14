@@ -161,7 +161,6 @@
     <Content Include="AdminDashboard\img\groot.jpg" />
     <Content Include="AdminDashboard\img\profile_small.jpg" />
     <Content Include="AdminDashboard\Index.aspx" />
-    <Content Include="AdminDashboard\js\bootstrap.js" />
     <Content Include="AdminDashboard\js\bootstrap.min.js" />
     <Content Include="AdminDashboard\js\inspinia.js" />
     <Content Include="AdminDashboard\js\jquery-3.1.1.min.js" />
@@ -171,7 +170,6 @@
     <Content Include="AdminDashboard\js\plugins\jasny\jasny-bootstrap.min.js" />
     <Content Include="AdminDashboard\js\plugins\metisMenu\jquery.metisMenu.js" />
     <Content Include="AdminDashboard\js\plugins\pace\pace.min.js" />
-    <Content Include="AdminDashboard\js\plugins\slimscroll\jquery.slimscroll.js" />
     <Content Include="AdminDashboard\js\plugins\slimscroll\jquery.slimscroll.min.js" />
     <Content Include="AdminDashboard\Producto.aspx" />
     <Content Include="AdminDashboard\Proveedor.aspx" />
