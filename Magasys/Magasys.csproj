@@ -116,6 +116,7 @@
     <Content Include="AdminDashboard\js\magasysProveedorListado.js" />
     <Content Include="AdminDashboard\js\plugins\validate\jquery.validate.js" />
     <Content Include="AdminDashboard\MasterPage.Master" />
+    <Content Include="AdminDashboard\ProductoListado.aspx" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -200,6 +201,13 @@
     </Compile>
     <Compile Include="AdminDashboard\Producto.aspx.designer.cs">
       <DependentUpon>Producto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\ProductoListado.aspx.cs">
+      <DependentUpon>ProductoListado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\ProductoListado.aspx.designer.cs">
+      <DependentUpon>ProductoListado.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminDashboard\Proveedor.aspx.cs">
       <DependentUpon>Proveedor.aspx</DependentUpon>
