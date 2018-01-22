@@ -33,10 +33,24 @@
                             </ul>
                         </div>
                         <div class="logo-element">
-                            M+
+                            M+                       
                         </div>
                     </li>
-                    <asp:ContentPlaceHolder ID="menu" runat="server" />
+                    <li id="liPrincipal" runat="server">
+                        <a href="Index.aspx"><i class="fa fa-home"></i><span class="nav-label">Principal</span> <span class="fa arrow"></span></a>                        
+                    </li>                    
+                    <li id="liProveedores" runat="server">
+                        <a href="#"><i class="fa fa-briefcase"></i><span class="nav-label">Proveedores</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li id="liProveedorListado" runat="server"><a href="ProveedorListado.aspx">Listado de Proveedores</a></li>                            
+                        </ul>
+                    </li>
+                    <li id="liProductos" runat="server">
+                        <a href="#"><i class="fa fa-newspaper-o"></i><span class="nav-label">Productos</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li id="liProductoListado" runat="server"><a href="ProductoListado.aspx">Listado de Productos</a></li>                            
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </nav>
@@ -61,7 +75,8 @@
             <asp:ContentPlaceHolder ID="contentMaster" runat="server" />
             <div class="footer">
                 <div class="text-center">
-                    <strong>Copyright</strong> Magasys &copy; 2017
+                    <strong>Copyright</strong> Magasys &copy; 2018
+               
                 </div>
             </div>
         </div>
@@ -80,9 +95,9 @@
     <script src="js/plugins/datapicker/bootstrap-datepicker.js"></script>
     <script src="js/plugins/datapicker/bootstrap-datepicker.es.js"></script>
     <!-- Paginado FooTable -->
-    <script src="js/plugins/footable/footable.all.min.js"></script>    
+    <script src="js/plugins/footable/footable.all.min.js"></script>
     <!-- Jquery Validate -->
-    <script src="js/plugins/validate/jquery.validate.js"></script>
+    <script src="js/plugins/validate/jquery.validate.js"></script>    
 
     <asp:ContentPlaceHolder ID="script" runat="server" />
 </body>

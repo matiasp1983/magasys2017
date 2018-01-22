@@ -2,8 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="menu" runat="server" />
-<asp:Content ID="Content3" ContentPlaceHolderID="contentMaster" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="contentMaster" runat="server">
     <form id="FormProveedor" runat="server" class="form-horizontal">
         <asp:ScriptManager ID="smgProveedor" runat="server"></asp:ScriptManager>
         <div class="row wrapper border-bottom white-bg page-heading">
@@ -235,7 +234,7 @@
         </div>
     </form>
 </asp:Content>
-<asp:Content ID="Content4" ContentPlaceHolderID="script" runat="server">
+<asp:Content ID="Content3" ContentPlaceHolderID="script" runat="server">
     <script type="text/javascript">      
         var FormProveedor = '#<%=FormProveedor.ClientID%>';
 

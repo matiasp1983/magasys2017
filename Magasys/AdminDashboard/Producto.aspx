@@ -2,8 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="menu" runat="server" />
-<asp:Content ID="Content3" ContentPlaceHolderID="contentMaster" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="contentMaster" runat="server">
     <form id="FormProducto" runat="server" class="form-horizontal">
         <asp:ScriptManager ID="smgProducto" runat="server"></asp:ScriptManager>
         <div class="row wrapper border-bottom white-bg page-heading">
@@ -128,7 +127,7 @@
                                                                     <span class="input-group-addon"><i class="fa fa-usd"></i></span>
                                                                     <asp:TextBox ID="txtPrecioMiercolesDiario" runat="server" CssClass="form-control" MaxLength="6"></asp:TextBox>
                                                                 </div>
-                                                        </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
@@ -391,14 +390,15 @@
                         <div class="col-xs-12 col-md-4" style="text-align: right">
                             <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-success" OnClick="BtnGuardar_Click" />
                             <a id="btnCancelar" runat="server" class="btn btn-primary" onserverclick="BtnCancelar_Click">Cancelar</a>
-                            <a id="btnLimpiar" runat="server" class="btn btn-warning" onserverclick="BtnLimpiar_Click">Limpiar</a>                            
+                            <a id="btnLimpiar" runat="server" class="btn btn-warning" onserverclick="BtnLimpiar_Click">Limpiar</a>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
     </form>
 </asp:Content>
-<asp:Content ID="Content4" ContentPlaceHolderID="script" runat="server">
+<asp:Content ID="Content3" ContentPlaceHolderID="script" runat="server">
     <script type="text/javascript">
         var FormProducto = '#<%=FormProducto.ClientID%>';
 
@@ -457,51 +457,51 @@
                          min: 0
                      },
                 },
-                messages: {
+        messages: {
                      <%=txtNombre.UniqueID%>: {
                         required: "Este campo es requerido."
                      },
                      <%=ddlProveedor.UniqueID%>: {
-                        required: "Este campo es requerido."
+                         required: "Este campo es requerido."
                      },
                      <%=ddlGenero.UniqueID%>: {
-                        required: "Este campo es requerido."
+                         required: "Este campo es requerido."
                      },
                      <%=txtPrecioLunesDiario.UniqueID%>: {
-                        number: "Ingrese un número válido.",
-                        min: "Ingrese un valor mayor o igual a 0."
+                         number: "Ingrese un número válido.",
+                         min: "Ingrese un valor mayor o igual a 0."
                      },
                      <%=txtPrecioMartesDiario.UniqueID%>: {
-                        number: "Ingrese un número válido.",
-                        min: "Ingrese un valor mayor o igual a 0."
+                         number: "Ingrese un número válido.",
+                         min: "Ingrese un valor mayor o igual a 0."
                      },
                      <%=txtPrecioMiercolesDiario.UniqueID%>: {
-                        number: "Ingrese un número válido.",
-                        min: "Ingrese un valor mayor o igual a 0."
+                         number: "Ingrese un número válido.",
+                         min: "Ingrese un valor mayor o igual a 0."
                      },
                      <%=txtPrecioJuevesDiario.UniqueID%>: {
-                        number: "Ingrese un número válido.",
-                        min: "Ingrese un valor mayor o igual a 0."
+                         number: "Ingrese un número válido.",
+                         min: "Ingrese un valor mayor o igual a 0."
                      },
                      <%=txtPrecioViernesDiario.UniqueID%>: {
-                        number: "Ingrese un número válido.",
-                        min: "Ingrese un valor mayor o igual a 0."
+                         number: "Ingrese un número válido.",
+                         min: "Ingrese un valor mayor o igual a 0."
                      },
                      <%=txtPrecioSabadoDiario.UniqueID%>: {
-                        number: "Ingrese un número válido.",
-                        min: "Ingrese un valor mayor o igual a 0."
+                         number: "Ingrese un número válido.",
+                             min: "Ingrese un valor mayor o igual a 0."
                      },
                      <%=txtPrecioDomingoDiario.UniqueID%>: {
-                        number: "Ingrese un número válido.",
-                        min: "Ingrese un valor mayor o igual a 0."
+                         number: "Ingrese un número válido.",
+                         min: "Ingrese un valor mayor o igual a 0."
                      },
                      <%=ddlPeriodicidadRevista.UniqueID%>: {
-                        required: "Este campo es requerido."
+                         required: "Este campo es requerido."
                      },
                      <%=txtPrecioRevista.UniqueID%>: {
-                        required: "Este campo es requerido.",
-                        number: "Ingrese un número válido.",
-                        min: "Ingrese un valor mayor o igual a 0."
+                         required: "Este campo es requerido.",
+                         number: "Ingrese un número válido.",
+                         min: "Ingrese un valor mayor o igual a 0."
                      },
                 }
             });

@@ -13,12 +13,35 @@ namespace PL.AdminDashboard
         {
             try
             {
-                menu.Controls.Add(new HtmlElement { InnerHtml = new Menu().Generar() });
+                MenuPrincipal();
             }
             catch (Exception ex)
             {
                 Logger logger = LogManager.GetCurrentClassLogger();
                 logger.Error(ex);
+            }
+        }
+
+        #endregion
+
+        #region Métodos Privados
+
+        private void MenuPrincipal()
+        {
+            String loActivePage = Request.RawUrl;
+            if (loActivePage.Contains("Index.aspx"))
+            {
+                liPrincipal.Attributes["class"] = "active";
+            }
+            if (loActivePage.Contains("ProveedorListado.aspx"))
+            {
+                liProveedores.Attributes["class"] = "active";
+                liProveedorListado.Attributes["class"] = "active";
+            }
+            if (loActivePage.Contains("ProductoListado.aspx"))
+            {
+                liProductos.Attributes["class"] = "active";
+                liProductoListado.Attributes["class"] = "active";
             }
         }
 

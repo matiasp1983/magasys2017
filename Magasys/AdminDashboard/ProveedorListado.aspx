@@ -2,8 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="menu" runat="server" />
-<asp:Content ID="Content3" ContentPlaceHolderID="contentMaster" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="contentMaster" runat="server">
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
             <h2>Listado de Proveedores</h2>
@@ -204,7 +203,7 @@
         </form>
     </div>
 </asp:Content>
-<asp:Content ID="Content4" ContentPlaceHolderID="script" runat="server">
+<asp:Content ID="Content3" ContentPlaceHolderID="script" runat="server">
     <script type="text/javascript">
         var hdIdProveedorBaja = '#<%=hdIdProveedorBaja.ClientID%>';
         var lblCuitProveedorBaja = '#<%=lblCuitProveedorBaja.ClientID%>';
