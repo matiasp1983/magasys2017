@@ -155,7 +155,7 @@ namespace BLL
             {
                 using (var res = new Repository<Proveedor>())
                 {
-                    var oProveedor = res.Find(p => p.CUIT == cuit);
+                    var oProveedor = res.Find(p => p.CUIT == cuit && p.FECHA_BAJA == null);
                     bEsNuevoCuit = oProveedor == null;
                 }
             }
