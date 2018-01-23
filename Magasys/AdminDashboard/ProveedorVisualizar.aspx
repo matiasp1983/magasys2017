@@ -27,7 +27,7 @@
                             <i class="fa fa-chevron-up"></i>
                         </a>
                     </div>
-                    <h2>Información General</h2>
+                    <h2>Informaci&oacute;n General</h2>
                 </div>
                 <div class="ibox-content">
                     <div class="row">

@@ -23,13 +23,8 @@
         </div>
         <div class="wrapper wrapper-content animated fadeInRight">
             <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <div class="ibox-tools">
-                        <a class="collapse-link">
-                            <i class="fa fa-chevron-up"></i>
-                        </a>
-                    </div>
-                    <h2>Información General</h2>
+                <div class="ibox-title">                    
+                    <h2>Informaci&oacute;n General</h2>
                 </div>
                 <div class="ibox-content">
                     <div class="row">
@@ -193,7 +188,7 @@
                                                             <label class="col-sm-3 control-label">D&iacute;a de entrega</label>
 
                                                             <div class="col-sm-9">
-                                                                <asp:DropDownList ID="ddlDiaDeEntregaRevista" runat="server" CssClass="form-control m-b" AutoPostBack="True"></asp:DropDownList>
+                                                                <asp:DropDownList ID="ddlDiaDeEntregaRevista" runat="server" CssClass="form-control m-b"></asp:DropDownList>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -202,7 +197,7 @@
                                                             <label class="col-sm-3 control-label">Periodicidad</label>
 
                                                             <div class="col-sm-9">
-                                                                <asp:DropDownList ID="ddlPeriodicidadRevista" runat="server" CssClass="form-control m-b" AutoPostBack="True"></asp:DropDownList>
+                                                                <asp:DropDownList ID="ddlPeriodicidadRevista" runat="server" CssClass="form-control m-b"></asp:DropDownList>
                                                             </div>
                                                         </div>
                                                     </div>

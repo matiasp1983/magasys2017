@@ -22,13 +22,8 @@
         </div>
         <div class="wrapper wrapper-content animated fadeInRight">
             <div class="ibox float-e-margins">
-                <div class="ibox-title">
-                    <div class="ibox-tools">
-                        <a class="collapse-link">
-                            <i class="fa fa-chevron-up"></i>
-                        </a>
-                    </div>
-                    <h2>Información General</h2>
+                <div class="ibox-title">                    
+                    <h2>Informaci&oacute;n General</h2>
                 </div>
                 <div class="ibox-content">
                     <div class="row" id="divRowCodigoFechaAlta" runat="server" style="display: none">
