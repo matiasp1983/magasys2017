@@ -22,15 +22,6 @@ namespace PL.AdminDashboard {
         protected global::System.Web.UI.HtmlControls.HtmlForm FormProveedor;
         
         /// <summary>
-        /// Control smgProveedor.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.ScriptManager smgProveedor;
-        
-        /// <summary>
         /// Control lblBreadcrumbActive.
         /// </summary>
         /// <remarks>
@@ -166,15 +157,6 @@ namespace PL.AdminDashboard {
         protected global::System.Web.UI.WebControls.TextBox txtDepartamento;
         
         /// <summary>
-        /// Control uplProvincia.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel uplProvincia;
-        
-        /// <summary>
         /// Control ddlProvincia.
         /// </summary>
         /// <remarks>
@@ -182,15 +164,6 @@ namespace PL.AdminDashboard {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlProvincia;
-        
-        /// <summary>
-        /// Control uplLocalidad.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel uplLocalidad;
         
         /// <summary>
         /// Control ddlLocalidad.

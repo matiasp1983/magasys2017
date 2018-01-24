@@ -74,6 +74,7 @@
     <Content Include="AdminDashboard\css\plugins\footable\fonts\footable.eot" />
     <Content Include="AdminDashboard\css\plugins\footable\fonts\footable.ttf" />
     <Content Include="AdminDashboard\css\plugins\footable\fonts\footable.woff" />
+    <Content Include="AdminDashboard\css\plugins\select2\select2.min.css" />
     <Content Include="AdminDashboard\css\plugins\sweetalert\sweetalert.css" />
     <Content Include="AdminDashboard\font-awesome\fonts\fontawesome-webfont.eot" />
     <Content Include="AdminDashboard\font-awesome\fonts\fontawesome-webfont.ttf" />
@@ -112,8 +113,8 @@
     <Content Include="AdminDashboard\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="AdminDashboard\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="AdminDashboard\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="AdminDashboard\js\plugins\select2\select2.full.min.js" />
     <Content Include="AdminDashboard\js\plugins\sweetalert\sweetalert.min.js" />
-    <Content Include="AdminDashboard\js\magasysProveedorListado.js" />
     <Content Include="AdminDashboard\js\plugins\validate\jquery.validate.js" />
     <Content Include="AdminDashboard\MasterPage.Master" />
     <Content Include="AdminDashboard\ProductoListado.aspx" />

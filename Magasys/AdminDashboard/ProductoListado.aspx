@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminDashboard/MasterPage.Master" AutoEventWireup="true" CodeBehind="ProductoListado.aspx.cs" Inherits="PL.AdminDashboard.ProductoListado" %>
+﻿<%@ Page Title="Listado de Productos" Language="C#" MasterPageFile="~/AdminDashboard/MasterPage.Master" AutoEventWireup="true" CodeBehind="ProductoListado.aspx.cs" Inherits="PL.AdminDashboard.ProductoListado" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>

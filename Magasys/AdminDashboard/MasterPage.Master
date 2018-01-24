@@ -13,6 +13,7 @@
     <link href="css/plugins/datapicker/datepicker3.css" rel="stylesheet">
     <link href="css/plugins/footable/footable.core.css" rel="stylesheet">
     <link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="css/plugins/select2/select2.min.css" rel="stylesheet">
     <asp:ContentPlaceHolder ID="head" runat="server" />
 </head>
 <body>
@@ -97,7 +98,9 @@
     <!-- Paginado FooTable -->
     <script src="js/plugins/footable/footable.all.min.js"></script>
     <!-- Jquery Validate -->
-    <script src="js/plugins/validate/jquery.validate.js"></script>    
+    <script src="js/plugins/validate/jquery.validate.js"></script>
+    <!-- Select2 -->
+    <script src="js/plugins/select2/select2.full.min.js"></script>
 
     <asp:ContentPlaceHolder ID="script" runat="server" />
 </body>

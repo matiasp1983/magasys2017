@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminDashboard/MasterPage.Master" AutoEventWireup="true" CodeBehind="ProveedorListado.aspx.cs" Inherits="PL.AdminDashboard.ProveedorListado" %>
+﻿<%@ Page Title="Listado de Proveedores" Language="C#" MasterPageFile="~/AdminDashboard/MasterPage.Master" AutoEventWireup="true" CodeBehind="ProveedorListado.aspx.cs" Inherits="PL.AdminDashboard.ProveedorListado" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -208,5 +208,37 @@
         var hdIdProveedorBaja = '#<%=hdIdProveedorBaja.ClientID%>';
         var lblCuitProveedorBaja = '#<%=lblCuitProveedorBaja.ClientID%>';
     </script>
-    <script src="js/magasysProveedorListado.js"></script>
+    <script type="text/javascript">
+        if (window.jQuery) {
+            $(document).ready(function () {
+                LoadDatePicker();
+                LoadFootable();
+            });
+        }
+
+        function LoadDatePicker() {
+            $('#datePickerRange .input-daterange').datepicker({
+                todayBtn: "linked",
+                clearBtn: true,
+                autoclose: true,
+                language: "es",
+                format: "dd/mm/yyyy"
+            });
+        }
+
+        function LoadFootable() {
+            $('.footable').footable();
+        }
+
+        function CargarIdCuitModalProveedorBaja(control) {
+            if (window.jQuery) {
+                var loValores = control.lastElementChild.defaultValue;
+                var loArreglo = loValores.split(",", 2);
+                var loId = loArreglo[0];
+                var loCuit = loArreglo[1];
+                $(hdIdProveedorBaja).val(loId);
+                $(lblCuitProveedorBaja).text(loCuit);
+            }
+        }
+    </script>
 </asp:Content>

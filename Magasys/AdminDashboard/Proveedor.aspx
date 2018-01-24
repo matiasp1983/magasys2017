@@ -1,10 +1,9 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminDashboard/MasterPage.Master" AutoEventWireup="true" CodeBehind="Proveedor.aspx.cs" Inherits="PL.AdminDashboard.Proveedor" %>
+﻿<%@ Page Title="Datos del Proveedor" Language="C#" MasterPageFile="~/AdminDashboard/MasterPage.Master" AutoEventWireup="true" CodeBehind="Proveedor.aspx.cs" Inherits="PL.AdminDashboard.Proveedor" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="contentMaster" runat="server">
-    <form id="FormProveedor" runat="server" class="form-horizontal">
-        <asp:ScriptManager ID="smgProveedor" runat="server"></asp:ScriptManager>
+    <form id="FormProveedor" runat="server" class="form-horizontal">        
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
                 <h2>Datos del Proveedor</h2>
@@ -15,14 +14,15 @@
                     </li>
                     <li class="active">
                         <strong>
-                            <asp:Label ID="lblBreadcrumbActive" runat="server" Text="Alta de Proveedor"></asp:Label></strong>
+                            <asp:Label ID="lblBreadcrumbActive" runat="server" Text="Alta de Proveedor"></asp:Label>
+                        </strong>
                     </li>
                 </ol>
             </div>
         </div>
         <div class="wrapper wrapper-content animated fadeInRight">
             <div class="ibox float-e-margins">
-                <div class="ibox-title">                    
+                <div class="ibox-title">
                     <h2>Informaci&oacute;n General</h2>
                 </div>
                 <div class="ibox-content">
@@ -174,11 +174,9 @@
                                 <label class="col-sm-2 control-label">Provincia</label>
 
                                 <div class="col-sm-10">
-                                    <asp:UpdatePanel ID="uplProvincia" runat="server">
-                                        <ContentTemplate>
-                                            <asp:DropDownList ID="ddlProvincia" runat="server" CssClass="form-control m-b" OnSelectedIndexChanged="DdlProvincia_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
-                                        </ContentTemplate>
-                                    </asp:UpdatePanel>
+                                    <div id="divProvincia">
+                                        <asp:DropDownList ID="ddlProvincia" runat="server" CssClass="select2_provincia form-control" OnSelectedIndexChanged="DdlProvincia_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -187,11 +185,9 @@
                                 <label class="col-sm-2 control-label">Localidad</label>
 
                                 <div class="col-sm-10">
-                                    <asp:UpdatePanel ID="uplLocalidad" runat="server">
-                                        <ContentTemplate>
-                                            <asp:DropDownList ID="ddlLocalidad" runat="server" CssClass="form-control m-b"></asp:DropDownList>
-                                        </ContentTemplate>
-                                    </asp:UpdatePanel>
+                                    <div id="divLocalidad">
+                                        <asp:DropDownList ID="ddlLocalidad" runat="server" CssClass="select2_localidad form-control"></asp:DropDownList>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -235,7 +231,8 @@
 
         if (window.jQuery) {
             $(document).ready(function () {
-                ValidarForm()
+                ValidarForm();
+                Select2();
             });
         }
 
@@ -288,10 +285,10 @@
                         required: true
                     }                    
 				},
-                messages: {
+        messages: {
                     <%=txtRazonSocial.UniqueID%>: {
                         required: "Este campo es requerido."
-                    },
+                     },
                     <%=txtNombre.UniqueID%>: {
                         required: "Este campo es requerido."
                     },
@@ -334,6 +331,22 @@
                     }
                 }
             });
+        }
+
+        function Select2() {
+            $(".select2_provincia").select2(
+                {
+                    placeholder: 'Seleccione una Provincia',
+                    width: '100%',
+                    allowClear: true
+                });
+
+            $(".select2_localidad").select2(
+                {
+                    placeholder: 'Seleccione una Localidad',
+                    width: '100%',
+                    allowClear: true
+                });
         }
     </script>
 </asp:Content>

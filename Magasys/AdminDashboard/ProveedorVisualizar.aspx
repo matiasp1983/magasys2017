@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminDashboard/MasterPage.Master" AutoEventWireup="true" CodeBehind="ProveedorVisualizar.aspx.cs" Inherits="PL.AdminDashboard.ProveedorVisualizar" %>
+﻿<%@ Page Title="Datos del Proveedor" Language="C#" MasterPageFile="~/AdminDashboard/MasterPage.Master" AutoEventWireup="true" CodeBehind="ProveedorVisualizar.aspx.cs" Inherits="PL.AdminDashboard.ProveedorVisualizar" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>

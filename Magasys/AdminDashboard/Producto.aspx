@@ -1,10 +1,9 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminDashboard/MasterPage.Master" AutoEventWireup="true" CodeBehind="Producto.aspx.cs" Inherits="PL.AdminDashboard.Producto" %>
+﻿<%@ Page Title="Datos del Producto" Language="C#" MasterPageFile="~/AdminDashboard/MasterPage.Master" AutoEventWireup="true" CodeBehind="Producto.aspx.cs" Inherits="PL.AdminDashboard.Producto" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="contentMaster" runat="server">
-    <form id="FormProducto" runat="server" class="form-horizontal">
-        <asp:ScriptManager ID="smgProducto" runat="server"></asp:ScriptManager>
+    <form id="FormProducto" runat="server" class="form-horizontal">        
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
                 <h2>Datos del Producto</h2>
@@ -53,7 +52,9 @@
                                 <label class="col-sm-2 control-label">Proveedor</label>
 
                                 <div class="col-sm-10">
-                                    <asp:DropDownList ID="ddlProveedor" runat="server" CssClass="form-control m-b"></asp:DropDownList>
+                                    <div id="divProveedor">
+                                        <asp:DropDownList ID="ddlProveedor" runat="server" CssClass="select2_proveedor form-control"></asp:DropDownList>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -62,7 +63,9 @@
                                 <label class="col-sm-2 control-label">G&eacute;nero</label>
 
                                 <div class="col-sm-10">
-                                    <asp:DropDownList ID="ddlGenero" runat="server" CssClass="form-control m-b"></asp:DropDownList>
+                                    <div id="divGenero">
+                                        <asp:DropDownList ID="ddlGenero" runat="server" CssClass="select2_genero form-control"></asp:DropDownList>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -187,8 +190,8 @@
                                                         <div class="form-group">
                                                             <label class="col-sm-3 control-label">D&iacute;a de entrega</label>
 
-                                                            <div class="col-sm-9">
-                                                                <asp:DropDownList ID="ddlDiaDeEntregaRevista" runat="server" CssClass="form-control m-b"></asp:DropDownList>
+                                                            <div class="col-sm-9">                                                                
+                                                                <asp:DropDownList ID="ddlDiaDeEntregaRevista" runat="server" CssClass="select2_diadeentregarevista form-control"></asp:DropDownList>                                                                
                                                             </div>
                                                         </div>
                                                     </div>
@@ -197,7 +200,9 @@
                                                             <label class="col-sm-3 control-label">Periodicidad</label>
 
                                                             <div class="col-sm-9">
-                                                                <asp:DropDownList ID="ddlPeriodicidadRevista" runat="server" CssClass="form-control m-b"></asp:DropDownList>
+                                                                <div id="divPeriodicidadRevista">
+                                                                    <asp:DropDownList ID="ddlPeriodicidadRevista" runat="server" CssClass="select2_periodicidadrevista form-control"></asp:DropDownList>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -226,7 +231,7 @@
                                                             <label class="col-sm-3 control-label">D&iacute;a de entrega</label>
 
                                                             <div class="col-sm-9">
-                                                                <asp:DropDownList ID="ddlDiaDeEntregaColeccion" runat="server" CssClass="form-control m-b" AutoPostBack="True"></asp:DropDownList>
+                                                                <asp:DropDownList ID="ddlDiaDeEntregaColeccion" runat="server" CssClass="select2_diadeentregacoleccion form-control" AutoPostBack="True"></asp:DropDownList>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -235,7 +240,7 @@
                                                             <label class="col-sm-3 control-label">Periodicidad</label>
 
                                                             <div class="col-sm-9">
-                                                                <asp:DropDownList ID="ddlPeriodicidadColeccion" runat="server" CssClass="form-control m-b" AutoPostBack="True"></asp:DropDownList>
+                                                                <asp:DropDownList ID="ddlPeriodicidadColeccion" runat="server" CssClass="select2_periodicidadcoleccion form-control" AutoPostBack="True"></asp:DropDownList>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -308,7 +313,7 @@
                                                             <label class="col-sm-3 control-label">D&iacute;a de entrega</label>
 
                                                             <div class="col-sm-9">
-                                                                <asp:DropDownList ID="ddlDiaDeEntregaSuplemento" runat="server" CssClass="form-control m-b" AutoPostBack="True"></asp:DropDownList>
+                                                                <asp:DropDownList ID="ddlDiaDeEntregaSuplemento" runat="server" CssClass="select2_diadeentregasuplemento form-control" AutoPostBack="True"></asp:DropDownList>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -317,7 +322,7 @@
                                                             <label class="col-sm-3 control-label">Diario</label>
 
                                                             <div class="col-sm-9">
-                                                                <asp:DropDownList ID="ddlDiarioSuplemento" runat="server" CssClass="form-control m-b" AutoPostBack="True"></asp:DropDownList>
+                                                                <asp:DropDownList ID="ddlDiarioSuplemento" runat="server" CssClass="select2_diariosuplemento form-control" AutoPostBack="True"></asp:DropDownList>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -399,7 +404,8 @@
 
         if (window.jQuery) {
             $(document).ready(function () {
-                ValidarForm()
+                ValidarForm();
+                Select2();
             });
         }
 
@@ -484,7 +490,7 @@
                      },
                      <%=txtPrecioSabadoDiario.UniqueID%>: {
                          number: "Ingrese un número válido.",
-                             min: "Ingrese un valor mayor o igual a 0."
+                         min: "Ingrese un valor mayor o igual a 0."
                      },
                      <%=txtPrecioDomingoDiario.UniqueID%>: {
                          number: "Ingrese un número válido.",
@@ -499,6 +505,64 @@
                          min: "Ingrese un valor mayor o igual a 0."
                      },
                 }
+            });
+        }
+
+        function Select2() {
+            $(".select2_proveedor").select2(
+            {
+                    placeholder: 'Seleccione un Proveedor',
+                    width: '100%',
+                    allowClear: true                    
+            });
+
+            $(".select2_genero").select2(
+            {
+                    placeholder: 'Seleccione un Género',
+                    width: '100%',
+                    allowClear: true
+            });
+
+            $(".select2_diadeentregarevista").select2(
+            {
+                    placeholder: 'Seleccione un Día de Entrega',
+                    width: '100%',
+                    allowClear: true
+            });
+
+            $(".select2_periodicidadrevista").select2(
+            {
+                    placeholder: 'Seleccione una Periodicidad',
+                    width: '100%',
+                    allowClear: true
+            });
+
+            $(".select2_diadeentregacoleccion").select2(
+            {
+                    placeholder: 'Seleccione un Día de Entrega',
+                    width: '100%',
+                    allowClear: true
+            });
+
+            $(".select2_periodicidadcoleccion").select2(
+            {
+                    placeholder: 'Seleccione una Periodicidad',
+                    width: '100%',
+                    allowClear: true
+            });
+
+            $(".select2_diadeentregasuplemento").select2(
+            {
+                    placeholder: 'Seleccione un Día de Entrega',
+                    width: '100%',
+                    allowClear: true
+            });
+
+            $(".select2_diariosuplemento").select2(
+            {
+                    placeholder: 'Seleccione un Diario',
+                    width: '100%',
+                    allowClear: true
             });
         }
     </script>
