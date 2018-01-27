@@ -15,6 +15,7 @@ namespace PL.AdminDashboard
             {
                 CargarProveedores();
                 CargarGeneros();
+                CargarDiasDeSemana();
             }              
         }
 
@@ -51,8 +52,8 @@ namespace PL.AdminDashboard
             }
             catch (Exception ex)
             {                                
-                Logger logger = LogManager.GetCurrentClassLogger();
-                logger.Error(ex);
+                Logger loLogger = LogManager.GetCurrentClassLogger();
+                loLogger.Error(ex);
             }
         }
 
@@ -70,8 +71,41 @@ namespace PL.AdminDashboard
             }
             catch (Exception ex)
             {
-                Logger logger = LogManager.GetCurrentClassLogger();
-                logger.Error(ex);
+                Logger loLogger = LogManager.GetCurrentClassLogger();
+                loLogger.Error(ex);
+            }
+        }
+
+        private void CargarDiasDeSemana()
+        {
+            var oDiaSemana = new DiaSemanaBLL();
+
+            try
+            {
+                var lstDiasDeSemana = oDiaSemana.ObtenerDiasDeSemana();
+
+                ddlDiaDeEntregaRevista.DataSource = lstDiasDeSemana;
+                ddlDiaDeEntregaRevista.DataTextField = "NOMBRE";
+                ddlDiaDeEntregaRevista.DataValueField = "ID_DIA_SEMANA";
+                ddlDiaDeEntregaRevista.DataBind();
+                ddlDiaDeEntregaRevista.Items.Insert(0, new ListItem(String.Empty, String.Empty));
+
+                ddlDiaDeEntregaColeccion.DataSource = lstDiasDeSemana;
+                ddlDiaDeEntregaColeccion.DataTextField = "NOMBRE";
+                ddlDiaDeEntregaColeccion.DataValueField = "ID_DIA_SEMANA";
+                ddlDiaDeEntregaColeccion.DataBind();
+                ddlDiaDeEntregaColeccion.Items.Insert(0, new ListItem(String.Empty, String.Empty));
+
+                ddlDiaDeEntregaSuplemento.DataSource = lstDiasDeSemana;
+                ddlDiaDeEntregaSuplemento.DataTextField = "NOMBRE";
+                ddlDiaDeEntregaSuplemento.DataValueField = "ID_DIA_SEMANA";
+                ddlDiaDeEntregaSuplemento.DataBind();
+                ddlDiaDeEntregaSuplemento.Items.Insert(0, new ListItem(String.Empty, String.Empty));
+            }
+            catch (Exception ex)
+            {
+                Logger loLogger = LogManager.GetCurrentClassLogger();
+                loLogger.Error(ex);
             }
         }
 

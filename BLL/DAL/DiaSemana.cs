@@ -15,39 +15,39 @@ namespace BLL.DAL
 using System;
     using System.Collections.Generic;
     
-public partial class Revista
+public partial class DiaSemana
 {
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public Revista()
+    public DiaSemana()
     {
 
-        this.RevistaEdicions = new HashSet<RevistaEdicion>();
+        this.Coleccions = new HashSet<Coleccion>();
+
+        this.DiarioDiaSemanas = new HashSet<DiarioDiaSemana>();
+
+        this.Revistas = new HashSet<Revista>();
 
     }
 
 
-    public decimal ID_REVISTA { get; set; }
-
-    public decimal COD_PRODUCTO { get; set; }
-
-    public decimal COD_PERIODICIDAD { get; set; }
-
     public int ID_DIA_SEMANA { get; set; }
 
-    public double PRECIO { get; set; }
+    public string NOMBRE { get; set; }
 
 
-
-    public virtual DiaSemana DiaSemana { get; set; }
-
-    public virtual Periodicidad Periodicidad { get; set; }
-
-    public virtual Producto Producto { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<RevistaEdicion> RevistaEdicions { get; set; }
+    public virtual ICollection<Coleccion> Coleccions { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<DiarioDiaSemana> DiarioDiaSemanas { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<Revista> Revistas { get; set; }
 
 }
 

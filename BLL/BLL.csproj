@@ -70,6 +70,9 @@
     <Compile Include="DAL\DiarioEdicion.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\DiaSemana.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\EstadoProducto.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -125,6 +128,7 @@
     <Compile Include="DAL\SuplementoEdicion.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="DiaSemanaBLL.cs" />
     <Compile Include="Filters\ProveedorFiltro.cs" />
     <Compile Include="GeneroBLL.cs" />
     <Compile Include="LocalidadBLL.cs" />

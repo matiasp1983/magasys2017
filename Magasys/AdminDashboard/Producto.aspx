@@ -313,7 +313,7 @@
                                                             <label class="col-sm-3 control-label">D&iacute;a de entrega</label>
 
                                                             <div class="col-sm-9">
-                                                                <asp:DropDownList ID="ddlDiaDeEntregaSuplemento" runat="server" CssClass="select2_diadeentregasuplemento form-control" AutoPostBack="True"></asp:DropDownList>
+                                                                <asp:DropDownList ID="ddlDiaDeEntregaSuplemento" runat="server" CssClass="select2_diadeentregasuplemento form-control"></asp:DropDownList>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -322,7 +322,7 @@
                                                             <label class="col-sm-3 control-label">Diario</label>
 
                                                             <div class="col-sm-9">
-                                                                <asp:DropDownList ID="ddlDiarioSuplemento" runat="server" CssClass="select2_diariosuplemento form-control" AutoPostBack="True"></asp:DropDownList>
+                                                                <asp:DropDownList ID="ddlDiarioSuplemento" runat="server" CssClass="select2_diariosuplemento form-control"></asp:DropDownList>
                                                             </div>
                                                         </div>
                                                     </div>

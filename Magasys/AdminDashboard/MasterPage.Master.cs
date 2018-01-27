@@ -17,8 +17,8 @@ namespace PL.AdminDashboard
             }
             catch (Exception ex)
             {
-                Logger logger = LogManager.GetCurrentClassLogger();
-                logger.Error(ex);
+                Logger loLogger = LogManager.GetCurrentClassLogger();
+                loLogger.Error(ex);
             }
         }
 
