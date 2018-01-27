@@ -49,10 +49,12 @@
                                     <div class="col-md-6">
                                         <label class="col-sm-10 control-label">Fecha Alta</label>
                                         <div id="datePickerRange" class="form-group">
-                                            <div class="input-daterange input-group">
-                                                <asp:TextBox ID="txtFechaAltaDesde" runat="server" CssClass="input-sm form-control"></asp:TextBox>
-                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                <asp:TextBox ID="txtFechaAltaHasta" runat="server" CssClass="input-sm form-control"></asp:TextBox>
+                                            <div class="input-daterange">
+                                                <div class="input-group" style="display:inline-table">
+                                                    <asp:TextBox ID="txtFechaAltaDesde" runat="server" CssClass="input-sm form-control"></asp:TextBox>
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <asp:TextBox ID="txtFechaAltaHasta" runat="server" CssClass="input-sm form-control"></asp:TextBox>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -112,14 +114,14 @@
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="5">
                                         <thead>
                                             <tr>
-                                                <th>CUIT</th>
+                                                <th class="text-left">CUIT</th>
                                                 <th data-hide="phone,tablet">Raz&oacute;n Social</th>
                                                 <th data-hide="phone,tablet">Fecha Alta</th>
                                                 <th data-hide="phone,tablet">Nombre</th>
                                                 <th data-hide="phone,tablet">Apellido</th>
                                                 <th data-hide="phone,tablet">Email</th>
                                                 <th data-hide="phone,tablet">Tel&eacute;fono Movil</th>
-                                                <th class="text-center" data-sort-ignore="true">Acti&oacute;n</th>
+                                                <th class="text-right" data-sort-ignore="true">Acti&oacute;n</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -136,7 +138,7 @@
                                 </LayoutTemplate>
                                 <ItemTemplate>
                                     <tr>
-                                        <td>
+                                        <td class="text-left">
                                             <asp:Label ID="lblCuit" runat="server" Text='<%#Convert.ToInt64(Eval("CUIT")).ToString("##-########-#")%>'></asp:Label>
                                         </td>
                                         <td>
@@ -157,7 +159,7 @@
                                         <td>
                                             <asp:Label ID="lblTelefonoMovil" runat="server" Text='<%#Eval("TELEFONO_MOVIL")%>'></asp:Label>
                                         </td>
-                                        <td class="text-center">
+                                        <td class="text-right">
                                             <div class="btn-group">
                                                 <button runat="server" id="btnVisualizar" class="btn btn-outline btn-success btn-xl" title="Visualizar" onserverclick="BtnVisualizar_Click"><i class="fa fa-search"></i></button>
                                                 <button runat="server" id="btnModificar" class="btn btn-outline btn-info  btn-xl" title="Modificar" onserverclick="BtnModificar_Click"><i class="fa fa-pencil"></i></button>
@@ -222,7 +224,9 @@
                 clearBtn: true,
                 autoclose: true,
                 language: "es",
-                format: "dd/mm/yyyy"
+                format: "dd/mm/yyyy",
+                keyboardNavigation: false,
+                forceParse: false
             });
         }
 
