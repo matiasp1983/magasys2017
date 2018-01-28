@@ -142,19 +142,19 @@
                                             <asp:Label ID="lblCuit" runat="server" Text='<%#Convert.ToInt64(Eval("CUIT")).ToString("##-########-#")%>'></asp:Label>
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblRazonSocial" runat="server" Text='<%#Eval("RAZON_SOCIAL")%>'></asp:Label>
+                                            <asp:Label ID="lblRazonSocial" runat="server" Text='<%#Eval("RAZON_SOCIAL").ToString().Length > 23 ? String.Format("{0}...", Eval("RAZON_SOCIAL").ToString().Remove(23).TrimEnd()):Eval("RAZON_SOCIAL")%>'></asp:Label>
                                         </td>
                                         <td>
                                             <asp:Label ID="lblFechaAlta" runat="server" Text='<%#Convert.ToDateTime(Eval("FECHA_ALTA")).ToString("dd/MM/yyyy")%>'></asp:Label>
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE")%>'></asp:Label>
+                                            <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE").ToString().Length > 13 ? String.Format("{0}...", Eval("NOMBRE").ToString().Remove(13).TrimEnd()):Eval("NOMBRE")%>'></asp:Label>
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblApellido" runat="server" Text='<%#Eval("APELLIDO")%>'></asp:Label>
+                                            <asp:Label ID="lblApellido" runat="server" Text='<%#Eval("APELLIDO").ToString().Length > 13 ? String.Format("{0}...", Eval("APELLIDO").ToString().Remove(13).TrimEnd()):Eval("APELLIDO")%>'></asp:Label>
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblEmail" runat="server" Text='<%#Eval("EMAIL")%>'></asp:Label>
+                                            <asp:Label ID="lblEmail" runat="server" Text='<%#Eval("EMAIL").ToString().Length > 19 ? String.Format("{0}...", Eval("EMAIL").ToString().Remove(19).TrimEnd()):Eval("EMAIL")%>'></asp:Label>
                                         </td>
                                         <td>
                                             <asp:Label ID="lblTelefonoMovil" runat="server" Text='<%#Eval("TELEFONO_MOVIL")%>'></asp:Label>

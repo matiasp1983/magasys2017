@@ -114,8 +114,8 @@ namespace PL.AdminDashboard
                         if (!String.IsNullOrEmpty(oProveedor.CUIT))
                             txtCuit.Text = Convert.ToInt64(oProveedor.CUIT).ToString("##-########-#");
                         txtRazonSocial.Text = oProveedor.RAZON_SOCIAL;
-                        txtNombre.Text = oProveedor.NOMBRE.ToString().ToUpper();
-                        txtApellido.Text = oProveedor.APELLIDO.ToString().ToUpper();
+                        txtNombre.Text = oProveedor.NOMBRE.ToString();
+                        txtApellido.Text = oProveedor.APELLIDO.ToString();
                         txtTelefonoMovil.Text = oProveedor.TELEFONO_MOVIL;
                         txtTelefonoFijo.Text = oProveedor.TELEFONO_FIJO;
                         txtEmail.Text = oProveedor.EMAIL;
