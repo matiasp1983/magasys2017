@@ -27,9 +27,9 @@ public partial class Diario
     }
 
 
-    public decimal ID_DIARIO { get; set; }
+    public int ID_DIARIO { get; set; }
 
-    public decimal COD_PRODUCTO { get; set; }
+    public int COD_PRODUCTO { get; set; }
 
 
 

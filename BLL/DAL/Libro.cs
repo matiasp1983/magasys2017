@@ -20,7 +20,7 @@ public partial class Libro
 
     public decimal ID_LIBRO { get; set; }
 
-    public decimal COD_PRODUCTO { get; set; }
+    public int COD_PRODUCTO { get; set; }
 
     public string EDITORIAL { get; set; }
 

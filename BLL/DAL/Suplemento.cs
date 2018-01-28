@@ -29,7 +29,7 @@ public partial class Suplemento
 
     public decimal ID_SUPLEMENTO { get; set; }
 
-    public decimal COD_PRODUCTO { get; set; }
+    public int COD_PRODUCTO { get; set; }
 
     public Nullable<decimal> CANTIDAD_ENTREGAS { get; set; }
 

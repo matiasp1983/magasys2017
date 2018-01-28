@@ -29,7 +29,7 @@ public partial class DiarioDiaSemana
 
     public decimal ID_DIARIO_DIA_SEMANA { get; set; }
 
-    public decimal COD_DIARIO { get; set; }
+    public int COD_DIARIO { get; set; }
 
     public int ID_DIA_SEMANA { get; set; }
 

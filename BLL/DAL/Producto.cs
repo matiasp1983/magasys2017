@@ -37,7 +37,7 @@ public partial class Producto
     }
 
 
-    public decimal ID_PRODUCTO { get; set; }
+    public int ID_PRODUCTO { get; set; }
 
     public System.DateTime FECHA_ALTA { get; set; }
 

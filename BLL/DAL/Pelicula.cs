@@ -20,7 +20,7 @@ public partial class Pelicula
 
     public decimal ID_PELICULA { get; set; }
 
-    public decimal COD_PRODUCTO { get; set; }
+    public int COD_PRODUCTO { get; set; }
 
     public decimal ANIO { get; set; }
 

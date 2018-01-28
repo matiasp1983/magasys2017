@@ -29,7 +29,7 @@ public partial class Coleccion
 
     public decimal ID_COLECCION { get; set; }
 
-    public decimal COD_PRODUCTO { get; set; }
+    public int COD_PRODUCTO { get; set; }
 
     public decimal COD_PERIODICIDAD { get; set; }
 

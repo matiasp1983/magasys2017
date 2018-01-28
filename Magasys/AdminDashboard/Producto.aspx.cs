@@ -16,6 +16,8 @@ namespace PL.AdminDashboard
                 CargarProveedores();
                 CargarGeneros();
                 CargarDiasDeSemana();
+                CargarPeriodicidades();
+                CargarDiarios();
             }              
         }
 
@@ -101,6 +103,54 @@ namespace PL.AdminDashboard
                 ddlDiaDeEntregaSuplemento.DataValueField = "ID_DIA_SEMANA";
                 ddlDiaDeEntregaSuplemento.DataBind();
                 ddlDiaDeEntregaSuplemento.Items.Insert(0, new ListItem(String.Empty, String.Empty));
+            }
+            catch (Exception ex)
+            {
+                Logger loLogger = LogManager.GetCurrentClassLogger();
+                loLogger.Error(ex);
+            }
+        }
+
+        private void CargarPeriodicidades()
+        {
+            var oPeriodicidad = new PeriodicidadBLL();
+
+            try
+            {
+                var lstPeriodicidades = oPeriodicidad.ObtenerPeriodicidades();
+
+                ddlPeriodicidadRevista.DataSource = lstPeriodicidades;
+                ddlPeriodicidadRevista.DataTextField = "NOMBRE";
+                ddlPeriodicidadRevista.DataValueField = "ID_PERIODICIDAD";
+                ddlPeriodicidadRevista.DataBind();
+                ddlPeriodicidadRevista.Items.Insert(0, new ListItem(String.Empty, String.Empty));
+
+                ddlPeriodicidadColeccion.DataSource = lstPeriodicidades;
+                ddlPeriodicidadColeccion.DataTextField = "NOMBRE";
+                ddlPeriodicidadColeccion.DataValueField = "ID_PERIODICIDAD";
+                ddlPeriodicidadColeccion.DataBind();
+                ddlPeriodicidadColeccion.Items.Insert(0, new ListItem(String.Empty, String.Empty));                
+            }
+            catch (Exception ex)
+            {
+                Logger loLogger = LogManager.GetCurrentClassLogger();
+                loLogger.Error(ex);
+            }
+        }
+
+        private void CargarDiarios()
+        {
+            var oDiario = new DiarioBLL();
+
+            try
+            {
+                var lstDiarios = oDiario.ObtenerDiarios();
+
+                ddlDiarioSuplemento.DataSource = lstDiarios;
+                ddlDiarioSuplemento.DataTextField = "NOMBRE";
+                ddlDiarioSuplemento.DataValueField = "ID_DIARIO";
+                ddlDiarioSuplemento.DataBind();
+                ddlDiarioSuplemento.Items.Insert(0, new ListItem(String.Empty, String.Empty));
             }
             catch (Exception ex)
             {
