@@ -27,11 +27,11 @@ public partial class Localidad
     }
 
 
-    public decimal ID_LOCALIDAD { get; set; }
+    public int ID_LOCALIDAD { get; set; }
 
     public string NOMBRE { get; set; }
 
-    public decimal ID_PROVINCIA { get; set; }
+    public int ID_PROVINCIA { get; set; }
 
 
 

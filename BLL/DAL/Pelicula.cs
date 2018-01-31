@@ -18,11 +18,11 @@ using System;
 public partial class Pelicula
 {
 
-    public decimal ID_PELICULA { get; set; }
+    public int ID_PELICULA { get; set; }
 
     public int COD_PRODUCTO { get; set; }
 
-    public decimal ANIO { get; set; }
+    public int ANIO { get; set; }
 
     public double PRECIO { get; set; }
 

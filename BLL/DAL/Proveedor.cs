@@ -27,7 +27,7 @@ public partial class Proveedor
     }
 
 
-    public decimal ID_PROVEEDOR { get; set; }
+    public int ID_PROVEEDOR { get; set; }
 
     public System.DateTime FECHA_ALTA { get; set; }
 
@@ -47,7 +47,7 @@ public partial class Proveedor
 
     public string CALLE { get; set; }
 
-    public decimal NUMERO { get; set; }
+    public int NUMERO { get; set; }
 
     public string PISO { get; set; }
 
@@ -57,9 +57,9 @@ public partial class Proveedor
 
     public string CODIGO_POSTAL { get; set; }
 
-    public decimal ID_PROVINCIA { get; set; }
+    public int ID_PROVINCIA { get; set; }
 
-    public decimal ID_LOCALIDAD { get; set; }
+    public int ID_LOCALIDAD { get; set; }
 
     public Nullable<System.DateTime> FECHA_BAJA { get; set; }
 

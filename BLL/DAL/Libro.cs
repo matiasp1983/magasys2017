@@ -18,7 +18,7 @@ using System;
 public partial class Libro
 {
 
-    public decimal ID_LIBRO { get; set; }
+    public int ID_LIBRO { get; set; }
 
     public int COD_PRODUCTO { get; set; }
 
@@ -26,7 +26,7 @@ public partial class Libro
 
     public string AUTOR { get; set; }
 
-    public Nullable<decimal> ANIO { get; set; }
+    public Nullable<int> ANIO { get; set; }
 
     public double PRECIO { get; set; }
 

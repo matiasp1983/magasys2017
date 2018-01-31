@@ -27,7 +27,7 @@ public partial class EstadoProducto
     }
 
 
-    public decimal ID_ESTADO_PROD { get; set; }
+    public int ID_ESTADO_PROD { get; set; }
 
     public string NOMBRE { get; set; }
 

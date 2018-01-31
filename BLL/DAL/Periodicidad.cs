@@ -29,7 +29,7 @@ public partial class Periodicidad
     }
 
 
-    public decimal ID_PERIODICIDAD { get; set; }
+    public int ID_PERIODICIDAD { get; set; }
 
     public string NOMBRE { get; set; }
 

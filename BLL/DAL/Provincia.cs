@@ -29,7 +29,7 @@ public partial class Provincia
     }
 
 
-    public decimal ID_PROVINCIA { get; set; }
+    public int ID_PROVINCIA { get; set; }
 
     public string NOMBRE { get; set; }
 

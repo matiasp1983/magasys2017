@@ -18,11 +18,11 @@ using System;
 public partial class RevistaEdicion
 {
 
-    public decimal ID_EDICION { get; set; }
+    public int ID_EDICION { get; set; }
 
-    public decimal COR_REVISTA { get; set; }
+    public int COR_REVISTA { get; set; }
 
-    public decimal NUMERO { get; set; }
+    public int NUMERO { get; set; }
 
     public string DESCRIPCION { get; set; }
 

@@ -27,7 +27,7 @@ public partial class Genero
     }
 
 
-    public decimal ID_GENERO { get; set; }
+    public int ID_GENERO { get; set; }
 
     public string NOMBRE { get; set; }
 

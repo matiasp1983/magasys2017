@@ -143,7 +143,7 @@ namespace PL.AdminDashboard
             var oProveedor = new BLL.DAL.Proveedor();
 
             if (!String.IsNullOrEmpty(txtCodigo.Text))
-                oProveedor.ID_PROVEEDOR = Convert.ToInt64(txtCodigo.Text);
+                oProveedor.ID_PROVEEDOR = Convert.ToInt32(txtCodigo.Text);
             else
                 oProveedor.ID_PROVEEDOR = 0;
 
@@ -160,13 +160,13 @@ namespace PL.AdminDashboard
             oProveedor.TELEFONO_FIJO = txtTelefonoFijo.Text;
             oProveedor.EMAIL = txtEmail.Text;
             oProveedor.CALLE = txtCalle.Text;
-            oProveedor.NUMERO = Convert.ToInt64(txtNumero.Text);
+            oProveedor.NUMERO = Convert.ToInt32(txtNumero.Text);
             oProveedor.PISO = txtPiso.Text;
             oProveedor.DEPARTAMENTO = txtDepartamento.Text;
             oProveedor.BARRIO = txtBarrio.Text;
             oProveedor.CODIGO_POSTAL = txtCodigoPostal.Text;
-            oProveedor.ID_PROVINCIA = Convert.ToInt64(ddlProvincia.SelectedValue);
-            oProveedor.ID_LOCALIDAD = Convert.ToInt64(ddlLocalidad.SelectedValue);
+            oProveedor.ID_PROVINCIA = Convert.ToInt32(ddlProvincia.SelectedValue);
+            oProveedor.ID_LOCALIDAD = Convert.ToInt32(ddlLocalidad.SelectedValue);
 
             return oProveedor;
         }

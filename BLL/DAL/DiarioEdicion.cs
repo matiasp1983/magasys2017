@@ -18,11 +18,11 @@ using System;
 public partial class DiarioEdicion
 {
 
-    public decimal ID_EDICION { get; set; }
+    public int ID_EDICION { get; set; }
 
-    public decimal COD_DIA_SEMANA { get; set; }
+    public int COD_DIA_SEMANA { get; set; }
 
-    public Nullable<decimal> NUMERO { get; set; }
+    public Nullable<int> NUMERO { get; set; }
 
     public System.DateTime FECHA { get; set; }
 

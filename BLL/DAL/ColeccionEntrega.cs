@@ -18,15 +18,15 @@ using System;
 public partial class ColeccionEntrega
 {
 
-    public decimal ID_ENTREGA { get; set; }
+    public int ID_ENTREGA { get; set; }
 
-    public decimal COD_COLECCION { get; set; }
+    public int COD_COLECCION { get; set; }
 
     public string NOMBRE { get; set; }
 
     public string DESCRIPCION { get; set; }
 
-    public Nullable<decimal> NRO_ENTREGA { get; set; }
+    public Nullable<int> NRO_ENTREGA { get; set; }
 
     public double PRECIO { get; set; }
 

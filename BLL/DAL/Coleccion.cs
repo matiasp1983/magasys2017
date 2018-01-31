@@ -27,15 +27,15 @@ public partial class Coleccion
     }
 
 
-    public decimal ID_COLECCION { get; set; }
+    public int ID_COLECCION { get; set; }
 
     public int COD_PRODUCTO { get; set; }
 
-    public decimal COD_PERIODICIDAD { get; set; }
+    public int COD_PERIODICIDAD { get; set; }
 
     public int ID_DIA_SEMANA { get; set; }
 
-    public Nullable<decimal> CANTIDAD_ENTREGAS { get; set; }
+    public Nullable<int> CANTIDAD_ENTREGAS { get; set; }
 
 
 

@@ -9,21 +9,21 @@
           <Key>
             <PropertyRef Name="ID_COLECCION" />
           </Key>
-          <Property Name="ID_COLECCION" Type="numeric" Precision="12" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_COLECCION" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="COD_PRODUCTO" Type="int" Nullable="false" />
-          <Property Name="COD_PERIODICIDAD" Type="numeric" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="COD_PERIODICIDAD" Type="int" Nullable="false" />
           <Property Name="ID_DIA_SEMANA" Type="int" Nullable="false" />
-          <Property Name="CANTIDAD_ENTREGAS" Type="numeric" Precision="12" Scale="0" />
+          <Property Name="CANTIDAD_ENTREGAS" Type="int" />
         </EntityType>
         <EntityType Name="ColeccionEntrega">
           <Key>
             <PropertyRef Name="ID_ENTREGA" />
           </Key>
-          <Property Name="ID_ENTREGA" Type="numeric" Precision="12" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="COD_COLECCION" Type="numeric" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="ID_ENTREGA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="COD_COLECCION" Type="int" Nullable="false" />
           <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="DESCRIPCION" Type="varchar" MaxLength="50" />
-          <Property Name="NRO_ENTREGA" Type="numeric" Precision="12" Scale="0" />
+          <Property Name="NRO_ENTREGA" Type="int" />
           <Property Name="PRECIO" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="Diario">
@@ -37,7 +37,7 @@
           <Key>
             <PropertyRef Name="ID_DIARIO_DIA_SEMANA" />
           </Key>
-          <Property Name="ID_DIARIO_DIA_SEMANA" Type="numeric" Precision="12" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_DIARIO_DIA_SEMANA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="COD_DIARIO" Type="int" Nullable="false" />
           <Property Name="ID_DIA_SEMANA" Type="int" Nullable="false" />
           <Property Name="PRECIO" Type="float" />
@@ -46,9 +46,9 @@
           <Key>
             <PropertyRef Name="ID_EDICION" />
           </Key>
-          <Property Name="ID_EDICION" Type="numeric" Precision="12" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="COD_DIA_SEMANA" Type="numeric" Precision="12" Scale="0" Nullable="false" />
-          <Property Name="NUMERO" Type="numeric" Precision="12" Scale="0" />
+          <Property Name="ID_EDICION" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="COD_DIA_SEMANA" Type="int" Nullable="false" />
+          <Property Name="NUMERO" Type="int" />
           <Property Name="FECHA" Type="datetime" Nullable="false" />
           <Property Name="PRECIO" Type="float" Nullable="false" />
         </EntityType>
@@ -63,49 +63,49 @@
           <Key>
             <PropertyRef Name="ID_ESTADO_PROD" />
           </Key>
-          <Property Name="ID_ESTADO_PROD" Type="numeric" Precision="12" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_ESTADO_PROD" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Genero">
           <Key>
             <PropertyRef Name="ID_GENERO" />
           </Key>
-          <Property Name="ID_GENERO" Type="numeric" Precision="12" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_GENERO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Libro">
           <Key>
             <PropertyRef Name="ID_LIBRO" />
           </Key>
-          <Property Name="ID_LIBRO" Type="numeric" Precision="12" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_LIBRO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="COD_PRODUCTO" Type="int" Nullable="false" />
           <Property Name="EDITORIAL" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="AUTOR" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="ANIO" Type="numeric" Precision="4" Scale="0" />
+          <Property Name="ANIO" Type="int" />
           <Property Name="PRECIO" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="Localidad">
           <Key>
             <PropertyRef Name="ID_LOCALIDAD" />
           </Key>
-          <Property Name="ID_LOCALIDAD" Type="numeric" Precision="12" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_LOCALIDAD" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="ID_PROVINCIA" Type="numeric" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="ID_PROVINCIA" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Pelicula">
           <Key>
             <PropertyRef Name="ID_PELICULA" />
           </Key>
-          <Property Name="ID_PELICULA" Type="numeric" Precision="12" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_PELICULA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="COD_PRODUCTO" Type="int" Nullable="false" />
-          <Property Name="ANIO" Type="numeric" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="ANIO" Type="int" Nullable="false" />
           <Property Name="PRECIO" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="Periodicidad">
           <Key>
             <PropertyRef Name="ID_PERIODICIDAD" />
           </Key>
-          <Property Name="ID_PERIODICIDAD" Type="numeric" Precision="12" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_PERIODICIDAD" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="DESCRIPCION" Type="varchar" MaxLength="50" />
         </EntityType>
@@ -117,16 +117,16 @@
           <Property Name="FECHA_ALTA" Type="datetime" Nullable="false" />
           <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="DESCRIPCION" Type="varchar" MaxLength="50" />
-          <Property Name="COD_ESTADO" Type="numeric" Precision="12" Scale="0" Nullable="false" />
-          <Property Name="COD_GENERO" Type="numeric" Precision="12" Scale="0" Nullable="false" />
-          <Property Name="COD_PROVEEDOR" Type="numeric" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="COD_ESTADO" Type="int" Nullable="false" />
+          <Property Name="COD_GENERO" Type="int" Nullable="false" />
+          <Property Name="COD_PROVEEDOR" Type="int" Nullable="false" />
           <Property Name="FECHA_BAJA" Type="datetime" />
         </EntityType>
         <EntityType Name="Proveedor">
           <Key>
             <PropertyRef Name="ID_PROVEEDOR" />
           </Key>
-          <Property Name="ID_PROVEEDOR" Type="numeric" Precision="12" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_PROVEEDOR" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FECHA_ALTA" Type="datetime" Nullable="false" />
           <Property Name="CUIT" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="RAZON_SOCIAL" Type="varchar" MaxLength="50" Nullable="false" />
@@ -136,29 +136,29 @@
           <Property Name="TELEFONO_FIJO" Type="varchar" MaxLength="50" />
           <Property Name="EMAIL" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="CALLE" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="NUMERO" Type="numeric" Precision="6" Scale="0" Nullable="false" />
+          <Property Name="NUMERO" Type="int" Nullable="false" />
           <Property Name="PISO" Type="varchar" MaxLength="2" />
           <Property Name="DEPARTAMENTO" Type="varchar" MaxLength="2" />
           <Property Name="BARRIO" Type="varchar" MaxLength="50" />
           <Property Name="CODIGO_POSTAL" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="ID_PROVINCIA" Type="numeric" Precision="12" Scale="0" Nullable="false" />
-          <Property Name="ID_LOCALIDAD" Type="numeric" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="ID_PROVINCIA" Type="int" Nullable="false" />
+          <Property Name="ID_LOCALIDAD" Type="int" Nullable="false" />
           <Property Name="FECHA_BAJA" Type="datetime" />
         </EntityType>
         <EntityType Name="Provincia">
           <Key>
             <PropertyRef Name="ID_PROVINCIA" />
           </Key>
-          <Property Name="ID_PROVINCIA" Type="numeric" Precision="12" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_PROVINCIA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Revista">
           <Key>
             <PropertyRef Name="ID_REVISTA" />
           </Key>
-          <Property Name="ID_REVISTA" Type="numeric" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="ID_REVISTA" Type="int" Nullable="false" />
           <Property Name="COD_PRODUCTO" Type="int" Nullable="false" />
-          <Property Name="COD_PERIODICIDAD" Type="numeric" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="COD_PERIODICIDAD" Type="int" Nullable="false" />
           <Property Name="ID_DIA_SEMANA" Type="int" Nullable="false" />
           <Property Name="PRECIO" Type="float" Nullable="false" />
         </EntityType>
@@ -166,27 +166,27 @@
           <Key>
             <PropertyRef Name="ID_EDICION" />
           </Key>
-          <Property Name="ID_EDICION" Type="numeric" Precision="12" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="COR_REVISTA" Type="numeric" Precision="12" Scale="0" Nullable="false" />
-          <Property Name="NUMERO" Type="numeric" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="ID_EDICION" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="COR_REVISTA" Type="int" Nullable="false" />
+          <Property Name="NUMERO" Type="int" Nullable="false" />
           <Property Name="DESCRIPCION" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Suplemento">
           <Key>
             <PropertyRef Name="ID_SUPLEMENTO" />
           </Key>
-          <Property Name="ID_SUPLEMENTO" Type="numeric" Precision="12" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_SUPLEMENTO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="COD_PRODUCTO" Type="int" Nullable="false" />
-          <Property Name="CANTIDAD_ENTREGAS" Type="numeric" Precision="12" Scale="0" />
+          <Property Name="CANTIDAD_ENTREGAS" Type="int" />
           <Property Name="PRECIO" Type="float" />
         </EntityType>
         <EntityType Name="SuplementoEdicion">
           <Key>
             <PropertyRef Name="ID_EDICION" />
           </Key>
-          <Property Name="ID_EDICION" Type="numeric" Precision="12" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="COD_SUPLEMENTO" Type="numeric" Precision="12" Scale="0" Nullable="false" />
-          <Property Name="NUMERO" Type="numeric" Precision="12" Scale="0" />
+          <Property Name="ID_EDICION" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="COD_SUPLEMENTO" Type="int" Nullable="false" />
+          <Property Name="NUMERO" Type="int" />
           <Property Name="FECHA" Type="datetime" Nullable="false" />
           <Property Name="PRECIO" Type="float" Nullable="false" />
         </EntityType>
@@ -680,11 +680,11 @@
           <Key>
             <PropertyRef Name="ID_COLECCION" />
           </Key>
-          <Property Name="ID_COLECCION" Type="Decimal" Nullable="false" Precision="12" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_COLECCION" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="COD_PRODUCTO" Type="Int32" Nullable="false" />
-          <Property Name="COD_PERIODICIDAD" Type="Decimal" Nullable="false" Precision="12" Scale="0" />
+          <Property Name="COD_PERIODICIDAD" Type="Int32" Nullable="false" />
           <Property Name="ID_DIA_SEMANA" Type="Int32" Nullable="false" />
-          <Property Name="CANTIDAD_ENTREGAS" Type="Decimal" Precision="12" Scale="0" />
+          <Property Name="CANTIDAD_ENTREGAS" Type="Int32" />
           <NavigationProperty Name="DiaSemana" Relationship="MAGASYSModel.FK_Coleccion_DiaSemana" FromRole="Coleccion" ToRole="DiaSemana" />
           <NavigationProperty Name="Periodicidad" Relationship="MAGASYSModel.FK_Coleccion_Periodicidad" FromRole="Coleccion" ToRole="Periodicidad" />
           <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_Coleccion_Producto" FromRole="Coleccion" ToRole="Producto" />
@@ -694,11 +694,11 @@
           <Key>
             <PropertyRef Name="ID_ENTREGA" />
           </Key>
-          <Property Name="ID_ENTREGA" Type="Decimal" Nullable="false" Precision="12" Scale="0" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="COD_COLECCION" Type="Decimal" Nullable="false" Precision="12" Scale="0" />
+          <Property Name="ID_ENTREGA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="COD_COLECCION" Type="Int32" Nullable="false" />
           <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="NRO_ENTREGA" Type="Decimal" Precision="12" Scale="0" />
+          <Property Name="NRO_ENTREGA" Type="Int32" />
           <Property Name="PRECIO" Type="Double" Nullable="false" />
           <NavigationProperty Name="Coleccion" Relationship="MAGASYSModel.FK_ColeccionEntrega_Coleccion" FromRole="ColeccionEntrega" ToRole="Coleccion" />
         </EntityType>
@@ -715,7 +715,7 @@
           <Key>
             <PropertyRef Name="ID_DIARIO_DIA_SEMANA" />
           </Key>
-          <Property Name="ID_DIARIO_DIA_SEMANA" Type="Decimal" Nullable="false" Precision="12" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_DIARIO_DIA_SEMANA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="COD_DIARIO" Type="Int32" Nullable="false" />
           <Property Name="ID_DIA_SEMANA" Type="Int32" Nullable="false" />
           <Property Name="PRECIO" Type="Double" />
@@ -727,9 +727,9 @@
           <Key>
             <PropertyRef Name="ID_EDICION" />
           </Key>
-          <Property Name="ID_EDICION" Type="Decimal" Nullable="false" Precision="12" Scale="0" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="COD_DIA_SEMANA" Type="Decimal" Nullable="false" Precision="12" Scale="0" />
-          <Property Name="NUMERO" Type="Decimal" Precision="12" Scale="0" />
+          <Property Name="ID_EDICION" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="COD_DIA_SEMANA" Type="Int32" Nullable="false" />
+          <Property Name="NUMERO" Type="Int32" />
           <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="PRECIO" Type="Double" Nullable="false" />
           <NavigationProperty Name="DiarioDiaSemana" Relationship="MAGASYSModel.FK_DiarioEdicion_DiarioDiaSemana1" FromRole="DiarioEdicion" ToRole="DiarioDiaSemana" />
@@ -748,7 +748,7 @@
           <Key>
             <PropertyRef Name="ID_ESTADO_PROD" />
           </Key>
-          <Property Name="ID_ESTADO_PROD" Type="Decimal" Nullable="false" Precision="12" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_ESTADO_PROD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Productoes" Relationship="MAGASYSModel.FK_Producto_EstadoProducto" FromRole="EstadoProducto" ToRole="Producto" />
         </EntityType>
@@ -756,7 +756,7 @@
           <Key>
             <PropertyRef Name="ID_GENERO" />
           </Key>
-          <Property Name="ID_GENERO" Type="Decimal" Nullable="false" Precision="12" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_GENERO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Productoes" Relationship="MAGASYSModel.FK_Producto_Genero" FromRole="Genero" ToRole="Producto" />
         </EntityType>
@@ -764,11 +764,11 @@
           <Key>
             <PropertyRef Name="ID_LIBRO" />
           </Key>
-          <Property Name="ID_LIBRO" Type="Decimal" Nullable="false" Precision="12" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_LIBRO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="COD_PRODUCTO" Type="Int32" Nullable="false" />
           <Property Name="EDITORIAL" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="AUTOR" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ANIO" Type="Decimal" Precision="4" Scale="0" />
+          <Property Name="ANIO" Type="Int32" />
           <Property Name="PRECIO" Type="Double" Nullable="false" />
           <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_Libro_Producto" FromRole="Libro" ToRole="Producto" />
         </EntityType>
@@ -776,9 +776,9 @@
           <Key>
             <PropertyRef Name="ID_LOCALIDAD" />
           </Key>
-          <Property Name="ID_LOCALIDAD" Type="Decimal" Nullable="false" Precision="12" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_LOCALIDAD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="ID_PROVINCIA" Type="Decimal" Nullable="false" Precision="12" Scale="0" />
+          <Property Name="ID_PROVINCIA" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Proveedors" Relationship="MAGASYSModel.FK_Proveedor_Localidad" FromRole="Localidad" ToRole="Proveedor" />
           <NavigationProperty Name="Provincia" Relationship="MAGASYSModel.FK_Provincia_Localidad" FromRole="Localidad" ToRole="Provincia" />
         </EntityType>
@@ -786,9 +786,9 @@
           <Key>
             <PropertyRef Name="ID_PELICULA" />
           </Key>
-          <Property Name="ID_PELICULA" Type="Decimal" Nullable="false" Precision="12" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PELICULA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="COD_PRODUCTO" Type="Int32" Nullable="false" />
-          <Property Name="ANIO" Type="Decimal" Nullable="false" Precision="4" Scale="0" />
+          <Property Name="ANIO" Type="Int32" Nullable="false" />
           <Property Name="PRECIO" Type="Double" Nullable="false" />
           <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_Pelicula_Producto" FromRole="Pelicula" ToRole="Producto" />
         </EntityType>
@@ -796,7 +796,7 @@
           <Key>
             <PropertyRef Name="ID_PERIODICIDAD" />
           </Key>
-          <Property Name="ID_PERIODICIDAD" Type="Decimal" Nullable="false" Precision="12" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PERIODICIDAD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Coleccions" Relationship="MAGASYSModel.FK_Coleccion_Periodicidad" FromRole="Periodicidad" ToRole="Coleccion" />
@@ -810,9 +810,9 @@
           <Property Name="FECHA_ALTA" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="COD_ESTADO" Type="Decimal" Nullable="false" Precision="12" Scale="0" />
-          <Property Name="COD_GENERO" Type="Decimal" Nullable="false" Precision="12" Scale="0" />
-          <Property Name="COD_PROVEEDOR" Type="Decimal" Nullable="false" Precision="12" Scale="0" />
+          <Property Name="COD_ESTADO" Type="Int32" Nullable="false" />
+          <Property Name="COD_GENERO" Type="Int32" Nullable="false" />
+          <Property Name="COD_PROVEEDOR" Type="Int32" Nullable="false" />
           <Property Name="FECHA_BAJA" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Coleccions" Relationship="MAGASYSModel.FK_Coleccion_Producto" FromRole="Producto" ToRole="Coleccion" />
           <NavigationProperty Name="Diarios" Relationship="MAGASYSModel.FK_Diario_Producto" FromRole="Producto" ToRole="Diario" />
@@ -828,7 +828,7 @@
           <Key>
             <PropertyRef Name="ID_PROVEEDOR" />
           </Key>
-          <Property Name="ID_PROVEEDOR" Type="Decimal" Nullable="false" Precision="12" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PROVEEDOR" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FECHA_ALTA" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CUIT" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="RAZON_SOCIAL" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -838,13 +838,13 @@
           <Property Name="TELEFONO_FIJO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EMAIL" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CALLE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="NUMERO" Type="Decimal" Nullable="false" Precision="6" Scale="0" />
+          <Property Name="NUMERO" Type="Int32" Nullable="false" />
           <Property Name="PISO" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="DEPARTAMENTO" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="BARRIO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CODIGO_POSTAL" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="ID_PROVINCIA" Type="Decimal" Nullable="false" Precision="12" Scale="0" />
-          <Property Name="ID_LOCALIDAD" Type="Decimal" Nullable="false" Precision="12" Scale="0" />
+          <Property Name="ID_PROVINCIA" Type="Int32" Nullable="false" />
+          <Property Name="ID_LOCALIDAD" Type="Int32" Nullable="false" />
           <Property Name="FECHA_BAJA" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Localidad" Relationship="MAGASYSModel.FK_Proveedor_Localidad" FromRole="Proveedor" ToRole="Localidad" />
           <NavigationProperty Name="Productoes" Relationship="MAGASYSModel.FK_Producto_Proveedor" FromRole="Proveedor" ToRole="Producto" />
@@ -854,7 +854,7 @@
           <Key>
             <PropertyRef Name="ID_PROVINCIA" />
           </Key>
-          <Property Name="ID_PROVINCIA" Type="Decimal" Nullable="false" Precision="12" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PROVINCIA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Localidads" Relationship="MAGASYSModel.FK_Provincia_Localidad" FromRole="Provincia" ToRole="Localidad" />
           <NavigationProperty Name="Proveedors" Relationship="MAGASYSModel.FK_Proveedor_Provincia" FromRole="Provincia" ToRole="Proveedor" />
@@ -863,9 +863,9 @@
           <Key>
             <PropertyRef Name="ID_REVISTA" />
           </Key>
-          <Property Name="ID_REVISTA" Type="Decimal" Nullable="false" Precision="12" Scale="0" />
+          <Property Name="ID_REVISTA" Type="Int32" Nullable="false" />
           <Property Name="COD_PRODUCTO" Type="Int32" Nullable="false" />
-          <Property Name="COD_PERIODICIDAD" Type="Decimal" Nullable="false" Precision="12" Scale="0" />
+          <Property Name="COD_PERIODICIDAD" Type="Int32" Nullable="false" />
           <Property Name="ID_DIA_SEMANA" Type="Int32" Nullable="false" />
           <Property Name="PRECIO" Type="Double" Nullable="false" />
           <NavigationProperty Name="DiaSemana" Relationship="MAGASYSModel.FK_Revista_DiaSemana" FromRole="Revista" ToRole="DiaSemana" />
@@ -877,9 +877,9 @@
           <Key>
             <PropertyRef Name="ID_EDICION" />
           </Key>
-          <Property Name="ID_EDICION" Type="Decimal" Nullable="false" Precision="12" Scale="0" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="COR_REVISTA" Type="Decimal" Nullable="false" Precision="12" Scale="0" />
-          <Property Name="NUMERO" Type="Decimal" Nullable="false" Precision="12" Scale="0" />
+          <Property Name="ID_EDICION" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="COR_REVISTA" Type="Int32" Nullable="false" />
+          <Property Name="NUMERO" Type="Int32" Nullable="false" />
           <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Revista" Relationship="MAGASYSModel.FK_RevistaEdicion_Revista" FromRole="RevistaEdicion" ToRole="Revista" />
         </EntityType>
@@ -887,9 +887,9 @@
           <Key>
             <PropertyRef Name="ID_SUPLEMENTO" />
           </Key>
-          <Property Name="ID_SUPLEMENTO" Type="Decimal" Nullable="false" Precision="12" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_SUPLEMENTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="COD_PRODUCTO" Type="Int32" Nullable="false" />
-          <Property Name="CANTIDAD_ENTREGAS" Type="Decimal" Precision="12" Scale="0" />
+          <Property Name="CANTIDAD_ENTREGAS" Type="Int32" />
           <Property Name="PRECIO" Type="Double" />
           <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_Suplemento_Producto" FromRole="Suplemento" ToRole="Producto" />
           <NavigationProperty Name="SuplementoEdicions" Relationship="MAGASYSModel.FK_SuplementoEdicion_Suplemento" FromRole="Suplemento" ToRole="SuplementoEdicion" />
@@ -898,9 +898,9 @@
           <Key>
             <PropertyRef Name="ID_EDICION" />
           </Key>
-          <Property Name="ID_EDICION" Type="Decimal" Nullable="false" Precision="12" Scale="0" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="COD_SUPLEMENTO" Type="Decimal" Nullable="false" Precision="12" Scale="0" />
-          <Property Name="NUMERO" Type="Decimal" Precision="12" Scale="0" />
+          <Property Name="ID_EDICION" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="COD_SUPLEMENTO" Type="Int32" Nullable="false" />
+          <Property Name="NUMERO" Type="Int32" />
           <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="PRECIO" Type="Double" Nullable="false" />
           <NavigationProperty Name="Suplemento" Relationship="MAGASYSModel.FK_SuplementoEdicion_Suplemento" FromRole="SuplementoEdicion" ToRole="Suplemento" />

@@ -45,11 +45,11 @@ public partial class Producto
 
     public string DESCRIPCION { get; set; }
 
-    public decimal COD_ESTADO { get; set; }
+    public int COD_ESTADO { get; set; }
 
-    public decimal COD_GENERO { get; set; }
+    public int COD_GENERO { get; set; }
 
-    public decimal COD_PROVEEDOR { get; set; }
+    public int COD_PROVEEDOR { get; set; }
 
     public Nullable<System.DateTime> FECHA_BAJA { get; set; }
 

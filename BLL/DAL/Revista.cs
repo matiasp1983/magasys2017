@@ -27,11 +27,11 @@ public partial class Revista
     }
 
 
-    public decimal ID_REVISTA { get; set; }
+    public int ID_REVISTA { get; set; }
 
     public int COD_PRODUCTO { get; set; }
 
-    public decimal COD_PERIODICIDAD { get; set; }
+    public int COD_PERIODICIDAD { get; set; }
 
     public int ID_DIA_SEMANA { get; set; }
 
