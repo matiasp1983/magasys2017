@@ -193,13 +193,13 @@ namespace PL.AdminDashboard {
         protected global::System.Web.UI.WebControls.TextBox txtAutorLibro;
         
         /// <summary>
-        /// Control txtAnioEdicionLibro.
+        /// Control ddlAnioEdicionLibro.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAnioEdicionLibro;
+        protected global::System.Web.UI.WebControls.DropDownList ddlAnioEdicionLibro;
         
         /// <summary>
         /// Control txtEditorialLibro.
@@ -256,13 +256,13 @@ namespace PL.AdminDashboard {
         protected global::System.Web.UI.WebControls.TextBox txtCantidadDeEntregaSuplemento;
         
         /// <summary>
-        /// Control txtAnioDeEstrenoPelicula.
+        /// Control ddlAnioDeEstrenoPelicula.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAnioDeEstrenoPelicula;
+        protected global::System.Web.UI.WebControls.DropDownList ddlAnioDeEstrenoPelicula;
         
         /// <summary>
         /// Control txtPrecioPelicula.

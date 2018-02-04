@@ -18,6 +18,7 @@ namespace PL.AdminDashboard
                 CargarDiasDeSemana();
                 CargarPeriodicidades();
                 CargarDiarios();
+                CargarAnios();
             }              
         }
 
@@ -151,6 +152,33 @@ namespace PL.AdminDashboard
                 ddlDiarioSuplemento.DataValueField = "ID_DIARIO";
                 ddlDiarioSuplemento.DataBind();
                 ddlDiarioSuplemento.Items.Insert(0, new ListItem(String.Empty, String.Empty));
+            }
+            catch (Exception ex)
+            {
+                Logger loLogger = LogManager.GetCurrentClassLogger();
+                loLogger.Error(ex);
+            }
+        }
+
+        private void CargarAnios()
+        {
+            var oAnio = new AnioBLL();
+
+            try
+            {
+                var lstAnios = oAnio.ObtenerAnios();
+
+                ddlAnioEdicionLibro.DataSource = lstAnios;
+                ddlAnioEdicionLibro.DataTextField = "DESCRIPCION";
+                ddlAnioEdicionLibro.DataValueField = "DESCRIPCION";
+                ddlAnioEdicionLibro.DataBind();
+                ddlAnioEdicionLibro.Items.Insert(0, new ListItem(String.Empty, String.Empty));
+
+                ddlAnioDeEstrenoPelicula.DataSource = lstAnios;
+                ddlAnioDeEstrenoPelicula.DataTextField = "DESCRIPCION";
+                ddlAnioDeEstrenoPelicula.DataValueField = "DESCRIPCION";
+                ddlAnioDeEstrenoPelicula.DataBind();
+                ddlAnioDeEstrenoPelicula.Items.Insert(0, new ListItem(String.Empty, String.Empty));
             }
             catch (Exception ex)
             {

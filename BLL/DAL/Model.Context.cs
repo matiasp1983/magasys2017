@@ -70,6 +70,8 @@ public partial class MAGASYSEntities : DbContext
 
     public virtual DbSet<SuplementoEdicion> SuplementoEdicions { get; set; }
 
+    public virtual DbSet<Anio> Anios { get; set; }
+
 }
 
 }

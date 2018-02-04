@@ -51,10 +51,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnioBLL.cs" />
     <Compile Include="Common\Enums.cs" />
     <Compile Include="Common\Message.cs" />
     <Compile Include="Common\MessageManager.cs" />
     <Compile Include="Common\Utilities.cs" />
+    <Compile Include="DAL\Anio.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\Coleccion.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

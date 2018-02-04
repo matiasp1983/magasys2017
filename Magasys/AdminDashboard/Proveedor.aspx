@@ -250,10 +250,12 @@
                     },
                     <%=txtTelefonoMovil.UniqueID%>: {
                         required: true,
-                        number: true
+                        number: true,
+                        digits: true
                     },
                     <%=txtTelefonoFijo.UniqueID%>: {
-                        number: true
+                        number: true,
+                        digits: true
                     },
                     <%=txtEmail.UniqueID%>: {
                         required: true,
@@ -265,7 +267,8 @@
                     <%=txtNumero.UniqueID%>: {
                         required: true,
                         number: true,
-                        min: 1
+                        min: 1,
+                        digits: true
                     },
                     <%=txtDepartamento.UniqueID%>: {
                         required: {
@@ -282,7 +285,8 @@
                         required: true
                     },
                     <%=txtCodigoPostal.UniqueID%>: {
-                        required: true
+                        required: true,
+                        digits: true
                     }                    
 				},
         messages: {
@@ -297,10 +301,12 @@
                     },
                     <%=txtTelefonoMovil.UniqueID%>: {
                         required: "Este campo es requerido.",
-                        number: "Ingrese un número válido."
+                        number: "Ingrese un número válido.",
+                        digits: "Ingrese solo dígitos."
                     },
                     <%=txtTelefonoFijo.UniqueID%>: {
-                        number: "Ingrese un número válido."
+                        number: "Ingrese un número válido.",
+                        digits: "Ingrese solo dígitos."
                     },
                     <%=txtEmail.UniqueID%>: {
                         required: "Este campo es requerido.",
@@ -312,7 +318,8 @@
                     <%=txtNumero.UniqueID%>: {
                         required: "Este campo es requerido.",
                         number: "Ingrese un número válido.",
-                        min: "Ingrese un valor mayor o igual a 1."
+                        min: "Ingrese un valor mayor o igual a 1.",
+                        digits: "Ingrese solo dígitos."
                     },
                     <%=txtDepartamento.UniqueID%>: {
                         required: "Este campo es requerido."
@@ -327,7 +334,8 @@
                         required: "Este campo es requerido."
                     },
                     <%=txtCodigoPostal.UniqueID%>: {
-                        required: "Este campo es requerido."
+                        required: "Este campo es requerido.",
+                        digits: "Ingrese solo dígitos."
                     }
                 }
             });

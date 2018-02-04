@@ -240,7 +240,9 @@
                                                             <label class="col-sm-3 control-label">Periodicidad</label>
 
                                                             <div class="col-sm-9">
-                                                                <asp:DropDownList ID="ddlPeriodicidadColeccion" runat="server" CssClass="select2_periodicidadcoleccion form-control"></asp:DropDownList>
+                                                                <div id="divPeriodicidadColeccion">
+                                                                    <asp:DropDownList ID="ddlPeriodicidadColeccion" runat="server" CssClass="select2_periodicidadcoleccion form-control"></asp:DropDownList>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -274,8 +276,10 @@
                                                         <div class="form-group">
                                                             <label class="col-sm-3 control-label">A&ntilde;o de edici&oacute;n</label>
 
-                                                            <div class="col-sm-9">
-                                                                <asp:TextBox ID="txtAnioEdicionLibro" runat="server" CssClass="form-control" MaxLength="4"></asp:TextBox>
+                                                            <div class="col-sm-9">                                                                
+                                                                <div id="divAnioEdicionLibro">
+                                                                    <asp:DropDownList ID="ddlAnioEdicionLibro" runat="server" CssClass="select2_anioeditoriallibro form-control"></asp:DropDownList>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -322,7 +326,9 @@
                                                             <label class="col-sm-3 control-label">Diario</label>
 
                                                             <div class="col-sm-9">
-                                                                <asp:DropDownList ID="ddlDiarioSuplemento" runat="server" CssClass="select2_diariosuplemento form-control"></asp:DropDownList>
+                                                                <div id="divDiarioSuplemento">
+                                                                    <asp:DropDownList ID="ddlDiarioSuplemento" runat="server" CssClass="select2_diariosuplemento form-control"></asp:DropDownList>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -359,8 +365,10 @@
                                                         <div class="form-group">
                                                             <label class="col-sm-3 control-label">A&ntilde;o de estreno</label>
 
-                                                            <div class="col-sm-9">
-                                                                <asp:TextBox ID="txtAnioDeEstrenoPelicula" runat="server" CssClass="form-control" MaxLength="4"></asp:TextBox>
+                                                            <div class="col-sm-9">                                                                
+                                                                <div id="divAnioDeEstrenoPelicula">
+                                                                    <asp:DropDownList ID="ddlAnioDeEstrenoPelicula" runat="server" CssClass="select2_aniodeestrenopelicula form-control"></asp:DropDownList>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -457,6 +465,51 @@
                          number: true,
                          min: 0
                      },
+                     <%=ddlPeriodicidadColeccion.UniqueID%>: {
+                         required: true
+                     },
+                     <%=txtCantidadDeEntregaColeccion.UniqueID%>: {
+                         required: true,
+                         number: true,
+                         digits: true,
+                         min: 0                         
+                     },
+                     <%=txtAutorLibro.UniqueID%>: {
+                         required: true
+                     },
+                     <%=ddlAnioEdicionLibro.UniqueID%>: {
+                         required: true
+                     },
+                     <%=txtEditorialLibro.UniqueID%>: {
+                         required: true
+                     },
+                     <%=txtPrecioLibro.UniqueID%>: {
+                         required: true,
+                         number: true,
+                         min: 0
+                     },
+                     <%=ddlDiarioSuplemento.UniqueID%>: {
+                         required: true
+                     },
+                     <%=txtPrecioSuplemento.UniqueID%>: {
+                         required: true,
+                         number: true,
+                         min: 0
+                     },
+                     <%=txtCantidadDeEntregaSuplemento.UniqueID%>: {
+                         required: true,
+                         number: true,
+                         digits: true,
+                         min: 0
+                     },
+                     <%=ddlAnioDeEstrenoPelicula.UniqueID%>: {
+                         required: true
+                     },
+                     <%=txtPrecioPelicula.UniqueID%>: {
+                         required: true,
+                         number: true,
+                         min: 0
+                     }
                 },
         messages: {
                      <%=txtNombre.UniqueID%>: {
@@ -504,6 +557,51 @@
                          number: "Ingrese un número válido.",
                          min: "Ingrese un valor mayor o igual a 0."
                      },
+                     <%=ddlPeriodicidadColeccion.UniqueID%>: {
+                         required: "Este campo es requerido."
+                     },
+                     <%=txtCantidadDeEntregaColeccion.UniqueID%>: {
+                         required: "Este campo es requerido.",
+                         number: "Ingrese un número válido.",
+                         digits: "Ingrese solo dígitos.",
+                         min: "Ingrese un valor mayor o igual a 0."
+                     },
+                     <%=txtAutorLibro.UniqueID%>: {
+                        required: "Este campo es requerido."
+                     },
+                     <%=ddlAnioEdicionLibro.UniqueID%>: {
+                         required: "Este campo es requerido."
+                     },
+                     <%=txtEditorialLibro.UniqueID%>: {
+                         required: "Este campo es requerido."
+                     },
+                     <%=txtPrecioLibro.UniqueID%>: {
+                         required: "Este campo es requerido.",
+                         number: "Ingrese un número válido.",
+                         min: "Ingrese un valor mayor o igual a 0."
+                     },
+                     <%=ddlDiarioSuplemento.UniqueID%>: {
+                         required: "Este campo es requerido."
+                     },
+                     <%=txtPrecioSuplemento.UniqueID%>: {
+                         required: "Este campo es requerido.",
+                         number: "Ingrese un número válido.",
+                         min: "Ingrese un valor mayor o igual a 0."
+                     },
+                     <%=txtCantidadDeEntregaSuplemento.UniqueID%>: {
+                         required: "Este campo es requerido.",
+                         number: "Ingrese un número válido.",
+                         digits: "Ingrese solo dígitos.",
+                         min: "Ingrese un valor mayor o igual a 0."
+                     },
+                     <%=ddlAnioDeEstrenoPelicula.UniqueID%>: {
+                         required: "Este campo es requerido."
+                     },
+                     <%=txtPrecioPelicula.UniqueID%>: {
+                         required: "Este campo es requerido.",
+                         number: "Ingrese un número válido.",
+                         min: "Ingrese un valor mayor o igual a 0."
+                     }
                 }
             });
         }
@@ -551,6 +649,13 @@
                     allowClear: true
             });
 
+            $(".select2_anioeditoriallibro").select2(
+            {
+                    placeholder: 'Seleccione un Año',
+                    width: '100%',
+                    allowClear: true
+            });
+
             $(".select2_diadeentregasuplemento").select2(
             {
                     placeholder: 'Seleccione un Día de Entrega',
@@ -561,6 +666,13 @@
             $(".select2_diariosuplemento").select2(
             {
                     placeholder: 'Seleccione un Diario',
+                    width: '100%',
+                    allowClear: true
+            });
+
+            $(".select2_aniodeestrenopelicula").select2(
+            {
+                    placeholder: 'Seleccione un Año',
                     width: '100%',
                     allowClear: true
             });

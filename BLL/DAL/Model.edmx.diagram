@@ -46,6 +46,7 @@
         <AssociationConnector Association="MAGASYSModel.FK_Proveedor_Provincia" />
         <AssociationConnector Association="MAGASYSModel.FK_RevistaEdicion_Revista" />
         <AssociationConnector Association="MAGASYSModel.FK_SuplementoEdicion_Suplemento" />
+        <EntityTypeShape EntityType="MAGASYSModel.Anio" Width="1.5" PointX="7" PointY="2.375" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

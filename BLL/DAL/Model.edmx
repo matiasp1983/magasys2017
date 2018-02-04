@@ -5,6 +5,12 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="MAGASYSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Anio">
+          <Key>
+            <PropertyRef Name="DESCRIPCION" />
+          </Key>
+          <Property Name="DESCRIPCION" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Coleccion">
           <Key>
             <PropertyRef Name="ID_COLECCION" />
@@ -455,6 +461,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="MAGASYSModelStoreContainer">
+          <EntitySet Name="Anio" EntityType="Self.Anio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Coleccion" EntityType="Self.Coleccion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ColeccionEntrega" EntityType="Self.ColeccionEntrega" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Diario" EntityType="Self.Diario" Schema="dbo" store:Type="Tables" />
@@ -675,6 +682,7 @@
             <End Role="Suplemento" EntitySet="Suplementoes" />
             <End Role="SuplementoEdicion" EntitySet="SuplementoEdicions" />
           </AssociationSet>
+          <EntitySet Name="Anios" EntityType="MAGASYSModel.Anio" />
         </EntityContainer>
         <EntityType Name="Coleccion">
           <Key>
@@ -1169,6 +1177,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Anio">
+          <Key>
+            <PropertyRef Name="DESCRIPCION" />
+          </Key>
+          <Property Name="DESCRIPCION" Type="Int32" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1376,6 +1390,13 @@
                 <ScalarProperty Name="NUMERO" ColumnName="NUMERO" />
                 <ScalarProperty Name="COD_SUPLEMENTO" ColumnName="COD_SUPLEMENTO" />
                 <ScalarProperty Name="ID_EDICION" ColumnName="ID_EDICION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Anios">
+            <EntityTypeMapping TypeName="MAGASYSModel.Anio">
+              <MappingFragment StoreEntitySet="Anio">
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
