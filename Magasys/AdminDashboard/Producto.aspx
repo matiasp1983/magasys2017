@@ -32,7 +32,7 @@
                                 <label class="col-sm-2 control-label">Nombre</label>
 
                                 <div class="col-sm-10">
-                                    <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" MaxLength="50"></asp:TextBox>
+                                    <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
@@ -41,7 +41,7 @@
                                 <label class="col-sm-2 control-label">Descripci&oacute;n</label>
 
                                 <div class="col-sm-10">
-                                    <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-control" MaxLength="50"></asp:TextBox>
+                                    <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
@@ -97,7 +97,7 @@
                                                             <div class="col-sm-8">
                                                                 <div class="input-group m-b" id="divPrecioLunesDiario">
                                                                     <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                                                    <asp:TextBox ID="txtPrecioLunesDiario" runat="server" CssClass="form-control" MaxLength="6"></asp:TextBox>
+                                                                    <asp:TextBox ID="txtPrecioLunesDiario" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -109,7 +109,7 @@
                                                             <div class="col-sm-8">
                                                                 <div class="input-group m-b" id="divPrecioMartesDiario">
                                                                     <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                                                    <asp:TextBox ID="txtPrecioMartesDiario" runat="server" CssClass="form-control" MaxLength="6"></asp:TextBox>
+                                                                    <asp:TextBox ID="txtPrecioMartesDiario" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -123,7 +123,7 @@
                                                             <div class="col-sm-8">
                                                                 <div class="input-group m-b" id="divPrecioMiercolesDiario">
                                                                     <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                                                    <asp:TextBox ID="txtPrecioMiercolesDiario" runat="server" CssClass="form-control" MaxLength="6"></asp:TextBox>
+                                                                    <asp:TextBox ID="txtPrecioMiercolesDiario" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -135,7 +135,7 @@
                                                             <div class="col-sm-8">
                                                                 <div class="input-group m-b" id="divPrecioJuevesDiario">
                                                                     <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                                                    <asp:TextBox ID="txtPrecioJuevesDiario" runat="server" CssClass="form-control" MaxLength="6"></asp:TextBox>
+                                                                    <asp:TextBox ID="txtPrecioJuevesDiario" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -149,7 +149,7 @@
                                                             <div class="col-sm-8">
                                                                 <div class="input-group m-b" id="divPrecioViernesDiario">
                                                                     <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                                                    <asp:TextBox ID="txtPrecioViernesDiario" runat="server" CssClass="form-control" MaxLength="6"></asp:TextBox>
+                                                                    <asp:TextBox ID="txtPrecioViernesDiario" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -161,7 +161,7 @@
                                                             <div class="col-sm-8">
                                                                 <div class="input-group m-b" id="divPrecioSabadoDiario">
                                                                     <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                                                    <asp:TextBox ID="txtPrecioSabadoDiario" runat="server" CssClass="form-control" MaxLength="6"></asp:TextBox>
+                                                                    <asp:TextBox ID="txtPrecioSabadoDiario" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -175,7 +175,7 @@
                                                             <div class="col-sm-8">
                                                                 <div class="input-group m-b" id="divPrecioDomingoDiario">
                                                                     <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                                                    <asp:TextBox ID="txtPrecioDomingoDiario" runat="server" CssClass="form-control" MaxLength="6"></asp:TextBox>
+                                                                    <asp:TextBox ID="txtPrecioDomingoDiario" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -215,7 +215,7 @@
                                                             <div class="col-sm-9">
                                                                 <div class="input-group m-b" id="divPrecioRevista">
                                                                     <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                                                    <asp:TextBox ID="txtPrecioRevista" runat="server" CssClass="form-control" MaxLength="6"></asp:TextBox>
+                                                                    <asp:TextBox ID="txtPrecioRevista" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -253,7 +253,7 @@
                                                             <label class="col-sm-3 control-label">Cantidad de entregas</label>
 
                                                             <div class="col-sm-9">
-                                                                <asp:TextBox ID="txtCantidadDeEntregaColeccion" runat="server" CssClass="form-control" MaxLength="6"></asp:TextBox>
+                                                                <asp:TextBox ID="txtCantidadDeEntregaColeccion" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -268,7 +268,7 @@
                                                             <label class="col-sm-3 control-label">Autor</label>
 
                                                             <div class="col-sm-9">
-                                                                <asp:TextBox ID="txtAutorLibro" runat="server" CssClass="form-control" MaxLength="50"></asp:TextBox>
+                                                                <asp:TextBox ID="txtAutorLibro" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off"></asp:TextBox>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -290,7 +290,7 @@
                                                             <label class="col-sm-3 control-label">Editorial</label>
 
                                                             <div class="col-sm-9">
-                                                                <asp:TextBox ID="txtEditorialLibro" runat="server" CssClass="form-control" MaxLength="50"></asp:TextBox>
+                                                                <asp:TextBox ID="txtEditorialLibro" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off"></asp:TextBox>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -301,7 +301,7 @@
                                                             <div class="col-sm-9">
                                                                 <div class="input-group m-b" id="divPrecioLibro">
                                                                     <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                                                    <asp:TextBox ID="txtPrecioLibro" runat="server" CssClass="form-control" MaxLength="6"></asp:TextBox>
+                                                                    <asp:TextBox ID="txtPrecioLibro" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -341,7 +341,7 @@
                                                             <div class="col-sm-9">
                                                                 <div class="input-group m-b" id="divPrecioSuplemento">
                                                                     <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                                                    <asp:TextBox ID="txtPrecioSuplemento" runat="server" CssClass="form-control" MaxLength="6"></asp:TextBox>
+                                                                    <asp:TextBox ID="txtPrecioSuplemento" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -351,7 +351,7 @@
                                                             <label class="col-sm-3 control-label">Cantidad de entregas</label>
 
                                                             <div class="col-sm-9">
-                                                                <asp:TextBox ID="txtCantidadDeEntregaSuplemento" runat="server" CssClass="form-control" MaxLength="6"></asp:TextBox>
+                                                                <asp:TextBox ID="txtCantidadDeEntregaSuplemento" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -379,7 +379,7 @@
                                                             <div class="col-sm-9">
                                                                 <div class="input-group m-b" id="divPrecioPelicula">
                                                                     <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                                                    <asp:TextBox ID="txtPrecioPelicula" runat="server" CssClass="form-control" MaxLength="6"></asp:TextBox>
+                                                                    <asp:TextBox ID="txtPrecioPelicula" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
                                                                 </div>
                                                             </div>
                                                         </div>
