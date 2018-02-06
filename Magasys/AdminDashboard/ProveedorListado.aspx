@@ -33,13 +33,13 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="col-sm-10 control-label">Código</label>
-                                            <asp:TextBox ID="txtCodigo" runat="server" CssClass="form-control" MaxLength="12"></asp:TextBox>
+                                            <asp:TextBox ID="txtCodigo" runat="server" CssClass="form-control" MaxLength="12" autocomplete="off"></asp:TextBox>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="col-sm-10 control-label">CUIT</label>
-                                            <asp:TextBox ID="txtCuitBusqueda" runat="server" CssClass="form-control" placeholder="99999999999" MaxLength="11"></asp:TextBox>
+                                            <asp:TextBox ID="txtCuitBusqueda" runat="server" CssClass="form-control" placeholder="99999999999" MaxLength="11" autocomplete="off"></asp:TextBox>
                                         </div>
                                     </div>
                                 </div>
@@ -51,9 +51,9 @@
                                         <div id="datePickerRange" class="form-group">
                                             <div class="input-daterange">
                                                 <div class="input-group" style="display:inline-table">
-                                                    <asp:TextBox ID="txtFechaAltaDesde" runat="server" CssClass="input-sm form-control"></asp:TextBox>
+                                                    <asp:TextBox ID="txtFechaAltaDesde" runat="server" CssClass="input-sm form-control" autocomplete="off"></asp:TextBox>
                                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                    <asp:TextBox ID="txtFechaAltaHasta" runat="server" CssClass="input-sm form-control"></asp:TextBox>
+                                                    <asp:TextBox ID="txtFechaAltaHasta" runat="server" CssClass="input-sm form-control" autocomplete="off"></asp:TextBox>
                                                 </div>
                                             </div>
                                         </div>
@@ -61,7 +61,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="col-sm-10 control-label">Razón Social</label>
-                                            <asp:TextBox ID="txtRazonSocial" runat="server" CssClass="form-control" MaxLength="50"></asp:TextBox>
+                                            <asp:TextBox ID="txtRazonSocial" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off"></asp:TextBox>
                                         </div>
                                     </div>
                                 </div>
@@ -92,7 +92,7 @@
                                 <ContentTemplate>
                                     <div class="text-center">
                                         <div class="form-group">
-                                            <asp:TextBox ID="txtCuitAlta" runat="server" placeholder="99999999999" CssClass="form-control" MaxLength="11"></asp:TextBox>
+                                            <asp:TextBox ID="txtCuitAlta" runat="server" placeholder="99999999999" CssClass="form-control" MaxLength="11" autocomplete="off"></asp:TextBox>
                                         </div>
                                         <button type="button" id="btnCrearProveedor" runat="server" class="btn btn-info" onserverclick="BtnCrearProveedor_Click">
                                             <i class="fa fa-plus"></i>&nbsp;&nbsp;<span>Crear</span>

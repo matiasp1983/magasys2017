@@ -5,6 +5,7 @@ using BLL.Filters;
 using System.Web.UI.HtmlControls;
 using BLL;
 using NLog;
+using System.Linq;
 
 namespace PL.AdminDashboard
 {
@@ -34,7 +35,7 @@ namespace PL.AdminDashboard
 
         protected void BtnLimpiar_Click(object sender, EventArgs e)
         {
-            Limpiar();
+            LimpiarCampos();
         }
 
         protected void LsvProveedores_ItemDataBound(object sender, ListViewItemEventArgs e)
@@ -235,13 +236,9 @@ namespace PL.AdminDashboard
             lsvProveedores.DataBind();
         }
 
-        private void Limpiar()
+        private void LimpiarCampos()
         {
-            txtCodigo.Text = string.Empty;
-            txtCuitBusqueda.Text = string.Empty;
-            txtFechaAltaDesde.Text = string.Empty;
-            txtFechaAltaHasta.Text = string.Empty;
-            txtRazonSocial.Text = string.Empty;
+            FormProveedorListado.Controls.OfType<TextBox>().ToList().ForEach(x => x.Text = String.Empty);
             Session.Remove(Enums.Session.Proveedor.ToString());
             CargarGrillaProveedores();
         }

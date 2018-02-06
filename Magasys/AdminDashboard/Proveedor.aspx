@@ -32,7 +32,7 @@
                                 <label class="col-sm-2 control-label">Código</label>
 
                                 <div class="col-sm-10">
-                                    <asp:TextBox ID="txtCodigo" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                                    <asp:TextBox ID="txtCodigo" runat="server" CssClass="form-control" Enabled="false" autocomplete="off"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
@@ -41,7 +41,7 @@
                                 <label class="col-sm-2 control-label">Fecha Alta</label>
 
                                 <div class="col-sm-10">
-                                    <asp:TextBox ID="txtFechaAlta" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                                    <asp:TextBox ID="txtFechaAlta" runat="server" CssClass="form-control" Enabled="false" autocomplete="off"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
@@ -52,7 +52,7 @@
                                 <label class="col-sm-2 control-label">CUIT</label>
 
                                 <div class="col-sm-10">
-                                    <asp:TextBox ID="txtCuit" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
+                                    <asp:TextBox ID="txtCuit" runat="server" CssClass="form-control" Enabled="false" autocomplete="off"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
@@ -61,7 +61,7 @@
                                 <label class="col-sm-2 control-label">Razón Social</label>
 
                                 <div class="col-sm-10">
-                                    <asp:TextBox ID="txtRazonSocial" runat="server" CssClass="form-control" MaxLength="50"></asp:TextBox>
+                                    <asp:TextBox ID="txtRazonSocial" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
@@ -72,7 +72,7 @@
                                 <label class="col-sm-2 control-label">Nombre</label>
 
                                 <div class="col-sm-10">
-                                    <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" MaxLength="50"></asp:TextBox>
+                                    <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
@@ -81,7 +81,7 @@
                                 <label class="col-sm-2 control-label">Apellido</label>
 
                                 <div class="col-sm-10">
-                                    <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control" MaxLength="50"></asp:TextBox>
+                                    <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
@@ -94,7 +94,7 @@
                                 <div class="col-sm-10">
                                     <div class="input-group m-b" id="divTelefonoMovil">
                                         <span class="input-group-addon"><i class="fa fa-mobile-phone"></i></span>
-                                        <asp:TextBox ID="txtTelefonoMovil" runat="server" CssClass="form-control" MaxLength="11"></asp:TextBox>
+                                        <asp:TextBox ID="txtTelefonoMovil" runat="server" CssClass="form-control" MaxLength="11" autocomplete="off"></asp:TextBox>
                                     </div>
                                     <span class="help-block m-b-none">Código de área + N°. Ej: 03516243492.</span>
                                 </div>
@@ -107,7 +107,7 @@
                                 <div class="col-sm-10">
                                     <div class="input-group m-b" id="divTelefonoFijo">
                                         <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                                        <asp:TextBox ID="txtTelefonoFijo" runat="server" CssClass="form-control" MaxLength="11"></asp:TextBox>
+                                        <asp:TextBox ID="txtTelefonoFijo" runat="server" CssClass="form-control" MaxLength="11" autocomplete="off"></asp:TextBox>
                                     </div>
                                     <span class="help-block m-b-none">Código de área + N°. Ej: 03514823455.</span>
                                 </div>
@@ -122,7 +122,7 @@
                                 <div class="col-sm-10">
                                     <div class="input-group m-b" id="divEmail">
                                         <span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
-                                        <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" MaxLength="50"></asp:TextBox>
+                                        <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off"></asp:TextBox>
                                     </div>
                                 </div>
                             </div>
@@ -142,7 +142,7 @@
                                 <label class="col-sm-2 control-label">Calle</label>
 
                                 <div class="col-sm-10">
-                                    <asp:TextBox ID="txtCalle" runat="server" CssClass="form-control" MaxLength="50"></asp:TextBox>
+                                    <asp:TextBox ID="txtCalle" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
@@ -151,19 +151,19 @@
                                 <label class="col-md-2 control-label">Número</label>
 
                                 <div class="col-md-3">
-                                    <asp:TextBox ID="txtNumero" runat="server" CssClass="form-control" MaxLength="6"></asp:TextBox>
+                                    <asp:TextBox ID="txtNumero" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
                                 </div>
 
                                 <label class="col-md-1 control-label">Piso</label>
 
                                 <div class="col-md-2">
-                                    <asp:TextBox ID="txtPiso" runat="server" CssClass="form-control" MaxLength="2"></asp:TextBox>
+                                    <asp:TextBox ID="txtPiso" runat="server" CssClass="form-control" MaxLength="2" autocomplete="off"></asp:TextBox>
                                 </div>
 
                                 <label class="col-md-1 control-label">Dpto</label>
 
                                 <div class="col-md-2">
-                                    <asp:TextBox ID="txtDepartamento" runat="server" CssClass="form-control" MaxLength="2"></asp:TextBox>
+                                    <asp:TextBox ID="txtDepartamento" runat="server" CssClass="form-control" MaxLength="2" autocomplete="off"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
@@ -198,7 +198,7 @@
                                 <label class="col-sm-2 control-label">Barrio</label>
 
                                 <div class="col-sm-10">
-                                    <asp:TextBox ID="txtBarrio" runat="server" CssClass="form-control" MaxLength="50"></asp:TextBox>
+                                    <asp:TextBox ID="txtBarrio" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
@@ -207,7 +207,7 @@
                                 <label class="col-sm-2 control-label">Código Postal</label>
 
                                 <div class="col-md-3">
-                                    <asp:TextBox ID="txtCodigoPostal" runat="server" CssClass="form-control" MaxLength="10"></asp:TextBox>
+                                    <asp:TextBox ID="txtCodigoPostal" runat="server" CssClass="form-control" MaxLength="10" autocomplete="off"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
