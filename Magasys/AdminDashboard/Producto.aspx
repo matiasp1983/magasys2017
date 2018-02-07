@@ -79,15 +79,15 @@
                             <div class="form-group">
                                 <div class="tabs-container">
                                     <ul class="nav nav-tabs">
-                                        <li class="active"><a data-toggle="tab" href="#tab-1">Diario</a></li>
-                                        <li class=""><a data-toggle="tab" href="#tab-2">Revista</a></li>
-                                        <li class=""><a data-toggle="tab" href="#tab-3">Colecci&oacute;n</a></li>
-                                        <li class=""><a data-toggle="tab" href="#tab-4">Libro</a></li>
-                                        <li class=""><a data-toggle="tab" href="#tab-5">Suplemento</a></li>
-                                        <li class=""><a data-toggle="tab" href="#tab-6">Pel&iacute;cula</a></li>
+                                        <li class="active"><a data-toggle="tab" href="#tabDiario">Diario</a></li>
+                                        <li class=""><a data-toggle="tab" href="#tabRevista">Revista</a></li>
+                                        <li class=""><a data-toggle="tab" href="#tabColeccion">Colecci&oacute;n</a></li>
+                                        <li class=""><a data-toggle="tab" href="#tabLibro">Libro</a></li>
+                                        <li class=""><a data-toggle="tab" href="#tabSuplemento">Suplemento</a></li>
+                                        <li class=""><a data-toggle="tab" href="#tabPelicula">Pel&iacute;cula</a></li>
                                     </ul>
                                     <div class="tab-content">
-                                        <div id="tab-1" class="tab-pane active">
+                                        <div id="tabDiario" class="tab-pane active">
                                             <div class="panel-body">
                                                 <div class="row">
                                                     <div class="col-md-6">
@@ -183,7 +183,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div id="tab-2" class="tab-pane">
+                                        <div id="tabRevista" class="tab-pane">
                                             <div class="panel-body">
                                                 <div class="row">
                                                     <div class="col-md-6">
@@ -223,7 +223,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div id="tab-3" class="tab-pane">
+                                        <div id="tabColeccion" class="tab-pane">
                                             <div class="panel-body">
                                                 <div class="row">
                                                     <div class="col-md-6">
@@ -260,7 +260,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div id="tab-4" class="tab-pane">
+                                        <div id="tabLibro" class="tab-pane">
                                             <div class="panel-body">
                                                 <div class="row">
                                                     <div class="col-md-6">
@@ -309,7 +309,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div id="tab-5" class="tab-pane">
+                                        <div id="tabSuplemento" class="tab-pane">
                                             <div class="panel-body">
                                                 <div class="row">
                                                     <div class="col-md-6">
@@ -358,7 +358,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div id="tab-6" class="tab-pane">
+                                        <div id="tabPelicula" class="tab-pane">
                                             <div class="panel-body">
                                                 <div class="row">
                                                     <div class="col-md-6">

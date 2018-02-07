@@ -1,6 +1,7 @@
 ﻿using BLL;
 using NLog;
 using System;
+using System.Linq;
 using System.Web.UI.WebControls;
 
 namespace PL.AdminDashboard
@@ -24,8 +25,16 @@ namespace PL.AdminDashboard
 
         protected void BtnGuardar_Click(object sender, EventArgs e)
         {
-
-        }
+            try
+            {
+                AltaProducto();
+            }
+            catch (Exception ex)
+            {
+                Logger loLogger = LogManager.GetCurrentClassLogger();
+                loLogger.Error(ex);
+            }
+        }       
 
         protected void BtnCancelar_Click(object sender, EventArgs e)
         {            
@@ -34,7 +43,7 @@ namespace PL.AdminDashboard
 
         protected void BtnLimpiar_Click(object sender, EventArgs e)
         {
-
+            LimpiarCampos();
         }
 
         #endregion
@@ -185,6 +194,17 @@ namespace PL.AdminDashboard
                 Logger loLogger = LogManager.GetCurrentClassLogger();
                 loLogger.Error(ex);
             }
+        }
+
+        private void AltaProducto()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void LimpiarCampos()
+        {
+            FormProducto.Controls.OfType<TextBox>().ToList().ForEach(x => x.Text = String.Empty);
+            FormProducto.Controls.OfType<DropDownList>().ToList().ForEach(y => y.SelectedIndex = 0);
         }
 
         #endregion
