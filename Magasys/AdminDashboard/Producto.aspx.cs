@@ -20,7 +20,24 @@ namespace PL.AdminDashboard
                 CargarPeriodicidades();
                 CargarDiarios();
                 CargarAnios();
-            }              
+            }
+        }
+
+        protected void DdlTipoProducto_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            OcultarDivTipoProducto();            
+            if (((DropDownList)sender).SelectedValue.Equals("Revista"))            
+                divRevista.Visible = true;            
+            else if (((DropDownList)sender).SelectedValue.Equals("Coleccion"))            
+                divColeccion.Visible = true;            
+            else if (((DropDownList)sender).SelectedValue.Equals("Libro"))            
+                divLibro.Visible = true;            
+            else if (((DropDownList)sender).SelectedValue.Equals("Suplemento"))            
+                divSuplemento.Visible = true;            
+            else if (((DropDownList)sender).SelectedValue.Equals("Pelicula"))            
+                divPelicula.Visible = true;            
+            else            
+                divDiario.Visible = true;            
         }
 
         protected void BtnGuardar_Click(object sender, EventArgs e)
@@ -34,10 +51,10 @@ namespace PL.AdminDashboard
                 Logger loLogger = LogManager.GetCurrentClassLogger();
                 loLogger.Error(ex);
             }
-        }       
+        }
 
         protected void BtnCancelar_Click(object sender, EventArgs e)
-        {            
+        {
             Response.Redirect("ProductoListado.aspx");
         }
 
@@ -63,7 +80,7 @@ namespace PL.AdminDashboard
                 ddlProveedor.Items.Insert(0, new ListItem(String.Empty, String.Empty));
             }
             catch (Exception ex)
-            {                                
+            {
                 Logger loLogger = LogManager.GetCurrentClassLogger();
                 loLogger.Error(ex);
             }
@@ -139,7 +156,7 @@ namespace PL.AdminDashboard
                 ddlPeriodicidadColeccion.DataTextField = "NOMBRE";
                 ddlPeriodicidadColeccion.DataValueField = "ID_PERIODICIDAD";
                 ddlPeriodicidadColeccion.DataBind();
-                ddlPeriodicidadColeccion.Items.Insert(0, new ListItem(String.Empty, String.Empty));                
+                ddlPeriodicidadColeccion.Items.Insert(0, new ListItem(String.Empty, String.Empty));
             }
             catch (Exception ex)
             {
@@ -196,17 +213,28 @@ namespace PL.AdminDashboard
             }
         }
 
-        private void AltaProducto()
+        private void OcultarDivTipoProducto(bool pDesdeBotonLimpiar = false)
         {
-            throw new NotImplementedException();
+            divRevista.Visible = divColeccion.Visible = divLibro.Visible = divSuplemento.Visible = divPelicula.Visible = false;
+
+            if (!pDesdeBotonLimpiar)            
+                divDiario.Visible = false;             
+            else
+                divDiario.Visible = true;            
         }
+
+        private void AltaProducto()
+        {            
+            LimpiarCampos();
+        }        
 
         private void LimpiarCampos()
         {
             FormProducto.Controls.OfType<TextBox>().ToList().ForEach(x => x.Text = String.Empty);
             FormProducto.Controls.OfType<DropDownList>().ToList().ForEach(y => y.SelectedIndex = 0);
+            OcultarDivTipoProducto(true);
         }
 
-        #endregion
+        #endregion        
     }
 }
