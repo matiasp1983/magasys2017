@@ -67,6 +67,24 @@ namespace PL.AdminDashboard {
         protected global::System.Web.UI.WebControls.DropDownList ddlGenero;
         
         /// <summary>
+        /// Control ddlTipoProducto.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlTipoProducto;
+        
+        /// <summary>
+        /// Control divDiario.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divDiario;
+        
+        /// <summary>
         /// Control txtPrecioLunesDiario.
         /// </summary>
         /// <remarks>
@@ -130,6 +148,15 @@ namespace PL.AdminDashboard {
         protected global::System.Web.UI.WebControls.TextBox txtPrecioDomingoDiario;
         
         /// <summary>
+        /// Control divRevista.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divRevista;
+        
+        /// <summary>
         /// Control ddlDiaDeEntregaRevista.
         /// </summary>
         /// <remarks>
@@ -157,6 +184,15 @@ namespace PL.AdminDashboard {
         protected global::System.Web.UI.WebControls.TextBox txtPrecioRevista;
         
         /// <summary>
+        /// Control divColeccion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divColeccion;
+        
+        /// <summary>
         /// Control ddlDiaDeEntregaColeccion.
         /// </summary>
         /// <remarks>
@@ -182,6 +218,15 @@ namespace PL.AdminDashboard {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCantidadDeEntregaColeccion;
+        
+        /// <summary>
+        /// Control divLibro.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divLibro;
         
         /// <summary>
         /// Control txtAutorLibro.
@@ -220,6 +265,15 @@ namespace PL.AdminDashboard {
         protected global::System.Web.UI.WebControls.TextBox txtPrecioLibro;
         
         /// <summary>
+        /// Control divSuplemento.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divSuplemento;
+        
+        /// <summary>
         /// Control ddlDiaDeEntregaSuplemento.
         /// </summary>
         /// <remarks>
@@ -254,6 +308,15 @@ namespace PL.AdminDashboard {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCantidadDeEntregaSuplemento;
+        
+        /// <summary>
+        /// Control divPelicula.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divPelicula;
         
         /// <summary>
         /// Control ddlAnioDeEstrenoPelicula.
