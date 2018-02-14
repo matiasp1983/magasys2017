@@ -414,7 +414,10 @@
             $(FormProducto).validate({
                 rules: {
                      <%=txtNombre.UniqueID%>: {
-                        required: true
+                        required: true,
+                        normalizer: function (value) {                            
+                            return $.trim(value);
+                        }
                      },
                      <%=ddlProveedor.UniqueID%>: {
                          required: true
@@ -468,13 +471,19 @@
                          min: 0                         
                      },
                      <%=txtAutorLibro.UniqueID%>: {
-                         required: true
+                         required: true,
+                         normalizer: function (value) {
+                             return $.trim(value);
+                         }
                      },
                      <%=ddlAnioEdicionLibro.UniqueID%>: {
                          required: true
                      },
                      <%=txtEditorialLibro.UniqueID%>: {
-                         required: true
+                         required: true,
+                         normalizer: function (value) {
+                             return $.trim(value);
+                         }
                      },
                      <%=txtPrecioLibro.UniqueID%>: {
                          required: true,

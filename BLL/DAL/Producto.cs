@@ -30,9 +30,9 @@ public partial class Producto
 
         this.Peliculas = new HashSet<Pelicula>();
 
-        this.Revistas = new HashSet<Revista>();
-
         this.Suplementoes = new HashSet<Suplemento>();
+
+        this.Revistas = new HashSet<Revista>();
 
     }
 
@@ -79,11 +79,11 @@ public partial class Producto
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<Revista> Revistas { get; set; }
+    public virtual ICollection<Suplemento> Suplementoes { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<Suplemento> Suplementoes { get; set; }
+    public virtual ICollection<Revista> Revistas { get; set; }
 
 }
 

@@ -97,7 +97,7 @@ namespace PL.AdminDashboard
         {
             try
             {
-                if (!string.IsNullOrEmpty(hdIdProveedorBaja.Value))
+                if (!String.IsNullOrEmpty(hdIdProveedorBaja.Value))
                 {
                     var loIdProveedor = Convert.ToInt64(hdIdProveedorBaja.Value);
                     var oProveedor = new ProveedorBLL();
@@ -191,22 +191,17 @@ namespace PL.AdminDashboard
                 else
                     oProveedorFiltro.IdProveedor = -1;
             }
-            if (!string.IsNullOrEmpty(txtCuitBusqueda.Text))
-            {
+            if (!String.IsNullOrEmpty(txtCuitBusqueda.Text))            
                 oProveedorFiltro.Cuit = txtCuitBusqueda.Text;
-            }
-            if (!string.IsNullOrEmpty(txtFechaAltaDesde.Text))
-            {
+            
+            if (!String.IsNullOrEmpty(txtFechaAltaDesde.Text))            
                 oProveedorFiltro.FechaAltaDesde = Convert.ToDateTime(txtFechaAltaDesde.Text);
-            }
-            if (!string.IsNullOrEmpty(txtFechaAltaHasta.Text))
-            {
+            
+            if (!String.IsNullOrEmpty(txtFechaAltaHasta.Text))            
                 oProveedorFiltro.FechaAltaHasta = Convert.ToDateTime(txtFechaAltaHasta.Text);
-            }
-            if (!string.IsNullOrEmpty(txtRazonSocial.Text))
-            {
-                oProveedorFiltro.RazonSocial = txtRazonSocial.Text;
-            }
+            
+            if (!String.IsNullOrEmpty(txtRazonSocial.Text))            
+                oProveedorFiltro.RazonSocial = txtRazonSocial.Text;            
 
             return oProveedorFiltro;
         }

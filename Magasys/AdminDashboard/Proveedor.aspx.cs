@@ -23,28 +23,33 @@ namespace PL.AdminDashboard
             try
             {
                 oProveedor.CUIT = oProveedor.CUIT.ToString().Replace("-", String.Empty).Trim();
-                
+
                 if (oProveedor.ID_PROVEEDOR == 0)
                 {
-                    var loProveedor = new ProveedorBLL().AltaProveedor(oProveedor);
+                    var loResultado = new ProveedorBLL().AltaProveedor(oProveedor);
 
-                    if (loProveedor)
+                    if (loResultado)
                         Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal("Alta Proveedor", Message.MsjeProveedorSuccessAlta, "ProveedorListado.aspx"));
                     else
-                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal("Alta Proveedor", Message.MsjeProveedorFailure, "ProveedorListado.aspx"));
+                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal("Alta Proveedor", Message.MsjeProveedorFailure));
                 }
                 else
                 {
-                    var loProveedor = new ProveedorBLL().ModificarProveedor(oProveedor);
+                    var loResutado = new ProveedorBLL().ModificarProveedor(oProveedor);
 
-                    if (loProveedor)
+                    if (loResutado)
                         Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal("Modificación Proveedor", Message.MsjeProveedorSuccessModificacion, "ProveedorListado.aspx"));
                     else
-                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal("Modificación Proveedor", Message.MsjeProveedorFailure, "ProveedorListado.aspx"));
+                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal("Modificación Proveedor", Message.MsjeProveedorFailure));
                 }
             }
             catch (Exception ex)
             {
+                if (oProveedor.ID_PROVEEDOR == 0)
+                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal("Alta Proveedor", Message.MsjeProveedorFailure, "ProveedorListado.aspx"));
+                else
+                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal("Modificación Proveedor", Message.MsjeProveedorFailure));
+
                 Logger loLogger = LogManager.GetCurrentClassLogger();
                 loLogger.Error(ex);
             }
@@ -157,13 +162,31 @@ namespace PL.AdminDashboard
             oProveedor.NOMBRE = txtNombre.Text;
             oProveedor.APELLIDO = txtApellido.Text;
             oProveedor.TELEFONO_MOVIL = txtTelefonoMovil.Text;
-            oProveedor.TELEFONO_FIJO = txtTelefonoFijo.Text;
+
+            if (!String.IsNullOrEmpty(txtTelefonoFijo.Text))
+                oProveedor.TELEFONO_FIJO = txtTelefonoFijo.Text;
+            else
+                oProveedor.TELEFONO_FIJO = null;
+
             oProveedor.EMAIL = txtEmail.Text;
             oProveedor.CALLE = txtCalle.Text;
             oProveedor.NUMERO = Convert.ToInt32(txtNumero.Text);
-            oProveedor.PISO = txtPiso.Text;
-            oProveedor.DEPARTAMENTO = txtDepartamento.Text;
-            oProveedor.BARRIO = txtBarrio.Text;
+
+            if (!String.IsNullOrEmpty(txtPiso.Text))
+                oProveedor.PISO = txtPiso.Text;
+            else
+                oProveedor.PISO = null;
+
+            if (!String.IsNullOrEmpty(txtDepartamento.Text))
+                oProveedor.DEPARTAMENTO = txtDepartamento.Text;
+            else
+                oProveedor.DEPARTAMENTO = null;
+
+            if (!String.IsNullOrEmpty(txtBarrio.Text))
+                oProveedor.BARRIO = txtBarrio.Text;
+            else
+                oProveedor.BARRIO = null;
+
             oProveedor.CODIGO_POSTAL = txtCodigoPostal.Text;
             oProveedor.ID_PROVINCIA = Convert.ToInt32(ddlProvincia.SelectedValue);
             oProveedor.ID_LOCALIDAD = Convert.ToInt32(ddlLocalidad.SelectedValue);

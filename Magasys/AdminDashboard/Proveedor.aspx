@@ -240,13 +240,22 @@
             $(FormProveedor).validate({
                 rules: {
                     <%=txtRazonSocial.UniqueID%>: {
-                        required: true
+                        required: true,
+                        normalizer: function (value) {
+                            return $.trim(value);
+                        }
                     },
                     <%=txtNombre.UniqueID%>: {
-                        required: true
+                        required: true,
+                        normalizer: function (value) {
+                            return $.trim(value);
+                        }
                     },
                     <%=txtApellido.UniqueID%>: {
-                        required: true
+                        required: true,
+                        normalizer: function (value) {
+                            return $.trim(value);
+                        }
                     },
                     <%=txtTelefonoMovil.UniqueID%>: {
                         required: true,
@@ -259,10 +268,16 @@
                     },
                     <%=txtEmail.UniqueID%>: {
                         required: true,
-                        email: true
+                        email: true,
+                        normalizer: function (value) {
+                            return $.trim(value);
+                        }
                     },
                     <%=txtCalle.UniqueID%>: {
-                        required: true
+                        required: true,
+                        normalizer: function (value) {
+                            return $.trim(value);
+                        }
                     },
                     <%=txtNumero.UniqueID%>: {
                         required: true,
@@ -282,7 +297,10 @@
                         required: true
                     },
                     <%=txtBarrio.UniqueID%>: {
-                        required: true
+                        required: true,
+                        normalizer: function (value) {
+                            return $.trim(value);
+                        }
                     },
                     <%=txtCodigoPostal.UniqueID%>: {
                         required: true,

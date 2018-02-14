@@ -62,8 +62,6 @@ public partial class MAGASYSEntities : DbContext
 
     public virtual DbSet<Provincia> Provincias { get; set; }
 
-    public virtual DbSet<Revista> Revistas { get; set; }
-
     public virtual DbSet<RevistaEdicion> RevistaEdicions { get; set; }
 
     public virtual DbSet<Suplemento> Suplementoes { get; set; }
@@ -71,6 +69,8 @@ public partial class MAGASYSEntities : DbContext
     public virtual DbSet<SuplementoEdicion> SuplementoEdicions { get; set; }
 
     public virtual DbSet<Anio> Anios { get; set; }
+
+    public virtual DbSet<Revista> Revistas { get; set; }
 
 }
 

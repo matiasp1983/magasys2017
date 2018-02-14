@@ -20,7 +20,6 @@
         <EntityTypeShape EntityType="MAGASYSModel.Producto" Width="1.5" PointX="7.5" PointY="8.625" />
         <EntityTypeShape EntityType="MAGASYSModel.Proveedor" Width="1.5" PointX="5.25" PointY="8.25" />
         <EntityTypeShape EntityType="MAGASYSModel.Provincia" Width="1.5" PointX="0.75" PointY="9.875" />
-        <EntityTypeShape EntityType="MAGASYSModel.Revista" Width="1.5" PointX="12.75" PointY="9.375" />
         <EntityTypeShape EntityType="MAGASYSModel.RevistaEdicion" Width="1.5" PointX="15" PointY="9.75" />
         <EntityTypeShape EntityType="MAGASYSModel.Suplemento" Width="1.5" PointX="9.75" PointY="20.875" />
         <EntityTypeShape EntityType="MAGASYSModel.SuplementoEdicion" Width="1.5" PointX="12" PointY="20.875" />
@@ -32,21 +31,22 @@
         <AssociationConnector Association="MAGASYSModel.FK_DiarioDiaSemana_Diario" />
         <AssociationConnector Association="MAGASYSModel.FK_DiarioDiaSemana_DiaSemana" />
         <AssociationConnector Association="MAGASYSModel.FK_DiarioEdicion_DiarioDiaSemana1" />
-        <AssociationConnector Association="MAGASYSModel.FK_Revista_DiaSemana" />
         <AssociationConnector Association="MAGASYSModel.FK_Producto_EstadoProducto" />
         <AssociationConnector Association="MAGASYSModel.FK_Producto_Genero" />
         <AssociationConnector Association="MAGASYSModel.FK_Libro_Producto" />
         <AssociationConnector Association="MAGASYSModel.FK_Proveedor_Localidad" />
         <AssociationConnector Association="MAGASYSModel.FK_Provincia_Localidad" />
         <AssociationConnector Association="MAGASYSModel.FK_Pelicula_Producto" />
-        <AssociationConnector Association="MAGASYSModel.FK_Revista_Periodicidad" />
         <AssociationConnector Association="MAGASYSModel.FK_Producto_Proveedor" />
-        <AssociationConnector Association="MAGASYSModel.FK_Revista_Producto" />
         <AssociationConnector Association="MAGASYSModel.FK_Suplemento_Producto" />
         <AssociationConnector Association="MAGASYSModel.FK_Proveedor_Provincia" />
-        <AssociationConnector Association="MAGASYSModel.FK_RevistaEdicion_Revista" />
         <AssociationConnector Association="MAGASYSModel.FK_SuplementoEdicion_Suplemento" />
         <EntityTypeShape EntityType="MAGASYSModel.Anio" Width="1.5" PointX="7" PointY="2.375" />
+        <EntityTypeShape EntityType="MAGASYSModel.Revista" Width="1.5" PointX="12" PointY="9.25" />
+        <AssociationConnector Association="MAGASYSModel.FK_Revista_DiaSemana" />
+        <AssociationConnector Association="MAGASYSModel.FK_Revista_Periodicidad" />
+        <AssociationConnector Association="MAGASYSModel.FK_Revista_Producto" />
+        <AssociationConnector Association="MAGASYSModel.FK_RevistaEdicion_Revista" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

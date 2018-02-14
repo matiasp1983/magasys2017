@@ -162,10 +162,10 @@
           <Key>
             <PropertyRef Name="ID_REVISTA" />
           </Key>
-          <Property Name="ID_REVISTA" Type="int" Nullable="false" />
+          <Property Name="ID_REVISTA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="COD_PRODUCTO" Type="int" Nullable="false" />
           <Property Name="COD_PERIODICIDAD" Type="int" Nullable="false" />
-          <Property Name="ID_DIA_SEMANA" Type="int" Nullable="false" />
+          <Property Name="ID_DIA_SEMANA" Type="int" />
           <Property Name="PRECIO" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="RevistaEdicion">
@@ -389,7 +389,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Revista_DiaSemana">
-          <End Role="DiaSemana" Type="Self.DiaSemana" Multiplicity="1" />
+          <End Role="DiaSemana" Type="Self.DiaSemana" Multiplicity="0..1" />
           <End Role="Revista" Type="Self.Revista" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="DiaSemana">
@@ -590,7 +590,6 @@
           <EntitySet Name="Productoes" EntityType="MAGASYSModel.Producto" />
           <EntitySet Name="Proveedors" EntityType="MAGASYSModel.Proveedor" />
           <EntitySet Name="Provincias" EntityType="MAGASYSModel.Provincia" />
-          <EntitySet Name="Revistas" EntityType="MAGASYSModel.Revista" />
           <EntitySet Name="RevistaEdicions" EntityType="MAGASYSModel.RevistaEdicion" />
           <EntitySet Name="Suplementoes" EntityType="MAGASYSModel.Suplemento" />
           <EntitySet Name="SuplementoEdicions" EntityType="MAGASYSModel.SuplementoEdicion" />
@@ -626,10 +625,6 @@
             <End Role="DiarioDiaSemana" EntitySet="DiarioDiaSemanas" />
             <End Role="DiarioEdicion" EntitySet="DiarioEdicions" />
           </AssociationSet>
-          <AssociationSet Name="FK_Revista_DiaSemana" Association="MAGASYSModel.FK_Revista_DiaSemana">
-            <End Role="DiaSemana" EntitySet="DiaSemanas" />
-            <End Role="Revista" EntitySet="Revistas" />
-          </AssociationSet>
           <AssociationSet Name="FK_Producto_EstadoProducto" Association="MAGASYSModel.FK_Producto_EstadoProducto">
             <End Role="EstadoProducto" EntitySet="EstadoProductoes" />
             <End Role="Producto" EntitySet="Productoes" />
@@ -654,17 +649,9 @@
             <End Role="Producto" EntitySet="Productoes" />
             <End Role="Pelicula" EntitySet="Peliculas" />
           </AssociationSet>
-          <AssociationSet Name="FK_Revista_Periodicidad" Association="MAGASYSModel.FK_Revista_Periodicidad">
-            <End Role="Periodicidad" EntitySet="Periodicidads" />
-            <End Role="Revista" EntitySet="Revistas" />
-          </AssociationSet>
           <AssociationSet Name="FK_Producto_Proveedor" Association="MAGASYSModel.FK_Producto_Proveedor">
             <End Role="Proveedor" EntitySet="Proveedors" />
             <End Role="Producto" EntitySet="Productoes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Revista_Producto" Association="MAGASYSModel.FK_Revista_Producto">
-            <End Role="Producto" EntitySet="Productoes" />
-            <End Role="Revista" EntitySet="Revistas" />
           </AssociationSet>
           <AssociationSet Name="FK_Suplemento_Producto" Association="MAGASYSModel.FK_Suplemento_Producto">
             <End Role="Producto" EntitySet="Productoes" />
@@ -674,15 +661,28 @@
             <End Role="Provincia" EntitySet="Provincias" />
             <End Role="Proveedor" EntitySet="Proveedors" />
           </AssociationSet>
-          <AssociationSet Name="FK_RevistaEdicion_Revista" Association="MAGASYSModel.FK_RevistaEdicion_Revista">
-            <End Role="Revista" EntitySet="Revistas" />
-            <End Role="RevistaEdicion" EntitySet="RevistaEdicions" />
-          </AssociationSet>
           <AssociationSet Name="FK_SuplementoEdicion_Suplemento" Association="MAGASYSModel.FK_SuplementoEdicion_Suplemento">
             <End Role="Suplemento" EntitySet="Suplementoes" />
             <End Role="SuplementoEdicion" EntitySet="SuplementoEdicions" />
           </AssociationSet>
           <EntitySet Name="Anios" EntityType="MAGASYSModel.Anio" />
+          <EntitySet Name="Revistas" EntityType="MAGASYSModel.Revista" />
+          <AssociationSet Name="FK_Revista_DiaSemana" Association="MAGASYSModel.FK_Revista_DiaSemana">
+            <End Role="DiaSemana" EntitySet="DiaSemanas" />
+            <End Role="Revista" EntitySet="Revistas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Revista_Periodicidad" Association="MAGASYSModel.FK_Revista_Periodicidad">
+            <End Role="Periodicidad" EntitySet="Periodicidads" />
+            <End Role="Revista" EntitySet="Revistas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Revista_Producto" Association="MAGASYSModel.FK_Revista_Producto">
+            <End Role="Producto" EntitySet="Productoes" />
+            <End Role="Revista" EntitySet="Revistas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RevistaEdicion_Revista" Association="MAGASYSModel.FK_RevistaEdicion_Revista">
+            <End Role="Revista" EntitySet="Revistas" />
+            <End Role="RevistaEdicion" EntitySet="RevistaEdicions" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Coleccion">
           <Key>
@@ -829,8 +829,8 @@
           <NavigationProperty Name="Libroes" Relationship="MAGASYSModel.FK_Libro_Producto" FromRole="Producto" ToRole="Libro" />
           <NavigationProperty Name="Peliculas" Relationship="MAGASYSModel.FK_Pelicula_Producto" FromRole="Producto" ToRole="Pelicula" />
           <NavigationProperty Name="Proveedor" Relationship="MAGASYSModel.FK_Producto_Proveedor" FromRole="Producto" ToRole="Proveedor" />
-          <NavigationProperty Name="Revistas" Relationship="MAGASYSModel.FK_Revista_Producto" FromRole="Producto" ToRole="Revista" />
           <NavigationProperty Name="Suplementoes" Relationship="MAGASYSModel.FK_Suplemento_Producto" FromRole="Producto" ToRole="Suplemento" />
+          <NavigationProperty Name="Revistas" Relationship="MAGASYSModel.FK_Revista_Producto" FromRole="Producto" ToRole="Revista" />
         </EntityType>
         <EntityType Name="Proveedor">
           <Key>
@@ -866,20 +866,6 @@
           <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Localidads" Relationship="MAGASYSModel.FK_Provincia_Localidad" FromRole="Provincia" ToRole="Localidad" />
           <NavigationProperty Name="Proveedors" Relationship="MAGASYSModel.FK_Proveedor_Provincia" FromRole="Provincia" ToRole="Proveedor" />
-        </EntityType>
-        <EntityType Name="Revista">
-          <Key>
-            <PropertyRef Name="ID_REVISTA" />
-          </Key>
-          <Property Name="ID_REVISTA" Type="Int32" Nullable="false" />
-          <Property Name="COD_PRODUCTO" Type="Int32" Nullable="false" />
-          <Property Name="COD_PERIODICIDAD" Type="Int32" Nullable="false" />
-          <Property Name="ID_DIA_SEMANA" Type="Int32" Nullable="false" />
-          <Property Name="PRECIO" Type="Double" Nullable="false" />
-          <NavigationProperty Name="DiaSemana" Relationship="MAGASYSModel.FK_Revista_DiaSemana" FromRole="Revista" ToRole="DiaSemana" />
-          <NavigationProperty Name="Periodicidad" Relationship="MAGASYSModel.FK_Revista_Periodicidad" FromRole="Revista" ToRole="Periodicidad" />
-          <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_Revista_Producto" FromRole="Revista" ToRole="Producto" />
-          <NavigationProperty Name="RevistaEdicions" Relationship="MAGASYSModel.FK_RevistaEdicion_Revista" FromRole="Revista" ToRole="RevistaEdicion" />
         </EntityType>
         <EntityType Name="RevistaEdicion">
           <Key>
@@ -1009,18 +995,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Revista_DiaSemana">
-          <End Type="MAGASYSModel.DiaSemana" Role="DiaSemana" Multiplicity="1" />
-          <End Type="MAGASYSModel.Revista" Role="Revista" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DiaSemana">
-              <PropertyRef Name="ID_DIA_SEMANA" />
-            </Principal>
-            <Dependent Role="Revista">
-              <PropertyRef Name="ID_DIA_SEMANA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Producto_EstadoProducto">
           <End Type="MAGASYSModel.EstadoProducto" Role="EstadoProducto" Multiplicity="1" />
           <End Type="MAGASYSModel.Producto" Role="Producto" Multiplicity="*" />
@@ -1093,18 +1067,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Revista_Periodicidad">
-          <End Type="MAGASYSModel.Periodicidad" Role="Periodicidad" Multiplicity="1" />
-          <End Type="MAGASYSModel.Revista" Role="Revista" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Periodicidad">
-              <PropertyRef Name="ID_PERIODICIDAD" />
-            </Principal>
-            <Dependent Role="Revista">
-              <PropertyRef Name="COD_PERIODICIDAD" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Producto_Proveedor">
           <End Type="MAGASYSModel.Proveedor" Role="Proveedor" Multiplicity="1" />
           <End Type="MAGASYSModel.Producto" Role="Producto" Multiplicity="*" />
@@ -1114,18 +1076,6 @@
             </Principal>
             <Dependent Role="Producto">
               <PropertyRef Name="COD_PROVEEDOR" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Revista_Producto">
-          <End Type="MAGASYSModel.Producto" Role="Producto" Multiplicity="1" />
-          <End Type="MAGASYSModel.Revista" Role="Revista" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Producto">
-              <PropertyRef Name="ID_PRODUCTO" />
-            </Principal>
-            <Dependent Role="Revista">
-              <PropertyRef Name="COD_PRODUCTO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1153,18 +1103,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_RevistaEdicion_Revista">
-          <End Type="MAGASYSModel.Revista" Role="Revista" Multiplicity="1" />
-          <End Type="MAGASYSModel.RevistaEdicion" Role="RevistaEdicion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Revista">
-              <PropertyRef Name="ID_REVISTA" />
-            </Principal>
-            <Dependent Role="RevistaEdicion">
-              <PropertyRef Name="COR_REVISTA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_SuplementoEdicion_Suplemento">
           <End Type="MAGASYSModel.Suplemento" Role="Suplemento" Multiplicity="1" />
           <End Type="MAGASYSModel.SuplementoEdicion" Role="SuplementoEdicion" Multiplicity="*" />
@@ -1183,6 +1121,68 @@
           </Key>
           <Property Name="DESCRIPCION" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="Revista">
+          <Key>
+            <PropertyRef Name="ID_REVISTA" />
+          </Key>
+          <Property Name="ID_REVISTA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="COD_PRODUCTO" Type="Int32" Nullable="false" />
+          <Property Name="COD_PERIODICIDAD" Type="Int32" Nullable="false" />
+          <Property Name="ID_DIA_SEMANA" Type="Int32" />
+          <Property Name="PRECIO" Type="Double" Nullable="false" />
+          <NavigationProperty Name="DiaSemana" Relationship="MAGASYSModel.FK_Revista_DiaSemana" FromRole="Revista" ToRole="DiaSemana" />
+          <NavigationProperty Name="Periodicidad" Relationship="MAGASYSModel.FK_Revista_Periodicidad" FromRole="Revista" ToRole="Periodicidad" />
+          <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_Revista_Producto" FromRole="Revista" ToRole="Producto" />
+          <NavigationProperty Name="RevistaEdicions" Relationship="MAGASYSModel.FK_RevistaEdicion_Revista" FromRole="Revista" ToRole="RevistaEdicion" />
+        </EntityType>
+        <Association Name="FK_Revista_DiaSemana">
+          <End Type="MAGASYSModel.DiaSemana" Role="DiaSemana" Multiplicity="0..1" />
+          <End Type="MAGASYSModel.Revista" Role="Revista" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DiaSemana">
+              <PropertyRef Name="ID_DIA_SEMANA" />
+            </Principal>
+            <Dependent Role="Revista">
+              <PropertyRef Name="ID_DIA_SEMANA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Revista_Periodicidad">
+          <End Type="MAGASYSModel.Periodicidad" Role="Periodicidad" Multiplicity="1" />
+          <End Type="MAGASYSModel.Revista" Role="Revista" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Periodicidad">
+              <PropertyRef Name="ID_PERIODICIDAD" />
+            </Principal>
+            <Dependent Role="Revista">
+              <PropertyRef Name="COD_PERIODICIDAD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Revista_Producto">
+          <End Type="MAGASYSModel.Producto" Role="Producto" Multiplicity="1" />
+          <End Type="MAGASYSModel.Revista" Role="Revista" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="ID_PRODUCTO" />
+            </Principal>
+            <Dependent Role="Revista">
+              <PropertyRef Name="COD_PRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RevistaEdicion_Revista">
+          <End Type="MAGASYSModel.Revista" Role="Revista" Multiplicity="1" />
+          <End Type="MAGASYSModel.RevistaEdicion" Role="RevistaEdicion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Revista">
+              <PropertyRef Name="ID_REVISTA" />
+            </Principal>
+            <Dependent Role="RevistaEdicion">
+              <PropertyRef Name="COR_REVISTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1351,17 +1351,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Revistas">
-            <EntityTypeMapping TypeName="MAGASYSModel.Revista">
-              <MappingFragment StoreEntitySet="Revista">
-                <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
-                <ScalarProperty Name="ID_DIA_SEMANA" ColumnName="ID_DIA_SEMANA" />
-                <ScalarProperty Name="COD_PERIODICIDAD" ColumnName="COD_PERIODICIDAD" />
-                <ScalarProperty Name="COD_PRODUCTO" ColumnName="COD_PRODUCTO" />
-                <ScalarProperty Name="ID_REVISTA" ColumnName="ID_REVISTA" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="RevistaEdicions">
             <EntityTypeMapping TypeName="MAGASYSModel.RevistaEdicion">
               <MappingFragment StoreEntitySet="RevistaEdicion">
@@ -1397,6 +1386,17 @@
             <EntityTypeMapping TypeName="MAGASYSModel.Anio">
               <MappingFragment StoreEntitySet="Anio">
                 <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Revistas">
+            <EntityTypeMapping TypeName="MAGASYSModel.Revista">
+              <MappingFragment StoreEntitySet="Revista">
+                <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
+                <ScalarProperty Name="ID_DIA_SEMANA" ColumnName="ID_DIA_SEMANA" />
+                <ScalarProperty Name="COD_PERIODICIDAD" ColumnName="COD_PERIODICIDAD" />
+                <ScalarProperty Name="COD_PRODUCTO" ColumnName="COD_PRODUCTO" />
+                <ScalarProperty Name="ID_REVISTA" ColumnName="ID_REVISTA" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
