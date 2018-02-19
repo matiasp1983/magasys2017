@@ -8,6 +8,25 @@ namespace BLL
     {
         #region Métodos Públicos
 
+        public DiaSemana ObtenerDiaSemana(string nombre)
+        {
+            DiaSemana oDiaSemana = null;
+
+            try
+            {
+                using (var rep = new Repository<DiaSemana>())
+                {
+                    oDiaSemana = rep.Find(p => p.NOMBRE.Contains(nombre));
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return oDiaSemana;
+        }
+
         public List<DiaSemana> ObtenerDiasDeSemana()
         {
             List<DiaSemana> lstDiasSemana = null;

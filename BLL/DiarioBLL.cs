@@ -1,12 +1,68 @@
 ﻿using BLL.DAL;
 using System;
 using System.Collections.Generic;
+using System.Transactions;
 
 namespace BLL
 {
     public class DiarioBLL
     {
         #region Métodos Públicos
+
+        public bool AltaDiario(Producto oProducto, List<DiarioDiaSemana> lstDiarioDiasSemanas)
+        {
+            var bRes = false;
+
+            try
+            {
+                using (TransactionScope loTransactionScope = new TransactionScope())
+                {
+                    using (var loRepProducto = new Repository<Producto>())
+                    {
+                        bRes = loRepProducto.Create(oProducto) != null;
+
+                        if (bRes)
+                        {
+                            using (var loRepDiario = new Repository<Diario>())
+                            {
+                                var oDiario = new Diario
+                                {
+                                    COD_PRODUCTO = oProducto.ID_PRODUCTO
+                                };
+
+                                bRes = loRepDiario.Create(oDiario) != null;
+
+                                if (bRes)
+                                {
+                                    using (var loRepDiarioDiaSemana = new Repository<DiarioDiaSemana>())
+                                    {
+                                        var oDiarioDiaSemana = new DiarioDiaSemana
+                                        {
+                                            COD_DIARIO = oDiario.ID_DIARIO
+                                        };
+
+                                        foreach (var loDiarioDiaSemana in lstDiarioDiasSemanas)
+                                        {
+                                            oDiarioDiaSemana.ID_DIA_SEMANA = loDiarioDiaSemana.ID_DIA_SEMANA;
+                                            oDiarioDiaSemana.PRECIO = loDiarioDiaSemana.PRECIO;
+                                            bRes = loRepDiarioDiaSemana.Create(oDiarioDiaSemana) != null;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    loTransactionScope.Complete();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return bRes;
+        }
 
         public List<DiarioProducto> ObtenerDiarios()
         {
@@ -60,7 +116,7 @@ namespace BLL
     {
         public int ID_DIARIO { get; set; }
         public string NOMBRE { get; set; }
-    } 
+    }
 
     #endregion
 }

@@ -31,11 +31,15 @@ public partial class Suplemento
 
     public int COD_PRODUCTO { get; set; }
 
+    public Nullable<int> ID_DIA_SEMANA { get; set; }
+
     public Nullable<int> CANTIDAD_ENTREGAS { get; set; }
 
     public Nullable<double> PRECIO { get; set; }
 
 
+
+    public virtual DiaSemana DiaSemana { get; set; }
 
     public virtual Producto Producto { get; set; }
 

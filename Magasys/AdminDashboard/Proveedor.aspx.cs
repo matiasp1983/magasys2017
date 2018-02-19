@@ -8,7 +8,7 @@ namespace PL.AdminDashboard
 {
     public partial class Proveedor : System.Web.UI.Page
     {
-        #region Enventos
+        #region Eventos
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -29,26 +29,26 @@ namespace PL.AdminDashboard
                     var loResultado = new ProveedorBLL().AltaProveedor(oProveedor);
 
                     if (loResultado)
-                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal("Alta Proveedor", Message.MsjeProveedorSuccessAlta, "ProveedorListado.aspx"));
+                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeProveedorSuccessAlta, "Alta Proveedor", "ProveedorListado.aspx"));
                     else
-                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal("Alta Proveedor", Message.MsjeProveedorFailure));
+                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProveedorFailure));
                 }
                 else
                 {
                     var loResutado = new ProveedorBLL().ModificarProveedor(oProveedor);
 
                     if (loResutado)
-                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal("Modificación Proveedor", Message.MsjeProveedorSuccessModificacion, "ProveedorListado.aspx"));
+                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeProveedorSuccessModificacion, "Modificación Proveedor", "ProveedorListado.aspx"));
                     else
-                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal("Modificación Proveedor", Message.MsjeProveedorFailure));
+                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProveedorFailure));
                 }
             }
             catch (Exception ex)
             {
                 if (oProveedor.ID_PROVEEDOR == 0)
-                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal("Alta Proveedor", Message.MsjeProveedorFailure, "ProveedorListado.aspx"));
+                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProveedorFailure, "ProveedorListado.aspx"));
                 else
-                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal("Modificación Proveedor", Message.MsjeProveedorFailure));
+                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProveedorFailure));
 
                 Logger loLogger = LogManager.GetCurrentClassLogger();
                 loLogger.Error(ex);
@@ -103,7 +103,7 @@ namespace PL.AdminDashboard
                 if (Session[Enums.Session.Proveedor.ToString()] != null)
                 {
                     var oProveedor = (BLL.DAL.Proveedor)Session[Enums.Session.Proveedor.ToString()];
-                    CargarProvincias((long)oProveedor.ID_PROVINCIA, (long)oProveedor.ID_LOCALIDAD);
+                    CargarProvincias(oProveedor.ID_PROVINCIA, oProveedor.ID_LOCALIDAD);
 
                     if (oProveedor.ID_PROVEEDOR == 0)
                     {

@@ -22,17 +22,17 @@ public partial class Producto
     public Producto()
     {
 
-        this.Coleccions = new HashSet<Coleccion>();
-
         this.Diarios = new HashSet<Diario>();
 
         this.Libroes = new HashSet<Libro>();
 
         this.Peliculas = new HashSet<Pelicula>();
 
-        this.Suplementoes = new HashSet<Suplemento>();
-
         this.Revistas = new HashSet<Revista>();
+
+        this.Coleccions = new HashSet<Coleccion>();
+
+        this.Suplementoes = new HashSet<Suplemento>();
 
     }
 
@@ -57,10 +57,6 @@ public partial class Producto
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<Coleccion> Coleccions { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
     public virtual ICollection<Diario> Diarios { get; set; }
 
     public virtual EstadoProducto EstadoProducto { get; set; }
@@ -79,11 +75,15 @@ public partial class Producto
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<Suplemento> Suplementoes { get; set; }
+    public virtual ICollection<Revista> Revistas { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<Revista> Revistas { get; set; }
+    public virtual ICollection<Coleccion> Coleccions { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<Suplemento> Suplementoes { get; set; }
 
 }
 

@@ -57,7 +57,7 @@ namespace BLL.Common
             return loContenido;
         }
 
-        public static string SuccessModal(string titulo, string texto, string pagina = "")
+        public static string SuccessModal(string texto, string titulo = "", string pagina = "")
         {
             var loScript = "<script src='js/plugins/sweetalert/sweetalert.min.js'></script>";
             loScript += "<script language='javascript'>";
@@ -80,7 +80,7 @@ namespace BLL.Common
             return loScript;
         }
 
-        public static string InfoModal(string titulo, string texto, string pagina = "")
+        public static string InfoModal(string texto, string titulo="", string pagina = "")
         {
             var loScript = "<script src='js/plugins/sweetalert/sweetalert.min.js'></script>";
             loScript += "<script language='javascript'>";
@@ -103,7 +103,7 @@ namespace BLL.Common
             return loScript;
         }
 
-        public static string WarningModal(string titulo, string texto, string pagina = "")
+        public static string WarningModal(string texto, string titulo = "", string pagina = "")
         {
             var loScript = "<script src='js/plugins/sweetalert/sweetalert.min.js'></script>";
             loScript += "<script language='javascript'>";
@@ -126,7 +126,7 @@ namespace BLL.Common
             return loScript;
         }
 
-        public static string DangerModal(string titulo, string texto, string pagina = "")
+        public static string DangerModal(string texto, string titulo = "", string pagina = "")
         {
             var loScript = "<script src='js/plugins/sweetalert/sweetalert.min.js'></script>";
             loScript += "<script language='javascript'>";

@@ -33,7 +33,7 @@ public partial class Coleccion
 
     public int COD_PERIODICIDAD { get; set; }
 
-    public int ID_DIA_SEMANA { get; set; }
+    public Nullable<int> ID_DIA_SEMANA { get; set; }
 
     public Nullable<int> CANTIDAD_ENTREGAS { get; set; }
 

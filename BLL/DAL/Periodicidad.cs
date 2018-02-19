@@ -22,9 +22,9 @@ public partial class Periodicidad
     public Periodicidad()
     {
 
-        this.Coleccions = new HashSet<Coleccion>();
-
         this.Revistas = new HashSet<Revista>();
+
+        this.Coleccions = new HashSet<Coleccion>();
 
     }
 
@@ -39,11 +39,11 @@ public partial class Periodicidad
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<Coleccion> Coleccions { get; set; }
+    public virtual ICollection<Revista> Revistas { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<Revista> Revistas { get; set; }
+    public virtual ICollection<Coleccion> Coleccions { get; set; }
 
 }
 

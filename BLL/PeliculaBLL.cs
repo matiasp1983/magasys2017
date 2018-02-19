@@ -4,11 +4,11 @@ using System.Transactions;
 
 namespace BLL
 {
-    public class RevistaBLL
+    public class PeliculaBLL
     {
         #region Métodos Públicos
 
-        public bool AltaRevista(Producto oProducto, Revista oRevista)
+        public bool AltaPelicula(Producto oProducto, Pelicula oPelicula)
         {
             var bRes = false;
 
@@ -22,10 +22,10 @@ namespace BLL
 
                         if (bRes)
                         {
-                            using (var loRepRevista = new Repository<Revista>())
+                            using (var loRepPelicula = new Repository<Pelicula>())
                             {
-                                oRevista.COD_PRODUCTO = oProducto.ID_PRODUCTO;                                
-                                bRes = loRepRevista.Create(oRevista) != null;
+                                oPelicula.COD_PRODUCTO = oProducto.ID_PRODUCTO;                                
+                                bRes = loRepPelicula.Create(oPelicula) != null;
                             }
                         }
                     }

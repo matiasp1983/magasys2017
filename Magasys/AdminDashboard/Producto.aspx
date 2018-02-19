@@ -125,7 +125,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="col-sm-4 control-label">Precio Miercoles </label>
+                                            <label class="col-sm-4 control-label">Precio Mi&eacute;rcoles </label>
 
                                             <div class="col-sm-8">
                                                 <div class="input-group m-b" id="divPrecioMiercolesDiario">
@@ -427,31 +427,31 @@
                      },
                      <%=txtPrecioLunesDiario.UniqueID%>: {
                          number: true,
-                         min: 0
+                         min: 1
                      },
                      <%=txtPrecioMartesDiario.UniqueID%>: {
                          number: true,
-                         min: 0
+                         min: 1
                      },
                      <%=txtPrecioMiercolesDiario.UniqueID%>: {
                          number: true,
-                         min: 0
+                         min: 1
                      },
                      <%=txtPrecioJuevesDiario.UniqueID%>: {
                          number: true,
-                         min: 0
+                         min: 1
                      },
                      <%=txtPrecioViernesDiario.UniqueID%>: {
                          number: true,
-                         min: 0
+                         min: 1
                      },
                      <%=txtPrecioSabadoDiario.UniqueID%>: {
                          number: true,
-                         min: 0
+                         min: 1
                      },
                      <%=txtPrecioDomingoDiario.UniqueID%>: {
                          number: true,
-                         min: 0
+                         min: 1
                      },
                      <%=ddlPeriodicidadRevista.UniqueID%>: {
                          required: true
@@ -525,31 +525,31 @@
                      },
                      <%=txtPrecioLunesDiario.UniqueID%>: {
                          number: "Ingrese un número válido.",
-                         min: "Ingrese un valor mayor o igual a 0."
+                         min: "Ingrese un valor mayor o igual a 1."
                      },
                      <%=txtPrecioMartesDiario.UniqueID%>: {
                          number: "Ingrese un número válido.",
-                         min: "Ingrese un valor mayor o igual a 0."
+                         min: "Ingrese un valor mayor o igual a 1."
                      },
                      <%=txtPrecioMiercolesDiario.UniqueID%>: {
                          number: "Ingrese un número válido.",
-                         min: "Ingrese un valor mayor o igual a 0."
+                         min: "Ingrese un valor mayor o igual a 1."
                      },
                      <%=txtPrecioJuevesDiario.UniqueID%>: {
                          number: "Ingrese un número válido.",
-                         min: "Ingrese un valor mayor o igual a 0."
+                         min: "Ingrese un valor mayor o igual a 1."
                      },
                      <%=txtPrecioViernesDiario.UniqueID%>: {
                          number: "Ingrese un número válido.",
-                         min: "Ingrese un valor mayor o igual a 0."
+                         min: "Ingrese un valor mayor o igual a 1."
                      },
                      <%=txtPrecioSabadoDiario.UniqueID%>: {
                          number: "Ingrese un número válido.",
-                         min: "Ingrese un valor mayor o igual a 0."
+                         min: "Ingrese un valor mayor o igual a 1."
                      },
                      <%=txtPrecioDomingoDiario.UniqueID%>: {
                          number: "Ingrese un número válido.",
-                         min: "Ingrese un valor mayor o igual a 0."
+                         min: "Ingrese un valor mayor o igual a 1."
                      },
                      <%=ddlPeriodicidadRevista.UniqueID%>: {
                          required: "Este campo es requerido."
