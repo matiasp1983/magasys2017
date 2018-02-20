@@ -20,10 +20,9 @@ namespace PL.AdminDashboard
                 CargarGeneros();
                 CargarTiposProducto();
                 CargarDiasDeSemana();
-                CargarPeriodicidades();                
+                CargarPeriodicidades();
                 CargarAnios();
-                CargarDiarios();
-            }           
+            }
         }
 
         protected void DdlTipoProducto_SelectedIndexChanged(object sender, EventArgs e)
@@ -43,7 +42,7 @@ namespace PL.AdminDashboard
                     break;
                 case "Suplemento":
                     CargarDiarios();
-                    divSuplemento.Visible = true;                    
+                    divSuplemento.Visible = true;
                     break;
                 case "Película":
                     divPelicula.Visible = true;
@@ -431,7 +430,9 @@ namespace PL.AdminDashboard
             divColeccion.Controls.OfType<TextBox>().ToList().ForEach(x => x.Text = String.Empty);
             divLibro.Controls.OfType<TextBox>().ToList().ForEach(x => x.Text = String.Empty);
             divLibro.Controls.OfType<DropDownList>().ToList().ForEach(y => y.SelectedIndex = 0);
-            divSuplemento.Controls.OfType<DropDownList>().ToList().ForEach(y => y.SelectedIndex = 0);
+            ddlDiaDeEntregaSuplemento.SelectedIndex = 0;
+            if (ddlDiarioSuplemento.SelectedIndex != -1)            
+                ddlDiarioSuplemento.SelectedIndex = 0;
             divSuplemento.Controls.OfType<TextBox>().ToList().ForEach(x => x.Text = String.Empty);
             divPelicula.Controls.OfType<DropDownList>().ToList().ForEach(y => y.SelectedIndex = 0);
             divPelicula.Controls.OfType<TextBox>().ToList().ForEach(x => x.Text = String.Empty);
