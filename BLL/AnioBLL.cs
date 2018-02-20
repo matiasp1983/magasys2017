@@ -17,7 +17,7 @@ namespace BLL
                 using (var rep = new Repository<Anio>())
                 {
                     lstAnios = rep.FindAll();
-                    lstAnios.Sort((x, y) => y.DESCRIPCION.CompareTo(x.DESCRIPCION));
+                    lstAnios.Sort((x, y) => y.DESCRIPCION.CompareTo(x.DESCRIPCION));                    
                 }
             }
             catch (Exception)

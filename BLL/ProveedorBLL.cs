@@ -78,8 +78,8 @@ namespace BLL
             {
                 using (var rep = new Repository<Proveedor>())
                 {
-                    lstProveedores = rep.Search(p => p.FECHA_BAJA == null);
-                    lstProveedores.Sort((x, y) => y.RAZON_SOCIAL.CompareTo(x.RAZON_SOCIAL));
+                    lstProveedores = rep.Search(p => p.FECHA_BAJA == null);                    
+                    lstProveedores.Sort((x, y) => String.Compare(x.RAZON_SOCIAL, y.RAZON_SOCIAL));
                 }
             }
             catch (Exception)

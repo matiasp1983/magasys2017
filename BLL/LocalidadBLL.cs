@@ -34,6 +34,7 @@ namespace BLL
                 using (var rep = new Repository<Localidad>())
                 {
                     lstLocalidades = rep.Search(l => l.ID_PROVINCIA == idProvincia);
+                    lstLocalidades.Sort((x, y) => String.Compare(x.NOMBRE, y.NOMBRE));                    
                 }
             }
             catch (Exception)

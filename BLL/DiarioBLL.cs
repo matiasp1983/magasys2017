@@ -96,6 +96,9 @@ namespace BLL
 
                         lstDiariosProducto.Add(oDiarioProducto);
                     }
+
+                    if (lstDiariosProducto.Count > 0)                    
+                        lstDiariosProducto.Sort((x, y) => String.Compare(x.NOMBRE, y.NOMBRE));
                 }
             }
             catch (Exception)

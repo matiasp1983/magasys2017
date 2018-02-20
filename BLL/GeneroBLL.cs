@@ -17,6 +17,7 @@ namespace BLL
                 using (var rep = new Repository<Genero>())
                 {
                     lstGeneros = rep.FindAll();
+                    lstGeneros.Sort((x, y) => String.Compare(x.NOMBRE, y.NOMBRE));
                 }
             }
             catch (Exception)
