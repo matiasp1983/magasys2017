@@ -67,11 +67,11 @@ public partial class Proveedor
 
     public virtual Localidad Localidad { get; set; }
 
+    public virtual Provincia Provincia { get; set; }
+
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Producto> Productoes { get; set; }
-
-    public virtual Provincia Provincia { get; set; }
 
 }
 

@@ -15,35 +15,27 @@ namespace BLL.DAL
 using System;
     using System.Collections.Generic;
     
-public partial class DiarioDiaSemana
+public partial class TipoProducto
 {
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public DiarioDiaSemana()
+    public TipoProducto()
     {
 
-        this.DiarioEdicions = new HashSet<DiarioEdicion>();
+        this.Productoes = new HashSet<Producto>();
 
     }
 
 
-    public int ID_DIARIO_DIA_SEMANA { get; set; }
+    public int ID_TIPO_PRODUCTO { get; set; }
 
-    public int COD_DIARIO { get; set; }
-
-    public int ID_DIA_SEMANA { get; set; }
-
-    public Nullable<double> PRECIO { get; set; }
+    public string DESCRIPCION { get; set; }
 
 
-
-    public virtual DiaSemana DiaSemana { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<DiarioEdicion> DiarioEdicions { get; set; }
-
-    public virtual Diario Diario { get; set; }
+    public virtual ICollection<Producto> Productoes { get; set; }
 
 }
 

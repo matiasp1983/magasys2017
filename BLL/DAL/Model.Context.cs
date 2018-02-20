@@ -34,15 +34,11 @@ public partial class MAGASYSEntities : DbContext
 
     public virtual DbSet<ColeccionEntrega> ColeccionEntregas { get; set; }
 
-    public virtual DbSet<Diario> Diarios { get; set; }
-
     public virtual DbSet<DiarioDiaSemana> DiarioDiaSemanas { get; set; }
 
     public virtual DbSet<DiarioEdicion> DiarioEdicions { get; set; }
 
     public virtual DbSet<DiaSemana> DiaSemanas { get; set; }
-
-    public virtual DbSet<EstadoProducto> EstadoProductoes { get; set; }
 
     public virtual DbSet<Genero> Generoes { get; set; }
 
@@ -53,8 +49,6 @@ public partial class MAGASYSEntities : DbContext
     public virtual DbSet<Pelicula> Peliculas { get; set; }
 
     public virtual DbSet<Periodicidad> Periodicidads { get; set; }
-
-    public virtual DbSet<Producto> Productoes { get; set; }
 
     public virtual DbSet<Proveedor> Proveedors { get; set; }
 
@@ -69,6 +63,14 @@ public partial class MAGASYSEntities : DbContext
     public virtual DbSet<Revista> Revistas { get; set; }
 
     public virtual DbSet<Coleccion> Coleccions { get; set; }
+
+    public virtual DbSet<TipoProducto> TipoProductoes { get; set; }
+
+    public virtual DbSet<EstadoProducto> EstadoProductoes { get; set; }
+
+    public virtual DbSet<Producto> Productoes { get; set; }
+
+    public virtual DbSet<Diario> Diarios { get; set; }
 
     public virtual DbSet<Suplemento> Suplementoes { get; set; }
 

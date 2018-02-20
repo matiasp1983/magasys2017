@@ -22,7 +22,7 @@ public partial class Producto
     public Producto()
     {
 
-        this.Diarios = new HashSet<Diario>();
+        this.Coleccions = new HashSet<Coleccion>();
 
         this.Libroes = new HashSet<Libro>();
 
@@ -30,7 +30,7 @@ public partial class Producto
 
         this.Revistas = new HashSet<Revista>();
 
-        this.Coleccions = new HashSet<Coleccion>();
+        this.Diarios = new HashSet<Diario>();
 
         this.Suplementoes = new HashSet<Suplemento>();
 
@@ -51,13 +51,15 @@ public partial class Producto
 
     public int COD_PROVEEDOR { get; set; }
 
+    public int COD_TIPO_PRODUCTO { get; set; }
+
     public Nullable<System.DateTime> FECHA_BAJA { get; set; }
 
 
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<Diario> Diarios { get; set; }
+    public virtual ICollection<Coleccion> Coleccions { get; set; }
 
     public virtual EstadoProducto EstadoProducto { get; set; }
 
@@ -73,13 +75,15 @@ public partial class Producto
 
     public virtual Proveedor Proveedor { get; set; }
 
+    public virtual TipoProducto TipoProducto { get; set; }
+
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Revista> Revistas { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<Coleccion> Coleccions { get; set; }
+    public virtual ICollection<Diario> Diarios { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 

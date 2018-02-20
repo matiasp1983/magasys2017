@@ -78,6 +78,8 @@ namespace BLL
 
                 using (var loRepProducto = new Repository<Producto>())
                 {
+                    lstDiariosProducto = new List<DiarioProducto>();
+
                     foreach (var loItemDiario in lstDiarios)
                     {
                         DiarioProducto oDiarioProducto = new DiarioProducto
@@ -92,10 +94,7 @@ namespace BLL
                             }.DESCRIPCION
                         };
 
-                        lstDiariosProducto = new List<DiarioProducto>
-                        {
-                            oDiarioProducto
-                        };
+                        lstDiariosProducto.Add(oDiarioProducto);
                     }
                 }
             }

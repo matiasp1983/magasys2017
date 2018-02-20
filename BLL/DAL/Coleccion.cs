@@ -43,11 +43,11 @@ public partial class Coleccion
 
     public virtual Periodicidad Periodicidad { get; set; }
 
-    public virtual Producto Producto { get; set; }
-
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<ColeccionEntrega> ColeccionEntregas { get; set; }
+
+    public virtual Producto Producto { get; set; }
 
 }
 

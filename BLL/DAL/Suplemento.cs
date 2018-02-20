@@ -37,7 +37,11 @@ public partial class Suplemento
 
     public Nullable<double> PRECIO { get; set; }
 
+    public int COD_DIARIO { get; set; }
 
+
+
+    public virtual Diario Diario { get; set; }
 
     public virtual DiaSemana DiaSemana { get; set; }
 

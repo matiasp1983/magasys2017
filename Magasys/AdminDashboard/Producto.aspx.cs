@@ -18,32 +18,34 @@ namespace PL.AdminDashboard
             {
                 CargarProveedores();
                 CargarGeneros();
+                CargarTiposProducto();
                 CargarDiasDeSemana();
-                CargarPeriodicidades();
-                CargarDiarios();
+                CargarPeriodicidades();                
                 CargarAnios();
-            }
+                CargarDiarios();
+            }           
         }
 
         protected void DdlTipoProducto_SelectedIndexChanged(object sender, EventArgs e)
         {
             OcultarDivTipoProducto();
 
-            switch (((DropDownList)sender).SelectedValue)
+            switch (((DropDownList)sender).SelectedItem.Text)
             {
                 case "Revista":
                     divRevista.Visible = true;
                     break;
-                case "Coleccion":
+                case "Colección":
                     divColeccion.Visible = true;
                     break;
                 case "Libro":
                     divLibro.Visible = true;
                     break;
                 case "Suplemento":
-                    divSuplemento.Visible = true;
+                    CargarDiarios();
+                    divSuplemento.Visible = true;                    
                     break;
-                case "Pelicula":
+                case "Película":
                     divPelicula.Visible = true;
                     break;
                 default:
@@ -59,13 +61,13 @@ namespace PL.AdminDashboard
                 bool loResutado = false;
                 var oProducto = CargarProductoDesdeControles();
 
-                switch (ddlTipoProducto.SelectedValue)
+                switch (ddlTipoProducto.SelectedItem.Text)
                 {
                     case "Revista":
                         var oRevista = CargarRevistaDesdeControles();
                         loResutado = new RevistaBLL().AltaRevista(oProducto, oRevista);
                         break;
-                    case "Coleccion":
+                    case "Colección":
                         var oColeccion = CargarColeccionDesdeControles();
                         loResutado = new ColeccionBLL().AltaColeccion(oProducto, oColeccion);
                         break;
@@ -77,13 +79,13 @@ namespace PL.AdminDashboard
                         var oSuplemento = CargarSuplementoDesdeControles();
                         loResutado = new SuplementoBLL().AltaSuplemento(oProducto, oSuplemento);
                         break;
-                    case "Pelicula":
+                    case "Película":
                         var oPelicula = CargarPeliculaDesdeControles();
                         loResutado = new PeliculaBLL().AltaPelicula(oProducto, oPelicula);
                         break;
                     default:
-                        var lstDiarioDiasSemanas = CargarDiarioDesdeControles();                       
-                            loResutado = new DiarioBLL().AltaDiario(oProducto, lstDiarioDiasSemanas);
+                        var lstDiarioDiasSemanas = CargarDiarioDesdeControles();
+                        loResutado = new DiarioBLL().AltaDiario(oProducto, lstDiarioDiasSemanas);
                         break;
                 }
 
@@ -148,6 +150,24 @@ namespace PL.AdminDashboard
                 ddlGenero.DataValueField = "ID_GENERO";
                 ddlGenero.DataBind();
                 ddlGenero.Items.Insert(0, new ListItem(String.Empty, String.Empty));
+            }
+            catch (Exception ex)
+            {
+                Logger loLogger = LogManager.GetCurrentClassLogger();
+                loLogger.Error(ex);
+            }
+        }
+
+        private void CargarTiposProducto()
+        {
+            var oTipoProducto = new TipoProductoBLL();
+
+            try
+            {
+                ddlTipoProducto.DataSource = oTipoProducto.ObtenerTiposProducto();
+                ddlTipoProducto.DataTextField = "DESCRIPCION";
+                ddlTipoProducto.DataValueField = "ID_TIPO_PRODUCTO";
+                ddlTipoProducto.DataBind();
             }
             catch (Exception ex)
             {
@@ -282,7 +302,8 @@ namespace PL.AdminDashboard
                 COD_PROVEEDOR = Convert.ToInt32(ddlProveedor.SelectedValue),
                 COD_GENERO = Convert.ToInt32(ddlGenero.SelectedValue),
                 FECHA_ALTA = DateTime.Now,
-                COD_ESTADO = 1 /*Ver para que se usa esta columna. ????*/
+                COD_ESTADO = 1,
+                COD_TIPO_PRODUCTO = Convert.ToInt32(ddlTipoProducto.SelectedValue)
             };
 
             if (!String.IsNullOrEmpty(txtDescripcion.Text))
@@ -348,7 +369,10 @@ namespace PL.AdminDashboard
 
         private BLL.DAL.Suplemento CargarSuplementoDesdeControles()
         {
-            var oSuplemento = new BLL.DAL.Suplemento();
+            var oSuplemento = new BLL.DAL.Suplemento
+            {
+                COD_DIARIO = Convert.ToInt32(ddlDiarioSuplemento.SelectedValue)
+            };
 
             if (!String.IsNullOrEmpty(txtCantidadDeEntregaSuplemento.Text))
                 oSuplemento.CANTIDAD_ENTREGAS = Convert.ToInt32(txtCantidadDeEntregaSuplemento.Text);

@@ -81,14 +81,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <div class="col-sm-10">
-                                    <asp:DropDownList ID="ddlTipoProducto" runat="server" CssClass="select2_tipoproducto form-control" AutoPostBack="true" OnSelectedIndexChanged="DdlTipoProducto_SelectedIndexChanged">
-                                        <asp:ListItem Selected="True" Value="Diario" Text="Diario"></asp:ListItem>
-                                        <asp:ListItem Value="Revista" Text="Revista"></asp:ListItem>
-                                        <asp:ListItem Value="Coleccion" Text="Colecci&oacute;n"></asp:ListItem>
-                                        <asp:ListItem Value="Libro" Text="Libro"></asp:ListItem>
-                                        <asp:ListItem Value="Suplemento" Text="Suplemento"></asp:ListItem>
-                                        <asp:ListItem Value="Pelicula" Text="Pel&iacute;cula"></asp:ListItem>
-                                    </asp:DropDownList>
+                                    <asp:DropDownList ID="ddlTipoProducto" runat="server" CssClass="select2_tipoproducto form-control" AutoPostBack="true" OnSelectedIndexChanged="DdlTipoProducto_SelectedIndexChanged"></asp:DropDownList>
                                 </div>
                             </div>
                         </div>
