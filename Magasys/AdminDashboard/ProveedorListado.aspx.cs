@@ -125,7 +125,7 @@ namespace PL.AdminDashboard
         }
 
         private static bool ValidaCuit(string cuit)
-        {           
+        {
             if (long.Parse(cuit) <= 0) return false;
             var loDigitoCalcu = Utilities.CalcularDigitoCuit(cuit);
             var loParseSubStr = int.Parse(cuit.Substring(10));
@@ -154,7 +154,7 @@ namespace PL.AdminDashboard
                                 CUIT = txtCuitAlta.Text
                             };
                             Session.Add(Enums.Session.Proveedor.ToString(), oProveedor);
-                            Response.Redirect("Proveedor.aspx");
+                            Response.Redirect("Proveedor.aspx", false);
                         }
                         else
                         {
@@ -191,17 +191,17 @@ namespace PL.AdminDashboard
                 else
                     oProveedorFiltro.IdProveedor = -1;
             }
-            if (!String.IsNullOrEmpty(txtCuitBusqueda.Text))            
+            if (!String.IsNullOrEmpty(txtCuitBusqueda.Text))
                 oProveedorFiltro.Cuit = txtCuitBusqueda.Text;
-            
-            if (!String.IsNullOrEmpty(txtFechaAltaDesde.Text))            
+
+            if (!String.IsNullOrEmpty(txtFechaAltaDesde.Text))
                 oProveedorFiltro.FechaAltaDesde = Convert.ToDateTime(txtFechaAltaDesde.Text);
-            
-            if (!String.IsNullOrEmpty(txtFechaAltaHasta.Text))            
+
+            if (!String.IsNullOrEmpty(txtFechaAltaHasta.Text))
                 oProveedorFiltro.FechaAltaHasta = Convert.ToDateTime(txtFechaAltaHasta.Text);
-            
-            if (!String.IsNullOrEmpty(txtRazonSocial.Text))            
-                oProveedorFiltro.RazonSocial = txtRazonSocial.Text;            
+
+            if (!String.IsNullOrEmpty(txtRazonSocial.Text))
+                oProveedorFiltro.RazonSocial = txtRazonSocial.Text;
 
             return oProveedorFiltro;
         }

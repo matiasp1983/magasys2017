@@ -60,7 +60,7 @@ namespace PL.AdminDashboard
         protected void BtnCancelar_Click(object sender, EventArgs e)
         {
             Session.Remove(Enums.Session.Proveedor.ToString());
-            Response.Redirect("ProveedorListado.aspx");
+            Response.Redirect("ProveedorListado.aspx", false);
         }
 
         protected void DdlProvincia_SelectedIndexChanged(object sender, EventArgs e)
@@ -134,7 +134,7 @@ namespace PL.AdminDashboard
                     }
                 }
                 else
-                    Response.Redirect("ProveedorListado.aspx");
+                    Response.Redirect("ProveedorListado.aspx", false);
             }
             catch (Exception ex)
             {

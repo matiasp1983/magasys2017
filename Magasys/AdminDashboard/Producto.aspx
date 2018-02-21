@@ -10,7 +10,7 @@
                 <ol class="breadcrumb">
                     <li>Principal
                     </li>
-                    <li>Producto
+                    <li>Productos
                     </li>
                     <li class="active">
                         <strong>

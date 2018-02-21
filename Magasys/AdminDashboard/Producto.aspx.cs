@@ -107,7 +107,7 @@ namespace PL.AdminDashboard
 
         protected void BtnCancelar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("ProductoListado.aspx");
+            Response.Redirect("ProductoListado.aspx", false);
         }
 
         protected void BtnLimpiar_Click(object sender, EventArgs e)
@@ -431,7 +431,7 @@ namespace PL.AdminDashboard
             divLibro.Controls.OfType<TextBox>().ToList().ForEach(x => x.Text = String.Empty);
             divLibro.Controls.OfType<DropDownList>().ToList().ForEach(y => y.SelectedIndex = 0);
             ddlDiaDeEntregaSuplemento.SelectedIndex = 0;
-            if (ddlDiarioSuplemento.SelectedIndex != -1)            
+            if (ddlDiarioSuplemento.SelectedIndex != -1)
                 ddlDiarioSuplemento.SelectedIndex = 0;
             divSuplemento.Controls.OfType<TextBox>().ToList().ForEach(x => x.Text = String.Empty);
             divPelicula.Controls.OfType<DropDownList>().ToList().ForEach(y => y.SelectedIndex = 0);
