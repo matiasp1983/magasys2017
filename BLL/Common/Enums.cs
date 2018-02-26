@@ -1,17 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BLL.Common
+﻿namespace BLL.Common
 {
     public class Enums
     {
+        #region Enums
+
         public enum Session
         {
             Proveedor,
-            ProductoDiario
-        }        
+            ProductoDiario,
+            ProductoRevista,
+            ProductoColeccion,
+            ProductoLibro,
+            ProductoSuplemento,
+            ProductoPelicula
+        } 
+
+        #endregion
     }
 }

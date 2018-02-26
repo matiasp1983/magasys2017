@@ -18,10 +18,15 @@
         public const string MsjeCuitProveedorFailure = "El CUIT ingresado no es válido.";
         public const string MsjeCuitProveedorExist = "El CUIT ingresado ya existe.";
         public const string MsjeListadoProveedorFiltrarTotalSinResultados = "No se encontraron Proveedores para la búsqueda seleccionada.";
+
+        #endregion
+
+        #region Mensajes Producto
+
         public const string MsjeProductoSuccessAlta = "El producto se guardó correctamente.";
         public const string MsjeProductoSuccessModificacion = "El producto se modificó correctamente.";
         public const string MsjeProductoFailure = "El producto no se pudo guardar.";
-
+        
         #endregion
     }
 }
