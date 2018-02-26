@@ -51,11 +51,11 @@ namespace BLL
                             lstProveedores = lstProveedores.FindAll(p => p.CUIT == oProveedorFiltro.Cuit);
 
                         if (oProveedorFiltro.FechaAltaDesde != null && oProveedorFiltro.FechaAltaHasta != null)
-                            lstProveedores = lstProveedores.FindAll(p => p.FECHA_ALTA >= oProveedorFiltro.FechaAltaDesde && p.FECHA_ALTA <= oProveedorFiltro.FechaAltaHasta);
+                            lstProveedores = lstProveedores.FindAll(p => p.FECHA_ALTA.Date >= oProveedorFiltro.FechaAltaDesde && p.FECHA_ALTA.Date <= oProveedorFiltro.FechaAltaHasta);
                         else if (oProveedorFiltro.FechaAltaDesde != null && oProveedorFiltro.FechaAltaHasta == null)
-                            lstProveedores = lstProveedores.FindAll(p => p.FECHA_ALTA >= oProveedorFiltro.FechaAltaDesde && oProveedorFiltro.FechaAltaHasta == null);
+                            lstProveedores = lstProveedores.FindAll(p => p.FECHA_ALTA.Date >= oProveedorFiltro.FechaAltaDesde && oProveedorFiltro.FechaAltaHasta == null);
                         else if (oProveedorFiltro.FechaAltaDesde == null && oProveedorFiltro.FechaAltaHasta != null)
-                            lstProveedores = lstProveedores.FindAll(p => p.FECHA_ALTA <= oProveedorFiltro.FechaAltaHasta && oProveedorFiltro.FechaAltaDesde == null);
+                            lstProveedores = lstProveedores.FindAll(p => p.FECHA_ALTA.Date <= oProveedorFiltro.FechaAltaHasta && oProveedorFiltro.FechaAltaDesde == null);
 
                         if (!String.IsNullOrEmpty(oProveedorFiltro.RazonSocial))
                             lstProveedores = lstProveedores.FindAll(p => p.RAZON_SOCIAL.ToUpper().Contains(oProveedorFiltro.RazonSocial.ToUpper()));
