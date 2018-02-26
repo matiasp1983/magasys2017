@@ -44,11 +44,8 @@ namespace PL.AdminDashboard
                 }
             }
             catch (Exception ex)
-            {
-                if (oProveedor.ID_PROVEEDOR == 0)
-                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProveedorFailure, "ProveedorListado.aspx"));
-                else
-                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProveedorFailure));
+            {                
+                Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProveedorFailure));
 
                 Logger loLogger = LogManager.GetCurrentClassLogger();
                 loLogger.Error(ex);
@@ -147,15 +144,16 @@ namespace PL.AdminDashboard
         {
             var oProveedor = new BLL.DAL.Proveedor();
 
-            if (!String.IsNullOrEmpty(txtCodigo.Text))
-                oProveedor.ID_PROVEEDOR = Convert.ToInt32(txtCodigo.Text);
+            if (Session[Enums.Session.Proveedor.ToString()] != null)
+            {
+                oProveedor.ID_PROVEEDOR = ((BLL.DAL.Proveedor)base.Session[Enums.Session.Proveedor.ToString()]).ID_PROVEEDOR;
+                oProveedor.FECHA_ALTA = ((BLL.DAL.Proveedor)base.Session[Enums.Session.Proveedor.ToString()]).FECHA_ALTA;
+            }
             else
+            {
                 oProveedor.ID_PROVEEDOR = 0;
-
-            if (!String.IsNullOrEmpty(txtFechaAlta.Text))
-                oProveedor.FECHA_ALTA = Convert.ToDateTime(txtFechaAlta.Text);
-            else
                 oProveedor.FECHA_ALTA = DateTime.Now;
+            }            
 
             oProveedor.CUIT = txtCuit.Text;
             oProveedor.RAZON_SOCIAL = txtRazonSocial.Text;

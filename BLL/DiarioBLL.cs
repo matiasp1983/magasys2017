@@ -45,9 +45,6 @@ namespace BLL
 
                             foreach (var loDiarioDiaSemana in lstDiarioDiaSemana)
                             {
-                                if (!loDiarioDiaSemana.PRECIO.HasValue)
-                                    continue;
-
                                 using (var loRepDiaSemana = new Repository<DiaSemana>())
                                 {
                                     String loDiaSemana = loRepDiaSemana.Find(x => x.ID_DIA_SEMANA == loDiarioDiaSemana.ID_DIA_SEMANA).NOMBRE;
@@ -55,24 +52,31 @@ namespace BLL
                                     switch (loDiaSemana)
                                     {
                                         case "Lunes":
+                                            oProductoDiario.ID_DIARIO_DIA_SEMANA_LUNES = loDiarioDiaSemana.ID_DIARIO_DIA_SEMANA;
                                             oProductoDiario.PRECIO_LUNES = loDiarioDiaSemana.PRECIO;
                                             break;
                                         case "Martes":
+                                            oProductoDiario.ID_DIARIO_DIA_SEMANA_MARTES = loDiarioDiaSemana.ID_DIARIO_DIA_SEMANA;
                                             oProductoDiario.PRECIO_MARTES = loDiarioDiaSemana.PRECIO;
                                             break;
                                         case "Miércoles":
+                                            oProductoDiario.ID_DIARIO_DIA_SEMANA_MIERCOLES = loDiarioDiaSemana.ID_DIARIO_DIA_SEMANA;
                                             oProductoDiario.PRECIO_MIERCOLES = loDiarioDiaSemana.PRECIO;
                                             break;
                                         case "Jueves":
+                                            oProductoDiario.ID_DIARIO_DIA_SEMANA_JUEVES = loDiarioDiaSemana.ID_DIARIO_DIA_SEMANA;
                                             oProductoDiario.PRECIO_JUEVES = loDiarioDiaSemana.PRECIO;
                                             break;
                                         case "Viernes":
+                                            oProductoDiario.ID_DIARIO_DIA_SEMANA_VIERNES = loDiarioDiaSemana.ID_DIARIO_DIA_SEMANA;
                                             oProductoDiario.PRECIO_VIERNES = loDiarioDiaSemana.PRECIO;
                                             break;
                                         case "Sábado":
+                                            oProductoDiario.ID_DIARIO_DIA_SEMANA_SABADO = loDiarioDiaSemana.ID_DIARIO_DIA_SEMANA;
                                             oProductoDiario.PRECIO_SABADO = loDiarioDiaSemana.PRECIO;
                                             break;
                                         default:
+                                            oProductoDiario.ID_DIARIO_DIA_SEMANA_DOMINGO = loDiarioDiaSemana.ID_DIARIO_DIA_SEMANA;
                                             oProductoDiario.PRECIO_DOMINGO = loDiarioDiaSemana.PRECIO;
                                             break;
                                     }
@@ -206,12 +210,16 @@ namespace BLL
                         {
                             using (var loRepDiarioDiaSemana = new Repository<DiarioDiaSemana>())
                             {
-                                var oDiarioDiaSemana = new DiarioDiaSemana();
-
                                 foreach (var loDiarioDiaSemana in lstDiarioDiasSemanas)
                                 {
-                                    oDiarioDiaSemana.ID_DIA_SEMANA = loDiarioDiaSemana.ID_DIA_SEMANA;
-                                    oDiarioDiaSemana.PRECIO = loDiarioDiaSemana.PRECIO;
+                                    var oDiarioDiaSemana = new DiarioDiaSemana
+                                    {
+                                        ID_DIARIO_DIA_SEMANA = loDiarioDiaSemana.ID_DIARIO_DIA_SEMANA,
+                                        COD_DIARIO = loDiarioDiaSemana.COD_DIARIO,
+                                        ID_DIA_SEMANA = loDiarioDiaSemana.ID_DIA_SEMANA,
+                                        PRECIO = loDiarioDiaSemana.PRECIO
+                                    };
+
                                     bRes = loRepDiarioDiaSemana.Update(oDiarioDiaSemana);
                                 }
                             }
@@ -245,6 +253,13 @@ namespace BLL
         public int COD_PROVEEDOR { get; set; }
         public int COD_TIPO_PRODUCTO { get; set; }
         public int ID_DIARIO { get; set; }
+        public int ID_DIARIO_DIA_SEMANA_LUNES { get; set; }
+        public int ID_DIARIO_DIA_SEMANA_MARTES { get; set; }
+        public int ID_DIARIO_DIA_SEMANA_MIERCOLES { get; set; }
+        public int ID_DIARIO_DIA_SEMANA_JUEVES { get; set; }
+        public int ID_DIARIO_DIA_SEMANA_VIERNES { get; set; }
+        public int ID_DIARIO_DIA_SEMANA_SABADO { get; set; }
+        public int ID_DIARIO_DIA_SEMANA_DOMINGO { get; set; }
         public double? PRECIO_LUNES { get; set; }
         public double? PRECIO_MARTES { get; set; }
         public double? PRECIO_MIERCOLES { get; set; }
