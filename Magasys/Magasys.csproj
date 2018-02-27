@@ -118,6 +118,7 @@
     <Content Include="AdminDashboard\js\plugins\validate\jquery.validate.js" />
     <Content Include="AdminDashboard\MasterPage.Master" />
     <Content Include="AdminDashboard\ProductoDiarioEditar.aspx" />
+    <Content Include="AdminDashboard\ProductoDiarioVisualizar.aspx" />
     <Content Include="AdminDashboard\ProductoListado.aspx" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -208,6 +209,13 @@
     </Compile>
     <Compile Include="AdminDashboard\ProductoDiarioEditar.aspx.designer.cs">
       <DependentUpon>ProductoDiarioEditar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\ProductoDiarioVisualizar.aspx.cs">
+      <DependentUpon>ProductoDiarioVisualizar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\ProductoDiarioVisualizar.aspx.designer.cs">
+      <DependentUpon>ProductoDiarioVisualizar.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminDashboard\ProductoListado.aspx.cs">
       <DependentUpon>ProductoListado.aspx</DependentUpon>

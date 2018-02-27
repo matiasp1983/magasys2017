@@ -1,5 +1,4 @@
-﻿using BLL;
-using BLL.Common;
+﻿using BLL.Common;
 using NLog;
 using System;
 using System.Web.UI.WebControls;
@@ -26,7 +25,7 @@ namespace PL.AdminDashboard
 
                 if (oProveedor.ID_PROVEEDOR == 0)
                 {
-                    var loResultado = new ProveedorBLL().AltaProveedor(oProveedor);
+                    var loResultado = new BLL.ProveedorBLL().AltaProveedor(oProveedor);
 
                     if (loResultado)
                         Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeProveedorSuccessAlta, "Alta Proveedor", "ProveedorListado.aspx"));
@@ -35,7 +34,7 @@ namespace PL.AdminDashboard
                 }
                 else
                 {
-                    var loResutado = new ProveedorBLL().ModificarProveedor(oProveedor);
+                    var loResutado = new BLL.ProveedorBLL().ModificarProveedor(oProveedor);
 
                     if (loResutado)
                         Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeProveedorSuccessModificacion, "Modificación Proveedor", "ProveedorListado.aspx"));
@@ -194,7 +193,7 @@ namespace PL.AdminDashboard
 
         private void CargarProvincias(long idProvincia, long idLocalidad)
         {
-            var oProvincia = new ProvinciaBLL();
+            var oProvincia = new BLL.ProvinciaBLL();
 
             try
             {
@@ -221,7 +220,7 @@ namespace PL.AdminDashboard
 
         private void CargarLocalidades(long idProvincia, long idLocalidad = 0)
         {
-            var oLocalidad = new LocalidadBLL();
+            var oLocalidad = new BLL.LocalidadBLL();
 
             try
             {

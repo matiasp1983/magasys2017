@@ -1,5 +1,4 @@
-﻿using BLL;
-using BLL.Common;
+﻿using BLL.Common;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -64,27 +63,27 @@ namespace PL.AdminDashboard
                 {
                     case "Revista":
                         var oRevista = CargarRevistaDesdeControles();
-                        loResutado = new RevistaBLL().AltaRevista(oProducto, oRevista);
+                        loResutado = new BLL.RevistaBLL().AltaRevista(oProducto, oRevista);
                         break;
                     case "Colección":
                         var oColeccion = CargarColeccionDesdeControles();
-                        loResutado = new ColeccionBLL().AltaColeccion(oProducto, oColeccion);
+                        loResutado = new BLL.ColeccionBLL().AltaColeccion(oProducto, oColeccion);
                         break;
                     case "Libro":
                         var oLibro = CargarLibroDesdeControles();
-                        loResutado = new LibroBLL().AltaLibro(oProducto, oLibro);
+                        loResutado = new BLL.LibroBLL().AltaLibro(oProducto, oLibro);
                         break;
                     case "Suplemento":
                         var oSuplemento = CargarSuplementoDesdeControles();
-                        loResutado = new SuplementoBLL().AltaSuplemento(oProducto, oSuplemento);
+                        loResutado = new BLL.SuplementoBLL().AltaSuplemento(oProducto, oSuplemento);
                         break;
                     case "Película":
                         var oPelicula = CargarPeliculaDesdeControles();
-                        loResutado = new PeliculaBLL().AltaPelicula(oProducto, oPelicula);
+                        loResutado = new BLL.PeliculaBLL().AltaPelicula(oProducto, oPelicula);
                         break;
                     default:
                         var lstDiarioDiasSemanas = CargarDiarioDesdeControles();
-                        loResutado = new DiarioBLL().AltaDiario(oProducto, lstDiarioDiasSemanas);
+                        loResutado = new BLL.DiarioBLL().AltaDiario(oProducto, lstDiarioDiasSemanas);
                         break;
                 }
 
@@ -121,7 +120,7 @@ namespace PL.AdminDashboard
 
         private void CargarProveedores()
         {
-            var oProveedor = new ProveedorBLL();
+            var oProveedor = new BLL.ProveedorBLL();
 
             try
             {
@@ -140,7 +139,7 @@ namespace PL.AdminDashboard
 
         private void CargarGeneros()
         {
-            var oGenero = new GeneroBLL();
+            var oGenero = new BLL.GeneroBLL();
 
             try
             {
@@ -159,7 +158,7 @@ namespace PL.AdminDashboard
 
         private void CargarTiposProducto()
         {
-            var oTipoProducto = new TipoProductoBLL();
+            var oTipoProducto = new BLL.TipoProductoBLL();
 
             try
             {
@@ -177,7 +176,7 @@ namespace PL.AdminDashboard
 
         private void CargarDiasDeSemana()
         {
-            var oDiaSemana = new DiaSemanaBLL();
+            var oDiaSemana = new BLL.DiaSemanaBLL();
 
             try
             {
@@ -210,7 +209,7 @@ namespace PL.AdminDashboard
 
         private void CargarPeriodicidades()
         {
-            var oPeriodicidad = new PeriodicidadBLL();
+            var oPeriodicidad = new BLL.PeriodicidadBLL();
 
             try
             {
@@ -237,7 +236,7 @@ namespace PL.AdminDashboard
 
         private void CargarDiarios()
         {
-            var oDiario = new DiarioBLL();
+            var oDiario = new BLL.DiarioBLL();
 
             try
             {
@@ -258,7 +257,7 @@ namespace PL.AdminDashboard
 
         private void CargarAnios()
         {
-            var oAnio = new AnioBLL();
+            var oAnio = new BLL.AnioBLL();
 
             try
             {
@@ -405,7 +404,7 @@ namespace PL.AdminDashboard
             {
                 var oDiarioDiaSemana = new BLL.DAL.DiarioDiaSemana
                 {
-                    ID_DIA_SEMANA = new DiaSemanaBLL().ObtenerDiaSemana(ObtenerParteDeNombreIDTexbox(loTxtPrecioDiario.ID.ToString())).ID_DIA_SEMANA
+                    ID_DIA_SEMANA = new BLL.DiaSemanaBLL().ObtenerDiaSemana(ObtenerParteDeNombreIDTexbox(loTxtPrecioDiario.ID.ToString())).ID_DIA_SEMANA
                 };
 
                 if (!String.IsNullOrEmpty(loTxtPrecioDiario.Text))

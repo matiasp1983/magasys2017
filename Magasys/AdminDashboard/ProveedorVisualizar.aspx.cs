@@ -52,10 +52,10 @@ namespace PL.AdminDashboard
                     txtNumero.Text = oProveedor.NUMERO.ToString();
                     txtPiso.Text = oProveedor.PISO;
                     txtDepartamento.Text = oProveedor.DEPARTAMENTO;
-                    var loProvincia = new BLL.ProvinciaBLL().ObtenerProvincia((long)oProveedor.ID_PROVINCIA);
+                    var loProvincia = new BLL.ProvinciaBLL().ObtenerProvincia(oProveedor.ID_PROVINCIA);
                     if (loProvincia != null)
                         txtProvincia.Text = loProvincia.NOMBRE;
-                    var loLocalidad = new BLL.LocalidadBLL().ObtenerLocalidad((long)oProveedor.ID_LOCALIDAD);
+                    var loLocalidad = new BLL.LocalidadBLL().ObtenerLocalidad(oProveedor.ID_LOCALIDAD);
                     if (loLocalidad != null)
                         txtLocalidad.Text = loLocalidad.NOMBRE;
                     txtBarrio.Text = oProveedor.BARRIO;

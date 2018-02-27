@@ -8,6 +8,25 @@ namespace BLL
     {
         #region Métodos Públicos
 
+        public Genero ObtenerGenero(long idGenero)
+        {
+            Genero oGenero = null;
+
+            try
+            {
+                using (var rep = new Repository<Genero>())
+                {
+                    oGenero = rep.Find(p => p.ID_GENERO == idGenero);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return oGenero;
+        }
+
         public List<Genero> ObtenerGeneros()
         {
             List<Genero> lstGeneros = null;

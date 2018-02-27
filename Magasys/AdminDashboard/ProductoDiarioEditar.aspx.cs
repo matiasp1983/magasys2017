@@ -1,5 +1,4 @@
-﻿using BLL;
-using BLL.Common;
+﻿using BLL.Common;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -28,7 +27,7 @@ namespace PL.AdminDashboard
                 var oProducto = CargarProductoDesdeControles();
                 var lstDiarioDiasSemanas = CargarDiarioDesdeControles();
 
-                loResutado = new DiarioBLL().ModificarDiario(oProducto, lstDiarioDiasSemanas);
+                loResutado = new BLL.DiarioBLL().ModificarDiario(oProducto, lstDiarioDiasSemanas);
 
                 if (loResutado)
                     Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeProductoSuccessModificacion, "Modificación Producto Diario", "ProductoListado.aspx"));
@@ -62,7 +61,7 @@ namespace PL.AdminDashboard
             {
                 if (Session[Enums.Session.ProductoDiario.ToString()] != null)
                 {
-                    var oProductoDiario = (ProductoDiario)Session[Enums.Session.ProductoDiario.ToString()];
+                    var oProductoDiario = (BLL.ProductoDiario)Session[Enums.Session.ProductoDiario.ToString()];
 
                     if (oProductoDiario.ID_PRODUCTO > 0)
                         txtCodigo.Text = oProductoDiario.ID_PRODUCTO.ToString();
@@ -103,10 +102,10 @@ namespace PL.AdminDashboard
 
             if (Session[Enums.Session.ProductoDiario.ToString()] != null)
             {
-                oProducto.ID_PRODUCTO = ((ProductoDiario)base.Session[Enums.Session.ProductoDiario.ToString()]).ID_PRODUCTO;
-                oProducto.FECHA_ALTA = ((ProductoDiario)base.Session[Enums.Session.ProductoDiario.ToString()]).FECHA_ALTA;
-                oProducto.COD_ESTADO = ((ProductoDiario)base.Session[Enums.Session.ProductoDiario.ToString()]).COD_ESTADO;
-                oProducto.COD_TIPO_PRODUCTO = ((ProductoDiario)base.Session[Enums.Session.ProductoDiario.ToString()]).COD_TIPO_PRODUCTO;
+                oProducto.ID_PRODUCTO = ((BLL.ProductoDiario)base.Session[Enums.Session.ProductoDiario.ToString()]).ID_PRODUCTO;
+                oProducto.FECHA_ALTA = ((BLL.ProductoDiario)base.Session[Enums.Session.ProductoDiario.ToString()]).FECHA_ALTA;
+                oProducto.COD_ESTADO = ((BLL.ProductoDiario)base.Session[Enums.Session.ProductoDiario.ToString()]).COD_ESTADO;
+                oProducto.COD_TIPO_PRODUCTO = ((BLL.ProductoDiario)base.Session[Enums.Session.ProductoDiario.ToString()]).COD_TIPO_PRODUCTO;
             }
 
             oProducto.NOMBRE = txtNombre.Text;
@@ -129,43 +128,43 @@ namespace PL.AdminDashboard
             {
                 var oDiarioDiaSemana = new BLL.DAL.DiarioDiaSemana();
 
-                var oDiaSemana = new DiaSemanaBLL().ObtenerDiaSemana(ObtenerParteDeNombreIDTexbox(loTxtPrecioDiario.ID.ToString()));
+                var oDiaSemana = new BLL.DiaSemanaBLL().ObtenerDiaSemana(ObtenerParteDeNombreIDTexbox(loTxtPrecioDiario.ID.ToString()));
 
                 if (Session[Enums.Session.ProductoDiario.ToString()] != null)
                 {
                     switch (oDiaSemana.NOMBRE)
                     {
                         case "Lunes":
-                            oDiarioDiaSemana.ID_DIARIO_DIA_SEMANA = ((ProductoDiario)base.Session[Enums.Session.ProductoDiario.ToString()]).ID_DIARIO_DIA_SEMANA_LUNES;
+                            oDiarioDiaSemana.ID_DIARIO_DIA_SEMANA = ((BLL.ProductoDiario)base.Session[Enums.Session.ProductoDiario.ToString()]).ID_DIARIO_DIA_SEMANA_LUNES;
                             oDiarioDiaSemana.ID_DIA_SEMANA = oDiaSemana.ID_DIA_SEMANA;                            
                             break;                            
                         case "Martes":                            
-                            oDiarioDiaSemana.ID_DIARIO_DIA_SEMANA = ((ProductoDiario)base.Session[Enums.Session.ProductoDiario.ToString()]).ID_DIARIO_DIA_SEMANA_MARTES;
+                            oDiarioDiaSemana.ID_DIARIO_DIA_SEMANA = ((BLL.ProductoDiario)base.Session[Enums.Session.ProductoDiario.ToString()]).ID_DIARIO_DIA_SEMANA_MARTES;
                             oDiarioDiaSemana.ID_DIA_SEMANA = oDiaSemana.ID_DIA_SEMANA;
                             break;
                         case "Miércoles":
-                            oDiarioDiaSemana.ID_DIARIO_DIA_SEMANA = ((ProductoDiario)base.Session[Enums.Session.ProductoDiario.ToString()]).ID_DIARIO_DIA_SEMANA_MIERCOLES;
+                            oDiarioDiaSemana.ID_DIARIO_DIA_SEMANA = ((BLL.ProductoDiario)base.Session[Enums.Session.ProductoDiario.ToString()]).ID_DIARIO_DIA_SEMANA_MIERCOLES;
                             oDiarioDiaSemana.ID_DIA_SEMANA = oDiaSemana.ID_DIA_SEMANA;
                             break;
                         case "Jueves":
-                            oDiarioDiaSemana.ID_DIARIO_DIA_SEMANA = ((ProductoDiario)base.Session[Enums.Session.ProductoDiario.ToString()]).ID_DIARIO_DIA_SEMANA_JUEVES;
+                            oDiarioDiaSemana.ID_DIARIO_DIA_SEMANA = ((BLL.ProductoDiario)base.Session[Enums.Session.ProductoDiario.ToString()]).ID_DIARIO_DIA_SEMANA_JUEVES;
                             oDiarioDiaSemana.ID_DIA_SEMANA = oDiaSemana.ID_DIA_SEMANA;
                             break;
                         case "Viernes":
-                            oDiarioDiaSemana.ID_DIARIO_DIA_SEMANA = ((ProductoDiario)base.Session[Enums.Session.ProductoDiario.ToString()]).ID_DIARIO_DIA_SEMANA_VIERNES;
+                            oDiarioDiaSemana.ID_DIARIO_DIA_SEMANA = ((BLL.ProductoDiario)base.Session[Enums.Session.ProductoDiario.ToString()]).ID_DIARIO_DIA_SEMANA_VIERNES;
                             oDiarioDiaSemana.ID_DIA_SEMANA = oDiaSemana.ID_DIA_SEMANA;
                             break;
                         case "Sábado":
-                            oDiarioDiaSemana.ID_DIARIO_DIA_SEMANA = ((ProductoDiario)base.Session[Enums.Session.ProductoDiario.ToString()]).ID_DIARIO_DIA_SEMANA_SABADO;
+                            oDiarioDiaSemana.ID_DIARIO_DIA_SEMANA = ((BLL.ProductoDiario)base.Session[Enums.Session.ProductoDiario.ToString()]).ID_DIARIO_DIA_SEMANA_SABADO;
                             oDiarioDiaSemana.ID_DIA_SEMANA = oDiaSemana.ID_DIA_SEMANA;
                             break;
                         default:
-                            oDiarioDiaSemana.ID_DIARIO_DIA_SEMANA = ((ProductoDiario)base.Session[Enums.Session.ProductoDiario.ToString()]).ID_DIARIO_DIA_SEMANA_DOMINGO;
+                            oDiarioDiaSemana.ID_DIARIO_DIA_SEMANA = ((BLL.ProductoDiario)base.Session[Enums.Session.ProductoDiario.ToString()]).ID_DIARIO_DIA_SEMANA_DOMINGO;
                             oDiarioDiaSemana.ID_DIA_SEMANA = oDiaSemana.ID_DIA_SEMANA;
                             break;
                     }
                     
-                    oDiarioDiaSemana.COD_DIARIO = ((ProductoDiario)base.Session[Enums.Session.ProductoDiario.ToString()]).ID_DIARIO;
+                    oDiarioDiaSemana.COD_DIARIO = ((BLL.ProductoDiario)base.Session[Enums.Session.ProductoDiario.ToString()]).ID_DIARIO;
                 }                
 
                 if (!String.IsNullOrEmpty(loTxtPrecioDiario.Text))
@@ -181,7 +180,7 @@ namespace PL.AdminDashboard
 
         private void CargarProveedor(long idProveedor)
         {
-            var oProveedor = new ProveedorBLL();
+            var oProveedor = new BLL.ProveedorBLL();
 
             try
             {
@@ -207,7 +206,7 @@ namespace PL.AdminDashboard
 
         private void CargarGenero(long idGenero)
         {
-            var oGenero = new GeneroBLL();
+            var oGenero = new BLL.GeneroBLL();
 
             try
             {

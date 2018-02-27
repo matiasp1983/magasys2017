@@ -3,7 +3,6 @@ using System.Web.UI.WebControls;
 using BLL.Common;
 using BLL.Filters;
 using System.Web.UI.HtmlControls;
-using BLL;
 using NLog;
 using System.Linq;
 
@@ -67,7 +66,7 @@ namespace PL.AdminDashboard
         {
             try
             {
-                var oProveedor = new ProveedorBLL().ObtenerProveedor(Convert.ToInt64(((HtmlButton)sender).Attributes["value"]));
+                var oProveedor = new BLL.ProveedorBLL().ObtenerProveedor(Convert.ToInt64(((HtmlButton)sender).Attributes["value"]));
                 Session.Add(Enums.Session.Proveedor.ToString(), oProveedor);
                 Response.Redirect("ProveedorVisualizar.aspx", false);
             }
@@ -82,7 +81,7 @@ namespace PL.AdminDashboard
         {
             try
             {
-                var oProveedor = new ProveedorBLL().ObtenerProveedor(Convert.ToInt64(((HtmlButton)sender).Attributes["value"]));
+                var oProveedor = new BLL.ProveedorBLL().ObtenerProveedor(Convert.ToInt64(((HtmlButton)sender).Attributes["value"]));
                 Session.Add(Enums.Session.Proveedor.ToString(), oProveedor);
                 Response.Redirect("Proveedor.aspx", false);
             }
@@ -100,7 +99,7 @@ namespace PL.AdminDashboard
                 if (!String.IsNullOrEmpty(hdIdProveedorBaja.Value))
                 {
                     var loIdProveedor = Convert.ToInt64(hdIdProveedorBaja.Value);
-                    var oProveedor = new ProveedorBLL();
+                    var oProveedor = new BLL.ProveedorBLL();
                     if (oProveedor.BajaProveedor(loIdProveedor))
                     {
                         CargarGrillaProveedores();
@@ -145,7 +144,7 @@ namespace PL.AdminDashboard
                 {
                     if (ValidaCuit(txtCuitAlta.Text))
                     {
-                        bool esNuevoCuit = new ProveedorBLL().ConsultarExistenciaCuit(txtCuitAlta.Text);
+                        bool esNuevoCuit = new BLL.ProveedorBLL().ConsultarExistenciaCuit(txtCuitAlta.Text);
 
                         if (esNuevoCuit)
                         {
@@ -211,7 +210,7 @@ namespace PL.AdminDashboard
             try
             {
                 var oProveedorFiltro = CargarProveedorFiltro();
-                var lstProveedores = new ProveedorBLL().ObtenerProveedores(oProveedorFiltro);
+                var lstProveedores = new BLL.ProveedorBLL().ObtenerProveedores(oProveedorFiltro);
 
                 if (lstProveedores != null && lstProveedores.Count > 0)
                     lsvProveedores.DataSource = lstProveedores;
