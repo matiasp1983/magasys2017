@@ -45,7 +45,7 @@ namespace PL.AdminDashboard
                     txtDescripcion.Text = oProductoDiario.DESCRIPCION;
                     var loProveedor = new BLL.ProveedorBLL().ObtenerProveedor(oProductoDiario.COD_PROVEEDOR);
                     if (loProveedor != null)
-                        txtProveedor.Text = loProveedor.NOMBRE;
+                        txtProveedor.Text = loProveedor.RAZON_SOCIAL;
                     var loGenero = new BLL.GeneroBLL().ObtenerGenero(oProductoDiario.COD_GENERO);
                     if (loGenero != null)
                         txtGenero.Text = loGenero.NOMBRE;                    
