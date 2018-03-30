@@ -300,7 +300,7 @@ namespace PL.AdminDashboard
                 COD_PROVEEDOR = Convert.ToInt32(ddlProveedor.SelectedValue),
                 COD_GENERO = Convert.ToInt32(ddlGenero.SelectedValue),
                 FECHA_ALTA = DateTime.Now,
-                COD_ESTADO = 1,
+                COD_ESTADO = 1, /*DEFINIR QUE HACER CON ESTE CAMPO*/
                 COD_TIPO_PRODUCTO = Convert.ToInt32(ddlTipoProducto.SelectedValue)
             };
 
