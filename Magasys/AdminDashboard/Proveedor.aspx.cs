@@ -43,7 +43,7 @@ namespace PL.AdminDashboard
                 }
             }
             catch (Exception ex)
-            {                
+            {
                 Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProveedorFailure));
 
                 Logger loLogger = LogManager.GetCurrentClassLogger();
@@ -145,14 +145,17 @@ namespace PL.AdminDashboard
 
             if (Session[Enums.Session.Proveedor.ToString()] != null)
             {
-                oProveedor.ID_PROVEEDOR = ((BLL.DAL.Proveedor)base.Session[Enums.Session.Proveedor.ToString()]).ID_PROVEEDOR;
-                oProveedor.FECHA_ALTA = ((BLL.DAL.Proveedor)base.Session[Enums.Session.Proveedor.ToString()]).FECHA_ALTA;
+                if (((BLL.DAL.Proveedor)base.Session[Enums.Session.Proveedor.ToString()]).ID_PROVEEDOR == 0)
+                {
+                    oProveedor.ID_PROVEEDOR = 0;
+                    oProveedor.FECHA_ALTA = DateTime.Now;
+                }
+                else
+                {
+                    oProveedor.ID_PROVEEDOR = ((BLL.DAL.Proveedor)base.Session[Enums.Session.Proveedor.ToString()]).ID_PROVEEDOR;
+                    oProveedor.FECHA_ALTA = ((BLL.DAL.Proveedor)base.Session[Enums.Session.Proveedor.ToString()]).FECHA_ALTA;
+                }
             }
-            else
-            {
-                oProveedor.ID_PROVEEDOR = 0;
-                oProveedor.FECHA_ALTA = DateTime.Now;
-            }            
 
             oProveedor.CUIT = txtCuit.Text;
             oProveedor.RAZON_SOCIAL = txtRazonSocial.Text;
