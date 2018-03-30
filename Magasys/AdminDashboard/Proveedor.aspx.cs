@@ -21,25 +21,32 @@ namespace PL.AdminDashboard
 
             try
             {
-                oProveedor.CUIT = oProveedor.CUIT.ToString().Replace("-", String.Empty).Trim();
-
-                if (oProveedor.ID_PROVEEDOR == 0)
+                if (oProveedor != null)
                 {
-                    var loResultado = new BLL.ProveedorBLL().AltaProveedor(oProveedor);
+                    oProveedor.CUIT = oProveedor.CUIT.ToString().Replace("-", String.Empty).Trim();
 
-                    if (loResultado)
-                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeProveedorSuccessAlta, "Alta Proveedor", "ProveedorListado.aspx"));
+                    if (oProveedor.ID_PROVEEDOR == 0)
+                    {
+                        var loResultado = new BLL.ProveedorBLL().AltaProveedor(oProveedor);
+
+                        if (loResultado)
+                            Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeProveedorSuccessAlta, "Alta Proveedor", "ProveedorListado.aspx"));
+                        else
+                            Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProveedorFailure));
+                    }
                     else
-                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProveedorFailure));
+                    {
+                        var loResutado = new BLL.ProveedorBLL().ModificarProveedor(oProveedor);
+
+                        if (loResutado)
+                            Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeProveedorSuccessModificacion, "Modificación Proveedor", "ProveedorListado.aspx"));
+                        else
+                            Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProveedorFailure));
+                    }
                 }
                 else
                 {
-                    var loResutado = new BLL.ProveedorBLL().ModificarProveedor(oProveedor);
-
-                    if (loResutado)
-                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeProveedorSuccessModificacion, "Modificación Proveedor", "ProveedorListado.aspx"));
-                    else
-                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProveedorFailure));
+                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProveedorFailure));
                 }
             }
             catch (Exception ex)
@@ -143,18 +150,18 @@ namespace PL.AdminDashboard
         {
             var oProveedor = new BLL.DAL.Proveedor();
 
-            if (Session[Enums.Session.Proveedor.ToString()] != null)
+            if (Session[Enums.Session.Proveedor.ToString()] == null)
+                return null;
+
+            if (((BLL.DAL.Proveedor)base.Session[Enums.Session.Proveedor.ToString()]).ID_PROVEEDOR == 0)
             {
-                if (((BLL.DAL.Proveedor)base.Session[Enums.Session.Proveedor.ToString()]).ID_PROVEEDOR == 0)
-                {
-                    oProveedor.ID_PROVEEDOR = 0;
-                    oProveedor.FECHA_ALTA = DateTime.Now;
-                }
-                else
-                {
-                    oProveedor.ID_PROVEEDOR = ((BLL.DAL.Proveedor)base.Session[Enums.Session.Proveedor.ToString()]).ID_PROVEEDOR;
-                    oProveedor.FECHA_ALTA = ((BLL.DAL.Proveedor)base.Session[Enums.Session.Proveedor.ToString()]).FECHA_ALTA;
-                }
+                oProveedor.ID_PROVEEDOR = 0;
+                oProveedor.FECHA_ALTA = DateTime.Now;
+            }
+            else
+            {
+                oProveedor.ID_PROVEEDOR = ((BLL.DAL.Proveedor)base.Session[Enums.Session.Proveedor.ToString()]).ID_PROVEEDOR;
+                oProveedor.FECHA_ALTA = ((BLL.DAL.Proveedor)base.Session[Enums.Session.Proveedor.ToString()]).FECHA_ALTA;
             }
 
             oProveedor.CUIT = txtCuit.Text;
