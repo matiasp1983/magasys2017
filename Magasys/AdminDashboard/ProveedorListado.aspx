@@ -213,8 +213,18 @@
     <script type="text/javascript">
         if (window.jQuery) {
             $(document).ready(function () {
+                KeypressEnterDisabled();
                 LoadDatePicker();
                 LoadFootable();
+            });
+        }
+
+        function KeypressEnterDisabled()
+        {
+            $('input').keypress(function (e) {
+                if (e.which == 13) {
+                    return false;
+                }
             });
         }
 
