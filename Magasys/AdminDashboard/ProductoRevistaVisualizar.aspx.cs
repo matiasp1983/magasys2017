@@ -11,7 +11,7 @@ namespace PL.AdminDashboard
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-                CargarProductoDiario();
+                CargarProductoRevista();
         }
 
         protected void BtnModificar_Click(object sender, EventArgs e)
@@ -21,7 +21,7 @@ namespace PL.AdminDashboard
 
         protected void BtnCancelar_Click(object sender, EventArgs e)
         {
-            Session.Remove(Enums.Session.ProductoDiario.ToString());
+            Session.Remove(Enums.Session.ProductoRevista.ToString());
             Response.Redirect("ProductoListado.aspx", false);
         }
 
@@ -29,50 +29,50 @@ namespace PL.AdminDashboard
 
         #region Métodos Privados
 
-        private void CargarProductoDiario()
+        private void CargarProductoRevista()
         {
             try
             {
-                //if (Session[Enums.Session.ProductoDiario.ToString()] != null)
-                //{
-                //    var oProductoDiario = (BLL.ProductoDiario)Session[Enums.Session.ProductoDiario.ToString()];
+                if (Session[Enums.Session.ProductoRevista.ToString()] != null)
+                {
+                    var oProductoRevista = (BLL.ProductoRevista)Session[Enums.Session.ProductoRevista.ToString()];
 
-                //    if (oProductoDiario.ID_PRODUCTO > 0)
-                //        txtCodigo.Text = oProductoDiario.ID_PRODUCTO.ToString();
-                //    if (!String.IsNullOrEmpty(oProductoDiario.FECHA_ALTA.ToString()))
-                //        txtFechaAlta.Text = oProductoDiario.FECHA_ALTA.ToString("dd/MM/yyyy");
-                //    txtNombre.Text = oProductoDiario.NOMBRE;
-                //    txtDescripcion.Text = oProductoDiario.DESCRIPCION;
-                //    var loProveedor = new BLL.ProveedorBLL().ObtenerProveedor(oProductoDiario.COD_PROVEEDOR);
-                //    if (loProveedor != null)
-                //        txtProveedor.Text = loProveedor.RAZON_SOCIAL;
-                //    var loGenero = new BLL.GeneroBLL().ObtenerGenero(oProductoDiario.COD_GENERO);
-                //    if (loGenero != null)
-                //        txtGenero.Text = loGenero.NOMBRE;                    
-                //    if (oProductoDiario.PRECIO_LUNES.HasValue)
-                //        txtPrecioLunesDiario.Text = oProductoDiario.PRECIO_LUNES.Value.ToString();
-                //    if (oProductoDiario.PRECIO_MARTES.HasValue)
-                //        txtPrecioMartesDiario.Text = oProductoDiario.PRECIO_MARTES.Value.ToString();
-                //    if (oProductoDiario.PRECIO_MIERCOLES.HasValue)
-                //        txtPrecioMiercolesDiario.Text = oProductoDiario.PRECIO_MIERCOLES.Value.ToString();
-                //    if (oProductoDiario.PRECIO_JUEVES.HasValue)
-                //        txtPrecioJuevesDiario.Text = oProductoDiario.PRECIO_JUEVES.Value.ToString();
-                //    if (oProductoDiario.PRECIO_VIERNES.HasValue)
-                //        txtPrecioViernesDiario.Text = oProductoDiario.PRECIO_VIERNES.Value.ToString();
-                //    if (oProductoDiario.PRECIO_SABADO.HasValue)
-                //        txtPrecioSabadoDiario.Text = oProductoDiario.PRECIO_SABADO.Value.ToString();
-                //    if (oProductoDiario.PRECIO_DOMINGO.HasValue)
-                //        txtPrecioDomingoDiario.Text = oProductoDiario.PRECIO_DOMINGO.Value.ToString();
-                //}
-                //else
-                //    Response.Redirect("ProductoListado.aspx", false);
+                    if (oProductoRevista.ID_PRODUCTO > 0)
+                        txtCodigo.Text = oProductoRevista.ID_PRODUCTO.ToString();
+                    if (!String.IsNullOrEmpty(oProductoRevista.FECHA_ALTA.ToString()))
+                        txtFechaAlta.Text = oProductoRevista.FECHA_ALTA.ToString("dd/MM/yyyy");
+                    txtNombre.Text = oProductoRevista.NOMBRE;
+                    txtDescripcion.Text = oProductoRevista.DESCRIPCION;
+                    var loProveedor = new BLL.ProveedorBLL().ObtenerProveedor(oProductoRevista.COD_PROVEEDOR);
+                    if (loProveedor != null)
+                        txtProveedor.Text = loProveedor.RAZON_SOCIAL;
+                    var loGenero = new BLL.GeneroBLL().ObtenerGenero(oProductoRevista.COD_GENERO);
+                    if (loGenero != null)
+                        txtGenero.Text = loGenero.NOMBRE;
+
+                    if (oProductoRevista.ID_DIA_SEMANA.HasValue)
+                    {
+                        var loDiaSemana = new BLL.DiaSemanaBLL().ObtenerDiaSemana(oProductoRevista.ID_DIA_SEMANA);
+                        if (loDiaSemana != null)                        
+                            txtDiaDeEntregaRevista.Text = loDiaSemana.NOMBRE;                        
+                    }
+
+                    var loPeriodicidad = new BLL.PeriodicidadBLL().ObtenerPeriodicidad(oProductoRevista.COD_PERIODICIDAD);
+                    if (loPeriodicidad != null)                    
+                        txtPeriodicidadRevista.Text = loPeriodicidad.NOMBRE;
+                    
+                    if (oProductoRevista.PRECIO > 0)
+                        txtPrecioRevista.Text = oProductoRevista.PRECIO.ToString();
+                }
+                else
+                    Response.Redirect("ProductoListado.aspx", false);
             }
             catch (Exception ex)
             {
                 Logger loLogger = LogManager.GetCurrentClassLogger();
                 loLogger.Error(ex);
             }
-        }        
+        }
 
         #endregion
     }

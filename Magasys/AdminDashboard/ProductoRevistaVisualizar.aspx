@@ -14,7 +14,7 @@
                     </li>
                     <li class="active">
                         <strong>
-                            <asp:Label ID="lblBreadcrumbActive" runat="server" Text="Visualizar Producto Diario"></asp:Label>
+                            <asp:Label ID="lblBreadcrumbActive" runat="server" Text="Visualizar Producto Revista"></asp:Label>
                         </strong>
                     </li>
                 </ol>
@@ -96,28 +96,24 @@
                 <div class="ibox-content">
                     <div class="col-lg-12">
                         <div class="panel panel-primary">
-                            <div id="divDiario" runat="server" class="panel-body" visible="true">
+                            <div id="divRevista" runat="server" class="panel-body" visible="true">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="col-sm-4 control-label">Precio Lunes </label>
+                                            <label class="col-sm-3 control-label">D&iacute;a de entrega</label>
 
-                                            <div class="col-sm-8">
-                                                <div class="input-group m-b" id="divPrecioLunesDiario">
-                                                    <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                                    <asp:TextBox ID="txtPrecioLunesDiario" runat="server" CssClass="form-control" disabled="" autocomplete="off"></asp:TextBox>
-                                                </div>
+                                            <div class="col-sm-9">                                                
+                                                <asp:TextBox ID="txtDiaDeEntregaRevista" runat="server" CssClass="form-control" disabled="" autocomplete="off"></asp:TextBox>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="col-sm-4 control-label">Precio Martes </label>
+                                            <label class="col-sm-3 control-label">Periodicidad</label>
 
-                                            <div class="col-sm-8">
-                                                <div class="input-group m-b" id="divPrecioMartesDiario">
-                                                    <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                                    <asp:TextBox ID="txtPrecioMartesDiario" runat="server" CssClass="form-control" disabled="" autocomplete="off"></asp:TextBox>
+                                            <div class="col-sm-9">
+                                                <div id="divPeriodicidadRevista">                                                    
+                                                    <asp:TextBox ID="txtPeriodicidadRevista" runat="server" CssClass="form-control" disabled="" autocomplete="off"></asp:TextBox>
                                                 </div>
                                             </div>
                                         </div>
@@ -126,64 +122,12 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="col-sm-4 control-label">Precio Mi&eacute;rcoles </label>
+                                            <label class="col-sm-3 control-label">Precio</label>
 
-                                            <div class="col-sm-8">
-                                                <div class="input-group m-b" id="divPrecioMiercolesDiario">
+                                            <div class="col-sm-9">
+                                                <div class="input-group m-b" id="divPrecioRevista">
                                                     <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                                    <asp:TextBox ID="txtPrecioMiercolesDiario" runat="server" CssClass="form-control" disabled="" autocomplete="off"></asp:TextBox>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-sm-4 control-label">Precio Jueves </label>
-
-                                            <div class="col-sm-8">
-                                                <div class="input-group m-b" id="divPrecioJuevesDiario">
-                                                    <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                                    <asp:TextBox ID="txtPrecioJuevesDiario" runat="server" CssClass="form-control" disabled="" autocomplete="off"></asp:TextBox>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-sm-4 control-label">Precio Viernes </label>
-
-                                            <div class="col-sm-8">
-                                                <div class="input-group m-b" id="divPrecioViernesDiario">
-                                                    <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                                    <asp:TextBox ID="txtPrecioViernesDiario" runat="server" CssClass="form-control" disabled="" autocomplete="off"></asp:TextBox>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-sm-4 control-label">Precio S&aacute;bado </label>
-
-                                            <div class="col-sm-8">
-                                                <div class="input-group m-b" id="divPrecioSabadoDiario">
-                                                    <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                                    <asp:TextBox ID="txtPrecioSabadoDiario" runat="server" CssClass="form-control" disabled="" autocomplete="off"></asp:TextBox>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-sm-4 control-label">Precio Domingo </label>
-
-                                            <div class="col-sm-8">
-                                                <div class="input-group m-b" id="divPrecioDomingoDiario">
-                                                    <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                                    <asp:TextBox ID="txtPrecioDomingoDiario" runat="server" CssClass="form-control" disabled="" autocomplete="off"></asp:TextBox>
+                                                    <asp:TextBox ID="txtPrecioRevista" runat="server" CssClass="form-control" disabled="" autocomplete="off"></asp:TextBox>
                                                 </div>
                                             </div>
                                         </div>
