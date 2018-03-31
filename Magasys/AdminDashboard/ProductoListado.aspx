@@ -20,6 +20,10 @@
     </div>
     <div class="wrapper wrapper-content animated fadeInRight">
         <form id="FormProductoListado" runat="server">
+            <asp:Button ID="Button1" runat="server" Text="Diario 64 Editar" OnClick="Button1_Click" />
+            <asp:Button ID="Button11" runat="server" Text="Diario 64 Visualizar" OnClick="Button11_Click" />
+            <asp:Button ID="Button2" runat="server" Text="Revista 20 Editar" OnClick="Button2_Click" />
+            <asp:Button ID="Button22" runat="server" Text="Revista 20 Visualizar" OnClick="Button22_Click" />
         </form>
     </div>
 </asp:Content>
