@@ -26,14 +26,14 @@ namespace PL.AdminDashboard
         protected void Button2_Click(object sender, EventArgs e)
         {
             /*Prueba con Producto Revista Editar*/
-            Session[BLL.Common.Enums.Session.ProductoRevista.ToString()] = new BLL.RevistaBLL().ObtenerRevista(20);
+            Session[BLL.Common.Enums.Session.ProductoRevista.ToString()] = new BLL.RevistaBLL().ObtenerRevista(22);
             Response.Redirect("ProductoRevistaEditar.aspx", false);
         }        
 
         protected void Button22_Click(object sender, EventArgs e)
         {
             /*Prueba con Producto Revista Visualizar*/
-            Session[BLL.Common.Enums.Session.ProductoRevista.ToString()] = new BLL.RevistaBLL().ObtenerRevista(20);
+            Session[BLL.Common.Enums.Session.ProductoRevista.ToString()] = new BLL.RevistaBLL().ObtenerRevista(22);
             Response.Redirect("ProductoRevistaVisualizar.aspx", false);
         }
     }
