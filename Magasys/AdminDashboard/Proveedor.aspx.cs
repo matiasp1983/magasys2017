@@ -148,10 +148,10 @@ namespace PL.AdminDashboard
 
         private BLL.DAL.Proveedor CargarProveedorDesdeControles()
         {
-            var oProveedor = new BLL.DAL.Proveedor();
-
             if (Session[Enums.Session.Proveedor.ToString()] == null)
                 return null;
+
+            var oProveedor = new BLL.DAL.Proveedor();            
 
             if (((BLL.DAL.Proveedor)base.Session[Enums.Session.Proveedor.ToString()]).ID_PROVEEDOR == 0)
             {

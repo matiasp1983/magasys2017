@@ -27,12 +27,19 @@ namespace PL.AdminDashboard
                 var oProducto = CargarProductoDesdeControles();
                 var oRevista = CargarRevistaDesdeControles();
 
-                loResutado = new BLL.RevistaBLL().ModificarRevista(oProducto, oRevista);
+                if (oProducto != null && oRevista != null)
+                {
+                    loResutado = new BLL.RevistaBLL().ModificarRevista(oProducto, oRevista);
 
-                if (loResutado)
-                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeProductoSuccessModificacion, "Modificación Producto Revista", "ProductoListado.aspx"));
+                    if (loResutado)
+                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeProductoSuccessModificacion, "Modificación Producto Revista", "ProductoListado.aspx"));
+                    else
+                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProductoFailure));
+                }
                 else
+                {
                     Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProductoFailure));
+                }
             }
             catch (Exception ex)
             {
@@ -61,17 +68,19 @@ namespace PL.AdminDashboard
             {
                 if (Session[Enums.Session.ProductoRevista.ToString()] != null)
                 {
-                    var oProductoDiario = (BLL.ProductoRevista)Session[Enums.Session.ProductoRevista.ToString()];
+                    var oProductoRevista = (BLL.ProductoRevista)Session[Enums.Session.ProductoRevista.ToString()];
 
-                    if (oProductoDiario.ID_PRODUCTO > 0)
-                        txtCodigo.Text = oProductoDiario.ID_PRODUCTO.ToString();
-                    if (!String.IsNullOrEmpty(oProductoDiario.FECHA_ALTA.ToString()))
-                        txtFechaAlta.Text = oProductoDiario.FECHA_ALTA.ToString("dd/MM/yyyy");
-                    txtNombre.Text = oProductoDiario.NOMBRE;
-                    txtDescripcion.Text = oProductoDiario.DESCRIPCION;
-                    CargarProveedor(oProductoDiario.COD_PROVEEDOR);
-                    CargarGenero(oProductoDiario.COD_GENERO);
-                    CargarDiasDeSemana(oProductoDiario.ID_DIA_SEMANA);
+                    if (oProductoRevista.ID_PRODUCTO > 0)
+                        txtCodigo.Text = oProductoRevista.ID_PRODUCTO.ToString();
+                    if (!String.IsNullOrEmpty(oProductoRevista.FECHA_ALTA.ToString()))
+                        txtFechaAlta.Text = oProductoRevista.FECHA_ALTA.ToString("dd/MM/yyyy");
+                    txtNombre.Text = oProductoRevista.NOMBRE;
+                    txtDescripcion.Text = oProductoRevista.DESCRIPCION;
+                    CargarProveedor(oProductoRevista.COD_PROVEEDOR);
+                    CargarGenero(oProductoRevista.COD_GENERO);
+                    CargarDiasDeSemana(oProductoRevista.ID_DIA_SEMANA);
+                    CargarPeriodicidades(oProductoRevista.COD_PERIODICIDAD);
+                    txtPrecioRevista.Text = oProductoRevista.PRECIO.ToString();
                 }
                 else
                     Response.Redirect("ProductoListado.aspx", false);
@@ -85,19 +94,19 @@ namespace PL.AdminDashboard
 
         private BLL.DAL.Producto CargarProductoDesdeControles()
         {
-            var oProducto = new BLL.DAL.Producto();
+            if (Session[Enums.Session.ProductoRevista.ToString()] == null)
+                return null;
 
-            if (Session[Enums.Session.ProductoRevista.ToString()] != null)
+            var oProducto = new BLL.DAL.Producto
             {
-                oProducto.ID_PRODUCTO = ((BLL.ProductoRevista)base.Session[Enums.Session.ProductoRevista.ToString()]).ID_PRODUCTO;
-                oProducto.FECHA_ALTA = ((BLL.ProductoRevista)base.Session[Enums.Session.ProductoRevista.ToString()]).FECHA_ALTA;
-                oProducto.COD_ESTADO = ((BLL.ProductoRevista)base.Session[Enums.Session.ProductoRevista.ToString()]).COD_ESTADO;
-                oProducto.COD_TIPO_PRODUCTO = ((BLL.ProductoRevista)base.Session[Enums.Session.ProductoRevista.ToString()]).COD_TIPO_PRODUCTO;
-            }
-
-            oProducto.NOMBRE = txtNombre.Text;
-            oProducto.COD_PROVEEDOR = Convert.ToInt32(ddlProveedor.SelectedValue);
-            oProducto.COD_GENERO = Convert.ToInt32(ddlGenero.SelectedValue);
+                ID_PRODUCTO = ((BLL.ProductoRevista)base.Session[Enums.Session.ProductoRevista.ToString()]).ID_PRODUCTO,
+                FECHA_ALTA = ((BLL.ProductoRevista)base.Session[Enums.Session.ProductoRevista.ToString()]).FECHA_ALTA,
+                COD_ESTADO = ((BLL.ProductoRevista)base.Session[Enums.Session.ProductoRevista.ToString()]).COD_ESTADO,
+                COD_TIPO_PRODUCTO = ((BLL.ProductoRevista)base.Session[Enums.Session.ProductoRevista.ToString()]).COD_TIPO_PRODUCTO,
+                NOMBRE = txtNombre.Text,
+                COD_PROVEEDOR = Convert.ToInt32(ddlProveedor.SelectedValue),
+                COD_GENERO = Convert.ToInt32(ddlGenero.SelectedValue)
+            };
 
             if (!String.IsNullOrEmpty(txtDescripcion.Text))
                 oProducto.DESCRIPCION = txtDescripcion.Text;
@@ -109,8 +118,13 @@ namespace PL.AdminDashboard
 
         private BLL.DAL.Revista CargarRevistaDesdeControles()
         {
+            if (Session[Enums.Session.ProductoRevista.ToString()] == null)
+                return null;
+
             var oRevista = new BLL.DAL.Revista
             {
+                COD_PRODUCTO = ((BLL.ProductoRevista)base.Session[Enums.Session.ProductoRevista.ToString()]).ID_PRODUCTO,
+                ID_REVISTA = ((BLL.ProductoRevista)base.Session[Enums.Session.ProductoRevista.ToString()]).ID_REVISTA,
                 COD_PERIODICIDAD = Convert.ToInt32(ddlPeriodicidadRevista.SelectedValue),
                 PRECIO = Convert.ToDouble(txtPrecioRevista.Text)
             };
@@ -190,7 +204,7 @@ namespace PL.AdminDashboard
                 ddlDiaDeEntregaRevista.Items.Insert(0, new ListItem(String.Empty, String.Empty));
 
                 if (idDiaSemana.HasValue)
-                    ddlPeriodicidadRevista.SelectedValue = idDiaSemana.ToString();
+                    ddlDiaDeEntregaRevista.SelectedValue = idDiaSemana.ToString();
             }
             catch (Exception ex)
             {
@@ -225,7 +239,7 @@ namespace PL.AdminDashboard
                 Logger loLogger = LogManager.GetCurrentClassLogger();
                 loLogger.Error(ex);
             }
-        }        
+        }
 
         #endregion
     }
