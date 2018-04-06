@@ -28,14 +28,9 @@
         <AssociationConnector Association="MAGASYSModel.FK_Revista_DiaSemana" />
         <AssociationConnector Association="MAGASYSModel.FK_Revista_Periodicidad" />
         <AssociationConnector Association="MAGASYSModel.FK_RevistaEdicion_Revista" />
-        <EntityTypeShape EntityType="MAGASYSModel.Coleccion" Width="1.5" PointX="12" PointY="1.25" />
-        <AssociationConnector Association="MAGASYSModel.FK_Coleccion_DiaSemana" />
-        <AssociationConnector Association="MAGASYSModel.FK_Coleccion_Periodicidad" />
-        <AssociationConnector Association="MAGASYSModel.FK_ColeccionEntrega_Coleccion" />
         <EntityTypeShape EntityType="MAGASYSModel.TipoProducto" Width="1.5" PointX="4.5" PointY="4.375" />
         <EntityTypeShape EntityType="MAGASYSModel.EstadoProducto" Width="1.5" PointX="5.5" PointY="16.875" />
         <EntityTypeShape EntityType="MAGASYSModel.Producto" Width="1.5" PointX="7.75" PointY="9.375" />
-        <AssociationConnector Association="MAGASYSModel.FK_Coleccion_Producto" />
         <AssociationConnector Association="MAGASYSModel.FK_Producto_EstadoProducto" />
         <AssociationConnector Association="MAGASYSModel.FK_Producto_Genero" />
         <AssociationConnector Association="MAGASYSModel.FK_Libro_Producto" />
@@ -51,6 +46,11 @@
         <AssociationConnector Association="MAGASYSModel.FK_Suplemento_DiaSemana" />
         <AssociationConnector Association="MAGASYSModel.FK_Suplemento_Producto" />
         <AssociationConnector Association="MAGASYSModel.FK_SuplementoEdicion_Suplemento" />
+        <EntityTypeShape EntityType="MAGASYSModel.Coleccion" Width="1.5" PointX="15" PointY="1.875" />
+        <AssociationConnector Association="MAGASYSModel.FK_Coleccion_DiaSemana" />
+        <AssociationConnector Association="MAGASYSModel.FK_Coleccion_Periodicidad" />
+        <AssociationConnector Association="MAGASYSModel.FK_Coleccion_Producto" />
+        <AssociationConnector Association="MAGASYSModel.FK_ColeccionEntrega_Coleccion" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -26,9 +26,9 @@ public partial class DiaSemana
 
         this.Revistas = new HashSet<Revista>();
 
-        this.Coleccions = new HashSet<Coleccion>();
-
         this.Suplementoes = new HashSet<Suplemento>();
+
+        this.Coleccions = new HashSet<Coleccion>();
 
     }
 
@@ -49,11 +49,11 @@ public partial class DiaSemana
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<Coleccion> Coleccions { get; set; }
+    public virtual ICollection<Suplemento> Suplementoes { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<Suplemento> Suplementoes { get; set; }
+    public virtual ICollection<Coleccion> Coleccions { get; set; }
 
 }
 

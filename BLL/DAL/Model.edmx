@@ -19,7 +19,7 @@
           <Property Name="COD_PRODUCTO" Type="int" Nullable="false" />
           <Property Name="COD_PERIODICIDAD" Type="int" Nullable="false" />
           <Property Name="ID_DIA_SEMANA" Type="int" />
-          <Property Name="CANTIDAD_ENTREGAS" Type="int" />
+          <Property Name="CANTIDAD_ENTREGAS" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ColeccionEntrega">
           <Key>
@@ -681,26 +681,9 @@
             <End Role="Revista" EntitySet="Revistas" />
             <End Role="RevistaEdicion" EntitySet="RevistaEdicions" />
           </AssociationSet>
-          <EntitySet Name="Coleccions" EntityType="MAGASYSModel.Coleccion" />
-          <AssociationSet Name="FK_Coleccion_DiaSemana" Association="MAGASYSModel.FK_Coleccion_DiaSemana">
-            <End Role="DiaSemana" EntitySet="DiaSemanas" />
-            <End Role="Coleccion" EntitySet="Coleccions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Coleccion_Periodicidad" Association="MAGASYSModel.FK_Coleccion_Periodicidad">
-            <End Role="Periodicidad" EntitySet="Periodicidads" />
-            <End Role="Coleccion" EntitySet="Coleccions" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ColeccionEntrega_Coleccion" Association="MAGASYSModel.FK_ColeccionEntrega_Coleccion">
-            <End Role="Coleccion" EntitySet="Coleccions" />
-            <End Role="ColeccionEntrega" EntitySet="ColeccionEntregas" />
-          </AssociationSet>
           <EntitySet Name="TipoProductoes" EntityType="MAGASYSModel.TipoProducto" />
           <EntitySet Name="EstadoProductoes" EntityType="MAGASYSModel.EstadoProducto" />
           <EntitySet Name="Productoes" EntityType="MAGASYSModel.Producto" />
-          <AssociationSet Name="FK_Coleccion_Producto" Association="MAGASYSModel.FK_Coleccion_Producto">
-            <End Role="Producto" EntitySet="Productoes" />
-            <End Role="Coleccion" EntitySet="Coleccions" />
-          </AssociationSet>
           <AssociationSet Name="FK_Producto_EstadoProducto" Association="MAGASYSModel.FK_Producto_EstadoProducto">
             <End Role="EstadoProducto" EntitySet="EstadoProductoes" />
             <End Role="Producto" EntitySet="Productoes" />
@@ -755,6 +738,23 @@
             <End Role="Suplemento" EntitySet="Suplementoes" />
             <End Role="SuplementoEdicion" EntitySet="SuplementoEdicions" />
           </AssociationSet>
+          <EntitySet Name="Coleccions" EntityType="MAGASYSModel.Coleccion" />
+          <AssociationSet Name="FK_Coleccion_DiaSemana" Association="MAGASYSModel.FK_Coleccion_DiaSemana">
+            <End Role="DiaSemana" EntitySet="DiaSemanas" />
+            <End Role="Coleccion" EntitySet="Coleccions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Coleccion_Periodicidad" Association="MAGASYSModel.FK_Coleccion_Periodicidad">
+            <End Role="Periodicidad" EntitySet="Periodicidads" />
+            <End Role="Coleccion" EntitySet="Coleccions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Coleccion_Producto" Association="MAGASYSModel.FK_Coleccion_Producto">
+            <End Role="Producto" EntitySet="Productoes" />
+            <End Role="Coleccion" EntitySet="Coleccions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ColeccionEntrega_Coleccion" Association="MAGASYSModel.FK_ColeccionEntrega_Coleccion">
+            <End Role="Coleccion" EntitySet="Coleccions" />
+            <End Role="ColeccionEntrega" EntitySet="ColeccionEntregas" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="ColeccionEntrega">
           <Key>
@@ -799,8 +799,8 @@
           <Property Name="NOMBRE" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="DiarioDiaSemanas" Relationship="MAGASYSModel.FK_DiarioDiaSemana_DiaSemana" FromRole="DiaSemana" ToRole="DiarioDiaSemana" />
           <NavigationProperty Name="Revistas" Relationship="MAGASYSModel.FK_Revista_DiaSemana" FromRole="DiaSemana" ToRole="Revista" />
-          <NavigationProperty Name="Coleccions" Relationship="MAGASYSModel.FK_Coleccion_DiaSemana" FromRole="DiaSemana" ToRole="Coleccion" />
           <NavigationProperty Name="Suplementoes" Relationship="MAGASYSModel.FK_Suplemento_DiaSemana" FromRole="DiaSemana" ToRole="Suplemento" />
+          <NavigationProperty Name="Coleccions" Relationship="MAGASYSModel.FK_Coleccion_DiaSemana" FromRole="DiaSemana" ToRole="Coleccion" />
         </EntityType>
         <EntityType Name="Genero">
           <Key>
@@ -1024,56 +1024,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Coleccion">
-          <Key>
-            <PropertyRef Name="ID_COLECCION" />
-          </Key>
-          <Property Name="ID_COLECCION" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="COD_PRODUCTO" Type="Int32" Nullable="false" />
-          <Property Name="COD_PERIODICIDAD" Type="Int32" Nullable="false" />
-          <Property Name="ID_DIA_SEMANA" Type="Int32" />
-          <Property Name="CANTIDAD_ENTREGAS" Type="Int32" />
-          <NavigationProperty Name="DiaSemana" Relationship="MAGASYSModel.FK_Coleccion_DiaSemana" FromRole="Coleccion" ToRole="DiaSemana" />
-          <NavigationProperty Name="Periodicidad" Relationship="MAGASYSModel.FK_Coleccion_Periodicidad" FromRole="Coleccion" ToRole="Periodicidad" />
-          <NavigationProperty Name="ColeccionEntregas" Relationship="MAGASYSModel.FK_ColeccionEntrega_Coleccion" FromRole="Coleccion" ToRole="ColeccionEntrega" />
-          <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_Coleccion_Producto" FromRole="Coleccion" ToRole="Producto" />
-        </EntityType>
-        <Association Name="FK_Coleccion_DiaSemana">
-          <End Type="MAGASYSModel.DiaSemana" Role="DiaSemana" Multiplicity="0..1" />
-          <End Type="MAGASYSModel.Coleccion" Role="Coleccion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DiaSemana">
-              <PropertyRef Name="ID_DIA_SEMANA" />
-            </Principal>
-            <Dependent Role="Coleccion">
-              <PropertyRef Name="ID_DIA_SEMANA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Coleccion_Periodicidad">
-          <End Type="MAGASYSModel.Periodicidad" Role="Periodicidad" Multiplicity="1" />
-          <End Type="MAGASYSModel.Coleccion" Role="Coleccion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Periodicidad">
-              <PropertyRef Name="ID_PERIODICIDAD" />
-            </Principal>
-            <Dependent Role="Coleccion">
-              <PropertyRef Name="COD_PERIODICIDAD" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ColeccionEntrega_Coleccion">
-          <End Type="MAGASYSModel.Coleccion" Role="Coleccion" Multiplicity="1" />
-          <End Type="MAGASYSModel.ColeccionEntrega" Role="ColeccionEntrega" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Coleccion">
-              <PropertyRef Name="ID_COLECCION" />
-            </Principal>
-            <Dependent Role="ColeccionEntrega">
-              <PropertyRef Name="COD_COLECCION" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="TipoProducto">
           <Key>
             <PropertyRef Name="ID_TIPO_PRODUCTO" />
@@ -1103,7 +1053,6 @@
           <Property Name="COD_PROVEEDOR" Type="Int32" Nullable="false" />
           <Property Name="COD_TIPO_PRODUCTO" Type="Int32" Nullable="false" />
           <Property Name="FECHA_BAJA" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Coleccions" Relationship="MAGASYSModel.FK_Coleccion_Producto" FromRole="Producto" ToRole="Coleccion" />
           <NavigationProperty Name="EstadoProducto" Relationship="MAGASYSModel.FK_Producto_EstadoProducto" FromRole="Producto" ToRole="EstadoProducto" />
           <NavigationProperty Name="Genero" Relationship="MAGASYSModel.FK_Producto_Genero" FromRole="Producto" ToRole="Genero" />
           <NavigationProperty Name="Libroes" Relationship="MAGASYSModel.FK_Libro_Producto" FromRole="Producto" ToRole="Libro" />
@@ -1113,19 +1062,8 @@
           <NavigationProperty Name="Revistas" Relationship="MAGASYSModel.FK_Revista_Producto" FromRole="Producto" ToRole="Revista" />
           <NavigationProperty Name="Diarios" Relationship="MAGASYSModel.FK_Diario_Producto" FromRole="Producto" ToRole="Diario" />
           <NavigationProperty Name="Suplementoes" Relationship="MAGASYSModel.FK_Suplemento_Producto" FromRole="Producto" ToRole="Suplemento" />
+          <NavigationProperty Name="Coleccions" Relationship="MAGASYSModel.FK_Coleccion_Producto" FromRole="Producto" ToRole="Coleccion" />
         </EntityType>
-        <Association Name="FK_Coleccion_Producto">
-          <End Type="MAGASYSModel.Producto" Role="Producto" Multiplicity="1" />
-          <End Type="MAGASYSModel.Coleccion" Role="Coleccion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Producto">
-              <PropertyRef Name="ID_PRODUCTO" />
-            </Principal>
-            <Dependent Role="Coleccion">
-              <PropertyRef Name="COD_PRODUCTO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Producto_EstadoProducto">
           <End Type="MAGASYSModel.EstadoProducto" Role="EstadoProducto" Multiplicity="1" />
           <End Type="MAGASYSModel.Producto" Role="Producto" Multiplicity="*" />
@@ -1307,6 +1245,68 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Coleccion">
+          <Key>
+            <PropertyRef Name="ID_COLECCION" />
+          </Key>
+          <Property Name="ID_COLECCION" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="COD_PRODUCTO" Type="Int32" Nullable="false" />
+          <Property Name="COD_PERIODICIDAD" Type="Int32" Nullable="false" />
+          <Property Name="ID_DIA_SEMANA" Type="Int32" />
+          <Property Name="CANTIDAD_ENTREGAS" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DiaSemana" Relationship="MAGASYSModel.FK_Coleccion_DiaSemana" FromRole="Coleccion" ToRole="DiaSemana" />
+          <NavigationProperty Name="Periodicidad" Relationship="MAGASYSModel.FK_Coleccion_Periodicidad" FromRole="Coleccion" ToRole="Periodicidad" />
+          <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_Coleccion_Producto" FromRole="Coleccion" ToRole="Producto" />
+          <NavigationProperty Name="ColeccionEntregas" Relationship="MAGASYSModel.FK_ColeccionEntrega_Coleccion" FromRole="Coleccion" ToRole="ColeccionEntrega" />
+        </EntityType>
+        <Association Name="FK_Coleccion_DiaSemana">
+          <End Type="MAGASYSModel.DiaSemana" Role="DiaSemana" Multiplicity="0..1" />
+          <End Type="MAGASYSModel.Coleccion" Role="Coleccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DiaSemana">
+              <PropertyRef Name="ID_DIA_SEMANA" />
+            </Principal>
+            <Dependent Role="Coleccion">
+              <PropertyRef Name="ID_DIA_SEMANA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Coleccion_Periodicidad">
+          <End Type="MAGASYSModel.Periodicidad" Role="Periodicidad" Multiplicity="1" />
+          <End Type="MAGASYSModel.Coleccion" Role="Coleccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Periodicidad">
+              <PropertyRef Name="ID_PERIODICIDAD" />
+            </Principal>
+            <Dependent Role="Coleccion">
+              <PropertyRef Name="COD_PERIODICIDAD" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Coleccion_Producto">
+          <End Type="MAGASYSModel.Producto" Role="Producto" Multiplicity="1" />
+          <End Type="MAGASYSModel.Coleccion" Role="Coleccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="ID_PRODUCTO" />
+            </Principal>
+            <Dependent Role="Coleccion">
+              <PropertyRef Name="COD_PRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ColeccionEntrega_Coleccion">
+          <End Type="MAGASYSModel.Coleccion" Role="Coleccion" Multiplicity="1" />
+          <End Type="MAGASYSModel.ColeccionEntrega" Role="ColeccionEntrega" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coleccion">
+              <PropertyRef Name="ID_COLECCION" />
+            </Principal>
+            <Dependent Role="ColeccionEntrega">
+              <PropertyRef Name="COD_COLECCION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1473,17 +1473,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Coleccions">
-            <EntityTypeMapping TypeName="MAGASYSModel.Coleccion">
-              <MappingFragment StoreEntitySet="Coleccion">
-                <ScalarProperty Name="CANTIDAD_ENTREGAS" ColumnName="CANTIDAD_ENTREGAS" />
-                <ScalarProperty Name="ID_DIA_SEMANA" ColumnName="ID_DIA_SEMANA" />
-                <ScalarProperty Name="COD_PERIODICIDAD" ColumnName="COD_PERIODICIDAD" />
-                <ScalarProperty Name="COD_PRODUCTO" ColumnName="COD_PRODUCTO" />
-                <ScalarProperty Name="ID_COLECCION" ColumnName="ID_COLECCION" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TipoProductoes">
             <EntityTypeMapping TypeName="MAGASYSModel.TipoProducto">
               <MappingFragment StoreEntitySet="TipoProducto">
@@ -1532,6 +1521,17 @@
                 <ScalarProperty Name="ID_DIA_SEMANA" ColumnName="ID_DIA_SEMANA" />
                 <ScalarProperty Name="COD_PRODUCTO" ColumnName="COD_PRODUCTO" />
                 <ScalarProperty Name="ID_SUPLEMENTO" ColumnName="ID_SUPLEMENTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Coleccions">
+            <EntityTypeMapping TypeName="MAGASYSModel.Coleccion">
+              <MappingFragment StoreEntitySet="Coleccion">
+                <ScalarProperty Name="CANTIDAD_ENTREGAS" ColumnName="CANTIDAD_ENTREGAS" />
+                <ScalarProperty Name="ID_DIA_SEMANA" ColumnName="ID_DIA_SEMANA" />
+                <ScalarProperty Name="COD_PERIODICIDAD" ColumnName="COD_PERIODICIDAD" />
+                <ScalarProperty Name="COD_PRODUCTO" ColumnName="COD_PRODUCTO" />
+                <ScalarProperty Name="ID_COLECCION" ColumnName="ID_COLECCION" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

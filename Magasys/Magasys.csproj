@@ -117,6 +117,8 @@
     <Content Include="AdminDashboard\js\plugins\sweetalert\sweetalert.min.js" />
     <Content Include="AdminDashboard\js\plugins\validate\jquery.validate.js" />
     <Content Include="AdminDashboard\MasterPage.Master" />
+    <Content Include="AdminDashboard\ProductoColeccionEditar.aspx" />
+    <Content Include="AdminDashboard\ProductoColeccionVisualizar.aspx" />
     <Content Include="AdminDashboard\ProductoDiarioEditar.aspx" />
     <Content Include="AdminDashboard\ProductoDiarioVisualizar.aspx" />
     <Content Include="AdminDashboard\ProductoListado.aspx" />
@@ -204,6 +206,20 @@
     </Compile>
     <Compile Include="AdminDashboard\Producto.aspx.designer.cs">
       <DependentUpon>Producto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\ProductoColeccionEditar.aspx.cs">
+      <DependentUpon>ProductoColeccionEditar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\ProductoColeccionEditar.aspx.designer.cs">
+      <DependentUpon>ProductoColeccionEditar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\ProductoColeccionVisualizar.aspx.cs">
+      <DependentUpon>ProductoColeccionVisualizar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\ProductoColeccionVisualizar.aspx.designer.cs">
+      <DependentUpon>ProductoColeccionVisualizar.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminDashboard\ProductoDiarioEditar.aspx.cs">
       <DependentUpon>ProductoDiarioEditar.aspx</DependentUpon>

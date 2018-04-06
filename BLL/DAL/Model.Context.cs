@@ -62,8 +62,6 @@ public partial class MAGASYSEntities : DbContext
 
     public virtual DbSet<Revista> Revistas { get; set; }
 
-    public virtual DbSet<Coleccion> Coleccions { get; set; }
-
     public virtual DbSet<TipoProducto> TipoProductoes { get; set; }
 
     public virtual DbSet<EstadoProducto> EstadoProductoes { get; set; }
@@ -73,6 +71,8 @@ public partial class MAGASYSEntities : DbContext
     public virtual DbSet<Diario> Diarios { get; set; }
 
     public virtual DbSet<Suplemento> Suplementoes { get; set; }
+
+    public virtual DbSet<Coleccion> Coleccions { get; set; }
 
 }
 

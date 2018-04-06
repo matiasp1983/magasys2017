@@ -22,8 +22,6 @@ public partial class Producto
     public Producto()
     {
 
-        this.Coleccions = new HashSet<Coleccion>();
-
         this.Libroes = new HashSet<Libro>();
 
         this.Peliculas = new HashSet<Pelicula>();
@@ -33,6 +31,8 @@ public partial class Producto
         this.Diarios = new HashSet<Diario>();
 
         this.Suplementoes = new HashSet<Suplemento>();
+
+        this.Coleccions = new HashSet<Coleccion>();
 
     }
 
@@ -56,10 +56,6 @@ public partial class Producto
     public Nullable<System.DateTime> FECHA_BAJA { get; set; }
 
 
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<Coleccion> Coleccions { get; set; }
 
     public virtual EstadoProducto EstadoProducto { get; set; }
 
@@ -88,6 +84,10 @@ public partial class Producto
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Suplemento> Suplementoes { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<Coleccion> Coleccions { get; set; }
 
 }
 
