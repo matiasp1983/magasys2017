@@ -125,7 +125,16 @@ namespace PL.AdminDashboard
 
         private static bool ValidaCuit(string cuit)
         {
+            //Validar que el CUIT sea numérico
+            Int64 locuit = 0;
+            if (!Int64.TryParse(cuit, out locuit)) return false;
+
+            //Validar que el CUIT sea positivo
             if (long.Parse(cuit) <= 0) return false;
+
+            //Validar que el CUIT conste de 11 cifras
+            if (cuit.Length != 11) return false;
+
             var loDigitoCalcu = Utilities.CalcularDigitoCuit(cuit);
             var loParseSubStr = int.Parse(cuit.Substring(10));
             return loDigitoCalcu == loParseSubStr;
@@ -137,41 +146,40 @@ namespace PL.AdminDashboard
             {
                 dvMensajeCuit.InnerHtml = MessageManager.Warning(dvMensajeCuit, Message.MsjeCuitProveedorVacio);
                 dvMensajeCuit.Visible = true;
+                return;
             }
-            else
-            {
-                try
-                {
-                    if (ValidaCuit(txtCuitAlta.Text))
-                    {
-                        bool esNuevoCuit = new BLL.ProveedorBLL().ConsultarExistenciaCuit(txtCuitAlta.Text);
 
-                        if (esNuevoCuit)
+            try
+            {
+                if (ValidaCuit(txtCuitAlta.Text))
+                {
+                    bool esNuevoCuit = new BLL.ProveedorBLL().ConsultarExistenciaCuit(txtCuitAlta.Text);
+
+                    if (esNuevoCuit)
+                    {
+                        var oProveedor = new BLL.DAL.Proveedor
                         {
-                            var oProveedor = new BLL.DAL.Proveedor
-                            {
-                                CUIT = txtCuitAlta.Text
-                            };
-                            Session.Add(Enums.Session.Proveedor.ToString(), oProveedor);
-                            Response.Redirect("Proveedor.aspx", false);
-                        }
-                        else
-                        {
-                            dvMensajeCuit.InnerHtml = MessageManager.Info(dvMensajeCuit, Message.MsjeCuitProveedorExist);
-                            dvMensajeCuit.Visible = true;
-                        }
+                            CUIT = txtCuitAlta.Text
+                        };
+                        Session.Add(Enums.Session.Proveedor.ToString(), oProveedor);
+                        Response.Redirect("Proveedor.aspx", false);
                     }
                     else
                     {
-                        dvMensajeCuit.InnerHtml = MessageManager.Warning(dvMensajeCuit, Message.MsjeCuitProveedorFailure);
+                        dvMensajeCuit.InnerHtml = MessageManager.Info(dvMensajeCuit, Message.MsjeCuitProveedorExist);
                         dvMensajeCuit.Visible = true;
                     }
                 }
-                catch (Exception ex)
+                else
                 {
-                    Logger loLogger = LogManager.GetCurrentClassLogger();
-                    loLogger.Error(ex);
+                    dvMensajeCuit.InnerHtml = MessageManager.Warning(dvMensajeCuit, Message.MsjeCuitProveedorFailure);
+                    dvMensajeCuit.Visible = true;
                 }
+            }
+            catch (Exception ex)
+            {
+                Logger loLogger = LogManager.GetCurrentClassLogger();
+                loLogger.Error(ex);
             }
         }
 
