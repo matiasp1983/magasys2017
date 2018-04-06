@@ -24,6 +24,8 @@
             <asp:Button ID="Button11" runat="server" Text="Diario 64 Visualizar" OnClick="Button11_Click" />
             <asp:Button ID="Button2" runat="server" Text="Revista 22 Editar" OnClick="Button2_Click" />
             <asp:Button ID="Button22" runat="server" Text="Revista 22 Visualizar" OnClick="Button22_Click" />
+            <asp:Button ID="Button3" runat="server" Text="Colección 27 Editar" OnClick="Button3_Click" />
+            <asp:Button ID="Button33" runat="server" Text="Colección 27 Visualizar" OnClick="Button33_Click" />
         </form>
     </div>
 </asp:Content>

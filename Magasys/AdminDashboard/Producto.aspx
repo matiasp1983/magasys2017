@@ -461,7 +461,7 @@
                          required: true,
                          number: true,
                          digits: true,
-                         min: 0                         
+                         min: 1                         
                      },
                      <%=txtAutorLibro.UniqueID%>: {
                          required: true,

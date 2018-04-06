@@ -340,10 +340,7 @@ namespace PL.AdminDashboard
             else
                 oColeccion.ID_DIA_SEMANA = null;
 
-            if (!String.IsNullOrEmpty(txtCantidadDeEntregaColeccion.Text))
-                oColeccion.CANTIDAD_ENTREGAS = Convert.ToInt32(txtCantidadDeEntregaColeccion.Text);
-            else
-                oColeccion.CANTIDAD_ENTREGAS = null;
+            oColeccion.CANTIDAD_ENTREGAS = Convert.ToInt32(txtCantidadDeEntregaColeccion.Text);
 
             return oColeccion;
         }

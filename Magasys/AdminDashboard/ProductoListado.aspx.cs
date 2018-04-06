@@ -6,14 +6,14 @@ namespace PL.AdminDashboard
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         protected void Button1_Click(object sender, EventArgs e)
         {
             /*Prueba con Producto Diario Editar*/
             Session[BLL.Common.Enums.Session.ProductoDiario.ToString()] = new BLL.DiarioBLL().ObtenerDiario(64);
-            Response.Redirect("ProductoDiarioEditar.aspx", false);            
+            Response.Redirect("ProductoDiarioEditar.aspx", false);
         }
 
         protected void Button11_Click(object sender, EventArgs e)
@@ -28,13 +28,27 @@ namespace PL.AdminDashboard
             /*Prueba con Producto Revista Editar*/
             Session[BLL.Common.Enums.Session.ProductoRevista.ToString()] = new BLL.RevistaBLL().ObtenerRevista(22);
             Response.Redirect("ProductoRevistaEditar.aspx", false);
-        }        
+        }
 
         protected void Button22_Click(object sender, EventArgs e)
         {
             /*Prueba con Producto Revista Visualizar*/
             Session[BLL.Common.Enums.Session.ProductoRevista.ToString()] = new BLL.RevistaBLL().ObtenerRevista(22);
             Response.Redirect("ProductoRevistaVisualizar.aspx", false);
+        }
+
+        protected void Button3_Click(object sender, EventArgs e)
+        {
+            /*Prueba con Producto Colección Editar*/
+            Session[BLL.Common.Enums.Session.ProductoColeccion.ToString()] = new BLL.ColeccionBLL().ObtenerColeccion(27);
+            Response.Redirect("ProductoColeccionEditar.aspx", false);
+        }
+
+        protected void Button33_Click(object sender, EventArgs e)
+        {
+            /*Prueba con Producto Colección Visualizar*/
+            Session[BLL.Common.Enums.Session.ProductoColeccion.ToString()] = new BLL.ColeccionBLL().ObtenerColeccion(27);
+            Response.Redirect("ProductoColeccionVisualizar.aspx", false);
         }
     }
 }
