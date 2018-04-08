@@ -362,18 +362,11 @@ namespace PL.AdminDashboard
         {
             var oSuplemento = new BLL.DAL.Suplemento
             {
-                COD_DIARIO = Convert.ToInt32(ddlDiarioSuplemento.SelectedValue)
+                ID_DIA_SEMANA = Convert.ToInt32(ddlDiaDeEntregaSuplemento.SelectedValue),
+                COD_DIARIO = Convert.ToInt32(ddlDiarioSuplemento.SelectedValue),
+                PRECIO = Convert.ToDouble(txtPrecioSuplemento.Text),
+                CANTIDAD_ENTREGAS = Convert.ToInt32(txtCantidadDeEntregaSuplemento.Text)
             };
-
-            if (!String.IsNullOrEmpty(txtCantidadDeEntregaSuplemento.Text))
-                oSuplemento.CANTIDAD_ENTREGAS = Convert.ToInt32(txtCantidadDeEntregaSuplemento.Text);
-            else
-                oSuplemento.CANTIDAD_ENTREGAS = null;
-
-            if (!String.IsNullOrEmpty(txtPrecioSuplemento.Text))
-                oSuplemento.PRECIO = Convert.ToDouble(txtPrecioSuplemento.Text);
-            else
-                oSuplemento.PRECIO = null;
 
             return oSuplemento;
         }
