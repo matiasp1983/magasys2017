@@ -351,13 +351,9 @@ namespace PL.AdminDashboard
             {
                 EDITORIAL = txtEditorialLibro.Text,
                 AUTOR = txtAutorLibro.Text,
-                PRECIO = Convert.ToDouble(txtPrecioLibro.Text)
+                PRECIO = Convert.ToDouble(txtPrecioLibro.Text),
+                ANIO = Convert.ToInt32(ddlAnioEdicionLibro.SelectedValue)
             };
-
-            if (!String.IsNullOrEmpty(ddlAnioEdicionLibro.SelectedValue))
-                oLibro.ANIO = Convert.ToInt32(ddlAnioEdicionLibro.SelectedValue);
-            else
-                oLibro.ANIO = null;
 
             return oLibro;
         }
