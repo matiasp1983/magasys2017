@@ -74,6 +74,8 @@ public partial class MAGASYSEntities : DbContext
 
     public virtual DbSet<Coleccion> Coleccions { get; set; }
 
+    public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+
 }
 
 }

@@ -50,5 +50,19 @@ namespace PL.AdminDashboard
             Session[BLL.Common.Enums.Session.ProductoColeccion.ToString()] = new BLL.ColeccionBLL().ObtenerColeccion(27);
             Response.Redirect("ProductoColeccionVisualizar.aspx", false);
         }
+
+        protected void Button4_Click(object sender, EventArgs e)
+        {
+            /*Prueba con Producto Libro Editar*/
+            Session[BLL.Common.Enums.Session.ProductoLibro.ToString()] = new BLL.LibroBLL().ObtenerLibro(73);
+            Response.Redirect("ProductoLibroEditar.aspx", false);
+        }
+
+        protected void Button44_Click(object sender, EventArgs e)
+        {
+            /*Prueba con Producto Colección Visualizar*/
+            Session[BLL.Common.Enums.Session.ProductoLibro.ToString()] = new BLL.LibroBLL().ObtenerLibro(73);
+            Response.Redirect("ProductoLibroVisualizar.aspx", false);
+        }
     }
 }

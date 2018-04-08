@@ -15,24 +15,18 @@ namespace BLL.DAL
 using System;
     using System.Collections.Generic;
     
-public partial class Libro
+public partial class sysdiagram
 {
 
-    public int ID_LIBRO { get; set; }
+    public string name { get; set; }
 
-    public int COD_PRODUCTO { get; set; }
+    public int principal_id { get; set; }
 
-    public string EDITORIAL { get; set; }
+    public int diagram_id { get; set; }
 
-    public string AUTOR { get; set; }
+    public Nullable<int> version { get; set; }
 
-    public int ANIO { get; set; }
-
-    public double PRECIO { get; set; }
-
-
-
-    public virtual Producto Producto { get; set; }
+    public byte[] definition { get; set; }
 
 }
 

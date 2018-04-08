@@ -51,6 +51,7 @@
         <AssociationConnector Association="MAGASYSModel.FK_Coleccion_Periodicidad" />
         <AssociationConnector Association="MAGASYSModel.FK_Coleccion_Producto" />
         <AssociationConnector Association="MAGASYSModel.FK_ColeccionEntrega_Coleccion" />
+        <EntityTypeShape EntityType="MAGASYSModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
