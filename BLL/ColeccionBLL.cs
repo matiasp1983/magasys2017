@@ -37,7 +37,7 @@ namespace BLL
                             ID_COLECCION = oColeccion.ID_COLECCION,
                             COD_PERIODICIDAD = oColeccion.COD_PERIODICIDAD,
                             ID_DIA_SEMANA = oColeccion.ID_DIA_SEMANA,
-                            CANTIDAD_DE_ENTREGAS = oColeccion.CANTIDAD_ENTREGAS,
+                            CANTIDAD_DE_ENTREGAS = oColeccion.CANTIDAD_ENTREGAS
                         };
                     }
                 }
