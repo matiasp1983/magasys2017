@@ -178,6 +178,7 @@
                      <%=txtCantidadDeEntregaColeccion.UniqueID%>: {
                          required: true,
                          number: true,
+                         digits: true,
                          min: 1
                      }
                 },
@@ -197,7 +198,8 @@
                      <%=txtCantidadDeEntregaColeccion.UniqueID%>: {
                          required: "Este campo es requerido.",
                          number: "Ingrese un número válido.",
-                         min: "Ingrese un valor mayor a 0."
+                         digits: "Ingrese solo dígitos.",
+                         min: "Ingrese un valor mayor o igual a 0."
                      }
                 }
             });
@@ -214,6 +216,20 @@
             $(".select2_genero").select2(
             {
                     placeholder: 'Seleccione un Género',
+                    width: '100%',
+                    allowClear: true
+            });
+
+            $(".select2_diadeentregacoleccion").select2(
+            {
+                    placeholder: 'Seleccione un Día de Entrega',
+                    width: '100%',
+                    allowClear: true
+            });
+
+            $(".select2_periodicidadcoleccion").select2(
+            {
+                    placeholder: 'Seleccione una Periodicidad',
                     width: '100%',
                     allowClear: true
             });

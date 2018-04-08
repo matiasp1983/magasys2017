@@ -121,6 +121,7 @@
     <Content Include="AdminDashboard\ProductoColeccionVisualizar.aspx" />
     <Content Include="AdminDashboard\ProductoDiarioEditar.aspx" />
     <Content Include="AdminDashboard\ProductoDiarioVisualizar.aspx" />
+    <Content Include="AdminDashboard\ProductoLibroEditar.aspx" />
     <Content Include="AdminDashboard\ProductoListado.aspx" />
     <Content Include="AdminDashboard\ProductoRevistaEditar.aspx" />
     <Content Include="AdminDashboard\ProductoRevistaVisualizar.aspx" />
@@ -234,6 +235,13 @@
     </Compile>
     <Compile Include="AdminDashboard\ProductoDiarioVisualizar.aspx.designer.cs">
       <DependentUpon>ProductoDiarioVisualizar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\ProductoLibroEditar.aspx.cs">
+      <DependentUpon>ProductoLibroEditar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\ProductoLibroEditar.aspx.designer.cs">
+      <DependentUpon>ProductoLibroEditar.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminDashboard\ProductoListado.aspx.cs">
       <DependentUpon>ProductoListado.aspx</DependentUpon>

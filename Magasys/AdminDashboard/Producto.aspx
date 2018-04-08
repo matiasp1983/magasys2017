@@ -452,7 +452,7 @@
                      <%=txtPrecioRevista.UniqueID%>: {
                          required: true,
                          number: true,
-                         min: 0
+                         min: 1
                      },
                      <%=ddlPeriodicidadColeccion.UniqueID%>: {
                          required: true
@@ -481,7 +481,7 @@
                      <%=txtPrecioLibro.UniqueID%>: {
                          required: true,
                          number: true,
-                         min: 0
+                         min: 1
                      },
                      <%=ddlDiarioSuplemento.UniqueID%>: {
                          required: true
@@ -550,7 +550,7 @@
                      <%=txtPrecioRevista.UniqueID%>: {
                          required: "Este campo es requerido.",
                          number: "Ingrese un número válido.",
-                         min: "Ingrese un valor mayor o igual a 0."
+                         min: "Ingrese un valor mayor a 0."
                      },
                      <%=ddlPeriodicidadColeccion.UniqueID%>: {
                          required: "Este campo es requerido."
@@ -573,7 +573,7 @@
                      <%=txtPrecioLibro.UniqueID%>: {
                          required: "Este campo es requerido.",
                          number: "Ingrese un número válido.",
-                         min: "Ingrese un valor mayor o igual a 0."
+                         min: "Ingrese un valor mayor a 0."
                      },
                      <%=ddlDiarioSuplemento.UniqueID%>: {
                          required: "Este campo es requerido."
