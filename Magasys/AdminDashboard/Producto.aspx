@@ -489,13 +489,13 @@
                      <%=txtPrecioSuplemento.UniqueID%>: {
                          required: true,
                          number: true,
-                         min: 0
+                         min: 1
                      },
                      <%=txtCantidadDeEntregaSuplemento.UniqueID%>: {
                          required: true,
                          number: true,
                          digits: true,
-                         min: 0
+                         min: 1
                      },
                      <%=ddlAnioDeEstrenoPelicula.UniqueID%>: {
                          required: true
@@ -581,13 +581,13 @@
                      <%=txtPrecioSuplemento.UniqueID%>: {
                          required: "Este campo es requerido.",
                          number: "Ingrese un número válido.",
-                         min: "Ingrese un valor mayor o igual a 0."
+                         min: "Ingrese un valor mayor a 0."
                      },
                      <%=txtCantidadDeEntregaSuplemento.UniqueID%>: {
                          required: "Este campo es requerido.",
                          number: "Ingrese un número válido.",
                          digits: "Ingrese solo dígitos.",
-                         min: "Ingrese un valor mayor o igual a 0."
+                         min: "Ingrese un valor mayor a 0."
                      },
                      <%=ddlAnioDeEstrenoPelicula.UniqueID%>: {
                          required: "Este campo es requerido."
