@@ -503,7 +503,7 @@
                      <%=txtPrecioPelicula.UniqueID%>: {
                          required: true,
                          number: true,
-                         min: 0
+                         min: 1
                      }
                 },
         messages: {
@@ -595,7 +595,7 @@
                      <%=txtPrecioPelicula.UniqueID%>: {
                          required: "Este campo es requerido.",
                          number: "Ingrese un número válido.",
-                         min: "Ingrese un valor mayor o igual a 0."
+                         min: "Ingrese un valor mayor a 0."
                      }
                 }
             });
