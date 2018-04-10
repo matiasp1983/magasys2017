@@ -126,6 +126,8 @@
     <Content Include="AdminDashboard\ProductoListado.aspx" />
     <Content Include="AdminDashboard\ProductoRevistaEditar.aspx" />
     <Content Include="AdminDashboard\ProductoRevistaVisualizar.aspx" />
+    <Content Include="AdminDashboard\ProductoSuplementoEditar.aspx" />
+    <Content Include="AdminDashboard\ProductoSuplementoVisualizar.aspx" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -271,6 +273,20 @@
     </Compile>
     <Compile Include="AdminDashboard\ProductoRevistaVisualizar.aspx.designer.cs">
       <DependentUpon>ProductoRevistaVisualizar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\ProductoSuplementoEditar.aspx.cs">
+      <DependentUpon>ProductoSuplementoEditar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\ProductoSuplementoEditar.aspx.designer.cs">
+      <DependentUpon>ProductoSuplementoEditar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\ProductoSuplementoVisualizar.aspx.cs">
+      <DependentUpon>ProductoSuplementoVisualizar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\ProductoSuplementoVisualizar.aspx.designer.cs">
+      <DependentUpon>ProductoSuplementoVisualizar.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminDashboard\Proveedor.aspx.cs">
       <DependentUpon>Proveedor.aspx</DependentUpon>

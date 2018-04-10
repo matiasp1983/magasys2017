@@ -33,9 +33,9 @@ public partial class Suplemento
 
     public Nullable<int> ID_DIA_SEMANA { get; set; }
 
-    public Nullable<int> CANTIDAD_ENTREGAS { get; set; }
+    public int CANTIDAD_ENTREGAS { get; set; }
 
-    public Nullable<double> PRECIO { get; set; }
+    public double PRECIO { get; set; }
 
     public int COD_DIARIO { get; set; }
 

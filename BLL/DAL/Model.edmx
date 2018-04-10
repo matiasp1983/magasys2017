@@ -185,8 +185,8 @@
           <Property Name="ID_SUPLEMENTO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="COD_PRODUCTO" Type="int" Nullable="false" />
           <Property Name="ID_DIA_SEMANA" Type="int" />
-          <Property Name="CANTIDAD_ENTREGAS" Type="int" />
-          <Property Name="PRECIO" Type="float" />
+          <Property Name="CANTIDAD_ENTREGAS" Type="int" Nullable="false" />
+          <Property Name="PRECIO" Type="float" Nullable="false" />
           <Property Name="COD_DIARIO" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="SuplementoEdicion">
@@ -1177,8 +1177,8 @@
           <Property Name="ID_SUPLEMENTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="COD_PRODUCTO" Type="Int32" Nullable="false" />
           <Property Name="ID_DIA_SEMANA" Type="Int32" />
-          <Property Name="CANTIDAD_ENTREGAS" Type="Int32" />
-          <Property Name="PRECIO" Type="Double" />
+          <Property Name="CANTIDAD_ENTREGAS" Type="Int32" Nullable="false" />
+          <Property Name="PRECIO" Type="Double" Nullable="false" />
           <Property Name="COD_DIARIO" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Diario" Relationship="MAGASYSModel.FK_Suplemento_Diario" FromRole="Suplemento" ToRole="Diario" />
           <NavigationProperty Name="DiaSemana" Relationship="MAGASYSModel.FK_Suplemento_DiaSemana" FromRole="Suplemento" ToRole="DiaSemana" />

@@ -94,6 +94,30 @@ namespace BLL
             return oProductoDiario;
         }
 
+        public ProductoDiario ObtenerDiarioPorIdDiario(int idDiario)
+        {
+            ProductoDiario oProductoDiario = null;
+            Diario oDiario = null;
+
+            try
+            {
+                using (var rep = new Repository<Diario>())
+                {
+                    oDiario = rep.Find(p => p.ID_DIARIO == idDiario);
+                }
+                if (oDiario != null)
+                {
+                    oProductoDiario = ObtenerDiario(oDiario.COD_PRODUCTO);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return oProductoDiario;
+        }
+
         public List<ProductoDiario> ObtenerDiarios()
         {
             List<Diario> lstDiarios = null;
