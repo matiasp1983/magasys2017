@@ -124,6 +124,8 @@
     <Content Include="AdminDashboard\ProductoLibroEditar.aspx" />
     <Content Include="AdminDashboard\ProductoLibroVisualizar.aspx" />
     <Content Include="AdminDashboard\ProductoListado.aspx" />
+    <Content Include="AdminDashboard\ProductoPeliculaEditar.aspx" />
+    <Content Include="AdminDashboard\ProductoPeliculaVisualizar.aspx" />
     <Content Include="AdminDashboard\ProductoRevistaEditar.aspx" />
     <Content Include="AdminDashboard\ProductoRevistaVisualizar.aspx" />
     <Content Include="AdminDashboard\ProductoSuplementoEditar.aspx" />
@@ -259,6 +261,20 @@
     </Compile>
     <Compile Include="AdminDashboard\ProductoListado.aspx.designer.cs">
       <DependentUpon>ProductoListado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\ProductoPeliculaEditar.aspx.cs">
+      <DependentUpon>ProductoPeliculaEditar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\ProductoPeliculaEditar.aspx.designer.cs">
+      <DependentUpon>ProductoPeliculaEditar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\ProductoPeliculaVisualizar.aspx.cs">
+      <DependentUpon>ProductoPeliculaVisualizar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\ProductoPeliculaVisualizar.aspx.designer.cs">
+      <DependentUpon>ProductoPeliculaVisualizar.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminDashboard\ProductoRevistaEditar.aspx.cs">
       <DependentUpon>ProductoRevistaEditar.aspx</DependentUpon>

@@ -29,7 +29,9 @@
             <asp:Button ID="Button4" runat="server" Text="Libro 73 Editar" OnClick="Button4_Click" />
             <asp:Button ID="Button44" runat="server" Text="Libro 73 Visualizar" OnClick="Button44_Click" />
             <asp:Button ID="Button5" runat="server" Text="Suplemento 74 Editar" OnClick="Button5_Click" />
-             <asp:Button ID="Button55" runat="server" Text="Suplemento 74 Visualizar" OnClick="Button55_Click" />
+            <asp:Button ID="Button55" runat="server" Text="Suplemento 74 Visualizar" OnClick="Button55_Click" />
+            <asp:Button ID="Button6" runat="server" Text="Película 76 Editar" OnClick="Button6_Click" />
+            <asp:Button ID="Button66" runat="server" Text="Película 76 Visualizar" OnClick="Button66_Click" />
         </form>
     </div>
 </asp:Content>

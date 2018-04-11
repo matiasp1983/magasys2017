@@ -74,9 +74,23 @@ namespace PL.AdminDashboard
 
         protected void Button55_Click(object sender, EventArgs e)
         {
-            /*Prueba con Producto Colección Visualizar*/
+            /*Prueba con Producto Suplemento Visualizar*/
             Session[BLL.Common.Enums.Session.ProductoSuplemento.ToString()] = new BLL.SuplementoBLL().ObtenerSuplemento(74);
             Response.Redirect("ProductoSuplementoVisualizar.aspx", false);
+        }
+
+        protected void Button6_Click(object sender, EventArgs e)
+        {
+            /*Prueba con Producto Película Editar*/
+            Session[BLL.Common.Enums.Session.ProductoPelicula.ToString()] = new BLL.PeliculaBLL().ObtenerPelicula(76);
+            Response.Redirect("ProductoPeliculaEditar.aspx", false);
+        }
+
+        protected void Button66_Click(object sender, EventArgs e)
+        {
+            /*Prueba con Producto Película Visualizar*/
+            Session[BLL.Common.Enums.Session.ProductoPelicula.ToString()] = new BLL.PeliculaBLL().ObtenerPelicula(76);
+            Response.Redirect("ProductoPeliculaVisualizar.aspx", false);
         }
     }
 }
