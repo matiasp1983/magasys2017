@@ -53,6 +53,7 @@ namespace PL.AdminDashboard
                 btnModificar.Attributes.Add("value", loIdProveedor);
 
                 HiddenField hdIdCuitProveedorBaja = ((HiddenField)e.Item.FindControl("hdIdCuitProveedorBaja"));
+                // Se concatena el IdProveedor y el CUIT:
                 hdIdCuitProveedorBaja.Value = string.Format("{0},{1}", loIdProveedor, loCuitProveedor);
             }
             catch (Exception ex)
