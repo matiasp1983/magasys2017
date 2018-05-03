@@ -142,12 +142,15 @@
     </Compile>
     <Compile Include="DiarioBLL.cs" />
     <Compile Include="DiaSemanaBLL.cs" />
+    <Compile Include="EstadoProductoBLL.cs" />
+    <Compile Include="Filters\ProductoFiltro.cs" />
     <Compile Include="Filters\ProveedorFiltro.cs" />
     <Compile Include="GeneroBLL.cs" />
     <Compile Include="LibroBLL.cs" />
     <Compile Include="LocalidadBLL.cs" />
     <Compile Include="PeliculaBLL.cs" />
     <Compile Include="PeriodicidadBLL .cs" />
+    <Compile Include="ProductoBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProveedorBLL.cs" />
     <Compile Include="ProvinciaBLL.cs" />
