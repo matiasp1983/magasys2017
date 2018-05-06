@@ -73,7 +73,7 @@
                             <div class="row">
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group">
-                                    <div class="col-sm-4 col-sm-offset-8">
+                                    <div class="col-sm-4 col-sm-offset-9">
                                         <button type="button" id="btnBuscar" runat="server" class="ladda-button btn btn-success" onserverclick="BtnBuscar_Click">
                                             <i class="fa fa-search"></i>&nbsp;&nbsp;<span>Buscar</span>
                                         </button>
@@ -185,9 +185,9 @@
     </script>--%>
     <script type="text/javascript">
         if (window.jQuery) {
-            $(document).ready(function () {
+            $(document).ready(function () {                
                 KeypressEnterDisabled();
-                LoadFootable();
+                LoadFootable();                
             });
         }
 
