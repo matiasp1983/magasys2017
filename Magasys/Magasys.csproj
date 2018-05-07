@@ -113,7 +113,6 @@
     <Content Include="AdminDashboard\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="AdminDashboard\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="AdminDashboard\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="AdminDashboard\Genero.aspx" />
     <Content Include="AdminDashboard\js\plugins\select2\select2.full.min.js" />
     <Content Include="AdminDashboard\js\plugins\sweetalert\sweetalert.min.js" />
     <Content Include="AdminDashboard\js\plugins\validate\jquery.validate.js" />
@@ -193,13 +192,6 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdminDashboard\Genero.aspx.cs">
-      <DependentUpon>Genero.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AdminDashboard\Genero.aspx.designer.cs">
-      <DependentUpon>Genero.aspx</DependentUpon>
-    </Compile>
     <Compile Include="AdminDashboard\Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
