@@ -130,6 +130,7 @@
     <Content Include="AdminDashboard\ProductoRevistaVisualizar.aspx" />
     <Content Include="AdminDashboard\ProductoSuplementoEditar.aspx" />
     <Content Include="AdminDashboard\ProductoSuplementoVisualizar.aspx" />
+    <Content Include="AdminDashboard\ProveedorEditar.aspx" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -310,6 +311,13 @@
     </Compile>
     <Compile Include="AdminDashboard\Proveedor.aspx.designer.cs">
       <DependentUpon>Proveedor.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\ProveedorEditar.aspx.cs">
+      <DependentUpon>ProveedorEditar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\ProveedorEditar.aspx.designer.cs">
+      <DependentUpon>ProveedorEditar.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminDashboard\ProveedorListado.aspx.cs">
       <DependentUpon>ProveedorListado.aspx</DependentUpon>

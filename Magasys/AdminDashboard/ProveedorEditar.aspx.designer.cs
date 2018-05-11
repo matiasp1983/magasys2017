@@ -10,16 +10,16 @@
 namespace PL.AdminDashboard {
     
     
-    public partial class Proveedor {
+    public partial class ProveedorEditar {
         
         /// <summary>
-        /// Control FormProveedor.
+        /// Control FormProveedorEditar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm FormProveedor;
+        protected global::System.Web.UI.HtmlControls.HtmlForm FormProveedorEditar;
         
         /// <summary>
         /// Control lblBreadcrumbActive.
@@ -29,6 +29,24 @@ namespace PL.AdminDashboard {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblBreadcrumbActive;
+        
+        /// <summary>
+        /// Control txtCodigo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCodigo;
+        
+        /// <summary>
+        /// Control txtFechaAlta.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFechaAlta;
         
         /// <summary>
         /// Control txtCuit.

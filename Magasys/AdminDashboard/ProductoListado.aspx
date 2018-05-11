@@ -73,7 +73,7 @@
                             <div class="row">
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group">
-                                    <div class="col-sm-4 col-sm-offset-9">
+                                    <div style="text-align: right; padding-right: 15px;">
                                         <button type="button" id="btnBuscar" runat="server" class="ladda-button btn btn-success" onserverclick="BtnBuscar_Click">
                                             <i class="fa fa-search"></i>&nbsp;&nbsp;<span>Buscar</span>
                                         </button>
@@ -91,6 +91,12 @@
                 <div class="col-lg-12">
                     <div class="ibox">
                         <div class="ibox-content">
+                            <div style="text-align: right;">
+                                <button type="button" id="btnNuevo" runat="server" class="ladda-button btn btn-info" onserverclick="BtnNuevo_Click">
+                                    <i class="fa fa-plus"></i>&nbsp;&nbsp;<span>Nuevo Producto</span>
+                                </button>
+                            </div>
+                            <br />
                             <asp:ListView ID="lsvProductos" runat="server" OnItemDataBound="LsvProductos_ItemDataBound">
                                 <LayoutTemplate>
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="5">

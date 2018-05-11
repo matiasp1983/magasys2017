@@ -43,12 +43,14 @@
                     <li id="liProveedores" runat="server">
                         <a href="#"><i class="fa fa-briefcase"></i><span class="nav-label">Proveedores</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
+                            <li id="li1" runat="server"><a href="Proveedor.aspx">Alta de Proveedor</a></li>
                             <li id="liProveedorListado" runat="server"><a href="ProveedorListado.aspx">Listado de Proveedores</a></li>                            
                         </ul>
                     </li>
                     <li id="liProductos" runat="server">
                         <a href="#"><i class="fa fa-newspaper-o"></i><span class="nav-label">Productos</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
+                            <li id="liAltaProducto" runat="server"><a href="Producto.aspx">Alta de Producto</a></li>
                             <li id="liProductoListado" runat="server"><a href="ProductoListado.aspx">Listado de Productos</a></li>                            
                         </ul>
                     </li>

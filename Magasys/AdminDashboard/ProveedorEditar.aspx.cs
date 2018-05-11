@@ -7,16 +7,14 @@ using System.Web.UI.WebControls;
 
 namespace PL.AdminDashboard
 {
-    public partial class Proveedor : System.Web.UI.Page
+    public partial class ProveedorEditar : System.Web.UI.Page
     {
         #region Eventos
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-            {
-                CargarProvincias();
-            }
+                CargarProveedorDesdeSession();
         }
 
         protected void BtnGuardar_Click(object sender, EventArgs e)
@@ -27,13 +25,12 @@ namespace PL.AdminDashboard
             {
                 if (oProveedor != null)
                 {
-                    var loResultado = new BLL.ProveedorBLL().AltaProveedor(oProveedor);
+                    oProveedor.CUIT = oProveedor.CUIT.ToString().Replace("-", String.Empty).Trim();
 
-                    if (loResultado)
-                    {
-                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeProveedorSuccessAlta, "Alta Proveedor"));
-                        LimpiarCampos();
-                    }
+                    var loResutado = new BLL.ProveedorBLL().ModificarProveedor(oProveedor);
+
+                    if (loResutado)
+                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeProveedorSuccessModificacion, "Modificación Proveedor", "ProveedorListado.aspx"));
                     else
                         Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProveedorFailure));
                 }
@@ -49,10 +46,13 @@ namespace PL.AdminDashboard
                 Logger loLogger = LogManager.GetCurrentClassLogger();
                 loLogger.Error(ex);
             }
+
+            Session.Remove(Enums.Session.Proveedor.ToString());
         }
 
         protected void BtnCancelar_Click(object sender, EventArgs e)
-        {            
+        {
+            Session.Remove(Enums.Session.Proveedor.ToString());
             Response.Redirect("ProveedorListado.aspx", false);
         }
 
@@ -73,18 +73,62 @@ namespace PL.AdminDashboard
 
         #region Métodos Privados
 
+        private void CargarProveedorDesdeSession()
+        {
+            try
+            {
+                var oProveedor = new BLL.DAL.Proveedor();
+
+                if (Session[Enums.Session.Proveedor.ToString()] != null)
+                {
+                    oProveedor = (BLL.DAL.Proveedor)Session[Enums.Session.Proveedor.ToString()];
+                    if (oProveedor.ID_PROVEEDOR > 0)
+                        txtCodigo.Text = oProveedor.ID_PROVEEDOR.ToString();
+                    if (!String.IsNullOrEmpty(oProveedor.FECHA_ALTA.ToString()))
+                        txtFechaAlta.Text = oProveedor.FECHA_ALTA.ToString("dd/MM/yyyy");
+                    if (!String.IsNullOrEmpty(oProveedor.CUIT))
+                    {
+                        txtCuit.MaxLength = 13;
+                        txtCuit.Text = Convert.ToInt64(oProveedor.CUIT).ToString("##-########-#");
+                    }
+                    txtRazonSocial.Text = oProveedor.RAZON_SOCIAL;
+                    txtNombre.Text = oProveedor.NOMBRE.ToString();
+                    txtApellido.Text = oProveedor.APELLIDO.ToString();
+                    txtTelefonoMovil.Text = oProveedor.TELEFONO_MOVIL;
+                    txtTelefonoFijo.Text = oProveedor.TELEFONO_FIJO;
+                    txtEmail.Text = oProveedor.EMAIL;
+                    txtCalle.Text = oProveedor.CALLE;
+                    if (!String.IsNullOrEmpty(oProveedor.NUMERO.ToString()))
+                        txtNumero.Text = oProveedor.NUMERO.ToString();
+                    txtPiso.Text = oProveedor.PISO;
+                    txtDepartamento.Text = oProveedor.DEPARTAMENTO;
+                    txtBarrio.Text = oProveedor.BARRIO;
+                    txtCodigoPostal.Text = oProveedor.CODIGO_POSTAL;
+                    CargarProvincias(oProveedor.ID_PROVINCIA, oProveedor.ID_LOCALIDAD);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger loLogger = LogManager.GetCurrentClassLogger();
+                loLogger.Error(ex);
+            }
+        }
+
         private BLL.DAL.Proveedor CargarProveedorDesdeControles()
         {
-            var oProveedor = new BLL.DAL.Proveedor
+            var oProveedor = new BLL.DAL.Proveedor();
+
+            if (Session[Enums.Session.Proveedor.ToString()] != null)
             {
-                ID_PROVEEDOR = 0,
-                FECHA_ALTA = DateTime.Now,
-                CUIT = txtCuit.Text,
-                RAZON_SOCIAL = txtRazonSocial.Text,
-                NOMBRE = txtNombre.Text,
-                APELLIDO = txtApellido.Text,
-                TELEFONO_MOVIL = txtTelefonoMovil.Text
-            };
+                oProveedor.ID_PROVEEDOR = ((BLL.DAL.Proveedor)base.Session[Enums.Session.Proveedor.ToString()]).ID_PROVEEDOR;
+                oProveedor.FECHA_ALTA = ((BLL.DAL.Proveedor)base.Session[Enums.Session.Proveedor.ToString()]).FECHA_ALTA;
+            }
+
+            oProveedor.CUIT = txtCuit.Text;
+            oProveedor.RAZON_SOCIAL = txtRazonSocial.Text;
+            oProveedor.NOMBRE = txtNombre.Text;
+            oProveedor.APELLIDO = txtApellido.Text;
+            oProveedor.TELEFONO_MOVIL = txtTelefonoMovil.Text;
 
             if (!String.IsNullOrEmpty(txtTelefonoFijo.Text))
                 oProveedor.TELEFONO_FIJO = txtTelefonoFijo.Text;
@@ -117,7 +161,7 @@ namespace PL.AdminDashboard
             return oProveedor;
         }
 
-        private void CargarProvincias()
+        private void CargarProvincias(long idProvincia, long idLocalidad)
         {
             var oProvincia = new BLL.ProvinciaBLL();
 
@@ -128,7 +172,8 @@ namespace PL.AdminDashboard
                 ddlProvincia.DataValueField = "ID_PROVINCIA";
                 ddlProvincia.DataBind();
                 ddlProvincia.Items.Insert(0, new ListItem(String.Empty, String.Empty));
-                ddlProvincia.SelectedIndex = 0;
+                ddlProvincia.SelectedValue = idProvincia.ToString();
+                CargarLocalidades(idProvincia, idLocalidad);
             }
             catch (Exception ex)
             {
@@ -148,10 +193,7 @@ namespace PL.AdminDashboard
                 ddlLocalidad.DataValueField = "ID_LOCALIDAD";
                 ddlLocalidad.DataBind();
                 ddlLocalidad.Items.Insert(0, new ListItem(String.Empty, String.Empty));
-                if (idLocalidad == 0)
-                    ddlLocalidad.SelectedIndex = 0;
-                else
-                    ddlLocalidad.SelectedValue = idLocalidad.ToString();
+                ddlLocalidad.SelectedValue = idLocalidad.ToString();
             }
             catch (Exception ex)
             {
@@ -160,38 +202,10 @@ namespace PL.AdminDashboard
             }
         }
 
-        private static bool ValidaCuit(string cuit)
-        {
-            //Validar que el CUIT sea numérico
-            Int64 locuit = 0;
-            if (!Int64.TryParse(cuit, out locuit)) return false;
-
-            //Validar que el CUIT sea positivo
-            if (long.Parse(cuit) <= 0) return false;
-
-            //Validar que el CUIT conste de 11 cifras
-            if (cuit.Length != 11) return false;
-
-            var loDigitoCalcu = Utilities.CalcularDigitoCuit(cuit);
-            var loParseSubStr = int.Parse(cuit.Substring(10));
-            return loDigitoCalcu == loParseSubStr;
-        }
-
         private void LimpiarCampos()
         {
-            FormProveedor.Controls.OfType<TextBox>().ToList().ForEach(x => x.Text = String.Empty);
-            FormProveedor.Controls.OfType<DropDownList>().ToList().ForEach(y => y.SelectedIndex = 0);
-        }
-
-        [WebMethod]
-        public static bool ValidarCuitProveedor(string pCuit)
-        {
-            if (ValidaCuit(pCuit))
-            {
-               return new BLL.ProveedorBLL().ConsultarExistenciaCuit(pCuit);
-            }
-
-            return false;
+            FormProveedorEditar.Controls.OfType<TextBox>().ToList().ForEach(x => x.Text = String.Empty);
+            FormProveedorEditar.Controls.OfType<DropDownList>().ToList().ForEach(y => y.SelectedIndex = 0);
         }
 
         #endregion

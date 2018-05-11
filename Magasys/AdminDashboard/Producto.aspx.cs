@@ -105,13 +105,8 @@ namespace PL.AdminDashboard
         }
 
         protected void BtnCancelar_Click(object sender, EventArgs e)
-        {
+        {            
             Response.Redirect("ProductoListado.aspx", false);
-        }
-
-        protected void BtnLimpiar_Click(object sender, EventArgs e)
-        {
-            LimpiarCampos();
         }
 
         #endregion

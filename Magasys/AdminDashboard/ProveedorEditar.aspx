@@ -1,9 +1,9 @@
-﻿<%@ Page Title="Datos del Proveedor" Language="C#" MasterPageFile="~/AdminDashboard/MasterPage.Master" AutoEventWireup="true" CodeBehind="Proveedor.aspx.cs" Inherits="PL.AdminDashboard.Proveedor" %>
+﻿<%@ Page Title="Datos del ProveedorEditar" Language="C#" MasterPageFile="~/AdminDashboard/MasterPage.Master" AutoEventWireup="true" CodeBehind="ProveedorEditar.aspx.cs" Inherits="PL.AdminDashboard.ProveedorEditar" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="contentMaster" runat="server">
-    <form id="FormProveedor" runat="server" class="form-horizontal">
+    <form id="FormProveedorEditar" runat="server" class="form-horizontal">
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
                 <h2>Datos del Proveedor</h2>
@@ -14,7 +14,7 @@
                     </li>
                     <li class="active">
                         <strong>
-                            <asp:Label ID="lblBreadcrumbActive" runat="server" Text="Alta de Proveedor"></asp:Label>
+                            <asp:Label ID="lblBreadcrumbActive" runat="server" Text="Editar Proveedor"></asp:Label>
                         </strong>
                     </li>
                 </ol>
@@ -25,14 +25,34 @@
                 <div class="ibox-title">
                     <h2>Informaci&oacute;n General</h2>
                 </div>
-                <div class="ibox-content">                    
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Código</label>
+
+                                <div class="col-sm-10">
+                                    <asp:TextBox ID="txtCodigo" runat="server" CssClass="form-control" Enabled="false" autocomplete="off"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Fecha Alta</label>
+
+                                <div class="col-sm-10">
+                                    <asp:TextBox ID="txtFechaAlta" runat="server" CssClass="form-control" Enabled="false" autocomplete="off"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">CUIT</label>
 
                                 <div class="col-sm-10">
-                                    <asp:TextBox ID="txtCuit" runat="server" CssClass="form-control" MaxLength="11" autocomplete="off"></asp:TextBox>                                    
+                                    <asp:TextBox ID="txtCuit" runat="server" CssClass="form-control" Enabled="false" MaxLength="11" autocomplete="off"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
@@ -207,61 +227,40 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="script" runat="server">
     <script type="text/javascript">      
-        var FormProveedor = '#<%=FormProveedor.ClientID%>';
+        var FormProveedorEditar = '#<%=FormProveedorEditar.ClientID%>';
 
         if (window.jQuery) {
             $(document).ready(function () {
                 ValidarForm();
                 Select2();
             });
-        }   
+        }
 
         function ValidarForm() {
 
             jQuery.validator.addMethod("lettersonly", function (value, element) { return this.optional(element) || /^[a-zñÑáéíóúÁÉÍÓÚ\s]+$/i.test(value); }, "Este campo solo permite letras.");
 
-            $(FormProveedor).validate({
-                rules: {
-                     <%=txtCuit.UniqueID%>: {
-                        required: true,
-                        number: true,
-                        digits: true,
-                        minlength: 11,
-                        remote: function () {
-                            return {
-                                url: "Proveedor.aspx/ValidarCuitProveedor",
-                                type: "POST",
-                                data: JSON.stringify({ 'pCuit': $("#<%=txtCuit.ClientID%>").val() }),
-                                contentType: "application/json; charset=utf-8",
-                                dataType: "json",                               
-                                dataFilter: function (data, type) {
-                                    console.log(data);                                    
-                                    var msg = JSON.parse(data);
-                                    if (msg.hasOwnProperty('d'))
-                                    {
-                                      return msg.d;                                        
-                                    }
-                                    else
-                                    {
-                                      return msg;                                        
-                                    }
-                                }
-                            }
-                        }
-                    },
+            $(FormProveedorEditar).validate({
+                rules: {                     
                     <%=txtRazonSocial.UniqueID%>: {
-                        required: true,
-                        normalizer: function (value) { return $.trim(value); },
-                        lettersonly: true
-                    },
+                         required: true,
+                         normalizer: function (value) {
+                             return $.trim(value);
+                         },
+                         lettersonly: true
+                     },
                     <%=txtNombre.UniqueID%>: {
                         required: true,
-                        normalizer: function (value) { return $.trim(value); },
+                        normalizer: function (value) {
+                            return $.trim(value);
+                        },
                         lettersonly: true
                     },
                     <%=txtApellido.UniqueID%>: {
                         required: true,
-                        normalizer: function (value) { return $.trim(value); },
+                        normalizer: function (value) {
+                            return $.trim(value);
+                        },
                         lettersonly: true
                     },
                     <%=txtTelefonoMovil.UniqueID%>: {
@@ -276,11 +275,15 @@
                     <%=txtEmail.UniqueID%>: {
                         required: true,
                         email: true,
-                        normalizer: function (value) { return $.trim(value); }
+                        normalizer: function (value) {
+                            return $.trim(value);
+                        }
                     },
                     <%=txtCalle.UniqueID%>: {
                         required: true,
-                        normalizer: function (value) { return $.trim(value); }
+                        normalizer: function (value) {
+                            return $.trim(value);
+                        }
                     },
                     <%=txtNumero.UniqueID%>: {
                         required: true,
@@ -301,23 +304,18 @@
                     },
                     <%=txtBarrio.UniqueID%>: {
                         required: true,
-                        normalizer: function (value) { return $.trim(value); }
+                        normalizer: function (value) {
+                            return $.trim(value);
+                        }
                     },
                     <%=txtCodigoPostal.UniqueID%>: {
                         required: true,
                         digits: true
                     }                    
 				},
-        messages: {
-                    <%=txtCuit.UniqueID%>: {
-                       required: "Este campo es requerido.",
-                       number: "Ingrese un número válido.",
-                       digits: "Ingrese solo dígitos.",                        
-                       minlength: "Este campo debe ser de 11 dígitos.",
-                       remote: "El número de Cuit es incorrecto o ya se encuentra cargado."
-                    },
+        messages: {                    
                     <%=txtRazonSocial.UniqueID%>: {
-                       required: "Este campo es requerido."
+                        required: "Este campo es requerido."
                     },
                     <%=txtNombre.UniqueID%>: {
                         required: "Este campo es requerido."

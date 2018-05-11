@@ -17,7 +17,7 @@ namespace PL.AdminDashboard
             OcultarDivsMensajes();
 
             if (!Page.IsPostBack)
-            {
+            {                
                 CargarTiposProducto();
                 CargarEstadosProducto();
                 CargarProveedores();
@@ -58,6 +58,11 @@ namespace PL.AdminDashboard
                 Logger loLogger = LogManager.GetCurrentClassLogger();
                 loLogger.Error(ex);
             }
+        }
+
+        protected void BtnNuevo_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Producto.aspx", false);
         }
 
         protected void BtnVisualizar_Click(object sender, EventArgs e)

@@ -22,11 +22,6 @@ namespace PL.AdminDashboard
             }
         }
 
-        protected void BtnCrearProveedor_Click(object sender, EventArgs e)
-        {
-            AltaProveedor();
-        }
-
         protected void BtnBuscar_Click(object sender, EventArgs e)
         {
             CargarGrillaProveedores();
@@ -63,6 +58,11 @@ namespace PL.AdminDashboard
             }
         }
 
+        protected void BtnNuevo_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Proveedor.aspx", false);
+        }
+
         protected void BtnVisualizar_Click(object sender, EventArgs e)
         {
             try
@@ -84,7 +84,7 @@ namespace PL.AdminDashboard
             {
                 var oProveedor = new BLL.ProveedorBLL().ObtenerProveedor(Convert.ToInt64(((HtmlButton)sender).Attributes["value"]));
                 Session.Add(Enums.Session.Proveedor.ToString(), oProveedor);
-                Response.Redirect("Proveedor.aspx", false);
+                Response.Redirect("ProveedorEditar.aspx", false);
             }
             catch (Exception ex)
             {
@@ -120,96 +120,40 @@ namespace PL.AdminDashboard
 
         private void OcultarDivsMensajes()
         {
-            dvMensajeCuit.Visible = false;
             dvMensajeLsvProveedores.Visible = false;
-        }
-
-        private static bool ValidaCuit(string cuit)
-        {
-            //Validar que el CUIT sea numérico
-            Int64 locuit = 0;
-            if (!Int64.TryParse(cuit, out locuit)) return false;
-
-            //Validar que el CUIT sea positivo
-            if (long.Parse(cuit) <= 0) return false;
-
-            //Validar que el CUIT conste de 11 cifras
-            if (cuit.Length != 11) return false;
-
-            var loDigitoCalcu = Utilities.CalcularDigitoCuit(cuit);
-            var loParseSubStr = int.Parse(cuit.Substring(10));
-            return loDigitoCalcu == loParseSubStr;
-        }
-
-        private void AltaProveedor()
-        {
-            if (string.IsNullOrEmpty(txtCuitAlta.Text))
-            {
-                dvMensajeCuit.InnerHtml = MessageManager.Warning(dvMensajeCuit, Message.MsjeCuitProveedorVacio);
-                dvMensajeCuit.Visible = true;
-                return;
-            }
-
-            try
-            {
-                if (ValidaCuit(txtCuitAlta.Text))
-                {
-                    bool esNuevoCuit = new BLL.ProveedorBLL().ConsultarExistenciaCuit(txtCuitAlta.Text);
-
-                    if (esNuevoCuit)
-                    {
-                        var oProveedor = new BLL.DAL.Proveedor
-                        {
-                            CUIT = txtCuitAlta.Text
-                        };
-                        Session.Add(Enums.Session.Proveedor.ToString(), oProveedor);
-                        Response.Redirect("Proveedor.aspx", false);
-                    }
-                    else
-                    {
-                        dvMensajeCuit.InnerHtml = MessageManager.Info(dvMensajeCuit, Message.MsjeCuitProveedorExist);
-                        dvMensajeCuit.Visible = true;
-                    }
-                }
-                else
-                {
-                    dvMensajeCuit.InnerHtml = MessageManager.Warning(dvMensajeCuit, Message.MsjeCuitProveedorFailure);
-                    dvMensajeCuit.Visible = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger loLogger = LogManager.GetCurrentClassLogger();
-                loLogger.Error(ex);
-            }
         }
 
         private ProveedorFiltro CargarProveedorFiltro()
         {
-            var oProveedorFiltro = new ProveedorFiltro();
+            ProveedorFiltro oProveedorFiltro = null;
 
-            if (string.IsNullOrEmpty(txtCodigo.Text))
-                oProveedorFiltro.IdProveedor = 0;
-            else
+            if (!(!String.IsNullOrEmpty(txtFechaAltaDesde.Text) && !String.IsNullOrEmpty(txtFechaAltaHasta.Text) && (Convert.ToDateTime(txtFechaAltaDesde.Text) > Convert.ToDateTime(txtFechaAltaHasta.Text))))
             {
-                long loIdProveedor;
-                bool loResultado = long.TryParse(txtCodigo.Text, out loIdProveedor);
-                if (loResultado)
-                    oProveedorFiltro.IdProveedor = loIdProveedor;
+                oProveedorFiltro = new ProveedorFiltro();
+
+                if (string.IsNullOrEmpty(txtCodigo.Text))
+                    oProveedorFiltro.IdProveedor = 0;
                 else
-                    oProveedorFiltro.IdProveedor = -1;
+                {
+                    long loIdProveedor;
+                    bool loResultado = long.TryParse(txtCodigo.Text, out loIdProveedor);
+                    if (loResultado)
+                        oProveedorFiltro.IdProveedor = loIdProveedor;
+                    else
+                        oProveedorFiltro.IdProveedor = -1;
+                }
+                if (!String.IsNullOrEmpty(txtCuitBusqueda.Text))
+                    oProveedorFiltro.Cuit = txtCuitBusqueda.Text;
+
+                if (!String.IsNullOrEmpty(txtFechaAltaDesde.Text))
+                    oProveedorFiltro.FechaAltaDesde = Convert.ToDateTime(txtFechaAltaDesde.Text);
+
+                if (!String.IsNullOrEmpty(txtFechaAltaHasta.Text))
+                    oProveedorFiltro.FechaAltaHasta = Convert.ToDateTime(txtFechaAltaHasta.Text);
+
+                if (!String.IsNullOrEmpty(txtRazonSocial.Text))
+                    oProveedorFiltro.RazonSocial = txtRazonSocial.Text;
             }
-            if (!String.IsNullOrEmpty(txtCuitBusqueda.Text))
-                oProveedorFiltro.Cuit = txtCuitBusqueda.Text;
-
-            if (!String.IsNullOrEmpty(txtFechaAltaDesde.Text))
-                oProveedorFiltro.FechaAltaDesde = Convert.ToDateTime(txtFechaAltaDesde.Text);
-
-            if (!String.IsNullOrEmpty(txtFechaAltaHasta.Text))
-                oProveedorFiltro.FechaAltaHasta = Convert.ToDateTime(txtFechaAltaHasta.Text);
-
-            if (!String.IsNullOrEmpty(txtRazonSocial.Text))
-                oProveedorFiltro.RazonSocial = txtRazonSocial.Text;
 
             return oProveedorFiltro;
         }
@@ -219,13 +163,22 @@ namespace PL.AdminDashboard
             try
             {
                 var oProveedorFiltro = CargarProveedorFiltro();
-                var lstProveedores = new BLL.ProveedorBLL().ObtenerProveedores(oProveedorFiltro);
 
-                if (lstProveedores != null && lstProveedores.Count > 0)
-                    lsvProveedores.DataSource = lstProveedores;
+                if (oProveedorFiltro != null)
+                {
+                    var lstProveedores = new BLL.ProveedorBLL().ObtenerProveedores(oProveedorFiltro);
+
+                    if (lstProveedores != null && lstProveedores.Count > 0)
+                        lsvProveedores.DataSource = lstProveedores;
+                    else
+                    {
+                        dvMensajeLsvProveedores.InnerHtml = MessageManager.Info(dvMensajeLsvProveedores, Message.MsjeListadoProveedorFiltrarTotalSinResultados, false);
+                        dvMensajeLsvProveedores.Visible = true;
+                    }
+                }
                 else
                 {
-                    dvMensajeLsvProveedores.InnerHtml = MessageManager.Info(dvMensajeLsvProveedores, Message.MsjeListadoProveedorFiltrarTotalSinResultados, false);
+                    dvMensajeLsvProveedores.InnerHtml = MessageManager.Info(dvMensajeLsvProveedores, Message.MsjeListadoProveedorFechaDesdeMayorQueFechaHasta, false);
                     dvMensajeLsvProveedores.Visible = true;
                 }
             }
@@ -242,7 +195,6 @@ namespace PL.AdminDashboard
         private void LimpiarCampos()
         {
             FormProveedorListado.Controls.OfType<TextBox>().ToList().ForEach(x => x.Text = String.Empty);
-            Session.Remove(Enums.Session.Proveedor.ToString());
             CargarGrillaProveedores();
         }
 

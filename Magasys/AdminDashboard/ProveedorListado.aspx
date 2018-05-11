@@ -22,7 +22,7 @@
         <form id="FormProveedorListado" runat="server">
             <asp:ScriptManager ID="smgProveedorListado" runat="server"></asp:ScriptManager>
             <div class="row">
-                <div class="col-lg-8">
+                <div class="col-lg-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>Buscar Proveedor</h5>
@@ -47,17 +47,27 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="col-md-6">
-                                        <label class="col-sm-10 control-label">Fecha Alta</label>
-                                        <div id="datePickerRange" class="form-group">
-                                            <div class="input-daterange">
-                                                <div class="input-group" style="display:inline-table">
-                                                    <asp:TextBox ID="txtFechaAltaDesde" runat="server" CssClass="input-sm form-control" autocomplete="off"></asp:TextBox>
-                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                                    <asp:TextBox ID="txtFechaAltaHasta" runat="server" CssClass="input-sm form-control" autocomplete="off"></asp:TextBox>
-                                                </div>
+                                        <div class="form-group" id="dpFechaDesde">
+                                            <label class="control-label">Fecha Alta Desde</label>
+                                            <div class="input-group date">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <asp:TextBox ID="txtFechaAltaDesde" runat="server" CssClass="input-sm form-control" autocomplete="off"></asp:TextBox>
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group" id="dpFechaHasta">
+                                            <label class="control-label">Fecha Alta Hasta</label>
+                                            <div class="input-group date">
+                                                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                <asp:TextBox ID="txtFechaAltaHasta" runat="server" CssClass="input-sm form-control" autocomplete="off"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="col-sm-10 control-label">Razón Social</label>
@@ -69,7 +79,7 @@
                             <div class="row">
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group">
-                                    <div class="col-sm-4 col-sm-offset-8">
+                                    <div style="text-align: right; padding-right: 15px;">
                                         <button type="button" id="btnBuscar" runat="server" class="ladda-button btn btn-success" onserverclick="BtnBuscar_Click">
                                             <i class="fa fa-search"></i>&nbsp;&nbsp;<span>Buscar</span>
                                         </button>
@@ -82,33 +92,17 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-title">
-                            <h5>Alta Proveedor <small>Ingrese el CUIT</small></h5>
-                        </div>
-                        <div class="ibox-content">
-                            <asp:UpdatePanel ID="uplAltaProveedor" runat="server">
-                                <ContentTemplate>
-                                    <div class="text-center">
-                                        <div class="form-group">
-                                            <asp:TextBox ID="txtCuitAlta" runat="server" placeholder="99999999999" CssClass="form-control" MaxLength="11" autocomplete="off"></asp:TextBox>
-                                        </div>
-                                        <button type="button" id="btnCrearProveedor" runat="server" class="btn btn-info" onserverclick="BtnCrearProveedor_Click">
-                                            <i class="fa fa-plus"></i>&nbsp;&nbsp;<span>Crear</span>
-                                        </button>
-                                    </div>
-                                    <div id="dvMensajeCuit" runat="server" />
-                                </ContentTemplate>
-                            </asp:UpdatePanel>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="ibox">
                         <div class="ibox-content">
+                            <div style="text-align: right;">
+                                <button type="button" id="btnNuevo" runat="server" class="ladda-button btn btn-info" onserverclick="BtnNuevo_Click">
+                                    <i class="fa fa-plus"></i>&nbsp;&nbsp;<span>Nuevo Proveedor</span>
+                                </button>
+                            </div>
+                            <br />
                             <asp:ListView ID="lsvProveedores" runat="server" OnItemDataBound="LsvProveedores_ItemDataBound">
                                 <LayoutTemplate>
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="5">
@@ -219,8 +213,7 @@
             });
         }
 
-        function KeypressEnterDisabled()
-        {
+        function KeypressEnterDisabled() {
             $('input').keypress(function (e) {
                 if (e.which == 13) {
                     return false;
@@ -229,14 +222,24 @@
         }
 
         function LoadDatePicker() {
-            $('#datePickerRange .input-daterange').datepicker({
+            $('#dpFechaDesde .input-group.date').datepicker({
                 todayBtn: "linked",
                 clearBtn: true,
+                forceParse: true,
                 autoclose: true,
                 language: "es",
                 format: "dd/mm/yyyy",
-                keyboardNavigation: false,
-                forceParse: false
+                keyboardNavigation: false                
+            });
+
+            $('#dpFechaHasta .input-group.date').datepicker({
+                todayBtn: "linked",
+                clearBtn: true,
+                forceParse: true,
+                autoclose: true,
+                language: "es",
+                format: "dd/mm/yyyy",
+                keyboardNavigation: false                
             });
         }
 

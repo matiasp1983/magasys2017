@@ -27,6 +27,25 @@ namespace BLL
             return oGenero;
         }
 
+        public bool AltaGenero(Genero oGenero)
+        {
+            var bRes = false;
+
+            try
+            {
+                using (var rep = new Repository<Genero>())
+                {
+                    bRes = rep.Create(oGenero) != null;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return bRes;
+        }
+
         public List<Genero> ObtenerGeneros()
         {
             List<Genero> lstGeneros = null;

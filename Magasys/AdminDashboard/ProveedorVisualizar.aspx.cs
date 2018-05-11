@@ -16,7 +16,7 @@ namespace PL.AdminDashboard
 
         protected void BtnModificar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Proveedor.aspx", false);
+            Response.Redirect("ProveedorEditar.aspx", false);
         }
 
         protected void BtnCancelar_Click(object sender, EventArgs e)

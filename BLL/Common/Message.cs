@@ -18,6 +18,7 @@
         public const string MsjeCuitProveedorFailure = "El CUIT ingresado no es válido.";
         public const string MsjeCuitProveedorExist = "El CUIT ingresado ya existe.";
         public const string MsjeListadoProveedorFiltrarTotalSinResultados = "No se encontraron Proveedores para la búsqueda seleccionada.";
+        public const string MsjeListadoProveedorFechaDesdeMayorQueFechaHasta = "La Fecha Hasta debe ser mayor que la Fecha Desde.";
 
         #endregion
 
