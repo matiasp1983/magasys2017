@@ -1,6 +1,9 @@
 ﻿using BLL.Common;
+using BLL.DAL;
 using NLog;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Services;
 using System.Web.UI.WebControls;
@@ -14,9 +17,7 @@ namespace PL.AdminDashboard
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-            {
                 CargarProvincias();
-            }
         }
 
         protected void BtnGuardar_Click(object sender, EventArgs e)
@@ -52,22 +53,9 @@ namespace PL.AdminDashboard
         }
 
         protected void BtnCancelar_Click(object sender, EventArgs e)
-        {            
-            Response.Redirect("ProveedorListado.aspx", false);
-        }
-
-        protected void DdlProvincia_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddlProvincia.SelectedValue != String.Empty)
-            {
-                var idProvincia = Convert.ToInt64(ddlProvincia.SelectedValue);
-                CargarLocalidades(idProvincia);
-            }
-            else
-            {
-                ddlLocalidad.Items.Clear();
-            }
-        }
+            Response.Redirect("ProveedorListado.aspx", false);
+        }        
 
         #endregion
 
@@ -93,7 +81,11 @@ namespace PL.AdminDashboard
 
             oProveedor.EMAIL = txtEmail.Text;
             oProveedor.CALLE = txtCalle.Text;
-            oProveedor.NUMERO = Convert.ToInt32(txtNumero.Text);
+
+            if (!String.IsNullOrEmpty(txtNumero.Text))
+                oProveedor.NUMERO = Convert.ToInt32(txtNumero.Text);
+            else
+                oProveedor.NUMERO = 0;
 
             if (!String.IsNullOrEmpty(txtPiso.Text))
                 oProveedor.PISO = txtPiso.Text;
@@ -111,8 +103,16 @@ namespace PL.AdminDashboard
                 oProveedor.BARRIO = null;
 
             oProveedor.CODIGO_POSTAL = txtCodigoPostal.Text;
-            oProveedor.ID_PROVINCIA = Convert.ToInt32(ddlProvincia.SelectedValue);
-            oProveedor.ID_LOCALIDAD = Convert.ToInt32(ddlLocalidad.SelectedValue);
+
+            if (!String.IsNullOrEmpty(ddlProvincia.SelectedValue))            
+                oProveedor.ID_PROVINCIA = Convert.ToInt32(ddlProvincia.SelectedValue);            
+            else            
+                oProveedor.ID_PROVINCIA = 0;
+
+            if (!String.IsNullOrEmpty(hfdidLocalidad.Value))                            
+                oProveedor.ID_LOCALIDAD = Convert.ToInt32(hfdidLocalidad.Value);                        
+            else             
+                oProveedor.ID_LOCALIDAD = 0;
 
             return oProveedor;
         }
@@ -135,30 +135,7 @@ namespace PL.AdminDashboard
                 Logger loLogger = LogManager.GetCurrentClassLogger();
                 loLogger.Error(ex);
             }
-        }
-
-        private void CargarLocalidades(long idProvincia, long idLocalidad = 0)
-        {
-            var oLocalidad = new BLL.LocalidadBLL();
-
-            try
-            {
-                ddlLocalidad.DataSource = oLocalidad.ObtenerLocalidades(idProvincia);
-                ddlLocalidad.DataTextField = "NOMBRE";
-                ddlLocalidad.DataValueField = "ID_LOCALIDAD";
-                ddlLocalidad.DataBind();
-                ddlLocalidad.Items.Insert(0, new ListItem(String.Empty, String.Empty));
-                if (idLocalidad == 0)
-                    ddlLocalidad.SelectedIndex = 0;
-                else
-                    ddlLocalidad.SelectedValue = idLocalidad.ToString();
-            }
-            catch (Exception ex)
-            {
-                Logger loLogger = LogManager.GetCurrentClassLogger();
-                loLogger.Error(ex);
-            }
-        }
+        }        
 
         private static bool ValidaCuit(string cuit)
         {
@@ -184,11 +161,43 @@ namespace PL.AdminDashboard
         }
 
         [WebMethod]
+        public static ArrayList CargarLocalidades(string idProvincia)
+        {
+            var oLocalidad = new BLL.LocalidadBLL();
+            ArrayList lstLocalidadesResultado = null;
+            List<Localidad> lstLocalides;
+
+            try
+            {
+                if (!String.IsNullOrEmpty(idProvincia))
+                {
+                    lstLocalides = oLocalidad.ObtenerLocalidades(Convert.ToInt64(idProvincia));
+                    lstLocalidadesResultado = new ArrayList
+                    {
+                        new ItemOptionLocalidad() { Value = string.Empty, Text = string.Empty }
+                    };
+
+                    foreach (var item in lstLocalides)
+                    {
+                        lstLocalidadesResultado.Add(new ItemOptionLocalidad() { Value = item.ID_LOCALIDAD.ToString(), Text = item.NOMBRE });
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger loLogger = LogManager.GetCurrentClassLogger();
+                loLogger.Error(ex);
+            }
+
+            return lstLocalidadesResultado;
+        }
+
+        [WebMethod]
         public static bool ValidarCuitProveedor(string pCuit)
         {
             if (ValidaCuit(pCuit))
             {
-               return new BLL.ProveedorBLL().ConsultarExistenciaCuit(pCuit);
+                return new BLL.ProveedorBLL().ConsultarExistenciaCuit(pCuit);
             }
 
             return false;
@@ -196,4 +205,14 @@ namespace PL.AdminDashboard
 
         #endregion
     }
+
+    #region Clases
+
+    public class ItemOptionLocalidad
+    {
+        public String Value { get; set; }
+        public String Text { get; set; }
+    }
+
+    #endregion
 }

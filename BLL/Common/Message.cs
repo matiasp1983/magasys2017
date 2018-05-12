@@ -9,8 +9,7 @@
         #endregion
 
         #region Mensajes Proveedor
-
-        public const string MsjeProveedorTitulo = "Modificar Proveedor";
+        
         public const string MsjeProveedorSuccessAlta = "El proveedor se guardó correctamente.";
         public const string MsjeProveedorSuccessModificacion = "El proveedor se modificó correctamente.";
         public const string MsjeProveedorFailure = "El proveedor no se pudo guardar.";

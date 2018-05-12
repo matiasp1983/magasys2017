@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Datos del Proveedor" Language="C#" MasterPageFile="~/AdminDashboard/MasterPage.Master" AutoEventWireup="true" CodeBehind="Proveedor.aspx.cs" Inherits="PL.AdminDashboard.Proveedor" %>
+﻿<%@ Page Title="Datos del Proveedor" Language="C#" MasterPageFile="~/AdminDashboard/MasterPage.Master" AutoEventWireup="true" CodeBehind="Proveedor.aspx.cs" Inherits="PL.AdminDashboard.Proveedor" EnableEventValidation="false" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -155,7 +155,7 @@
 
                                 <div class="col-sm-10">
                                     <div id="divProvincia">
-                                        <asp:DropDownList ID="ddlProvincia" runat="server" CssClass="select2_provincia form-control" OnSelectedIndexChanged="DdlProvincia_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
+                                        <asp:DropDownList ID="ddlProvincia" runat="server" CssClass="select2_provincia form-control"></asp:DropDownList>
                                     </div>
                                 </div>
                             </div>
@@ -167,6 +167,7 @@
                                 <div class="col-sm-10">
                                     <div id="divLocalidad">
                                         <asp:DropDownList ID="ddlLocalidad" runat="server" CssClass="select2_localidad form-control"></asp:DropDownList>
+                                        <asp:HiddenField ID="hfdidLocalidad" runat="server"/>
                                     </div>
                                 </div>
                             </div>
@@ -210,11 +211,53 @@
         var FormProveedor = '#<%=FormProveedor.ClientID%>';
 
         if (window.jQuery) {
-            $(document).ready(function () {
+            $(document).ready(function () {                
                 ValidarForm();
                 Select2();
             });
-        }   
+
+            ChangeProvincias();
+            ChangeLocalidades();
+        }        
+
+        function ChangeProvincias(){
+            $('#<%=ddlProvincia.ClientID%>').change(CargarLocalidesPorProvincia);
+        }
+
+        function ChangeLocalidades() {
+            $('#<%=ddlLocalidad.ClientID%>').change(SeleccionarLocalidad);
+        }
+
+        function CargarLocalidesPorProvincia() {
+            $.ajax({
+                type: "POST",
+                url: "Proveedor.aspx/CargarLocalidades",                
+                data: JSON.stringify({ 'idProvincia': $("#<%=ddlProvincia.ClientID%>").val() }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: CargarLocalidades,
+                failure: function (response) {
+                   console.log(response.d);
+                }
+            });
+        }
+
+        function SeleccionarLocalidad() {                       
+            $("#<%=hfdidLocalidad.ClientID%>").val(this.value);
+         }
+
+        function CargarLocalidades(response) {
+            CargarDatosAlControl(response.d, $("#<%=ddlLocalidad.ClientID %>"));
+        }
+
+        function CargarDatosAlControl(lista, combo) {
+            combo.val(null).html(null).trigger('change');
+            if (lista != null && lista.length > 0) {                
+                $.each(lista, function () {                    
+                    combo.append($("<option></option>").val(this['Value']).html(this['Text']));                    
+                });
+            }
+        }
 
         function ValidarForm() {
 
@@ -229,22 +272,17 @@
                         minlength: 11,
                         remote: function () {
                             return {
-                                url: "Proveedor.aspx/ValidarCuitProveedor",
                                 type: "POST",
+                                url: "Proveedor.aspx/ValidarCuitProveedor",                                
                                 data: JSON.stringify({ 'pCuit': $("#<%=txtCuit.ClientID%>").val() }),
                                 contentType: "application/json; charset=utf-8",
                                 dataType: "json",                               
-                                dataFilter: function (data, type) {
-                                    console.log(data);                                    
+                                dataFilter: function (data, type) {                                    
                                     var msg = JSON.parse(data);
-                                    if (msg.hasOwnProperty('d'))
-                                    {
-                                      return msg.d;                                        
-                                    }
-                                    else
-                                    {
-                                      return msg;                                        
-                                    }
+                                    if (msg.hasOwnProperty('d'))                                    
+                                      return msg.d;                                    
+                                    else                                    
+                                      return msg;
                                 }
                             }
                         }
@@ -379,7 +417,7 @@
                 {
                     placeholder: 'Seleccione una Localidad',
                     width: '100%',
-                    allowClear: true
+                    allowClear: true                    
                 });
         }
     </script>
