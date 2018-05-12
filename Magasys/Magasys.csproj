@@ -131,9 +131,11 @@
     <Content Include="AdminDashboard\ProductoSuplementoEditar.aspx" />
     <Content Include="AdminDashboard\ProductoSuplementoVisualizar.aspx" />
     <Content Include="AdminDashboard\ProveedorEditar.aspx" />
+    <Content Include="CustomersWebSite\Index.aspx" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="CustomersWebSite\MasterPage.Master" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -333,11 +335,23 @@
     <Compile Include="AdminDashboard\ProveedorVisualizar.aspx.designer.cs">
       <DependentUpon>ProveedorVisualizar.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CustomersWebSite\Index.aspx.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomersWebSite\Index.aspx.designer.cs">
+      <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomersWebSite\MasterPage.Master.cs">
+      <DependentUpon>MasterPage.Master</DependentUpon>
+    </Compile>
+    <Compile Include="CustomersWebSite\MasterPage.Master.designer.cs">
+      <DependentUpon>MasterPage.Master</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AdminDashboard\logs\" />
-    <Folder Include="CustomersWebSite\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
