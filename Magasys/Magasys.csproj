@@ -344,6 +344,7 @@
     </Compile>
     <Compile Include="CustomersWebSite\MasterPage.Master.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="CustomersWebSite\MasterPage.Master.designer.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
