@@ -113,6 +113,8 @@
     <Content Include="AdminDashboard\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="AdminDashboard\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="AdminDashboard\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="AdminDashboard\fonts\opensans.css" />
+    <Content Include="AdminDashboard\fonts\roboto.css" />
     <Content Include="AdminDashboard\js\plugins\select2\select2.full.min.js" />
     <Content Include="AdminDashboard\js\plugins\sweetalert\sweetalert.min.js" />
     <Content Include="AdminDashboard\js\plugins\validate\jquery.validate.js" />
@@ -136,6 +138,10 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="CustomersWebSite\MasterPage.Master" />
+    <Content Include="AdminDashboard\fonts\mem5YaGs126MiZpBA-UN7rgOUuhp.woff2" />
+    <Content Include="AdminDashboard\fonts\mem5YaGs126MiZpBA-UNirkOUuhp.woff2" />
+    <Content Include="AdminDashboard\fonts\mem5YaGs126MiZpBA-UN_r8OUuhp.woff2" />
+    <Content Include="AdminDashboard\fonts\mem8YaGs126MiZpBA-UFVZ0b.woff2" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
