@@ -32,7 +32,7 @@ namespace PL.AdminDashboard
 
                     if (loResultado)
                     {
-                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeProveedorSuccessAlta, "Alta Proveedor"));
+                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeProveedorSuccessAlta, "Alta Proveedor","Proveedor.aspx"));
                         LimpiarCampos();
                     }
                     else
