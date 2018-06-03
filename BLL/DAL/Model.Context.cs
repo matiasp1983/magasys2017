@@ -32,49 +32,45 @@ public partial class MAGASYSEntities : DbContext
     }
 
 
-    public virtual DbSet<ColeccionEntrega> ColeccionEntregas { get; set; }
+    public virtual DbSet<Anio> Anio { get; set; }
 
-    public virtual DbSet<DiarioDiaSemana> DiarioDiaSemanas { get; set; }
+    public virtual DbSet<Coleccion> Coleccion { get; set; }
 
-    public virtual DbSet<DiarioEdicion> DiarioEdicions { get; set; }
+    public virtual DbSet<DetalleIngresoProducto> DetalleIngresoProducto { get; set; }
 
-    public virtual DbSet<DiaSemana> DiaSemanas { get; set; }
+    public virtual DbSet<Diario> Diario { get; set; }
 
-    public virtual DbSet<Genero> Generoes { get; set; }
+    public virtual DbSet<DiarioDiaSemana> DiarioDiaSemana { get; set; }
 
-    public virtual DbSet<Libro> Libroes { get; set; }
+    public virtual DbSet<DiaSemana> DiaSemana { get; set; }
 
-    public virtual DbSet<Localidad> Localidads { get; set; }
+    public virtual DbSet<Estado> Estado { get; set; }
 
-    public virtual DbSet<Pelicula> Peliculas { get; set; }
+    public virtual DbSet<Genero> Genero { get; set; }
 
-    public virtual DbSet<Periodicidad> Periodicidads { get; set; }
+    public virtual DbSet<IngresoProducto> IngresoProducto { get; set; }
 
-    public virtual DbSet<Proveedor> Proveedors { get; set; }
+    public virtual DbSet<Libro> Libro { get; set; }
 
-    public virtual DbSet<Provincia> Provincias { get; set; }
+    public virtual DbSet<Localidad> Localidad { get; set; }
 
-    public virtual DbSet<RevistaEdicion> RevistaEdicions { get; set; }
+    public virtual DbSet<Pelicula> Pelicula { get; set; }
 
-    public virtual DbSet<SuplementoEdicion> SuplementoEdicions { get; set; }
+    public virtual DbSet<Periodicidad> Periodicidad { get; set; }
 
-    public virtual DbSet<Anio> Anios { get; set; }
+    public virtual DbSet<Producto> Producto { get; set; }
 
-    public virtual DbSet<Revista> Revistas { get; set; }
+    public virtual DbSet<Producto_Edicion> Producto_Edicion { get; set; }
 
-    public virtual DbSet<TipoProducto> TipoProductoes { get; set; }
+    public virtual DbSet<Proveedor> Proveedor { get; set; }
 
-    public virtual DbSet<EstadoProducto> EstadoProductoes { get; set; }
+    public virtual DbSet<Provincia> Provincia { get; set; }
 
-    public virtual DbSet<Producto> Productoes { get; set; }
+    public virtual DbSet<Revista> Revista { get; set; }
 
-    public virtual DbSet<Diario> Diarios { get; set; }
+    public virtual DbSet<Suplemento> Suplemento { get; set; }
 
-    public virtual DbSet<Suplemento> Suplementoes { get; set; }
-
-    public virtual DbSet<Coleccion> Coleccions { get; set; }
-
-    public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+    public virtual DbSet<TipoProducto> TipoProducto { get; set; }
 
 }
 

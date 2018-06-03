@@ -22,7 +22,9 @@ public partial class Proveedor
     public Proveedor()
     {
 
-        this.Productoes = new HashSet<Producto>();
+        this.IngresoProducto = new HashSet<IngresoProducto>();
+
+        this.Producto = new HashSet<Producto>();
 
     }
 
@@ -30,6 +32,8 @@ public partial class Proveedor
     public int ID_PROVEEDOR { get; set; }
 
     public System.DateTime FECHA_ALTA { get; set; }
+
+    public int COD_ESTADO { get; set; }
 
     public string CUIT { get; set; }
 
@@ -65,13 +69,19 @@ public partial class Proveedor
 
 
 
-    public virtual Localidad Localidad { get; set; }
-
-    public virtual Provincia Provincia { get; set; }
+    public virtual Estado Estado { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<Producto> Productoes { get; set; }
+    public virtual ICollection<IngresoProducto> IngresoProducto { get; set; }
+
+    public virtual Localidad Localidad { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<Producto> Producto { get; set; }
+
+    public virtual Provincia Provincia { get; set; }
 
 }
 

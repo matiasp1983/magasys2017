@@ -22,7 +22,7 @@ public partial class Localidad
     public Localidad()
     {
 
-        this.Proveedors = new HashSet<Proveedor>();
+        this.Proveedor = new HashSet<Proveedor>();
 
     }
 
@@ -35,11 +35,11 @@ public partial class Localidad
 
 
 
+    public virtual Provincia Provincia { get; set; }
+
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<Proveedor> Proveedors { get; set; }
-
-    public virtual Provincia Provincia { get; set; }
+    public virtual ICollection<Proveedor> Proveedor { get; set; }
 
 }
 

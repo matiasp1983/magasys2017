@@ -23,12 +23,18 @@ namespace PL.AdminDashboard
         protected void BtnGuardar_Click(object sender, EventArgs e)
         {
             var oProveedor = CargarProveedorDesdeControles();
+            var bEsNuevaRazonSocial = new BLL.ProveedorBLL().ConsultarExistenciaRazonSocial(oProveedor.RAZON_SOCIAL);
+            if (!bEsNuevaRazonSocial)
+            {
+                Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeRazonSocialProveedorExist));
+                return;
+            }
 
             try
             {
                 if (oProveedor != null)
                 {
-                    var loResultado = new BLL.ProveedorBLL().AltaProveedor(oProveedor);
+                    var loResultado = new BLL.ProveedorBLL().AltaProveedor(oProveedor);       
 
                     if (loResultado)
                     {
@@ -67,6 +73,7 @@ namespace PL.AdminDashboard
             {
                 ID_PROVEEDOR = 0,
                 FECHA_ALTA = DateTime.Now,
+                COD_ESTADO = 1,
                 CUIT = txtCuit.Text,
                 RAZON_SOCIAL = txtRazonSocial.Text,
                 NOMBRE = txtNombre.Text,

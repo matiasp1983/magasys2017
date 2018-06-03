@@ -4,19 +4,19 @@ using System.Collections.Generic;
 
 namespace BLL
 {
-    public class EstadoProductoBLL
+    public class EstadoBLL
     {
         #region Métodos Públicos
 
-        public List<EstadoProducto> ObtenerEstadosProducto()
+        public List<Estado> ObtenerEstados()
         {
-            List<EstadoProducto> lstEstadoProducto = null;
+            List<Estado> lstEstado = null;
 
             try
             {
-                using (var rep = new Repository<EstadoProducto>())
+                using (var rep = new Repository<Estado>())
                 {
-                    lstEstadoProducto = rep.FindAll();
+                    lstEstado = rep.FindAll();
                 }
             }
             catch (Exception)
@@ -24,7 +24,7 @@ namespace BLL
                 throw;
             }
 
-            return lstEstadoProducto;
+            return lstEstado;
         }
 
         #endregion

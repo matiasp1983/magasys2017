@@ -18,15 +18,6 @@ using System;
 public partial class DiarioDiaSemana
 {
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public DiarioDiaSemana()
-    {
-
-        this.DiarioEdicions = new HashSet<DiarioEdicion>();
-
-    }
-
-
     public int ID_DIARIO_DIA_SEMANA { get; set; }
 
     public int COD_DIARIO { get; set; }
@@ -37,13 +28,9 @@ public partial class DiarioDiaSemana
 
 
 
-    public virtual DiaSemana DiaSemana { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<DiarioEdicion> DiarioEdicions { get; set; }
-
     public virtual Diario Diario { get; set; }
+
+    public virtual DiaSemana DiaSemana { get; set; }
 
 }
 

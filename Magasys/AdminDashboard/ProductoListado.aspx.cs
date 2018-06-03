@@ -19,7 +19,7 @@ namespace PL.AdminDashboard
             if (!Page.IsPostBack)
             {                
                 CargarTiposProducto();
-                CargarEstadosProducto();
+                CargarEstados();
                 CargarProveedores();
                 CargarGrillaProductos();
             }
@@ -182,15 +182,15 @@ namespace PL.AdminDashboard
             }
         }
 
-        private void CargarEstadosProducto()
+        private void CargarEstados()
         {
-            var oEstadoProducto = new BLL.EstadoProductoBLL();
+            var oEstado = new BLL.EstadoBLL();
 
             try
             {
-                ddlEstado.DataSource = oEstadoProducto.ObtenerEstadosProducto();
+                ddlEstado.DataSource = oEstado.ObtenerEstados();
                 ddlEstado.DataTextField = "NOMBRE";
-                ddlEstado.DataValueField = "ID_ESTADO_PROD";
+                ddlEstado.DataValueField = "ID_ESTADO";
                 ddlEstado.DataBind();
                 ddlEstado.Items.Insert(0, new ListItem(String.Empty, String.Empty));
             }

@@ -22,9 +22,9 @@ public partial class Diario
     public Diario()
     {
 
-        this.DiarioDiaSemanas = new HashSet<DiarioDiaSemana>();
+        this.DiarioDiaSemana = new HashSet<DiarioDiaSemana>();
 
-        this.Suplementoes = new HashSet<Suplemento>();
+        this.Suplemento = new HashSet<Suplemento>();
 
     }
 
@@ -39,11 +39,11 @@ public partial class Diario
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<DiarioDiaSemana> DiarioDiaSemanas { get; set; }
+    public virtual ICollection<DiarioDiaSemana> DiarioDiaSemana { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<Suplemento> Suplementoes { get; set; }
+    public virtual ICollection<Suplemento> Suplemento { get; set; }
 
 }
 

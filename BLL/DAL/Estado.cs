@@ -15,25 +15,27 @@ namespace BLL.DAL
 using System;
     using System.Collections.Generic;
     
-public partial class DiaSemana
+public partial class Estado
 {
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public DiaSemana()
+    public Estado()
     {
 
-        this.Coleccion = new HashSet<Coleccion>();
+        this.DetalleIngresoProducto = new HashSet<DetalleIngresoProducto>();
 
-        this.DiarioDiaSemana = new HashSet<DiarioDiaSemana>();
+        this.IngresoProducto = new HashSet<IngresoProducto>();
 
-        this.Revista = new HashSet<Revista>();
+        this.Producto_Edicion = new HashSet<Producto_Edicion>();
 
-        this.Suplemento = new HashSet<Suplemento>();
+        this.Producto = new HashSet<Producto>();
+
+        this.Proveedor = new HashSet<Proveedor>();
 
     }
 
 
-    public int ID_DIA_SEMANA { get; set; }
+    public int ID_ESTADO { get; set; }
 
     public string NOMBRE { get; set; }
 
@@ -41,19 +43,23 @@ public partial class DiaSemana
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<Coleccion> Coleccion { get; set; }
+    public virtual ICollection<DetalleIngresoProducto> DetalleIngresoProducto { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<DiarioDiaSemana> DiarioDiaSemana { get; set; }
+    public virtual ICollection<IngresoProducto> IngresoProducto { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<Revista> Revista { get; set; }
+    public virtual ICollection<Producto_Edicion> Producto_Edicion { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<Suplemento> Suplemento { get; set; }
+    public virtual ICollection<Producto> Producto { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<Proveedor> Proveedor { get; set; }
 
 }
 

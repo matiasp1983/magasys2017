@@ -15,33 +15,43 @@ namespace BLL.DAL
 using System;
     using System.Collections.Generic;
     
-public partial class Provincia
+public partial class Producto_Edicion
 {
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public Provincia()
+    public Producto_Edicion()
     {
 
-        this.Localidad = new HashSet<Localidad>();
-
-        this.Proveedor = new HashSet<Proveedor>();
+        this.DetalleIngresoProducto = new HashSet<DetalleIngresoProducto>();
 
     }
 
 
-    public int ID_PROVINCIA { get; set; }
+    public int ID_PRODUCTO_EDICION { get; set; }
+
+    public int COD_PRODUCTO { get; set; }
+
+    public int NUMERO_EDICION { get; set; }
+
+    public int COD_ESTADO { get; set; }
 
     public string NOMBRE { get; set; }
 
+    public string DESCRIPCION { get; set; }
+
+    public int CANTIDAD_DISPONIBLE { get; set; }
+
+    public double PRECIO { get; set; }
+
 
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<Localidad> Localidad { get; set; }
+    public virtual ICollection<DetalleIngresoProducto> DetalleIngresoProducto { get; set; }
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+    public virtual Estado Estado { get; set; }
 
-    public virtual ICollection<Proveedor> Proveedor { get; set; }
+    public virtual Producto Producto { get; set; }
 
 }
 

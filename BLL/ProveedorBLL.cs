@@ -36,7 +36,7 @@ namespace BLL
             {
                 using (var rep = new Repository<Proveedor>())
                 {
-                    lstProveedores = rep.Search(p => p.FECHA_BAJA == null);
+                    lstProveedores = rep.Search(p => p.FECHA_BAJA == null && p.COD_ESTADO == 1);
 
                     lstProveedores.Sort((x, y) => y.FECHA_ALTA.CompareTo(x.FECHA_ALTA));
 
@@ -78,7 +78,7 @@ namespace BLL
             {
                 using (var rep = new Repository<Proveedor>())
                 {
-                    lstProveedores = rep.Search(p => p.FECHA_BAJA == null);                    
+                    lstProveedores = rep.Search(p => p.FECHA_BAJA == null && p.COD_ESTADO == 1);
                     lstProveedores.Sort((x, y) => String.Compare(x.RAZON_SOCIAL, y.RAZON_SOCIAL));
                 }
             }
@@ -118,6 +118,7 @@ namespace BLL
                 {
                     Proveedor oProveedor = rep.Find(p => p.ID_PROVEEDOR == idProveedor);
                     oProveedor.FECHA_BAJA = DateTime.Now;
+                    oProveedor.COD_ESTADO = 2;
                     bRes = rep.Update(oProveedor);
                 }
             }
@@ -155,8 +156,28 @@ namespace BLL
             {
                 using (var res = new Repository<Proveedor>())
                 {
-                    var oProveedor = res.Find(p => p.CUIT == cuit && p.FECHA_BAJA == null);
+                    var oProveedor = res.Find(p => p.CUIT == cuit && p.FECHA_BAJA == null && p.COD_ESTADO == 1);
                     bEsNuevoCuit = oProveedor == null;
+                }
+            }
+            catch (Exception)
+            {
+                 throw;
+            }
+
+            return bEsNuevoCuit;
+        }
+
+        public bool ConsultarExistenciaRazonSocial(string razonSocial)
+        {
+            bool bEsNuevaRazonSocial = false;
+
+            try
+            {
+                using (var rep = new Repository<Proveedor>())
+                {
+                    var oProveedor = rep.Find(p => p.RAZON_SOCIAL == razonSocial && p.FECHA_BAJA == null && p.COD_ESTADO == 1);
+                    bEsNuevaRazonSocial = oProveedor == null;
                 }
             }
             catch (Exception)
@@ -164,7 +185,7 @@ namespace BLL
                 throw;
             }
 
-            return bEsNuevoCuit;
+            return bEsNuevaRazonSocial;
         }
 
         #endregion

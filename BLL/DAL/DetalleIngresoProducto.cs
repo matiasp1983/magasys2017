@@ -15,28 +15,32 @@ namespace BLL.DAL
 using System;
     using System.Collections.Generic;
     
-public partial class Suplemento
+public partial class DetalleIngresoProducto
 {
 
-    public int ID_SUPLEMENTO { get; set; }
+    public int ID_DETALLE_INGRESO_PRODUCTO { get; set; }
+
+    public int COD_INGRESO_PRODUCTO { get; set; }
+
+    public int CANTIDAD_UNIDADES { get; set; }
+
+    public Nullable<System.DateTime> FECHA_DEVOLUCION { get; set; }
+
+    public int COD_ESTADO { get; set; }
 
     public int COD_PRODUCTO { get; set; }
 
-    public Nullable<int> ID_DIA_SEMANA { get; set; }
-
-    public int CANTIDAD_ENTREGAS { get; set; }
-
-    public double PRECIO { get; set; }
-
-    public int COD_DIARIO { get; set; }
+    public Nullable<int> COD_PRODUCTO_EDICION { get; set; }
 
 
 
-    public virtual Diario Diario { get; set; }
+    public virtual Estado Estado { get; set; }
 
-    public virtual DiaSemana DiaSemana { get; set; }
+    public virtual IngresoProducto IngresoProducto { get; set; }
 
     public virtual Producto Producto { get; set; }
+
+    public virtual Producto_Edicion Producto_Edicion { get; set; }
 
 }
 

@@ -64,7 +64,7 @@
     <Compile Include="DAL\Coleccion.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\ColeccionEntrega.cs">
+    <Compile Include="DAL\DetalleIngresoProducto.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Diario.cs">
@@ -73,16 +73,16 @@
     <Compile Include="DAL\DiarioDiaSemana.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\DiarioEdicion.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="DAL\DiaSemana.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\EstadoProducto.cs">
+    <Compile Include="DAL\Estado.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Genero.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\IngresoProducto.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Libro.cs">
@@ -115,6 +115,9 @@
     <Compile Include="DAL\Producto.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\Producto_Edicion.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\Proveedor.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -125,16 +128,7 @@
     <Compile Include="DAL\Revista.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\RevistaEdicion.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="DAL\Suplemento.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\SuplementoEdicion.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\sysdiagram.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\TipoProducto.cs">
@@ -142,7 +136,7 @@
     </Compile>
     <Compile Include="DiarioBLL.cs" />
     <Compile Include="DiaSemanaBLL.cs" />
-    <Compile Include="EstadoProductoBLL.cs" />
+    <Compile Include="EstadoBLL.cs" />
     <Compile Include="Filters\ProductoFiltro.cs" />
     <Compile Include="Filters\ProveedorFiltro.cs" />
     <Compile Include="GeneroBLL.cs" />

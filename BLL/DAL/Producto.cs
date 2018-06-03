@@ -22,17 +22,21 @@ public partial class Producto
     public Producto()
     {
 
-        this.Libroes = new HashSet<Libro>();
+        this.Coleccion = new HashSet<Coleccion>();
 
-        this.Peliculas = new HashSet<Pelicula>();
+        this.DetalleIngresoProducto = new HashSet<DetalleIngresoProducto>();
 
-        this.Revistas = new HashSet<Revista>();
+        this.Diario = new HashSet<Diario>();
 
-        this.Diarios = new HashSet<Diario>();
+        this.Libro = new HashSet<Libro>();
 
-        this.Suplementoes = new HashSet<Suplemento>();
+        this.Pelicula = new HashSet<Pelicula>();
 
-        this.Coleccions = new HashSet<Coleccion>();
+        this.Producto_Edicion = new HashSet<Producto_Edicion>();
+
+        this.Revista = new HashSet<Revista>();
+
+        this.Suplemento = new HashSet<Suplemento>();
 
     }
 
@@ -57,17 +61,33 @@ public partial class Producto
 
 
 
-    public virtual EstadoProducto EstadoProducto { get; set; }
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<Coleccion> Coleccion { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<DetalleIngresoProducto> DetalleIngresoProducto { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<Diario> Diario { get; set; }
+
+    public virtual Estado Estado { get; set; }
 
     public virtual Genero Genero { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<Libro> Libroes { get; set; }
+    public virtual ICollection<Libro> Libro { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<Pelicula> Peliculas { get; set; }
+    public virtual ICollection<Pelicula> Pelicula { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<Producto_Edicion> Producto_Edicion { get; set; }
 
     public virtual Proveedor Proveedor { get; set; }
 
@@ -75,19 +95,11 @@ public partial class Producto
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<Revista> Revistas { get; set; }
+    public virtual ICollection<Revista> Revista { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<Diario> Diarios { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<Suplemento> Suplementoes { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<Coleccion> Coleccions { get; set; }
+    public virtual ICollection<Suplemento> Suplemento { get; set; }
 
 }
 

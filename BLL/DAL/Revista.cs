@@ -18,15 +18,6 @@ using System;
 public partial class Revista
 {
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public Revista()
-    {
-
-        this.RevistaEdicions = new HashSet<RevistaEdicion>();
-
-    }
-
-
     public int ID_REVISTA { get; set; }
 
     public int COD_PRODUCTO { get; set; }
@@ -42,10 +33,6 @@ public partial class Revista
     public virtual DiaSemana DiaSemana { get; set; }
 
     public virtual Periodicidad Periodicidad { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<RevistaEdicion> RevistaEdicions { get; set; }
 
     public virtual Producto Producto { get; set; }
 

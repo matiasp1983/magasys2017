@@ -19,7 +19,7 @@ namespace BLL
             {
                 using (var loRepProducto = new Repository<Producto>())
                 {
-                    lstProductos = loRepProducto.Search(p => p.FECHA_BAJA == null);
+                    lstProductos = loRepProducto.FindAll();
 
                     if (oProductoFiltro.IdProducto > 0 && lstProductos.Count > 0)
                         lstProductos = lstProductos.FindAll(p => p.ID_PRODUCTO.ToString().Contains(oProductoFiltro.IdProducto.ToString()));
@@ -51,8 +51,8 @@ namespace BLL
                             COD_TIPO_PRODUCTO = loProducto.COD_TIPO_PRODUCTO
                         };
 
-                        using (var loRepEstadoProducto = new Repository<EstadoProducto>())
-                            oProductoListado.DESC_ESTADO = loRepEstadoProducto.Find(p => p.ID_ESTADO_PROD == loProducto.COD_ESTADO).NOMBRE;
+                        using (var loRepEstadoProducto = new Repository<Estado>())
+                            oProductoListado.DESC_ESTADO = loRepEstadoProducto.Find(p => p.ID_ESTADO == loProducto.COD_ESTADO).NOMBRE;
 
                         using (var loRepGenero = new Repository<Genero>())
                             oProductoListado.DESC_GENERO = loRepGenero.Find(p => p.ID_GENERO == loProducto.COD_GENERO).NOMBRE;
