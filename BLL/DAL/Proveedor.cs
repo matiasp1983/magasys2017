@@ -22,9 +22,9 @@ public partial class Proveedor
     public Proveedor()
     {
 
-        this.IngresoProducto = new HashSet<IngresoProducto>();
-
         this.Producto = new HashSet<Producto>();
+
+        this.ProductoIngreso = new HashSet<ProductoIngreso>();
 
     }
 
@@ -71,15 +71,15 @@ public partial class Proveedor
 
     public virtual Estado Estado { get; set; }
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<IngresoProducto> IngresoProducto { get; set; }
-
     public virtual Localidad Localidad { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Producto> Producto { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<ProductoIngreso> ProductoIngreso { get; set; }
 
     public virtual Provincia Provincia { get; set; }
 

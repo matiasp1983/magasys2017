@@ -54,6 +54,12 @@
                             <li id="liProductoListado" runat="server"><a href="ProductoListado.aspx">Listado de Productos</a></li>                            
                         </ul>
                     </li>
+                    <li id="liDeposito" runat="server">
+                        <a href="#"><i class="fa fa-archive"></i><span class="nav-label">Depósito</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li id="liProductoIngreso" runat="server"><a href="ProductoIngreso.aspx">Ingreso de Producto</a></li>                 
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </nav>

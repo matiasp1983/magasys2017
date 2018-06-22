@@ -64,7 +64,7 @@
     <Compile Include="DAL\Coleccion.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\DetalleIngresoProducto.cs">
+    <Compile Include="DAL\DetalleProductoIngreso.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Diario.cs">
@@ -80,9 +80,6 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Genero.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\IngresoProducto.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Libro.cs">
@@ -115,7 +112,10 @@
     <Compile Include="DAL\Producto.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\Producto_Edicion.cs">
+    <Compile Include="DAL\ProductoEdicion.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\ProductoIngreso.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Proveedor.cs">
@@ -131,6 +131,9 @@
     <Compile Include="DAL\Suplemento.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\sysdiagrams.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\TipoProducto.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -140,11 +143,13 @@
     <Compile Include="Filters\ProductoFiltro.cs" />
     <Compile Include="Filters\ProveedorFiltro.cs" />
     <Compile Include="GeneroBLL.cs" />
+    <Compile Include="ProductoIngresoBLL.cs" />
     <Compile Include="LibroBLL.cs" />
     <Compile Include="LocalidadBLL.cs" />
     <Compile Include="PeliculaBLL.cs" />
     <Compile Include="PeriodicidadBLL .cs" />
     <Compile Include="ProductoBLL.cs" />
+    <Compile Include="ProductoEdicionBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProveedorBLL.cs" />
     <Compile Include="ProvinciaBLL.cs" />

@@ -24,15 +24,13 @@ public partial class Producto
 
         this.Coleccion = new HashSet<Coleccion>();
 
-        this.DetalleIngresoProducto = new HashSet<DetalleIngresoProducto>();
-
         this.Diario = new HashSet<Diario>();
 
         this.Libro = new HashSet<Libro>();
 
         this.Pelicula = new HashSet<Pelicula>();
 
-        this.Producto_Edicion = new HashSet<Producto_Edicion>();
+        this.ProductoEdicion = new HashSet<ProductoEdicion>();
 
         this.Revista = new HashSet<Revista>();
 
@@ -67,10 +65,6 @@ public partial class Producto
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<DetalleIngresoProducto> DetalleIngresoProducto { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
     public virtual ICollection<Diario> Diario { get; set; }
 
     public virtual Estado Estado { get; set; }
@@ -87,7 +81,7 @@ public partial class Producto
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<Producto_Edicion> Producto_Edicion { get; set; }
+    public virtual ICollection<ProductoEdicion> ProductoEdicion { get; set; }
 
     public virtual Proveedor Proveedor { get; set; }
 

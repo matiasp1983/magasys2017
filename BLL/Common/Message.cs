@@ -31,10 +31,11 @@
 
         #endregion
 
-        #region Mensajes Cantidad Producto
+        #region Mensajes Producto Ingreso
 
-        public const string MsjeCantidadProductoSuccessAlta = "La/s cantidades de productos se guardaron correctamente.";        
-        public const string MsjeCantidadProductoFailure = "La/s cantidades de productos no se pudieron guardar.";        
+        public const string MsjeProductoIngresoSuccessAlta = "El ingreso de productos se guardó correctamente.";
+        public const string MsjeProductoIngresoCampObligatorio = "Debe completar los campos obligatorios.";        
+        public const string MsjeProductoIngresoFailure = "El ingreso de productos no se pudo guardar";        
 
         #endregion
     }

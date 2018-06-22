@@ -1,4 +1,5 @@
 ﻿using BLL.DAL;
+using BLL.Filters;
 using System;
 using System.Collections.Generic;
 using System.Transactions;
@@ -163,6 +164,65 @@ namespace BLL
             return lstDiariosProducto;
         }
 
+        public List<DiarioEdicion> ObtenerDariosParaEdicion(ProductoFiltro oProductoFiltro)
+        {
+            List<Producto> lstProductos = null;
+            List<DiarioEdicion> lstDiarioEdicion = null;
+            List<DiarioDiaSemana> lstDiasSemana = null;
+
+            try
+            {
+                using (var loRepProducto = new Repository<Producto>())
+                {
+                    lstProductos = loRepProducto.Search(p => p.FECHA_BAJA == null && p.COD_ESTADO == 1);
+
+                    if (oProductoFiltro.CodProveedor > 0 && lstProductos.Count > 0)
+                        lstProductos = lstProductos.FindAll(p => p.COD_PROVEEDOR == oProductoFiltro.CodProveedor);
+
+                    if (oProductoFiltro.CodTipoProducto > 0 && lstProductos.Count > 0)
+                        lstProductos = lstProductos.FindAll(p => p.COD_TIPO_PRODUCTO == oProductoFiltro.CodTipoProducto);
+
+                    if (!String.IsNullOrEmpty(oProductoFiltro.Nombre) && lstProductos.Count > 0)
+                        lstProductos = lstProductos.FindAll(p => p.NOMBRE.ToUpper().Contains(oProductoFiltro.Nombre.ToUpper()));
+                }
+
+                DiarioEdicion oDiarioEdicion;
+                lstDiarioEdicion = new List<DiarioEdicion>();
+
+                foreach (var loProducto in lstProductos)
+                {
+                    int loCodigoDiario;
+
+                    using (var loRepDiario = new Repository<Diario>())
+                        loCodigoDiario = loRepDiario.Find(p => p.COD_PRODUCTO == loProducto.ID_PRODUCTO).ID_DIARIO;
+
+                    using (var loRepDiarioDiaSemana = new Repository<DiarioDiaSemana>())
+                        lstDiasSemana = loRepDiarioDiaSemana.Search(p => p.COD_DIARIO == loCodigoDiario);
+
+                    foreach (var loDiasSemana in lstDiasSemana)
+                    {
+                        oDiarioEdicion = new DiarioEdicion
+                        {
+                            COD_PRODUCTO = loProducto.ID_PRODUCTO,
+                            NOMBRE = loProducto.NOMBRE,
+                            COD_DIARIO = loCodigoDiario
+                        };
+
+                        using (var loRepDiaSemana = new Repository<DiaSemana>())
+                            oDiarioEdicion.DIA_SEMANA = loRepDiaSemana.Find(p => p.ID_DIA_SEMANA == loDiasSemana.ID_DIA_SEMANA).NOMBRE;
+
+                        lstDiarioEdicion.Add(oDiarioEdicion);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return lstDiarioEdicion;
+        }
+
         public bool AltaDiario(Producto oProducto, List<DiarioDiaSemana> lstDiarioDiasSemanas)
         {
             var bRes = false;
@@ -291,6 +351,19 @@ namespace BLL
         public double? PRECIO_VIERNES { get; set; }
         public double? PRECIO_SABADO { get; set; }
         public double? PRECIO_DOMINGO { get; set; }
+    }
+
+    public class DiarioEdicion
+    {
+        public int COD_PRODUCTO { get; set; }
+        public int COD_DIARIO { get; set; }
+        public string NOMBRE { get; set; }
+        public string DIA_SEMANA { get; set; }
+        public int COD_PRODUCTO_EDICION { get; set; }
+        public int NUMERO_EDICION { get; set; }
+        public System.DateTime FECHA_EDICION { get; set; }
+        public double PRECIO { get; set; }
+        public int CANTIDAD_DISPONIBLE { get; set; }
     }
 
     #endregion

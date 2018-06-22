@@ -21,7 +21,7 @@
           <Property Name="ID_DIA_SEMANA" Type="int" />
           <Property Name="CANTIDAD_ENTREGAS" Type="int" Nullable="false" />
         </EntityType>
-        <EntityType Name="DetalleIngresoProducto">
+        <EntityType Name="DetalleProductoIngreso">
           <Key>
             <PropertyRef Name="ID_DETALLE_INGRESO_PRODUCTO" />
           </Key>
@@ -30,7 +30,6 @@
           <Property Name="CANTIDAD_UNIDADES" Type="int" Nullable="false" />
           <Property Name="FECHA_DEVOLUCION" Type="datetime" />
           <Property Name="COD_ESTADO" Type="int" Nullable="false" />
-          <Property Name="COD_PRODUCTO" Type="int" Nullable="false" />
           <Property Name="COD_PRODUCTO_EDICION" Type="int" />
         </EntityType>
         <EntityType Name="Diario">
@@ -69,15 +68,6 @@
           </Key>
           <Property Name="ID_GENERO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
-        </EntityType>
-        <EntityType Name="IngresoProducto">
-          <Key>
-            <PropertyRef Name="ID_INGRESO_PRODUCTOS" />
-          </Key>
-          <Property Name="ID_INGRESO_PRODUCTOS" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="FECHA" Type="datetime" Nullable="false" />
-          <Property Name="COD_ESTADO" Type="int" Nullable="false" />
-          <Property Name="COD_PROVEEDOR" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Libro">
           <Key>
@@ -129,18 +119,29 @@
           <Property Name="COD_TIPO_PRODUCTO" Type="int" Nullable="false" />
           <Property Name="FECHA_BAJA" Type="datetime" />
         </EntityType>
-        <EntityType Name="Producto_Edicion">
+        <EntityType Name="ProductoEdicion">
           <Key>
             <PropertyRef Name="ID_PRODUCTO_EDICION" />
           </Key>
           <Property Name="ID_PRODUCTO_EDICION" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="COD_PRODUCTO" Type="int" Nullable="false" />
-          <Property Name="NUMERO_EDICION" Type="int" Nullable="false" />
+          <Property Name="COD_TIPO_PRODUCTO" Type="int" Nullable="false" />
+          <Property Name="EDICION" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="FECHA_EDICION" Type="datetime" />
           <Property Name="COD_ESTADO" Type="int" Nullable="false" />
-          <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="50" />
           <Property Name="DESCRIPCION" Type="varchar" MaxLength="50" />
           <Property Name="CANTIDAD_DISPONIBLE" Type="int" Nullable="false" />
           <Property Name="PRECIO" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductoIngreso">
+          <Key>
+            <PropertyRef Name="ID_INGRESO_PRODUCTOS" />
+          </Key>
+          <Property Name="ID_INGRESO_PRODUCTOS" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FECHA" Type="datetime" Nullable="false" />
+          <Property Name="COD_ESTADO" Type="int" Nullable="false" />
+          <Property Name="COD_PROVEEDOR" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Proveedor">
           <Key>
@@ -194,6 +195,16 @@
           <Property Name="PRECIO" Type="float" Nullable="false" />
           <Property Name="COD_DIARIO" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
         <EntityType Name="TipoProducto">
           <Key>
             <PropertyRef Name="ID_TIPO_PRODUCTO" />
@@ -239,48 +250,36 @@
         </Association>
         <Association Name="FK_DetalleIngresoProducto_Estado">
           <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
-          <End Role="DetalleIngresoProducto" Type="Self.DetalleIngresoProducto" Multiplicity="*" />
+          <End Role="DetalleProductoIngreso" Type="Self.DetalleProductoIngreso" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Estado">
               <PropertyRef Name="ID_ESTADO" />
             </Principal>
-            <Dependent Role="DetalleIngresoProducto">
+            <Dependent Role="DetalleProductoIngreso">
               <PropertyRef Name="COD_ESTADO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DetalleIngresoProducto_IngresoProducto">
-          <End Role="IngresoProducto" Type="Self.IngresoProducto" Multiplicity="1" />
-          <End Role="DetalleIngresoProducto" Type="Self.DetalleIngresoProducto" Multiplicity="*" />
+          <End Role="ProductoIngreso" Type="Self.ProductoIngreso" Multiplicity="1" />
+          <End Role="DetalleProductoIngreso" Type="Self.DetalleProductoIngreso" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="IngresoProducto">
+            <Principal Role="ProductoIngreso">
               <PropertyRef Name="ID_INGRESO_PRODUCTOS" />
             </Principal>
-            <Dependent Role="DetalleIngresoProducto">
+            <Dependent Role="DetalleProductoIngreso">
               <PropertyRef Name="COD_INGRESO_PRODUCTO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DetalleIngresoProducto_Producto">
-          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
-          <End Role="DetalleIngresoProducto" Type="Self.DetalleIngresoProducto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Producto">
-              <PropertyRef Name="ID_PRODUCTO" />
-            </Principal>
-            <Dependent Role="DetalleIngresoProducto">
-              <PropertyRef Name="COD_PRODUCTO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_DetalleIngresoProducto_Producto_Edicion">
-          <End Role="Producto_Edicion" Type="Self.Producto_Edicion" Multiplicity="0..1" />
-          <End Role="DetalleIngresoProducto" Type="Self.DetalleIngresoProducto" Multiplicity="*" />
+          <End Role="ProductoEdicion" Type="Self.ProductoEdicion" Multiplicity="0..1" />
+          <End Role="DetalleProductoIngreso" Type="Self.DetalleProductoIngreso" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Producto_Edicion">
+            <Principal Role="ProductoEdicion">
               <PropertyRef Name="ID_PRODUCTO_EDICION" />
             </Principal>
-            <Dependent Role="DetalleIngresoProducto">
+            <Dependent Role="DetalleProductoIngreso">
               <PropertyRef Name="COD_PRODUCTO_EDICION" />
             </Dependent>
           </ReferentialConstraint>
@@ -323,24 +322,24 @@
         </Association>
         <Association Name="FK_IngresoProducto_Estado">
           <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
-          <End Role="IngresoProducto" Type="Self.IngresoProducto" Multiplicity="*" />
+          <End Role="ProductoIngreso" Type="Self.ProductoIngreso" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Estado">
               <PropertyRef Name="ID_ESTADO" />
             </Principal>
-            <Dependent Role="IngresoProducto">
+            <Dependent Role="ProductoIngreso">
               <PropertyRef Name="COD_ESTADO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_IngresoProducto_Proveedor">
           <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1" />
-          <End Role="IngresoProducto" Type="Self.IngresoProducto" Multiplicity="*" />
+          <End Role="ProductoIngreso" Type="Self.ProductoIngreso" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Proveedor">
               <PropertyRef Name="ID_PROVEEDOR" />
             </Principal>
-            <Dependent Role="IngresoProducto">
+            <Dependent Role="ProductoIngreso">
               <PropertyRef Name="COD_PROVEEDOR" />
             </Dependent>
           </ReferentialConstraint>
@@ -383,24 +382,24 @@
         </Association>
         <Association Name="FK_Producto_Edicion_Estado">
           <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
-          <End Role="Producto_Edicion" Type="Self.Producto_Edicion" Multiplicity="*" />
+          <End Role="ProductoEdicion" Type="Self.ProductoEdicion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Estado">
               <PropertyRef Name="ID_ESTADO" />
             </Principal>
-            <Dependent Role="Producto_Edicion">
+            <Dependent Role="ProductoEdicion">
               <PropertyRef Name="COD_ESTADO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Producto_Edicion_Producto">
           <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
-          <End Role="Producto_Edicion" Type="Self.Producto_Edicion" Multiplicity="*" />
+          <End Role="ProductoEdicion" Type="Self.ProductoEdicion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Producto">
               <PropertyRef Name="ID_PRODUCTO" />
             </Principal>
-            <Dependent Role="Producto_Edicion">
+            <Dependent Role="ProductoEdicion">
               <PropertyRef Name="COD_PRODUCTO" />
             </Dependent>
           </ReferentialConstraint>
@@ -564,23 +563,24 @@
         <EntityContainer Name="MAGASYSModelStoreContainer">
           <EntitySet Name="Anio" EntityType="Self.Anio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Coleccion" EntityType="Self.Coleccion" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="DetalleIngresoProducto" EntityType="Self.DetalleIngresoProducto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetalleProductoIngreso" EntityType="Self.DetalleProductoIngreso" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Diario" EntityType="Self.Diario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DiarioDiaSemana" EntityType="Self.DiarioDiaSemana" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DiaSemana" EntityType="Self.DiaSemana" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Estado" EntityType="Self.Estado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Genero" EntityType="Self.Genero" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="IngresoProducto" EntityType="Self.IngresoProducto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Libro" EntityType="Self.Libro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Localidad" EntityType="Self.Localidad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pelicula" EntityType="Self.Pelicula" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Periodicidad" EntityType="Self.Periodicidad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Producto_Edicion" EntityType="Self.Producto_Edicion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductoEdicion" EntityType="Self.ProductoEdicion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductoIngreso" EntityType="Self.ProductoIngreso" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Proveedor" EntityType="Self.Proveedor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Provincia" EntityType="Self.Provincia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Revista" EntityType="Self.Revista" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Suplemento" EntityType="Self.Suplemento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoProducto" EntityType="Self.TipoProducto" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Coleccion_DiaSemana" Association="Self.FK_Coleccion_DiaSemana">
             <End Role="DiaSemana" EntitySet="DiaSemana" />
@@ -596,19 +596,15 @@
           </AssociationSet>
           <AssociationSet Name="FK_DetalleIngresoProducto_Estado" Association="Self.FK_DetalleIngresoProducto_Estado">
             <End Role="Estado" EntitySet="Estado" />
-            <End Role="DetalleIngresoProducto" EntitySet="DetalleIngresoProducto" />
+            <End Role="DetalleProductoIngreso" EntitySet="DetalleProductoIngreso" />
           </AssociationSet>
           <AssociationSet Name="FK_DetalleIngresoProducto_IngresoProducto" Association="Self.FK_DetalleIngresoProducto_IngresoProducto">
-            <End Role="IngresoProducto" EntitySet="IngresoProducto" />
-            <End Role="DetalleIngresoProducto" EntitySet="DetalleIngresoProducto" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DetalleIngresoProducto_Producto" Association="Self.FK_DetalleIngresoProducto_Producto">
-            <End Role="Producto" EntitySet="Producto" />
-            <End Role="DetalleIngresoProducto" EntitySet="DetalleIngresoProducto" />
+            <End Role="ProductoIngreso" EntitySet="ProductoIngreso" />
+            <End Role="DetalleProductoIngreso" EntitySet="DetalleProductoIngreso" />
           </AssociationSet>
           <AssociationSet Name="FK_DetalleIngresoProducto_Producto_Edicion" Association="Self.FK_DetalleIngresoProducto_Producto_Edicion">
-            <End Role="Producto_Edicion" EntitySet="Producto_Edicion" />
-            <End Role="DetalleIngresoProducto" EntitySet="DetalleIngresoProducto" />
+            <End Role="ProductoEdicion" EntitySet="ProductoEdicion" />
+            <End Role="DetalleProductoIngreso" EntitySet="DetalleProductoIngreso" />
           </AssociationSet>
           <AssociationSet Name="FK_Diario_Producto" Association="Self.FK_Diario_Producto">
             <End Role="Producto" EntitySet="Producto" />
@@ -624,11 +620,11 @@
           </AssociationSet>
           <AssociationSet Name="FK_IngresoProducto_Estado" Association="Self.FK_IngresoProducto_Estado">
             <End Role="Estado" EntitySet="Estado" />
-            <End Role="IngresoProducto" EntitySet="IngresoProducto" />
+            <End Role="ProductoIngreso" EntitySet="ProductoIngreso" />
           </AssociationSet>
           <AssociationSet Name="FK_IngresoProducto_Proveedor" Association="Self.FK_IngresoProducto_Proveedor">
             <End Role="Proveedor" EntitySet="Proveedor" />
-            <End Role="IngresoProducto" EntitySet="IngresoProducto" />
+            <End Role="ProductoIngreso" EntitySet="ProductoIngreso" />
           </AssociationSet>
           <AssociationSet Name="FK_Libro_Producto" Association="Self.FK_Libro_Producto">
             <End Role="Producto" EntitySet="Producto" />
@@ -644,11 +640,11 @@
           </AssociationSet>
           <AssociationSet Name="FK_Producto_Edicion_Estado" Association="Self.FK_Producto_Edicion_Estado">
             <End Role="Estado" EntitySet="Estado" />
-            <End Role="Producto_Edicion" EntitySet="Producto_Edicion" />
+            <End Role="ProductoEdicion" EntitySet="ProductoEdicion" />
           </AssociationSet>
           <AssociationSet Name="FK_Producto_Edicion_Producto" Association="Self.FK_Producto_Edicion_Producto">
             <End Role="Producto" EntitySet="Producto" />
-            <End Role="Producto_Edicion" EntitySet="Producto_Edicion" />
+            <End Role="ProductoEdicion" EntitySet="ProductoEdicion" />
           </AssociationSet>
           <AssociationSet Name="FK_Producto_Estado1" Association="Self.FK_Producto_Estado1">
             <End Role="Estado" EntitySet="Estado" />
@@ -710,23 +706,24 @@
         <EntityContainer Name="MAGASYSEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Anio" EntityType="MAGASYSModel.Anio" />
           <EntitySet Name="Coleccion" EntityType="MAGASYSModel.Coleccion" />
-          <EntitySet Name="DetalleIngresoProducto" EntityType="MAGASYSModel.DetalleIngresoProducto" />
+          <EntitySet Name="DetalleProductoIngreso" EntityType="MAGASYSModel.DetalleProductoIngreso" />
           <EntitySet Name="Diario" EntityType="MAGASYSModel.Diario" />
           <EntitySet Name="DiarioDiaSemana" EntityType="MAGASYSModel.DiarioDiaSemana" />
           <EntitySet Name="DiaSemana" EntityType="MAGASYSModel.DiaSemana" />
           <EntitySet Name="Estado" EntityType="MAGASYSModel.Estado" />
           <EntitySet Name="Genero" EntityType="MAGASYSModel.Genero" />
-          <EntitySet Name="IngresoProducto" EntityType="MAGASYSModel.IngresoProducto" />
           <EntitySet Name="Libro" EntityType="MAGASYSModel.Libro" />
           <EntitySet Name="Localidad" EntityType="MAGASYSModel.Localidad" />
           <EntitySet Name="Pelicula" EntityType="MAGASYSModel.Pelicula" />
           <EntitySet Name="Periodicidad" EntityType="MAGASYSModel.Periodicidad" />
           <EntitySet Name="Producto" EntityType="MAGASYSModel.Producto" />
-          <EntitySet Name="Producto_Edicion" EntityType="MAGASYSModel.Producto_Edicion" />
+          <EntitySet Name="ProductoEdicion" EntityType="MAGASYSModel.ProductoEdicion" />
+          <EntitySet Name="ProductoIngreso" EntityType="MAGASYSModel.ProductoIngreso" />
           <EntitySet Name="Proveedor" EntityType="MAGASYSModel.Proveedor" />
           <EntitySet Name="Provincia" EntityType="MAGASYSModel.Provincia" />
           <EntitySet Name="Revista" EntityType="MAGASYSModel.Revista" />
           <EntitySet Name="Suplemento" EntityType="MAGASYSModel.Suplemento" />
+          <EntitySet Name="sysdiagrams" EntityType="MAGASYSModel.sysdiagrams" />
           <EntitySet Name="TipoProducto" EntityType="MAGASYSModel.TipoProducto" />
           <AssociationSet Name="FK_Coleccion_DiaSemana" Association="MAGASYSModel.FK_Coleccion_DiaSemana">
             <End Role="DiaSemana" EntitySet="DiaSemana" />
@@ -742,19 +739,15 @@
           </AssociationSet>
           <AssociationSet Name="FK_DetalleIngresoProducto_Estado" Association="MAGASYSModel.FK_DetalleIngresoProducto_Estado">
             <End Role="Estado" EntitySet="Estado" />
-            <End Role="DetalleIngresoProducto" EntitySet="DetalleIngresoProducto" />
+            <End Role="DetalleProductoIngreso" EntitySet="DetalleProductoIngreso" />
           </AssociationSet>
           <AssociationSet Name="FK_DetalleIngresoProducto_IngresoProducto" Association="MAGASYSModel.FK_DetalleIngresoProducto_IngresoProducto">
-            <End Role="IngresoProducto" EntitySet="IngresoProducto" />
-            <End Role="DetalleIngresoProducto" EntitySet="DetalleIngresoProducto" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DetalleIngresoProducto_Producto" Association="MAGASYSModel.FK_DetalleIngresoProducto_Producto">
-            <End Role="Producto" EntitySet="Producto" />
-            <End Role="DetalleIngresoProducto" EntitySet="DetalleIngresoProducto" />
+            <End Role="ProductoIngreso" EntitySet="ProductoIngreso" />
+            <End Role="DetalleProductoIngreso" EntitySet="DetalleProductoIngreso" />
           </AssociationSet>
           <AssociationSet Name="FK_DetalleIngresoProducto_Producto_Edicion" Association="MAGASYSModel.FK_DetalleIngresoProducto_Producto_Edicion">
-            <End Role="Producto_Edicion" EntitySet="Producto_Edicion" />
-            <End Role="DetalleIngresoProducto" EntitySet="DetalleIngresoProducto" />
+            <End Role="ProductoEdicion" EntitySet="ProductoEdicion" />
+            <End Role="DetalleProductoIngreso" EntitySet="DetalleProductoIngreso" />
           </AssociationSet>
           <AssociationSet Name="FK_Diario_Producto" Association="MAGASYSModel.FK_Diario_Producto">
             <End Role="Producto" EntitySet="Producto" />
@@ -782,11 +775,11 @@
           </AssociationSet>
           <AssociationSet Name="FK_IngresoProducto_Estado" Association="MAGASYSModel.FK_IngresoProducto_Estado">
             <End Role="Estado" EntitySet="Estado" />
-            <End Role="IngresoProducto" EntitySet="IngresoProducto" />
+            <End Role="ProductoIngreso" EntitySet="ProductoIngreso" />
           </AssociationSet>
           <AssociationSet Name="FK_Producto_Edicion_Estado" Association="MAGASYSModel.FK_Producto_Edicion_Estado">
             <End Role="Estado" EntitySet="Estado" />
-            <End Role="Producto_Edicion" EntitySet="Producto_Edicion" />
+            <End Role="ProductoEdicion" EntitySet="ProductoEdicion" />
           </AssociationSet>
           <AssociationSet Name="FK_Producto_Estado1" Association="MAGASYSModel.FK_Producto_Estado1">
             <End Role="Estado" EntitySet="Estado" />
@@ -799,10 +792,6 @@
           <AssociationSet Name="FK_Producto_Genero" Association="MAGASYSModel.FK_Producto_Genero">
             <End Role="Genero" EntitySet="Genero" />
             <End Role="Producto" EntitySet="Producto" />
-          </AssociationSet>
-          <AssociationSet Name="FK_IngresoProducto_Proveedor" Association="MAGASYSModel.FK_IngresoProducto_Proveedor">
-            <End Role="Proveedor" EntitySet="Proveedor" />
-            <End Role="IngresoProducto" EntitySet="IngresoProducto" />
           </AssociationSet>
           <AssociationSet Name="FK_Libro_Producto" Association="MAGASYSModel.FK_Libro_Producto">
             <End Role="Producto" EntitySet="Producto" />
@@ -826,7 +815,7 @@
           </AssociationSet>
           <AssociationSet Name="FK_Producto_Edicion_Producto" Association="MAGASYSModel.FK_Producto_Edicion_Producto">
             <End Role="Producto" EntitySet="Producto" />
-            <End Role="Producto_Edicion" EntitySet="Producto_Edicion" />
+            <End Role="ProductoEdicion" EntitySet="ProductoEdicion" />
           </AssociationSet>
           <AssociationSet Name="FK_Producto_Proveedor" Association="MAGASYSModel.FK_Producto_Proveedor">
             <End Role="Proveedor" EntitySet="Proveedor" />
@@ -843,6 +832,10 @@
           <AssociationSet Name="FK_Suplemento_Producto" Association="MAGASYSModel.FK_Suplemento_Producto">
             <End Role="Producto" EntitySet="Producto" />
             <End Role="Suplemento" EntitySet="Suplemento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IngresoProducto_Proveedor" Association="MAGASYSModel.FK_IngresoProducto_Proveedor">
+            <End Role="Proveedor" EntitySet="Proveedor" />
+            <End Role="ProductoIngreso" EntitySet="ProductoIngreso" />
           </AssociationSet>
           <AssociationSet Name="FK_Proveedor_Provincia" Association="MAGASYSModel.FK_Proveedor_Provincia">
             <End Role="Provincia" EntitySet="Provincia" />
@@ -868,7 +861,7 @@
           <NavigationProperty Name="Periodicidad" Relationship="MAGASYSModel.FK_Coleccion_Periodicidad" FromRole="Coleccion" ToRole="Periodicidad" />
           <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_Coleccion_Producto" FromRole="Coleccion" ToRole="Producto" />
         </EntityType>
-        <EntityType Name="DetalleIngresoProducto">
+        <EntityType Name="DetalleProductoIngreso">
           <Key>
             <PropertyRef Name="ID_DETALLE_INGRESO_PRODUCTO" />
           </Key>
@@ -877,12 +870,10 @@
           <Property Name="CANTIDAD_UNIDADES" Type="Int32" Nullable="false" />
           <Property Name="FECHA_DEVOLUCION" Type="DateTime" Precision="3" />
           <Property Name="COD_ESTADO" Type="Int32" Nullable="false" />
-          <Property Name="COD_PRODUCTO" Type="Int32" Nullable="false" />
           <Property Name="COD_PRODUCTO_EDICION" Type="Int32" />
-          <NavigationProperty Name="Estado" Relationship="MAGASYSModel.FK_DetalleIngresoProducto_Estado" FromRole="DetalleIngresoProducto" ToRole="Estado" />
-          <NavigationProperty Name="IngresoProducto" Relationship="MAGASYSModel.FK_DetalleIngresoProducto_IngresoProducto" FromRole="DetalleIngresoProducto" ToRole="IngresoProducto" />
-          <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_DetalleIngresoProducto_Producto" FromRole="DetalleIngresoProducto" ToRole="Producto" />
-          <NavigationProperty Name="Producto_Edicion" Relationship="MAGASYSModel.FK_DetalleIngresoProducto_Producto_Edicion" FromRole="DetalleIngresoProducto" ToRole="Producto_Edicion" />
+          <NavigationProperty Name="Estado" Relationship="MAGASYSModel.FK_DetalleIngresoProducto_Estado" FromRole="DetalleProductoIngreso" ToRole="Estado" />
+          <NavigationProperty Name="ProductoIngreso" Relationship="MAGASYSModel.FK_DetalleIngresoProducto_IngresoProducto" FromRole="DetalleProductoIngreso" ToRole="ProductoIngreso" />
+          <NavigationProperty Name="ProductoEdicion" Relationship="MAGASYSModel.FK_DetalleIngresoProducto_Producto_Edicion" FromRole="DetalleProductoIngreso" ToRole="ProductoEdicion" />
         </EntityType>
         <EntityType Name="Diario">
           <Key>
@@ -922,9 +913,9 @@
           </Key>
           <Property Name="ID_ESTADO" Type="Int32" Nullable="false" />
           <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="DetalleIngresoProducto" Relationship="MAGASYSModel.FK_DetalleIngresoProducto_Estado" FromRole="Estado" ToRole="DetalleIngresoProducto" />
-          <NavigationProperty Name="IngresoProducto" Relationship="MAGASYSModel.FK_IngresoProducto_Estado" FromRole="Estado" ToRole="IngresoProducto" />
-          <NavigationProperty Name="Producto_Edicion" Relationship="MAGASYSModel.FK_Producto_Edicion_Estado" FromRole="Estado" ToRole="Producto_Edicion" />
+          <NavigationProperty Name="DetalleProductoIngreso" Relationship="MAGASYSModel.FK_DetalleIngresoProducto_Estado" FromRole="Estado" ToRole="DetalleProductoIngreso" />
+          <NavigationProperty Name="ProductoIngreso" Relationship="MAGASYSModel.FK_IngresoProducto_Estado" FromRole="Estado" ToRole="ProductoIngreso" />
+          <NavigationProperty Name="ProductoEdicion" Relationship="MAGASYSModel.FK_Producto_Edicion_Estado" FromRole="Estado" ToRole="ProductoEdicion" />
           <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_Producto_Estado1" FromRole="Estado" ToRole="Producto" />
           <NavigationProperty Name="Proveedor" Relationship="MAGASYSModel.FK_Proveedor_Estado" FromRole="Estado" ToRole="Proveedor" />
         </EntityType>
@@ -935,18 +926,6 @@
           <Property Name="ID_GENERO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_Producto_Genero" FromRole="Genero" ToRole="Producto" />
-        </EntityType>
-        <EntityType Name="IngresoProducto">
-          <Key>
-            <PropertyRef Name="ID_INGRESO_PRODUCTOS" />
-          </Key>
-          <Property Name="ID_INGRESO_PRODUCTOS" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="COD_ESTADO" Type="Int32" Nullable="false" />
-          <Property Name="COD_PROVEEDOR" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="DetalleIngresoProducto" Relationship="MAGASYSModel.FK_DetalleIngresoProducto_IngresoProducto" FromRole="IngresoProducto" ToRole="DetalleIngresoProducto" />
-          <NavigationProperty Name="Estado" Relationship="MAGASYSModel.FK_IngresoProducto_Estado" FromRole="IngresoProducto" ToRole="Estado" />
-          <NavigationProperty Name="Proveedor" Relationship="MAGASYSModel.FK_IngresoProducto_Proveedor" FromRole="IngresoProducto" ToRole="Proveedor" />
         </EntityType>
         <EntityType Name="Libro">
           <Key>
@@ -1004,33 +983,46 @@
           <Property Name="COD_TIPO_PRODUCTO" Type="Int32" Nullable="false" />
           <Property Name="FECHA_BAJA" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Coleccion" Relationship="MAGASYSModel.FK_Coleccion_Producto" FromRole="Producto" ToRole="Coleccion" />
-          <NavigationProperty Name="DetalleIngresoProducto" Relationship="MAGASYSModel.FK_DetalleIngresoProducto_Producto" FromRole="Producto" ToRole="DetalleIngresoProducto" />
           <NavigationProperty Name="Diario" Relationship="MAGASYSModel.FK_Diario_Producto" FromRole="Producto" ToRole="Diario" />
           <NavigationProperty Name="Estado" Relationship="MAGASYSModel.FK_Producto_Estado1" FromRole="Producto" ToRole="Estado" />
           <NavigationProperty Name="Genero" Relationship="MAGASYSModel.FK_Producto_Genero" FromRole="Producto" ToRole="Genero" />
           <NavigationProperty Name="Libro" Relationship="MAGASYSModel.FK_Libro_Producto" FromRole="Producto" ToRole="Libro" />
           <NavigationProperty Name="Pelicula" Relationship="MAGASYSModel.FK_Pelicula_Producto" FromRole="Producto" ToRole="Pelicula" />
-          <NavigationProperty Name="Producto_Edicion" Relationship="MAGASYSModel.FK_Producto_Edicion_Producto" FromRole="Producto" ToRole="Producto_Edicion" />
+          <NavigationProperty Name="ProductoEdicion" Relationship="MAGASYSModel.FK_Producto_Edicion_Producto" FromRole="Producto" ToRole="ProductoEdicion" />
           <NavigationProperty Name="Proveedor" Relationship="MAGASYSModel.FK_Producto_Proveedor" FromRole="Producto" ToRole="Proveedor" />
           <NavigationProperty Name="TipoProducto" Relationship="MAGASYSModel.FK_Producto_TipoProducto" FromRole="Producto" ToRole="TipoProducto" />
           <NavigationProperty Name="Revista" Relationship="MAGASYSModel.FK_Revista_Producto" FromRole="Producto" ToRole="Revista" />
           <NavigationProperty Name="Suplemento" Relationship="MAGASYSModel.FK_Suplemento_Producto" FromRole="Producto" ToRole="Suplemento" />
         </EntityType>
-        <EntityType Name="Producto_Edicion">
+        <EntityType Name="ProductoEdicion">
           <Key>
             <PropertyRef Name="ID_PRODUCTO_EDICION" />
           </Key>
           <Property Name="ID_PRODUCTO_EDICION" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="COD_PRODUCTO" Type="Int32" Nullable="false" />
-          <Property Name="NUMERO_EDICION" Type="Int32" Nullable="false" />
+          <Property Name="COD_TIPO_PRODUCTO" Type="Int32" Nullable="false" />
+          <Property Name="EDICION" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FECHA_EDICION" Type="DateTime" Precision="3" />
           <Property Name="COD_ESTADO" Type="Int32" Nullable="false" />
-          <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CANTIDAD_DISPONIBLE" Type="Int32" Nullable="false" />
           <Property Name="PRECIO" Type="Double" Nullable="false" />
-          <NavigationProperty Name="DetalleIngresoProducto" Relationship="MAGASYSModel.FK_DetalleIngresoProducto_Producto_Edicion" FromRole="Producto_Edicion" ToRole="DetalleIngresoProducto" />
-          <NavigationProperty Name="Estado" Relationship="MAGASYSModel.FK_Producto_Edicion_Estado" FromRole="Producto_Edicion" ToRole="Estado" />
-          <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_Producto_Edicion_Producto" FromRole="Producto_Edicion" ToRole="Producto" />
+          <NavigationProperty Name="DetalleProductoIngreso" Relationship="MAGASYSModel.FK_DetalleIngresoProducto_Producto_Edicion" FromRole="ProductoEdicion" ToRole="DetalleProductoIngreso" />
+          <NavigationProperty Name="Estado" Relationship="MAGASYSModel.FK_Producto_Edicion_Estado" FromRole="ProductoEdicion" ToRole="Estado" />
+          <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_Producto_Edicion_Producto" FromRole="ProductoEdicion" ToRole="Producto" />
+        </EntityType>
+        <EntityType Name="ProductoIngreso">
+          <Key>
+            <PropertyRef Name="ID_INGRESO_PRODUCTOS" />
+          </Key>
+          <Property Name="ID_INGRESO_PRODUCTOS" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="COD_ESTADO" Type="Int32" Nullable="false" />
+          <Property Name="COD_PROVEEDOR" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DetalleProductoIngreso" Relationship="MAGASYSModel.FK_DetalleIngresoProducto_IngresoProducto" FromRole="ProductoIngreso" ToRole="DetalleProductoIngreso" />
+          <NavigationProperty Name="Estado" Relationship="MAGASYSModel.FK_IngresoProducto_Estado" FromRole="ProductoIngreso" ToRole="Estado" />
+          <NavigationProperty Name="Proveedor" Relationship="MAGASYSModel.FK_IngresoProducto_Proveedor" FromRole="ProductoIngreso" ToRole="Proveedor" />
         </EntityType>
         <EntityType Name="Proveedor">
           <Key>
@@ -1056,9 +1048,9 @@
           <Property Name="ID_LOCALIDAD" Type="Int32" Nullable="false" />
           <Property Name="FECHA_BAJA" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Estado" Relationship="MAGASYSModel.FK_Proveedor_Estado" FromRole="Proveedor" ToRole="Estado" />
-          <NavigationProperty Name="IngresoProducto" Relationship="MAGASYSModel.FK_IngresoProducto_Proveedor" FromRole="Proveedor" ToRole="IngresoProducto" />
           <NavigationProperty Name="Localidad" Relationship="MAGASYSModel.FK_Proveedor_Localidad" FromRole="Proveedor" ToRole="Localidad" />
           <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_Producto_Proveedor" FromRole="Proveedor" ToRole="Producto" />
+          <NavigationProperty Name="ProductoIngreso" Relationship="MAGASYSModel.FK_IngresoProducto_Proveedor" FromRole="Proveedor" ToRole="ProductoIngreso" />
           <NavigationProperty Name="Provincia" Relationship="MAGASYSModel.FK_Proveedor_Provincia" FromRole="Proveedor" ToRole="Provincia" />
         </EntityType>
         <EntityType Name="Provincia">
@@ -1096,6 +1088,16 @@
           <NavigationProperty Name="Diario" Relationship="MAGASYSModel.FK_Suplemento_Diario" FromRole="Suplemento" ToRole="Diario" />
           <NavigationProperty Name="DiaSemana" Relationship="MAGASYSModel.FK_Suplemento_DiaSemana" FromRole="Suplemento" ToRole="DiaSemana" />
           <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_Suplemento_Producto" FromRole="Suplemento" ToRole="Producto" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="TipoProducto">
           <Key>
@@ -1143,48 +1145,36 @@
         </Association>
         <Association Name="FK_DetalleIngresoProducto_Estado">
           <End Type="MAGASYSModel.Estado" Role="Estado" Multiplicity="1" />
-          <End Type="MAGASYSModel.DetalleIngresoProducto" Role="DetalleIngresoProducto" Multiplicity="*" />
+          <End Type="MAGASYSModel.DetalleProductoIngreso" Role="DetalleProductoIngreso" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Estado">
               <PropertyRef Name="ID_ESTADO" />
             </Principal>
-            <Dependent Role="DetalleIngresoProducto">
+            <Dependent Role="DetalleProductoIngreso">
               <PropertyRef Name="COD_ESTADO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DetalleIngresoProducto_IngresoProducto">
-          <End Type="MAGASYSModel.IngresoProducto" Role="IngresoProducto" Multiplicity="1" />
-          <End Type="MAGASYSModel.DetalleIngresoProducto" Role="DetalleIngresoProducto" Multiplicity="*" />
+          <End Type="MAGASYSModel.ProductoIngreso" Role="ProductoIngreso" Multiplicity="1" />
+          <End Type="MAGASYSModel.DetalleProductoIngreso" Role="DetalleProductoIngreso" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="IngresoProducto">
+            <Principal Role="ProductoIngreso">
               <PropertyRef Name="ID_INGRESO_PRODUCTOS" />
             </Principal>
-            <Dependent Role="DetalleIngresoProducto">
+            <Dependent Role="DetalleProductoIngreso">
               <PropertyRef Name="COD_INGRESO_PRODUCTO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DetalleIngresoProducto_Producto">
-          <End Type="MAGASYSModel.Producto" Role="Producto" Multiplicity="1" />
-          <End Type="MAGASYSModel.DetalleIngresoProducto" Role="DetalleIngresoProducto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Producto">
-              <PropertyRef Name="ID_PRODUCTO" />
-            </Principal>
-            <Dependent Role="DetalleIngresoProducto">
-              <PropertyRef Name="COD_PRODUCTO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_DetalleIngresoProducto_Producto_Edicion">
-          <End Type="MAGASYSModel.Producto_Edicion" Role="Producto_Edicion" Multiplicity="0..1" />
-          <End Type="MAGASYSModel.DetalleIngresoProducto" Role="DetalleIngresoProducto" Multiplicity="*" />
+          <End Type="MAGASYSModel.ProductoEdicion" Role="ProductoEdicion" Multiplicity="0..1" />
+          <End Type="MAGASYSModel.DetalleProductoIngreso" Role="DetalleProductoIngreso" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Producto_Edicion">
+            <Principal Role="ProductoEdicion">
               <PropertyRef Name="ID_PRODUCTO_EDICION" />
             </Principal>
-            <Dependent Role="DetalleIngresoProducto">
+            <Dependent Role="DetalleProductoIngreso">
               <PropertyRef Name="COD_PRODUCTO_EDICION" />
             </Dependent>
           </ReferentialConstraint>
@@ -1263,24 +1253,24 @@
         </Association>
         <Association Name="FK_IngresoProducto_Estado">
           <End Type="MAGASYSModel.Estado" Role="Estado" Multiplicity="1" />
-          <End Type="MAGASYSModel.IngresoProducto" Role="IngresoProducto" Multiplicity="*" />
+          <End Type="MAGASYSModel.ProductoIngreso" Role="ProductoIngreso" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Estado">
               <PropertyRef Name="ID_ESTADO" />
             </Principal>
-            <Dependent Role="IngresoProducto">
+            <Dependent Role="ProductoIngreso">
               <PropertyRef Name="COD_ESTADO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Producto_Edicion_Estado">
           <End Type="MAGASYSModel.Estado" Role="Estado" Multiplicity="1" />
-          <End Type="MAGASYSModel.Producto_Edicion" Role="Producto_Edicion" Multiplicity="*" />
+          <End Type="MAGASYSModel.ProductoEdicion" Role="ProductoEdicion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Estado">
               <PropertyRef Name="ID_ESTADO" />
             </Principal>
-            <Dependent Role="Producto_Edicion">
+            <Dependent Role="ProductoEdicion">
               <PropertyRef Name="COD_ESTADO" />
             </Dependent>
           </ReferentialConstraint>
@@ -1318,18 +1308,6 @@
             </Principal>
             <Dependent Role="Producto">
               <PropertyRef Name="COD_GENERO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_IngresoProducto_Proveedor">
-          <End Type="MAGASYSModel.Proveedor" Role="Proveedor" Multiplicity="1" />
-          <End Type="MAGASYSModel.IngresoProducto" Role="IngresoProducto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Proveedor">
-              <PropertyRef Name="ID_PROVEEDOR" />
-            </Principal>
-            <Dependent Role="IngresoProducto">
-              <PropertyRef Name="COD_PROVEEDOR" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1395,12 +1373,12 @@
         </Association>
         <Association Name="FK_Producto_Edicion_Producto">
           <End Type="MAGASYSModel.Producto" Role="Producto" Multiplicity="1" />
-          <End Type="MAGASYSModel.Producto_Edicion" Role="Producto_Edicion" Multiplicity="*" />
+          <End Type="MAGASYSModel.ProductoEdicion" Role="ProductoEdicion" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Producto">
               <PropertyRef Name="ID_PRODUCTO" />
             </Principal>
-            <Dependent Role="Producto_Edicion">
+            <Dependent Role="ProductoEdicion">
               <PropertyRef Name="COD_PRODUCTO" />
             </Dependent>
           </ReferentialConstraint>
@@ -1453,6 +1431,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_IngresoProducto_Proveedor">
+          <End Type="MAGASYSModel.Proveedor" Role="Proveedor" Multiplicity="1" />
+          <End Type="MAGASYSModel.ProductoIngreso" Role="ProductoIngreso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedor">
+              <PropertyRef Name="ID_PROVEEDOR" />
+            </Principal>
+            <Dependent Role="ProductoIngreso">
+              <PropertyRef Name="COD_PROVEEDOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Proveedor_Provincia">
           <End Type="MAGASYSModel.Provincia" Role="Provincia" Multiplicity="1" />
           <End Type="MAGASYSModel.Proveedor" Role="Proveedor" Multiplicity="*" />
@@ -1489,11 +1479,10 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="DetalleIngresoProducto">
-            <EntityTypeMapping TypeName="MAGASYSModel.DetalleIngresoProducto">
-              <MappingFragment StoreEntitySet="DetalleIngresoProducto">
+          <EntitySetMapping Name="DetalleProductoIngreso">
+            <EntityTypeMapping TypeName="MAGASYSModel.DetalleProductoIngreso">
+              <MappingFragment StoreEntitySet="DetalleProductoIngreso">
                 <ScalarProperty Name="COD_PRODUCTO_EDICION" ColumnName="COD_PRODUCTO_EDICION" />
-                <ScalarProperty Name="COD_PRODUCTO" ColumnName="COD_PRODUCTO" />
                 <ScalarProperty Name="COD_ESTADO" ColumnName="COD_ESTADO" />
                 <ScalarProperty Name="FECHA_DEVOLUCION" ColumnName="FECHA_DEVOLUCION" />
                 <ScalarProperty Name="CANTIDAD_UNIDADES" ColumnName="CANTIDAD_UNIDADES" />
@@ -1541,16 +1530,6 @@
               <MappingFragment StoreEntitySet="Genero">
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
                 <ScalarProperty Name="ID_GENERO" ColumnName="ID_GENERO" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="IngresoProducto">
-            <EntityTypeMapping TypeName="MAGASYSModel.IngresoProducto">
-              <MappingFragment StoreEntitySet="IngresoProducto">
-                <ScalarProperty Name="COD_PROVEEDOR" ColumnName="COD_PROVEEDOR" />
-                <ScalarProperty Name="COD_ESTADO" ColumnName="COD_ESTADO" />
-                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
-                <ScalarProperty Name="ID_INGRESO_PRODUCTOS" ColumnName="ID_INGRESO_PRODUCTOS" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1609,17 +1588,29 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Producto_Edicion">
-            <EntityTypeMapping TypeName="MAGASYSModel.Producto_Edicion">
-              <MappingFragment StoreEntitySet="Producto_Edicion">
+          <EntitySetMapping Name="ProductoEdicion">
+            <EntityTypeMapping TypeName="MAGASYSModel.ProductoEdicion">
+              <MappingFragment StoreEntitySet="ProductoEdicion">
                 <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
                 <ScalarProperty Name="CANTIDAD_DISPONIBLE" ColumnName="CANTIDAD_DISPONIBLE" />
                 <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
                 <ScalarProperty Name="COD_ESTADO" ColumnName="COD_ESTADO" />
-                <ScalarProperty Name="NUMERO_EDICION" ColumnName="NUMERO_EDICION" />
+                <ScalarProperty Name="FECHA_EDICION" ColumnName="FECHA_EDICION" />
+                <ScalarProperty Name="EDICION" ColumnName="EDICION" />
+                <ScalarProperty Name="COD_TIPO_PRODUCTO" ColumnName="COD_TIPO_PRODUCTO" />
                 <ScalarProperty Name="COD_PRODUCTO" ColumnName="COD_PRODUCTO" />
                 <ScalarProperty Name="ID_PRODUCTO_EDICION" ColumnName="ID_PRODUCTO_EDICION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductoIngreso">
+            <EntityTypeMapping TypeName="MAGASYSModel.ProductoIngreso">
+              <MappingFragment StoreEntitySet="ProductoIngreso">
+                <ScalarProperty Name="COD_PROVEEDOR" ColumnName="COD_PROVEEDOR" />
+                <ScalarProperty Name="COD_ESTADO" ColumnName="COD_ESTADO" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="ID_INGRESO_PRODUCTOS" ColumnName="ID_INGRESO_PRODUCTOS" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1676,6 +1667,17 @@
                 <ScalarProperty Name="ID_DIA_SEMANA" ColumnName="ID_DIA_SEMANA" />
                 <ScalarProperty Name="COD_PRODUCTO" ColumnName="COD_PRODUCTO" />
                 <ScalarProperty Name="ID_SUPLEMENTO" ColumnName="ID_SUPLEMENTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="MAGASYSModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

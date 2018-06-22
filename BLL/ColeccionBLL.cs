@@ -1,6 +1,8 @@
 ﻿using BLL.DAL;
+using BLL.Filters;
 using System;
 using System.Transactions;
+using System.Collections.Generic;
 
 namespace BLL
 {
@@ -48,6 +50,49 @@ namespace BLL
             }
 
             return oProductoColeccion;
+        }
+
+        public List<ColeccionEdicion> ObtenerColeccionesParaEdicion(ProductoFiltro oProductoFiltro)
+        {
+            List<Producto> lstProductos = null;
+            List<ColeccionEdicion> lstColeccionEdicion = null;
+
+            try
+            {
+                using (var loRepProducto = new Repository<Producto>())
+                {
+                    lstProductos = loRepProducto.Search(p => p.FECHA_BAJA == null && p.COD_ESTADO == 1);
+
+                    if (oProductoFiltro.CodProveedor > 0 && lstProductos.Count > 0)
+                        lstProductos = lstProductos.FindAll(p => p.COD_PROVEEDOR == oProductoFiltro.CodProveedor);
+
+                    if (oProductoFiltro.CodTipoProducto > 0 && lstProductos.Count > 0)
+                        lstProductos = lstProductos.FindAll(p => p.COD_TIPO_PRODUCTO == oProductoFiltro.CodTipoProducto);
+
+                    if (!String.IsNullOrEmpty(oProductoFiltro.Nombre) && lstProductos.Count > 0)
+                        lstProductos = lstProductos.FindAll(p => p.NOMBRE.ToUpper().Contains(oProductoFiltro.Nombre.ToUpper()));
+                }
+
+                ColeccionEdicion oColeccionEdicion;
+                lstColeccionEdicion = new List<ColeccionEdicion>();
+
+                foreach (var loProducto in lstProductos)
+                {
+                    oColeccionEdicion = new ColeccionEdicion
+                    {
+                        COD_PRODUCTO = loProducto.ID_PRODUCTO,
+                        NOMBRE = loProducto.NOMBRE
+                    };
+
+                    lstColeccionEdicion.Add(oColeccionEdicion);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return lstColeccionEdicion;
         }
 
         public bool AltaColeccion(Producto oProducto, Coleccion oColeccion)
@@ -134,6 +179,18 @@ namespace BLL
         public int COD_PERIODICIDAD { get; set; }
         public int? ID_DIA_SEMANA { get; set; }
         public int CANTIDAD_DE_ENTREGAS { get; set; }
+    }
+
+    public class ColeccionEdicion
+    {
+        public int COD_PRODUCTO { get; set; }
+        public string NOMBRE { get; set; }
+        public int NUMERO_EDICION { get; set; }
+        public System.DateTime FECHA_EDICION { get; set; }
+        public string DESCRIPCION { get; set; }
+        public double PRECIO { get; set; }
+        public int CANTIDAD_DISPONIBLE { get; set; }
+        public System.DateTime FECHA_DEVOLUCION { get; set; }
     }
 
     #endregion
