@@ -345,48 +345,54 @@ namespace PL.AdminDashboard
         private bool ActualizarIngresoDiarios()
         {
             bool loResutado = false;
+            bool loGrabarEdicion = false;
             List<DetalleProductoIngreso> lstDetalleProductoIngreso = null;
             ProductoEdicion oProductoEdicion = null;
             BLL.DAL.ProductoIngreso oProductoIngreso = null;
 
             try
             {
+                // Eliminar bordes rojos de las celdas
+                foreach (var loItem in lsvDiarios.Items)
+                {
+                    ((TextBox)loItem.Controls[9]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#e5e6e7");
+                    ((TextBox)loItem.Controls[11]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#e5e6e7");
+                    ((TextBox)loItem.Controls[13]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#e5e6e7");
+                }
+
                 foreach (var loItem in lsvDiarios.Items)
                 {
                     if (String.IsNullOrEmpty(((TextBox)loItem.Controls[7]).Text))
-                    {   // Si el nro. de edición viene vació no se procesa el registro y se continúa con el siguiente
+                    {   // Si el nro. de edición viene vació no se procesa el registro y se continúa con el siguiente              
                         continue;
                     }
 
                     // Controlar campos obligatorios
                     if (String.IsNullOrEmpty(((TextBox)loItem.Controls[9]).Text) || String.IsNullOrEmpty(((TextBox)loItem.Controls[11]).Text) || String.IsNullOrEmpty(((TextBox)loItem.Controls[13]).Text))
                     {
-                        if (String.IsNullOrEmpty(((TextBox)loItem.Controls[9]).Text))                        
-                            ((TextBox)loItem.Controls[9]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#cc5965");                            
-                        else
-                            ((TextBox)loItem.Controls[9]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#e5e6e7");
-                       
-                        if (String.IsNullOrEmpty(((TextBox)loItem.Controls[11]).Text))                        
-                            ((TextBox)loItem.Controls[11]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#cc5965");
-                        else
-                            ((TextBox)loItem.Controls[11]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#e5e6e7");
-                        
-                        if (String.IsNullOrEmpty(((TextBox)loItem.Controls[13]).Text))                        
-                            ((TextBox)loItem.Controls[13]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#cc5965");
-                        else
-                            ((TextBox)loItem.Controls[13]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#e5e6e7");
+                        if (String.IsNullOrEmpty(((TextBox)loItem.Controls[9]).Text))
+                            ((TextBox)loItem.Controls[9]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#cc5965");
 
-                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProductoIngresoCampObligatorio, "Diario Edición"));
+                        if (String.IsNullOrEmpty(((TextBox)loItem.Controls[11]).Text))
+                            ((TextBox)loItem.Controls[11]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#cc5965");
+
+                        if (String.IsNullOrEmpty(((TextBox)loItem.Controls[13]).Text))
+                            ((TextBox)loItem.Controls[13]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#cc5965");
+
+                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProductoIngresoCampObligatorio));
                         return false;
                     }
 
-                    ((TextBox)loItem.Controls[9]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#e5e6e7");
-                    ((TextBox)loItem.Controls[11]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#e5e6e7");
-                    ((TextBox)loItem.Controls[13]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#e5e6e7");
+                    loGrabarEdicion = true;
+                }
+
+                if (!loGrabarEdicion)
+                {
+                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProductoIngresoCampObligatorio));
+                    return false;
                 }
 
                 lstDetalleProductoIngreso = new List<DetalleProductoIngreso>();
-
 
                 foreach (var loItem in lsvDiarios.Items)
                 {
@@ -457,12 +463,21 @@ namespace PL.AdminDashboard
         private bool ActualizarIngresoRevistas()
         {
             bool loResutado = false;
+            bool loGrabarEdicion = false;
             List<DetalleProductoIngreso> lstDetalleProductoIngreso = null;
             ProductoEdicion oProductoEdicion = null;
             BLL.DAL.ProductoIngreso oProductoIngreso = null;
 
             try
             {
+                // Eliminar bordes rojos de las celdas
+                foreach (var loItem in lsvRevistas.Items)
+                {
+                    ((TextBox)loItem.Controls[7]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#e5e6e7");
+                    ((TextBox)loItem.Controls[11]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#e5e6e7");
+                    ((TextBox)loItem.Controls[13]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#e5e6e7");
+                }
+
                 foreach (var loItem in lsvRevistas.Items)
                 {
                     if (String.IsNullOrEmpty(((TextBox)loItem.Controls[5]).Text))
@@ -473,9 +488,26 @@ namespace PL.AdminDashboard
                     // Controlar campos obligatorios
                     if (String.IsNullOrEmpty(((TextBox)loItem.Controls[7]).Text) || String.IsNullOrEmpty(((TextBox)loItem.Controls[11]).Text) || String.IsNullOrEmpty(((TextBox)loItem.Controls[13]).Text))
                     {
-                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProductoIngresoCampObligatorio, "Revita Edición"));
+                        if (String.IsNullOrEmpty(((TextBox)loItem.Controls[7]).Text))
+                            ((TextBox)loItem.Controls[7]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#cc5965");
+
+                        if (String.IsNullOrEmpty(((TextBox)loItem.Controls[11]).Text))
+                            ((TextBox)loItem.Controls[11]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#cc5965");
+
+                        if (String.IsNullOrEmpty(((TextBox)loItem.Controls[13]).Text))
+                            ((TextBox)loItem.Controls[13]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#cc5965");
+
+                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProductoIngresoCampObligatorio));
                         return false;
                     }
+
+                    loGrabarEdicion = true;
+                }
+
+                if (!loGrabarEdicion)
+                {
+                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProductoIngresoCampObligatorio));
+                    return false;
                 }
 
                 lstDetalleProductoIngreso = new List<DetalleProductoIngreso>();
@@ -553,12 +585,20 @@ namespace PL.AdminDashboard
         private bool ActualizarIngresoColecciones()
         {
             bool loResutado = false;
+            bool loGrabarEdicion = false;
             List<DetalleProductoIngreso> lstDetalleProductoIngreso = null;
             ProductoEdicion oProductoEdicion = null;
             BLL.DAL.ProductoIngreso oProductoIngreso = null;
 
             try
             {
+                // Eliminar bordes rojos de las celdas
+                foreach (var loItem in lsvColecciones.Items)
+                {
+                    ((TextBox)loItem.Controls[9]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#e5e6e7");
+                    ((TextBox)loItem.Controls[11]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#e5e6e7");
+                }
+
                 foreach (var loItem in lsvColecciones.Items)
                 {
                     if (String.IsNullOrEmpty(((TextBox)loItem.Controls[5]).Text))
@@ -569,9 +609,23 @@ namespace PL.AdminDashboard
                     // Controlar campos obligatorios
                     if (String.IsNullOrEmpty(((TextBox)loItem.Controls[9]).Text) || String.IsNullOrEmpty(((TextBox)loItem.Controls[11]).Text))
                     {
-                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProductoIngresoCampObligatorio, "Colección Edición"));
+                        if (String.IsNullOrEmpty(((TextBox)loItem.Controls[9]).Text))
+                            ((TextBox)loItem.Controls[9]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#cc5965");
+
+                        if (String.IsNullOrEmpty(((TextBox)loItem.Controls[11]).Text))
+                            ((TextBox)loItem.Controls[11]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#cc5965");
+
+                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProductoIngresoCampObligatorio));
                         return false;
                     }
+
+                    loGrabarEdicion = true;
+                }
+
+                if (!loGrabarEdicion)
+                {
+                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProductoIngresoCampObligatorio));
+                    return false;
                 }
 
                 lstDetalleProductoIngreso = new List<DetalleProductoIngreso>();
@@ -647,12 +701,20 @@ namespace PL.AdminDashboard
         private bool ActualizarIngresoLibros()
         {
             bool loResutado = false;
+            bool loGrabarEdicion = false;
             List<DetalleProductoIngreso> lstDetalleProductoIngreso = null;
             ProductoEdicion oProductoEdicion = null;
             BLL.DAL.ProductoIngreso oProductoIngreso = null;
 
             try
             {
+                // Eliminar bordes rojos de las celdas
+                foreach (var loItem in lsvLibros.Items)
+                {
+                    ((TextBox)loItem.Controls[11]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#e5e6e7");
+                    ((TextBox)loItem.Controls[13]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#e5e6e7");
+                }
+
                 foreach (var loItem in lsvLibros.Items)
                 {
                     if (String.IsNullOrEmpty(((TextBox)loItem.Controls[7]).Text))
@@ -663,9 +725,23 @@ namespace PL.AdminDashboard
                     // Controlar campos obligatorios
                     if (String.IsNullOrEmpty(((TextBox)loItem.Controls[11]).Text) || String.IsNullOrEmpty(((TextBox)loItem.Controls[13]).Text))
                     {
-                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProductoIngresoCampObligatorio, "Libro Edición"));
+                        if (String.IsNullOrEmpty(((TextBox)loItem.Controls[11]).Text))
+                            ((TextBox)loItem.Controls[11]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#cc5965");
+
+                        if (String.IsNullOrEmpty(((TextBox)loItem.Controls[13]).Text))
+                            ((TextBox)loItem.Controls[13]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#cc5965");
+
+                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProductoIngresoCampObligatorio));
                         return false;
                     }
+
+                    loGrabarEdicion = true;
+                }
+
+                if (!loGrabarEdicion)
+                {
+                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProductoIngresoCampObligatorio));
+                    return false;
                 }
 
                 lstDetalleProductoIngreso = new List<DetalleProductoIngreso>();
@@ -741,12 +817,20 @@ namespace PL.AdminDashboard
         private bool ActualizarIngresoSuplementos()
         {
             bool loResutado = false;
+            bool loGrabarEdicion = false;
             List<DetalleProductoIngreso> lstDetalleProductoIngreso = null;
             ProductoEdicion oProductoEdicion = null;
             BLL.DAL.ProductoIngreso oProductoIngreso = null;
 
             try
             {
+                // Eliminar bordes rojos de las celdas
+                foreach (var loItem in lsvSuplementos.Items)
+                {
+                    ((TextBox)loItem.Controls[11]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#e5e6e7");
+                    ((TextBox)loItem.Controls[13]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#e5e6e7");
+                }
+
                 foreach (var loItem in lsvSuplementos.Items)
                 {
                     if (String.IsNullOrEmpty(((TextBox)loItem.Controls[5]).Text))
@@ -757,9 +841,23 @@ namespace PL.AdminDashboard
                     // Controlar campos obligatorios
                     if (String.IsNullOrEmpty(((TextBox)loItem.Controls[11]).Text) || String.IsNullOrEmpty(((TextBox)loItem.Controls[13]).Text))
                     {
-                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProductoIngresoCampObligatorio, "Suplemento Edición"));
+                        if (String.IsNullOrEmpty(((TextBox)loItem.Controls[11]).Text))
+                            ((TextBox)loItem.Controls[11]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#cc5965");
+
+                        if (String.IsNullOrEmpty(((TextBox)loItem.Controls[13]).Text))
+                            ((TextBox)loItem.Controls[13]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#cc5965");
+
+                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProductoIngresoCampObligatorio));
                         return false;
                     }
+
+                    loGrabarEdicion = true;
+                }
+
+                if (!loGrabarEdicion)
+                {
+                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProductoIngresoCampObligatorio));
+                    return false;
                 }
 
                 lstDetalleProductoIngreso = new List<DetalleProductoIngreso>();
@@ -835,12 +933,20 @@ namespace PL.AdminDashboard
         private bool ActualizarIngresoPeliculas()
         {
             bool loResutado = false;
+            bool loGrabarEdicion = false;
             List<DetalleProductoIngreso> lstDetalleProductoIngreso = null;
             ProductoEdicion oProductoEdicion = null;
             BLL.DAL.ProductoIngreso oProductoIngreso = null;
 
             try
             {
+                // Eliminar bordes rojos de las celdas
+                foreach (var loItem in lsvPeliculas.Items)
+                {
+                    ((TextBox)loItem.Controls[11]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#e5e6e7");
+                    ((TextBox)loItem.Controls[13]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#e5e6e7");
+                }
+
                 foreach (var loItem in lsvPeliculas.Items)
                 {
                     if (String.IsNullOrEmpty(((TextBox)loItem.Controls[5]).Text))
@@ -851,9 +957,23 @@ namespace PL.AdminDashboard
                     // Controlar campos obligatorios
                     if (String.IsNullOrEmpty(((TextBox)loItem.Controls[11]).Text) || String.IsNullOrEmpty(((TextBox)loItem.Controls[13]).Text))
                     {
-                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProductoIngresoCampObligatorio, "Película Edición"));
+                        if (String.IsNullOrEmpty(((TextBox)loItem.Controls[11]).Text))
+                            ((TextBox)loItem.Controls[11]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#cc5965");
+
+                        if (String.IsNullOrEmpty(((TextBox)loItem.Controls[13]).Text))
+                            ((TextBox)loItem.Controls[13]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#cc5965");
+
+                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProductoIngresoCampObligatorio));
                         return false;
                     }
+
+                    loGrabarEdicion = true;
+                }
+
+                if (!loGrabarEdicion)
+                {
+                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProductoIngresoCampObligatorio));
+                    return false;
                 }
 
                 lstDetalleProductoIngreso = new List<DetalleProductoIngreso>();
@@ -929,6 +1049,7 @@ namespace PL.AdminDashboard
         private void LimpiarCampos()
         {
             FormProductoIngreso.Controls.OfType<DropDownList>().ToList().ForEach(x => x.SelectedIndex = -1);
+            txtNombre.Text = String.Empty;
             lsvDiarios.Visible = false;
             lsvRevistas.Visible = false;
             lsvColecciones.Visible = false;
@@ -941,22 +1062,5 @@ namespace PL.AdminDashboard
 
         #endregion
 
-        #region Métodos Públicos
-
-        [WebMethod]
-        public static void MostrarGrillaPorTipoProducto(string idTipoProducto)
-        {
-            try
-            {
-                var a = idTipoProducto;
-            }
-            catch (Exception ex)
-            {
-                Logger loLogger = LogManager.GetCurrentClassLogger();
-                loLogger.Error(ex);
-            }
-        }
-
-        #endregion
     }
 }

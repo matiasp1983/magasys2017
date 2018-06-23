@@ -32,14 +32,18 @@
                                 <div class="col-sm-12">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="col-sm-10 control-label">Proveedor</label>                                            
+                                            <label class="col-sm-10 control-label">Proveedor</label>   
+                                            <div id="divProveedor">
                                                 <asp:DropDownList ID="ddlProveedor" runat="server" CssClass="select2_proveedor form-control"></asp:DropDownList>                                            
+                                            </div>   
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="col-sm-10 control-label">Tipo de Producto</label>
-                                            <asp:DropDownList ID="ddlTipoProducto" runat="server" CssClass="select2_tipoproducto form-control"></asp:DropDownList>
+                                            <div id="divTipoProducto">
+                                                <asp:DropDownList ID="ddlTipoProducto" runat="server" CssClass="select2_tipoproducto form-control"></asp:DropDownList>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -510,30 +514,12 @@
 
         if (window.jQuery) {
             $(document).ready(function () {                
-                //KeypressEnterDisabled();
-                //LoadFootable();  
+                KeypressEnterDisabled();
+                LoadFootable();  
                 ValidarForm();
                 Select2();
             });
         }
-
-        function ChangeTipoProducto() {
-            $('#<%=ddlTipoProducto.ClientID%>').change(MostrarGrillaPorTipoProducto);
-        }
-
-        function MostrarGrillaPorTipoProducto() {
-            $.ajax({
-                type: "POST",
-                url: "ProductoIngreso.aspx/MostrarGrillaPorTipoProducto",
-                data: JSON.stringify({ 'idTipoProducto': $("#<%=ddlTipoProducto.ClientID%>").val() }),
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: console.log("ok"),
-                failure: function (response) {
-                    console.log(response.d);
-                }
-             });
-         }
 
         function KeypressEnterDisabled()
         {
@@ -553,12 +539,18 @@
                 rules: {
                      <%=ddlProveedor.UniqueID%>: {
                          required: true
-                     }
+                       },
+                     <%=ddlTipoProducto.UniqueID%>: {
+                         required: true
+                       }
                 },
                 messages: {
                      <%=ddlProveedor.UniqueID%>: {
                          required: "Este campo es requerido."
-                     }
+                          },
+                     <%=ddlTipoProducto.UniqueID%>: {
+                         required: "Este campo es requerido."
+                          }
                 }
             });
         }
