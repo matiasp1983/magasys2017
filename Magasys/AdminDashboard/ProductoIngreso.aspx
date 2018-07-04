@@ -3,6 +3,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="contentMaster" runat="server">
+    <style type="text/css">
+        #btnBuscarSuccess:hover { background-color: #1a7bb9!important; color: #FFFFFF!important; border-color:#1a7bb9!important; }
+    </style>
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
             <h2>Ingreso de Producto</h2>
@@ -61,10 +64,10 @@
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group">
                                     <div style="text-align: right; padding-right: 15px;">
-                                        <%--Verificar porque no funciona el validadores de jquery--%>
-                                        <button type="button" id="btnBuscar" runat="server" class="ladda-button btn btn-success" onserverclick="BtnBuscar_Click">
-                                            <i class="fa fa-search"></i>&nbsp;&nbsp;<span>Buscar</span>
-                                        </button>
+                                        <a id="btnBuscarSuccess" class="ladda-button btn btn-success" style="background-color: #1c84c6; color: #FFFFFF; border-color: #1c84c6; border-radius: 3px; height: 33px; width: 100px; padding-left: 10px; padding-top: 0px;">
+                                            <i class="fa fa-search"></i>
+                                            <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="ladda-button btn btn-success" OnClick="BtnBuscar_Click" Style="padding:4px 5px"/>
+                                        </a>
                                         
                                         <button type="reset" id="btnLimpiar" runat="server" class="btn btn-warning" onserverclick="BtnLimpiar_Click">
                                             <i class="fa fa-trash-o"></i>&nbsp;&nbsp;<span>Limpiar</span>
