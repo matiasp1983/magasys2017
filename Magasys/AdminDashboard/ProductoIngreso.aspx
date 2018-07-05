@@ -4,7 +4,11 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="contentMaster" runat="server">
     <style type="text/css">
-        #btnBuscarSuccess:hover { background-color: #1a7bb9!important; color: #FFFFFF!important; border-color:#1a7bb9!important; }
+        #btnBuscarSuccess:hover {
+            background-color: #1a7bb9 !important;
+            color: #FFFFFF !important;
+            border-color: #1a7bb9 !important;
+        }
     </style>
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
@@ -34,10 +38,10 @@
                                 <div class="col-sm-12">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="col-sm-10 control-label">Proveedor</label>   
+                                            <label class="col-sm-10 control-label">Proveedor</label>
                                             <div id="divProveedor">
-                                                <asp:DropDownList ID="ddlProveedor" runat="server" CssClass="select2_proveedor form-control"></asp:DropDownList>                                            
-                                            </div>   
+                                                <asp:DropDownList ID="ddlProveedor" runat="server" CssClass="select2_proveedor form-control"></asp:DropDownList>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -49,7 +53,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>    
+                            </div>
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="col-md-6">
@@ -59,16 +63,15 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>                              
+                            </div>
                             <div class="row">
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group">
                                     <div style="text-align: right; padding-right: 15px;">
                                         <a id="btnBuscarSuccess" class="ladda-button btn btn-success" style="background-color: #1c84c6; color: #FFFFFF; border-color: #1c84c6; border-radius: 3px; height: 33px; width: 100px; padding-left: 10px; padding-top: 0px;">
                                             <i class="fa fa-search"></i>
-                                            <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="ladda-button btn btn-success" OnClick="BtnBuscar_Click" Style="padding:4px 5px"/>
+                                            <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="ladda-button btn btn-success" OnClick="BtnBuscar_Click" Style="padding: 4px 5px" />
                                         </a>
-                                        
                                         <button type="reset" id="btnLimpiar" runat="server" class="btn btn-warning" onserverclick="BtnLimpiar_Click">
                                             <i class="fa fa-trash-o"></i>&nbsp;&nbsp;<span>Limpiar</span>
                                         </button>
@@ -89,19 +92,18 @@
                                 </button>
                             </div>
                             <br />
-                            
                             <asp:ListView ID="lsvDiarios" runat="server" Visible="false">
                                 <LayoutTemplate>
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                         <thead>
                                             <tr>
                                                 <th class="text-left">C&oacute;digo</th>
-                                                <th>Nombre</th>                                                                                                
+                                                <th>Nombre</th>
                                                 <th data-hide="phone,tablet">Día de semana</th>
-                                                 <th data-hide="phone,tablet">Edici&oacute;n</th>
-                                                 <th data-hide="phone,tablet">Fecha Edici&oacute;n</th>
+                                                <th data-hide="phone,tablet">Edici&oacute;n</th>
+                                                <th data-hide="phone,tablet">Fecha Edici&oacute;n</th>
                                                 <th data-hide="phone,tablet">Precio</th>
-                                                <th data-hide="phone,tablet">Cantidad</th>    
+                                                <th data-hide="phone,tablet">Cantidad</th>
                                                 <th data-hide="phone,tablet">Fecha Devoluci&oacute;n</th>
                                             </tr>
                                         </thead>
@@ -122,37 +124,43 @@
                                         <td class="text-left">
                                             <asp:Label ID="lblCodigoProducto" runat="server" Text='<%#Eval("COD_PRODUCTO").ToString()%>'></asp:Label>
                                         </td>
-                                        <td>                                            
-                                            <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE").ToString().Length > 50 ? String.Format("{0}...", Eval("NOMBRE").ToString().Remove(50).TrimEnd()):Eval("NOMBRE")%>'></asp:Label>                                            
-                                        </td>                                        
+                                        <td>
+                                            <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE").ToString().Length > 50 ? String.Format("{0}...", Eval("NOMBRE").ToString().Remove(50).TrimEnd()):Eval("NOMBRE")%>'></asp:Label>
+                                        </td>
                                         <td>
                                             <asp:Label ID="lblDiaSemana" runat="server" Text='<%#Eval("DIA_SEMANA").ToString()%>'></asp:Label>
                                         </td>
                                         <td>
-                                            <div id="dvEdicion" style="width:100%">
+                                            <div id="dvEdicion" style="width: 100%">
                                                 <asp:TextBox ID="txtEdicion" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off"></asp:TextBox>
                                             </div>
-                                        </td>   
+                                        </td>
                                         <td>
-                                            <div id="dvFechaEdicion" style="width:100%">
-                                                <asp:TextBox ID="txtFechaEdicion" runat="server" CssClass="form-control" MaxLength="10" autocomplete="off"></asp:TextBox>
+                                            <div id="dvFechaEdicion" class="form-group">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <asp:TextBox ID="txtFechaEdicion" runat="server" CssClass="form-control" MaxLength="10" autocomplete="off"></asp:TextBox>
+                                                </div>
                                             </div>
-                                        </td>    
+                                        </td>
                                         <td>
-                                            <div id="dvPrecio" style="width:100%">
+                                            <div id="dvPrecio" style="width: 100%">
                                                 <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-control" MaxLength="5" autocomplete="off"></asp:TextBox>
                                             </div>
-                                        </td>                                         
+                                        </td>
                                         <td>
-                                            <div id="dvCantidad" style="width:100%">
+                                            <div id="dvCantidad" style="width: 100%">
                                                 <asp:TextBox ID="txtCantidad" runat="server" CssClass="form-control" MaxLength="5" autocomplete="off"></asp:TextBox>
                                             </div>
-                                        </td>       
+                                        </td>
                                         <td>
-                                            <div id="dvFechaDevolucion" style="width:100%">
-                                                <asp:TextBox ID="txtFechaDevolucion" runat="server" CssClass="form-control" MaxLength="10" autocomplete="off"></asp:TextBox>
+                                            <div id="dvFechaDevolucion" class="form-group">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <asp:TextBox ID="txtFechaDevolucion" runat="server" CssClass="form-control" MaxLength="10" autocomplete="off"></asp:TextBox>
+                                                </div>
                                             </div>
-                                        </td>                                         
+                                        </td>
                                     </tr>
                                 </ItemTemplate>
                             </asp:ListView>
@@ -163,7 +171,7 @@
                                         <thead>
                                             <tr>
                                                 <th class="text-left">C&oacute;digo</th>
-                                                <th>Nombre</th>                                                                                                
+                                                <th>Nombre</th>
                                                 <th data-hide="phone,tablet">Edici&oacute;n</th>
                                                 <th data-hide="phone,tablet">Fecha Edici&oacute;n</th>
                                                 <th data-hide="phone,tablet">Descripci&oacute;n</th>
@@ -189,39 +197,45 @@
                                         <td class="text-left">
                                             <asp:Label ID="lblCodigoProducto" runat="server" Text='<%#Eval("COD_PRODUCTO").ToString()%>'></asp:Label>
                                         </td>
-                                        <td>                                            
-                                            <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE").ToString().Length > 50 ? String.Format("{0}...", Eval("NOMBRE").ToString().Remove(50).TrimEnd()):Eval("NOMBRE")%>'></asp:Label>                                            
-                                        </td>                                        
                                         <td>
-                                            <div id="dvEdicion" style="width:100%">
+                                            <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE").ToString().Length > 50 ? String.Format("{0}...", Eval("NOMBRE").ToString().Remove(50).TrimEnd()):Eval("NOMBRE")%>'></asp:Label>
+                                        </td>
+                                        <td>
+                                            <div id="dvEdicion" style="width: 100%">
                                                 <asp:TextBox ID="txtEdicion" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off"></asp:TextBox>
                                             </div>
-                                        </td>   
+                                        </td>
                                         <td>
-                                            <div id="dvFechaEdicion" style="width:100%">
-                                                <asp:TextBox ID="txtFechaEdicion" runat="server" CssClass="form-control" MaxLength="10" autocomplete="off"></asp:TextBox>
+                                            <div id="dvFechaEdicion" class="form-group">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <asp:TextBox ID="txtFechaEdicion" runat="server" CssClass="form-control" MaxLength="10" autocomplete="off"></asp:TextBox>
+                                                </div>
                                             </div>
-                                        </td>    
+                                        </td>
                                         <td>
-                                            <div id="dvDescripcion" style="width:100%">
+                                            <div id="dvDescripcion" style="width: 100%">
                                                 <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off"></asp:TextBox>
                                             </div>
-                                        </td>   
+                                        </td>
                                         <td>
-                                            <div id="dvPrecio" style="width:100%">
+                                            <div id="dvPrecio" style="width: 100%">
                                                 <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-control" MaxLength="5" autocomplete="off"></asp:TextBox>
                                             </div>
-                                        </td>                                         
+                                        </td>
                                         <td>
-                                            <div id="dvCantidad" style="width:100%">
+                                            <div id="dvCantidad" style="width: 100%">
                                                 <asp:TextBox ID="txtCantidad" runat="server" CssClass="form-control" MaxLength="5" autocomplete="off"></asp:TextBox>
                                             </div>
-                                        </td>   
+                                        </td>
                                         <td>
-                                            <div id="dvFechaDevolucion" style="width:100%">
-                                                <asp:TextBox ID="txtFechaDevolucion" runat="server" CssClass="form-control" MaxLength="10" autocomplete="off"></asp:TextBox>
+                                            <div id="dvFechaDevolucion" class="form-group">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <asp:TextBox ID="txtFechaDevolucion" runat="server" CssClass="form-control" MaxLength="10" autocomplete="off"></asp:TextBox>
+                                                </div>
                                             </div>
-                                        </td>                                         
+                                        </td>
                                     </tr>
                                 </ItemTemplate>
                             </asp:ListView>
@@ -232,7 +246,7 @@
                                         <thead>
                                             <tr>
                                                 <th class="text-left">C&oacute;digo</th>
-                                                <th>Nombre</th>                                                                                                
+                                                <th>Nombre</th>
                                                 <th data-hide="phone,tablet">Edici&oacute;n</th>
                                                 <th data-hide="phone,tablet">Descripci&oacute;n</th>
                                                 <th data-hide="phone,tablet">Precio</th>
@@ -257,34 +271,37 @@
                                         <td class="text-left">
                                             <asp:Label ID="lblCodigoProducto" runat="server" Text='<%#Eval("COD_PRODUCTO").ToString()%>'></asp:Label>
                                         </td>
-                                        <td>                                            
-                                            <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE").ToString().Length > 50 ? String.Format("{0}...", Eval("NOMBRE").ToString().Remove(50).TrimEnd()):Eval("NOMBRE")%>'></asp:Label>                                            
-                                        </td>                                        
                                         <td>
-                                            <div id="dvEdicion" style="width:100%">
+                                            <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE").ToString().Length > 50 ? String.Format("{0}...", Eval("NOMBRE").ToString().Remove(50).TrimEnd()):Eval("NOMBRE")%>'></asp:Label>
+                                        </td>
+                                        <td>
+                                            <div id="dvEdicion" style="width: 100%">
                                                 <asp:TextBox ID="txtEdicion" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off"></asp:TextBox>
                                             </div>
-                                        </td>      
+                                        </td>
                                         <td>
-                                            <div id="dvDescripcion" style="width:100%">
+                                            <div id="dvDescripcion" style="width: 100%">
                                                 <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off"></asp:TextBox>
                                             </div>
-                                        </td>   
+                                        </td>
                                         <td>
-                                            <div id="dvPrecio" style="width:100%">
+                                            <div id="dvPrecio" style="width: 100%">
                                                 <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-control" MaxLength="5" autocomplete="off"></asp:TextBox>
                                             </div>
-                                        </td>                                         
+                                        </td>
                                         <td>
-                                            <div id="dvCantidad" style="width:100%">
+                                            <div id="dvCantidad" style="width: 100%">
                                                 <asp:TextBox ID="txtCantidad" runat="server" CssClass="form-control" MaxLength="5" autocomplete="off"></asp:TextBox>
                                             </div>
-                                        </td>   
+                                        </td>
                                         <td>
-                                            <div id="dvFechaDevolucion" style="width:100%">
-                                                <asp:TextBox ID="txtFechaDevolucion" runat="server" CssClass="form-control" MaxLength="10" autocomplete="off"></asp:TextBox>
+                                            <div id="dvFechaDevolucion" class="form-group">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <asp:TextBox ID="txtFechaDevolucion" runat="server" CssClass="form-control" MaxLength="10" autocomplete="off"></asp:TextBox>
+                                                </div>
                                             </div>
-                                        </td>                                         
+                                        </td>
                                     </tr>
                                 </ItemTemplate>
                             </asp:ListView>
@@ -295,7 +312,7 @@
                                         <thead>
                                             <tr>
                                                 <th class="text-left">C&oacute;digo</th>
-                                                <th>Nombre</th>    
+                                                <th>Nombre</th>
                                                 <th>Autor</th>
                                                 <th data-hide="phone,tablet">Edici&oacute;n</th>
                                                 <th data-hide="phone,tablet">Descripci&oacute;n</th>
@@ -321,37 +338,40 @@
                                         <td class="text-left">
                                             <asp:Label ID="lblCodigoProducto" runat="server" Text='<%#Eval("COD_PRODUCTO").ToString()%>'></asp:Label>
                                         </td>
-                                        <td>                                            
-                                            <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE").ToString().Length > 50 ? String.Format("{0}...", Eval("NOMBRE").ToString().Remove(50).TrimEnd()):Eval("NOMBRE")%>'></asp:Label>                                            
-                                        </td>   
-                                        <td>                                            
-                                            <asp:Label ID="lblAutor" runat="server" Text='<%#Eval("AUTOR").ToString().Length > 50 ? String.Format("{0}...", Eval("AUTOR").ToString().Remove(50).TrimEnd()):Eval("AUTOR")%>'></asp:Label>                                            
-                                        </td>                                         
                                         <td>
-                                            <div id="dvEdicion" style="width:100%">
+                                            <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE").ToString().Length > 50 ? String.Format("{0}...", Eval("NOMBRE").ToString().Remove(50).TrimEnd()):Eval("NOMBRE")%>'></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label ID="lblAutor" runat="server" Text='<%#Eval("AUTOR").ToString().Length > 50 ? String.Format("{0}...", Eval("AUTOR").ToString().Remove(50).TrimEnd()):Eval("AUTOR")%>'></asp:Label>
+                                        </td>
+                                        <td>
+                                            <div id="dvEdicion" style="width: 100%">
                                                 <asp:TextBox ID="txtEdicion" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off"></asp:TextBox>
                                             </div>
-                                        </td>     
+                                        </td>
                                         <td>
-                                            <div id="dvDescripcion" style="width:100%">
+                                            <div id="dvDescripcion" style="width: 100%">
                                                 <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off"></asp:TextBox>
                                             </div>
-                                        </td>   
+                                        </td>
                                         <td>
-                                            <div id="dvPrecio" style="width:100%">
+                                            <div id="dvPrecio" style="width: 100%">
                                                 <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-control" MaxLength="5" autocomplete="off"></asp:TextBox>
                                             </div>
-                                        </td>                                         
+                                        </td>
                                         <td>
-                                            <div id="dvCantidad" style="width:100%">
+                                            <div id="dvCantidad" style="width: 100%">
                                                 <asp:TextBox ID="txtCantidad" runat="server" CssClass="form-control" MaxLength="5" autocomplete="off"></asp:TextBox>
                                             </div>
-                                        </td>   
+                                        </td>
                                         <td>
-                                            <div id="dvFechaDevolucion" style="width:100%">
-                                                <asp:TextBox ID="txtFechaDevolucion" runat="server" CssClass="form-control" MaxLength="10" autocomplete="off"></asp:TextBox>
+                                            <div id="dvFechaDevolucion" class="form-group">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <asp:TextBox ID="txtFechaDevolucion" runat="server" CssClass="form-control" MaxLength="10" autocomplete="off"></asp:TextBox>
+                                                </div>
                                             </div>
-                                        </td>                                         
+                                        </td>
                                     </tr>
                                 </ItemTemplate>
                             </asp:ListView>
@@ -362,7 +382,7 @@
                                         <thead>
                                             <tr>
                                                 <th class="text-left">C&oacute;digo</th>
-                                                <th>Nombre</th>                                                                                                
+                                                <th>Nombre</th>
                                                 <th data-hide="phone,tablet">Edici&oacute;n</th>
                                                 <th data-hide="phone,tablet">Fecha Edici&oacute;n</th>
                                                 <th data-hide="phone,tablet">Descripci&oacute;n</th>
@@ -388,39 +408,45 @@
                                         <td class="text-left">
                                             <asp:Label ID="lblCodigoProducto" runat="server" Text='<%#Eval("COD_PRODUCTO").ToString()%>'></asp:Label>
                                         </td>
-                                        <td>                                            
-                                            <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE").ToString().Length > 50 ? String.Format("{0}...", Eval("NOMBRE").ToString().Remove(50).TrimEnd()):Eval("NOMBRE")%>'></asp:Label>                                            
-                                        </td>                                        
                                         <td>
-                                            <div id="dvEdicion" style="width:100%">
+                                            <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE").ToString().Length > 50 ? String.Format("{0}...", Eval("NOMBRE").ToString().Remove(50).TrimEnd()):Eval("NOMBRE")%>'></asp:Label>
+                                        </td>
+                                        <td>
+                                            <div id="dvEdicion" style="width: 100%">
                                                 <asp:TextBox ID="txtEdicion" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off"></asp:TextBox>
                                             </div>
-                                        </td>   
+                                        </td>
                                         <td>
-                                            <div id="dvFechaEdicion" style="width:100%">
-                                                <asp:TextBox ID="txtFechaEdicion" runat="server" CssClass="form-control" MaxLength="10" autocomplete="off"></asp:TextBox>
+                                            <div id="dvFechaEdicion" class="form-group">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <asp:TextBox ID="txtFechaEdicion" runat="server" CssClass="form-control" MaxLength="10" autocomplete="off"></asp:TextBox>
+                                                </div>
                                             </div>
-                                        </td>    
+                                        </td>
                                         <td>
-                                            <div id="dvDescripcion" style="width:100%">
+                                            <div id="dvDescripcion" style="width: 100%">
                                                 <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off"></asp:TextBox>
                                             </div>
-                                        </td>   
+                                        </td>
                                         <td>
-                                            <div id="dvPrecio" style="width:100%">
+                                            <div id="dvPrecio" style="width: 100%">
                                                 <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-control" MaxLength="5" autocomplete="off"></asp:TextBox>
                                             </div>
-                                        </td>                                         
+                                        </td>
                                         <td>
-                                            <div id="dvCantidad" style="width:100%">
+                                            <div id="dvCantidad" style="width: 100%">
                                                 <asp:TextBox ID="txtCantidad" runat="server" CssClass="form-control" MaxLength="5" autocomplete="off"></asp:TextBox>
                                             </div>
-                                        </td>   
+                                        </td>
                                         <td>
-                                            <div id="dvFechaDevolucion" style="width:100%">
-                                                <asp:TextBox ID="txtFechaDevolucion" runat="server" CssClass="form-control" MaxLength="10" autocomplete="off"></asp:TextBox>
+                                            <div id="dvFechaDevolucion" class="form-group">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <asp:TextBox ID="txtFechaDevolucion" runat="server" CssClass="form-control" MaxLength="10" autocomplete="off"></asp:TextBox>
+                                                </div>
                                             </div>
-                                        </td>                                         
+                                        </td>
                                     </tr>
                                 </ItemTemplate>
                             </asp:ListView>
@@ -431,7 +457,7 @@
                                         <thead>
                                             <tr>
                                                 <th class="text-left">C&oacute;digo</th>
-                                                <th>Nombre</th>                                                                                                
+                                                <th>Nombre</th>
                                                 <th data-hide="phone,tablet">Edici&oacute;n</th>
                                                 <th data-hide="phone,tablet">Fecha Edici&oacute;n</th>
                                                 <th data-hide="phone,tablet">Descripci&oacute;n</th>
@@ -457,46 +483,52 @@
                                         <td class="text-left">
                                             <asp:Label ID="lblCodigoProducto" runat="server" Text='<%#Eval("COD_PRODUCTO").ToString()%>'></asp:Label>
                                         </td>
-                                        <td>                                            
-                                            <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE").ToString().Length > 50 ? String.Format("{0}...", Eval("NOMBRE").ToString().Remove(50).TrimEnd()):Eval("NOMBRE")%>'></asp:Label>                                            
-                                        </td>                                        
                                         <td>
-                                            <div id="dvEdicion" style="width:100%">
+                                            <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE").ToString().Length > 50 ? String.Format("{0}...", Eval("NOMBRE").ToString().Remove(50).TrimEnd()):Eval("NOMBRE")%>'></asp:Label>
+                                        </td>
+                                        <td>
+                                            <div id="dvEdicion" style="width: 100%">
                                                 <asp:TextBox ID="txtEdicion" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off"></asp:TextBox>
                                             </div>
-                                        </td>   
+                                        </td>
                                         <td>
-                                            <div id="dvFechaEdicion" style="width:100%">
-                                                <asp:TextBox ID="txtFechaEdicion" runat="server" CssClass="form-control" MaxLength="10" autocomplete="off"></asp:TextBox>
+                                            <div id="dvFechaEdicion" class="form-group">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <asp:TextBox ID="txtFechaEdicion" runat="server" CssClass="form-control" MaxLength="10" autocomplete="off"></asp:TextBox>
+                                                </div>
                                             </div>
-                                        </td>    
+                                        </td>
                                         <td>
-                                            <div id="dvDescripcion" style="width:100%">
+                                            <div id="dvDescripcion" style="width: 100%">
                                                 <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off"></asp:TextBox>
                                             </div>
-                                        </td>   
+                                        </td>
                                         <td>
-                                            <div id="dvPrecio" style="width:100%">
+                                            <div id="dvPrecio" style="width: 100%">
                                                 <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-control" MaxLength="5" autocomplete="off"></asp:TextBox>
                                             </div>
-                                        </td>                                         
+                                        </td>
                                         <td>
-                                            <div id="dvCantidad" style="width:100%">
+                                            <div id="dvCantidad" style="width: 100%">
                                                 <asp:TextBox ID="txtCantidad" runat="server" CssClass="form-control" MaxLength="5" autocomplete="off"></asp:TextBox>
                                             </div>
-                                        </td>   
+                                        </td>
                                         <td>
-                                            <div id="dvFechaDevolucion" style="width:100%">
-                                                <asp:TextBox ID="txtFechaDevolucion" runat="server" CssClass="form-control" MaxLength="10" autocomplete="off"></asp:TextBox>
+                                            <div id="dvFechaDevolucion" class="form-group">
+                                                <div class="input-group date">
+                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                    <asp:TextBox ID="txtFechaDevolucion" runat="server" CssClass="form-control" MaxLength="10" autocomplete="off"></asp:TextBox>
+                                                </div>
                                             </div>
-                                        </td>                                         
+                                        </td>
                                     </tr>
                                 </ItemTemplate>
                             </asp:ListView>
 
                             <div id="dvMensajeLsvProductos" runat="server" />
                             <div class="hr-line-dashed"></div>
-                            <div class="form-group" style="margin-bottom:50px">
+                            <div class="form-group" style="margin-bottom: 50px">
                                 <div class="col-xs-12 col-sm-6 col-md-8"></div>
                                 <div class="col-xs-12 col-md-4" style="text-align: right">
                                     <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-success" OnClick="BtnGuardar_Click" />
@@ -504,8 +536,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>                    
-                </div>                
+                    </div>
+                </div>
             </div>
         </form>
     </div>
@@ -515,20 +547,42 @@
         var FormProductoIngreso = '#<%=FormProductoIngreso.ClientID%>';
 
         if (window.jQuery) {
-            $(document).ready(function () {                
+            $(document).ready(function () {
                 KeypressEnterDisabled();
-                LoadFootable();  
+                LoadDatePicker();
+                LoadFootable();
                 ValidarForm();
                 Select2();
             });
         }
 
-        function KeypressEnterDisabled()
-        {
+        function KeypressEnterDisabled() {
             $('input').keypress(function (e) {
                 if (e.which == 13) {
                     return false;
                 }
+            });
+        }
+
+        function LoadDatePicker() {
+            $('#dvFechaEdicion .input-group.date').datepicker({
+                todayBtn: "linked",
+                clearBtn: true,
+                forceParse: true,
+                autoclose: true,
+                language: "es",
+                format: "dd/mm/yyyy",
+                keyboardNavigation: false
+            });
+
+            $('#dvFechaDevolucion .input-group.date').datepicker({
+                todayBtn: "linked",
+                clearBtn: true,
+                forceParse: true,
+                autoclose: true,
+                language: "es",
+                format: "dd/mm/yyyy",
+                keyboardNavigation: false
             });
         }
 
@@ -540,37 +594,37 @@
             $(FormProductoIngreso).validate({
                 rules: {
                      <%=ddlProveedor.UniqueID%>: {
-                         required: true
-                       },
+                        required: true
+                    },
                      <%=ddlTipoProducto.UniqueID%>: {
                          required: true
-                       }
+                    }
                 },
                 messages: {
                      <%=ddlProveedor.UniqueID%>: {
-                         required: "Este campo es requerido."
-                          },
+                        required: "Este campo es requerido."
+                    },
                      <%=ddlTipoProducto.UniqueID%>: {
                          required: "Este campo es requerido."
-                          }
+                    }
                 }
             });
         }
 
         function Select2() {
             $(".select2_proveedor").select2(
-            {
+                {
                     placeholder: 'Seleccione un Proveedor',
                     width: '100%',
                     allowClear: true
-            });
+                });
 
             $(".select2_tipoproducto").select2(
                 {
                     placeholder: 'Seleccione un Tipo de Producto',
                     width: '100%',
                     allowClear: true
-            });
+                });
         }
 
     </script>
