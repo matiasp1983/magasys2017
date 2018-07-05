@@ -492,7 +492,7 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <div id="dvFechaEdicion" class="form-group">
+                                            <div id="dvFechaEdicion" class="form-group" style="width:157px">
                                                 <div class="input-group date">
                                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                                     <asp:TextBox ID="txtFechaEdicion" runat="server" CssClass="form-control" MaxLength="10" autocomplete="off"></asp:TextBox>
@@ -515,7 +515,7 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <div id="dvFechaDevolucion" class="form-group">
+                                            <div id="dvFechaDevolucion" class="form-group" style="width:157px">
                                                 <div class="input-group date">
                                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                                     <asp:TextBox ID="txtFechaDevolucion" runat="server" CssClass="form-control" MaxLength="10" autocomplete="off"></asp:TextBox>
