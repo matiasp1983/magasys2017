@@ -9,7 +9,7 @@
         #endregion
 
         #region Mensajes Proveedor
-        
+
         public const string MsjeProveedorSuccessAlta = "El proveedor se guardó correctamente.";
         public const string MsjeProveedorSuccessModificacion = "El proveedor se modificó correctamente.";
         public const string MsjeProveedorFailure = "El proveedor no se pudo guardar.";
@@ -34,8 +34,11 @@
         #region Mensajes Producto Ingreso
 
         public const string MsjeProductoIngresoSuccessAlta = "El ingreso de productos se guardó correctamente.";
-        public const string MsjeProductoIngresoCampObligatorio = "Debe completar los campos obligatorios.";        
-        public const string MsjeProductoIngresoFailure = "El ingreso de productos no se pudo guardar";        
+        public const string MsjeProductoIngresoCampObligatorio = "Debe completar los campos obligatorios.";
+        public const string MsjeProductoIngresoFailure = "El ingreso de productos no se pudo guardar";
+        public const string MsjeListadoProductoIngresoFiltrarTotalSinResultados = "No se encontraron Ingresos de productos para la búsqueda seleccionada.";
+        public const string MsjeListadoProductoIngresoFechaDesdeMayorQueFechaHasta = "La Fecha Hasta debe ser mayor que la Fecha Desde.";
+        public const string MsjeListadoProductoIngresoCargarProducto = "Debe cargar al menos un producto.";
 
         #endregion
     }

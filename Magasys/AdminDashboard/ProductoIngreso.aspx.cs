@@ -76,7 +76,7 @@ namespace PL.AdminDashboard
 
         protected void BtnCancelar_Click(object sender, EventArgs e)
         {
-
+            LimpiarCampos();
         }
 
         #endregion
@@ -388,7 +388,7 @@ namespace PL.AdminDashboard
 
                 if (!loGrabarEdicion)
                 {
-                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProductoIngresoCampObligatorio));
+                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeListadoProductoIngresoCargarProducto));
                     return false;
                 }
 
@@ -506,7 +506,7 @@ namespace PL.AdminDashboard
 
                 if (!loGrabarEdicion)
                 {
-                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProductoIngresoCampObligatorio));
+                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeListadoProductoIngresoCargarProducto));
                     return false;
                 }
 
@@ -624,7 +624,7 @@ namespace PL.AdminDashboard
 
                 if (!loGrabarEdicion)
                 {
-                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProductoIngresoCampObligatorio));
+                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeListadoProductoIngresoCargarProducto));
                     return false;
                 }
 
@@ -740,7 +740,7 @@ namespace PL.AdminDashboard
 
                 if (!loGrabarEdicion)
                 {
-                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProductoIngresoCampObligatorio));
+                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeListadoProductoIngresoCargarProducto));
                     return false;
                 }
 
@@ -856,7 +856,7 @@ namespace PL.AdminDashboard
 
                 if (!loGrabarEdicion)
                 {
-                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProductoIngresoCampObligatorio));
+                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeListadoProductoIngresoCargarProducto));
                     return false;
                 }
 
@@ -972,7 +972,7 @@ namespace PL.AdminDashboard
 
                 if (!loGrabarEdicion)
                 {
-                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProductoIngresoCampObligatorio));
+                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeListadoProductoIngresoCargarProducto));
                     return false;
                 }
 
