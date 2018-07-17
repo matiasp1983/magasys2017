@@ -30,7 +30,7 @@
           <Property Name="CANTIDAD_UNIDADES" Type="int" Nullable="false" />
           <Property Name="FECHA_DEVOLUCION" Type="datetime" />
           <Property Name="COD_ESTADO" Type="int" Nullable="false" />
-          <Property Name="COD_PRODUCTO_EDICION" Type="int" />
+          <Property Name="COD_PRODUCTO_EDICION" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Diario">
           <Key>
@@ -273,7 +273,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DetalleIngresoProducto_Producto_Edicion">
-          <End Role="ProductoEdicion" Type="Self.ProductoEdicion" Multiplicity="0..1" />
+          <End Role="ProductoEdicion" Type="Self.ProductoEdicion" Multiplicity="1" />
           <End Role="DetalleProductoIngreso" Type="Self.DetalleProductoIngreso" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ProductoEdicion">
@@ -870,7 +870,7 @@
           <Property Name="CANTIDAD_UNIDADES" Type="Int32" Nullable="false" />
           <Property Name="FECHA_DEVOLUCION" Type="DateTime" Precision="3" />
           <Property Name="COD_ESTADO" Type="Int32" Nullable="false" />
-          <Property Name="COD_PRODUCTO_EDICION" Type="Int32" />
+          <Property Name="COD_PRODUCTO_EDICION" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Estado" Relationship="MAGASYSModel.FK_DetalleIngresoProducto_Estado" FromRole="DetalleProductoIngreso" ToRole="Estado" />
           <NavigationProperty Name="ProductoIngreso" Relationship="MAGASYSModel.FK_DetalleIngresoProducto_IngresoProducto" FromRole="DetalleProductoIngreso" ToRole="ProductoIngreso" />
           <NavigationProperty Name="ProductoEdicion" Relationship="MAGASYSModel.FK_DetalleIngresoProducto_Producto_Edicion" FromRole="DetalleProductoIngreso" ToRole="ProductoEdicion" />
@@ -1168,7 +1168,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_DetalleIngresoProducto_Producto_Edicion">
-          <End Type="MAGASYSModel.ProductoEdicion" Role="ProductoEdicion" Multiplicity="0..1" />
+          <End Type="MAGASYSModel.ProductoEdicion" Role="ProductoEdicion" Multiplicity="1" />
           <End Type="MAGASYSModel.DetalleProductoIngreso" Role="DetalleProductoIngreso" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ProductoEdicion">

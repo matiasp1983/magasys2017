@@ -12,7 +12,8 @@
             ProductoColeccion,
             ProductoLibro,
             ProductoSuplemento,
-            ProductoPelicula
+            ProductoPelicula,
+            IdIngresoProductos
         } 
 
         #endregion

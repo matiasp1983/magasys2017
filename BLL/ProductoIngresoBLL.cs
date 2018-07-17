@@ -2,6 +2,7 @@
 using BLL.Filters;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Transactions;
 
 namespace BLL
@@ -48,6 +49,98 @@ namespace BLL
             return bRes;
         }
 
+        public List<ProductoIngresoListado> ObtenerProductoIngreso(IngresoProductoFiltro oIngresoProductoFiltro)
+        {
+            List<ProductoIngresoListado> lstProductoIngresoListado = null;
+            List<ProductoIngreso> lstProductoIngreso = null;
+
+            try
+            {
+                using (var rep = new Repository<ProductoIngreso>())
+                {
+                    if (oIngresoProductoFiltro.IdProveedor > 0)
+                        lstProductoIngreso = rep.Search(p => p.COD_ESTADO == 1 && p.COD_PROVEEDOR == oIngresoProductoFiltro.IdProveedor);
+
+                    if (lstProductoIngreso != null)
+                    {
+                        if (oIngresoProductoFiltro.FechaAltaDesde != null && oIngresoProductoFiltro.FechaAltaHasta != null)
+                            lstProductoIngreso = lstProductoIngreso.FindAll(p => p.FECHA.Date >= oIngresoProductoFiltro.FechaAltaDesde && p.FECHA.Date <= oIngresoProductoFiltro.FechaAltaHasta);
+                        else if (oIngresoProductoFiltro.FechaAltaDesde != null && oIngresoProductoFiltro.FechaAltaHasta == null)
+                            lstProductoIngreso = lstProductoIngreso.FindAll(p => p.FECHA.Date >= oIngresoProductoFiltro.FechaAltaDesde);
+                        else if (oIngresoProductoFiltro.FechaAltaDesde == null && oIngresoProductoFiltro.FechaAltaHasta != null)
+                            lstProductoIngreso = lstProductoIngreso.FindAll(p => p.FECHA.Date <= oIngresoProductoFiltro.FechaAltaHasta);
+                    }
+                    else
+                    {
+                        if (oIngresoProductoFiltro.FechaAltaDesde != null && oIngresoProductoFiltro.FechaAltaHasta != null)
+                            lstProductoIngreso = rep.Search(p => p.COD_ESTADO == 1 && DbFunctions.TruncateTime(p.FECHA) >= DbFunctions.TruncateTime(oIngresoProductoFiltro.FechaAltaDesde) && DbFunctions.TruncateTime(p.FECHA) <= DbFunctions.TruncateTime(oIngresoProductoFiltro.FechaAltaHasta));
+                        else if (oIngresoProductoFiltro.FechaAltaDesde != null && oIngresoProductoFiltro.FechaAltaHasta == null)
+                            lstProductoIngreso = rep.Search(p => p.COD_ESTADO == 1 && DbFunctions.TruncateTime(p.FECHA) >= DbFunctions.TruncateTime(oIngresoProductoFiltro.FechaAltaDesde));
+                        else if (oIngresoProductoFiltro.FechaAltaDesde == null && oIngresoProductoFiltro.FechaAltaHasta != null)
+                            lstProductoIngreso = rep.Search(p => p.COD_ESTADO == 1 && DbFunctions.TruncateTime(p.FECHA) <= DbFunctions.TruncateTime(oIngresoProductoFiltro.FechaAltaHasta));
+                    }
+                }
+
+                ProductoIngresoListado oProductoIngresoListado;
+                lstProductoIngresoListado = new List<ProductoIngresoListado>();
+
+                if (lstProductoIngreso != null)
+                {
+                    foreach (var loProductoIngreso in lstProductoIngreso)
+                    {
+                        oProductoIngresoListado = new ProductoIngresoListado
+                        {
+                            ID_INGRESO_PRODUCTOS = loProductoIngreso.ID_INGRESO_PRODUCTOS,
+                            FECHA = loProductoIngreso.FECHA,
+                            COD_PROVEEDOR = loProductoIngreso.COD_PROVEEDOR,
+                        };
+
+                        using (var loRepProveedor = new Repository<Proveedor>())
+                            oProductoIngresoListado.DESC_PROVEEDOR = loRepProveedor.Find(p => p.ID_PROVEEDOR == loProductoIngreso.COD_PROVEEDOR).RAZON_SOCIAL;
+
+                        lstProductoIngresoListado.Add(oProductoIngresoListado);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return lstProductoIngresoListado;
+        }
+
+        public List<DetalleProductoIngreso> ObtenerDetalleProductoIngreso(int idIngresoProductos)
+        {
+            List<DetalleProductoIngreso> lstDetalleProductoIngreso = null;
+
+            try
+            {
+                using (var rep = new Repository<DetalleProductoIngreso>())
+                {
+                    lstDetalleProductoIngreso = rep.Search(p => p.COD_ESTADO == 1 && p.COD_INGRESO_PRODUCTO == idIngresoProductos);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return lstDetalleProductoIngreso;
+        }
+
         #endregion
     }
+
+    #region Clases
+
+    public class ProductoIngresoListado
+    {
+        public int ID_INGRESO_PRODUCTOS { get; set; }
+        public DateTime FECHA { get; set; }
+        public int COD_PROVEEDOR { get; set; }
+        public string DESC_PROVEEDOR { get; set; }
+    }
+
+    #endregion
 }

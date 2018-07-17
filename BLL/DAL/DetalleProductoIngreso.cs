@@ -28,7 +28,7 @@ public partial class DetalleProductoIngreso
 
     public int COD_ESTADO { get; set; }
 
-    public Nullable<int> COD_PRODUCTO_EDICION { get; set; }
+    public int COD_PRODUCTO_EDICION { get; set; }
 
 
 

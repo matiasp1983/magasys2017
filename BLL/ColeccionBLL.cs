@@ -190,7 +190,7 @@ namespace BLL
         public string DESCRIPCION { get; set; }
         public double PRECIO { get; set; }
         public int CANTIDAD_DISPONIBLE { get; set; }
-        public System.DateTime FECHA_DEVOLUCION { get; set; }
+        public System.DateTime? FECHA_DEVOLUCION { get; set; }
     }
 
     #endregion

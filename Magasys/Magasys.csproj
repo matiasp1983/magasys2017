@@ -76,6 +76,7 @@
     <Content Include="AdminDashboard\css\plugins\footable\fonts\footable.woff" />
     <Content Include="AdminDashboard\css\plugins\select2\select2.min.css" />
     <Content Include="AdminDashboard\css\plugins\sweetalert\sweetalert.css" />
+    <Content Include="AdminDashboard\DetalleProductoIngresos.aspx" />
     <Content Include="AdminDashboard\font-awesome\fonts\fontawesome-webfont.eot" />
     <Content Include="AdminDashboard\font-awesome\fonts\fontawesome-webfont.ttf" />
     <Content Include="AdminDashboard\font-awesome\fonts\fontawesome-webfont.woff" />
@@ -124,6 +125,7 @@
     <Content Include="AdminDashboard\ProductoDiarioEditar.aspx" />
     <Content Include="AdminDashboard\ProductoDiarioVisualizar.aspx" />
     <Content Include="AdminDashboard\ProductoIngreso.aspx" />
+    <Content Include="AdminDashboard\ProductoIngresoListado.aspx" />
     <Content Include="AdminDashboard\ProductoLibroEditar.aspx" />
     <Content Include="AdminDashboard\ProductoLibroVisualizar.aspx" />
     <Content Include="AdminDashboard\ProductoListado.aspx" />
@@ -202,6 +204,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminDashboard\DetalleProductoIngresos.aspx.cs">
+      <DependentUpon>DetalleProductoIngresos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\DetalleProductoIngresos.aspx.designer.cs">
+      <DependentUpon>DetalleProductoIngresos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AdminDashboard\Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -257,6 +266,13 @@
     </Compile>
     <Compile Include="AdminDashboard\ProductoIngreso.aspx.designer.cs">
       <DependentUpon>ProductoIngreso.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\ProductoIngresoListado.aspx.cs">
+      <DependentUpon>ProductoIngresoListado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\ProductoIngresoListado.aspx.designer.cs">
+      <DependentUpon>ProductoIngresoListado.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminDashboard\ProductoLibroEditar.aspx.cs">
       <DependentUpon>ProductoLibroEditar.aspx</DependentUpon>
