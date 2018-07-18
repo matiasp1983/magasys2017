@@ -24,11 +24,6 @@
                 <div class="col-lg-12">
                     <div class="ibox">
                         <div class="ibox-content">
-                            <%--                            <div style="text-align: right;">
-                                <button type="button" id="btnNuevo" runat="server" class="ladda-button btn btn-info" onserverclick="BtnNuevo_Click">
-                                    <i class="fa fa-plus"></i>&nbsp;&nbsp;<span>Nuevo Producto</span>
-                                </button>
-                            </div>--%>
                             <br />
 
                             <asp:ListView ID="lsvDiarios" runat="server" Visible="false">
