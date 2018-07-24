@@ -367,7 +367,7 @@ namespace PL.AdminDashboard
                         continue;
                     }
 
-                    // Controlar campos obligatorios
+                    // Controlar campos obligatorios: Fecha Edición, Precio, Cantidad de unidades
                     if (String.IsNullOrEmpty(((TextBox)loItem.Controls[9]).Text) || String.IsNullOrEmpty(((TextBox)loItem.Controls[11]).Text) || String.IsNullOrEmpty(((TextBox)loItem.Controls[13]).Text))
                     {
                         if (String.IsNullOrEmpty(((TextBox)loItem.Controls[9]).Text))
@@ -485,7 +485,7 @@ namespace PL.AdminDashboard
                         continue;
                     }
 
-                    // Controlar campos obligatorios
+                    // Controlar campos obligatorios: Fecha Edición, Precio, Cantidad de unidades
                     if (String.IsNullOrEmpty(((TextBox)loItem.Controls[7]).Text) || String.IsNullOrEmpty(((TextBox)loItem.Controls[11]).Text) || String.IsNullOrEmpty(((TextBox)loItem.Controls[13]).Text))
                     {
                         if (String.IsNullOrEmpty(((TextBox)loItem.Controls[7]).Text))
@@ -606,7 +606,7 @@ namespace PL.AdminDashboard
                         continue;
                     }
 
-                    // Controlar campos obligatorios
+                    // Controlar campos obligatorios: Precio, Cantidad de unidades
                     if (String.IsNullOrEmpty(((TextBox)loItem.Controls[9]).Text) || String.IsNullOrEmpty(((TextBox)loItem.Controls[11]).Text))
                     {
                         if (String.IsNullOrEmpty(((TextBox)loItem.Controls[9]).Text))
@@ -722,7 +722,7 @@ namespace PL.AdminDashboard
                         continue;
                     }
 
-                    // Controlar campos obligatorios
+                    // Controlar campos obligatorios: Precio, Cantidad de unidades
                     if (String.IsNullOrEmpty(((TextBox)loItem.Controls[11]).Text) || String.IsNullOrEmpty(((TextBox)loItem.Controls[13]).Text))
                     {
                         if (String.IsNullOrEmpty(((TextBox)loItem.Controls[11]).Text))
@@ -838,7 +838,7 @@ namespace PL.AdminDashboard
                         continue;
                     }
 
-                    // Controlar campos obligatorios
+                    // Controlar campos obligatorios: Precio, Cantidad de unidades
                     if (String.IsNullOrEmpty(((TextBox)loItem.Controls[11]).Text) || String.IsNullOrEmpty(((TextBox)loItem.Controls[13]).Text))
                     {
                         if (String.IsNullOrEmpty(((TextBox)loItem.Controls[11]).Text))
@@ -954,7 +954,7 @@ namespace PL.AdminDashboard
                         continue;
                     }
 
-                    // Controlar campos obligatorios
+                    // Controlar campos obligatorios: Precio, Cantidad de unidades
                     if (String.IsNullOrEmpty(((TextBox)loItem.Controls[11]).Text) || String.IsNullOrEmpty(((TextBox)loItem.Controls[13]).Text))
                     {
                         if (String.IsNullOrEmpty(((TextBox)loItem.Controls[11]).Text))
