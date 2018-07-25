@@ -359,8 +359,7 @@ namespace BLL
         public int COD_DIARIO { get; set; }
         public string NOMBRE { get; set; }
         public string DIA_SEMANA { get; set; }
-        public int COD_PRODUCTO_EDICION { get; set; }
-        public int NUMERO_EDICION { get; set; }
+        public string EDICION { get; set; }
         public System.DateTime FECHA_EDICION { get; set; }
         public double PRECIO { get; set; }
         public int CANTIDAD_DISPONIBLE { get; set; }
