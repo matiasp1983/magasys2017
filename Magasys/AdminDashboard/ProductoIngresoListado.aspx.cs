@@ -49,6 +49,9 @@ namespace PL.AdminDashboard
                 HtmlButton btnVisualizar = ((HtmlButton)e.Item.FindControl("btnVisualizar"));
                 btnVisualizar.Attributes.Add("value", loIdIngresoProductos);
 
+                HtmlButton btnModificar = ((HtmlButton)e.Item.FindControl("btnModificar"));
+                btnModificar.Attributes.Add("value", loIdIngresoProductos);
+
             }
             catch (Exception ex)
             {
@@ -63,6 +66,20 @@ namespace PL.AdminDashboard
             {
                 Session.Add(Enums.Session.IdIngresoProductos.ToString(), Convert.ToInt64(((HtmlButton)sender).Attributes["value"]));
                 Response.Redirect("DetalleProductoIngresos.aspx", false);
+            }
+            catch (Exception ex)
+            {
+                Logger loLogger = LogManager.GetCurrentClassLogger();
+                loLogger.Error(ex);
+            }
+        }
+
+        protected void BtnModificar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Session.Add(Enums.Session.IdIngresoProductos.ToString(), Convert.ToInt64(((HtmlButton)sender).Attributes["value"]));
+                Response.Redirect("DetalleProductoIngresosEditar.aspx", false);
             }
             catch (Exception ex)
             {
