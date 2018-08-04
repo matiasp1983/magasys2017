@@ -884,6 +884,8 @@ namespace PL.AdminDashboard
                         oProductoEdicion.COD_ESTADO = 1;
                         oProductoEdicion.PRECIO = Convert.ToDouble(((TextBox)loItem.Controls[11]).Text);
                         oProductoEdicion.CANTIDAD_DISPONIBLE = Convert.ToInt32(((TextBox)loItem.Controls[13]).Text);
+                        if (!String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[7]).Text)))
+                            oProductoEdicion.FECHA_EDICION = Convert.ToDateTime(((TextBox)loItem.Controls[7]).Text);
                         if (!String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[9]).Text)))
                             oProductoEdicion.DESCRIPCION = Convert.ToString(((TextBox)loItem.Controls[9]).Text);
                         oDetalleProductoIngreso.COD_PRODUCTO_EDICION = new BLL.ProductoEdicionBLL().AltaProductoEdicion(oProductoEdicion);
@@ -899,6 +901,8 @@ namespace PL.AdminDashboard
                         oDetalleProductoIngreso.COD_PRODUCTO_EDICION = oProductoEdicion.ID_PRODUCTO_EDICION;
                         oProductoEdicion.PRECIO = Convert.ToDouble(((TextBox)loItem.Controls[11]).Text);
                         oProductoEdicion.CANTIDAD_DISPONIBLE = oProductoEdicion.CANTIDAD_DISPONIBLE + Convert.ToInt32(((TextBox)loItem.Controls[13]).Text);
+                        if (!String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[7]).Text)))
+                            oProductoEdicion.FECHA_EDICION = Convert.ToDateTime(((TextBox)loItem.Controls[7]).Text);
                         if (!String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[9]).Text)))
                             oProductoEdicion.DESCRIPCION = Convert.ToString(((TextBox)loItem.Controls[9]).Text);
                         loResutado = new BLL.ProductoEdicionBLL().ModificarProductoEdicion(oProductoEdicion);
@@ -1000,6 +1004,8 @@ namespace PL.AdminDashboard
                         oProductoEdicion.COD_ESTADO = 1;
                         oProductoEdicion.PRECIO = Convert.ToDouble(((TextBox)loItem.Controls[11]).Text);
                         oProductoEdicion.CANTIDAD_DISPONIBLE = Convert.ToInt32(((TextBox)loItem.Controls[13]).Text);
+                        if (!String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[7]).Text)))
+                            oProductoEdicion.FECHA_EDICION = Convert.ToDateTime(((TextBox)loItem.Controls[7]).Text);
                         if (!String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[9]).Text)))
                             oProductoEdicion.DESCRIPCION = Convert.ToString(((TextBox)loItem.Controls[9]).Text);
                         oDetalleProductoIngreso.COD_PRODUCTO_EDICION = new BLL.ProductoEdicionBLL().AltaProductoEdicion(oProductoEdicion);
@@ -1015,6 +1021,8 @@ namespace PL.AdminDashboard
                         oDetalleProductoIngreso.COD_PRODUCTO_EDICION = oProductoEdicion.ID_PRODUCTO_EDICION;
                         oProductoEdicion.PRECIO = Convert.ToDouble(((TextBox)loItem.Controls[11]).Text);
                         oProductoEdicion.CANTIDAD_DISPONIBLE = oProductoEdicion.CANTIDAD_DISPONIBLE + Convert.ToInt32(((TextBox)loItem.Controls[13]).Text);
+                        if (!String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[7]).Text)))
+                            oProductoEdicion.FECHA_EDICION = Convert.ToDateTime(((TextBox)loItem.Controls[7]).Text);
                         if (!String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[9]).Text)))
                             oProductoEdicion.DESCRIPCION = Convert.ToString(((TextBox)loItem.Controls[9]).Text);
                         loResutado = new BLL.ProductoEdicionBLL().ModificarProductoEdicion(oProductoEdicion);
