@@ -49,6 +49,26 @@ namespace BLL
             return bRes;
         }
 
+        public bool ModificarDetalleProductoIngreso(DetalleProductoIngreso oDetalleProductoIngreso)
+        {
+            var bRes = false;
+
+            try
+            {
+                using (var rep = new Repository<DetalleProductoIngreso>())
+                {
+                    bRes = rep.Update(oDetalleProductoIngreso);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return bRes;
+        }
+
         public List<ProductoIngresoListado> ObtenerProductoIngreso(IngresoProductoFiltro oIngresoProductoFiltro)
         {
             List<ProductoIngresoListado> lstProductoIngresoListado = null;

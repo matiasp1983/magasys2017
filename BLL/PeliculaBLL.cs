@@ -183,6 +183,7 @@ namespace BLL
     {
         public int COD_PRODUCTO { get; set; }
         public string NOMBRE { get; set; }
+        public string TIPO_PRODUCTO { get; set; }
         public string EDICION { get; set; }
         public System.DateTime? FECHA_EDICION { get; set; }
         public string DESCRIPCION { get; set; }
