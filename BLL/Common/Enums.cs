@@ -13,7 +13,8 @@
             ProductoLibro,
             ProductoSuplemento,
             ProductoPelicula,
-            IdIngresoProductos
+            IdIngresoProductos,
+            DetalleIngresoProductos
         } 
 
         #endregion

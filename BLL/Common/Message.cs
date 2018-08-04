@@ -34,6 +34,7 @@
         #region Mensajes Producto Ingreso
 
         public const string MsjeProductoIngresoSuccessAlta = "El ingreso de productos se guardó correctamente.";
+        public const string MsjeProductoIngresoSuccessModificacion = "El ingreso de productos se modificó correctamente.";
         public const string MsjeProductoIngresoCampObligatorio = "Debe completar los campos obligatorios.";
         public const string MsjeProductoIngresoFailure = "El ingreso de productos no se pudo guardar";
         public const string MsjeListadoProductoIngresoFiltrarTotalSinResultados = "No se encontraron Ingresos de productos para la búsqueda seleccionada.";
