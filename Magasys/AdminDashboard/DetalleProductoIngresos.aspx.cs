@@ -77,7 +77,7 @@ namespace PL.AdminDashboard
                                 {
                                     COD_PRODUCTO = oProductoEdicion.COD_PRODUCTO,
                                     NOMBRE = loNombre,
-                                    COD_PRODUCTO_EDICION = Convert.ToInt32(oProductoEdicion.EDICION),
+                                    EDICION = oProductoEdicion.EDICION,
                                     FECHA_EDICION = Convert.ToDateTime(oProductoEdicion.FECHA_EDICION),
                                     PRECIO = oProductoEdicion.PRECIO,
                                     CANTIDAD_DISPONIBLE = loDetalleProductoIngreso.CANTIDAD_UNIDADES
@@ -93,7 +93,7 @@ namespace PL.AdminDashboard
                                 {
                                     COD_PRODUCTO = oProductoEdicion.COD_PRODUCTO,
                                     NOMBRE = loNombre,
-                                    NUMERO_EDICION = Convert.ToInt32(oProductoEdicion.EDICION),
+                                    EDICION = oProductoEdicion.EDICION,
                                     FECHA_EDICION = Convert.ToDateTime(oProductoEdicion.FECHA_EDICION),
                                     PRECIO = oProductoEdicion.PRECIO,
                                     CANTIDAD_DISPONIBLE = loDetalleProductoIngreso.CANTIDAD_UNIDADES
@@ -111,7 +111,7 @@ namespace PL.AdminDashboard
                                 {
                                     COD_PRODUCTO = oProductoEdicion.COD_PRODUCTO,
                                     NOMBRE = loNombre,
-                                    NUMERO_EDICION = Convert.ToInt32(oProductoEdicion.EDICION),
+                                    EDICION = oProductoEdicion.EDICION,
                                     FECHA_EDICION = Convert.ToDateTime(oProductoEdicion.FECHA_EDICION),
                                     PRECIO = oProductoEdicion.PRECIO,
                                     CANTIDAD_DISPONIBLE = loDetalleProductoIngreso.CANTIDAD_UNIDADES
@@ -130,7 +130,7 @@ namespace PL.AdminDashboard
                                 {
                                     COD_PRODUCTO = oProductoEdicion.COD_PRODUCTO,
                                     NOMBRE = loNombre,
-                                    NUMERO_EDICION = Convert.ToInt32(oProductoEdicion.EDICION),
+                                    EDICION = oProductoEdicion.EDICION,
                                     PRECIO = oProductoEdicion.PRECIO,
                                     CANTIDAD_DISPONIBLE = loDetalleProductoIngreso.CANTIDAD_UNIDADES
                                 };

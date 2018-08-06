@@ -61,7 +61,7 @@
                                             <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE").ToString().Length > 50 ? String.Format("{0}...", Eval("NOMBRE").ToString().Remove(50).TrimEnd()):Eval("NOMBRE")%>'></asp:Label>
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblEdicion" runat="server" Text='<%#Eval("COD_PRODUCTO_EDICION").ToString().Length > 50 ? String.Format("{0}...", Eval("COD_PRODUCTO_EDICION").ToString().Remove(50).TrimEnd()):Eval("COD_PRODUCTO_EDICION")%>'></asp:Label>
+                                            <asp:Label ID="lblEdicion" runat="server" Text='<%#Eval("EDICION").ToString().Length > 50 ? String.Format("{0}...", Eval("EDICION").ToString().Remove(50).TrimEnd()):Eval("EDICION")%>'></asp:Label>
                                         </td>
                                         <td>
                                             <asp:Label ID="lblFechaEdicion" runat="server" Text='<%#Convert.ToDateTime(Eval("FECHA_EDICION")).ToString("dd/MM/yyyy")%>'></asp:Label>
@@ -115,7 +115,7 @@
                                             <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE").ToString().Length > 50 ? String.Format("{0}...", Eval("NOMBRE").ToString().Remove(50).TrimEnd()):Eval("NOMBRE")%>'></asp:Label>
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblEdicion" runat="server" Text='<%#Eval("NUMERO_EDICION").ToString().Length > 50 ? String.Format("{0}...", Eval("NUMERO_EDICION").ToString().Remove(50).TrimEnd()):Eval("NUMERO_EDICION")%>'></asp:Label>
+                                            <asp:Label ID="lblEdicion" runat="server" Text='<%#Eval("EDICION").ToString().Length > 50 ? String.Format("{0}...", Eval("EDICION").ToString().Remove(50).TrimEnd()):Eval("EDICION")%>'></asp:Label>
                                         </td>
                                         <td>
                                             <asp:Label ID="lblFechaEdicion" runat="server" Text='<%#Convert.ToDateTime(Eval("FECHA_EDICION")).ToString("dd/MM/yyyy")%>'></asp:Label>
@@ -171,7 +171,7 @@
                                             <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE").ToString().Length > 50 ? String.Format("{0}...", Eval("NOMBRE").ToString().Remove(50).TrimEnd()):Eval("NOMBRE")%>'></asp:Label>
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblEdicion" runat="server" Text='<%#Eval("NUMERO_EDICION").ToString().Length > 50 ? String.Format("{0}...", Eval("NUMERO_EDICION").ToString().Remove(50).TrimEnd()):Eval("NUMERO_EDICION")%>'></asp:Label>
+                                            <asp:Label ID="lblEdicion" runat="server" Text='<%#Eval("EDICION").ToString().Length > 50 ? String.Format("{0}...", Eval("EDICION").ToString().Remove(50).TrimEnd()):Eval("EDICION")%>'></asp:Label>
                                         </td>
                                         <td>
                                             <asp:Label ID="lblDescripcion" runat="server" Text='<%#(Eval("DESCRIPCION") != null) ? Eval("DESCRIPCION").ToString().Length > 50 ? String.Format("{0}...", Eval("DESCRIPCION").ToString().Remove(50).TrimEnd()):Eval("DESCRIPCION"):null%>'></asp:Label>
@@ -228,7 +228,7 @@
                                             <asp:Label ID="lblAutor" runat="server" Text='<%#Eval("AUTOR").ToString().Length > 50 ? String.Format("{0}...", Eval("AUTOR").ToString().Remove(50).TrimEnd()):Eval("AUTOR")%>'></asp:Label>
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblEdicion" runat="server" Text='<%#Eval("NUMERO_EDICION").ToString().Length > 50 ? String.Format("{0}...", Eval("NUMERO_EDICION").ToString().Remove(50).TrimEnd()):Eval("NUMERO_EDICION")%>'></asp:Label>
+                                            <asp:Label ID="lblEdicion" runat="server" Text='<%#Eval("EDICION").ToString().Length > 50 ? String.Format("{0}...", Eval("EDICION").ToString().Remove(50).TrimEnd()):Eval("EDICION")%>'></asp:Label>
                                         </td>
                                         <td>
                                             <asp:Label ID="lblDescripcion" runat="server" Text='<%#(Eval("DESCRIPCION") != null) ? Eval("DESCRIPCION").ToString().Length > 50 ? String.Format("{0}...", Eval("DESCRIPCION").ToString().Remove(50).TrimEnd()):Eval("DESCRIPCION"):null%>'></asp:Label>
