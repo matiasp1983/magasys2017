@@ -77,6 +77,7 @@
     <Content Include="AdminDashboard\css\plugins\select2\select2.min.css" />
     <Content Include="AdminDashboard\css\plugins\sweetalert\sweetalert.css" />
     <Content Include="AdminDashboard\DetalleProductoIngresos.aspx" />
+    <Content Include="AdminDashboard\DetalleProductoIngresosEditar.aspx" />
     <Content Include="AdminDashboard\font-awesome\fonts\fontawesome-webfont.eot" />
     <Content Include="AdminDashboard\font-awesome\fonts\fontawesome-webfont.ttf" />
     <Content Include="AdminDashboard\font-awesome\fonts\fontawesome-webfont.woff" />
@@ -210,6 +211,13 @@
     </Compile>
     <Compile Include="AdminDashboard\DetalleProductoIngresos.aspx.designer.cs">
       <DependentUpon>DetalleProductoIngresos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\DetalleProductoIngresosEditar.aspx.cs">
+      <DependentUpon>DetalleProductoIngresosEditar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\DetalleProductoIngresosEditar.aspx.designer.cs">
+      <DependentUpon>DetalleProductoIngresosEditar.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminDashboard\Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
