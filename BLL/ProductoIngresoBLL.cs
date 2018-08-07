@@ -130,25 +130,6 @@ namespace BLL
             return lstProductoIngresoListado;
         }
 
-        public List<DetalleProductoIngreso> ObtenerDetalleProductoIngreso(int idIngresoProductos)
-        {
-            List<DetalleProductoIngreso> lstDetalleProductoIngreso = null;
-
-            try
-            {
-                using (var rep = new Repository<DetalleProductoIngreso>())
-                {
-                    lstDetalleProductoIngreso = rep.Search(p => p.COD_ESTADO == 1 && p.COD_INGRESO_PRODUCTO == idIngresoProductos);
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-            return lstDetalleProductoIngreso;
-        }
-
         #endregion
     }
 

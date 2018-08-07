@@ -113,7 +113,7 @@ namespace PL.AdminDashboard
                         {
                             oProductoEdicion = loDetalleProductoIngreso.ProductoEdicion;
                             loNombre = oProductoEdicion.Producto.NOMBRE;
-                            var loTipoProdectoDescripcion = oProductoEdicion.Producto.TipoProducto.DESCRIPCION;
+                            var loTipoProductoDescripcion = oProductoEdicion.Producto.TipoProducto.DESCRIPCION;
 
                             switch (oProductoEdicion.COD_TIPO_PRODUCTO)
                             {
@@ -123,7 +123,7 @@ namespace PL.AdminDashboard
                                     {
                                         COD_PRODUCTO = oProductoEdicion.COD_PRODUCTO,
                                         NOMBRE = loNombre,
-                                        TIPO_PRODUCTO = loTipoProdectoDescripcion,
+                                        TIPO_PRODUCTO = loTipoProductoDescripcion,
                                         EDICION = oProductoEdicion.EDICION,
                                         FECHA_EDICION = Convert.ToDateTime(oProductoEdicion.FECHA_EDICION),
                                         PRECIO = oProductoEdicion.PRECIO,
@@ -140,7 +140,7 @@ namespace PL.AdminDashboard
                                     {
                                         COD_PRODUCTO = oProductoEdicion.COD_PRODUCTO,
                                         NOMBRE = loNombre,
-                                        TIPO_PRODUCTO = loTipoProdectoDescripcion,
+                                        TIPO_PRODUCTO = loTipoProductoDescripcion,
                                         EDICION = oProductoEdicion.EDICION,
                                         FECHA_EDICION = Convert.ToDateTime(oProductoEdicion.FECHA_EDICION),
                                         PRECIO = oProductoEdicion.PRECIO,
@@ -159,7 +159,7 @@ namespace PL.AdminDashboard
                                     {
                                         COD_PRODUCTO = oProductoEdicion.COD_PRODUCTO,
                                         NOMBRE = loNombre,
-                                        TIPO_PRODUCTO = loTipoProdectoDescripcion,
+                                        TIPO_PRODUCTO = loTipoProductoDescripcion,
                                         EDICION = oProductoEdicion.EDICION,
                                         FECHA_EDICION = Convert.ToDateTime(oProductoEdicion.FECHA_EDICION),
                                         PRECIO = oProductoEdicion.PRECIO,
@@ -179,7 +179,7 @@ namespace PL.AdminDashboard
                                     {
                                         COD_PRODUCTO = oProductoEdicion.COD_PRODUCTO,
                                         NOMBRE = loNombre,
-                                        TIPO_PRODUCTO = loTipoProdectoDescripcion,
+                                        TIPO_PRODUCTO = loTipoProductoDescripcion,
                                         EDICION = oProductoEdicion.EDICION,
                                         PRECIO = oProductoEdicion.PRECIO,
                                         CANTIDAD_DISPONIBLE = loDetalleProductoIngreso.CANTIDAD_UNIDADES
@@ -201,7 +201,7 @@ namespace PL.AdminDashboard
                                     {
                                         COD_PRODUCTO = oProductoEdicion.COD_PRODUCTO,
                                         NOMBRE = loNombre,
-                                        TIPO_PRODUCTO = loTipoProdectoDescripcion,
+                                        TIPO_PRODUCTO = loTipoProductoDescripcion,
                                         EDICION = oProductoEdicion.EDICION,
                                         PRECIO = oProductoEdicion.PRECIO,
                                         CANTIDAD_DISPONIBLE = loDetalleProductoIngreso.CANTIDAD_UNIDADES
@@ -222,7 +222,7 @@ namespace PL.AdminDashboard
                                     {
                                         COD_PRODUCTO = oProductoEdicion.COD_PRODUCTO,
                                         NOMBRE = loNombre,
-                                        TIPO_PRODUCTO = loTipoProdectoDescripcion,
+                                        TIPO_PRODUCTO = loTipoProductoDescripcion,
                                         EDICION = oProductoEdicion.EDICION,
                                         PRECIO = oProductoEdicion.PRECIO,
                                         CANTIDAD_DISPONIBLE = loDetalleProductoIngreso.CANTIDAD_UNIDADES
