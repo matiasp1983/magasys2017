@@ -36,11 +36,12 @@ namespace PL.AdminDashboard
                 if (GuardarEdicion())
                 {
                     Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeProductoIngresoSuccessModificacion, "Modificación de Ingreso de productos"));
-                    //        LimpiarCampos();
+                    Session.Remove(Enums.Session.IdIngresoProductos.ToString());
                 }
                 else
                 {
                     Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProductoIngresoFailure));
+                    Session.Remove(Enums.Session.IdIngresoProductos.ToString());
                 }
             }
             catch (Exception ex)
@@ -54,7 +55,8 @@ namespace PL.AdminDashboard
 
         protected void BtnCancelar_Click(object sender, EventArgs e)
         {
-            LimpiarCampos();
+            Session.Remove(Enums.Session.IdIngresoProductos.ToString());
+            Session.Remove(Enums.Session.DetalleIngresoProductos.ToString());
             Response.Redirect("ProductoIngresoListado.aspx", false);
         }
 
@@ -1028,19 +1030,6 @@ namespace PL.AdminDashboard
             }
 
             return loResutado;
-        }
-
-        private void LimpiarCampos()
-        {
-            lsvDiarios.Visible = false;
-            lsvRevistas.Visible = false;
-            lsvColecciones.Visible = false;
-            lsvLibros.Visible = false;
-            lsvSuplementos.Visible = false;
-            lsvPeliculas.Visible = false;
-            btnGuardar.Visible = false;
-            btnCancelar.Visible = false;
-            // controlar borrado se session
         }
 
         #endregion
