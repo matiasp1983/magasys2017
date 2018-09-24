@@ -164,7 +164,7 @@ namespace BLL
             return lstDiariosProducto;
         }
 
-        public List<DiarioEdicion> ObtenerDariosParaEdicion(ProductoFiltro oProductoFiltro)
+        public List<DiarioEdicion> ObtenerDiariosParaEdicion(ProductoFiltro oProductoFiltro)
         {
             List<Producto> lstProductos = null;
             List<DiarioEdicion> lstDiarioEdicion = null;
@@ -182,8 +182,8 @@ namespace BLL
                     if (oProductoFiltro.CodTipoProducto > 0 && lstProductos.Count > 0)
                         lstProductos = lstProductos.FindAll(p => p.COD_TIPO_PRODUCTO == oProductoFiltro.CodTipoProducto);
 
-                    if (!String.IsNullOrEmpty(oProductoFiltro.Nombre) && lstProductos.Count > 0)
-                        lstProductos = lstProductos.FindAll(p => p.NOMBRE.ToUpper().Contains(oProductoFiltro.Nombre.ToUpper()));
+                    if (!String.IsNullOrEmpty(oProductoFiltro.NombreProducto) && lstProductos.Count > 0)
+                        lstProductos = lstProductos.FindAll(p => p.NOMBRE.ToUpper().Contains(oProductoFiltro.NombreProducto.ToUpper()));
                 }
 
                 DiarioEdicion oDiarioEdicion;
@@ -221,6 +221,11 @@ namespace BLL
             }
 
             return lstDiarioEdicion;
+        }
+
+        public List<DiarioEdicion> ObtenerDiariosEdicion()
+        {
+
         }
 
         public bool AltaDiario(Producto oProducto, List<DiarioDiaSemana> lstDiarioDiasSemanas)
