@@ -158,7 +158,7 @@ namespace PL.AdminDashboard
                         lsvSuplementos.Visible = false;
                         lsvPeliculas.Visible = false;
 
-                        var lstDiarios = new BLL.DiarioBLL().ObtenerDariosParaEdicion(oProductoFiltro);
+                        var lstDiarios = new BLL.DiarioBLL().ObtenerDiariosParaEdicion(oProductoFiltro);
                         if (lstDiarios != null && lstDiarios.Count > 0)
                         {
                             lsvDiarios.DataSource = lstDiarios;
