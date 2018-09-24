@@ -24,8 +24,8 @@ namespace BLL
                     if (oProductoFiltro.IdProducto > 0 && lstProductos.Count > 0)
                         lstProductos = lstProductos.FindAll(p => p.ID_PRODUCTO.ToString().Contains(oProductoFiltro.IdProducto.ToString()));
 
-                    if (!String.IsNullOrEmpty(oProductoFiltro.Nombre) && lstProductos.Count > 0)
-                        lstProductos = lstProductos.FindAll(p => p.NOMBRE.ToUpper().Contains(oProductoFiltro.Nombre.ToUpper()));                    
+                    if (!String.IsNullOrEmpty(oProductoFiltro.NombreProducto) && lstProductos.Count > 0)
+                        lstProductos = lstProductos.FindAll(p => p.NOMBRE.ToUpper().Contains(oProductoFiltro.NombreProducto.ToUpper()));                    
 
                     if (oProductoFiltro.CodTipoProducto > 0 && lstProductos.Count > 0)
                         lstProductos = lstProductos.FindAll(p => p.COD_TIPO_PRODUCTO == oProductoFiltro.CodTipoProducto);
