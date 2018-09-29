@@ -228,7 +228,7 @@ namespace PL.AdminDashboard
                 oProductoFiltro.IdProducto = Convert.ToInt32(txtCodigo.Text);
 
             if (!String.IsNullOrEmpty(txtNombre.Text))
-                oProductoFiltro.Nombre = txtNombre.Text;
+                oProductoFiltro.NombreProducto = txtNombre.Text;
 
             if (!String.IsNullOrEmpty(ddlTipoProducto.SelectedValue))
                 oProductoFiltro.CodTipoProducto = Convert.ToInt32(ddlTipoProducto.SelectedValue);

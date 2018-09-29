@@ -107,7 +107,7 @@
                                                 <th data-hide="phone,tablet">Estado</th>
                                                 <th data-hide="phone,tablet">G&eacute;nero</th>
                                                 <th data-hide="phone,tablet">Proveedor</th>
-                                                <th class="text-right" data-sort-ignore="true">Acti&oacute;n</th>
+                                                <th class="text-right" data-sort-ignore="true">Acci&oacute;n</th>
                                             </tr>
                                         </thead>
                                         <tbody>
