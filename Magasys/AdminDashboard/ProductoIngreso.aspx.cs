@@ -137,7 +137,7 @@ namespace PL.AdminDashboard
                 oProductoFiltro.CodProveedor = Convert.ToInt32(ddlProveedor.SelectedValue);
 
             if (!String.IsNullOrEmpty(txtNombre.Text))
-                oProductoFiltro.Nombre = txtNombre.Text;
+                oProductoFiltro.NombreProducto = txtNombre.Text;
 
             return oProductoFiltro;
         }
