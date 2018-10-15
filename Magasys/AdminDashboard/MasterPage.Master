@@ -61,6 +61,12 @@
                             <li id="liProductoIngresoListado" runat="server"><a href="ProductoIngresoListado.aspx">Listado Ingreso de Producto</a></li>
                         </ul>
                     </li>
+                    <li id="liVenta" runat="server">
+                        <a href="#"><i class="fa fa-gift"></i><span class="nav-label">Venta</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li id="liRegistrarVenta" runat="server"><a href="Venta.aspx">Registrar Venta</a></li>    
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </nav>

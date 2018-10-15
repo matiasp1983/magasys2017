@@ -3,6 +3,7 @@ using BLL.Filters;
 using System;
 using System.Transactions;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BLL
 {
@@ -99,6 +100,64 @@ namespace BLL
             return lstLibroEdicion;
         }
 
+        public List<LibroEdicion> ObtenerLibrosEdicion(ProductoFiltro oProductoFiltro)
+        {
+            List<LibroEdicion> lstLibroEdicion = null;
+            List<ProductoEdicion> lstProductoEdicion = null;
+
+            try
+            {
+                using (var loRepProductoEdicion = new Repository<ProductoEdicion>())
+                {
+                    lstProductoEdicion = loRepProductoEdicion.Search(p => p.COD_ESTADO == 1 && p.COD_TIPO_PRODUCTO == oProductoFiltro.CodTipoProducto && p.Producto.COD_PROVEEDOR == oProductoFiltro.CodProveedor);
+
+                    if (!String.IsNullOrEmpty(oProductoFiltro.NombreEdicion) && lstProductoEdicion.Count > 0)
+                        lstProductoEdicion = lstProductoEdicion.FindAll(p => p.EDICION.ToUpper().Contains(oProductoFiltro.NombreEdicion.ToUpper()));
+
+                    if (!String.IsNullOrEmpty(oProductoFiltro.DescripcionEdicion) && lstProductoEdicion.Count > 0)
+                        lstProductoEdicion = lstProductoEdicion.FindAll(p => !string.IsNullOrEmpty(p.DESCRIPCION) && p.DESCRIPCION.ToUpper().Contains(oProductoFiltro.DescripcionEdicion.ToUpper()));
+
+                    LibroEdicion oLibroEdicion;
+                    lstLibroEdicion = new List<LibroEdicion>();
+
+                    foreach (var loProductoEdicion in lstProductoEdicion)
+                    {
+                        // Filtro por Nombre de Producto
+                        if ((String.IsNullOrEmpty(oProductoFiltro.NombreProducto)) || (!String.IsNullOrEmpty(oProductoFiltro.NombreProducto) && loProductoEdicion.Producto.NOMBRE.ToUpper().Contains(oProductoFiltro.NombreProducto.ToUpper())))
+                        {
+                            // Filtro por Descripción del Producto
+                            if ((String.IsNullOrEmpty(oProductoFiltro.DescripcionProducto)) || (!String.IsNullOrEmpty(oProductoFiltro.DescripcionProducto) && !string.IsNullOrEmpty(loProductoEdicion.Producto.DESCRIPCION) && loProductoEdicion.Producto.DESCRIPCION.ToUpper().Contains(oProductoFiltro.DescripcionProducto.ToUpper())))
+                            {
+                                oLibroEdicion = new LibroEdicion
+                                {
+                                    COD_PRODUCTO = loProductoEdicion.COD_PRODUCTO,
+                                    COD_PRODUCTO_EDICION = loProductoEdicion.ID_PRODUCTO_EDICION,
+                                    NOMBRE = loProductoEdicion.Producto.NOMBRE, //nombre del Producto
+                                    TIPO_PRODUCTO = loProductoEdicion.Producto.TipoProducto.DESCRIPCION,
+                                    AUTOR = (from loAutor in loProductoEdicion.Producto.Libro select loAutor).FirstOrDefault().AUTOR,
+                                    EDICION = loProductoEdicion.EDICION,
+                                    PRECIO = loProductoEdicion.PRECIO,
+                                    CANTIDAD_DISPONIBLE = loProductoEdicion.CANTIDAD_DISPONIBLE
+                                };
+
+                                if (!String.IsNullOrEmpty(loProductoEdicion.DESCRIPCION))
+                                    oLibroEdicion.DESCRIPCION = loProductoEdicion.DESCRIPCION;
+
+                                lstLibroEdicion.Add(oLibroEdicion);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return lstLibroEdicion;
+        }
+
         public bool AltaLibro(Producto oProducto, Libro oLibro)
         {
             var bRes = false;
@@ -189,6 +248,7 @@ namespace BLL
     public class LibroEdicion
     {
         public int COD_PRODUCTO { get; set; }
+        public int COD_PRODUCTO_EDICION { get; set; }
         public string NOMBRE { get; set; }
         public string TIPO_PRODUCTO { get; set; }
         public string AUTOR { get; set; }
@@ -197,6 +257,7 @@ namespace BLL
         public string DESCRIPCION { get; set; }
         public double PRECIO { get; set; }
         public int CANTIDAD_DISPONIBLE { get; set; }
+        public int CANTIDAD { get; set; }
         public System.DateTime? FECHA_DEVOLUCION { get; set; }
     }
 

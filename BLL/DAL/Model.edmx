@@ -11,6 +11,31 @@
           </Key>
           <Property Name="DESCRIPCION" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="ID_CLIENTE" />
+          </Key>
+          <Property Name="ID_CLIENTE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FECHA_ALTA" Type="date" Nullable="false" />
+          <Property Name="COD_ESTADO" Type="int" Nullable="false" />
+          <Property Name="TIPO_DOCUMENTO" Type="int" Nullable="false" />
+          <Property Name="NRO_DOCUMENTO" Type="int" Nullable="false" />
+          <Property Name="APELLIDO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ALIAS" Type="varchar" MaxLength="50" />
+          <Property Name="TELEFONO_MOVIL" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TELEFONO_FIJO" Type="varchar" MaxLength="50" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="50" />
+          <Property Name="CALLE" Type="varchar" MaxLength="50" />
+          <Property Name="NUMERO" Type="int" />
+          <Property Name="PISO" Type="varchar" MaxLength="2" />
+          <Property Name="DEPARTAMENTO" Type="varchar" MaxLength="2" />
+          <Property Name="BARRIO" Type="varchar" MaxLength="50" />
+          <Property Name="CODIGO_POSTAL" Type="varchar" MaxLength="10" />
+          <Property Name="ID_PROVINCIA" Type="int" />
+          <Property Name="ID_LOCALIDAD" Type="int" />
+          <Property Name="FECHA_BAJA" Type="datetime" />
+        </EntityType>
         <EntityType Name="Coleccion">
           <Key>
             <PropertyRef Name="ID_COLECCION" />
@@ -31,6 +56,17 @@
           <Property Name="FECHA_DEVOLUCION" Type="datetime" />
           <Property Name="COD_ESTADO" Type="int" Nullable="false" />
           <Property Name="COD_PRODUCTO_EDICION" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DetalleVenta">
+          <Key>
+            <PropertyRef Name="ID_DETALLE_VENTA" />
+          </Key>
+          <Property Name="ID_DETALLE_VENTA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="COD_VENTA" Type="int" Nullable="false" />
+          <Property Name="COD_PRODUCTO_EDICION" Type="int" Nullable="false" />
+          <Property Name="PRECIO_UNIDAD" Type="float" Nullable="false" />
+          <Property Name="CANTIDAD" Type="int" Nullable="false" />
+          <Property Name="SUBTOTAL" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="Diario">
           <Key>
@@ -205,6 +241,13 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <EntityType Name="TipoDocumento">
+          <Key>
+            <PropertyRef Name="ID_TIPO_DOCUMENTO" />
+          </Key>
+          <Property Name="ID_TIPO_DOCUMENTO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="TipoProducto">
           <Key>
             <PropertyRef Name="ID_TIPO_PRODUCTO" />
@@ -212,6 +255,28 @@
           <Property Name="ID_TIPO_PRODUCTO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DESCRIPCION" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Venta">
+          <Key>
+            <PropertyRef Name="ID_VENTA" />
+          </Key>
+          <Property Name="ID_VENTA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FECHA" Type="datetime" Nullable="false" />
+          <Property Name="COD_ESTADO" Type="int" Nullable="false" />
+          <Property Name="TOTAL" Type="float" Nullable="false" />
+          <Property Name="COD_CLIENTE" Type="int" />
+        </EntityType>
+        <Association Name="FK_Cliente_TipoDocumento">
+          <End Role="TipoDocumento" Type="Self.TipoDocumento" Multiplicity="1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDocumento">
+              <PropertyRef Name="ID_TIPO_DOCUMENTO" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="TIPO_DOCUMENTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Coleccion_DiaSemana">
           <End Role="DiaSemana" Type="Self.DiaSemana" Multiplicity="0..1" />
           <End Role="Coleccion" Type="Self.Coleccion" Multiplicity="*" />
@@ -281,6 +346,18 @@
             </Principal>
             <Dependent Role="DetalleProductoIngreso">
               <PropertyRef Name="COD_PRODUCTO_EDICION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleVenta_Venta">
+          <End Role="Venta" Type="Self.Venta" Multiplicity="1" />
+          <End Role="DetalleVenta" Type="Self.DetalleVenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venta">
+              <PropertyRef Name="ID_VENTA" />
+            </Principal>
+            <Dependent Role="DetalleVenta">
+              <PropertyRef Name="COD_VENTA" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -560,10 +637,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Venta_Cliente">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Venta" Type="Self.Venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Principal>
+            <Dependent Role="Venta">
+              <PropertyRef Name="COD_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="MAGASYSModelStoreContainer">
           <EntitySet Name="Anio" EntityType="Self.Anio" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Coleccion" EntityType="Self.Coleccion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DetalleProductoIngreso" EntityType="Self.DetalleProductoIngreso" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetalleVenta" EntityType="Self.DetalleVenta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Diario" EntityType="Self.Diario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DiarioDiaSemana" EntityType="Self.DiarioDiaSemana" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DiaSemana" EntityType="Self.DiaSemana" Schema="dbo" store:Type="Tables" />
@@ -581,7 +672,13 @@
           <EntitySet Name="Revista" EntityType="Self.Revista" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Suplemento" EntityType="Self.Suplemento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoDocumento" EntityType="Self.TipoDocumento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoProducto" EntityType="Self.TipoProducto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Venta" EntityType="Self.Venta" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Cliente_TipoDocumento" Association="Self.FK_Cliente_TipoDocumento">
+            <End Role="TipoDocumento" EntitySet="TipoDocumento" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
           <AssociationSet Name="FK_Coleccion_DiaSemana" Association="Self.FK_Coleccion_DiaSemana">
             <End Role="DiaSemana" EntitySet="DiaSemana" />
             <End Role="Coleccion" EntitySet="Coleccion" />
@@ -605,6 +702,10 @@
           <AssociationSet Name="FK_DetalleIngresoProducto_Producto_Edicion" Association="Self.FK_DetalleIngresoProducto_Producto_Edicion">
             <End Role="ProductoEdicion" EntitySet="ProductoEdicion" />
             <End Role="DetalleProductoIngreso" EntitySet="DetalleProductoIngreso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleVenta_Venta" Association="Self.FK_DetalleVenta_Venta">
+            <End Role="Venta" EntitySet="Venta" />
+            <End Role="DetalleVenta" EntitySet="DetalleVenta" />
           </AssociationSet>
           <AssociationSet Name="FK_Diario_Producto" Association="Self.FK_Diario_Producto">
             <End Role="Producto" EntitySet="Producto" />
@@ -698,6 +799,10 @@
             <End Role="Producto" EntitySet="Producto" />
             <End Role="Suplemento" EntitySet="Suplemento" />
           </AssociationSet>
+          <AssociationSet Name="FK_Venta_Cliente" Association="Self.FK_Venta_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Venta" EntitySet="Venta" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -705,8 +810,10 @@
       <Schema Namespace="MAGASYSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="MAGASYSEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Anio" EntityType="MAGASYSModel.Anio" />
+          <EntitySet Name="Cliente" EntityType="MAGASYSModel.Cliente" />
           <EntitySet Name="Coleccion" EntityType="MAGASYSModel.Coleccion" />
           <EntitySet Name="DetalleProductoIngreso" EntityType="MAGASYSModel.DetalleProductoIngreso" />
+          <EntitySet Name="DetalleVenta" EntityType="MAGASYSModel.DetalleVenta" />
           <EntitySet Name="Diario" EntityType="MAGASYSModel.Diario" />
           <EntitySet Name="DiarioDiaSemana" EntityType="MAGASYSModel.DiarioDiaSemana" />
           <EntitySet Name="DiaSemana" EntityType="MAGASYSModel.DiaSemana" />
@@ -724,7 +831,17 @@
           <EntitySet Name="Revista" EntityType="MAGASYSModel.Revista" />
           <EntitySet Name="Suplemento" EntityType="MAGASYSModel.Suplemento" />
           <EntitySet Name="sysdiagrams" EntityType="MAGASYSModel.sysdiagrams" />
+          <EntitySet Name="TipoDocumento" EntityType="MAGASYSModel.TipoDocumento" />
           <EntitySet Name="TipoProducto" EntityType="MAGASYSModel.TipoProducto" />
+          <EntitySet Name="Venta" EntityType="MAGASYSModel.Venta" />
+          <AssociationSet Name="FK_Cliente_TipoDocumento" Association="MAGASYSModel.FK_Cliente_TipoDocumento">
+            <End Role="TipoDocumento" EntitySet="TipoDocumento" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Venta_Cliente" Association="MAGASYSModel.FK_Venta_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Venta" EntitySet="Venta" />
+          </AssociationSet>
           <AssociationSet Name="FK_Coleccion_DiaSemana" Association="MAGASYSModel.FK_Coleccion_DiaSemana">
             <End Role="DiaSemana" EntitySet="DiaSemana" />
             <End Role="Coleccion" EntitySet="Coleccion" />
@@ -748,6 +865,10 @@
           <AssociationSet Name="FK_DetalleIngresoProducto_Producto_Edicion" Association="MAGASYSModel.FK_DetalleIngresoProducto_Producto_Edicion">
             <End Role="ProductoEdicion" EntitySet="ProductoEdicion" />
             <End Role="DetalleProductoIngreso" EntitySet="DetalleProductoIngreso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleVenta_Venta" Association="MAGASYSModel.FK_DetalleVenta_Venta">
+            <End Role="Venta" EntitySet="Venta" />
+            <End Role="DetalleVenta" EntitySet="DetalleVenta" />
           </AssociationSet>
           <AssociationSet Name="FK_Diario_Producto" Association="MAGASYSModel.FK_Diario_Producto">
             <End Role="Producto" EntitySet="Producto" />
@@ -848,6 +969,33 @@
           </Key>
           <Property Name="DESCRIPCION" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="ID_CLIENTE" />
+          </Key>
+          <Property Name="ID_CLIENTE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FECHA_ALTA" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="COD_ESTADO" Type="Int32" Nullable="false" />
+          <Property Name="TIPO_DOCUMENTO" Type="Int32" Nullable="false" />
+          <Property Name="NRO_DOCUMENTO" Type="Int32" Nullable="false" />
+          <Property Name="APELLIDO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ALIAS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TELEFONO_MOVIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TELEFONO_FIJO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CALLE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NUMERO" Type="Int32" />
+          <Property Name="PISO" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="DEPARTAMENTO" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="BARRIO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CODIGO_POSTAL" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ID_PROVINCIA" Type="Int32" />
+          <Property Name="ID_LOCALIDAD" Type="Int32" />
+          <NavigationProperty Name="TipoDocumento" Relationship="MAGASYSModel.FK_Cliente_TipoDocumento" FromRole="Cliente" ToRole="TipoDocumento" />
+          <NavigationProperty Name="Venta" Relationship="MAGASYSModel.FK_Venta_Cliente" FromRole="Cliente" ToRole="Venta" />
+          <Property Name="FECHA_BAJA" Type="DateTime" Precision="3" />
+        </EntityType>
         <EntityType Name="Coleccion">
           <Key>
             <PropertyRef Name="ID_COLECCION" />
@@ -874,6 +1022,18 @@
           <NavigationProperty Name="Estado" Relationship="MAGASYSModel.FK_DetalleIngresoProducto_Estado" FromRole="DetalleProductoIngreso" ToRole="Estado" />
           <NavigationProperty Name="ProductoIngreso" Relationship="MAGASYSModel.FK_DetalleIngresoProducto_IngresoProducto" FromRole="DetalleProductoIngreso" ToRole="ProductoIngreso" />
           <NavigationProperty Name="ProductoEdicion" Relationship="MAGASYSModel.FK_DetalleIngresoProducto_Producto_Edicion" FromRole="DetalleProductoIngreso" ToRole="ProductoEdicion" />
+        </EntityType>
+        <EntityType Name="DetalleVenta">
+          <Key>
+            <PropertyRef Name="ID_DETALLE_VENTA" />
+          </Key>
+          <Property Name="ID_DETALLE_VENTA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="COD_VENTA" Type="Int32" Nullable="false" />
+          <Property Name="COD_PRODUCTO_EDICION" Type="Int32" Nullable="false" />
+          <Property Name="PRECIO_UNIDAD" Type="Double" Nullable="false" />
+          <Property Name="CANTIDAD" Type="Int32" Nullable="false" />
+          <Property Name="SUBTOTAL" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Venta" Relationship="MAGASYSModel.FK_DetalleVenta_Venta" FromRole="DetalleVenta" ToRole="Venta" />
         </EntityType>
         <EntityType Name="Diario">
           <Key>
@@ -1099,6 +1259,14 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
+        <EntityType Name="TipoDocumento">
+          <Key>
+            <PropertyRef Name="ID_TIPO_DOCUMENTO" />
+          </Key>
+          <Property Name="ID_TIPO_DOCUMENTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DESCRIPCION" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Cliente" Relationship="MAGASYSModel.FK_Cliente_TipoDocumento" FromRole="TipoDocumento" ToRole="Cliente" />
+        </EntityType>
         <EntityType Name="TipoProducto">
           <Key>
             <PropertyRef Name="ID_TIPO_PRODUCTO" />
@@ -1107,6 +1275,42 @@
           <Property Name="DESCRIPCION" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_Producto_TipoProducto" FromRole="TipoProducto" ToRole="Producto" />
         </EntityType>
+        <EntityType Name="Venta">
+          <Key>
+            <PropertyRef Name="ID_VENTA" />
+          </Key>
+          <Property Name="ID_VENTA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="COD_ESTADO" Type="Int32" Nullable="false" />
+          <Property Name="TOTAL" Type="Double" Nullable="false" />
+          <Property Name="COD_CLIENTE" Type="Int32" />
+          <NavigationProperty Name="Cliente" Relationship="MAGASYSModel.FK_Venta_Cliente" FromRole="Venta" ToRole="Cliente" />
+          <NavigationProperty Name="DetalleVenta" Relationship="MAGASYSModel.FK_DetalleVenta_Venta" FromRole="Venta" ToRole="DetalleVenta" />
+        </EntityType>
+        <Association Name="FK_Cliente_TipoDocumento">
+          <End Type="MAGASYSModel.TipoDocumento" Role="TipoDocumento" Multiplicity="1" />
+          <End Type="MAGASYSModel.Cliente" Role="Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDocumento">
+              <PropertyRef Name="ID_TIPO_DOCUMENTO" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="TIPO_DOCUMENTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Venta_Cliente">
+          <End Type="MAGASYSModel.Cliente" Role="Cliente" Multiplicity="0..1" />
+          <End Type="MAGASYSModel.Venta" Role="Venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Principal>
+            <Dependent Role="Venta">
+              <PropertyRef Name="COD_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Coleccion_DiaSemana">
           <End Type="MAGASYSModel.DiaSemana" Role="DiaSemana" Multiplicity="0..1" />
           <End Type="MAGASYSModel.Coleccion" Role="Coleccion" Multiplicity="*" />
@@ -1176,6 +1380,18 @@
             </Principal>
             <Dependent Role="DetalleProductoIngreso">
               <PropertyRef Name="COD_PRODUCTO_EDICION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleVenta_Venta">
+          <End Type="MAGASYSModel.Venta" Role="Venta" Multiplicity="1" />
+          <End Type="MAGASYSModel.DetalleVenta" Role="DetalleVenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venta">
+              <PropertyRef Name="ID_VENTA" />
+            </Principal>
+            <Dependent Role="DetalleVenta">
+              <PropertyRef Name="COD_VENTA" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1468,6 +1684,32 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Cliente">
+            <EntityTypeMapping TypeName="MAGASYSModel.Cliente">
+              <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="FECHA_BAJA" ColumnName="FECHA_BAJA" />
+                <ScalarProperty Name="ID_LOCALIDAD" ColumnName="ID_LOCALIDAD" />
+                <ScalarProperty Name="ID_PROVINCIA" ColumnName="ID_PROVINCIA" />
+                <ScalarProperty Name="CODIGO_POSTAL" ColumnName="CODIGO_POSTAL" />
+                <ScalarProperty Name="BARRIO" ColumnName="BARRIO" />
+                <ScalarProperty Name="DEPARTAMENTO" ColumnName="DEPARTAMENTO" />
+                <ScalarProperty Name="PISO" ColumnName="PISO" />
+                <ScalarProperty Name="NUMERO" ColumnName="NUMERO" />
+                <ScalarProperty Name="CALLE" ColumnName="CALLE" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="TELEFONO_FIJO" ColumnName="TELEFONO_FIJO" />
+                <ScalarProperty Name="TELEFONO_MOVIL" ColumnName="TELEFONO_MOVIL" />
+                <ScalarProperty Name="ALIAS" ColumnName="ALIAS" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="APELLIDO" ColumnName="APELLIDO" />
+                <ScalarProperty Name="NRO_DOCUMENTO" ColumnName="NRO_DOCUMENTO" />
+                <ScalarProperty Name="TIPO_DOCUMENTO" ColumnName="TIPO_DOCUMENTO" />
+                <ScalarProperty Name="COD_ESTADO" ColumnName="COD_ESTADO" />
+                <ScalarProperty Name="FECHA_ALTA" ColumnName="FECHA_ALTA" />
+                <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Coleccion">
             <EntityTypeMapping TypeName="MAGASYSModel.Coleccion">
               <MappingFragment StoreEntitySet="Coleccion">
@@ -1488,6 +1730,18 @@
                 <ScalarProperty Name="CANTIDAD_UNIDADES" ColumnName="CANTIDAD_UNIDADES" />
                 <ScalarProperty Name="COD_INGRESO_PRODUCTO" ColumnName="COD_INGRESO_PRODUCTO" />
                 <ScalarProperty Name="ID_DETALLE_INGRESO_PRODUCTO" ColumnName="ID_DETALLE_INGRESO_PRODUCTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetalleVenta">
+            <EntityTypeMapping TypeName="MAGASYSModel.DetalleVenta">
+              <MappingFragment StoreEntitySet="DetalleVenta">
+                <ScalarProperty Name="SUBTOTAL" ColumnName="SUBTOTAL" />
+                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+                <ScalarProperty Name="PRECIO_UNIDAD" ColumnName="PRECIO_UNIDAD" />
+                <ScalarProperty Name="COD_PRODUCTO_EDICION" ColumnName="COD_PRODUCTO_EDICION" />
+                <ScalarProperty Name="COD_VENTA" ColumnName="COD_VENTA" />
+                <ScalarProperty Name="ID_DETALLE_VENTA" ColumnName="ID_DETALLE_VENTA" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1681,11 +1935,30 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TipoDocumento">
+            <EntityTypeMapping TypeName="MAGASYSModel.TipoDocumento">
+              <MappingFragment StoreEntitySet="TipoDocumento">
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="ID_TIPO_DOCUMENTO" ColumnName="ID_TIPO_DOCUMENTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TipoProducto">
             <EntityTypeMapping TypeName="MAGASYSModel.TipoProducto">
               <MappingFragment StoreEntitySet="TipoProducto">
                 <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
                 <ScalarProperty Name="ID_TIPO_PRODUCTO" ColumnName="ID_TIPO_PRODUCTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Venta">
+            <EntityTypeMapping TypeName="MAGASYSModel.Venta">
+              <MappingFragment StoreEntitySet="Venta">
+                <ScalarProperty Name="COD_CLIENTE" ColumnName="COD_CLIENTE" />
+                <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+                <ScalarProperty Name="COD_ESTADO" ColumnName="COD_ESTADO" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="ID_VENTA" ColumnName="ID_VENTA" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

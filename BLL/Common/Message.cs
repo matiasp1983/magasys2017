@@ -43,5 +43,24 @@
         public const string MsjeListadoProductoIngresoCargarProducto = "Debe cargar al menos un producto.";
 
         #endregion
+
+        #region Mensajes Cliente
+
+        public const string MsjeClienteBuscarClienteSinResultados = "No se encontró el Cliente para la búsqueda seleccionada.";
+        public const string MsjeClienteBuscarClienteSinNroDocumento = "Debe completar el Nro. de Documento.";
+        public const string MsjeClienterExiste = "El Cliente ya existe.";
+        public const string MsjeClienteSuccessAlta = "El cliente se guardó correctamente.";
+        public const string MsjeClienteFailure = "El cliente no se pudo guardar.";
+
+        #endregion
+
+        #region Venta
+        public const string MsjeVentaCampoCantidadObligatorio = "Debe completar la Cantidad.";
+        public const string MsjeVentaStockInsuficiente = "No hay suficiente stock.";
+        public const string MsjeVentaSuccessAlta = "La venta se guardó correctamente.";
+        public const string MsjeVentaFailure = "La venta no se pudo guardar.";
+        public const string MsjeVentaCantidadInvalida = "La cantidad ingresada no es válida";
+        public const string MsjeVentaAviso = "La venta solo puede ser de Contado y Pagado Sí.";
+        #endregion
     }
 }

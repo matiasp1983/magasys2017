@@ -14,7 +14,8 @@
             ProductoSuplemento,
             ProductoPelicula,
             IdIngresoProductos,
-            DetalleIngresoProductos
+            DetalleIngresoProductos,
+            Cliente
         } 
 
         #endregion

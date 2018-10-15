@@ -22,7 +22,7 @@ namespace BLL
                     oIdProductoEdicion = oProductoEdicion.ID_PRODUCTO_EDICION;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -40,7 +40,33 @@ namespace BLL
                     bRes = rep.Update(oProductoEdicion);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return bRes;
+        }
+
+        public bool ActualizarCantidadDisponible(int codProductoEdicion, int cantidad)
+        {
+            var bRes = false;
+            ProductoEdicion oProductoEdicion = null;
+
+            try
+            {
+                using (var res = new Repository<ProductoEdicion>())
+                {
+                    oProductoEdicion = res.Find(p => p.ID_PRODUCTO_EDICION == codProductoEdicion);
+                }
+
+                if (oProductoEdicion != null)
+                {
+                    oProductoEdicion.CANTIDAD_DISPONIBLE = oProductoEdicion.CANTIDAD_DISPONIBLE - cantidad;
+                    bRes = ModificarProductoEdicion(oProductoEdicion);
+                }
+            }
+            catch (Exception ex)
             {
                 throw;
             }
@@ -59,9 +85,8 @@ namespace BLL
                     oProductoEdicion = res.Find(p => p.EDICION == nroEdicion && p.COD_TIPO_PRODUCTO == tipoProducto);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
                 throw;
             }
 

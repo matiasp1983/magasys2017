@@ -15,18 +15,24 @@ namespace BLL.DAL
 using System;
     using System.Collections.Generic;
     
-public partial class sysdiagram
+public partial class DetalleVenta
 {
 
-    public string name { get; set; }
+    public int ID_DETALLE_VENTA { get; set; }
 
-    public int principal_id { get; set; }
+    public int COD_VENTA { get; set; }
 
-    public int diagram_id { get; set; }
+    public int COD_PRODUCTO_EDICION { get; set; }
 
-    public Nullable<int> version { get; set; }
+    public double PRECIO_UNIDAD { get; set; }
 
-    public byte[] definition { get; set; }
+    public int CANTIDAD { get; set; }
+
+    public double SUBTOTAL { get; set; }
+
+
+
+    public virtual Venta Venta { get; set; }
 
 }
 

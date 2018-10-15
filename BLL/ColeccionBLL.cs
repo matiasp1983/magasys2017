@@ -95,6 +95,63 @@ namespace BLL
             return lstColeccionEdicion;
         }
 
+        public List<ColeccionEdicion> ObtenerColeccionesEdicion(ProductoFiltro oProductoFiltro)
+        {
+            List<ColeccionEdicion> lstColeccionEdicion = null;
+            List<ProductoEdicion> lstProductoEdicion = null;
+
+            try
+            {
+                using (var loRepProductoEdicion = new Repository<ProductoEdicion>())
+                {
+                    lstProductoEdicion = loRepProductoEdicion.Search(p => p.COD_ESTADO == 1 && p.COD_TIPO_PRODUCTO == oProductoFiltro.CodTipoProducto && p.Producto.COD_PROVEEDOR == oProductoFiltro.CodProveedor);
+
+                    if (!String.IsNullOrEmpty(oProductoFiltro.NombreEdicion) && lstProductoEdicion.Count > 0)
+                        lstProductoEdicion = lstProductoEdicion.FindAll(p => p.EDICION.ToUpper().Contains(oProductoFiltro.NombreEdicion.ToUpper()));
+
+                    if (!String.IsNullOrEmpty(oProductoFiltro.DescripcionEdicion) && lstProductoEdicion.Count > 0)
+                        lstProductoEdicion = lstProductoEdicion.FindAll(p => !string.IsNullOrEmpty(p.DESCRIPCION) && p.DESCRIPCION.ToUpper().Contains(oProductoFiltro.DescripcionEdicion.ToUpper()));
+
+                    ColeccionEdicion oColeccionEdicion;
+                    lstColeccionEdicion = new List<ColeccionEdicion>();
+
+                    foreach (var loProductoEdicion in lstProductoEdicion)
+                    {
+                        // Filtro por Nombre de Producto
+                        if ((String.IsNullOrEmpty(oProductoFiltro.NombreProducto)) || (!String.IsNullOrEmpty(oProductoFiltro.NombreProducto) && loProductoEdicion.Producto.NOMBRE.ToUpper().Contains(oProductoFiltro.NombreProducto.ToUpper())))
+                        {
+                            // Filtro por Descripción del Producto
+                            if ((String.IsNullOrEmpty(oProductoFiltro.DescripcionProducto)) || (!String.IsNullOrEmpty(oProductoFiltro.DescripcionProducto) && !string.IsNullOrEmpty(loProductoEdicion.Producto.DESCRIPCION) && loProductoEdicion.Producto.DESCRIPCION.ToUpper().Contains(oProductoFiltro.DescripcionProducto.ToUpper())))
+                            {
+                                oColeccionEdicion = new ColeccionEdicion
+                                {
+                                    COD_PRODUCTO = loProductoEdicion.COD_PRODUCTO,
+                                    COD_PRODUCTO_EDICION = loProductoEdicion.ID_PRODUCTO_EDICION,
+                                    NOMBRE = loProductoEdicion.Producto.NOMBRE, //nombre del Producto
+                                    TIPO_PRODUCTO = loProductoEdicion.Producto.TipoProducto.DESCRIPCION,
+                                    EDICION = loProductoEdicion.EDICION,
+                                    PRECIO = loProductoEdicion.PRECIO,
+                                    CANTIDAD_DISPONIBLE = loProductoEdicion.CANTIDAD_DISPONIBLE
+                                };
+
+                                if (!String.IsNullOrEmpty(loProductoEdicion.DESCRIPCION))
+                                    oColeccionEdicion.DESCRIPCION = loProductoEdicion.DESCRIPCION;
+
+                                lstColeccionEdicion.Add(oColeccionEdicion);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return lstColeccionEdicion;
+        }
+
         public bool AltaColeccion(Producto oProducto, Coleccion oColeccion)
         {
             var bRes = false;
@@ -184,6 +241,7 @@ namespace BLL
     public class ColeccionEdicion
     {
         public int COD_PRODUCTO { get; set; }
+        public int COD_PRODUCTO_EDICION { get; set; }
         public string NOMBRE { get; set; }
         public string TIPO_PRODUCTO { get; set; }
         public string EDICION { get; set; }
@@ -191,6 +249,7 @@ namespace BLL
         public string DESCRIPCION { get; set; }
         public double PRECIO { get; set; }
         public int CANTIDAD_DISPONIBLE { get; set; }
+        public int CANTIDAD { get; set; }
         public System.DateTime? FECHA_DEVOLUCION { get; set; }
     }
 

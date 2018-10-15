@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnioBLL.cs" />
+    <Compile Include="ClienteBLL.cs" />
     <Compile Include="ColeccionBLL.cs" />
     <Compile Include="Common\Enums.cs" />
     <Compile Include="Common\Message.cs" />
@@ -61,10 +62,16 @@
     <Compile Include="DAL\Anio.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\Cliente.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\Coleccion.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\DetalleProductoIngreso.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\DetalleVenta.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Diario.cs">
@@ -134,7 +141,13 @@
     <Compile Include="DAL\sysdiagrams.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\TipoDocumento.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\TipoProducto.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\Venta.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DiarioBLL.cs" />
@@ -156,7 +169,9 @@
     <Compile Include="ProvinciaBLL.cs" />
     <Compile Include="RevistaBLL.cs" />
     <Compile Include="SuplementoBLL.cs" />
+    <Compile Include="TipoDocumentoBLL.cs" />
     <Compile Include="TipoProductoBLL.cs" />
+    <Compile Include="VentaBLL.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="DAL\Model.edmx">

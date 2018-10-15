@@ -34,9 +34,13 @@ public partial class MAGASYSEntities : DbContext
 
     public virtual DbSet<Anio> Anio { get; set; }
 
+    public virtual DbSet<Cliente> Cliente { get; set; }
+
     public virtual DbSet<Coleccion> Coleccion { get; set; }
 
     public virtual DbSet<DetalleProductoIngreso> DetalleProductoIngreso { get; set; }
+
+    public virtual DbSet<DetalleVenta> DetalleVenta { get; set; }
 
     public virtual DbSet<Diario> Diario { get; set; }
 
@@ -72,7 +76,11 @@ public partial class MAGASYSEntities : DbContext
 
     public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
 
+    public virtual DbSet<TipoDocumento> TipoDocumento { get; set; }
+
     public virtual DbSet<TipoProducto> TipoProducto { get; set; }
+
+    public virtual DbSet<Venta> Venta { get; set; }
 
 }
 

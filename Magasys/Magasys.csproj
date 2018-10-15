@@ -69,11 +69,15 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AdminDashboard\Cliente.aspx" />
     <Content Include="AdminDashboard\css\bootstrap.css.map" />
     <Content Include="AdminDashboard\css\bootstrap.min.css.map" />
     <Content Include="AdminDashboard\css\plugins\footable\fonts\footable.eot" />
     <Content Include="AdminDashboard\css\plugins\footable\fonts\footable.ttf" />
     <Content Include="AdminDashboard\css\plugins\footable\fonts\footable.woff" />
+    <Content Include="AdminDashboard\css\plugins\iCheck\custom.css" />
+    <Content Include="AdminDashboard\css\plugins\iCheck\green%402x.png" />
+    <Content Include="AdminDashboard\css\plugins\iCheck\green.png" />
     <Content Include="AdminDashboard\css\plugins\select2\select2.min.css" />
     <Content Include="AdminDashboard\css\plugins\sweetalert\sweetalert.css" />
     <Content Include="AdminDashboard\DetalleProductoIngresos.aspx" />
@@ -117,6 +121,7 @@
     <Content Include="AdminDashboard\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="AdminDashboard\fonts\opensans.css" />
     <Content Include="AdminDashboard\fonts\roboto.css" />
+    <Content Include="AdminDashboard\js\plugins\iCheck\icheck.min.js" />
     <Content Include="AdminDashboard\js\plugins\select2\select2.full.min.js" />
     <Content Include="AdminDashboard\js\plugins\sweetalert\sweetalert.min.js" />
     <Content Include="AdminDashboard\js\plugins\validate\jquery.validate.js" />
@@ -137,6 +142,7 @@
     <Content Include="AdminDashboard\ProductoSuplementoEditar.aspx" />
     <Content Include="AdminDashboard\ProductoSuplementoVisualizar.aspx" />
     <Content Include="AdminDashboard\ProveedorEditar.aspx" />
+    <Content Include="AdminDashboard\Venta.aspx" />
     <Content Include="CustomersWebSite\Index.aspx" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -205,6 +211,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminDashboard\Cliente.aspx.cs">
+      <DependentUpon>Cliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\Cliente.aspx.designer.cs">
+      <DependentUpon>Cliente.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AdminDashboard\DetalleProductoIngresos.aspx.cs">
       <DependentUpon>DetalleProductoIngresos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -372,6 +385,13 @@
     </Compile>
     <Compile Include="AdminDashboard\ProveedorVisualizar.aspx.designer.cs">
       <DependentUpon>ProveedorVisualizar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\Venta.aspx.cs">
+      <DependentUpon>Venta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\Venta.aspx.designer.cs">
+      <DependentUpon>Venta.aspx</DependentUpon>
     </Compile>
     <Compile Include="CustomersWebSite\Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>

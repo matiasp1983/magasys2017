@@ -403,6 +403,9 @@
         }       
 
         function ValidarForm() {
+
+            jQuery.validator.addMethod("lettersonly", function (value, element) { return this.optional(element) || /^[a-zñÑáéíóúÁÉÍÓÚ\s]+$/i.test(value); }, "Este campo solo permite letras.");
+
             $(FormProducto).validate({
                 rules: {
                      <%=txtNombre.UniqueID%>: {
@@ -466,7 +469,8 @@
                          required: true,
                          normalizer: function (value) {
                              return $.trim(value);
-                         }
+                         },
+                         lettersonly: true
                      },
                      <%=ddlAnioEdicionLibro.UniqueID%>: {
                          required: true
