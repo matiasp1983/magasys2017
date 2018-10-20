@@ -13,7 +13,7 @@
                 <li>Depósito
                 </li>
                 <li class="active">
-                    <strong>Listado de Ingreso de Producto</strong>
+                    <strong>Lista de Ingreso de Producto</strong>
                 </li>
             </ol>
         </div>
