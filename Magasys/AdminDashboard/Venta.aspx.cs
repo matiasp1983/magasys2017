@@ -391,9 +391,9 @@ namespace PL.AdminDashboard
                                 }
                                 else
                                 {
-                                    if (Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString()) == 0)
+                                    if (Convert.ToInt32(((TextBox)loItem.Controls[15]).Text.ToString()) == 0)
                                         Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeVentaCampoCantidadObligatorio));
-                                    else if (Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString()) < 0)
+                                    else if (Convert.ToInt32(((TextBox)loItem.Controls[15]).Text.ToString()) < 0)
                                         Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeVentaCantidadInvalida));
                                     else
                                         Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeVentaStockInsuficiente));
@@ -477,9 +477,9 @@ namespace PL.AdminDashboard
                                 }
                                 else
                                 {
-                                    if (Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString()) == 0)
+                                    if (Convert.ToInt32(((TextBox)loItem.Controls[15]).Text.ToString()) == 0)
                                         Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeVentaCampoCantidadObligatorio));
-                                    else if (Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString()) < 0)
+                                    else if (Convert.ToInt32(((TextBox)loItem.Controls[15]).Text.ToString()) < 0)
                                         Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeVentaCantidadInvalida));
                                     else
                                         Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeVentaStockInsuficiente));
