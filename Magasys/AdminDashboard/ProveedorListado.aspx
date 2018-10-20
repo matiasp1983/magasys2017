@@ -20,7 +20,6 @@
     </div>
     <div class="wrapper wrapper-content animated fadeInRight">
         <form id="FormProveedorListado" runat="server">
-            <asp:ScriptManager ID="smgProveedorListado" runat="server"></asp:ScriptManager>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
