@@ -98,6 +98,13 @@
           <Property Name="ID_ESTADO" Type="int" Nullable="false" />
           <Property Name="NOMBRE" Type="nchar" MaxLength="10" Nullable="false" />
         </EntityType>
+        <EntityType Name="FormaPago">
+          <Key>
+            <PropertyRef Name="ID_FORMA_PAGO" />
+          </Key>
+          <Property Name="ID_FORMA_PAGO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Genero">
           <Key>
             <PropertyRef Name="ID_GENERO" />
@@ -264,6 +271,7 @@
           <Property Name="COD_ESTADO" Type="int" Nullable="false" />
           <Property Name="TOTAL" Type="float" Nullable="false" />
           <Property Name="COD_CLIENTE" Type="int" />
+          <Property Name="COD_FORMA_PAGO" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Cliente_TipoDocumento">
           <End Role="TipoDocumento" Type="Self.TipoDocumento" Multiplicity="1" />
@@ -649,6 +657,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Venta_FormaPago">
+          <End Role="FormaPago" Type="Self.FormaPago" Multiplicity="1" />
+          <End Role="Venta" Type="Self.Venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormaPago">
+              <PropertyRef Name="ID_FORMA_PAGO" />
+            </Principal>
+            <Dependent Role="Venta">
+              <PropertyRef Name="COD_FORMA_PAGO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="MAGASYSModelStoreContainer">
           <EntitySet Name="Anio" EntityType="Self.Anio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
@@ -659,6 +679,7 @@
           <EntitySet Name="DiarioDiaSemana" EntityType="Self.DiarioDiaSemana" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DiaSemana" EntityType="Self.DiaSemana" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Estado" EntityType="Self.Estado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FormaPago" EntityType="Self.FormaPago" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Genero" EntityType="Self.Genero" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Libro" EntityType="Self.Libro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Localidad" EntityType="Self.Localidad" Schema="dbo" store:Type="Tables" />
@@ -801,6 +822,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Venta_Cliente" Association="Self.FK_Venta_Cliente">
             <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Venta" EntitySet="Venta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Venta_FormaPago" Association="Self.FK_Venta_FormaPago">
+            <End Role="FormaPago" EntitySet="FormaPago" />
             <End Role="Venta" EntitySet="Venta" />
           </AssociationSet>
         </EntityContainer>
@@ -961,6 +986,11 @@
           <AssociationSet Name="FK_Proveedor_Provincia" Association="MAGASYSModel.FK_Proveedor_Provincia">
             <End Role="Provincia" EntitySet="Provincia" />
             <End Role="Proveedor" EntitySet="Proveedor" />
+          </AssociationSet>
+          <EntitySet Name="FormaPago" EntityType="MAGASYSModel.FormaPago" />
+          <AssociationSet Name="FK_Venta_FormaPago" Association="MAGASYSModel.FK_Venta_FormaPago">
+            <End Role="FormaPago" EntitySet="FormaPago" />
+            <End Role="Venta" EntitySet="Venta" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Anio">
@@ -1286,6 +1316,8 @@
           <Property Name="COD_CLIENTE" Type="Int32" />
           <NavigationProperty Name="Cliente" Relationship="MAGASYSModel.FK_Venta_Cliente" FromRole="Venta" ToRole="Cliente" />
           <NavigationProperty Name="DetalleVenta" Relationship="MAGASYSModel.FK_DetalleVenta_Venta" FromRole="Venta" ToRole="DetalleVenta" />
+          <Property Name="COD_FORMA_PAGO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FormaPago" Relationship="MAGASYSModel.FK_Venta_FormaPago" FromRole="Venta" ToRole="FormaPago" />
         </EntityType>
         <Association Name="FK_Cliente_TipoDocumento">
           <End Type="MAGASYSModel.TipoDocumento" Role="TipoDocumento" Multiplicity="1" />
@@ -1671,6 +1703,26 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="FormaPago">
+          <Key>
+            <PropertyRef Name="ID_FORMA_PAGO" />
+          </Key>
+          <Property Name="ID_FORMA_PAGO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DESCRIPCION" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Venta" Relationship="MAGASYSModel.FK_Venta_FormaPago" FromRole="FormaPago" ToRole="Venta" />
+        </EntityType>
+        <Association Name="FK_Venta_FormaPago">
+          <End Type="MAGASYSModel.FormaPago" Role="FormaPago" Multiplicity="1" />
+          <End Type="MAGASYSModel.Venta" Role="Venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormaPago">
+              <PropertyRef Name="ID_FORMA_PAGO" />
+            </Principal>
+            <Dependent Role="Venta">
+              <PropertyRef Name="COD_FORMA_PAGO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1954,11 +2006,20 @@
           <EntitySetMapping Name="Venta">
             <EntityTypeMapping TypeName="MAGASYSModel.Venta">
               <MappingFragment StoreEntitySet="Venta">
+                <ScalarProperty Name="COD_FORMA_PAGO" ColumnName="COD_FORMA_PAGO" />
                 <ScalarProperty Name="COD_CLIENTE" ColumnName="COD_CLIENTE" />
                 <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
                 <ScalarProperty Name="COD_ESTADO" ColumnName="COD_ESTADO" />
                 <ScalarProperty Name="FECHA" ColumnName="FECHA" />
                 <ScalarProperty Name="ID_VENTA" ColumnName="ID_VENTA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FormaPago">
+            <EntityTypeMapping TypeName="MAGASYSModel.FormaPago">
+              <MappingFragment StoreEntitySet="FormaPago">
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="ID_FORMA_PAGO" ColumnName="ID_FORMA_PAGO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

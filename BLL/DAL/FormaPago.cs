@@ -15,39 +15,27 @@ namespace BLL.DAL
 using System;
     using System.Collections.Generic;
     
-public partial class Venta
+public partial class FormaPago
 {
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public Venta()
+    public FormaPago()
     {
 
-        this.DetalleVenta = new HashSet<DetalleVenta>();
+        this.Venta = new HashSet<Venta>();
 
     }
 
 
-    public int ID_VENTA { get; set; }
+    public int ID_FORMA_PAGO { get; set; }
 
-    public System.DateTime FECHA { get; set; }
-
-    public int COD_ESTADO { get; set; }
-
-    public double TOTAL { get; set; }
-
-    public Nullable<int> COD_CLIENTE { get; set; }
-
-    public int COD_FORMA_PAGO { get; set; }
+    public string DESCRIPCION { get; set; }
 
 
-
-    public virtual Cliente Cliente { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<DetalleVenta> DetalleVenta { get; set; }
-
-    public virtual FormaPago FormaPago { get; set; }
+    public virtual ICollection<Venta> Venta { get; set; }
 
 }
 

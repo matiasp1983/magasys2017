@@ -62,6 +62,8 @@
         <AssociationConnector Association="MAGASYSModel.FK_Suplemento_Producto" />
         <AssociationConnector Association="MAGASYSModel.FK_IngresoProducto_Proveedor" />
         <AssociationConnector Association="MAGASYSModel.FK_Proveedor_Provincia" />
+        <EntityTypeShape EntityType="MAGASYSModel.FormaPago" Width="1.5" PointX="14.875" PointY="5.875" />
+        <AssociationConnector Association="MAGASYSModel.FK_Venta_FormaPago" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
