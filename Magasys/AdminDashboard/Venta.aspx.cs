@@ -94,13 +94,14 @@ namespace PL.AdminDashboard
             bool loResutado = false;
             List<DetalleVenta> lstDetalleVenta = new List<DetalleVenta>();
 
-            if (rdbPagadoSi.Checked && ddlFormaPago.SelectedItem.Text == "Contado")
+            if (rdbPagadoSi.Checked && ddlFormaPago.SelectedValue == "1") //"Contado"
             {
                 BLL.DAL.Venta oVenta = new BLL.DAL.Venta()
                 {
                     FECHA = DateTime.Now,
                     COD_ESTADO = 1,
                     TOTAL = Convert.ToDouble(lblTotal.Text),
+                    COD_FORMA_PAGO = Convert.ToInt32(ddlFormaPago.SelectedValue)
                     //COD_CLIENTE    Próxima iteración                    
                 };
 
@@ -703,10 +704,14 @@ namespace PL.AdminDashboard
 
         private void CargarFormaDePago()
         {
+            var oFormaPagoBLL = new BLL.FormaPagoBLL();
+
             try
             {
-                ddlFormaPago.Items.Insert(0, new ListItem("Contado"));
-                ddlFormaPago.Items.Insert(1, new ListItem("Cuenta corriente"));
+                ddlFormaPago.DataSource = oFormaPagoBLL.ObtenerFormasPago();
+                ddlFormaPago.DataTextField = "DESCRIPCION";
+                ddlFormaPago.DataValueField = "ID_FORMA_PAGO";
+                ddlFormaPago.DataBind();
             }
             catch (Exception ex)
             {
