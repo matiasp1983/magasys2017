@@ -113,7 +113,7 @@
                                                 <th data-hide="phone,tablet">Nombre</th>
                                                 <th data-hide="phone,tablet">Apellido</th>
                                                 <th data-hide="phone,tablet">Email</th>
-                                                <th data-hide="phone,tablet">Tel&eacute;fono Movil</th>
+                                                <th data-hide="phone,tablet">Tel&eacute;fono Móvil</th>
                                                 <th class="text-right" data-sort-ignore="true">Acci&oacute;n</th>
                                             </tr>
                                         </thead>

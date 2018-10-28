@@ -89,7 +89,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Teléfono Movil</label>
+                                <label class="col-sm-2 control-label">Teléfono Móvil</label>
 
                                 <div class="col-sm-10">
                                     <div class="input-group m-b" id="divTelefonoMovil">

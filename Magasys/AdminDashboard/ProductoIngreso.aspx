@@ -99,7 +99,7 @@
                                             <tr>
                                                 <th class="text-left">C&oacute;digo</th>
                                                 <th>Nombre</th>
-                                                <th data-hide="phone,tablet">Día de semana</th>
+                                                <th data-hide="phone,tablet">Día de Semana</th>
                                                 <th data-hide="phone,tablet">Edici&oacute;n</th>
                                                 <th data-hide="phone,tablet">Fecha Edici&oacute;n</th>
                                                 <th data-hide="phone,tablet">Precio</th>
