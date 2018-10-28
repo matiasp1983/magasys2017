@@ -158,7 +158,7 @@ namespace PL.AdminDashboard
                 }
                 else
                 {
-                    dvMensajeLsvIngresos.InnerHtml = MessageManager.Info(dvMensajeLsvIngresos, Message.MsjeListadoProductoIngresoFechaDesdeMayorQueFechaHasta, false);
+                    dvMensajeLsvIngresos.InnerHtml = MessageManager.Info(dvMensajeLsvIngresos, Message.MsjeListadoFechaDesdeMayorQueFechaHasta, false);
                     dvMensajeLsvIngresos.Visible = true;
                 }
             }
