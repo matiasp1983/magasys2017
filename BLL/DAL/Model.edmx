@@ -273,18 +273,6 @@
           <Property Name="COD_CLIENTE" Type="int" />
           <Property Name="COD_FORMA_PAGO" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Cliente_TipoDocumento">
-          <End Role="TipoDocumento" Type="Self.TipoDocumento" Multiplicity="1" />
-          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoDocumento">
-              <PropertyRef Name="ID_TIPO_DOCUMENTO" />
-            </Principal>
-            <Dependent Role="Cliente">
-              <PropertyRef Name="TIPO_DOCUMENTO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Coleccion_DiaSemana">
           <End Role="DiaSemana" Type="Self.DiaSemana" Multiplicity="0..1" />
           <End Role="Coleccion" Type="Self.Coleccion" Multiplicity="*" />
@@ -353,6 +341,18 @@
               <PropertyRef Name="ID_PRODUCTO_EDICION" />
             </Principal>
             <Dependent Role="DetalleProductoIngreso">
+              <PropertyRef Name="COD_PRODUCTO_EDICION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleVenta_ProductoEdicion">
+          <End Role="ProductoEdicion" Type="Self.ProductoEdicion" Multiplicity="1" />
+          <End Role="DetalleVenta" Type="Self.DetalleVenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductoEdicion">
+              <PropertyRef Name="ID_PRODUCTO_EDICION" />
+            </Principal>
+            <Dependent Role="DetalleVenta">
               <PropertyRef Name="COD_PRODUCTO_EDICION" />
             </Dependent>
           </ReferentialConstraint>
@@ -657,6 +657,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Venta_Estado">
+          <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
+          <End Role="Venta" Type="Self.Venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="ID_ESTADO" />
+            </Principal>
+            <Dependent Role="Venta">
+              <PropertyRef Name="COD_ESTADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Venta_FormaPago">
           <End Role="FormaPago" Type="Self.FormaPago" Multiplicity="1" />
           <End Role="Venta" Type="Self.Venta" Multiplicity="*" />
@@ -696,10 +708,6 @@
           <EntitySet Name="TipoDocumento" EntityType="Self.TipoDocumento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoProducto" EntityType="Self.TipoProducto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Venta" EntityType="Self.Venta" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Cliente_TipoDocumento" Association="Self.FK_Cliente_TipoDocumento">
-            <End Role="TipoDocumento" EntitySet="TipoDocumento" />
-            <End Role="Cliente" EntitySet="Cliente" />
-          </AssociationSet>
           <AssociationSet Name="FK_Coleccion_DiaSemana" Association="Self.FK_Coleccion_DiaSemana">
             <End Role="DiaSemana" EntitySet="DiaSemana" />
             <End Role="Coleccion" EntitySet="Coleccion" />
@@ -723,6 +731,10 @@
           <AssociationSet Name="FK_DetalleIngresoProducto_Producto_Edicion" Association="Self.FK_DetalleIngresoProducto_Producto_Edicion">
             <End Role="ProductoEdicion" EntitySet="ProductoEdicion" />
             <End Role="DetalleProductoIngreso" EntitySet="DetalleProductoIngreso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleVenta_ProductoEdicion" Association="Self.FK_DetalleVenta_ProductoEdicion">
+            <End Role="ProductoEdicion" EntitySet="ProductoEdicion" />
+            <End Role="DetalleVenta" EntitySet="DetalleVenta" />
           </AssociationSet>
           <AssociationSet Name="FK_DetalleVenta_Venta" Association="Self.FK_DetalleVenta_Venta">
             <End Role="Venta" EntitySet="Venta" />
@@ -822,6 +834,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Venta_Cliente" Association="Self.FK_Venta_Cliente">
             <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Venta" EntitySet="Venta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Venta_Estado" Association="Self.FK_Venta_Estado">
+            <End Role="Estado" EntitySet="Estado" />
             <End Role="Venta" EntitySet="Venta" />
           </AssociationSet>
           <AssociationSet Name="FK_Venta_FormaPago" Association="Self.FK_Venta_FormaPago">
@@ -992,6 +1008,14 @@
             <End Role="FormaPago" EntitySet="FormaPago" />
             <End Role="Venta" EntitySet="Venta" />
           </AssociationSet>
+          <AssociationSet Name="FK_DetalleVenta_ProductoEdicion" Association="MAGASYSModel.FK_DetalleVenta_ProductoEdicion">
+            <End Role="ProductoEdicion" EntitySet="ProductoEdicion" />
+            <End Role="DetalleVenta" EntitySet="DetalleVenta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Venta_Estado" Association="MAGASYSModel.FK_Venta_Estado">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Venta" EntitySet="Venta" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Anio">
           <Key>
@@ -1064,6 +1088,7 @@
           <Property Name="CANTIDAD" Type="Int32" Nullable="false" />
           <Property Name="SUBTOTAL" Type="Double" Nullable="false" />
           <NavigationProperty Name="Venta" Relationship="MAGASYSModel.FK_DetalleVenta_Venta" FromRole="DetalleVenta" ToRole="Venta" />
+          <NavigationProperty Name="ProductoEdicion" Relationship="MAGASYSModel.FK_DetalleVenta_ProductoEdicion" FromRole="DetalleVenta" ToRole="ProductoEdicion" />
         </EntityType>
         <EntityType Name="Diario">
           <Key>
@@ -1108,6 +1133,7 @@
           <NavigationProperty Name="ProductoEdicion" Relationship="MAGASYSModel.FK_Producto_Edicion_Estado" FromRole="Estado" ToRole="ProductoEdicion" />
           <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_Producto_Estado1" FromRole="Estado" ToRole="Producto" />
           <NavigationProperty Name="Proveedor" Relationship="MAGASYSModel.FK_Proveedor_Estado" FromRole="Estado" ToRole="Proveedor" />
+          <NavigationProperty Name="Venta" Relationship="MAGASYSModel.FK_Venta_Estado" FromRole="Estado" ToRole="Venta" />
         </EntityType>
         <EntityType Name="Genero">
           <Key>
@@ -1201,6 +1227,7 @@
           <NavigationProperty Name="DetalleProductoIngreso" Relationship="MAGASYSModel.FK_DetalleIngresoProducto_Producto_Edicion" FromRole="ProductoEdicion" ToRole="DetalleProductoIngreso" />
           <NavigationProperty Name="Estado" Relationship="MAGASYSModel.FK_Producto_Edicion_Estado" FromRole="ProductoEdicion" ToRole="Estado" />
           <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_Producto_Edicion_Producto" FromRole="ProductoEdicion" ToRole="Producto" />
+          <NavigationProperty Name="DetalleVenta" Relationship="MAGASYSModel.FK_DetalleVenta_ProductoEdicion" FromRole="ProductoEdicion" ToRole="DetalleVenta" />
         </EntityType>
         <EntityType Name="ProductoIngreso">
           <Key>
@@ -1318,6 +1345,7 @@
           <NavigationProperty Name="DetalleVenta" Relationship="MAGASYSModel.FK_DetalleVenta_Venta" FromRole="Venta" ToRole="DetalleVenta" />
           <Property Name="COD_FORMA_PAGO" Type="Int32" Nullable="false" />
           <NavigationProperty Name="FormaPago" Relationship="MAGASYSModel.FK_Venta_FormaPago" FromRole="Venta" ToRole="FormaPago" />
+          <NavigationProperty Name="Estado" Relationship="MAGASYSModel.FK_Venta_Estado" FromRole="Venta" ToRole="Estado" />
         </EntityType>
         <Association Name="FK_Cliente_TipoDocumento">
           <End Type="MAGASYSModel.TipoDocumento" Role="TipoDocumento" Multiplicity="1" />
@@ -1720,6 +1748,30 @@
             </Principal>
             <Dependent Role="Venta">
               <PropertyRef Name="COD_FORMA_PAGO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleVenta_ProductoEdicion">
+          <End Type="MAGASYSModel.ProductoEdicion" Role="ProductoEdicion" Multiplicity="1" />
+          <End Type="MAGASYSModel.DetalleVenta" Role="DetalleVenta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductoEdicion">
+              <PropertyRef Name="ID_PRODUCTO_EDICION" />
+            </Principal>
+            <Dependent Role="DetalleVenta">
+              <PropertyRef Name="COD_PRODUCTO_EDICION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Venta_Estado">
+          <End Type="MAGASYSModel.Estado" Role="Estado" Multiplicity="1" />
+          <End Type="MAGASYSModel.Venta" Role="Venta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="ID_ESTADO" />
+            </Principal>
+            <Dependent Role="Venta">
+              <PropertyRef Name="COD_ESTADO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

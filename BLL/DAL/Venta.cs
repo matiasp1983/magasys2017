@@ -49,6 +49,8 @@ public partial class Venta
 
     public virtual FormaPago FormaPago { get; set; }
 
+    public virtual Estado Estado { get; set; }
+
 }
 
 }

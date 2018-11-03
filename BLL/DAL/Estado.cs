@@ -32,6 +32,8 @@ public partial class Estado
 
         this.Proveedor = new HashSet<Proveedor>();
 
+        this.Venta = new HashSet<Venta>();
+
     }
 
 
@@ -60,6 +62,10 @@ public partial class Estado
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Proveedor> Proveedor { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<Venta> Venta { get; set; }
 
 }
 
