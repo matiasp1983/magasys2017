@@ -232,7 +232,7 @@
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                    <td colspan="8">
+                                                    <td colspan="10">
                                                         <ul class="pagination pull-right"></ul>
                                                     </td>
                                                 </tr>
@@ -301,7 +301,7 @@
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                    <td colspan="8">
+                                                    <td colspan="11">
                                                         <ul class="pagination pull-right"></ul>
                                                     </td>
                                                 </tr>
@@ -372,7 +372,7 @@
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                    <td colspan="8">
+                                                    <td colspan="10">
                                                         <ul class="pagination pull-right"></ul>
                                                     </td>
                                                 </tr>
@@ -441,7 +441,7 @@
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                    <td colspan="8">
+                                                    <td colspan="11">
                                                         <ul class="pagination pull-right"></ul>
                                                     </td>
                                                 </tr>
@@ -513,7 +513,7 @@
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                    <td colspan="8">
+                                                    <td colspan="11">
                                                         <ul class="pagination pull-right"></ul>
                                                     </td>
                                                 </tr>
@@ -585,7 +585,7 @@
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                    <td colspan="8">
+                                                    <td colspan="11">
                                                         <ul class="pagination pull-right"></ul>
                                                     </td>
                                                 </tr>
