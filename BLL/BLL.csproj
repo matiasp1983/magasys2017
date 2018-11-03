@@ -86,6 +86,9 @@
     <Compile Include="DAL\Estado.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\FormaPago.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\Genero.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -156,6 +159,8 @@
     <Compile Include="Filters\IngresoProductoFiltro.cs" />
     <Compile Include="Filters\ProductoFiltro.cs" />
     <Compile Include="Filters\ProveedorFiltro.cs" />
+    <Compile Include="Filters\VentaFiltro.cs" />
+    <Compile Include="FormaPagoBLL.cs" />
     <Compile Include="GeneroBLL.cs" />
     <Compile Include="ProductoIngresoBLL.cs" />
     <Compile Include="LibroBLL.cs" />
