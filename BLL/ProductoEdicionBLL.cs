@@ -93,6 +93,25 @@ namespace BLL
             return oProductoEdicion;
         }
 
+        public ProductoEdicion ObtenerEdicion(int codigo_edicion)
+        {
+            ProductoEdicion oProductoEdicion = null;
+
+            try
+            {
+                using (var res = new Repository<ProductoEdicion>())
+                {
+                    oProductoEdicion = res.Find(p => p.ID_PRODUCTO_EDICION == codigo_edicion);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return oProductoEdicion;
+        }
+
         #endregion
     }
 }

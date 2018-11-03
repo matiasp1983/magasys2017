@@ -14,6 +14,7 @@
             ProductoSuplemento,
             ProductoPelicula,
             IdIngresoProductos,
+            IdVenta,
             DetalleIngresoProductos,
             Cliente
         } 

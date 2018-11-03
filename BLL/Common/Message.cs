@@ -39,7 +39,7 @@
         public const string MsjeProductoIngresoSinCambios = "No se realizaron modificaciones.";
         public const string MsjeProductoIngresoFailure = "El ingreso de productos no se pudo guardar";
         public const string MsjeListadoProductoIngresoFiltrarTotalSinResultados = "No se encontraron Ingresos de productos para la búsqueda seleccionada.";
-        public const string MsjeListadoProductoIngresoFechaDesdeMayorQueFechaHasta = "La Fecha Hasta debe ser mayor que la Fecha Desde.";
+        public const string MsjeListadoFechaDesdeMayorQueFechaHasta = "La Fecha Hasta debe ser mayor que la Fecha Desde.";
         public const string MsjeListadoProductoIngresoCargarProducto = "Debe cargar al menos un producto.";
 
         #endregion
@@ -61,6 +61,9 @@
         public const string MsjeVentaFailure = "La venta no se pudo guardar.";
         public const string MsjeVentaCantidadInvalida = "La cantidad ingresada no es válida";
         public const string MsjeVentaAviso = "La venta solo puede ser de Contado y Pagado Sí.";
+        public const string MsjeListadoVentaFiltrarTotalSinResultados = "No se encontraron Ventas para la búsqueda seleccionada.";
+        public const string MsjeVentaAnularFailure = "La venta no se pudo anular.";
+        public const string MsjeVentaAnularOk = "La venta se pudo anular.";
         #endregion
     }
 }
