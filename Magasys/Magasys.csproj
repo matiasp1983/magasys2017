@@ -82,6 +82,7 @@
     <Content Include="AdminDashboard\css\plugins\sweetalert\sweetalert.css" />
     <Content Include="AdminDashboard\DetalleProductoIngresos.aspx" />
     <Content Include="AdminDashboard\DetalleProductoIngresosEditar.aspx" />
+    <Content Include="AdminDashboard\DetalleVentaProductos.aspx" />
     <Content Include="AdminDashboard\font-awesome\fonts\fontawesome-webfont.eot" />
     <Content Include="AdminDashboard\font-awesome\fonts\fontawesome-webfont.ttf" />
     <Content Include="AdminDashboard\font-awesome\fonts\fontawesome-webfont.woff" />
@@ -143,6 +144,7 @@
     <Content Include="AdminDashboard\ProductoSuplementoVisualizar.aspx" />
     <Content Include="AdminDashboard\ProveedorEditar.aspx" />
     <Content Include="AdminDashboard\Venta.aspx" />
+    <Content Include="AdminDashboard\VentaListado.aspx" />
     <Content Include="CustomersWebSite\Index.aspx" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -231,6 +233,13 @@
     </Compile>
     <Compile Include="AdminDashboard\DetalleProductoIngresosEditar.aspx.designer.cs">
       <DependentUpon>DetalleProductoIngresosEditar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\DetalleVentaProductos.aspx.cs">
+      <DependentUpon>DetalleVentaProductos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\DetalleVentaProductos.aspx.designer.cs">
+      <DependentUpon>DetalleVentaProductos.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminDashboard\Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
@@ -392,6 +401,13 @@
     </Compile>
     <Compile Include="AdminDashboard\Venta.aspx.designer.cs">
       <DependentUpon>Venta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\VentaListado.aspx.cs">
+      <DependentUpon>VentaListado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\VentaListado.aspx.designer.cs">
+      <DependentUpon>VentaListado.aspx</DependentUpon>
     </Compile>
     <Compile Include="CustomersWebSite\Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>

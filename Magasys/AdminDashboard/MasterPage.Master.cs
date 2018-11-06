@@ -31,15 +31,45 @@ namespace PL.AdminDashboard
             {
                 liPrincipal.Attributes["class"] = "active";
             }
+            if (loActivePage.Contains("Proveedor.aspx"))
+            {
+                liProveedores.Attributes["class"] = "active";
+                liAltaProveedor.Attributes["class"] = "active";
+            }
             if (loActivePage.Contains("ProveedorListado.aspx"))
             {
                 liProveedores.Attributes["class"] = "active";
                 liProveedorListado.Attributes["class"] = "active";
             }
+            if (loActivePage.Contains("Producto.aspx"))
+            {
+                liProductos.Attributes["class"] = "active";
+                liAltaProducto.Attributes["class"] = "active";
+            }
             if (loActivePage.Contains("ProductoListado.aspx"))
             {
                 liProductos.Attributes["class"] = "active";
                 liProductoListado.Attributes["class"] = "active";
+            }
+            if (loActivePage.Contains("ProductoIngreso.aspx"))
+            {
+                liDeposito.Attributes["class"] = "active";
+                liProductoIngreso.Attributes["class"] = "active";
+            }
+            if (loActivePage.Contains("ProductoIngresoListado.aspx"))
+            {
+                liDeposito.Attributes["class"] = "active";
+                liProductoIngresoListado.Attributes["class"] = "active";
+            }
+            if (loActivePage.Contains("Venta.aspx"))
+            {
+                liVenta.Attributes["class"] = "active";
+                liRegistrarVenta.Attributes["class"] = "active";
+            }
+            if (loActivePage.Contains("VentaListado.aspx"))
+            {
+                liVenta.Attributes["class"] = "active";
+                liVentaListado.Attributes["class"] = "active";
             }
         }
 
