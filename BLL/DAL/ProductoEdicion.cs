@@ -26,6 +26,8 @@ public partial class ProductoEdicion
 
         this.DetalleVenta = new HashSet<DetalleVenta>();
 
+        this.DetalleProductoDevolucion = new HashSet<DetalleProductoDevolucion>();
+
     }
 
 
@@ -49,6 +51,8 @@ public partial class ProductoEdicion
 
     public double PRECIO { get; set; }
 
+    public Nullable<System.DateTime> FECHA_DEVOLUCION_REAL { get; set; }
+
 
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -62,6 +66,10 @@ public partial class ProductoEdicion
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<DetalleVenta> DetalleVenta { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<DetalleProductoDevolucion> DetalleProductoDevolucion { get; set; }
 
 }
 

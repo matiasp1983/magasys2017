@@ -84,6 +84,10 @@ public partial class MAGASYSEntities : DbContext
 
     public virtual DbSet<FormaPago> FormaPago { get; set; }
 
+    public virtual DbSet<DetalleProductoDevolucion> DetalleProductoDevolucion { get; set; }
+
+    public virtual DbSet<ProductoDevolucion> ProductoDevolucion { get; set; }
+
 }
 
 }

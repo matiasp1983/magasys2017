@@ -68,6 +68,9 @@
     <Compile Include="DAL\Coleccion.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\DetalleProductoDevolucion.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\DetalleProductoIngreso.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -120,6 +123,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Producto.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\ProductoDevolucion.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\ProductoEdicion.cs">

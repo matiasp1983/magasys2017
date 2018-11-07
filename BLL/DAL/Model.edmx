@@ -46,6 +46,15 @@
           <Property Name="ID_DIA_SEMANA" Type="int" />
           <Property Name="CANTIDAD_ENTREGAS" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="DetalleProductoDevolucion">
+          <Key>
+            <PropertyRef Name="ID_DETALLE_PRODUCTO_DEVOLUCION" />
+          </Key>
+          <Property Name="ID_DETALLE_PRODUCTO_DEVOLUCION" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="COD_PRODUCTO_DEVOLUCION" Type="int" Nullable="false" />
+          <Property Name="CANTIDAD" Type="int" Nullable="false" />
+          <Property Name="COD_PRODUCTO_EDICION" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="DetalleProductoIngreso">
           <Key>
             <PropertyRef Name="ID_DETALLE_INGRESO_PRODUCTO" />
@@ -162,6 +171,15 @@
           <Property Name="COD_TIPO_PRODUCTO" Type="int" Nullable="false" />
           <Property Name="FECHA_BAJA" Type="datetime" />
         </EntityType>
+        <EntityType Name="ProductoDevolucion">
+          <Key>
+            <PropertyRef Name="ID_PRODUCTO_DEVOLUCION" />
+          </Key>
+          <Property Name="ID_PRODUCTO_DEVOLUCION" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FECHA" Type="datetime" Nullable="false" />
+          <Property Name="COD_ESTADO" Type="int" Nullable="false" />
+          <Property Name="COD_PROVEEDOR" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="ProductoEdicion">
           <Key>
             <PropertyRef Name="ID_PRODUCTO_EDICION" />
@@ -176,6 +194,7 @@
           <Property Name="DESCRIPCION" Type="varchar" MaxLength="50" />
           <Property Name="CANTIDAD_DISPONIBLE" Type="int" Nullable="false" />
           <Property Name="PRECIO" Type="float" Nullable="false" />
+          <Property Name="FECHA_DEVOLUCION_REAL" Type="datetime" />
         </EntityType>
         <EntityType Name="ProductoIngreso">
           <Key>
@@ -341,6 +360,30 @@
               <PropertyRef Name="ID_PRODUCTO_EDICION" />
             </Principal>
             <Dependent Role="DetalleProductoIngreso">
+              <PropertyRef Name="COD_PRODUCTO_EDICION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleProductoDevolucion_ProductoDevolucion">
+          <End Role="ProductoDevolucion" Type="Self.ProductoDevolucion" Multiplicity="1" />
+          <End Role="DetalleProductoDevolucion" Type="Self.DetalleProductoDevolucion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductoDevolucion">
+              <PropertyRef Name="ID_PRODUCTO_DEVOLUCION" />
+            </Principal>
+            <Dependent Role="DetalleProductoDevolucion">
+              <PropertyRef Name="COD_PRODUCTO_DEVOLUCION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleProductoDevolucion_ProductoEdicion">
+          <End Role="ProductoEdicion" Type="Self.ProductoEdicion" Multiplicity="1" />
+          <End Role="DetalleProductoDevolucion" Type="Self.DetalleProductoDevolucion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductoEdicion">
+              <PropertyRef Name="ID_PRODUCTO_EDICION" />
+            </Principal>
+            <Dependent Role="DetalleProductoDevolucion">
               <PropertyRef Name="COD_PRODUCTO_EDICION" />
             </Dependent>
           </ReferentialConstraint>
@@ -537,6 +580,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ProductoDevolucion_Estado">
+          <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
+          <End Role="ProductoDevolucion" Type="Self.ProductoDevolucion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="ID_ESTADO" />
+            </Principal>
+            <Dependent Role="ProductoDevolucion">
+              <PropertyRef Name="COD_ESTADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductoDevolucion_Proveedor">
+          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1" />
+          <End Role="ProductoDevolucion" Type="Self.ProductoDevolucion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedor">
+              <PropertyRef Name="ID_PROVEEDOR" />
+            </Principal>
+            <Dependent Role="ProductoDevolucion">
+              <PropertyRef Name="COD_PROVEEDOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Proveedor_Estado">
           <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
           <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="*" />
@@ -685,6 +752,7 @@
           <EntitySet Name="Anio" EntityType="Self.Anio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Coleccion" EntityType="Self.Coleccion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetalleProductoDevolucion" EntityType="Self.DetalleProductoDevolucion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DetalleProductoIngreso" EntityType="Self.DetalleProductoIngreso" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DetalleVenta" EntityType="Self.DetalleVenta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Diario" EntityType="Self.Diario" Schema="dbo" store:Type="Tables" />
@@ -698,6 +766,7 @@
           <EntitySet Name="Pelicula" EntityType="Self.Pelicula" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Periodicidad" EntityType="Self.Periodicidad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProductoDevolucion" EntityType="Self.ProductoDevolucion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductoEdicion" EntityType="Self.ProductoEdicion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProductoIngreso" EntityType="Self.ProductoIngreso" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Proveedor" EntityType="Self.Proveedor" Schema="dbo" store:Type="Tables" />
@@ -731,6 +800,14 @@
           <AssociationSet Name="FK_DetalleIngresoProducto_Producto_Edicion" Association="Self.FK_DetalleIngresoProducto_Producto_Edicion">
             <End Role="ProductoEdicion" EntitySet="ProductoEdicion" />
             <End Role="DetalleProductoIngreso" EntitySet="DetalleProductoIngreso" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleProductoDevolucion_ProductoDevolucion" Association="Self.FK_DetalleProductoDevolucion_ProductoDevolucion">
+            <End Role="ProductoDevolucion" EntitySet="ProductoDevolucion" />
+            <End Role="DetalleProductoDevolucion" EntitySet="DetalleProductoDevolucion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleProductoDevolucion_ProductoEdicion" Association="Self.FK_DetalleProductoDevolucion_ProductoEdicion">
+            <End Role="ProductoEdicion" EntitySet="ProductoEdicion" />
+            <End Role="DetalleProductoDevolucion" EntitySet="DetalleProductoDevolucion" />
           </AssociationSet>
           <AssociationSet Name="FK_DetalleVenta_ProductoEdicion" Association="Self.FK_DetalleVenta_ProductoEdicion">
             <End Role="ProductoEdicion" EntitySet="ProductoEdicion" />
@@ -795,6 +872,14 @@
           <AssociationSet Name="FK_Producto_TipoProducto" Association="Self.FK_Producto_TipoProducto">
             <End Role="TipoProducto" EntitySet="TipoProducto" />
             <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductoDevolucion_Estado" Association="Self.FK_ProductoDevolucion_Estado">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="ProductoDevolucion" EntitySet="ProductoDevolucion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductoDevolucion_Proveedor" Association="Self.FK_ProductoDevolucion_Proveedor">
+            <End Role="Proveedor" EntitySet="Proveedor" />
+            <End Role="ProductoDevolucion" EntitySet="ProductoDevolucion" />
           </AssociationSet>
           <AssociationSet Name="FK_Proveedor_Estado" Association="Self.FK_Proveedor_Estado">
             <End Role="Estado" EntitySet="Estado" />
@@ -1016,6 +1101,24 @@
             <End Role="Estado" EntitySet="Estado" />
             <End Role="Venta" EntitySet="Venta" />
           </AssociationSet>
+          <EntitySet Name="DetalleProductoDevolucion" EntityType="MAGASYSModel.DetalleProductoDevolucion" />
+          <EntitySet Name="ProductoDevolucion" EntityType="MAGASYSModel.ProductoDevolucion" />
+          <AssociationSet Name="FK_DetalleProductoDevolucion_ProductoDevolucion" Association="MAGASYSModel.FK_DetalleProductoDevolucion_ProductoDevolucion">
+            <End Role="ProductoDevolucion" EntitySet="ProductoDevolucion" />
+            <End Role="DetalleProductoDevolucion" EntitySet="DetalleProductoDevolucion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleProductoDevolucion_ProductoEdicion" Association="MAGASYSModel.FK_DetalleProductoDevolucion_ProductoEdicion">
+            <End Role="ProductoEdicion" EntitySet="ProductoEdicion" />
+            <End Role="DetalleProductoDevolucion" EntitySet="DetalleProductoDevolucion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductoDevolucion_Estado" Association="MAGASYSModel.FK_ProductoDevolucion_Estado">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="ProductoDevolucion" EntitySet="ProductoDevolucion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductoDevolucion_Proveedor" Association="MAGASYSModel.FK_ProductoDevolucion_Proveedor">
+            <End Role="Proveedor" EntitySet="Proveedor" />
+            <End Role="ProductoDevolucion" EntitySet="ProductoDevolucion" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Anio">
           <Key>
@@ -1134,6 +1237,7 @@
           <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_Producto_Estado1" FromRole="Estado" ToRole="Producto" />
           <NavigationProperty Name="Proveedor" Relationship="MAGASYSModel.FK_Proveedor_Estado" FromRole="Estado" ToRole="Proveedor" />
           <NavigationProperty Name="Venta" Relationship="MAGASYSModel.FK_Venta_Estado" FromRole="Estado" ToRole="Venta" />
+          <NavigationProperty Name="ProductoDevolucion" Relationship="MAGASYSModel.FK_ProductoDevolucion_Estado" FromRole="Estado" ToRole="ProductoDevolucion" />
         </EntityType>
         <EntityType Name="Genero">
           <Key>
@@ -1228,6 +1332,8 @@
           <NavigationProperty Name="Estado" Relationship="MAGASYSModel.FK_Producto_Edicion_Estado" FromRole="ProductoEdicion" ToRole="Estado" />
           <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_Producto_Edicion_Producto" FromRole="ProductoEdicion" ToRole="Producto" />
           <NavigationProperty Name="DetalleVenta" Relationship="MAGASYSModel.FK_DetalleVenta_ProductoEdicion" FromRole="ProductoEdicion" ToRole="DetalleVenta" />
+          <Property Name="FECHA_DEVOLUCION_REAL" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="DetalleProductoDevolucion" Relationship="MAGASYSModel.FK_DetalleProductoDevolucion_ProductoEdicion" FromRole="ProductoEdicion" ToRole="DetalleProductoDevolucion" />
         </EntityType>
         <EntityType Name="ProductoIngreso">
           <Key>
@@ -1269,6 +1375,7 @@
           <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_Producto_Proveedor" FromRole="Proveedor" ToRole="Producto" />
           <NavigationProperty Name="ProductoIngreso" Relationship="MAGASYSModel.FK_IngresoProducto_Proveedor" FromRole="Proveedor" ToRole="ProductoIngreso" />
           <NavigationProperty Name="Provincia" Relationship="MAGASYSModel.FK_Proveedor_Provincia" FromRole="Proveedor" ToRole="Provincia" />
+          <NavigationProperty Name="ProductoDevolucion" Relationship="MAGASYSModel.FK_ProductoDevolucion_Proveedor" FromRole="Proveedor" ToRole="ProductoDevolucion" />
         </EntityType>
         <EntityType Name="Provincia">
           <Key>
@@ -1775,6 +1882,77 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="DetalleProductoDevolucion">
+          <Key>
+            <PropertyRef Name="ID_DETALLE_PRODUCTO_DEVOLUCION" />
+          </Key>
+          <Property Name="ID_DETALLE_PRODUCTO_DEVOLUCION" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="COD_PRODUCTO_DEVOLUCION" Type="Int32" Nullable="false" />
+          <Property Name="CANTIDAD" Type="Int32" Nullable="false" />
+          <Property Name="COD_PRODUCTO_EDICION" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ProductoDevolucion" Relationship="MAGASYSModel.FK_DetalleProductoDevolucion_ProductoDevolucion" FromRole="DetalleProductoDevolucion" ToRole="ProductoDevolucion" />
+          <NavigationProperty Name="ProductoEdicion" Relationship="MAGASYSModel.FK_DetalleProductoDevolucion_ProductoEdicion" FromRole="DetalleProductoDevolucion" ToRole="ProductoEdicion" />
+        </EntityType>
+        <EntityType Name="ProductoDevolucion">
+          <Key>
+            <PropertyRef Name="ID_PRODUCTO_DEVOLUCION" />
+          </Key>
+          <Property Name="ID_PRODUCTO_DEVOLUCION" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="COD_ESTADO" Type="Int32" Nullable="false" />
+          <Property Name="COD_PROVEEDOR" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DetalleProductoDevolucion" Relationship="MAGASYSModel.FK_DetalleProductoDevolucion_ProductoDevolucion" FromRole="ProductoDevolucion" ToRole="DetalleProductoDevolucion" />
+          <NavigationProperty Name="Estado" Relationship="MAGASYSModel.FK_ProductoDevolucion_Estado" FromRole="ProductoDevolucion" ToRole="Estado" />
+          <NavigationProperty Name="Proveedor" Relationship="MAGASYSModel.FK_ProductoDevolucion_Proveedor" FromRole="ProductoDevolucion" ToRole="Proveedor" />
+        </EntityType>
+        <Association Name="FK_DetalleProductoDevolucion_ProductoDevolucion">
+          <End Type="MAGASYSModel.ProductoDevolucion" Role="ProductoDevolucion" Multiplicity="1" />
+          <End Type="MAGASYSModel.DetalleProductoDevolucion" Role="DetalleProductoDevolucion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductoDevolucion">
+              <PropertyRef Name="ID_PRODUCTO_DEVOLUCION" />
+            </Principal>
+            <Dependent Role="DetalleProductoDevolucion">
+              <PropertyRef Name="COD_PRODUCTO_DEVOLUCION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleProductoDevolucion_ProductoEdicion">
+          <End Type="MAGASYSModel.ProductoEdicion" Role="ProductoEdicion" Multiplicity="1" />
+          <End Type="MAGASYSModel.DetalleProductoDevolucion" Role="DetalleProductoDevolucion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductoEdicion">
+              <PropertyRef Name="ID_PRODUCTO_EDICION" />
+            </Principal>
+            <Dependent Role="DetalleProductoDevolucion">
+              <PropertyRef Name="COD_PRODUCTO_EDICION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductoDevolucion_Estado">
+          <End Type="MAGASYSModel.Estado" Role="Estado" Multiplicity="1" />
+          <End Type="MAGASYSModel.ProductoDevolucion" Role="ProductoDevolucion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="ID_ESTADO" />
+            </Principal>
+            <Dependent Role="ProductoDevolucion">
+              <PropertyRef Name="COD_ESTADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductoDevolucion_Proveedor">
+          <End Type="MAGASYSModel.Proveedor" Role="Proveedor" Multiplicity="1" />
+          <End Type="MAGASYSModel.ProductoDevolucion" Role="ProductoDevolucion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedor">
+              <PropertyRef Name="ID_PROVEEDOR" />
+            </Principal>
+            <Dependent Role="ProductoDevolucion">
+              <PropertyRef Name="COD_PROVEEDOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1949,6 +2127,7 @@
           <EntitySetMapping Name="ProductoEdicion">
             <EntityTypeMapping TypeName="MAGASYSModel.ProductoEdicion">
               <MappingFragment StoreEntitySet="ProductoEdicion">
+                <ScalarProperty Name="FECHA_DEVOLUCION_REAL" ColumnName="FECHA_DEVOLUCION_REAL" />
                 <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
                 <ScalarProperty Name="CANTIDAD_DISPONIBLE" ColumnName="CANTIDAD_DISPONIBLE" />
                 <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
@@ -2072,6 +2251,26 @@
               <MappingFragment StoreEntitySet="FormaPago">
                 <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
                 <ScalarProperty Name="ID_FORMA_PAGO" ColumnName="ID_FORMA_PAGO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetalleProductoDevolucion">
+            <EntityTypeMapping TypeName="MAGASYSModel.DetalleProductoDevolucion">
+              <MappingFragment StoreEntitySet="DetalleProductoDevolucion">
+                <ScalarProperty Name="COD_PRODUCTO_EDICION" ColumnName="COD_PRODUCTO_EDICION" />
+                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+                <ScalarProperty Name="COD_PRODUCTO_DEVOLUCION" ColumnName="COD_PRODUCTO_DEVOLUCION" />
+                <ScalarProperty Name="ID_DETALLE_PRODUCTO_DEVOLUCION" ColumnName="ID_DETALLE_PRODUCTO_DEVOLUCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductoDevolucion">
+            <EntityTypeMapping TypeName="MAGASYSModel.ProductoDevolucion">
+              <MappingFragment StoreEntitySet="ProductoDevolucion">
+                <ScalarProperty Name="COD_PROVEEDOR" ColumnName="COD_PROVEEDOR" />
+                <ScalarProperty Name="COD_ESTADO" ColumnName="COD_ESTADO" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="ID_PRODUCTO_DEVOLUCION" ColumnName="ID_PRODUCTO_DEVOLUCION" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

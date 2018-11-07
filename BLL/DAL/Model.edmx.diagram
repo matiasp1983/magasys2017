@@ -66,6 +66,12 @@
         <AssociationConnector Association="MAGASYSModel.FK_Venta_FormaPago" />
         <AssociationConnector Association="MAGASYSModel.FK_DetalleVenta_ProductoEdicion" />
         <AssociationConnector Association="MAGASYSModel.FK_Venta_Estado" />
+        <EntityTypeShape EntityType="MAGASYSModel.DetalleProductoDevolucion" Width="1.5" PointX="15.5" PointY="19.5" />
+        <EntityTypeShape EntityType="MAGASYSModel.ProductoDevolucion" Width="1.5" PointX="13.25" PointY="19.25" />
+        <AssociationConnector Association="MAGASYSModel.FK_DetalleProductoDevolucion_ProductoDevolucion" />
+        <AssociationConnector Association="MAGASYSModel.FK_DetalleProductoDevolucion_ProductoEdicion" />
+        <AssociationConnector Association="MAGASYSModel.FK_ProductoDevolucion_Estado" />
+        <AssociationConnector Association="MAGASYSModel.FK_ProductoDevolucion_Proveedor" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
