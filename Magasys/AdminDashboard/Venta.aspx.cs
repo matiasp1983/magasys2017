@@ -932,7 +932,6 @@ namespace PL.AdminDashboard
             }
             catch (Exception ex)
             {
-                lsvDiarios.DataSource = null;
                 Logger loLogger = LogManager.GetCurrentClassLogger();
                 loLogger.Error(ex);
             }
