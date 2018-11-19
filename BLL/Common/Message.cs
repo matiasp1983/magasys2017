@@ -65,5 +65,13 @@
         public const string MsjeVentaAnularFailure = "La venta no se pudo anular.";
         public const string MsjeVentaAnularOk = "La venta se pudo anular.";
         #endregion
+
+        #region MensajesDevolucion
+
+        public const string MsjeListadoDevolucionSinResultados = "No se encontraron Productos para la búsqueda seleccionada.";
+        public const string MsjeDevolucionSuccessAlta = "La devolución se guardó correctamente.";
+        public const string MsjeDevolucionFailure = "La devolución no se pudo guardar.";
+
+        #endregion
     }
 }

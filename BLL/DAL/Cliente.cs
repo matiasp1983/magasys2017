@@ -69,8 +69,6 @@ public partial class Cliente
 
 
 
-    public virtual TipoDocumento TipoDocumento { get; set; }
-
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Venta> Venta { get; set; }

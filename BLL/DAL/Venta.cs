@@ -47,9 +47,9 @@ public partial class Venta
 
     public virtual ICollection<DetalleVenta> DetalleVenta { get; set; }
 
-    public virtual FormaPago FormaPago { get; set; }
-
     public virtual Estado Estado { get; set; }
+
+    public virtual FormaPago FormaPago { get; set; }
 
 }
 

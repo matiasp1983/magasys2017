@@ -32,9 +32,9 @@ public partial class DetalleVenta
 
 
 
-    public virtual Venta Venta { get; set; }
-
     public virtual ProductoEdicion ProductoEdicion { get; set; }
+
+    public virtual Venta Venta { get; set; }
 
 }
 

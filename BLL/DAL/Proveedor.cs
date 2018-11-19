@@ -26,8 +26,6 @@ public partial class Proveedor
 
         this.ProductoIngreso = new HashSet<ProductoIngreso>();
 
-        this.ProductoDevolucion = new HashSet<ProductoDevolucion>();
-
     }
 
 
@@ -84,10 +82,6 @@ public partial class Proveedor
     public virtual ICollection<ProductoIngreso> ProductoIngreso { get; set; }
 
     public virtual Provincia Provincia { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<ProductoDevolucion> ProductoDevolucion { get; set; }
 
 }
 

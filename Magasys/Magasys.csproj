@@ -129,6 +129,7 @@
     <Content Include="AdminDashboard\MasterPage.Master" />
     <Content Include="AdminDashboard\ProductoColeccionEditar.aspx" />
     <Content Include="AdminDashboard\ProductoColeccionVisualizar.aspx" />
+    <Content Include="AdminDashboard\ProductoDevolucion.aspx" />
     <Content Include="AdminDashboard\ProductoDiarioEditar.aspx" />
     <Content Include="AdminDashboard\ProductoDiarioVisualizar.aspx" />
     <Content Include="AdminDashboard\ProductoIngreso.aspx" />
@@ -275,6 +276,13 @@
     </Compile>
     <Compile Include="AdminDashboard\ProductoColeccionVisualizar.aspx.designer.cs">
       <DependentUpon>ProductoColeccionVisualizar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\ProductoDevolucion.aspx.cs">
+      <DependentUpon>ProductoDevolucion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\ProductoDevolucion.aspx.designer.cs">
+      <DependentUpon>ProductoDevolucion.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminDashboard\ProductoDiarioEditar.aspx.cs">
       <DependentUpon>ProductoDiarioEditar.aspx</DependentUpon>
@@ -449,7 +457,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>1676</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:1676/</IISUrl>
+          <IISUrl>http://localhost:8081/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

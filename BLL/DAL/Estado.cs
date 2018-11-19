@@ -30,11 +30,11 @@ public partial class Estado
 
         this.Producto = new HashSet<Producto>();
 
+        this.ProductoDevolucion = new HashSet<ProductoDevolucion>();
+
         this.Proveedor = new HashSet<Proveedor>();
 
         this.Venta = new HashSet<Venta>();
-
-        this.ProductoDevolucion = new HashSet<ProductoDevolucion>();
 
     }
 
@@ -63,15 +63,15 @@ public partial class Estado
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
+    public virtual ICollection<ProductoDevolucion> ProductoDevolucion { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
     public virtual ICollection<Proveedor> Proveedor { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Venta> Venta { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<ProductoDevolucion> ProductoDevolucion { get; set; }
 
 }
 

@@ -38,6 +38,8 @@ public partial class MAGASYSEntities : DbContext
 
     public virtual DbSet<Coleccion> Coleccion { get; set; }
 
+    public virtual DbSet<DetalleProductoDevolucion> DetalleProductoDevolucion { get; set; }
+
     public virtual DbSet<DetalleProductoIngreso> DetalleProductoIngreso { get; set; }
 
     public virtual DbSet<DetalleVenta> DetalleVenta { get; set; }
@@ -50,6 +52,8 @@ public partial class MAGASYSEntities : DbContext
 
     public virtual DbSet<Estado> Estado { get; set; }
 
+    public virtual DbSet<FormaPago> FormaPago { get; set; }
+
     public virtual DbSet<Genero> Genero { get; set; }
 
     public virtual DbSet<Libro> Libro { get; set; }
@@ -61,6 +65,8 @@ public partial class MAGASYSEntities : DbContext
     public virtual DbSet<Periodicidad> Periodicidad { get; set; }
 
     public virtual DbSet<Producto> Producto { get; set; }
+
+    public virtual DbSet<ProductoDevolucion> ProductoDevolucion { get; set; }
 
     public virtual DbSet<ProductoEdicion> ProductoEdicion { get; set; }
 
@@ -81,12 +87,6 @@ public partial class MAGASYSEntities : DbContext
     public virtual DbSet<TipoProducto> TipoProducto { get; set; }
 
     public virtual DbSet<Venta> Venta { get; set; }
-
-    public virtual DbSet<FormaPago> FormaPago { get; set; }
-
-    public virtual DbSet<DetalleProductoDevolucion> DetalleProductoDevolucion { get; set; }
-
-    public virtual DbSet<ProductoDevolucion> ProductoDevolucion { get; set; }
 
 }
 

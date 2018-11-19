@@ -33,8 +33,6 @@ public partial class ProductoDevolucion
 
     public int COD_ESTADO { get; set; }
 
-    public int COD_PROVEEDOR { get; set; }
-
 
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -42,8 +40,6 @@ public partial class ProductoDevolucion
     public virtual ICollection<DetalleProductoDevolucion> DetalleProductoDevolucion { get; set; }
 
     public virtual Estado Estado { get; set; }
-
-    public virtual Proveedor Proveedor { get; set; }
 
 }
 
