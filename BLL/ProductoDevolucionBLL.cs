@@ -109,6 +109,49 @@ namespace BLL
             }
         }
 
+        public List<Devolucion> ObtenerDevolucionesDiarias()
+        {
+            List<Devolucion> lstDevolucion = null;
+            Devolucion oDevolucion = null;
+            List<DetalleProductoIngreso> lstDetalleProductoIngreso = null;
+            DateTime loFechaDia = Convert.ToDateTime(DateTime.Now.ToString("dd/MM/yyyy"));
+
+            try
+            {
+                using (var loRepDetalleProductoIngreso = new Repository<DetalleProductoIngreso>())
+                {
+                    lstDetalleProductoIngreso = loRepDetalleProductoIngreso.Search(p => p.FECHA_DEVOLUCION != null && p.FECHA_DEVOLUCION == loFechaDia && p.ProductoEdicion.COD_ESTADO == 1 && p.ProductoEdicion.CANTIDAD_DISPONIBLE > 0).GroupBy(x => x.COD_PRODUCTO_EDICION).Select(m => m.First()).ToList();
+
+                    if (lstDetalleProductoIngreso.Count > 0)
+                    {
+                        lstDevolucion = new List<Devolucion>();
+
+                        foreach (var loDetalleProductoIngreso in lstDetalleProductoIngreso)
+                        {
+                            oDevolucion = new Devolucion
+                            {
+                                COD_PRODUCTO = loDetalleProductoIngreso.ProductoEdicion.COD_PRODUCTO,
+                                COD_PRODUCTO_EDICION = loDetalleProductoIngreso.COD_PRODUCTO_EDICION,
+                                NOMBRE = loDetalleProductoIngreso.ProductoEdicion.Producto.NOMBRE,
+                                TIPO_PRODUCTO = loDetalleProductoIngreso.ProductoEdicion.Producto.TipoProducto.DESCRIPCION,
+                                EDICION = loDetalleProductoIngreso.ProductoEdicion.EDICION,
+                                FECHA_EDICION = Convert.ToDateTime(loDetalleProductoIngreso.ProductoEdicion.FECHA_EDICION),
+                                FECHA_DEVOLUCION = Convert.ToDateTime(loDetalleProductoIngreso.FECHA_DEVOLUCION),
+                                CANTIDAD_DISPONIBLE = loDetalleProductoIngreso.ProductoEdicion.CANTIDAD_DISPONIBLE
+                            };
+
+                            lstDevolucion.Add(oDevolucion);
+                        }
+                    }
+                }
+                return lstDevolucion;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         #endregion
     }
 

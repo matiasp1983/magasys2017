@@ -71,6 +71,11 @@ namespace PL.AdminDashboard
                 liVenta.Attributes["class"] = "active";
                 liVentaListado.Attributes["class"] = "active";
             }
+            if (loActivePage.Contains("ProductoDevolucion.aspx"))
+            {
+                liDevolucionProductos.Attributes["class"] = "active";
+                liProductoDevolucion.Attributes["class"] = "active";
+            }
         }
 
         #endregion

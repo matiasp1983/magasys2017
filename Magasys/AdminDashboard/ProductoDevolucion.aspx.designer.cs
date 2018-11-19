@@ -112,6 +112,15 @@ namespace PL.AdminDashboard {
         protected global::System.Web.UI.HtmlControls.HtmlButton btnLimpiar;
         
         /// <summary>
+        /// Control btnDevolucionDiarias.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnDevolucionDiarias;
+        
+        /// <summary>
         /// Control lsvDevolucion.
         /// </summary>
         /// <remarks>

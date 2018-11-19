@@ -40,8 +40,36 @@ namespace PL.AdminDashboard
             LimpiarSeleccionProductos();
         }
 
+        protected void BtnDevolucionesDiarias_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var lstDevouciones = new ProductoDevolucionBLL().ObtenerDevolucionesDiarias();
+                if (lstDevouciones != null && lstDevouciones.Count > 0)
+                {
+                    lsvDevolucion.Visible = true;
+                    lsvDevolucion.DataSource = lstDevouciones;
+                }
+                else
+                {
+                    dvMensajeLsvDevolucion.InnerHtml = MessageManager.Info(dvMensajeLsvDevolucion, Message.MsjeListadoDevolucionSinResultados, false);
+                    dvMensajeLsvDevolucion.Visible = true;
+                }
+
+                lsvDevolucion.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Logger loLogger = LogManager.GetCurrentClassLogger();
+                loLogger.Error(ex);
+            }
+        }
+
         protected void LsvDevolucion_ItemDataBound(object sender, ListViewItemEventArgs e)
         {  // El evento OnItemDataBound se llama cuando se setea la fuente de datos (DataSource) de la grilla
+
+            DateTime loFechaDia = Convert.ToDateTime(DateTime.Now.ToString("dd/MM/yyyy"));
+
             try
             {
                 if (e.Item.ItemType != ListViewItemType.DataItem) return; //Controla que los registros a procesas correspondan al cuerpo de la grilla (ItemTemplate)
@@ -59,7 +87,7 @@ namespace PL.AdminDashboard
                 txtFechaDevolucion.Enabled = false;
 
                 // Cuando la fecha propuesta sea menor a la fecha del día, se debe resaltar el campo en rojo.
-                if (((Devolucion)e.Item.DataItem).FECHA_DEVOLUCION < DateTime.Now)
+                if (((Devolucion)e.Item.DataItem).FECHA_DEVOLUCION < loFechaDia)
                 {
                     // Borde rojo para el campo FECHA_DEVOLUCION                    
                     txtFechaDevolucion.BorderColor = System.Drawing.ColorTranslator.FromHtml("#cc5965");

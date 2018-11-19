@@ -68,6 +68,13 @@
                             <li id="liVentaListado" runat="server"><a href="VentaListado.aspx">Listado de Ventas</a></li>
                         </ul>
                     </li>
+                    <li id="liDevolucionProductos" runat="server">
+                        <a href="#"><i class="fa fa-stack-overflow"></i><span class="nav-label">Devoluciones</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li id="liProductoDevolucion" runat="server"><a href="ProductoDevolucion.aspx">Registrar Devoluciones</a></li>    
+             <%--               <li id="liProductoDevolucionListado" runat="server"><a href="ProductoDevolucionListado.aspx">Listado de Devoluciones</a></li>--%>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </nav>

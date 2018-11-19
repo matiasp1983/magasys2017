@@ -139,6 +139,24 @@ namespace PL.AdminDashboard {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liVentaListado;
         
         /// <summary>
+        /// Control liDevolucionProductos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liDevolucionProductos;
+        
+        /// <summary>
+        /// Control liProductoDevolucion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liProductoDevolucion;
+        
+        /// <summary>
         /// Control contentMaster.
         /// </summary>
         /// <remarks>

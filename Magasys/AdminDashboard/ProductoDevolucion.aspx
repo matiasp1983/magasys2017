@@ -125,6 +125,11 @@
                     <div class="col-lg-12">
                         <div class="ibox">
                             <div class="ibox-content">
+                                <div style="text-align: right;">
+                                    <button type="button" id="btnDevolucionDiarias" runat="server" class="ladda-button btn btn-info" onserverclick="BtnDevolucionesDiarias_Click">
+                                        <i class="fa fa-plus"></i>&nbsp;&nbsp;<span>Devoluciones Diarias</span>
+                                    </button>
+                                </div>
                                 <br />
 
                                 <asp:ListView ID="lsvDevolucion" runat="server" Visible="false" OnItemDataBound="LsvDevolucion_ItemDataBound">
