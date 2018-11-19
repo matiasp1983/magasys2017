@@ -252,7 +252,7 @@ namespace PL.AdminDashboard
                 lstDetalleProductoDevolucion.Add(oDetalleProductoDevolucion);
 
                 // Actualizar Stock
-                loResutado = new ProductoEdicionBLL().ActualizarCantidadDisponible(oDetalleProductoDevolucion.COD_PRODUCTO_EDICION, oDetalleProductoDevolucion.CANTIDAD);
+                loResutado = new ProductoEdicionBLL().ActualizarCantidadDisponible(oDetalleProductoDevolucion.COD_PRODUCTO_EDICION, oDetalleProductoDevolucion.CANTIDAD, DateTime.Now);
             }
 
             if (loResutado)

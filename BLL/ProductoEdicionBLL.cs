@@ -48,7 +48,7 @@ namespace BLL
             return bRes;
         }
 
-        public bool ActualizarCantidadDisponible(int codProductoEdicion, int cantidad)
+        public bool ActualizarCantidadDisponible(int codProductoEdicion, int cantidad, DateTime? fechaDevolucionReal = null)
         {
             var bRes = false;
             ProductoEdicion oProductoEdicion = null;
@@ -63,6 +63,8 @@ namespace BLL
                 if (oProductoEdicion != null)
                 {
                     oProductoEdicion.CANTIDAD_DISPONIBLE = oProductoEdicion.CANTIDAD_DISPONIBLE - cantidad;
+                    if (fechaDevolucionReal != null)
+                        oProductoEdicion.FECHA_DEVOLUCION_REAL = fechaDevolucionReal;
                     bRes = ModificarProductoEdicion(oProductoEdicion);
                 }
             }
