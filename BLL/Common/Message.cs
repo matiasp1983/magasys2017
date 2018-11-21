@@ -71,7 +71,9 @@
         public const string MsjeListadoDevolucionSinResultados = "No se encontraron Productos para la búsqueda seleccionada.";
         public const string MsjeDevolucionSuccessAlta = "La devolución se guardó correctamente.";
         public const string MsjeDevolucionFailure = "La devolución no se pudo guardar.";
-
+        public const string MsjeListadoDevolucionListadoSinResultados = "No se encontraron Devoluciones de productos para la búsqueda seleccionada.";
+        public const string MsjeDevolucionAnularOk = "La devolución se pudo anular.";
+        public const string MsjeDevolucionAnularFailure = "La devolución no se pudo anular.";
         #endregion
     }
 }

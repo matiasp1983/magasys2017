@@ -76,6 +76,11 @@ namespace PL.AdminDashboard
                 liDevolucionProductos.Attributes["class"] = "active";
                 liProductoDevolucion.Attributes["class"] = "active";
             }
+            if (loActivePage.Contains("ProductoDevolucionListado.aspx"))
+            {
+                liDevolucionProductos.Attributes["class"] = "active";
+                liProductoDevolucionListado.Attributes["class"] = "active";
+            }
         }
 
         #endregion

@@ -3,6 +3,7 @@ using BLL.Filters;
 using BLL.DAL;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 
 namespace BLL
 {
@@ -152,6 +153,101 @@ namespace BLL
             }
         }
 
+        public List<ProductoDevolucionListado> ObtenerDevolucion(IngresoProductoFiltro oDevolucionFiltro)
+        {
+            List<ProductoDevolucionListado> lstProductoDevolucionListado = null;
+            List<DetalleProductoDevolucion> lstDetalleProductoDevolucion = null;
+
+            try
+            {
+                using (var loRepDetalleProductoDevolucion = new Repository<DetalleProductoDevolucion>())
+                {
+                    if (oDevolucionFiltro.IdProveedor > 0)
+                        lstDetalleProductoDevolucion = loRepDetalleProductoDevolucion.Search(p => p.ProductoDevolucion.COD_ESTADO == 1 && p.ProductoEdicion.Producto.COD_PROVEEDOR == oDevolucionFiltro.IdProveedor).GroupBy(x => x.COD_PRODUCTO_DEVOLUCION).Select(m => m.First()).ToList();
+
+                    if (lstDetalleProductoDevolucion != null)
+                    {
+                        if (oDevolucionFiltro.FechaAltaDesde != null && oDevolucionFiltro.FechaAltaHasta != null)
+                            lstDetalleProductoDevolucion = lstDetalleProductoDevolucion.FindAll(p => p.ProductoDevolucion.FECHA.Date >= oDevolucionFiltro.FechaAltaDesde && p.ProductoDevolucion.FECHA.Date <= oDevolucionFiltro.FechaAltaHasta);
+                        else if (oDevolucionFiltro.FechaAltaDesde != null && oDevolucionFiltro.FechaAltaHasta == null)
+                            lstDetalleProductoDevolucion = lstDetalleProductoDevolucion.FindAll(p => p.ProductoDevolucion.FECHA.Date >= oDevolucionFiltro.FechaAltaDesde);
+                        else if (oDevolucionFiltro.FechaAltaDesde == null && oDevolucionFiltro.FechaAltaHasta != null)
+                            lstDetalleProductoDevolucion = lstDetalleProductoDevolucion.FindAll(p => p.ProductoDevolucion.FECHA.Date <= oDevolucionFiltro.FechaAltaHasta);
+                    }
+                    else
+                    {
+                        if (oDevolucionFiltro.FechaAltaDesde != null && oDevolucionFiltro.FechaAltaHasta != null)
+                            lstDetalleProductoDevolucion = loRepDetalleProductoDevolucion.Search(p => p.ProductoDevolucion.COD_ESTADO == 1 && DbFunctions.TruncateTime(p.ProductoDevolucion.FECHA) >= DbFunctions.TruncateTime(oDevolucionFiltro.FechaAltaDesde) && DbFunctions.TruncateTime(p.ProductoDevolucion.FECHA) <= DbFunctions.TruncateTime(oDevolucionFiltro.FechaAltaHasta)).GroupBy(x => x.COD_PRODUCTO_DEVOLUCION).Select(m => m.First()).ToList();
+                        else if (oDevolucionFiltro.FechaAltaDesde != null && oDevolucionFiltro.FechaAltaHasta == null)
+                            lstDetalleProductoDevolucion = loRepDetalleProductoDevolucion.Search(p => p.ProductoDevolucion.COD_ESTADO == 1 && DbFunctions.TruncateTime(p.ProductoDevolucion.FECHA) >= DbFunctions.TruncateTime(oDevolucionFiltro.FechaAltaDesde)).GroupBy(x => x.COD_PRODUCTO_DEVOLUCION).Select(m => m.First()).ToList();
+                        else if (oDevolucionFiltro.FechaAltaDesde == null && oDevolucionFiltro.FechaAltaHasta != null)
+                            lstDetalleProductoDevolucion = loRepDetalleProductoDevolucion.Search(p => p.ProductoDevolucion.COD_ESTADO == 1 && DbFunctions.TruncateTime(p.ProductoDevolucion.FECHA) <= DbFunctions.TruncateTime(oDevolucionFiltro.FechaAltaHasta)).GroupBy(x => x.COD_PRODUCTO_DEVOLUCION).Select(m => m.First()).ToList();
+                    }
+
+
+                    ProductoDevolucionListado oProductoDevolucionListado;
+                    lstProductoDevolucionListado = new List<ProductoDevolucionListado>();
+
+                    if (lstDetalleProductoDevolucion != null)
+                    {
+                        foreach (var loDetalleProductoDevolucion in lstDetalleProductoDevolucion)
+                        {
+                            oProductoDevolucionListado = new ProductoDevolucionListado
+                            {
+                                ID_PRODUCTO_DEVOLUCION = loDetalleProductoDevolucion.COD_PRODUCTO_DEVOLUCION,
+                                FECHA = loDetalleProductoDevolucion.ProductoDevolucion.FECHA
+                            };
+
+                            lstProductoDevolucionListado.Add(oProductoDevolucionListado);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return lstProductoDevolucionListado;
+        }
+
+        public bool AnularDevolucion(int idProductoDevolucion)
+        {
+            var bRes = false;
+
+            try
+            {
+                using (var loRepProductoDevolucion = new Repository<ProductoDevolucion>())
+                {
+                    var loProductoDevolucion = loRepProductoDevolucion.Find(p => p.ID_PRODUCTO_DEVOLUCION == idProductoDevolucion);
+
+                    if (loProductoDevolucion != null)
+                    {
+                        foreach (var oDetalleProductoDevolucion in loProductoDevolucion.DetalleProductoDevolucion)
+                        {
+                            var oProductoEdicion = new ProductoEdicionBLL().ObtenerEdicion(oDetalleProductoDevolucion.COD_PRODUCTO_EDICION);
+                            oProductoEdicion.CANTIDAD_DISPONIBLE = oProductoEdicion.CANTIDAD_DISPONIBLE + oDetalleProductoDevolucion.CANTIDAD;
+                            bRes = new ProductoEdicionBLL().ModificarProductoEdicion(oProductoEdicion);
+                            if (!bRes)
+                                break;
+                        }
+
+                        if (bRes)
+                        {
+                            loProductoDevolucion.COD_ESTADO = 3;
+                            bRes = loRepProductoDevolucion.Update(loProductoDevolucion);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return bRes;
+        }
+
         #endregion
     }
 
@@ -177,6 +273,22 @@ namespace BLL
         public string NOMBRE { get; set; }
         public string TIPO_PRODUCTO { get; set; }
         public string EDICION { get; set; }
+        public int CANTIDAD { get; set; }
+    }
+
+    public class ProductoDevolucionListado
+    {
+        public int ID_PRODUCTO_DEVOLUCION { get; set; }
+        public DateTime FECHA { get; set; }
+    }
+
+    public class DetalleProductoDevolucionListado
+    {
+        public int ID_PRODUCTO_DEVOLUCION { get; set; }
+        public int COD_EDICION { get; set; }
+        public string EDICION { get; set; }
+        public string TIPO_PRODUCTO { get; set; }
+        public string NOMBRE_PRODUCTO { get; set; }
         public int CANTIDAD { get; set; }
     }
 
