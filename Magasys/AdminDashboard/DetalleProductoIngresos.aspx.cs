@@ -49,13 +49,13 @@ namespace PL.AdminDashboard
             if (Convert.ToInt32(Session[Enums.Session.IdIngresoProductos.ToString()]) > 0)
             {
 
-                using (var loRepDetalleProductoIngreso = new Repository<DetalleProductoIngreso>())
+                using (var loRepProductoIngreso = new Repository<BLL.DAL.ProductoIngreso>())
                 {
                     var loIdIngresoProductos = Convert.ToInt32(Session[Enums.Session.IdIngresoProductos.ToString()]);
 
-                    var lstDetalleProductoIngreso = loRepDetalleProductoIngreso.Search(p => p.COD_ESTADO == 1 && p.COD_INGRESO_PRODUCTO == loIdIngresoProductos);
+                    var loProductoIngreso = loRepProductoIngreso.Find(p => p.COD_ESTADO == 1 && p.ID_INGRESO_PRODUCTOS == loIdIngresoProductos);
 
-                    if (lstDetalleProductoIngreso.Count > 0)
+                    if (loProductoIngreso != null)
                     {
                         lstDiarioEdicion = new List<DiarioEdicion>();
                         lstRevistaEdicion = new List<RevistaEdicion>();
@@ -64,7 +64,10 @@ namespace PL.AdminDashboard
                         lstSuplementoEdicion = new List<SuplementoEdicion>();
                         lstPeliculaEdicion = new List<PeliculaEdicion>();
 
-                        foreach (var loDetalleProductoIngreso in lstDetalleProductoIngreso)
+                        txtProveedor.Text = loProductoIngreso.Proveedor.RAZON_SOCIAL;
+                        txtFechaIngresoProducto.Text = loProductoIngreso.FECHA.ToString("dd/MM/yyyy");
+
+                        foreach (var loDetalleProductoIngreso in loProductoIngreso.DetalleProductoIngreso)
                         {
                             oProductoEdicion = loDetalleProductoIngreso.ProductoEdicion;
                             loNombre = oProductoEdicion.Producto.NOMBRE;
