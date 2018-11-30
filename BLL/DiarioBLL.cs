@@ -259,7 +259,7 @@ namespace BLL
                                     TIPO_PRODUCTO = loProductoEdicion.Producto.TipoProducto.DESCRIPCION,
                                     EDICION = loProductoEdicion.EDICION,
                                     FECHA_EDICION = Convert.ToDateTime(loProductoEdicion.FECHA_EDICION),
-                                    PRECIO = loProductoEdicion.PRECIO,
+                                    PRECIO = loProductoEdicion.PRECIO.ToString(),
                                     CANTIDAD_DISPONIBLE = loProductoEdicion.CANTIDAD_DISPONIBLE
                                 };
 
@@ -418,7 +418,7 @@ namespace BLL
         public string DIA_SEMANA { get; set; }
         public string EDICION { get; set; }
         public System.DateTime FECHA_EDICION { get; set; }
-        public double PRECIO { get; set; }
+        public string PRECIO { get; set; }
         public int CANTIDAD_DISPONIBLE { get; set; }
         public int CANTIDAD { get; set; }
         public System.DateTime? FECHA_DEVOLUCION { get; set; }

@@ -131,7 +131,7 @@ namespace BLL
                                     NOMBRE = loProductoEdicion.Producto.NOMBRE, //nombre del Producto
                                     TIPO_PRODUCTO = loProductoEdicion.Producto.TipoProducto.DESCRIPCION,
                                     EDICION = loProductoEdicion.EDICION,
-                                    PRECIO = loProductoEdicion.PRECIO,
+                                    PRECIO = loProductoEdicion.PRECIO.ToString(),
                                     CANTIDAD_DISPONIBLE = loProductoEdicion.CANTIDAD_DISPONIBLE
                                 };
 
@@ -250,12 +250,12 @@ namespace BLL
         public string NOMBRE { get; set; }
         public string TIPO_PRODUCTO { get; set; }
         public string EDICION { get; set; }
-        public System.DateTime? FECHA_EDICION { get; set; }
+        public DateTime? FECHA_EDICION { get; set; }
         public string DESCRIPCION { get; set; }
-        public double PRECIO { get; set; }
+        public string PRECIO { get; set; }
         public int CANTIDAD_DISPONIBLE { get; set; }
         public int CANTIDAD { get; set; }
-        public System.DateTime? FECHA_DEVOLUCION { get; set; }
+        public DateTime? FECHA_DEVOLUCION { get; set; }
     }
 
     #endregion

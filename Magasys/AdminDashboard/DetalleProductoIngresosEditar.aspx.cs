@@ -126,7 +126,7 @@ namespace PL.AdminDashboard
                                         TIPO_PRODUCTO = loTipoProductoDescripcion,
                                         EDICION = oProductoEdicion.EDICION,
                                         FECHA_EDICION = Convert.ToDateTime(oProductoEdicion.FECHA_EDICION),
-                                        PRECIO = oProductoEdicion.PRECIO,
+                                        PRECIO = oProductoEdicion.PRECIO.ToString(),
                                         CANTIDAD_DISPONIBLE = loDetalleProductoIngreso.CANTIDAD_UNIDADES
                                     };
                                     if (loDetalleProductoIngreso.FECHA_DEVOLUCION != null)
@@ -143,7 +143,7 @@ namespace PL.AdminDashboard
                                         TIPO_PRODUCTO = loTipoProductoDescripcion,
                                         EDICION = oProductoEdicion.EDICION,
                                         FECHA_EDICION = Convert.ToDateTime(oProductoEdicion.FECHA_EDICION),
-                                        PRECIO = oProductoEdicion.PRECIO,
+                                        PRECIO = oProductoEdicion.PRECIO.ToString(),
                                         CANTIDAD_DISPONIBLE = loDetalleProductoIngreso.CANTIDAD_UNIDADES
                                     };
                                     if (oProductoEdicion.DESCRIPCION != null)
@@ -162,7 +162,7 @@ namespace PL.AdminDashboard
                                         TIPO_PRODUCTO = loTipoProductoDescripcion,
                                         EDICION = oProductoEdicion.EDICION,
                                         FECHA_EDICION = Convert.ToDateTime(oProductoEdicion.FECHA_EDICION),
-                                        PRECIO = oProductoEdicion.PRECIO,
+                                        PRECIO = oProductoEdicion.PRECIO.ToString(),
                                         CANTIDAD_DISPONIBLE = loDetalleProductoIngreso.CANTIDAD_UNIDADES
                                     };
                                     if (oProductoEdicion.DESCRIPCION != null)
@@ -181,7 +181,7 @@ namespace PL.AdminDashboard
                                         NOMBRE = loNombre,
                                         TIPO_PRODUCTO = loTipoProductoDescripcion,
                                         EDICION = oProductoEdicion.EDICION,
-                                        PRECIO = oProductoEdicion.PRECIO,
+                                        PRECIO = oProductoEdicion.PRECIO.ToString(),
                                         CANTIDAD_DISPONIBLE = loDetalleProductoIngreso.CANTIDAD_UNIDADES
                                     };
 
@@ -203,7 +203,7 @@ namespace PL.AdminDashboard
                                         NOMBRE = loNombre,
                                         TIPO_PRODUCTO = loTipoProductoDescripcion,
                                         EDICION = oProductoEdicion.EDICION,
-                                        PRECIO = oProductoEdicion.PRECIO,
+                                        PRECIO = oProductoEdicion.PRECIO.ToString(),
                                         CANTIDAD_DISPONIBLE = loDetalleProductoIngreso.CANTIDAD_UNIDADES
                                     };
 
@@ -224,7 +224,7 @@ namespace PL.AdminDashboard
                                         NOMBRE = loNombre,
                                         TIPO_PRODUCTO = loTipoProductoDescripcion,
                                         EDICION = oProductoEdicion.EDICION,
-                                        PRECIO = oProductoEdicion.PRECIO,
+                                        PRECIO = oProductoEdicion.PRECIO.ToString(),
                                         CANTIDAD_DISPONIBLE = loDetalleProductoIngreso.CANTIDAD_UNIDADES
                                     };
 
