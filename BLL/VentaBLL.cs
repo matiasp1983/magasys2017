@@ -173,9 +173,9 @@ namespace BLL
         public string NOMBRE { get; set; }
         public string TIPO_PRODUCTO { get; set; }
         public string EDICION { get; set; }
-        public double PRECIO_UNITARIO { get; set; }
+        public string PRECIO_UNITARIO { get; set; }
         public int CANTIDAD { get; set; }
-        public double VALOR_TOTAL { get; set; }
+        public string VALOR_TOTAL { get; set; }
     }
 
     public class VentaListado

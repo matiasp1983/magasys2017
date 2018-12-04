@@ -136,7 +136,7 @@ namespace BLL
                                     TIPO_PRODUCTO = loProductoEdicion.Producto.TipoProducto.DESCRIPCION,
                                     AUTOR = (from loAutor in loProductoEdicion.Producto.Libro select loAutor).FirstOrDefault().AUTOR,
                                     EDICION = loProductoEdicion.EDICION,
-                                    PRECIO = loProductoEdicion.PRECIO.ToString(),
+                                    PRECIO = "$ " + loProductoEdicion.PRECIO.ToString(),
                                     CANTIDAD_DISPONIBLE = loProductoEdicion.CANTIDAD_DISPONIBLE
                                 };
 

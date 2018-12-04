@@ -347,6 +347,7 @@ namespace PL.AdminDashboard
         {
             List<VentaProductos> lstVentaProductos = null;
             bool loResutado = false;
+            double loValorTotal = 0;
             double loMontoTotal = 0;
 
             try
@@ -372,6 +373,9 @@ namespace PL.AdminDashboard
                             {
                                 if (Convert.ToInt32(((TextBox)loItem.Controls[15]).Text.ToString()) > 0 && Convert.ToInt32(((TextBox)loItem.Controls[15]).Text.ToString()) <= Convert.ToInt32(((Label)loItem.Controls[13]).Text.ToString())) //CANTIDAD_DISPONIBLE debe ser mayor a 0 y menor o igual a al Sotck
                                 {
+                                    var loPrecioUnitario = ((Label)loItem.Controls[11]).Text.Split(' ').Last();
+                                    loValorTotal = Convert.ToDouble(loPrecioUnitario) * Convert.ToInt32(((TextBox)loItem.Controls[15]).Text.ToString());
+
                                     VentaProductos oVentaProductos = new VentaProductos
                                     {
                                         COD_PRODUCTO = Convert.ToInt32(((Label)loItem.Controls[1]).Text.ToString()),
@@ -379,13 +383,13 @@ namespace PL.AdminDashboard
                                         NOMBRE = ((Label)loItem.Controls[3]).Text.ToString(),
                                         TIPO_PRODUCTO = ((Label)loItem.Controls[5]).Text.ToString(),
                                         EDICION = ((Label)loItem.Controls[7]).Text.ToString(),
-                                        PRECIO_UNITARIO = Convert.ToDouble(((Label)loItem.Controls[11]).Text.ToString()),
+                                        PRECIO_UNITARIO = ((Label)loItem.Controls[11]).Text.ToString(),
                                         CANTIDAD = Convert.ToInt32(((TextBox)loItem.Controls[15]).Text.ToString()),
-                                        VALOR_TOTAL = Convert.ToDouble(((Label)loItem.Controls[11]).Text.ToString()) * Convert.ToInt32(((TextBox)loItem.Controls[15]).Text.ToString())
+                                        VALOR_TOTAL = "$ " + loValorTotal.ToString()
                                     };
 
                                     lstVentaProductos.Add(oVentaProductos);
-                                    loMontoTotal += oVentaProductos.VALOR_TOTAL;
+                                    loMontoTotal += loValorTotal;
                                     loResutado = true;
                                     // Eliminar borde rojo de las celda
                                     ((TextBox)loItem.Controls[15]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#e5e6e7");
@@ -415,6 +419,9 @@ namespace PL.AdminDashboard
                             {
                                 if (Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString()) > 0 && Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString()) <= Convert.ToInt32(((Label)loItem.Controls[15]).Text.ToString())) //CANTIDAD_DISPONIBLE debe ser mayor a 0 y menor o igual a al Sotck
                                 {
+                                    var loPrecioUnitario = ((Label)loItem.Controls[13]).Text.Split(' ').Last();
+                                    loValorTotal = Convert.ToDouble(loPrecioUnitario) * Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString());
+
                                     VentaProductos oVentaProductos = new VentaProductos
                                     {
                                         COD_PRODUCTO = Convert.ToInt32(((Label)loItem.Controls[1]).Text.ToString()),
@@ -422,13 +429,13 @@ namespace PL.AdminDashboard
                                         NOMBRE = ((Label)loItem.Controls[3]).Text.ToString(),
                                         TIPO_PRODUCTO = ((Label)loItem.Controls[5]).Text.ToString(),
                                         EDICION = ((Label)loItem.Controls[7]).Text.ToString(),
-                                        PRECIO_UNITARIO = Convert.ToDouble(((Label)loItem.Controls[13]).Text.ToString()),
+                                        PRECIO_UNITARIO = ((Label)loItem.Controls[13]).Text.ToString(),
                                         CANTIDAD = Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString()),
-                                        VALOR_TOTAL = Convert.ToDouble(((Label)loItem.Controls[13]).Text.ToString()) * Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString())
+                                        VALOR_TOTAL = "$ " + loValorTotal.ToString()
                                     };
 
                                     lstVentaProductos.Add(oVentaProductos);
-                                    loMontoTotal += oVentaProductos.VALOR_TOTAL;
+                                    loMontoTotal += loValorTotal;
                                     loResutado = true;
                                     // Eliminar borde rojo de las celda
                                     ((TextBox)loItem.Controls[17]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#e5e6e7");
@@ -458,6 +465,9 @@ namespace PL.AdminDashboard
                             {
                                 if (Convert.ToInt32(((TextBox)loItem.Controls[15]).Text.ToString()) > 0 && Convert.ToInt32(((TextBox)loItem.Controls[15]).Text.ToString()) <= Convert.ToInt32(((Label)loItem.Controls[13]).Text.ToString())) //CANTIDAD_DISPONIBLE debe ser mayor a 0 y menor o igual a al Sotck
                                 {
+                                    var loPrecioUnitario = ((Label)loItem.Controls[11]).Text.Split(' ').Last();
+                                    loValorTotal = Convert.ToDouble(loPrecioUnitario) * Convert.ToInt32(((TextBox)loItem.Controls[15]).Text.ToString());
+
                                     VentaProductos oVentaProductos = new VentaProductos
                                     {
                                         COD_PRODUCTO = Convert.ToInt32(((Label)loItem.Controls[1]).Text.ToString()),
@@ -465,13 +475,13 @@ namespace PL.AdminDashboard
                                         NOMBRE = ((Label)loItem.Controls[3]).Text.ToString(),
                                         TIPO_PRODUCTO = ((Label)loItem.Controls[5]).Text.ToString(),
                                         EDICION = ((Label)loItem.Controls[7]).Text.ToString(),
-                                        PRECIO_UNITARIO = Convert.ToDouble(((Label)loItem.Controls[11]).Text.ToString()),
+                                        PRECIO_UNITARIO = ((Label)loItem.Controls[11]).Text.ToString(),
                                         CANTIDAD = Convert.ToInt32(((TextBox)loItem.Controls[15]).Text.ToString()),
-                                        VALOR_TOTAL = Convert.ToDouble(((Label)loItem.Controls[11]).Text.ToString()) * Convert.ToInt32(((TextBox)loItem.Controls[15]).Text.ToString())
+                                        VALOR_TOTAL = "$ " + loValorTotal.ToString()
                                     };
 
                                     lstVentaProductos.Add(oVentaProductos);
-                                    loMontoTotal += oVentaProductos.VALOR_TOTAL;
+                                    loMontoTotal += loValorTotal;
                                     loResutado = true;
                                     // Eliminar borde rojo de las celda
                                     ((TextBox)loItem.Controls[15]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#e5e6e7");
@@ -501,6 +511,9 @@ namespace PL.AdminDashboard
                             {
                                 if (Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString()) > 0 && Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString()) <= Convert.ToInt32(((Label)loItem.Controls[15]).Text.ToString())) //CANTIDAD_DISPONIBLE debe ser mayor a 0 y menor o igual a al Sotck
                                 {
+                                    var loPrecioUnitario = ((Label)loItem.Controls[13]).Text.Split(' ').Last();
+                                    loValorTotal = Convert.ToDouble(loPrecioUnitario) * Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString());
+
                                     VentaProductos oVentaProductos = new VentaProductos
                                     {
                                         COD_PRODUCTO = Convert.ToInt32(((Label)loItem.Controls[1]).Text.ToString()),
@@ -508,13 +521,13 @@ namespace PL.AdminDashboard
                                         NOMBRE = ((Label)loItem.Controls[3]).Text.ToString(),
                                         TIPO_PRODUCTO = ((Label)loItem.Controls[5]).Text.ToString(),
                                         EDICION = ((Label)loItem.Controls[7]).Text.ToString(),
-                                        PRECIO_UNITARIO = Convert.ToDouble(((Label)loItem.Controls[13]).Text.ToString()),
+                                        PRECIO_UNITARIO = ((Label)loItem.Controls[13]).Text.ToString(),
                                         CANTIDAD = Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString()),
-                                        VALOR_TOTAL = Convert.ToDouble(((Label)loItem.Controls[13]).Text.ToString()) * Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString())
+                                        VALOR_TOTAL = "$ " + loValorTotal.ToString()
                                     };
 
                                     lstVentaProductos.Add(oVentaProductos);
-                                    loMontoTotal += oVentaProductos.VALOR_TOTAL;
+                                    loMontoTotal += loValorTotal;
                                     loResutado = true;
                                     // Eliminar borde rojo de las celda
                                     ((TextBox)loItem.Controls[17]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#e5e6e7");
@@ -544,6 +557,9 @@ namespace PL.AdminDashboard
                             {
                                 if (Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString()) > 0 && Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString()) <= Convert.ToInt32(((Label)loItem.Controls[15]).Text.ToString())) //CANTIDAD_DISPONIBLE debe ser mayor a 0 y menor o igual a al Sotck
                                 {
+                                    var loPrecioUnitario = ((Label)loItem.Controls[13]).Text.Split(' ').Last();
+                                    loValorTotal = Convert.ToDouble(loPrecioUnitario) * Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString());
+
                                     VentaProductos oVentaProductos = new VentaProductos
                                     {
                                         COD_PRODUCTO = Convert.ToInt32(((Label)loItem.Controls[1]).Text.ToString()),
@@ -551,13 +567,13 @@ namespace PL.AdminDashboard
                                         NOMBRE = ((Label)loItem.Controls[3]).Text.ToString(),
                                         TIPO_PRODUCTO = ((Label)loItem.Controls[5]).Text.ToString(),
                                         EDICION = ((Label)loItem.Controls[7]).Text.ToString(),
-                                        PRECIO_UNITARIO = Convert.ToDouble(((Label)loItem.Controls[13]).Text.ToString()),
+                                        PRECIO_UNITARIO = ((Label)loItem.Controls[13]).Text.ToString(),
                                         CANTIDAD = Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString()),
-                                        VALOR_TOTAL = Convert.ToDouble(((Label)loItem.Controls[13]).Text.ToString()) * Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString())
+                                        VALOR_TOTAL = "$ " + loValorTotal.ToString()
                                     };
 
                                     lstVentaProductos.Add(oVentaProductos);
-                                    loMontoTotal += oVentaProductos.VALOR_TOTAL;
+                                    loMontoTotal += loValorTotal;
                                     loResutado = true;
                                     // Eliminar borde rojo de las celda
                                     ((TextBox)loItem.Controls[17]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#e5e6e7");
@@ -587,6 +603,9 @@ namespace PL.AdminDashboard
                             {
                                 if (Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString()) > 0 && Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString()) <= Convert.ToInt32(((Label)loItem.Controls[15]).Text.ToString())) //CANTIDAD_DISPONIBLE debe ser mayor a 0 y menor o igual a al Sotck
                                 {
+                                    var loPrecioUnitario = ((Label)loItem.Controls[13]).Text.Split(' ').Last();
+                                    loValorTotal = Convert.ToDouble(loPrecioUnitario) * Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString());
+
                                     VentaProductos oVentaProductos = new VentaProductos
                                     {
                                         COD_PRODUCTO = Convert.ToInt32(((Label)loItem.Controls[1]).Text.ToString()),
@@ -594,13 +613,13 @@ namespace PL.AdminDashboard
                                         NOMBRE = ((Label)loItem.Controls[3]).Text.ToString(),
                                         TIPO_PRODUCTO = ((Label)loItem.Controls[5]).Text.ToString(),
                                         EDICION = ((Label)loItem.Controls[7]).Text.ToString(),
-                                        PRECIO_UNITARIO = Convert.ToDouble(((Label)loItem.Controls[13]).Text.ToString()),
+                                        PRECIO_UNITARIO = ((Label)loItem.Controls[13]).Text.ToString(),
                                         CANTIDAD = Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString()),
-                                        VALOR_TOTAL = Convert.ToDouble(((Label)loItem.Controls[13]).Text.ToString()) * Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString())
+                                        VALOR_TOTAL = "$ " + loValorTotal.ToString()
                                     };
 
                                     lstVentaProductos.Add(oVentaProductos);
-                                    loMontoTotal += oVentaProductos.VALOR_TOTAL;
+                                    loMontoTotal += loValorTotal;
                                     loResutado = true;
                                     // Eliminar borde rojo de las celda
                                     ((TextBox)loItem.Controls[17]).BorderColor = System.Drawing.ColorTranslator.FromHtml("#e5e6e7");
@@ -675,7 +694,8 @@ namespace PL.AdminDashboard
             && ((Label)x.Controls[7]).Text.ToString().Equals(loEdicion)).First();
             lsvVenta.Items.Remove(loItem);
 
-            loMontoTotal = loMontoTotal - Convert.ToDouble(((Label)loItem.Controls[13]).Text);
+            var loMonto = ((Label)loItem.Controls[13]).Text.Split(' ').Last();
+            loMontoTotal = loMontoTotal - Convert.ToDouble(loMonto);
             lblTotal.Text = loMontoTotal.ToString();
             lsvVenta.DataSource = MapListViewToListObject(lsvVenta);
             lsvVenta.DataBind();
@@ -985,9 +1005,9 @@ namespace PL.AdminDashboard
                     NOMBRE = ((Label)loItem.Controls[3]).Text,
                     TIPO_PRODUCTO = ((Label)loItem.Controls[5]).Text,
                     EDICION = ((Label)loItem.Controls[7]).Text,
-                    PRECIO_UNITARIO = Convert.ToDouble(((Label)loItem.Controls[9]).Text),
+                    PRECIO_UNITARIO = ((Label)loItem.Controls[9]).Text,
                     CANTIDAD = Convert.ToInt32(((Label)loItem.Controls[11]).Text),
-                    VALOR_TOTAL = Convert.ToDouble(((Label)loItem.Controls[13]).Text)
+                    VALOR_TOTAL = ((Label)loItem.Controls[13]).Text.ToString()
                 };
 
                 lstVentaProductos.Add(oVentaProductos);

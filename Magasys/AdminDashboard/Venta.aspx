@@ -710,10 +710,10 @@
                         </asp:ListView>
 
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-group">
-                                    <h2 class="col-sm-1 control-label font-bold">Total</h2>
-                                    <div class="col-sm-3 control-label font-bold">
+                                    <h2 class="col-sm-4 control-label font-bold">Total $</h2>
+                                    <div class="col-sm-1 control-label font-bold">
                                         <h2>
                                             <asp:Label ID="lblTotal" runat="server" MaxLength="5" autocomplete="off"></asp:Label></h2>
                                     </div>
