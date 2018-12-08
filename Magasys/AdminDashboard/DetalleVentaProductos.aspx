@@ -2,26 +2,72 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="contentMaster" runat="server">
-    <div class="row wrapper border-bottom white-bg page-heading">
-        <div class="col-lg-10">
-            <h2>Detalle Venta</h2>
-            <ol class="breadcrumb">
-                <li>
-                    <a href="Index.aspx">Principal</a>
-                </li>
-                <li>Venta
-                </li>
-                <li class="active">
-                    <strong>Detalle de Venta</strong>
-                </li>
-            </ol>
+    <form id="FormDetalleVentaProductos" runat="server" class="form-horizontal">
+        <div class="row wrapper border-bottom white-bg page-heading">
+           <div class="col-lg-10">
+               <h2>Detalle Venta</h2>
+               <ol class="breadcrumb">
+                   <li>
+                   <a href="Index.aspx">Principal</a>
+                   </li>
+                   <li>Venta
+                   </li>
+                   <li class="active">
+                       <strong>Detalle de Venta</strong>
+                   </li>
+                </ol>
+           </div>
         </div>
-    </div>
-    <div class="wrapper wrapper-content animated fadeInRight">
-        <form id="FormDetalleVentaProductos" runat="server">
+        <div class="wrapper wrapper-content animated fadeInRight">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h2>Informaci&oacute;n General</h2>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Código de Venta</label>
+                                <div class="col-sm-10">
+                                    <asp:TextBox ID="txtCodigoVenta" runat="server" CssClass="form-control" Enabled="false" autocomplete="off"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Fecha de Venta</label>
+                                <div class="col-sm-10">
+                                    <asp:TextBox ID="txtFechaVenta" runat="server" CssClass="form-control" Enabled="false" autocomplete="off"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Forma de Pago</label>
+                                <div class="col-sm-10">
+                                    <asp:TextBox ID="txtFormaPago" runat="server" CssClass="form-control" Enabled="false" autocomplete="off"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Pagado</label>
+                                <div class="col-sm-10">
+                                    <asp:TextBox ID="txtPagado" runat="server" CssClass="form-control" Enabled="false" autocomplete="off"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="ibox">
+                        <div class="ibox-title">
+                            <h2>Items de la Venta</h2>
+                        </div>
                         <div class="ibox-content">
                             <br />
 
@@ -78,6 +124,18 @@
                                 </ItemTemplate>
                             </asp:ListView>
 
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <h2 class="col-sm-4 control-label font-bold">Total $</h2>
+                                        <div class="col-sm-1 control-label font-bold">
+                                            <h2>
+                                                <asp:Label ID="lblTotal" runat="server" MaxLength="5" autocomplete="off"></asp:Label></h2>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
                             <div class="hr-line-dashed"></div>
                             <div class="form-group" style="margin-bottom: 50px">
                                 <div class="col-xs-12 col-sm-6 col-md-8"></div>
@@ -88,9 +146,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </form>
-    </div>
+            </div>        
+        </div>
+    </form>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="script" runat="server">
     <script type="text/javascript">

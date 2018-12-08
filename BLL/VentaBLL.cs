@@ -103,8 +103,8 @@ namespace BLL
                         {
                             ID_VENTA = loVenta.ID_VENTA,
                             FECHA = loVenta.FECHA,
-                            COD_FORMA_PAGO = loVenta.COD_FORMA_PAGO,
-                            TOTAL = loVenta.TOTAL
+                            FORMA_PAGO = loVenta.FormaPago.DESCRIPCION,
+                            TOTAL = "$ " + loVenta.TOTAL.ToString()
                         };
 
                         if (loVenta.COD_CLIENTE != null)
@@ -117,7 +117,6 @@ namespace BLL
 
             catch (Exception ex)
             {
-
                 throw;
             }
 
@@ -186,11 +185,11 @@ namespace BLL
         public string TIPO_PRODUCTO { get; set; }
         public DateTime FECHA { get; set; }
         public int? COD_CLIENTE { get; set; }
-        public int COD_FORMA_PAGO { get; set; }
+        public string FORMA_PAGO { get; set; }
         public double PRECIO_UNITARIO { get; set; }
         public double SUBTOTAL { get; set; }
         public int CANTIDAD { get; set; }
-        public double TOTAL { get; set; }
+        public string TOTAL { get; set; }
     }
 
     #endregion

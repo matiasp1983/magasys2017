@@ -173,7 +173,7 @@
                                             <asp:Label ID="lblCodigoCliente" runat="server" Text='<%#(Eval("COD_CLIENTE") != null) ? Eval("COD_CLIENTE").ToString():null%>'></asp:Label>
                                         </td>     
                                         <td class="text-left">
-                                            <asp:Label ID="lblFormaPago" runat="server" Text='<%#Eval("COD_FORMA_PAGO").ToString()%>'></asp:Label>
+                                            <asp:Label ID="lblFormaPago" runat="server" Text='<%#Eval("FORMA_PAGO").ToString()%>'></asp:Label>
                                         </td>     
                                         <td class="text-left">
                                             <asp:Label ID="lblTotal" runat="server" Text='<%#Eval("TOTAL").ToString()%>'></asp:Label>
