@@ -73,6 +73,8 @@ public partial class Cliente
 
     public virtual ICollection<Venta> Venta { get; set; }
 
+    public virtual TipoDocumento TipoDocumento { get; set; }
+
 }
 
 }

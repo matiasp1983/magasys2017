@@ -101,7 +101,8 @@ namespace PL.AdminDashboard
                     FECHA = DateTime.Now,
                     COD_ESTADO = 1,
                     TOTAL = Convert.ToDouble(lblTotal.Text),
-                    COD_FORMA_PAGO = Convert.ToInt32(ddlFormaPago.SelectedValue)
+                    COD_FORMA_PAGO = Convert.ToInt32(ddlFormaPago.SelectedValue),
+                    PAGADO = "SI"
                     //COD_CLIENTE    Próxima iteración                    
                 };
 

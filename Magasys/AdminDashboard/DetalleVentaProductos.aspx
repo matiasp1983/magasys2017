@@ -62,6 +62,49 @@
                     </div>
                 </div>
             </div>
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h2>Cliente</h2>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Tipo de Documento</label>
+                                <div class="col-sm-10">
+                                    <asp:TextBox ID="txtTipoDocumento" runat="server" CssClass="form-control" Enabled="false" autocomplete="off"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Número de Documento</label>
+                                <div class="col-sm-10">
+                                    <asp:TextBox ID="txtNumeroDocumento" runat="server" CssClass="form-control" Enabled="false" autocomplete="off"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Nombre</label>
+                                <div class="col-sm-10">
+                                    <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" Enabled="false" autocomplete="off"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Apellido</label>
+                                <div class="col-sm-10">
+                                    <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control" Enabled="false" autocomplete="off"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="ibox">

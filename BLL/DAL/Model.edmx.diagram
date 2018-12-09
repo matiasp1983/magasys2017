@@ -70,6 +70,7 @@
         <AssociationConnector Association="MAGASYSModel.FK_Suplemento_Producto" />
         <AssociationConnector Association="MAGASYSModel.FK_IngresoProducto_Proveedor" />
         <AssociationConnector Association="MAGASYSModel.FK_Proveedor_Provincia" />
+        <AssociationConnector Association="MAGASYSModel.FK_Cliente_TipoDocumento" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

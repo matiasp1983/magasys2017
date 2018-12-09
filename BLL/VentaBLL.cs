@@ -186,8 +186,8 @@ namespace BLL
         public DateTime FECHA { get; set; }
         public int? COD_CLIENTE { get; set; }
         public string FORMA_PAGO { get; set; }
-        public double PRECIO_UNITARIO { get; set; }
-        public double SUBTOTAL { get; set; }
+        public string PRECIO_UNITARIO { get; set; }
+        public string SUBTOTAL { get; set; }
         public int CANTIDAD { get; set; }
         public string TOTAL { get; set; }
     }

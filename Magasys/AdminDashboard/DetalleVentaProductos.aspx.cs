@@ -38,6 +38,18 @@ namespace PL.AdminDashboard
                     if (loVenta != null)
                     {
                         lstVentaListado = new List<BLL.VentaListado>();
+                        txtCodigoVenta.Text = loVenta.ID_VENTA.ToString();
+                        txtFechaVenta.Text = loVenta.FECHA.ToString("dd/MM/yyyy");
+                        txtFormaPago.Text = loVenta.FormaPago.DESCRIPCION;
+                        txtPagado.Text = loVenta.PAGADO;
+                        if (loVenta.Cliente != null)
+                        {
+                            txtTipoDocumento.Text = loVenta.Cliente.TipoDocumento.DESCRIPCION;
+                            txtNumeroDocumento.Text = loVenta.Cliente.NRO_DOCUMENTO.ToString();
+                            txtNombre.Text = loVenta.Cliente.NOMBRE.ToString();
+                            txtApellido.Text = loVenta.Cliente.APELLIDO.ToString();
+                        }
+                        lblTotal.Text = loVenta.TOTAL.ToString();
 
                         foreach (var loDetalleVenta in loVenta.DetalleVenta)
                         {
@@ -47,9 +59,9 @@ namespace PL.AdminDashboard
                                 COD_EDICION = loDetalleVenta.COD_PRODUCTO_EDICION,
                                 EDICION = loDetalleVenta.ProductoEdicion.EDICION,
                                 TIPO_PRODUCTO = loDetalleVenta.ProductoEdicion.Producto.TipoProducto.DESCRIPCION,
-                                PRECIO_UNITARIO = loDetalleVenta.PRECIO_UNIDAD,
+                                PRECIO_UNITARIO = "$ " + loDetalleVenta.PRECIO_UNIDAD.ToString(),
                                 CANTIDAD = loDetalleVenta.CANTIDAD,
-                                SUBTOTAL = loDetalleVenta.SUBTOTAL
+                                SUBTOTAL = "$ " + loDetalleVenta.SUBTOTAL.ToString()
                             };
 
                             lstVentaListado.Add(oVentaListado);
