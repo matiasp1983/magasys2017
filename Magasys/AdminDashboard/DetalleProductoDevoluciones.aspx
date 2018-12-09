@@ -19,7 +19,32 @@
         </div>
     </div>
     <div class="wrapper wrapper-content animated fadeInRight">
-        <form id="FormDetalleDevolucionProductos" runat="server">
+        <form id="FormDetalleDevolucionProductos" runat="server" class="form-horizontal">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h2>Informaci&oacute;n General</h2>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Código de Devolución</label>
+                                <div class="col-sm-10">
+                                    <asp:TextBox ID="txtCodigoDevolucion" runat="server" CssClass="form-control" Enabled="false" autocomplete="off"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Fecha de Devolución</label>
+                                <div class="col-sm-10">
+                                    <asp:TextBox ID="txtFechaDevoluion" runat="server" CssClass="form-control" Enabled="false" autocomplete="off"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="ibox">

@@ -39,6 +39,9 @@ namespace PL.AdminDashboard
                     {
                         lstDetalleProductoDevolucionListado = new List<BLL.DetalleProductoDevolucionListado>();
 
+                        txtCodigoDevolucion.Text = loProductoDevolucion.ID_PRODUCTO_DEVOLUCION.ToString();
+                        txtFechaDevoluion.Text = loProductoDevolucion.FECHA.ToString("dd/MM/yyyy");
+
                         foreach (var loDetalleProductoDevolucion in loProductoDevolucion.DetalleProductoDevolucion)
                         {
                             oDetalleProductoDevolucionListado = new BLL.DetalleProductoDevolucionListado
