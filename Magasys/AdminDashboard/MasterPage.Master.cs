@@ -73,12 +73,12 @@ namespace PL.AdminDashboard
             }
             if (loActivePage.Contains("ProductoDevolucion.aspx"))
             {
-                liDevolucionProductos.Attributes["class"] = "active";
+                liDeposito.Attributes["class"] = "active";
                 liProductoDevolucion.Attributes["class"] = "active";
             }
             if (loActivePage.Contains("ProductoDevolucionListado.aspx"))
             {
-                liDevolucionProductos.Attributes["class"] = "active";
+                liDeposito.Attributes["class"] = "active";
                 liProductoDevolucionListado.Attributes["class"] = "active";
             }
         }

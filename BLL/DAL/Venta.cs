@@ -39,8 +39,6 @@ public partial class Venta
 
     public int COD_FORMA_PAGO { get; set; }
 
-    public string PAGADO { get; set; }
-
 
 
     public virtual Cliente Cliente { get; set; }

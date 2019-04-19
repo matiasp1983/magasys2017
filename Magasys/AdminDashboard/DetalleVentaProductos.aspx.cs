@@ -33,7 +33,7 @@ namespace PL.AdminDashboard
                 {
                     var loIdVenta = Convert.ToInt32(Session[Enums.Session.IdVenta.ToString()]);
 
-                    var loVenta = loRepVenta.Find(p => p.COD_ESTADO == 1 && p.ID_VENTA == loIdVenta);
+                    var loVenta = loRepVenta.Find(p => p.ID_VENTA == loIdVenta);
 
                     if (loVenta != null)
                     {
@@ -41,7 +41,7 @@ namespace PL.AdminDashboard
                         txtCodigoVenta.Text = loVenta.ID_VENTA.ToString();
                         txtFechaVenta.Text = loVenta.FECHA.ToString("dd/MM/yyyy");
                         txtFormaPago.Text = loVenta.FormaPago.DESCRIPCION;
-                        txtPagado.Text = loVenta.PAGADO;
+                        txtEstado.Text = loVenta.Estado.NOMBRE;
                         if (loVenta.Cliente != null)
                         {
                             txtTipoDocumento.Text = loVenta.Cliente.TipoDocumento.DESCRIPCION;

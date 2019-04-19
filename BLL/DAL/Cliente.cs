@@ -67,13 +67,15 @@ public partial class Cliente
 
     public Nullable<System.DateTime> FECHA_BAJA { get; set; }
 
+    public string DIRECCION_MAPS { get; set; }
 
+
+
+    public virtual TipoDocumento TipoDocumento { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Venta> Venta { get; set; }
-
-    public virtual TipoDocumento TipoDocumento { get; set; }
 
 }
 

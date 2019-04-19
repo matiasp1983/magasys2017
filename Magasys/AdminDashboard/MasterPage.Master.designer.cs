@@ -85,31 +85,22 @@ namespace PL.AdminDashboard {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liProductoListado;
         
         /// <summary>
-        /// Control liDeposito.
+        /// Control liClientes.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liDeposito;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liClientes;
         
         /// <summary>
-        /// Control liProductoIngreso.
+        /// Control li2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liProductoIngreso;
-        
-        /// <summary>
-        /// Control liProductoIngresoListado.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liProductoIngresoListado;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl li2;
         
         /// <summary>
         /// Control liVenta.
@@ -139,13 +130,31 @@ namespace PL.AdminDashboard {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liVentaListado;
         
         /// <summary>
-        /// Control liDevolucionProductos.
+        /// Control liDeposito.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liDevolucionProductos;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liDeposito;
+        
+        /// <summary>
+        /// Control liProductoIngreso.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liProductoIngreso;
+        
+        /// <summary>
+        /// Control liProductoIngresoListado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liProductoIngresoListado;
         
         /// <summary>
         /// Control liProductoDevolucion.

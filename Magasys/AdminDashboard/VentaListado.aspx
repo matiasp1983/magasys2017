@@ -67,6 +67,18 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-10 control-label">Estado</label>   
+                                            <div id="divEstado">
+                                                <asp:DropDownList ID="ddlEstado" runat="server" CssClass="form-control"></asp:DropDownList>                                            
+                                            </div>   
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <br />
                             <div class="row">      
                                 <div class="ibox-title">

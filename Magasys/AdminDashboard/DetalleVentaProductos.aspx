@@ -53,9 +53,9 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Pagado</label>
+                                <label class="col-sm-2 control-label">Estado</label>
                                 <div class="col-sm-10">
-                                    <asp:TextBox ID="txtPagado" runat="server" CssClass="form-control" Enabled="false" autocomplete="off"></asp:TextBox>
+                                    <asp:TextBox ID="txtEstado" runat="server" CssClass="form-control" Enabled="false" autocomplete="off"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
@@ -119,7 +119,7 @@
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                         <thead>
                                             <tr>
-                                                <th class="text-left">C&oacute;digo</th>
+                                                <%--<th class="text-left">C&oacute;digo</th>--%>
                                                 <th>C&oacute;digo Edici&oacute;n</th>
                                                 <th>Edici&oacute;n</th>
                                                 <th>Tipo de Producto</th>
@@ -142,9 +142,9 @@
                                 </LayoutTemplate>
                                 <ItemTemplate>
                                     <tr>
-                                        <td class="text-left">
+<%--                                        <td class="text-left">
                                             <asp:Label ID="lblCodigoProducto" runat="server" Text='<%#Eval("ID_VENTA").ToString()%>'></asp:Label>
-                                        </td>
+                                        </td>--%>
                                         <td class="text-left">
                                             <asp:Label ID="lblCodigoEdicion" runat="server" Text='<%#Eval("COD_EDICION").ToString()%>'></asp:Label>
                                         </td>

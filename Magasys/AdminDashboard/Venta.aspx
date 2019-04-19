@@ -97,7 +97,7 @@
                         <div class="col-md-4">
                             <div class="form-group">
                                 <div class="col-sm-3">
-                                    <asp:Button ID="btnBuscarCliente" runat="server" Text="Buscar" CssClass="btn btn-success" OnClick="BtnBuscarCliente_Click" />
+                                    <asp:Button ID="btnBuscarCliente" runat="server" Text="Buscar" CssClass="btn btn-success" OnClick="BtnBuscarCliente_Click" formnovalidate="formnovalidate"/>
                                 </div>
                                 <div class="col-sm-5">
                                     <button type="button" id="btnNuevoCliente" runat="server" class="ladda-button btn btn-info" onserverclick="BtnNuevoCliente_Click">

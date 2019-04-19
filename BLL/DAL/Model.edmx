@@ -35,6 +35,7 @@
           <Property Name="ID_PROVINCIA" Type="int" />
           <Property Name="ID_LOCALIDAD" Type="int" />
           <Property Name="FECHA_BAJA" Type="datetime" />
+          <Property Name="DIRECCION_MAPS" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="Coleccion">
           <Key>
@@ -290,7 +291,6 @@
           <Property Name="TOTAL" Type="float" Nullable="false" />
           <Property Name="COD_CLIENTE" Type="int" />
           <Property Name="COD_FORMA_PAGO" Type="int" Nullable="false" />
-          <Property Name="PAGADO" Type="nchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <Association Name="FK_Cliente_TipoDocumento">
           <End Role="TipoDocumento" Type="Self.TipoDocumento" Multiplicity="1" />
@@ -963,6 +963,10 @@
           <EntitySet Name="TipoDocumento" EntityType="MAGASYSModel.TipoDocumento" />
           <EntitySet Name="TipoProducto" EntityType="MAGASYSModel.TipoProducto" />
           <EntitySet Name="Venta" EntityType="MAGASYSModel.Venta" />
+          <AssociationSet Name="FK_Cliente_TipoDocumento" Association="MAGASYSModel.FK_Cliente_TipoDocumento">
+            <End Role="TipoDocumento" EntitySet="TipoDocumento" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
           <AssociationSet Name="FK_Venta_Cliente" Association="MAGASYSModel.FK_Venta_Cliente">
             <End Role="Cliente" EntitySet="Cliente" />
             <End Role="Venta" EntitySet="Venta" />
@@ -1111,10 +1115,6 @@
             <End Role="Provincia" EntitySet="Provincia" />
             <End Role="Proveedor" EntitySet="Proveedor" />
           </AssociationSet>
-          <AssociationSet Name="FK_Cliente_TipoDocumento" Association="MAGASYSModel.FK_Cliente_TipoDocumento">
-            <End Role="TipoDocumento" EntitySet="TipoDocumento" />
-            <End Role="Cliente" EntitySet="Cliente" />
-          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Anio">
           <Key>
@@ -1146,8 +1146,9 @@
           <Property Name="ID_PROVINCIA" Type="Int32" />
           <Property Name="ID_LOCALIDAD" Type="Int32" />
           <Property Name="FECHA_BAJA" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Venta" Relationship="MAGASYSModel.FK_Venta_Cliente" FromRole="Cliente" ToRole="Venta" />
+          <Property Name="DIRECCION_MAPS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="TipoDocumento" Relationship="MAGASYSModel.FK_Cliente_TipoDocumento" FromRole="Cliente" ToRole="TipoDocumento" />
+          <NavigationProperty Name="Venta" Relationship="MAGASYSModel.FK_Venta_Cliente" FromRole="Cliente" ToRole="Venta" />
         </EntityType>
         <EntityType Name="Coleccion">
           <Key>
@@ -1477,8 +1478,19 @@
           <NavigationProperty Name="DetalleVenta" Relationship="MAGASYSModel.FK_DetalleVenta_Venta" FromRole="Venta" ToRole="DetalleVenta" />
           <NavigationProperty Name="Estado" Relationship="MAGASYSModel.FK_Venta_Estado" FromRole="Venta" ToRole="Estado" />
           <NavigationProperty Name="FormaPago" Relationship="MAGASYSModel.FK_Venta_FormaPago" FromRole="Venta" ToRole="FormaPago" />
-          <Property Name="PAGADO" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
         </EntityType>
+        <Association Name="FK_Cliente_TipoDocumento">
+          <End Type="MAGASYSModel.TipoDocumento" Role="TipoDocumento" Multiplicity="1" />
+          <End Type="MAGASYSModel.Cliente" Role="Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDocumento">
+              <PropertyRef Name="ID_TIPO_DOCUMENTO" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="TIPO_DOCUMENTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Venta_Cliente">
           <End Type="MAGASYSModel.Cliente" Role="Cliente" Multiplicity="0..1" />
           <End Type="MAGASYSModel.Venta" Role="Venta" Multiplicity="*" />
@@ -1923,18 +1935,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Cliente_TipoDocumento">
-          <End Type="MAGASYSModel.TipoDocumento" Role="TipoDocumento" Multiplicity="1" />
-          <End Type="MAGASYSModel.Cliente" Role="Cliente" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoDocumento">
-              <PropertyRef Name="ID_TIPO_DOCUMENTO" />
-            </Principal>
-            <Dependent Role="Cliente">
-              <PropertyRef Name="TIPO_DOCUMENTO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1951,6 +1951,7 @@
           <EntitySetMapping Name="Cliente">
             <EntityTypeMapping TypeName="MAGASYSModel.Cliente">
               <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="DIRECCION_MAPS" ColumnName="DIRECCION_MAPS" />
                 <ScalarProperty Name="FECHA_BAJA" ColumnName="FECHA_BAJA" />
                 <ScalarProperty Name="ID_LOCALIDAD" ColumnName="ID_LOCALIDAD" />
                 <ScalarProperty Name="ID_PROVINCIA" ColumnName="ID_PROVINCIA" />
@@ -2246,7 +2247,6 @@
           <EntitySetMapping Name="Venta">
             <EntityTypeMapping TypeName="MAGASYSModel.Venta">
               <MappingFragment StoreEntitySet="Venta">
-                <ScalarProperty Name="PAGADO" ColumnName="PAGADO" />
                 <ScalarProperty Name="COD_FORMA_PAGO" ColumnName="COD_FORMA_PAGO" />
                 <ScalarProperty Name="COD_CLIENTE" ColumnName="COD_CLIENTE" />
                 <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />

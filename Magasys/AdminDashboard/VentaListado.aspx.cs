@@ -26,6 +26,7 @@ namespace PL.AdminDashboard
                 txtFechaVentaHasta.Text = DateTime.Now.ToString("dd/MM/yyyy");
                 CargarFormaDePago();
                 CargarTiposDocumento();
+                CargarEstados();
                 CargarGrilla();
             }
         }
@@ -152,6 +153,24 @@ namespace PL.AdminDashboard
             }
         }
 
+        private void CargarEstados()
+        {
+            try
+            {
+                ddlEstado.DataTextField = "NOMBRE";
+                ddlEstado.DataValueField = "ID_ESTADO";
+                ddlEstado.DataBind();
+                ddlEstado.Items.Insert(0, new ListItem("Pagada", "5"));
+                ddlEstado.Items.Insert(1, new ListItem("A Cuenta", "4"));
+                ddlEstado.Items.Insert(2, new ListItem("Anulado", "3"));
+            }
+            catch (Exception ex)
+            {
+                Logger loLogger = LogManager.GetCurrentClassLogger();
+                loLogger.Error(ex);
+            }
+        }
+
         private VentaFiltro CargarVentaFiltro()
         {
             VentaFiltro oVentaFiltro = null;
@@ -171,6 +190,8 @@ namespace PL.AdminDashboard
 
                 if (!String.IsNullOrEmpty(ddlFormaPago.SelectedValue))
                     oVentaFiltro.COD_FORMA_PAGO = Convert.ToInt32(ddlFormaPago.SelectedValue);
+
+                oVentaFiltro.COD_ESTADO = Convert.ToInt32(ddlEstado.SelectedValue);
 
                 if (!String.IsNullOrEmpty(ddlTipoDocumento.SelectedValue) && !String.IsNullOrEmpty(txtNroDocumento.Text))
                 {

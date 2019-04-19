@@ -30,10 +30,14 @@ namespace PL.AdminDashboard
                 if (Session[Enums.Session.Cliente.ToString()] != null)
                 {
                     var oCliente = (BLL.DAL.Cliente)Session[Enums.Session.Cliente.ToString()];
+                    ddlTipoDocumento.SelectedValue = oCliente.TIPO_DOCUMENTO.ToString();
+                    txtNroDocumento.Text = oCliente.NRO_DOCUMENTO.ToString();
                     txtApellido.Text = oCliente.APELLIDO;
                     txtNombre.Text = oCliente.NOMBRE;
-                    Session.Remove(Enums.Session.Cliente.ToString());
                 }
+
+                Session.Remove(Enums.Session.Cliente.ToString());
+                Session.Remove(Enums.Session.AltaVentaAltaCliente.ToString());
 
                 CargarTiposProducto();
                 CargarProveedores();
@@ -48,7 +52,7 @@ namespace PL.AdminDashboard
                 Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeClienteBuscarClienteSinNroDocumento));
                 return;
             }
-            var loCliente = new BLL.ClienteBLL().ObtenerCliente(Convert.ToInt32(ddlTipoDocumento.SelectedValue), Convert.ToInt32(txtNroDocumento.Text));
+            var loCliente = new ClienteBLL().ObtenerCliente(Convert.ToInt32(ddlTipoDocumento.SelectedValue), Convert.ToInt32(txtNroDocumento.Text));
 
             if (loCliente == null)
                 Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeClienteBuscarClienteSinResultados));
@@ -56,6 +60,7 @@ namespace PL.AdminDashboard
             {
                 txtApellido.Text = loCliente.APELLIDO;
                 txtNombre.Text = loCliente.NOMBRE;
+                Session["Cliente"] = loCliente;
             }
         }
 
@@ -86,6 +91,7 @@ namespace PL.AdminDashboard
 
         protected void BtnNuevoCliente_Click(object sender, EventArgs e)
         {
+            Session[Enums.Session.AltaVentaAltaCliente.ToString()] = "AltaVentaAltaCliente";
             Response.Redirect("Cliente.aspx", false);
         }
 
@@ -94,47 +100,83 @@ namespace PL.AdminDashboard
             bool loResutado = false;
             List<DetalleVenta> lstDetalleVenta = new List<DetalleVenta>();
 
-            if (rdbPagadoSi.Checked && ddlFormaPago.SelectedValue == "1") //"Contado"
+            if (ddlFormaPago.SelectedValue == "1" && rdbPagadoNo.Checked) // Para una venta de Contado debe indicar Pagado Sí.
             {
-                BLL.DAL.Venta oVenta = new BLL.DAL.Venta()
+                Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeVentaAviso));
+                return;
+            }
+
+            if (ddlFormaPago.SelectedValue == "2" && String.IsNullOrEmpty(txtApellido.Text))
+            {
+                Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeVentaValidaCtaCorriente));
+                return;
+            }
+
+            if (ddlFormaPago.SelectedValue == "2")
+            {
+                int lnumeroDocumento = 0;
+                if (!String.IsNullOrEmpty(txtNroDocumento.Text))
+                    lnumeroDocumento = Convert.ToInt32(txtNroDocumento.Text);
+                var loCliente = new ClienteBLL().ObtenerCliente(Convert.ToInt32(ddlTipoDocumento.SelectedValue), lnumeroDocumento);
+                if (loCliente == null)
                 {
-                    FECHA = DateTime.Now,
-                    COD_ESTADO = 1,
-                    TOTAL = Convert.ToDouble(lblTotal.Text),
-                    COD_FORMA_PAGO = Convert.ToInt32(ddlFormaPago.SelectedValue),
-                    PAGADO = "SI"
-                    //COD_CLIENTE    Próxima iteración                    
-                };
-
-                foreach (var loItem in lsvVenta.Items)
-                {
-                    DetalleVenta oDetalleVenta = new DetalleVenta
-                    {
-                        COD_PRODUCTO_EDICION = Convert.ToInt32(((Label)loItem.Controls[17]).Text.ToString()),
-                        PRECIO_UNIDAD = Convert.ToInt32(((Label)loItem.Controls[9]).Text.ToString()),
-                        CANTIDAD = Convert.ToInt32(((Label)loItem.Controls[11]).Text.ToString()),
-                        SUBTOTAL = Convert.ToInt32(((Label)loItem.Controls[13]).Text.ToString())
-                    };
-
-                    lstDetalleVenta.Add(oDetalleVenta);
-
-                    // Actualizar Stock
-                    loResutado = new ProductoEdicionBLL().ActualizarCantidadDisponible(oDetalleVenta.COD_PRODUCTO_EDICION, oDetalleVenta.CANTIDAD);
-                }
-
-                if (loResutado)
-                    loResutado = new VentaBLL().AltaVenta(oVenta, lstDetalleVenta);
-
-                if (loResutado)
-                {
-                    LimpiarPantalla();
-                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeVentaSuccessAlta));
+                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeVentaValidaClienteCtaCorriente));
+                    return;
                 }
                 else
-                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeVentaFailure));
+                {
+                    if (!loCliente.NOMBRE.ToUpper().Equals(txtNombre.Text.ToUpper()) || !loCliente.APELLIDO.ToUpper().Equals(txtApellido.Text.ToUpper()))
+                    {
+                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeVentaValidaClienteCtaCorriente));
+                        return;
+                    }
+                }
+            }
+
+            BLL.DAL.Venta oVenta = new BLL.DAL.Venta()
+            {
+                FECHA = DateTime.Now,
+                TOTAL = Convert.ToDouble(lblTotal.Text),
+                COD_FORMA_PAGO = Convert.ToInt32(ddlFormaPago.SelectedValue)
+            };
+
+            if (rdbPagadoSi.Checked)
+                oVenta.COD_ESTADO = 5;
+            else
+                oVenta.COD_ESTADO = 4;
+
+            if (ddlFormaPago.SelectedValue == "2") // Forma de Pago: Cuenta corriente
+            {
+                oVenta.COD_CLIENTE = ((BLL.DAL.Cliente)Session["Cliente"]).ID_CLIENTE;
+                Session.Remove("Cliente");
+            }
+
+            foreach (var loItem in lsvVenta.Items)
+            {
+                DetalleVenta oDetalleVenta = new DetalleVenta
+                {
+                    COD_PRODUCTO_EDICION = Convert.ToInt32(((Label)loItem.Controls[17]).Text.ToString()),
+                    PRECIO_UNIDAD = Convert.ToInt32(((Label)loItem.Controls[9]).Text.Split('$').Last().ToString()),
+                    CANTIDAD = Convert.ToInt32(((Label)loItem.Controls[11]).Text.ToString()),
+                    SUBTOTAL = Convert.ToInt32(((Label)loItem.Controls[13]).Text.Split('$').Last().ToString())
+                };
+
+                lstDetalleVenta.Add(oDetalleVenta);
+
+                // Actualizar Stock
+                loResutado = new ProductoEdicionBLL().ActualizarCantidadDisponible(oDetalleVenta.COD_PRODUCTO_EDICION, oDetalleVenta.CANTIDAD);
+            }
+
+            if (loResutado)
+                loResutado = new VentaBLL().AltaVenta(oVenta, lstDetalleVenta);
+
+            if (loResutado)
+            {
+                LimpiarPantalla();
+                Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeVentaSuccessAlta));
             }
             else
-                Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeVentaAviso));
+                Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeVentaFailure));
         }
 
         protected void BtnCancelarVenta_Click(object sender, EventArgs e)
@@ -1022,5 +1064,4 @@ namespace PL.AdminDashboard
 
         #endregion
     }
-
 }

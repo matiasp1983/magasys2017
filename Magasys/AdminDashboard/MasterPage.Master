@@ -54,11 +54,11 @@
                             <li id="liProductoListado" runat="server"><a href="ProductoListado.aspx">Listado de Productos</a></li>                            
                         </ul>
                     </li>
-                    <li id="liDeposito" runat="server">
-                        <a href="#"><i class="fa fa-archive"></i><span class="nav-label">Depósito</span><span class="fa arrow"></span></a>
+                    <li id="liClientes" runat="server">
+                        <a href="#"><i class="fa fa-newspaper-o"></i><span class="nav-label">Clientes</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
-                            <li id="liProductoIngreso" runat="server"><a href="ProductoIngreso.aspx">Ingreso de Producto</a></li>    
-                            <li id="liProductoIngresoListado" runat="server"><a href="ProductoIngresoListado.aspx">Listado Ingreso de Producto</a></li>
+                            <li id="li2" runat="server"><a href="Cliente.aspx">Nuevo Cliente</a></li>
+                 <%--           <li id="li3" runat="server"><a href="ProductoListado.aspx">Listado de Productos</a></li>  --%>                          
                         </ul>
                     </li>
                     <li id="liVenta" runat="server">
@@ -68,13 +68,21 @@
                             <li id="liVentaListado" runat="server"><a href="VentaListado.aspx">Listado de Ventas</a></li>
                         </ul>
                     </li>
-                    <li id="liDevolucionProductos" runat="server">
-                        <a href="#"><i class="fa fa-stack-overflow"></i><span class="nav-label">Devoluciones</span><span class="fa arrow"></span></a>
+                    <li id="liDeposito" runat="server">
+                        <a href="#"><i class="fa fa-archive"></i><span class="nav-label">Depósito</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
+                            <li id="liProductoIngreso" runat="server"><a href="ProductoIngreso.aspx">Ingreso de Producto</a></li>    
+                            <li id="liProductoIngresoListado" runat="server"><a href="ProductoIngresoListado.aspx">Listado Ingreso de Producto</a></li>
                             <li id="liProductoDevolucion" runat="server"><a href="ProductoDevolucion.aspx">Registrar Devoluciones</a></li>    
                             <li id="liProductoDevolucionListado" runat="server"><a href="ProductoDevolucionListado.aspx">Listado de Devoluciones</a></li>
                         </ul>
                     </li>
+<%--                    <li id="liDevolucionProductos" runat="server">
+                        <a href="#"><i class="fa fa-stack-overflow"></i><span class="nav-label">Devoluciones</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+
+                        </ul>
+                    </li>--%>
                 </ul>
             </div>
         </nav>

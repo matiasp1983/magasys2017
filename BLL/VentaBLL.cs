@@ -20,7 +20,7 @@ namespace BLL
                 using (var rep = new Repository<Venta>())
                 {
                     // Ordenar la lista descendentemente
-                    lstVenta = rep.Search(p => p.COD_ESTADO == 1).OrderByDescending(p => p.ID_VENTA).ToList();
+                    lstVenta = rep.FindAll().OrderByDescending(p => p.ID_VENTA).ToList();
 
                     if (lstVenta.Count > 0)
                         loIdVenta = lstVenta[0].ID_VENTA + 1;
@@ -64,7 +64,7 @@ namespace BLL
             {
                 using (var loRepVenta = new Repository<Venta>())
                 {
-                    lstVenta = loRepVenta.Search(p => p.COD_ESTADO == 1);
+                    lstVenta = loRepVenta.Search(p => p.COD_ESTADO == oVentaFiltro.COD_ESTADO);
 
                     if (lstVenta.Count > 0)
                     {
