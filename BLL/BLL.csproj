@@ -167,11 +167,6 @@
     <Compile Include="Filters\ProveedorFiltro.cs" />
     <Compile Include="Filters\VentaFiltro.cs" />
     <Compile Include="FormaPagoBLL.cs" />
-    <Compile Include="FuerzaBruta\EstrategiaFuerzaBruta.cs" />
-    <Compile Include="FuerzaBruta\FilaMatrizFB.cs" />
-    <Compile Include="FuerzaBruta\MatrizFB.cs" />
-    <Compile Include="FuerzaBruta\NodoDistanciaFB.cs" />
-    <Compile Include="FuerzaBruta\NodoFB.cs" />
     <Compile Include="GeneroBLL.cs" />
     <Compile Include="ProductoDevolucionBLL.cs" />
     <Compile Include="ProductoIngresoBLL.cs" />
