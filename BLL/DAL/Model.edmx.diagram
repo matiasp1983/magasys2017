@@ -6,33 +6,33 @@
     <edmx:Diagrams>
       <Diagram DiagramId="2e403494ac264524930a527d850139d0" Name="Diagram1" ZoomLevel="81" ShowGrid="true">
         <EntityTypeShape EntityType="MAGASYSModel.Anio" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="MAGASYSModel.Cliente" Width="1.5" PointX="0.75" PointY="30.375" />
-        <EntityTypeShape EntityType="MAGASYSModel.Coleccion" Width="1.5" PointX="5.25" PointY="15.625" />
-        <EntityTypeShape EntityType="MAGASYSModel.DetalleProductoDevolucion" Width="1.5" PointX="8.25" PointY="34.625" />
-        <EntityTypeShape EntityType="MAGASYSModel.DetalleProductoIngreso" Width="1.5" PointX="3" PointY="23.5" />
-        <EntityTypeShape EntityType="MAGASYSModel.DetalleVenta" Width="1.5" PointX="11.25" PointY="20.375" />
-        <EntityTypeShape EntityType="MAGASYSModel.Diario" Width="1.5" PointX="5.25" PointY="31.5" />
-        <EntityTypeShape EntityType="MAGASYSModel.DiarioDiaSemana" Width="1.5" PointX="7.5" PointY="31.375" />
-        <EntityTypeShape EntityType="MAGASYSModel.DiaSemana" Width="1.5" PointX="3" PointY="8.5" />
+        <EntityTypeShape EntityType="MAGASYSModel.Cliente" Width="1.5" PointX="0.75" PointY="17" />
+        <EntityTypeShape EntityType="MAGASYSModel.Coleccion" Width="1.5" PointX="13.25" PointY="26.625" />
+        <EntityTypeShape EntityType="MAGASYSModel.DetalleProductoDevolucion" Width="1.5" PointX="10.5" PointY="38.375" />
+        <EntityTypeShape EntityType="MAGASYSModel.DetalleProductoIngreso" Width="1.5" PointX="10.5" PointY="22" />
+        <EntityTypeShape EntityType="MAGASYSModel.DetalleVenta" Width="1.5" PointX="10.5" PointY="25.625" />
+        <EntityTypeShape EntityType="MAGASYSModel.Diario" Width="1.5" PointX="8.25" PointY="20" />
+        <EntityTypeShape EntityType="MAGASYSModel.DiarioDiaSemana" Width="1.5" PointX="10.5" PointY="18.875" />
+        <EntityTypeShape EntityType="MAGASYSModel.DiaSemana" Width="1.5" PointX="11" PointY="15.5" />
         <EntityTypeShape EntityType="MAGASYSModel.Estado" Width="1.5" PointX="0.75" PointY="23.5" />
-        <EntityTypeShape EntityType="MAGASYSModel.FormaPago" Width="1.5" PointX="0.75" PointY="28" />
-        <EntityTypeShape EntityType="MAGASYSModel.Genero" Width="1.5" PointX="0.75" PointY="18.875" />
-        <EntityTypeShape EntityType="MAGASYSModel.Libro" Width="1.5" PointX="5.25" PointY="28.375" />
-        <EntityTypeShape EntityType="MAGASYSModel.Localidad" Width="1.5" PointX="6.75" PointY="11.875" />
-        <EntityTypeShape EntityType="MAGASYSModel.Pelicula" Width="1.5" PointX="5.25" PointY="19.625" />
-        <EntityTypeShape EntityType="MAGASYSModel.Periodicidad" Width="1.5" PointX="3" PointY="5.375" />
-        <EntityTypeShape EntityType="MAGASYSModel.Producto" Width="1.5" PointX="3" PointY="17.5" />
-        <EntityTypeShape EntityType="MAGASYSModel.ProductoDevolucion" Width="1.5" PointX="3" PointY="44.5" />
-        <EntityTypeShape EntityType="MAGASYSModel.ProductoEdicion" Width="1.5" PointX="6" PointY="22.875" />
-        <EntityTypeShape EntityType="MAGASYSModel.ProductoIngreso" Width="1.5" PointX="11.25" PointY="23.75" />
-        <EntityTypeShape EntityType="MAGASYSModel.Proveedor" Width="1.5" PointX="9" PointY="22.125" />
-        <EntityTypeShape EntityType="MAGASYSModel.Provincia" Width="1.5" PointX="4.5" PointY="12" />
-        <EntityTypeShape EntityType="MAGASYSModel.Revista" Width="1.5" PointX="8.25" PointY="18.625" />
-        <EntityTypeShape EntityType="MAGASYSModel.Suplemento" Width="1.5" PointX="11.5" PointY="27.125" />
+        <EntityTypeShape EntityType="MAGASYSModel.FormaPago" Width="1.5" PointX="0.75" PointY="27.25" />
+        <EntityTypeShape EntityType="MAGASYSModel.Genero" Width="1.5" PointX="3.75" PointY="16.875" />
+        <EntityTypeShape EntityType="MAGASYSModel.Libro" Width="1.5" PointX="8.25" PointY="33.125" />
+        <EntityTypeShape EntityType="MAGASYSModel.Localidad" Width="1.5" PointX="0.75" PointY="29.875" />
+        <EntityTypeShape EntityType="MAGASYSModel.Pelicula" Width="1.5" PointX="8.25" PointY="30.375" />
+        <EntityTypeShape EntityType="MAGASYSModel.Periodicidad" Width="1.5" PointX="11" PointY="12.375" />
+        <EntityTypeShape EntityType="MAGASYSModel.Producto" Width="1.5" PointX="6" PointY="22.5" />
+        <EntityTypeShape EntityType="MAGASYSModel.ProductoDevolucion" Width="1.5" PointX="3" PointY="54" />
+        <EntityTypeShape EntityType="MAGASYSModel.ProductoEdicion" Width="1.5" PointX="8.25" PointY="22.875" />
+        <EntityTypeShape EntityType="MAGASYSModel.ProductoIngreso" Width="1.5" PointX="3" PointY="19.75" />
+        <EntityTypeShape EntityType="MAGASYSModel.Proveedor" Width="1.5" PointX="3" PointY="28.125" />
+        <EntityTypeShape EntityType="MAGASYSModel.Provincia" Width="1.5" PointX="1.5" PointY="35" />
+        <EntityTypeShape EntityType="MAGASYSModel.Revista" Width="1.5" PointX="13.25" PointY="18.625" />
+        <EntityTypeShape EntityType="MAGASYSModel.Suplemento" Width="1.5" PointX="13.5" PointY="22.25" />
         <EntityTypeShape EntityType="MAGASYSModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="MAGASYSModel.TipoDocumento" Width="1.5" PointX="1.5" PointY="37.25" />
-        <EntityTypeShape EntityType="MAGASYSModel.TipoProducto" Width="1.5" PointX="0.75" PointY="16.625" />
-        <EntityTypeShape EntityType="MAGASYSModel.Venta" Width="1.5" PointX="3" PointY="27.375" />
+        <EntityTypeShape EntityType="MAGASYSModel.TipoDocumento" Width="1.5" PointX="1.5" PointY="13.875" />
+        <EntityTypeShape EntityType="MAGASYSModel.TipoProducto" Width="1.5" PointX="3.75" PointY="35.25" />
+        <EntityTypeShape EntityType="MAGASYSModel.Venta" Width="1.5" PointX="3" PointY="23.375" />
         <AssociationConnector Association="MAGASYSModel.FK_Cliente_TipoDocumento" />
         <AssociationConnector Association="MAGASYSModel.FK_Venta_Cliente" />
         <AssociationConnector Association="MAGASYSModel.FK_Coleccion_DiaSemana" />

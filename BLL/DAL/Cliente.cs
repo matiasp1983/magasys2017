@@ -61,9 +61,9 @@ public partial class Cliente
 
     public string CODIGO_POSTAL { get; set; }
 
-    public Nullable<int> ID_PROVINCIA { get; set; }
+    public string PROVINCIA { get; set; }
 
-    public Nullable<int> ID_LOCALIDAD { get; set; }
+    public string LOCALIDAD { get; set; }
 
     public Nullable<System.DateTime> FECHA_BAJA { get; set; }
 

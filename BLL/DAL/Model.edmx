@@ -32,10 +32,10 @@
           <Property Name="DEPARTAMENTO" Type="varchar" MaxLength="2" />
           <Property Name="BARRIO" Type="varchar" MaxLength="50" />
           <Property Name="CODIGO_POSTAL" Type="varchar" MaxLength="10" />
-          <Property Name="ID_PROVINCIA" Type="int" />
-          <Property Name="ID_LOCALIDAD" Type="int" />
-          <Property Name="FECHA_BAJA" Type="datetime" />
+          <Property Name="PROVINCIA" Type="varchar" MaxLength="50" />
+          <Property Name="LOCALIDAD" Type="varchar" MaxLength="50" />
           <Property Name="DIRECCION_MAPS" Type="varchar(max)" />
+          <Property Name="FECHA_BAJA" Type="datetime" />
         </EntityType>
         <EntityType Name="Coleccion">
           <Key>
@@ -1143,8 +1143,8 @@
           <Property Name="DEPARTAMENTO" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="BARRIO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CODIGO_POSTAL" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="ID_PROVINCIA" Type="Int32" />
-          <Property Name="ID_LOCALIDAD" Type="Int32" />
+          <Property Name="PROVINCIA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LOCALIDAD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="FECHA_BAJA" Type="DateTime" Precision="3" />
           <Property Name="DIRECCION_MAPS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="TipoDocumento" Relationship="MAGASYSModel.FK_Cliente_TipoDocumento" FromRole="Cliente" ToRole="TipoDocumento" />
@@ -1953,8 +1953,8 @@
               <MappingFragment StoreEntitySet="Cliente">
                 <ScalarProperty Name="DIRECCION_MAPS" ColumnName="DIRECCION_MAPS" />
                 <ScalarProperty Name="FECHA_BAJA" ColumnName="FECHA_BAJA" />
-                <ScalarProperty Name="ID_LOCALIDAD" ColumnName="ID_LOCALIDAD" />
-                <ScalarProperty Name="ID_PROVINCIA" ColumnName="ID_PROVINCIA" />
+                <ScalarProperty Name="LOCALIDAD" ColumnName="LOCALIDAD" />
+                <ScalarProperty Name="PROVINCIA" ColumnName="PROVINCIA" />
                 <ScalarProperty Name="CODIGO_POSTAL" ColumnName="CODIGO_POSTAL" />
                 <ScalarProperty Name="BARRIO" ColumnName="BARRIO" />
                 <ScalarProperty Name="DEPARTAMENTO" ColumnName="DEPARTAMENTO" />

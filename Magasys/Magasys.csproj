@@ -80,6 +80,7 @@
     <Content Include="AdminDashboard\css\plugins\iCheck\green.png" />
     <Content Include="AdminDashboard\css\plugins\select2\select2.min.css" />
     <Content Include="AdminDashboard\css\plugins\sweetalert\sweetalert.css" />
+    <Content Include="AdminDashboard\css\style.googlemap.css" />
     <Content Include="AdminDashboard\DetalleProductoDevoluciones.aspx" />
     <Content Include="AdminDashboard\DetalleProductoIngresos.aspx" />
     <Content Include="AdminDashboard\DetalleProductoIngresosEditar.aspx" />

@@ -1,12 +1,9 @@
 ﻿using System;
 using NLog;
-using BLL.DAL;
 using BLL.Common;
 using System.Web.UI;
-using System.Collections;
-using System.Collections.Generic;
-using System.Web.Services;
 using System.Web.UI.WebControls;
+using System.Linq;
 
 namespace PL.AdminDashboard
 {
@@ -19,7 +16,6 @@ namespace PL.AdminDashboard
             if (!Page.IsPostBack)
             {
                 CargarTiposDocumento();
-                CargarProvincias();
             }
         }
 
@@ -43,14 +39,13 @@ namespace PL.AdminDashboard
                     {
                         Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeClienteSuccessAlta, "Alta Cliente"));
                         Session.Add(Enums.Session.Cliente.ToString(), oCliente);
+                        LimpiarCampos();
                     }
                     else
                         Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeClienteFailure));
                 }
                 else
-                {
                     Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeClienteFailure));
-                }
             }
             catch (Exception ex)
             {
@@ -91,26 +86,6 @@ namespace PL.AdminDashboard
             }
         }
 
-        private void CargarProvincias()
-        {
-            var oProvincia = new BLL.ProvinciaBLL();
-
-            try
-            {
-                ddlProvincia.DataSource = oProvincia.ObtenerProvincias();
-                ddlProvincia.DataTextField = "NOMBRE";
-                ddlProvincia.DataValueField = "ID_PROVINCIA";
-                ddlProvincia.DataBind();
-                ddlProvincia.Items.Insert(0, new ListItem(String.Empty, String.Empty));
-                ddlProvincia.SelectedIndex = 0;
-            }
-            catch (Exception ex)
-            {
-                Logger loLogger = LogManager.GetCurrentClassLogger();
-                loLogger.Error(ex);
-            }
-        }
-
         private BLL.DAL.Cliente CargarClienteDesdeControles()
         {
             var oCliente = new BLL.DAL.Cliente
@@ -130,7 +105,6 @@ namespace PL.AdminDashboard
             else
                 oCliente.ALIAS = null;
 
-
             if (!String.IsNullOrEmpty(txtTelefonoFijo.Text))
                 oCliente.TELEFONO_FIJO = txtTelefonoFijo.Text;
             else
@@ -141,13 +115,13 @@ namespace PL.AdminDashboard
             else
                 oCliente.EMAIL = null;
 
-            if (!String.IsNullOrEmpty(txtCalle.Text))
-                oCliente.CALLE = txtCalle.Text;
+            if (!String.IsNullOrEmpty(hdCalle.Value))
+                oCliente.CALLE = hdCalle.Value;
             else
                 oCliente.CALLE = null;
 
-            if (!String.IsNullOrEmpty(txtNumero.Text))
-                oCliente.NUMERO = Convert.ToInt32(txtNumero.Text);
+            if (!String.IsNullOrEmpty(hdNumero.Value))
+                oCliente.NUMERO = Convert.ToInt32(hdNumero.Value);
             else
                 oCliente.NUMERO = null;
 
@@ -161,59 +135,37 @@ namespace PL.AdminDashboard
             else
                 oCliente.DEPARTAMENTO = null;
 
-            if (!String.IsNullOrEmpty(txtBarrio.Text))
-                oCliente.BARRIO = txtBarrio.Text;
+            if (!String.IsNullOrEmpty(hdLocalidad.Value))
+                oCliente.LOCALIDAD = hdLocalidad.Value;
+            else
+                oCliente.LOCALIDAD = null;
+
+            if (!String.IsNullOrEmpty(hdProvincia.Value))
+                oCliente.PROVINCIA = hdProvincia.Value;
+            else
+                oCliente.PROVINCIA = null;
+
+            if (!String.IsNullOrEmpty(hdBarrio.Value))
+                oCliente.BARRIO = hdBarrio.Value;
             else
                 oCliente.BARRIO = null;
 
-            if (!String.IsNullOrEmpty(txtCodigoPostal.Text))
-                oCliente.CODIGO_POSTAL = txtCodigoPostal.Text;
+            if (!String.IsNullOrEmpty(hdCodigoPostal.Value))
+                oCliente.CODIGO_POSTAL = hdCodigoPostal.Value;
             else
                 oCliente.CODIGO_POSTAL = null;
 
-            if (!String.IsNullOrEmpty(ddlProvincia.SelectedValue))
-                oCliente.ID_PROVINCIA = Convert.ToInt32(ddlProvincia.SelectedValue);
+            if (!String.IsNullOrEmpty(hdIdDireccionMaps.Value))
+                oCliente.DIRECCION_MAPS = hdIdDireccionMaps.Value;
             else
-                oCliente.ID_PROVINCIA = null;
-
-            if (!String.IsNullOrEmpty(hfdidLocalidad.Value))
-                oCliente.ID_LOCALIDAD = Convert.ToInt32(hfdidLocalidad.Value);
-            else
-                oCliente.ID_LOCALIDAD = null;
+                oCliente.DIRECCION_MAPS = null;
 
             return oCliente;
         }
 
-        [WebMethod]
-        public static ArrayList CargarLocalidades(string idProvincia)
+        private void LimpiarCampos()
         {
-            var oLocalidad = new BLL.LocalidadBLL();
-            ArrayList lstLocalidadesResultado = null;
-            List<Localidad> lstLocalides;
-
-            try
-            {
-                if (!String.IsNullOrEmpty(idProvincia))
-                {
-                    lstLocalides = oLocalidad.ObtenerLocalidades(Convert.ToInt64(idProvincia));
-                    lstLocalidadesResultado = new ArrayList
-                    {
-                        new ItemOptionLocalidad() { Value = string.Empty, Text = string.Empty }
-                    };
-
-                    foreach (var item in lstLocalides)
-                    {
-                        lstLocalidadesResultado.Add(new ItemOptionLocalidad() { Value = item.ID_LOCALIDAD.ToString(), Text = item.NOMBRE });
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger loLogger = LogManager.GetCurrentClassLogger();
-                loLogger.Error(ex);
-            }
-
-            return lstLocalidadesResultado;
+            FormCliente.Controls.OfType<TextBox>().ToList().ForEach(x => x.Text = String.Empty);
         }
 
         #endregion
