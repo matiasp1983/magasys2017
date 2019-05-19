@@ -6,7 +6,7 @@ namespace PL.AdminDashboard
 {
     public partial class ProveedorVisualizar : System.Web.UI.Page
     {
-        #region Enventos
+        #region Eventos
 
         protected void Page_Load(object sender, EventArgs e)
         {
