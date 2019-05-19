@@ -80,8 +80,6 @@ public partial class MAGASYSEntities : DbContext
 
     public virtual DbSet<Suplemento> Suplemento { get; set; }
 
-    public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-
     public virtual DbSet<TipoDocumento> TipoDocumento { get; set; }
 
     public virtual DbSet<TipoProducto> TipoProducto { get; set; }

@@ -51,6 +51,7 @@
         public const string MsjeClienterExiste = "El Cliente ya existe.";
         public const string MsjeClienteSuccessAlta = "El cliente se guardó correctamente.";
         public const string MsjeClienteFailure = "El cliente no se pudo guardar.";
+        public const string MsjeListadoClienteFiltrarTotalSinResultados = "No se encontraron Clientes para la búsqueda seleccionada.";
 
         #endregion
 

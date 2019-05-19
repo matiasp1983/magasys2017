@@ -65,9 +65,9 @@ public partial class Cliente
 
     public string LOCALIDAD { get; set; }
 
-    public Nullable<System.DateTime> FECHA_BAJA { get; set; }
-
     public string DIRECCION_MAPS { get; set; }
+
+    public Nullable<System.DateTime> FECHA_BAJA { get; set; }
 
 
 

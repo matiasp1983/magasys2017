@@ -57,8 +57,8 @@
                     <li id="liClientes" runat="server">
                         <a href="#"><i class="fa fa-newspaper-o"></i><span class="nav-label">Clientes</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
-                            <li id="li2" runat="server"><a href="Cliente.aspx">Nuevo Cliente</a></li>
-                 <%--           <li id="li3" runat="server"><a href="ProductoListado.aspx">Listado de Productos</a></li>  --%>                          
+                            <li id="liAltaCliente" runat="server"><a href="Cliente.aspx">Nuevo Cliente</a></li>
+                            <li id="liClienteListado" runat="server"><a href="ClienteListado.aspx">Listado de Clientes</a></li>                            
                         </ul>
                     </li>
                     <li id="liVenta" runat="server">

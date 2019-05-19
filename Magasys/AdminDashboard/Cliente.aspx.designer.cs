@@ -22,6 +22,15 @@ namespace PL.AdminDashboard {
         protected global::System.Web.UI.HtmlControls.HtmlForm FormCliente;
         
         /// <summary>
+        /// Control lblBreadcrumbActive.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblBreadcrumbActive;
+        
+        /// <summary>
         /// Control ddlTipoDocumento.
         /// </summary>
         /// <remarks>
