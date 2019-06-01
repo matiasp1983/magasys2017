@@ -52,6 +52,8 @@
         public const string MsjeClienteSuccessAlta = "El cliente se guardó correctamente.";
         public const string MsjeClienteFailure = "El cliente no se pudo guardar.";
         public const string MsjeListadoClienteFiltrarTotalSinResultados = "No se encontraron Clientes para la búsqueda seleccionada.";
+        public const string MsjeClienteSuccessModificacion = "El cliente se modificó correctamente.";
+        public const string MsjeClienteSinModificaciones = "No se realizaron modificaciones en el Cliente.";
 
         #endregion
 

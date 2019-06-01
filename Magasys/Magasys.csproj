@@ -70,7 +70,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="AdminDashboard\Cliente.aspx" />
+    <Content Include="AdminDashboard\ClienteEditar.aspx" />
     <Content Include="AdminDashboard\ClienteListado.aspx" />
+    <Content Include="AdminDashboard\ClienteVisualizar.aspx" />
     <Content Include="AdminDashboard\css\bootstrap.css.map" />
     <Content Include="AdminDashboard\css\bootstrap.min.css.map" />
     <Content Include="AdminDashboard\css\plugins\footable\fonts\footable.eot" />
@@ -225,12 +227,26 @@
     <Compile Include="AdminDashboard\Cliente.aspx.designer.cs">
       <DependentUpon>Cliente.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AdminDashboard\ClienteEditar.aspx.cs">
+      <DependentUpon>ClienteEditar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\ClienteEditar.aspx.designer.cs">
+      <DependentUpon>ClienteEditar.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AdminDashboard\ClienteListado.aspx.cs">
       <DependentUpon>ClienteListado.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="AdminDashboard\ClienteListado.aspx.designer.cs">
       <DependentUpon>ClienteListado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\ClienteVisualizar.aspx.cs">
+      <DependentUpon>ClienteVisualizar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\ClienteVisualizar.aspx.designer.cs">
+      <DependentUpon>ClienteVisualizar.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminDashboard\DetalleProductoDevoluciones.aspx.cs">
       <DependentUpon>DetalleProductoDevoluciones.aspx</DependentUpon>

@@ -109,7 +109,7 @@
                                             <tr>
                                                 <th class="text-left">C&oacute;digo</th>
                                                 <th data-hide="phone,tablet">Tipo Documento</th>
-                                                <th data-hide="phone,tablet">Nro. Document</th>
+                                                <th data-hide="phone,tablet">Nro. Documento</th>
                                                 <th data-hide="phone,tablet">Nombre</th>
                                                 <th class="text-left">Apellido</th>
                                                 <th class="text-right" data-sort-ignore="true">Acci&oacute;n</th>

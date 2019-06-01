@@ -126,6 +126,24 @@ namespace BLL
             return lstClienteListado;
         }
 
+        public bool ModificarCliente(Cliente oCliente)
+        {
+            var bRes = false;
+            try
+            {
+                using (var rep = new Repository<Cliente>())
+                {
+                    bRes = rep.Update(oCliente);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return bRes;
+        }
+
         #endregion
     }
 

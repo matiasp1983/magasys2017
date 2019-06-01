@@ -46,7 +46,7 @@ namespace PL.AdminDashboard
             {
                 if (e.Item.ItemType != ListViewItemType.DataItem) return;
 
-                var loIdCliente = ((BLL.DAL.Cliente)e.Item.DataItem).ID_CLIENTE.ToString();
+                var loIdCliente = ((BLL.ClienteListado)e.Item.DataItem).ID_CLIENTE.ToString();
 
                 HtmlButton btnVisualizar = ((HtmlButton)e.Item.FindControl("btnVisualizar"));
                 btnVisualizar.Attributes.Add("value", loIdCliente);
@@ -65,8 +65,9 @@ namespace PL.AdminDashboard
         {
             try
             {
-                Session.Add(Enums.Session.IdCliente.ToString(), Convert.ToInt64(((HtmlButton)sender).Attributes["value"]));
-                //Response.Redirect("DetalleProductoIngresos.aspx", false);
+                var oCliente = Convert.ToInt32(((HtmlButton)sender).Attributes["value"]);
+                Session.Add(Enums.Session.IdCliente.ToString(), oCliente);
+                Response.Redirect("ClienteVisualizar.aspx", false);
             }
             catch (Exception ex)
             {
@@ -79,8 +80,9 @@ namespace PL.AdminDashboard
         {
             try
             {
-                Session.Add(Enums.Session.IdCliente.ToString(), Convert.ToInt64(((HtmlButton)sender).Attributes["value"]));
-                //Response.Redirect("DetalleProductoIngresosEditar.aspx", false);
+                var oCliente = Convert.ToInt32(((HtmlButton)sender).Attributes["value"]);
+                Session.Add(Enums.Session.IdCliente.ToString(), oCliente);
+                Response.Redirect("ClienteEditar.aspx", false);
             }
             catch (Exception ex)
             {
@@ -174,11 +176,9 @@ namespace PL.AdminDashboard
         {
             FormClienteListado.Controls.OfType<DropDownList>().ToList().ForEach(x => x.SelectedIndex = -1);
             FormClienteListado.Controls.OfType<TextBox>().ToList().ForEach(x => x.Text = String.Empty);
-            lsvClientes.Visible = false;
             CargarGrillaClientes();
         }
 
         #endregion
-
     }
 }
