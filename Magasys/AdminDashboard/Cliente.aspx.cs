@@ -56,11 +56,15 @@ namespace PL.AdminDashboard
             }
         }
 
-        protected void BtnVolver_Click(object sender, EventArgs e)
+        protected void BtnCancelar_Click(object sender, EventArgs e)
         {
             if (Session[Enums.Session.AltaVentaAltaCliente.ToString()] != null)
             {
                 Response.Redirect("Venta.aspx", false);
+            }
+            else
+            {
+                Response.Redirect("ClienteListado.aspx", false);
             }
         }
 

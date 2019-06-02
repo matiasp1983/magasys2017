@@ -2,6 +2,7 @@
 using BLL.DAL;
 using BLL.Filters;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BLL
 {
@@ -76,7 +77,7 @@ namespace BLL
             {
                 using (var rep = new Repository<Cliente>())
                 {
-                    lstCliente = rep.Search(p => p.FECHA_BAJA == null && p.COD_ESTADO == 1);
+                    lstCliente = rep.Search(p => p.FECHA_BAJA == null && p.COD_ESTADO == 1).OrderByDescending(p => p.ID_CLIENTE).ToList();
 
                     if (lstCliente.Count > 0)
                     {
