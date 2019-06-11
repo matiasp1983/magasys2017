@@ -19,7 +19,9 @@
             Cliente,
             IdProductoDevolucion,
             AltaVentaAltaCliente,
-            IdCliente
+            IdCliente,
+            ListadoVenta,
+            Venta
         } 
 
         #endregion

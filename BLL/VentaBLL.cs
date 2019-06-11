@@ -64,7 +64,7 @@ namespace BLL
             {
                 using (var loRepVenta = new Repository<Venta>())
                 {
-                    lstVenta = loRepVenta.Search(p => p.COD_ESTADO == oVentaFiltro.COD_ESTADO);
+                    lstVenta = loRepVenta.Search(p => p.COD_ESTADO == oVentaFiltro.COD_ESTADO).OrderByDescending(p => p.ID_VENTA).ToList();
 
                     if (lstVenta.Count > 0)
                     {

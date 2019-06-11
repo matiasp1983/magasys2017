@@ -14,9 +14,7 @@ namespace PL.AdminDashboard
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
-            {
                 CargarTiposDocumento();
-            }
         }
 
         protected void BtnGuardar_Click(object sender, EventArgs e)
@@ -25,7 +23,7 @@ namespace PL.AdminDashboard
             var bEsNuevoCliente = new BLL.ClienteBLL().ConsultarExistenciaCliente(oCliente.TIPO_DOCUMENTO, oCliente.NRO_DOCUMENTO);
             if (!bEsNuevoCliente)
             {
-                Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeClienterExiste));
+                Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.InfoModal(Message.MsjeClienterExiste));
                 return;
             }
 
@@ -37,9 +35,16 @@ namespace PL.AdminDashboard
 
                     if (loResultado)
                     {
-                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeClienteSuccessAlta, "Alta Cliente"));
-                        Session.Add(Enums.Session.Cliente.ToString(), oCliente);
-                        LimpiarCampos();
+                        if (Session[Enums.Session.AltaVentaAltaCliente.ToString()] != null)
+                        {
+                            Session.Add(Enums.Session.Cliente.ToString(), oCliente);
+                            Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeClienteSuccessAlta, "Alta Cliente", "Venta.aspx"));
+                        }
+                        else
+                        {
+                            Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeClienteSuccessAlta, "Alta Cliente"));
+                            LimpiarCampos();
+                        }
                     }
                     else
                         Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeClienteFailure));
@@ -56,16 +61,12 @@ namespace PL.AdminDashboard
             }
         }
 
-        protected void BtnCancelar_Click(object sender, EventArgs e)
+        protected void BtnVolver_Click(object sender, EventArgs e)
         {
             if (Session[Enums.Session.AltaVentaAltaCliente.ToString()] != null)
-            {
                 Response.Redirect("Venta.aspx", false);
-            }
             else
-            {
                 Response.Redirect("ClienteListado.aspx", false);
-            }
         }
 
         #endregion
@@ -149,9 +150,11 @@ namespace PL.AdminDashboard
             else
                 oCliente.PROVINCIA = null;
 
-            if (!String.IsNullOrEmpty(hdBarrio.Value))
+            if (!String.IsNullOrEmpty(hdCalle.Value) && !String.IsNullOrEmpty(hdBarrio.Value))
                 oCliente.BARRIO = hdBarrio.Value;
-            else
+            else if (!String.IsNullOrEmpty(hdCalle.Value) && !String.IsNullOrEmpty(txtBarrio.Text))
+                oCliente.BARRIO = txtBarrio.Text;
+            else if (String.IsNullOrEmpty(txtBarrio.Text))
                 oCliente.BARRIO = null;
 
             if (!String.IsNullOrEmpty(hdCodigoPostal.Value))

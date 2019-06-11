@@ -27,6 +27,35 @@ namespace PL.AdminDashboard
                 rdbPagadoNo.Checked = true;
                 CargarFormaDePago();
                 CargarTiposDocumento();
+
+                if (Session[Enums.Session.ListadoVenta.ToString()] != null)
+                {
+                    List<VentaProductos> listViewVenta = MapListViewToListObject((ListView)Session[Enums.Session.ListadoVenta.ToString()]);
+                    if (listViewVenta.Count > 0)
+                    {
+                        lsvVenta.DataSource = listViewVenta;
+                        lsvVenta.DataBind();
+                        MostrarOcultarDivsVentas(true);
+                    }
+                    Session.Remove(Enums.Session.ListadoVenta.ToString());
+                }
+                else
+                    MostrarOcultarDivsVentas();
+
+                if (Session[Enums.Session.Venta.ToString()] != null)
+                {
+                    var oVenta = (BLL.DAL.Venta)Session[Enums.Session.Venta.ToString()];
+                    if (oVenta.TOTAL > 0)
+                        lblTotal.Text = oVenta.TOTAL.ToString();
+                    ddlFormaPago.SelectedValue = oVenta.COD_FORMA_PAGO.ToString();
+                    if (oVenta.COD_ESTADO == 5)
+                    {
+                        rdbPagadoSi.Checked = true;
+                        rdbPagadoNo.Checked = false;
+                    }
+                    Session.Remove(Enums.Session.Venta.ToString());
+                }
+
                 if (Session[Enums.Session.Cliente.ToString()] != null)
                 {
                     var oCliente = (BLL.DAL.Cliente)Session[Enums.Session.Cliente.ToString()];
@@ -36,12 +65,9 @@ namespace PL.AdminDashboard
                     txtNombre.Text = oCliente.NOMBRE;
                 }
 
-                Session.Remove(Enums.Session.Cliente.ToString());
                 Session.Remove(Enums.Session.AltaVentaAltaCliente.ToString());
-
                 CargarTiposProducto();
                 CargarProveedores();
-                MostrarOcultarDivsVentas();
             }
         }
 
@@ -55,12 +81,12 @@ namespace PL.AdminDashboard
             var loCliente = new ClienteBLL().ObtenerCliente(Convert.ToInt32(ddlTipoDocumento.SelectedValue), Convert.ToInt32(txtNroDocumento.Text));
 
             if (loCliente == null)
-                Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeClienteBuscarClienteSinResultados));
+                Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.InfoModal(Message.MsjeClienteBuscarClienteSinResultados));
             else
             {
                 txtApellido.Text = loCliente.APELLIDO;
                 txtNombre.Text = loCliente.NOMBRE;
-                Session["Cliente"] = loCliente;
+                Session.Add(Enums.Session.Cliente.ToString(), loCliente);
             }
         }
 
@@ -91,6 +117,18 @@ namespace PL.AdminDashboard
 
         protected void BtnNuevoCliente_Click(object sender, EventArgs e)
         {
+            BLL.DAL.Venta oVenta = new BLL.DAL.Venta();
+            if (!String.IsNullOrEmpty(lblTotal.Text))
+                oVenta.TOTAL = Convert.ToDouble(lblTotal.Text);
+            oVenta.COD_FORMA_PAGO = Convert.ToInt32(ddlFormaPago.SelectedValue);
+            if (rdbPagadoSi.Checked)
+                oVenta.COD_ESTADO = 5;
+            else
+                oVenta.COD_ESTADO = 4;
+
+            Session.Add(Enums.Session.Venta.ToString(), oVenta);
+            if (lsvVenta.Items.Count > 0)
+                Session.Add(Enums.Session.ListadoVenta.ToString(), lsvVenta);
             Session[Enums.Session.AltaVentaAltaCliente.ToString()] = "AltaVentaAltaCliente";
             Response.Redirect("Cliente.aspx", false);
         }
@@ -100,15 +138,17 @@ namespace PL.AdminDashboard
             bool loResutado = false;
             List<DetalleVenta> lstDetalleVenta = new List<DetalleVenta>();
 
+            var oCliente = (BLL.DAL.Cliente)Session[Enums.Session.Cliente.ToString()];
+
             if (ddlFormaPago.SelectedValue == "1" && rdbPagadoNo.Checked) // Para una venta de Contado debe indicar Pagado Sí.
             {
-                Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeVentaAviso));
+                Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.InfoModal(Message.MsjeVentaAviso));
                 return;
             }
 
             if (ddlFormaPago.SelectedValue == "2" && String.IsNullOrEmpty(txtApellido.Text))
             {
-                Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeVentaValidaCtaCorriente));
+                Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.InfoModal(Message.MsjeVentaValidaCtaCorriente));
                 return;
             }
 
@@ -146,10 +186,7 @@ namespace PL.AdminDashboard
                 oVenta.COD_ESTADO = 4;
 
             if (ddlFormaPago.SelectedValue == "2") // Forma de Pago: Cuenta corriente
-            {
-                oVenta.COD_CLIENTE = ((BLL.DAL.Cliente)Session["Cliente"]).ID_CLIENTE;
-                Session.Remove("Cliente");
-            }
+                oVenta.COD_CLIENTE = oCliente.ID_CLIENTE;
 
             foreach (var loItem in lsvVenta.Items)
             {
@@ -1031,6 +1068,7 @@ namespace PL.AdminDashboard
             lsvVenta.DataBind();
             MostrarOcultarDivsVentas();
             lblTotal.Text = String.Empty;
+            Session.Remove(Enums.Session.Cliente.ToString());
         }
 
         private List<VentaProductos> MapListViewToListObject(ListView pListView)
