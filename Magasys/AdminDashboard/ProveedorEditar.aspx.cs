@@ -122,6 +122,7 @@ namespace PL.AdminDashboard
             {
                 oProveedor.ID_PROVEEDOR = ((BLL.DAL.Proveedor)base.Session[Enums.Session.Proveedor.ToString()]).ID_PROVEEDOR;
                 oProveedor.FECHA_ALTA = ((BLL.DAL.Proveedor)base.Session[Enums.Session.Proveedor.ToString()]).FECHA_ALTA;
+                oProveedor.COD_ESTADO = ((BLL.DAL.Proveedor)base.Session[Enums.Session.Proveedor.ToString()]).COD_ESTADO;
             }
 
             oProveedor.CUIT = txtCuit.Text;
