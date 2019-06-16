@@ -24,7 +24,7 @@ namespace PL.AdminDashboard
             {
                 txtFechaVenta.Text = DateTime.Now.ToString("dd/MM/yyyy");
                 txtCodigoVenta.Text = new BLL.VentaBLL().ObtenerUltimaVenta().ToString();
-                rdbPagadoNo.Checked = true;
+                rdbPagadoSi.Checked = true;
                 CargarFormaDePago();
                 CargarTiposDocumento();
 
@@ -185,7 +185,7 @@ namespace PL.AdminDashboard
             else
                 oVenta.COD_ESTADO = 4;
 
-            if (ddlFormaPago.SelectedValue == "2") // Forma de Pago: Cuenta corriente
+            if (oCliente != null)
                 oVenta.COD_CLIENTE = oCliente.ID_CLIENTE;
 
             foreach (var loItem in lsvVenta.Items)
