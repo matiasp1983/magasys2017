@@ -23,7 +23,7 @@ namespace PL.AdminDashboard
             if (!Page.IsPostBack)
             {
                 txtFechaVenta.Text = DateTime.Now.ToString("dd/MM/yyyy");
-                txtCodigoVenta.Text = new BLL.VentaBLL().ObtenerUltimaVenta().ToString();
+                txtCodigoVenta.Text = new BLL.VentaBLL().ObtenerProximaVenta().ToString();
                 rdbPagadoSi.Checked = true;
                 CargarFormaDePago();
                 CargarTiposDocumento();
