@@ -1055,7 +1055,7 @@ namespace PL.AdminDashboard
 
         private void LimpiarPantalla()
         {
-            txtCodigoVenta.Text = new BLL.VentaBLL().ObtenerUltimaVenta().ToString();
+            txtCodigoVenta.Text = new BLL.VentaBLL().ObtenerProximaVenta().ToString();
             ddlFormaPago.SelectedIndex = 0;
             rdbPagadoNo.Checked = true;
             ddlTipoDocumento.SelectedIndex = 0;
