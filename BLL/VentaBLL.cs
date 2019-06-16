@@ -10,20 +10,19 @@ namespace BLL
     {
         #region Métodos Públicos
 
-        public int ObtenerUltimaVenta()
+        public int ObtenerProximaVenta()
         {
-            List<Venta> lstVenta = null;
             int loIdVenta = 0;
 
             try
             {
                 using (var rep = new Repository<Venta>())
                 {
-                    // Ordenar la lista descendentemente
-                    lstVenta = rep.FindAll().OrderByDescending(p => p.ID_VENTA).ToList();
+                    // Devuelve el mayor valor del campo ID_VENTA
+                    loIdVenta = rep.FindAll().Max(p => p.ID_VENTA);
 
-                    if (lstVenta.Count > 0)
-                        loIdVenta = lstVenta[0].ID_VENTA + 1;
+                    if (loIdVenta > 0)
+                        loIdVenta = loIdVenta + 1;
                     else
                         loIdVenta = 1;
                 }
