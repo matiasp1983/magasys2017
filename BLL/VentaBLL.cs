@@ -18,11 +18,16 @@ namespace BLL
             {
                 using (var rep = new Repository<Venta>())
                 {
-                    // Devuelve el mayor valor del campo ID_VENTA
-                    loIdVenta = rep.FindAll().Max(p => p.ID_VENTA);
+                    var loExiste = rep.FindAll().Any();
 
-                    if (loIdVenta > 0)
-                        loIdVenta = loIdVenta + 1;
+                    if (loExiste)
+                    {
+                        // Devuelve el mayor valor del campo ID_VENTA
+                        loIdVenta = rep.FindAll().Max(p => p.ID_VENTA);
+
+                        if (loIdVenta > 0)
+                            loIdVenta = loIdVenta + 1;
+                    }
                     else
                         loIdVenta = 1;
                 }
