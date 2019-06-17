@@ -210,7 +210,7 @@ namespace PL.AdminDashboard
             if (loResutado)
             {
                 LimpiarPantalla();
-                Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeVentaSuccessAlta));
+                Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeVentaSuccessAlta, "Alta Venta"));
             }
             else
                 Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeVentaFailure));
