@@ -32,6 +32,8 @@ public partial class Producto
 
         this.ProductoEdicion = new HashSet<ProductoEdicion>();
 
+        this.Reserva = new HashSet<Reserva>();
+
         this.Revista = new HashSet<Revista>();
 
         this.Suplemento = new HashSet<Suplemento>();
@@ -86,6 +88,10 @@ public partial class Producto
     public virtual Proveedor Proveedor { get; set; }
 
     public virtual TipoProducto TipoProducto { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<Reserva> Reserva { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 

@@ -150,6 +150,7 @@
     <Content Include="AdminDashboard\ProductoSuplementoEditar.aspx" />
     <Content Include="AdminDashboard\ProductoSuplementoVisualizar.aspx" />
     <Content Include="AdminDashboard\ProveedorEditar.aspx" />
+    <Content Include="AdminDashboard\Reserva.aspx" />
     <Content Include="AdminDashboard\Venta.aspx" />
     <Content Include="AdminDashboard\VentaListado.aspx" />
     <Content Include="CustomersWebSite\Index.aspx" />
@@ -443,6 +444,13 @@
     </Compile>
     <Compile Include="AdminDashboard\ProveedorVisualizar.aspx.designer.cs">
       <DependentUpon>ProveedorVisualizar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\Reserva.aspx.cs">
+      <DependentUpon>Reserva.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\Reserva.aspx.designer.cs">
+      <DependentUpon>Reserva.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminDashboard\Venta.aspx.cs">
       <DependentUpon>Venta.aspx</DependentUpon>

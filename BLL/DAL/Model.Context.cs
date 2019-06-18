@@ -76,6 +76,8 @@ public partial class MAGASYSEntities : DbContext
 
     public virtual DbSet<Provincia> Provincia { get; set; }
 
+    public virtual DbSet<Reserva> Reserva { get; set; }
+
     public virtual DbSet<Revista> Revista { get; set; }
 
     public virtual DbSet<Suplemento> Suplemento { get; set; }
@@ -83,6 +85,8 @@ public partial class MAGASYSEntities : DbContext
     public virtual DbSet<TipoDocumento> TipoDocumento { get; set; }
 
     public virtual DbSet<TipoProducto> TipoProducto { get; set; }
+
+    public virtual DbSet<TipoReserva> TipoReserva { get; set; }
 
     public virtual DbSet<Venta> Venta { get; set; }
 

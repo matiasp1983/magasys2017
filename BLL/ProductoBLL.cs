@@ -25,7 +25,7 @@ namespace BLL
                         lstProductos = lstProductos.FindAll(p => p.ID_PRODUCTO.ToString().Contains(oProductoFiltro.IdProducto.ToString()));
 
                     if (!String.IsNullOrEmpty(oProductoFiltro.NombreProducto) && lstProductos.Count > 0)
-                        lstProductos = lstProductos.FindAll(p => p.NOMBRE.ToUpper().Contains(oProductoFiltro.NombreProducto.ToUpper()));                    
+                        lstProductos = lstProductos.FindAll(p => p.NOMBRE.ToUpper().Contains(oProductoFiltro.NombreProducto.ToUpper()));
 
                     if (oProductoFiltro.CodTipoProducto > 0 && lstProductos.Count > 0)
                         lstProductos = lstProductos.FindAll(p => p.COD_TIPO_PRODUCTO == oProductoFiltro.CodTipoProducto);
@@ -76,6 +76,50 @@ namespace BLL
             return lstProductoListado;
         }
 
+        public List<ProductoListado> ObtenerProductosPorTipoProducto(ProductoFiltro oProductoFiltro)
+        {
+            List<Producto> lstProducto = null;
+            List<ProductoListado> lstProductoListado = null;
+
+            try
+            {
+                using (var loRepProducto = new Repository<Producto>())
+                {
+                    lstProducto = loRepProducto.Search(p => p.COD_ESTADO == 1 && p.COD_PROVEEDOR == oProductoFiltro.CodProveedor && p.COD_TIPO_PRODUCTO == oProductoFiltro.CodTipoProducto);
+
+                    if (!String.IsNullOrEmpty(oProductoFiltro.NombreProducto) && lstProducto.Count > 0)
+                        lstProducto = lstProducto.FindAll(p => p.NOMBRE.ToUpper().Contains(oProductoFiltro.NombreProducto.ToUpper()));
+
+                    if (!String.IsNullOrEmpty(oProductoFiltro.DescripcionProducto) && lstProducto.Count > 0)
+                        lstProducto = lstProducto.FindAll(p => !string.IsNullOrEmpty(p.DESCRIPCION) && p.DESCRIPCION.ToUpper().Contains(oProductoFiltro.DescripcionProducto.ToUpper()));
+
+                    ProductoListado oProductoListado;
+                    lstProductoListado = new List<ProductoListado>();
+
+                    foreach (var loProducto in lstProducto)
+                    {
+                        oProductoListado = new ProductoListado
+                        {
+                            ID_PRODUCTO = loProducto.ID_PRODUCTO,
+                            NOMBRE = loProducto.NOMBRE,
+                            DESC_TIPO_PRODUCTO = loProducto.TipoProducto.DESCRIPCION
+                        };
+
+                        if (!String.IsNullOrEmpty(loProducto.DESCRIPCION))
+                            oProductoListado.DESCRIPCION = loProducto.DESCRIPCION;
+
+                        lstProductoListado.Add(oProductoListado);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return lstProductoListado;
+        }
+
         #endregion
     }
 
@@ -85,6 +129,7 @@ namespace BLL
     {
         public int ID_PRODUCTO { get; set; }
         public string NOMBRE { get; set; }
+        public string DESCRIPCION { get; set; }
         public int COD_ESTADO { get; set; }
         public string DESC_ESTADO { get; set; }
         public int COD_GENERO { get; set; }

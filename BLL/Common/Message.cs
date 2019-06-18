@@ -49,31 +49,32 @@
         public const string MsjeClienteBuscarClienteSinResultados = "No se encontró el Cliente para la búsqueda seleccionada.";
         public const string MsjeClienteBuscarClienteSinNroDocumento = "Debe completar el Nro. de Documento.";
         public const string MsjeClienterExiste = "El Cliente ya existe.";
-        public const string MsjeClienteSuccessAlta = "El cliente se guardó correctamente.";
+        public const string MsjeClienteSuccessAlta = "El cliente se registró correctamente.";
         public const string MsjeClienteFailure = "El cliente no se pudo guardar.";
         public const string MsjeListadoClienteFiltrarTotalSinResultados = "No se encontraron Clientes para la búsqueda seleccionada.";
         public const string MsjeClienteSuccessModificacion = "El cliente se modificó correctamente.";
         public const string MsjeClienteSinModificaciones = "No se realizaron modificaciones en el Cliente.";
+        public const string MsjeClienteObligatorio = "Debe completar el Cliente.";
 
         #endregion
 
-        #region Venta
+        #region Mensajes Venta
 
         public const string MsjeVentaCampoCantidadObligatorio = "Debe completar la Cantidad.";
         public const string MsjeVentaStockInsuficiente = "No hay suficiente stock.";
-        public const string MsjeVentaSuccessAlta = "La venta se guardó correctamente.";
-        public const string MsjeVentaFailure = "La venta no se pudo guardar.";
-        public const string MsjeVentaCantidadInvalida = "La cantidad ingresada no es válida";
+        public const string MsjeVentaSuccessAlta = "La venta se registró correctamente.";
+        public const string MsjeVentaFailure = "La venta no se pudo registrar.";
+        public const string MsjeVentaCantidadInvalida = "La cantidad ingresada no es válida.";
         public const string MsjeVentaAviso = "Para una venta de Contado debe indicar Pagado Sí.";
         public const string MsjeListadoVentaFiltrarTotalSinResultados = "No se encontraron Ventas para la búsqueda seleccionada.";
         public const string MsjeVentaAnularFailure = "La venta no se pudo anular.";
         public const string MsjeVentaAnularOk = "La venta se pudo anular.";
-        public const string MsjeVentaValidaCtaCorriente = "Debe seleccionar un cliente";
-        public const string MsjeVentaValidaClienteCtaCorriente = "Los datos del cliente no son válidos";
+        public const string MsjeVentaValidaCtaCorriente = "Debe seleccionar un cliente.";
+        public const string MsjeVentaValidaClienteCtaCorriente = "Los datos del cliente no son válidos.";
 
         #endregion
 
-        #region MensajesDevolucion
+        #region Mensajes Devolucion
 
         public const string MsjeListadoDevolucionSinResultados = "No se encontraron Productos para la búsqueda seleccionada.";
         public const string MsjeDevolucionSuccessAlta = "La devolución se guardó correctamente.";
@@ -81,6 +82,17 @@
         public const string MsjeListadoDevolucionListadoSinResultados = "No se encontraron Devoluciones de productos para la búsqueda seleccionada.";
         public const string MsjeDevolucionAnularOk = "La devolución se pudo anular.";
         public const string MsjeDevolucionAnularFailure = "La devolución no se pudo anular.";
+
+        #endregion
+
+        #region Mensajes Reserva
+
+        public const string MsjeReservaSuccessAlta = "La reserva se registró correctamente.";
+        public const string MsjeReservaFailure = "La reserva no se pudo registrar.";
+        public const string MsjeReservaDireccionRequerida = "La forma de entrega “Envío a Domicilio” requiere que el cliente complete los datos de la dirección.";
+        public const string MsjeReservaSeleccionDeProducto = "Debe seleccionar un producto.";
+        public const string MsjeReservaFechaInicioMayorQueFechaFin = "La Fecha de fin debe ser mayor que la Fecha de inicio.";
+
         #endregion
     }
 }

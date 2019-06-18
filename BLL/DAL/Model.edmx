@@ -236,6 +236,20 @@
           <Property Name="ID_PROVINCIA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Reserva">
+          <Key>
+            <PropertyRef Name="ID_RESERVA" />
+          </Key>
+          <Property Name="ID_RESERVA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FECHA" Type="datetime" Nullable="false" />
+          <Property Name="COD_ESTADO" Type="int" Nullable="false" />
+          <Property Name="COD_CLIENTE" Type="int" Nullable="false" />
+          <Property Name="FECHA_INICIO" Type="datetime" />
+          <Property Name="FECHA_FIN" Type="datetime" />
+          <Property Name="COD_TIPO_RESERVA" Type="int" Nullable="false" />
+          <Property Name="COD_PRODUCTO" Type="int" Nullable="false" />
+          <Property Name="ENVIO_DOMICILIO" Type="nchar" MaxLength="10" />
+        </EntityType>
         <EntityType Name="Revista">
           <Key>
             <PropertyRef Name="ID_REVISTA" />
@@ -269,6 +283,13 @@
             <PropertyRef Name="ID_TIPO_PRODUCTO" />
           </Key>
           <Property Name="ID_TIPO_PRODUCTO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoReserva">
+          <Key>
+            <PropertyRef Name="ID_TIPO_RESERVA" />
+          </Key>
+          <Property Name="ID_TIPO_RESERVA" Type="int" Nullable="false" />
           <Property Name="DESCRIPCION" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Venta">
@@ -630,6 +651,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Reserva_Cliente">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Reserva" Type="Self.Reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Principal>
+            <Dependent Role="Reserva">
+              <PropertyRef Name="COD_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reserva_Estado">
+          <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
+          <End Role="Reserva" Type="Self.Reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="ID_ESTADO" />
+            </Principal>
+            <Dependent Role="Reserva">
+              <PropertyRef Name="COD_ESTADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reserva_Producto">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="Reserva" Type="Self.Reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="ID_PRODUCTO" />
+            </Principal>
+            <Dependent Role="Reserva">
+              <PropertyRef Name="COD_PRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reserva_TipoReserva">
+          <End Role="TipoReserva" Type="Self.TipoReserva" Multiplicity="1" />
+          <End Role="Reserva" Type="Self.Reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoReserva">
+              <PropertyRef Name="ID_TIPO_RESERVA" />
+            </Principal>
+            <Dependent Role="Reserva">
+              <PropertyRef Name="COD_TIPO_RESERVA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Revista_DiaSemana">
           <End Role="DiaSemana" Type="Self.DiaSemana" Multiplicity="0..1" />
           <End Role="Revista" Type="Self.Revista" Multiplicity="*" />
@@ -761,10 +830,12 @@
           <EntitySet Name="ProductoIngreso" EntityType="Self.ProductoIngreso" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Proveedor" EntityType="Self.Proveedor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Provincia" EntityType="Self.Provincia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reserva" EntityType="Self.Reserva" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Revista" EntityType="Self.Revista" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Suplemento" EntityType="Self.Suplemento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoDocumento" EntityType="Self.TipoDocumento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoProducto" EntityType="Self.TipoProducto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoReserva" EntityType="Self.TipoReserva" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Venta" EntityType="Self.Venta" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Cliente_TipoDocumento1" Association="Self.FK_Cliente_TipoDocumento1">
             <End Role="TipoDocumento" EntitySet="TipoDocumento" />
@@ -882,6 +953,22 @@
             <End Role="Provincia" EntitySet="Provincia" />
             <End Role="Proveedor" EntitySet="Proveedor" />
           </AssociationSet>
+          <AssociationSet Name="FK_Reserva_Cliente" Association="Self.FK_Reserva_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Reserva" EntitySet="Reserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reserva_Estado" Association="Self.FK_Reserva_Estado">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Reserva" EntitySet="Reserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reserva_Producto" Association="Self.FK_Reserva_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="Reserva" EntitySet="Reserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reserva_TipoReserva" Association="Self.FK_Reserva_TipoReserva">
+            <End Role="TipoReserva" EntitySet="TipoReserva" />
+            <End Role="Reserva" EntitySet="Reserva" />
+          </AssociationSet>
           <AssociationSet Name="FK_Revista_DiaSemana" Association="Self.FK_Revista_DiaSemana">
             <End Role="DiaSemana" EntitySet="DiaSemana" />
             <End Role="Revista" EntitySet="Revista" />
@@ -946,14 +1033,20 @@
           <EntitySet Name="ProductoIngreso" EntityType="MAGASYSModel.ProductoIngreso" />
           <EntitySet Name="Proveedor" EntityType="MAGASYSModel.Proveedor" />
           <EntitySet Name="Provincia" EntityType="MAGASYSModel.Provincia" />
+          <EntitySet Name="Reserva" EntityType="MAGASYSModel.Reserva" />
           <EntitySet Name="Revista" EntityType="MAGASYSModel.Revista" />
           <EntitySet Name="Suplemento" EntityType="MAGASYSModel.Suplemento" />
           <EntitySet Name="TipoDocumento" EntityType="MAGASYSModel.TipoDocumento" />
           <EntitySet Name="TipoProducto" EntityType="MAGASYSModel.TipoProducto" />
+          <EntitySet Name="TipoReserva" EntityType="MAGASYSModel.TipoReserva" />
           <EntitySet Name="Venta" EntityType="MAGASYSModel.Venta" />
           <AssociationSet Name="FK_Cliente_TipoDocumento1" Association="MAGASYSModel.FK_Cliente_TipoDocumento1">
             <End Role="TipoDocumento" EntitySet="TipoDocumento" />
             <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reserva_Cliente" Association="MAGASYSModel.FK_Reserva_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Reserva" EntitySet="Reserva" />
           </AssociationSet>
           <AssociationSet Name="FK_Venta_Cliente" Association="MAGASYSModel.FK_Venta_Cliente">
             <End Role="Cliente" EntitySet="Cliente" />
@@ -1043,6 +1136,10 @@
             <End Role="Estado" EntitySet="Estado" />
             <End Role="Proveedor" EntitySet="Proveedor" />
           </AssociationSet>
+          <AssociationSet Name="FK_Reserva_Estado" Association="MAGASYSModel.FK_Reserva_Estado">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Reserva" EntitySet="Reserva" />
+          </AssociationSet>
           <AssociationSet Name="FK_Venta_Estado" Association="MAGASYSModel.FK_Venta_Estado">
             <End Role="Estado" EntitySet="Estado" />
             <End Role="Venta" EntitySet="Venta" />
@@ -1087,6 +1184,10 @@
             <End Role="TipoProducto" EntitySet="TipoProducto" />
             <End Role="Producto" EntitySet="Producto" />
           </AssociationSet>
+          <AssociationSet Name="FK_Reserva_Producto" Association="MAGASYSModel.FK_Reserva_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="Reserva" EntitySet="Reserva" />
+          </AssociationSet>
           <AssociationSet Name="FK_Revista_Producto" Association="MAGASYSModel.FK_Revista_Producto">
             <End Role="Producto" EntitySet="Producto" />
             <End Role="Revista" EntitySet="Revista" />
@@ -1102,6 +1203,10 @@
           <AssociationSet Name="FK_Proveedor_Provincia" Association="MAGASYSModel.FK_Proveedor_Provincia">
             <End Role="Provincia" EntitySet="Provincia" />
             <End Role="Proveedor" EntitySet="Proveedor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reserva_TipoReserva" Association="MAGASYSModel.FK_Reserva_TipoReserva">
+            <End Role="TipoReserva" EntitySet="TipoReserva" />
+            <End Role="Reserva" EntitySet="Reserva" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Anio">
@@ -1136,6 +1241,7 @@
           <Property Name="DIRECCION_MAPS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="FECHA_BAJA" Type="DateTime" Precision="3" />
           <NavigationProperty Name="TipoDocumento" Relationship="MAGASYSModel.FK_Cliente_TipoDocumento1" FromRole="Cliente" ToRole="TipoDocumento" />
+          <NavigationProperty Name="Reserva" Relationship="MAGASYSModel.FK_Reserva_Cliente" FromRole="Cliente" ToRole="Reserva" />
           <NavigationProperty Name="Venta" Relationship="MAGASYSModel.FK_Venta_Cliente" FromRole="Cliente" ToRole="Venta" />
         </EntityType>
         <EntityType Name="Coleccion">
@@ -1233,6 +1339,7 @@
           <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_Producto_Estado1" FromRole="Estado" ToRole="Producto" />
           <NavigationProperty Name="ProductoDevolucion" Relationship="MAGASYSModel.FK_ProductoDevolucion_Estado" FromRole="Estado" ToRole="ProductoDevolucion" />
           <NavigationProperty Name="Proveedor" Relationship="MAGASYSModel.FK_Proveedor_Estado" FromRole="Estado" ToRole="Proveedor" />
+          <NavigationProperty Name="Reserva" Relationship="MAGASYSModel.FK_Reserva_Estado" FromRole="Estado" ToRole="Reserva" />
           <NavigationProperty Name="Venta" Relationship="MAGASYSModel.FK_Venta_Estado" FromRole="Estado" ToRole="Venta" />
         </EntityType>
         <EntityType Name="FormaPago">
@@ -1315,6 +1422,7 @@
           <NavigationProperty Name="ProductoEdicion" Relationship="MAGASYSModel.FK_Producto_Edicion_Producto" FromRole="Producto" ToRole="ProductoEdicion" />
           <NavigationProperty Name="Proveedor" Relationship="MAGASYSModel.FK_Producto_Proveedor" FromRole="Producto" ToRole="Proveedor" />
           <NavigationProperty Name="TipoProducto" Relationship="MAGASYSModel.FK_Producto_TipoProducto" FromRole="Producto" ToRole="TipoProducto" />
+          <NavigationProperty Name="Reserva" Relationship="MAGASYSModel.FK_Reserva_Producto" FromRole="Producto" ToRole="Reserva" />
           <NavigationProperty Name="Revista" Relationship="MAGASYSModel.FK_Revista_Producto" FromRole="Producto" ToRole="Revista" />
           <NavigationProperty Name="Suplemento" Relationship="MAGASYSModel.FK_Suplemento_Producto" FromRole="Producto" ToRole="Suplemento" />
         </EntityType>
@@ -1399,6 +1507,24 @@
           <NavigationProperty Name="Localidad" Relationship="MAGASYSModel.FK_Localidad_Provincia" FromRole="Provincia" ToRole="Localidad" />
           <NavigationProperty Name="Proveedor" Relationship="MAGASYSModel.FK_Proveedor_Provincia" FromRole="Provincia" ToRole="Proveedor" />
         </EntityType>
+        <EntityType Name="Reserva">
+          <Key>
+            <PropertyRef Name="ID_RESERVA" />
+          </Key>
+          <Property Name="ID_RESERVA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="COD_ESTADO" Type="Int32" Nullable="false" />
+          <Property Name="COD_CLIENTE" Type="Int32" Nullable="false" />
+          <Property Name="FECHA_INICIO" Type="DateTime" Precision="3" />
+          <Property Name="FECHA_FIN" Type="DateTime" Precision="3" />
+          <Property Name="COD_TIPO_RESERVA" Type="Int32" Nullable="false" />
+          <Property Name="COD_PRODUCTO" Type="Int32" Nullable="false" />
+          <Property Name="ENVIO_DOMICILIO" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Cliente" Relationship="MAGASYSModel.FK_Reserva_Cliente" FromRole="Reserva" ToRole="Cliente" />
+          <NavigationProperty Name="Estado" Relationship="MAGASYSModel.FK_Reserva_Estado" FromRole="Reserva" ToRole="Estado" />
+          <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_Reserva_Producto" FromRole="Reserva" ToRole="Producto" />
+          <NavigationProperty Name="TipoReserva" Relationship="MAGASYSModel.FK_Reserva_TipoReserva" FromRole="Reserva" ToRole="TipoReserva" />
+        </EntityType>
         <EntityType Name="Revista">
           <Key>
             <PropertyRef Name="ID_REVISTA" />
@@ -1442,6 +1568,14 @@
           <Property Name="DESCRIPCION" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_Producto_TipoProducto" FromRole="TipoProducto" ToRole="Producto" />
         </EntityType>
+        <EntityType Name="TipoReserva">
+          <Key>
+            <PropertyRef Name="ID_TIPO_RESERVA" />
+          </Key>
+          <Property Name="ID_TIPO_RESERVA" Type="Int32" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Reserva" Relationship="MAGASYSModel.FK_Reserva_TipoReserva" FromRole="TipoReserva" ToRole="Reserva" />
+        </EntityType>
         <EntityType Name="Venta">
           <Key>
             <PropertyRef Name="ID_VENTA" />
@@ -1466,6 +1600,18 @@
             </Principal>
             <Dependent Role="Cliente">
               <PropertyRef Name="TIPO_DOCUMENTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reserva_Cliente">
+          <End Type="MAGASYSModel.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="MAGASYSModel.Reserva" Role="Reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Principal>
+            <Dependent Role="Reserva">
+              <PropertyRef Name="COD_CLIENTE" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1733,6 +1879,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Reserva_Estado">
+          <End Type="MAGASYSModel.Estado" Role="Estado" Multiplicity="1" />
+          <End Type="MAGASYSModel.Reserva" Role="Reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="ID_ESTADO" />
+            </Principal>
+            <Dependent Role="Reserva">
+              <PropertyRef Name="COD_ESTADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Venta_Estado">
           <End Type="MAGASYSModel.Estado" Role="Estado" Multiplicity="1" />
           <End Type="MAGASYSModel.Venta" Role="Venta" Multiplicity="*" />
@@ -1865,6 +2023,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Reserva_Producto">
+          <End Type="MAGASYSModel.Producto" Role="Producto" Multiplicity="1" />
+          <End Type="MAGASYSModel.Reserva" Role="Reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="ID_PRODUCTO" />
+            </Principal>
+            <Dependent Role="Reserva">
+              <PropertyRef Name="COD_PRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Revista_Producto">
           <End Type="MAGASYSModel.Producto" Role="Producto" Multiplicity="1" />
           <End Type="MAGASYSModel.Revista" Role="Revista" Multiplicity="*" />
@@ -1910,6 +2080,18 @@
             </Principal>
             <Dependent Role="Proveedor">
               <PropertyRef Name="ID_PROVINCIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reserva_TipoReserva">
+          <End Type="MAGASYSModel.TipoReserva" Role="TipoReserva" Multiplicity="1" />
+          <End Type="MAGASYSModel.Reserva" Role="Reserva" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoReserva">
+              <PropertyRef Name="ID_TIPO_RESERVA" />
+            </Principal>
+            <Dependent Role="Reserva">
+              <PropertyRef Name="COD_TIPO_RESERVA" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2172,6 +2354,21 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Reserva">
+            <EntityTypeMapping TypeName="MAGASYSModel.Reserva">
+              <MappingFragment StoreEntitySet="Reserva">
+                <ScalarProperty Name="ENVIO_DOMICILIO" ColumnName="ENVIO_DOMICILIO" />
+                <ScalarProperty Name="COD_PRODUCTO" ColumnName="COD_PRODUCTO" />
+                <ScalarProperty Name="COD_TIPO_RESERVA" ColumnName="COD_TIPO_RESERVA" />
+                <ScalarProperty Name="FECHA_FIN" ColumnName="FECHA_FIN" />
+                <ScalarProperty Name="FECHA_INICIO" ColumnName="FECHA_INICIO" />
+                <ScalarProperty Name="COD_CLIENTE" ColumnName="COD_CLIENTE" />
+                <ScalarProperty Name="COD_ESTADO" ColumnName="COD_ESTADO" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="ID_RESERVA" ColumnName="ID_RESERVA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Revista">
             <EntityTypeMapping TypeName="MAGASYSModel.Revista">
               <MappingFragment StoreEntitySet="Revista">
@@ -2208,6 +2405,14 @@
               <MappingFragment StoreEntitySet="TipoProducto">
                 <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
                 <ScalarProperty Name="ID_TIPO_PRODUCTO" ColumnName="ID_TIPO_PRODUCTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoReserva">
+            <EntityTypeMapping TypeName="MAGASYSModel.TipoReserva">
+              <MappingFragment StoreEntitySet="TipoReserva">
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="ID_TIPO_RESERVA" ColumnName="ID_TIPO_RESERVA" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
