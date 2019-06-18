@@ -55,7 +55,7 @@
                         </ul>
                     </li>
                     <li id="liClientes" runat="server">
-                        <a href="#"><i class="fa fa-newspaper-o"></i><span class="nav-label">Clientes</span><span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-child"></i><span class="nav-label">Clientes</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
                             <li id="liAltaCliente" runat="server"><a href="Cliente.aspx">Nuevo Cliente</a></li>
                             <li id="liClienteListado" runat="server"><a href="ClienteListado.aspx">Listado de Clientes</a></li>                            
@@ -77,12 +77,13 @@
                             <li id="liProductoDevolucionListado" runat="server"><a href="ProductoDevolucionListado.aspx">Listado de Devoluciones</a></li>
                         </ul>
                     </li>
-<%--                    <li id="liDevolucionProductos" runat="server">
-                        <a href="#"><i class="fa fa-stack-overflow"></i><span class="nav-label">Devoluciones</span><span class="fa arrow"></span></a>
+                    <li id="liReserva" runat="server">
+                        <a href="#"><i class="fa fa-list-alt"></i><span class="nav-label">Reserva</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
-
+                            <li id="liRegistrarReserva" runat="server"><a href="Reserva.aspx">Registrar Reserva</a></li>    
+                            <%--<li id="liReservaListado" runat="server"><a href=".aspx">Listado de Reservas</a></li>--%>
                         </ul>
-                    </li>--%>
+                    </li>
                 </ul>
             </div>
         </nav>
