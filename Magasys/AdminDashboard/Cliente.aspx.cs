@@ -40,6 +40,11 @@ namespace PL.AdminDashboard
                             Session.Add(Enums.Session.Cliente.ToString(), oCliente);
                             Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeClienteSuccessAlta, "Alta Cliente", "Venta.aspx"));
                         }
+                        else if (Session[Enums.Session.AltaReservaAltaCliente.ToString()] != null)
+                        {
+                            Session.Add(Enums.Session.Cliente.ToString(), oCliente);
+                            Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeClienteSuccessAlta, "Alta Cliente", "Reserva.aspx"));
+                        }
                         else
                         {
                             Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeClienteSuccessAlta, "Alta Cliente"));
@@ -65,6 +70,8 @@ namespace PL.AdminDashboard
         {
             if (Session[Enums.Session.AltaVentaAltaCliente.ToString()] != null)
                 Response.Redirect("Venta.aspx", false);
+            else if (Session[Enums.Session.AltaReservaAltaCliente.ToString()] != null)
+                Response.Redirect("Reserva.aspx", false);
             else
                 Response.Redirect("ClienteListado.aspx", false);
         }
