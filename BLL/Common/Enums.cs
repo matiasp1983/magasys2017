@@ -22,7 +22,8 @@
             IdCliente,
             ListadoVenta,
             Venta,
-            AltaReservaAltaCliente
+            AltaReservaAltaCliente,
+            Genero
         } 
 
         #endregion

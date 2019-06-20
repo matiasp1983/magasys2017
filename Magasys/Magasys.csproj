@@ -127,6 +127,9 @@
     <Content Include="AdminDashboard\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="AdminDashboard\fonts\opensans.css" />
     <Content Include="AdminDashboard\fonts\roboto.css" />
+    <Content Include="AdminDashboard\Genero.aspx" />
+    <Content Include="AdminDashboard\GeneroEditar.aspx" />
+    <Content Include="AdminDashboard\GeneroListado.aspx" />
     <Content Include="AdminDashboard\js\plugins\iCheck\icheck.min.js" />
     <Content Include="AdminDashboard\js\plugins\select2\select2.full.min.js" />
     <Content Include="AdminDashboard\js\plugins\sweetalert\sweetalert.min.js" />
@@ -218,7 +221,9 @@
     <Content Include="AdminDashboard\ProveedorListado.aspx" />
     <Content Include="AdminDashboard\ProveedorVisualizar.aspx" />
     <Content Include="favicon.ico" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AdminDashboard\Cliente.aspx.cs">
@@ -276,6 +281,27 @@
     </Compile>
     <Compile Include="AdminDashboard\DetalleVentaProductos.aspx.designer.cs">
       <DependentUpon>DetalleVentaProductos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\Genero.aspx.cs">
+      <DependentUpon>Genero.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\Genero.aspx.designer.cs">
+      <DependentUpon>Genero.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\GeneroEditar.aspx.cs">
+      <DependentUpon>GeneroEditar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\GeneroEditar.aspx.designer.cs">
+      <DependentUpon>GeneroEditar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\GeneroListado.aspx.cs">
+      <DependentUpon>GeneroListado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\GeneroListado.aspx.designer.cs">
+      <DependentUpon>GeneroListado.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminDashboard\Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>

@@ -93,6 +93,17 @@
         public const string MsjeReservaSeleccionDeProducto = "Debe seleccionar un producto.";
         public const string MsjeReservaFechaInicioMayorQueFechaFin = "La Fecha de fin debe ser mayor que la Fecha de inicio.";
 
+
+        #endregion
+
+        #region MensajesGenero
+
+        public const string MsjeGeneroSuccessAlta = "El Genero se guardó correctamente.";
+        public const string MsjeGeneroFailure = "El Genero no se pudo guardar.";
+        public const string MsjeNombreGeneroExist = "El Nombre de Genero ingresado ya existe.";
+        public const string MsjeListadoGenerosFiltrarTotalSinResultados = "No se encontraron Generos para la búsqueda seleccionada.";
+        public const string MsjeGeneroSuccessModificacion = "El Genero se modificó correctamente.";
+
         #endregion
     }
 }

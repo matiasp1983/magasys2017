@@ -1,5 +1,6 @@
 ﻿using BLL.DAL;
 using System;
+using BLL.Filters;
 using System.Collections.Generic;
 
 namespace BLL
@@ -25,6 +26,38 @@ namespace BLL
             }
 
             return oGenero;
+        }
+
+        public List<Genero> ObtenerGeneros(GeneroFiltro oGeneroFiltro)
+        {
+            List<Genero> lstGeneros = null;
+
+            try
+            {
+                using (var rep = new Repository<Genero>())
+                {
+                    lstGeneros = rep.FindAll();
+
+                    //lstGeneros.Sort((x, y) => y.FECHA_ALTA.CompareTo(x.FECHA_ALTA));
+
+                    if (lstGeneros.Count > 0)
+                    {
+                        if (oGeneroFiltro.Id_Genero == -1)
+                            lstGeneros = lstGeneros.FindAll(p => p.ID_GENERO == oGeneroFiltro.Id_Genero);
+                        else if (oGeneroFiltro.Id_Genero > 0)
+                            lstGeneros = lstGeneros.FindAll(p => p.ID_GENERO == oGeneroFiltro.Id_Genero);
+
+                        if (!String.IsNullOrEmpty(oGeneroFiltro.Nombre) && lstGeneros.Count > 0)
+                            lstGeneros = lstGeneros.FindAll(p => p.NOMBRE.ToUpper().Contains(oGeneroFiltro.Nombre.ToUpper()));
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return lstGeneros;
         }
 
         public bool AltaGenero(Genero oGenero)
@@ -64,6 +97,44 @@ namespace BLL
             }
 
             return lstGeneros;
+        }
+
+        public bool ConsultarExistenciaGenero(string nombre)
+        {
+            bool bEsNuevoNombre = false;
+
+            try
+            {
+                using (var rep = new Repository<Genero>())
+                {
+                    var oGenero = rep.Find(p => p.NOMBRE == nombre);
+                    bEsNuevoNombre = oGenero == null;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return bEsNuevoNombre;
+        }
+
+        public bool ModificarGenero(Genero oGenero)
+        {
+            var bRes = false;
+            try
+            {
+                using (var rep = new Repository<Genero>())
+                {
+                    bRes = rep.Update(oGenero);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return bRes;
         }
 
         #endregion
