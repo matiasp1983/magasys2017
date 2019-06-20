@@ -51,6 +51,16 @@ namespace PL.AdminDashboard
                 liProductos.Attributes["class"] = "active";
                 liProductoListado.Attributes["class"] = "active";
             }
+            if (loActivePage.Contains("Genero.aspx"))
+            {
+                liProductos.Attributes["class"] = "active";
+                liAltaGenero.Attributes["class"] = "active";
+            }
+            if (loActivePage.Contains("GeneroListado.aspx"))
+            {
+                liProductos.Attributes["class"] = "active";
+                liGeneroListado.Attributes["class"] = "active";
+            }
             if (loActivePage.Contains("Cliente.aspx"))
             {
                 liClientes.Attributes["class"] = "active";
