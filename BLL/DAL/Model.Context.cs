@@ -44,8 +44,6 @@ public partial class MAGASYSEntities : DbContext
 
     public virtual DbSet<DetalleVenta> DetalleVenta { get; set; }
 
-    public virtual DbSet<Diario> Diario { get; set; }
-
     public virtual DbSet<DiarioDiaSemana> DiarioDiaSemana { get; set; }
 
     public virtual DbSet<DiaSemana> DiaSemana { get; set; }
@@ -78,9 +76,13 @@ public partial class MAGASYSEntities : DbContext
 
     public virtual DbSet<Reserva> Reserva { get; set; }
 
+    public virtual DbSet<ReservaEdicion> ReservaEdicion { get; set; }
+
     public virtual DbSet<Revista> Revista { get; set; }
 
     public virtual DbSet<Suplemento> Suplemento { get; set; }
+
+    public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
 
     public virtual DbSet<TipoDocumento> TipoDocumento { get; set; }
 

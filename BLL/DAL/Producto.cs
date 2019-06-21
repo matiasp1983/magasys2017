@@ -24,7 +24,7 @@ public partial class Producto
 
         this.Coleccion = new HashSet<Coleccion>();
 
-        this.Diario = new HashSet<Diario>();
+        this.DiarioDiaSemana = new HashSet<DiarioDiaSemana>();
 
         this.Libro = new HashSet<Libro>();
 
@@ -67,7 +67,7 @@ public partial class Producto
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<Diario> Diario { get; set; }
+    public virtual ICollection<DiarioDiaSemana> DiarioDiaSemana { get; set; }
 
     public virtual Estado Estado { get; set; }
 

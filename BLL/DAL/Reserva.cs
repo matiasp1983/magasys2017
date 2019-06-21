@@ -18,6 +18,15 @@ using System;
 public partial class Reserva
 {
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+    public Reserva()
+    {
+
+        this.ReservaEdicion = new HashSet<ReservaEdicion>();
+
+    }
+
+
     public int ID_RESERVA { get; set; }
 
     public System.DateTime FECHA { get; set; }
@@ -45,6 +54,10 @@ public partial class Reserva
     public virtual Producto Producto { get; set; }
 
     public virtual TipoReserva TipoReserva { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<ReservaEdicion> ReservaEdicion { get; set; }
 
 }
 

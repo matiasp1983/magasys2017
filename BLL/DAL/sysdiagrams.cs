@@ -15,28 +15,18 @@ namespace BLL.DAL
 using System;
     using System.Collections.Generic;
     
-public partial class Suplemento
+public partial class sysdiagrams
 {
 
-    public int ID_SUPLEMENTO { get; set; }
+    public string name { get; set; }
 
-    public int COD_PRODUCTO { get; set; }
+    public int principal_id { get; set; }
 
-    public Nullable<int> ID_DIA_SEMANA { get; set; }
+    public int diagram_id { get; set; }
 
-    public int CANTIDAD_ENTREGAS { get; set; }
+    public Nullable<int> version { get; set; }
 
-    public double PRECIO { get; set; }
-
-    public int COD_DIARIO { get; set; }
-
-
-
-    public virtual DiarioDiaSemana DiarioDiaSemana { get; set; }
-
-    public virtual DiaSemana DiaSemana { get; set; }
-
-    public virtual Producto Producto { get; set; }
+    public byte[] definition { get; set; }
 
 }
 

@@ -36,6 +36,8 @@ public partial class Estado
 
         this.Reserva = new HashSet<Reserva>();
 
+        this.ReservaEdicion = new HashSet<ReservaEdicion>();
+
         this.Venta = new HashSet<Venta>();
 
     }
@@ -44,6 +46,8 @@ public partial class Estado
     public int ID_ESTADO { get; set; }
 
     public string NOMBRE { get; set; }
+
+    public string AMBITO { get; set; }
 
 
 
@@ -74,6 +78,10 @@ public partial class Estado
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Reserva> Reserva { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<ReservaEdicion> ReservaEdicion { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 

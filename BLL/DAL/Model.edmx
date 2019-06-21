@@ -78,13 +78,6 @@
           <Property Name="CANTIDAD" Type="int" Nullable="false" />
           <Property Name="SUBTOTAL" Type="float" Nullable="false" />
         </EntityType>
-        <EntityType Name="Diario">
-          <Key>
-            <PropertyRef Name="ID_DIARIO" />
-          </Key>
-          <Property Name="ID_DIARIO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="COD_PRODUCTO" Type="int" Nullable="false" />
-        </EntityType>
         <EntityType Name="DiarioDiaSemana">
           <Key>
             <PropertyRef Name="ID_DIARIO_DIA_SEMANA" />
@@ -107,6 +100,7 @@
           </Key>
           <Property Name="ID_ESTADO" Type="int" Nullable="false" />
           <Property Name="NOMBRE" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="AMBITO" Type="nchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="FormaPago">
           <Key>
@@ -250,6 +244,16 @@
           <Property Name="COD_PRODUCTO" Type="int" Nullable="false" />
           <Property Name="ENVIO_DOMICILIO" Type="nchar" MaxLength="10" />
         </EntityType>
+        <EntityType Name="ReservaEdicion">
+          <Key>
+            <PropertyRef Name="ID_RESERVA_EDICION" />
+          </Key>
+          <Property Name="ID_RESERVA_EDICION" Type="int" Nullable="false" />
+          <Property Name="FECHA" Type="datetime" Nullable="false" />
+          <Property Name="COD_RESERVA" Type="int" Nullable="false" />
+          <Property Name="COD_PROD_EDICION" Type="int" Nullable="false" />
+          <Property Name="COD_ESTADO" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Revista">
           <Key>
             <PropertyRef Name="ID_REVISTA" />
@@ -270,6 +274,16 @@
           <Property Name="CANTIDAD_ENTREGAS" Type="int" Nullable="false" />
           <Property Name="PRECIO" Type="float" Nullable="false" />
           <Property Name="COD_DIARIO" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="TipoDocumento">
           <Key>
@@ -435,30 +449,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Diario_Producto">
-          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
-          <End Role="Diario" Type="Self.Diario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Producto">
-              <PropertyRef Name="ID_PRODUCTO" />
-            </Principal>
-            <Dependent Role="Diario">
-              <PropertyRef Name="COD_PRODUCTO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DiarioDiaSemana_Diario">
-          <End Role="Diario" Type="Self.Diario" Multiplicity="1" />
-          <End Role="DiarioDiaSemana" Type="Self.DiarioDiaSemana" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Diario">
-              <PropertyRef Name="ID_DIARIO" />
-            </Principal>
-            <Dependent Role="DiarioDiaSemana">
-              <PropertyRef Name="COD_DIARIO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_DiarioDiaSemana_DiaSemana">
           <End Role="DiaSemana" Type="Self.DiaSemana" Multiplicity="1" />
           <End Role="DiarioDiaSemana" Type="Self.DiarioDiaSemana" Multiplicity="*" />
@@ -468,6 +458,18 @@
             </Principal>
             <Dependent Role="DiarioDiaSemana">
               <PropertyRef Name="ID_DIA_SEMANA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DiarioDiaSemana_Producto">
+          <End Role="Producto" Type="Self.Producto" Multiplicity="1" />
+          <End Role="DiarioDiaSemana" Type="Self.DiarioDiaSemana" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="ID_PRODUCTO" />
+            </Principal>
+            <Dependent Role="DiarioDiaSemana">
+              <PropertyRef Name="COD_DIARIO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -699,6 +701,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ReservaEdicion_Estado">
+          <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
+          <End Role="ReservaEdicion" Type="Self.ReservaEdicion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="ID_ESTADO" />
+            </Principal>
+            <Dependent Role="ReservaEdicion">
+              <PropertyRef Name="COD_ESTADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReservaEdicion_ProductoEdicion">
+          <End Role="ProductoEdicion" Type="Self.ProductoEdicion" Multiplicity="1" />
+          <End Role="ReservaEdicion" Type="Self.ReservaEdicion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductoEdicion">
+              <PropertyRef Name="ID_PRODUCTO_EDICION" />
+            </Principal>
+            <Dependent Role="ReservaEdicion">
+              <PropertyRef Name="COD_PROD_EDICION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReservaEdicion_Reserva">
+          <End Role="Reserva" Type="Self.Reserva" Multiplicity="1" />
+          <End Role="ReservaEdicion" Type="Self.ReservaEdicion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reserva">
+              <PropertyRef Name="ID_RESERVA" />
+            </Principal>
+            <Dependent Role="ReservaEdicion">
+              <PropertyRef Name="COD_RESERVA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Revista_DiaSemana">
           <End Role="DiaSemana" Type="Self.DiaSemana" Multiplicity="0..1" />
           <End Role="Revista" Type="Self.Revista" Multiplicity="*" />
@@ -735,12 +773,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Suplemento_Diario">
-          <End Role="Diario" Type="Self.Diario" Multiplicity="1" />
+        <Association Name="FK_Suplemento_DiarioDiaSemana">
+          <End Role="DiarioDiaSemana" Type="Self.DiarioDiaSemana" Multiplicity="1" />
           <End Role="Suplemento" Type="Self.Suplemento" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Diario">
-              <PropertyRef Name="ID_DIARIO" />
+            <Principal Role="DiarioDiaSemana">
+              <PropertyRef Name="ID_DIARIO_DIA_SEMANA" />
             </Principal>
             <Dependent Role="Suplemento">
               <PropertyRef Name="COD_DIARIO" />
@@ -814,7 +852,6 @@
           <EntitySet Name="DetalleProductoDevolucion" EntityType="Self.DetalleProductoDevolucion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DetalleProductoIngreso" EntityType="Self.DetalleProductoIngreso" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DetalleVenta" EntityType="Self.DetalleVenta" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Diario" EntityType="Self.Diario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DiarioDiaSemana" EntityType="Self.DiarioDiaSemana" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DiaSemana" EntityType="Self.DiaSemana" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Estado" EntityType="Self.Estado" Schema="dbo" store:Type="Tables" />
@@ -831,8 +868,10 @@
           <EntitySet Name="Proveedor" EntityType="Self.Proveedor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Provincia" EntityType="Self.Provincia" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reserva" EntityType="Self.Reserva" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReservaEdicion" EntityType="Self.ReservaEdicion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Revista" EntityType="Self.Revista" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Suplemento" EntityType="Self.Suplemento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoDocumento" EntityType="Self.TipoDocumento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoProducto" EntityType="Self.TipoProducto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoReserva" EntityType="Self.TipoReserva" Schema="dbo" store:Type="Tables" />
@@ -881,16 +920,12 @@
             <End Role="Venta" EntitySet="Venta" />
             <End Role="DetalleVenta" EntitySet="DetalleVenta" />
           </AssociationSet>
-          <AssociationSet Name="FK_Diario_Producto" Association="Self.FK_Diario_Producto">
-            <End Role="Producto" EntitySet="Producto" />
-            <End Role="Diario" EntitySet="Diario" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DiarioDiaSemana_Diario" Association="Self.FK_DiarioDiaSemana_Diario">
-            <End Role="Diario" EntitySet="Diario" />
-            <End Role="DiarioDiaSemana" EntitySet="DiarioDiaSemana" />
-          </AssociationSet>
           <AssociationSet Name="FK_DiarioDiaSemana_DiaSemana" Association="Self.FK_DiarioDiaSemana_DiaSemana">
             <End Role="DiaSemana" EntitySet="DiaSemana" />
+            <End Role="DiarioDiaSemana" EntitySet="DiarioDiaSemana" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DiarioDiaSemana_Producto" Association="Self.FK_DiarioDiaSemana_Producto">
+            <End Role="Producto" EntitySet="Producto" />
             <End Role="DiarioDiaSemana" EntitySet="DiarioDiaSemana" />
           </AssociationSet>
           <AssociationSet Name="FK_IngresoProducto_Estado" Association="Self.FK_IngresoProducto_Estado">
@@ -969,6 +1004,18 @@
             <End Role="TipoReserva" EntitySet="TipoReserva" />
             <End Role="Reserva" EntitySet="Reserva" />
           </AssociationSet>
+          <AssociationSet Name="FK_ReservaEdicion_Estado" Association="Self.FK_ReservaEdicion_Estado">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="ReservaEdicion" EntitySet="ReservaEdicion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReservaEdicion_ProductoEdicion" Association="Self.FK_ReservaEdicion_ProductoEdicion">
+            <End Role="ProductoEdicion" EntitySet="ProductoEdicion" />
+            <End Role="ReservaEdicion" EntitySet="ReservaEdicion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReservaEdicion_Reserva" Association="Self.FK_ReservaEdicion_Reserva">
+            <End Role="Reserva" EntitySet="Reserva" />
+            <End Role="ReservaEdicion" EntitySet="ReservaEdicion" />
+          </AssociationSet>
           <AssociationSet Name="FK_Revista_DiaSemana" Association="Self.FK_Revista_DiaSemana">
             <End Role="DiaSemana" EntitySet="DiaSemana" />
             <End Role="Revista" EntitySet="Revista" />
@@ -981,8 +1028,8 @@
             <End Role="Producto" EntitySet="Producto" />
             <End Role="Revista" EntitySet="Revista" />
           </AssociationSet>
-          <AssociationSet Name="FK_Suplemento_Diario" Association="Self.FK_Suplemento_Diario">
-            <End Role="Diario" EntitySet="Diario" />
+          <AssociationSet Name="FK_Suplemento_DiarioDiaSemana" Association="Self.FK_Suplemento_DiarioDiaSemana">
+            <End Role="DiarioDiaSemana" EntitySet="DiarioDiaSemana" />
             <End Role="Suplemento" EntitySet="Suplemento" />
           </AssociationSet>
           <AssociationSet Name="FK_Suplemento_DiaSemana" Association="Self.FK_Suplemento_DiaSemana">
@@ -1017,7 +1064,6 @@
           <EntitySet Name="DetalleProductoDevolucion" EntityType="MAGASYSModel.DetalleProductoDevolucion" />
           <EntitySet Name="DetalleProductoIngreso" EntityType="MAGASYSModel.DetalleProductoIngreso" />
           <EntitySet Name="DetalleVenta" EntityType="MAGASYSModel.DetalleVenta" />
-          <EntitySet Name="Diario" EntityType="MAGASYSModel.Diario" />
           <EntitySet Name="DiarioDiaSemana" EntityType="MAGASYSModel.DiarioDiaSemana" />
           <EntitySet Name="DiaSemana" EntityType="MAGASYSModel.DiaSemana" />
           <EntitySet Name="Estado" EntityType="MAGASYSModel.Estado" />
@@ -1034,8 +1080,10 @@
           <EntitySet Name="Proveedor" EntityType="MAGASYSModel.Proveedor" />
           <EntitySet Name="Provincia" EntityType="MAGASYSModel.Provincia" />
           <EntitySet Name="Reserva" EntityType="MAGASYSModel.Reserva" />
+          <EntitySet Name="ReservaEdicion" EntityType="MAGASYSModel.ReservaEdicion" />
           <EntitySet Name="Revista" EntityType="MAGASYSModel.Revista" />
           <EntitySet Name="Suplemento" EntityType="MAGASYSModel.Suplemento" />
+          <EntitySet Name="sysdiagrams" EntityType="MAGASYSModel.sysdiagrams" />
           <EntitySet Name="TipoDocumento" EntityType="MAGASYSModel.TipoDocumento" />
           <EntitySet Name="TipoProducto" EntityType="MAGASYSModel.TipoProducto" />
           <EntitySet Name="TipoReserva" EntityType="MAGASYSModel.TipoReserva" />
@@ -1092,21 +1140,17 @@
             <End Role="Venta" EntitySet="Venta" />
             <End Role="DetalleVenta" EntitySet="DetalleVenta" />
           </AssociationSet>
-          <AssociationSet Name="FK_Diario_Producto" Association="MAGASYSModel.FK_Diario_Producto">
-            <End Role="Producto" EntitySet="Producto" />
-            <End Role="Diario" EntitySet="Diario" />
-          </AssociationSet>
-          <AssociationSet Name="FK_DiarioDiaSemana_Diario" Association="MAGASYSModel.FK_DiarioDiaSemana_Diario">
-            <End Role="Diario" EntitySet="Diario" />
-            <End Role="DiarioDiaSemana" EntitySet="DiarioDiaSemana" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Suplemento_Diario" Association="MAGASYSModel.FK_Suplemento_Diario">
-            <End Role="Diario" EntitySet="Diario" />
-            <End Role="Suplemento" EntitySet="Suplemento" />
-          </AssociationSet>
           <AssociationSet Name="FK_DiarioDiaSemana_DiaSemana" Association="MAGASYSModel.FK_DiarioDiaSemana_DiaSemana">
             <End Role="DiaSemana" EntitySet="DiaSemana" />
             <End Role="DiarioDiaSemana" EntitySet="DiarioDiaSemana" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DiarioDiaSemana_Producto" Association="MAGASYSModel.FK_DiarioDiaSemana_Producto">
+            <End Role="Producto" EntitySet="Producto" />
+            <End Role="DiarioDiaSemana" EntitySet="DiarioDiaSemana" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Suplemento_DiarioDiaSemana" Association="MAGASYSModel.FK_Suplemento_DiarioDiaSemana">
+            <End Role="DiarioDiaSemana" EntitySet="DiarioDiaSemana" />
+            <End Role="Suplemento" EntitySet="Suplemento" />
           </AssociationSet>
           <AssociationSet Name="FK_Revista_DiaSemana" Association="MAGASYSModel.FK_Revista_DiaSemana">
             <End Role="DiaSemana" EntitySet="DiaSemana" />
@@ -1139,6 +1183,10 @@
           <AssociationSet Name="FK_Reserva_Estado" Association="MAGASYSModel.FK_Reserva_Estado">
             <End Role="Estado" EntitySet="Estado" />
             <End Role="Reserva" EntitySet="Reserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReservaEdicion_Estado" Association="MAGASYSModel.FK_ReservaEdicion_Estado">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="ReservaEdicion" EntitySet="ReservaEdicion" />
           </AssociationSet>
           <AssociationSet Name="FK_Venta_Estado" Association="MAGASYSModel.FK_Venta_Estado">
             <End Role="Estado" EntitySet="Estado" />
@@ -1196,6 +1244,10 @@
             <End Role="Producto" EntitySet="Producto" />
             <End Role="Suplemento" EntitySet="Suplemento" />
           </AssociationSet>
+          <AssociationSet Name="FK_ReservaEdicion_ProductoEdicion" Association="MAGASYSModel.FK_ReservaEdicion_ProductoEdicion">
+            <End Role="ProductoEdicion" EntitySet="ProductoEdicion" />
+            <End Role="ReservaEdicion" EntitySet="ReservaEdicion" />
+          </AssociationSet>
           <AssociationSet Name="FK_IngresoProducto_Proveedor" Association="MAGASYSModel.FK_IngresoProducto_Proveedor">
             <End Role="Proveedor" EntitySet="Proveedor" />
             <End Role="ProductoIngreso" EntitySet="ProductoIngreso" />
@@ -1207,6 +1259,10 @@
           <AssociationSet Name="FK_Reserva_TipoReserva" Association="MAGASYSModel.FK_Reserva_TipoReserva">
             <End Role="TipoReserva" EntitySet="TipoReserva" />
             <End Role="Reserva" EntitySet="Reserva" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReservaEdicion_Reserva" Association="MAGASYSModel.FK_ReservaEdicion_Reserva">
+            <End Role="Reserva" EntitySet="Reserva" />
+            <End Role="ReservaEdicion" EntitySet="ReservaEdicion" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Anio">
@@ -1295,16 +1351,6 @@
           <NavigationProperty Name="ProductoEdicion" Relationship="MAGASYSModel.FK_DetalleVenta_ProductoEdicion" FromRole="DetalleVenta" ToRole="ProductoEdicion" />
           <NavigationProperty Name="Venta" Relationship="MAGASYSModel.FK_DetalleVenta_Venta" FromRole="DetalleVenta" ToRole="Venta" />
         </EntityType>
-        <EntityType Name="Diario">
-          <Key>
-            <PropertyRef Name="ID_DIARIO" />
-          </Key>
-          <Property Name="ID_DIARIO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="COD_PRODUCTO" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_Diario_Producto" FromRole="Diario" ToRole="Producto" />
-          <NavigationProperty Name="DiarioDiaSemana" Relationship="MAGASYSModel.FK_DiarioDiaSemana_Diario" FromRole="Diario" ToRole="DiarioDiaSemana" />
-          <NavigationProperty Name="Suplemento" Relationship="MAGASYSModel.FK_Suplemento_Diario" FromRole="Diario" ToRole="Suplemento" />
-        </EntityType>
         <EntityType Name="DiarioDiaSemana">
           <Key>
             <PropertyRef Name="ID_DIARIO_DIA_SEMANA" />
@@ -1313,8 +1359,9 @@
           <Property Name="COD_DIARIO" Type="Int32" Nullable="false" />
           <Property Name="ID_DIA_SEMANA" Type="Int32" Nullable="false" />
           <Property Name="PRECIO" Type="Double" />
-          <NavigationProperty Name="Diario" Relationship="MAGASYSModel.FK_DiarioDiaSemana_Diario" FromRole="DiarioDiaSemana" ToRole="Diario" />
           <NavigationProperty Name="DiaSemana" Relationship="MAGASYSModel.FK_DiarioDiaSemana_DiaSemana" FromRole="DiarioDiaSemana" ToRole="DiaSemana" />
+          <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_DiarioDiaSemana_Producto" FromRole="DiarioDiaSemana" ToRole="Producto" />
+          <NavigationProperty Name="Suplemento" Relationship="MAGASYSModel.FK_Suplemento_DiarioDiaSemana" FromRole="DiarioDiaSemana" ToRole="Suplemento" />
         </EntityType>
         <EntityType Name="DiaSemana">
           <Key>
@@ -1333,6 +1380,7 @@
           </Key>
           <Property Name="ID_ESTADO" Type="Int32" Nullable="false" />
           <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="AMBITO" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="DetalleProductoIngreso" Relationship="MAGASYSModel.FK_DetalleIngresoProducto_Estado" FromRole="Estado" ToRole="DetalleProductoIngreso" />
           <NavigationProperty Name="ProductoIngreso" Relationship="MAGASYSModel.FK_IngresoProducto_Estado" FromRole="Estado" ToRole="ProductoIngreso" />
           <NavigationProperty Name="ProductoEdicion" Relationship="MAGASYSModel.FK_Producto_Edicion_Estado" FromRole="Estado" ToRole="ProductoEdicion" />
@@ -1340,6 +1388,7 @@
           <NavigationProperty Name="ProductoDevolucion" Relationship="MAGASYSModel.FK_ProductoDevolucion_Estado" FromRole="Estado" ToRole="ProductoDevolucion" />
           <NavigationProperty Name="Proveedor" Relationship="MAGASYSModel.FK_Proveedor_Estado" FromRole="Estado" ToRole="Proveedor" />
           <NavigationProperty Name="Reserva" Relationship="MAGASYSModel.FK_Reserva_Estado" FromRole="Estado" ToRole="Reserva" />
+          <NavigationProperty Name="ReservaEdicion" Relationship="MAGASYSModel.FK_ReservaEdicion_Estado" FromRole="Estado" ToRole="ReservaEdicion" />
           <NavigationProperty Name="Venta" Relationship="MAGASYSModel.FK_Venta_Estado" FromRole="Estado" ToRole="Venta" />
         </EntityType>
         <EntityType Name="FormaPago">
@@ -1414,7 +1463,7 @@
           <Property Name="COD_TIPO_PRODUCTO" Type="Int32" Nullable="false" />
           <Property Name="FECHA_BAJA" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Coleccion" Relationship="MAGASYSModel.FK_Coleccion_Producto" FromRole="Producto" ToRole="Coleccion" />
-          <NavigationProperty Name="Diario" Relationship="MAGASYSModel.FK_Diario_Producto" FromRole="Producto" ToRole="Diario" />
+          <NavigationProperty Name="DiarioDiaSemana" Relationship="MAGASYSModel.FK_DiarioDiaSemana_Producto" FromRole="Producto" ToRole="DiarioDiaSemana" />
           <NavigationProperty Name="Estado" Relationship="MAGASYSModel.FK_Producto_Estado1" FromRole="Producto" ToRole="Estado" />
           <NavigationProperty Name="Genero" Relationship="MAGASYSModel.FK_Producto_Genero" FromRole="Producto" ToRole="Genero" />
           <NavigationProperty Name="Libro" Relationship="MAGASYSModel.FK_Libro_Producto" FromRole="Producto" ToRole="Libro" />
@@ -1456,6 +1505,7 @@
           <NavigationProperty Name="DetalleVenta" Relationship="MAGASYSModel.FK_DetalleVenta_ProductoEdicion" FromRole="ProductoEdicion" ToRole="DetalleVenta" />
           <NavigationProperty Name="Estado" Relationship="MAGASYSModel.FK_Producto_Edicion_Estado" FromRole="ProductoEdicion" ToRole="Estado" />
           <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_Producto_Edicion_Producto" FromRole="ProductoEdicion" ToRole="Producto" />
+          <NavigationProperty Name="ReservaEdicion" Relationship="MAGASYSModel.FK_ReservaEdicion_ProductoEdicion" FromRole="ProductoEdicion" ToRole="ReservaEdicion" />
         </EntityType>
         <EntityType Name="ProductoIngreso">
           <Key>
@@ -1524,6 +1574,20 @@
           <NavigationProperty Name="Estado" Relationship="MAGASYSModel.FK_Reserva_Estado" FromRole="Reserva" ToRole="Estado" />
           <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_Reserva_Producto" FromRole="Reserva" ToRole="Producto" />
           <NavigationProperty Name="TipoReserva" Relationship="MAGASYSModel.FK_Reserva_TipoReserva" FromRole="Reserva" ToRole="TipoReserva" />
+          <NavigationProperty Name="ReservaEdicion" Relationship="MAGASYSModel.FK_ReservaEdicion_Reserva" FromRole="Reserva" ToRole="ReservaEdicion" />
+        </EntityType>
+        <EntityType Name="ReservaEdicion">
+          <Key>
+            <PropertyRef Name="ID_RESERVA_EDICION" />
+          </Key>
+          <Property Name="ID_RESERVA_EDICION" Type="Int32" Nullable="false" />
+          <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="COD_RESERVA" Type="Int32" Nullable="false" />
+          <Property Name="COD_PROD_EDICION" Type="Int32" Nullable="false" />
+          <Property Name="COD_ESTADO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Estado" Relationship="MAGASYSModel.FK_ReservaEdicion_Estado" FromRole="ReservaEdicion" ToRole="Estado" />
+          <NavigationProperty Name="ProductoEdicion" Relationship="MAGASYSModel.FK_ReservaEdicion_ProductoEdicion" FromRole="ReservaEdicion" ToRole="ProductoEdicion" />
+          <NavigationProperty Name="Reserva" Relationship="MAGASYSModel.FK_ReservaEdicion_Reserva" FromRole="ReservaEdicion" ToRole="Reserva" />
         </EntityType>
         <EntityType Name="Revista">
           <Key>
@@ -1548,9 +1612,19 @@
           <Property Name="CANTIDAD_ENTREGAS" Type="Int32" Nullable="false" />
           <Property Name="PRECIO" Type="Double" Nullable="false" />
           <Property Name="COD_DIARIO" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Diario" Relationship="MAGASYSModel.FK_Suplemento_Diario" FromRole="Suplemento" ToRole="Diario" />
+          <NavigationProperty Name="DiarioDiaSemana" Relationship="MAGASYSModel.FK_Suplemento_DiarioDiaSemana" FromRole="Suplemento" ToRole="DiarioDiaSemana" />
           <NavigationProperty Name="DiaSemana" Relationship="MAGASYSModel.FK_Suplemento_DiaSemana" FromRole="Suplemento" ToRole="DiaSemana" />
           <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_Suplemento_Producto" FromRole="Suplemento" ToRole="Producto" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="TipoDocumento">
           <Key>
@@ -1747,42 +1821,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Diario_Producto">
-          <End Type="MAGASYSModel.Producto" Role="Producto" Multiplicity="1" />
-          <End Type="MAGASYSModel.Diario" Role="Diario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Producto">
-              <PropertyRef Name="ID_PRODUCTO" />
-            </Principal>
-            <Dependent Role="Diario">
-              <PropertyRef Name="COD_PRODUCTO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DiarioDiaSemana_Diario">
-          <End Type="MAGASYSModel.Diario" Role="Diario" Multiplicity="1" />
-          <End Type="MAGASYSModel.DiarioDiaSemana" Role="DiarioDiaSemana" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Diario">
-              <PropertyRef Name="ID_DIARIO" />
-            </Principal>
-            <Dependent Role="DiarioDiaSemana">
-              <PropertyRef Name="COD_DIARIO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Suplemento_Diario">
-          <End Type="MAGASYSModel.Diario" Role="Diario" Multiplicity="1" />
-          <End Type="MAGASYSModel.Suplemento" Role="Suplemento" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Diario">
-              <PropertyRef Name="ID_DIARIO" />
-            </Principal>
-            <Dependent Role="Suplemento">
-              <PropertyRef Name="COD_DIARIO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_DiarioDiaSemana_DiaSemana">
           <End Type="MAGASYSModel.DiaSemana" Role="DiaSemana" Multiplicity="1" />
           <End Type="MAGASYSModel.DiarioDiaSemana" Role="DiarioDiaSemana" Multiplicity="*" />
@@ -1792,6 +1830,30 @@
             </Principal>
             <Dependent Role="DiarioDiaSemana">
               <PropertyRef Name="ID_DIA_SEMANA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DiarioDiaSemana_Producto">
+          <End Type="MAGASYSModel.Producto" Role="Producto" Multiplicity="1" />
+          <End Type="MAGASYSModel.DiarioDiaSemana" Role="DiarioDiaSemana" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producto">
+              <PropertyRef Name="ID_PRODUCTO" />
+            </Principal>
+            <Dependent Role="DiarioDiaSemana">
+              <PropertyRef Name="COD_DIARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Suplemento_DiarioDiaSemana">
+          <End Type="MAGASYSModel.DiarioDiaSemana" Role="DiarioDiaSemana" Multiplicity="1" />
+          <End Type="MAGASYSModel.Suplemento" Role="Suplemento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DiarioDiaSemana">
+              <PropertyRef Name="ID_DIARIO_DIA_SEMANA" />
+            </Principal>
+            <Dependent Role="Suplemento">
+              <PropertyRef Name="COD_DIARIO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1887,6 +1949,18 @@
               <PropertyRef Name="ID_ESTADO" />
             </Principal>
             <Dependent Role="Reserva">
+              <PropertyRef Name="COD_ESTADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReservaEdicion_Estado">
+          <End Type="MAGASYSModel.Estado" Role="Estado" Multiplicity="1" />
+          <End Type="MAGASYSModel.ReservaEdicion" Role="ReservaEdicion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="ID_ESTADO" />
+            </Principal>
+            <Dependent Role="ReservaEdicion">
               <PropertyRef Name="COD_ESTADO" />
             </Dependent>
           </ReferentialConstraint>
@@ -2059,6 +2133,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ReservaEdicion_ProductoEdicion">
+          <End Type="MAGASYSModel.ProductoEdicion" Role="ProductoEdicion" Multiplicity="1" />
+          <End Type="MAGASYSModel.ReservaEdicion" Role="ReservaEdicion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProductoEdicion">
+              <PropertyRef Name="ID_PRODUCTO_EDICION" />
+            </Principal>
+            <Dependent Role="ReservaEdicion">
+              <PropertyRef Name="COD_PROD_EDICION" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_IngresoProducto_Proveedor">
           <End Type="MAGASYSModel.Proveedor" Role="Proveedor" Multiplicity="1" />
           <End Type="MAGASYSModel.ProductoIngreso" Role="ProductoIngreso" Multiplicity="*" />
@@ -2092,6 +2178,18 @@
             </Principal>
             <Dependent Role="Reserva">
               <PropertyRef Name="COD_TIPO_RESERVA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReservaEdicion_Reserva">
+          <End Type="MAGASYSModel.Reserva" Role="Reserva" Multiplicity="1" />
+          <End Type="MAGASYSModel.ReservaEdicion" Role="ReservaEdicion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Reserva">
+              <PropertyRef Name="ID_RESERVA" />
+            </Principal>
+            <Dependent Role="ReservaEdicion">
+              <PropertyRef Name="COD_RESERVA" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2180,14 +2278,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Diario">
-            <EntityTypeMapping TypeName="MAGASYSModel.Diario">
-              <MappingFragment StoreEntitySet="Diario">
-                <ScalarProperty Name="COD_PRODUCTO" ColumnName="COD_PRODUCTO" />
-                <ScalarProperty Name="ID_DIARIO" ColumnName="ID_DIARIO" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DiarioDiaSemana">
             <EntityTypeMapping TypeName="MAGASYSModel.DiarioDiaSemana">
               <MappingFragment StoreEntitySet="DiarioDiaSemana">
@@ -2209,6 +2299,7 @@
           <EntitySetMapping Name="Estado">
             <EntityTypeMapping TypeName="MAGASYSModel.Estado">
               <MappingFragment StoreEntitySet="Estado">
+                <ScalarProperty Name="AMBITO" ColumnName="AMBITO" />
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
                 <ScalarProperty Name="ID_ESTADO" ColumnName="ID_ESTADO" />
               </MappingFragment>
@@ -2369,6 +2460,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ReservaEdicion">
+            <EntityTypeMapping TypeName="MAGASYSModel.ReservaEdicion">
+              <MappingFragment StoreEntitySet="ReservaEdicion">
+                <ScalarProperty Name="COD_ESTADO" ColumnName="COD_ESTADO" />
+                <ScalarProperty Name="COD_PROD_EDICION" ColumnName="COD_PROD_EDICION" />
+                <ScalarProperty Name="COD_RESERVA" ColumnName="COD_RESERVA" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="ID_RESERVA_EDICION" ColumnName="ID_RESERVA_EDICION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Revista">
             <EntityTypeMapping TypeName="MAGASYSModel.Revista">
               <MappingFragment StoreEntitySet="Revista">
@@ -2389,6 +2491,17 @@
                 <ScalarProperty Name="ID_DIA_SEMANA" ColumnName="ID_DIA_SEMANA" />
                 <ScalarProperty Name="COD_PRODUCTO" ColumnName="COD_PRODUCTO" />
                 <ScalarProperty Name="ID_SUPLEMENTO" ColumnName="ID_SUPLEMENTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="MAGASYSModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
