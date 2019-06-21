@@ -1,5 +1,6 @@
 ﻿using BLL.DAL;
 using System;
+using BLL.Filters;
 using System.Collections.Generic;
 
 namespace BLL
@@ -26,6 +27,26 @@ namespace BLL
 
             return lstEstado;
         }
+
+        public Estado ObtenerEstado(EstadoFiltro oEstadoFiltro)
+        {
+            Estado oEstado = null;
+
+            try
+            {
+                using (var rep = new Repository<Estado>())
+                {
+                    oEstado = rep.Find(p => p.NOMBRE == oEstadoFiltro.Nombre && p.AMBITO == oEstadoFiltro.Ambito);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return oEstado;
+        }
+        
 
         #endregion
     }
