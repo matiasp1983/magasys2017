@@ -188,7 +188,7 @@ namespace PL.AdminDashboard
 
             try
             {
-                ddlEstado.DataSource = oEstado.ObtenerEstados();
+                ddlEstado.DataSource = oEstado.ObtenerEstados("GLOBAL");
                 ddlEstado.DataTextField = "NOMBRE";
                 ddlEstado.DataValueField = "ID_ESTADO";
                 ddlEstado.DataBind();
