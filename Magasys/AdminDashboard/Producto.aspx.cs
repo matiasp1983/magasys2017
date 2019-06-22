@@ -1,4 +1,5 @@
 ﻿using BLL.Common;
+using BLL.DAL;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -83,7 +84,15 @@ namespace PL.AdminDashboard
                         break;
                     default:
                         var lstDiarioDiasSemanas = CargarDiarioDesdeControles();
-                        loResutado = new BLL.DiarioBLL().AltaDiario(oProducto, lstDiarioDiasSemanas);
+                        using (var loRepDiarioDiaSemana = new Repository<DiarioDiaSemana>())
+                        {
+                            foreach (var loDiarioDiaSemana in lstDiarioDiasSemanas)
+                            {
+                                BLL.DAL.Producto oProductoDia = CambiarNombreDia(oProducto, loDiarioDiaSemana);
+                                loResutado = new BLL.DiarioBLL().AltaDiario(oProductoDia, loDiarioDiaSemana);
+                            }
+                                
+                        }
                         break;
                 }
 
@@ -430,6 +439,14 @@ namespace PL.AdminDashboard
             loNuevoString = loNuevoString.Substring(loIniciaString, loCortar);
 
             return loNuevoString;
+        }
+
+        private BLL.DAL.Producto CambiarNombreDia(BLL.DAL.Producto oProductoOri, BLL.DAL.DiarioDiaSemana diarioDiaSemana)
+        {
+            BLL.DAL.Producto oProductoNew = oProductoOri;
+            BLL.DAL.DiaSemana dia = new BLL.DiaSemanaBLL().ObtenerDiaSemana(diarioDiaSemana.ID_DIA_SEMANA.ToString());
+            oProductoNew.NOMBRE = String.Concat(oProductoOri.NOMBRE, " - ", dia.NOMBRE);
+            return oProductoNew;
         }
 
         #endregion

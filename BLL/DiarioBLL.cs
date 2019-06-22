@@ -98,17 +98,17 @@ namespace BLL
         public ProductoDiario ObtenerDiarioPorIdDiario(int idDiario)
         {
             ProductoDiario oProductoDiario = null;
-            Diario oDiario = null;
+            DiarioDiaSemana oDiario = null;
 
             try
             {
-                using (var rep = new Repository<Diario>())
+                using (var rep = new Repository<DiarioDiaSemana>())
                 {
-                    oDiario = rep.Find(p => p.ID_DIARIO == idDiario);
+                    oDiario = rep.Find(p => p.ID_DIARIO_DIA_SEMANA == idDiario);
                 }
                 if (oDiario != null)
                 {
-                    oProductoDiario = ObtenerDiario(oDiario.COD_PRODUCTO);
+                    oProductoDiario = ObtenerDiario(oDiario.ID_DIARIO_DIA_SEMANA);
                 }
             }
             catch (Exception)
@@ -278,7 +278,7 @@ namespace BLL
             return lstDiarioEdicion;
         }
 
-        public bool AltaDiario(Producto oProducto, List<DiarioDiaSemana> lstDiarioDiasSemanas)
+        public bool AltaDiario(Producto oProducto, DiarioDiaSemana loDiarioDiasSemana)
         {
             var bRes = false;
 
@@ -292,37 +292,13 @@ namespace BLL
 
                         if (bRes)
                         {
-                            using (var loRepDiario = new Repository<Diario>())
+                            using (var loRepDiario = new Repository<DiarioDiaSemana>())
                             {
-                                var oDiario = new Diario
-                                {
-                                    COD_PRODUCTO = oProducto.ID_PRODUCTO
-                                };
-
-                                bRes = loRepDiario.Create(oDiario) != null;
-
-                                if (bRes)
-                                {
-                                    using (var loRepDiarioDiaSemana = new Repository<DiarioDiaSemana>())
-                                    {
-                                        var oDiarioDiaSemana = new DiarioDiaSemana
-                                        {
-                                            COD_DIARIO = oDiario.ID_DIARIO
-                                        };
-
-                                        foreach (var loDiarioDiaSemana in lstDiarioDiasSemanas)
-                                        {
-                                            oDiarioDiaSemana.ID_DIA_SEMANA = loDiarioDiaSemana.ID_DIA_SEMANA;
-                                            oDiarioDiaSemana.PRECIO = loDiarioDiaSemana.PRECIO;
-                                            bRes = loRepDiarioDiaSemana.Create(oDiarioDiaSemana) != null;
-                                        }
-                                    }
-                                }
+                                loDiarioDiasSemana.COD_DIARIO = oProducto.ID_PRODUCTO;
+                                bRes = loRepDiario.Create(loDiarioDiasSemana) != null;
                             }
                         }
                     }
-
-                    loTransactionScope.Complete();
                 }
             }
             catch (Exception)
