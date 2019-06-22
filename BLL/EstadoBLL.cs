@@ -9,7 +9,7 @@ namespace BLL
     {
         #region Métodos Públicos
 
-        public List<Estado> ObtenerEstados()
+        public List<Estado> ObtenerEstados(string ambito)
         {
             List<Estado> lstEstado = null;
 
@@ -17,7 +17,7 @@ namespace BLL
             {
                 using (var rep = new Repository<Estado>())
                 {
-                    lstEstado = rep.FindAll();
+                    lstEstado = rep.Search(p => p.AMBITO == ambito);
                 }
             }
             catch (Exception)
@@ -47,7 +47,6 @@ namespace BLL
             return oEstado;
         }
         
-
         #endregion
     }
 }
