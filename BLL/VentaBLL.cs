@@ -150,7 +150,7 @@ namespace BLL
 
                         if (bRes)
                         {
-                            loVenta.COD_ESTADO = 3;
+                            loVenta.COD_ESTADO = 6;
                             bRes = loRepVenta.Update(loVenta);
                         }
                     }
