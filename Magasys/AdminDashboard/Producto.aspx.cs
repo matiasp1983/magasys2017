@@ -84,16 +84,13 @@ namespace PL.AdminDashboard
                         break;
                     default:
                         var lstDiarioDiasSemanas = CargarDiarioDesdeControles();
-                        using (var loRepDiarioDiaSemana = new Repository<DiarioDiaSemana>())
+                        var loNombre = oProducto.NOMBRE;
+                        foreach (var loDiarioDiaSemana in lstDiarioDiasSemanas)
                         {
-                            foreach (var loDiarioDiaSemana in lstDiarioDiasSemanas)
-                            {
-                                //BLL.DAL.Producto oProductoDia = new BLL.DAL.Producto();
-                                //oProductoDia = CambiarNombreDia(oProducto, loDiarioDiaSemana);
-                                loResutado = new BLL.DiarioBLL().AltaDiario(oProducto, loDiarioDiaSemana);
-                            }
-                                
+                            oProducto.NOMBRE = string.Format("{0} - {1}", loNombre, loDiarioDiaSemana.DiaSemana.NOMBRE);
+                            loResutado = new BLL.DiarioBLL().AltaDiario(oProducto, loDiarioDiaSemana);
                         }
+
                         break;
                 }
 
@@ -115,7 +112,7 @@ namespace PL.AdminDashboard
         }
 
         protected void BtnCancelar_Click(object sender, EventArgs e)
-        {            
+        {
             Response.Redirect("ProductoListado.aspx", false);
         }
 
@@ -395,7 +392,7 @@ namespace PL.AdminDashboard
             {
                 var oDiarioDiaSemana = new BLL.DAL.DiarioDiaSemana
                 {
-                    ID_DIA_SEMANA = new BLL.DiaSemanaBLL().ObtenerDiaSemana(ObtenerParteDeNombreIDTexbox(loTxtPrecioDiario.ID.ToString())).ID_DIA_SEMANA
+                    DiaSemana = new BLL.DiaSemanaBLL().ObtenerDiaSemana(ObtenerParteDeNombreIDTexbox(loTxtPrecioDiario.ID.ToString()))
                 };
 
                 if (!String.IsNullOrEmpty(loTxtPrecioDiario.Text))
@@ -440,17 +437,7 @@ namespace PL.AdminDashboard
             loNuevoString = loNuevoString.Substring(loIniciaString, loCortar);
 
             return loNuevoString;
-        }
-
-        private BLL.DAL.Producto CambiarNombreDia(BLL.DAL.Producto oProductoOri, BLL.DAL.DiarioDiaSemana diarioDiaSemana)
-        {
-            BLL.DAL.Producto oProductoNew = new BLL.DAL.Producto();
-            oProductoNew = oProductoOri;
-            BLL.DAL.DiaSemana dia = new BLL.DiaSemanaBLL().ObtenerDiaSemana(diarioDiaSemana.ID_DIA_SEMANA);
-            String nombre = oProductoOri.NOMBRE + " - " + dia.NOMBRE;
-            oProductoNew.NOMBRE = nombre;
-            return oProductoNew;
-        }
+        }        
 
         #endregion
     }
