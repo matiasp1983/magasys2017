@@ -88,8 +88,9 @@ namespace PL.AdminDashboard
                         {
                             foreach (var loDiarioDiaSemana in lstDiarioDiasSemanas)
                             {
-                                BLL.DAL.Producto oProductoDia = CambiarNombreDia(oProducto, loDiarioDiaSemana);
-                                loResutado = new BLL.DiarioBLL().AltaDiario(oProductoDia, loDiarioDiaSemana);
+                                //BLL.DAL.Producto oProductoDia = new BLL.DAL.Producto();
+                                //oProductoDia = CambiarNombreDia(oProducto, loDiarioDiaSemana);
+                                loResutado = new BLL.DiarioBLL().AltaDiario(oProducto, loDiarioDiaSemana);
                             }
                                 
                         }
@@ -443,9 +444,11 @@ namespace PL.AdminDashboard
 
         private BLL.DAL.Producto CambiarNombreDia(BLL.DAL.Producto oProductoOri, BLL.DAL.DiarioDiaSemana diarioDiaSemana)
         {
-            BLL.DAL.Producto oProductoNew = oProductoOri;
-            BLL.DAL.DiaSemana dia = new BLL.DiaSemanaBLL().ObtenerDiaSemana(diarioDiaSemana.ID_DIA_SEMANA.ToString());
-            oProductoNew.NOMBRE = String.Concat(oProductoOri.NOMBRE, " - ", dia.NOMBRE);
+            BLL.DAL.Producto oProductoNew = new BLL.DAL.Producto();
+            oProductoNew = oProductoOri;
+            BLL.DAL.DiaSemana dia = new BLL.DiaSemanaBLL().ObtenerDiaSemana(diarioDiaSemana.ID_DIA_SEMANA);
+            String nombre = oProductoOri.NOMBRE + " - " + dia.NOMBRE;
+            oProductoNew.NOMBRE = nombre;
             return oProductoNew;
         }
 

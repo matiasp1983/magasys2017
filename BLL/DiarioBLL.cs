@@ -13,8 +13,8 @@ namespace BLL
         public ProductoDiario ObtenerDiario(long idProducto)
         {
             Producto oProducto = null;
-            Diario oDiario = null;
-            List<DiarioDiaSemana> lstDiarioDiaSemana = null;
+            DiarioDiaSemana oDiario = null;
+            //List<DiarioDiaSemana> lstDiarioDiaSemana = null;
             ProductoDiario oProductoDiario = null;
 
             try
@@ -23,16 +23,16 @@ namespace BLL
                 {
                     oProducto = loRepProducto.Find(x => x.ID_PRODUCTO == idProducto);
 
-                    using (var loRepDiario = new Repository<Diario>())
+                    using (var loRepDiario = new Repository<DiarioDiaSemana>())
                     {
-                        oDiario = loRepDiario.Find(x => x.COD_PRODUCTO == oProducto.ID_PRODUCTO);
+                        oDiario = loRepDiario.Find(x => x.COD_DIARIO == oProducto.ID_PRODUCTO);
 
-                        using (var loRepDiarioDiaSemana = new Repository<DiarioDiaSemana>())
+                        //using (var loRepDiarioDiaSemana = new Repository<DiarioDiaSemana>())
+                        //{
+                        //    lstDiarioDiaSemana = loRepDiarioDiaSemana.Search(x => x.COD_DIARIO == oDiario.ID_DIARIO);
+
+                        oProductoDiario = new ProductoDiario
                         {
-                            lstDiarioDiaSemana = loRepDiarioDiaSemana.Search(x => x.COD_DIARIO == oDiario.ID_DIARIO);
-
-                            oProductoDiario = new ProductoDiario
-                            {
                                 ID_PRODUCTO = oProducto.ID_PRODUCTO,
                                 FECHA_ALTA = oProducto.FECHA_ALTA,
                                 NOMBRE = oProducto.NOMBRE,
@@ -41,49 +41,49 @@ namespace BLL
                                 COD_GENERO = oProducto.COD_GENERO,
                                 COD_PROVEEDOR = oProducto.COD_PROVEEDOR,
                                 COD_TIPO_PRODUCTO = oProducto.COD_TIPO_PRODUCTO,
-                                ID_DIARIO = oDiario.ID_DIARIO
-                            };
+                                ID_DIARIO = oDiario.COD_DIARIO
+                        };
 
-                            foreach (var loDiarioDiaSemana in lstDiarioDiaSemana)
-                            {
-                                using (var loRepDiaSemana = new Repository<DiaSemana>())
-                                {
-                                    String loDiaSemana = loRepDiaSemana.Find(x => x.ID_DIA_SEMANA == loDiarioDiaSemana.ID_DIA_SEMANA).NOMBRE;
-
-                                    switch (loDiaSemana)
-                                    {
-                                        case "Lunes":
-                                            oProductoDiario.ID_DIARIO_DIA_SEMANA_LUNES = loDiarioDiaSemana.ID_DIARIO_DIA_SEMANA;
-                                            oProductoDiario.PRECIO_LUNES = loDiarioDiaSemana.PRECIO;
-                                            break;
-                                        case "Martes":
-                                            oProductoDiario.ID_DIARIO_DIA_SEMANA_MARTES = loDiarioDiaSemana.ID_DIARIO_DIA_SEMANA;
-                                            oProductoDiario.PRECIO_MARTES = loDiarioDiaSemana.PRECIO;
-                                            break;
-                                        case "Miércoles":
-                                            oProductoDiario.ID_DIARIO_DIA_SEMANA_MIERCOLES = loDiarioDiaSemana.ID_DIARIO_DIA_SEMANA;
-                                            oProductoDiario.PRECIO_MIERCOLES = loDiarioDiaSemana.PRECIO;
-                                            break;
-                                        case "Jueves":
-                                            oProductoDiario.ID_DIARIO_DIA_SEMANA_JUEVES = loDiarioDiaSemana.ID_DIARIO_DIA_SEMANA;
-                                            oProductoDiario.PRECIO_JUEVES = loDiarioDiaSemana.PRECIO;
-                                            break;
-                                        case "Viernes":
-                                            oProductoDiario.ID_DIARIO_DIA_SEMANA_VIERNES = loDiarioDiaSemana.ID_DIARIO_DIA_SEMANA;
-                                            oProductoDiario.PRECIO_VIERNES = loDiarioDiaSemana.PRECIO;
-                                            break;
-                                        case "Sábado":
-                                            oProductoDiario.ID_DIARIO_DIA_SEMANA_SABADO = loDiarioDiaSemana.ID_DIARIO_DIA_SEMANA;
-                                            oProductoDiario.PRECIO_SABADO = loDiarioDiaSemana.PRECIO;
-                                            break;
-                                        default:
-                                            oProductoDiario.ID_DIARIO_DIA_SEMANA_DOMINGO = loDiarioDiaSemana.ID_DIARIO_DIA_SEMANA;
-                                            oProductoDiario.PRECIO_DOMINGO = loDiarioDiaSemana.PRECIO;
-                                            break;
-                                    }
-                                }
-                            }
+                        //foreach (var loDiarioDiaSemana in lstDiarioDiaSemana)
+                        //{
+                        //    using (var loRepDiaSemana = new Repository<DiaSemana>())
+                        //    {
+                        DiaSemana diaSemana = new BLL.DiaSemanaBLL().ObtenerDiaSemana(oDiario.ID_DIA_SEMANA);
+                       
+                        switch (diaSemana.NOMBRE)
+                        {
+                            case "Lunes":
+                                oProductoDiario.ID_DIARIO_DIA_SEMANA_LUNES = oDiario.ID_DIARIO_DIA_SEMANA;
+                                oProductoDiario.PRECIO_LUNES = oDiario.PRECIO;
+                                break;
+                            case "Martes":
+                                oProductoDiario.ID_DIARIO_DIA_SEMANA_MARTES = oDiario.ID_DIARIO_DIA_SEMANA;
+                                oProductoDiario.PRECIO_MARTES = oDiario.PRECIO;
+                                break;
+                            case "Miércoles":
+                                oProductoDiario.ID_DIARIO_DIA_SEMANA_MIERCOLES = oDiario.ID_DIARIO_DIA_SEMANA;
+                                oProductoDiario.PRECIO_MIERCOLES = oDiario.PRECIO;
+                                break;
+                            case "Jueves":
+                                oProductoDiario.ID_DIARIO_DIA_SEMANA_JUEVES = oDiario.ID_DIARIO_DIA_SEMANA;
+                                oProductoDiario.PRECIO_JUEVES = oDiario.PRECIO;
+                                break;
+                            case "Viernes":
+                                oProductoDiario.ID_DIARIO_DIA_SEMANA_VIERNES = oDiario.ID_DIARIO_DIA_SEMANA;
+                                oProductoDiario.PRECIO_VIERNES = oDiario.PRECIO;
+                                break;
+                            case "Sábado":
+                                oProductoDiario.ID_DIARIO_DIA_SEMANA_SABADO = oDiario.ID_DIARIO_DIA_SEMANA;
+                                oProductoDiario.PRECIO_SABADO = oDiario.PRECIO;
+                                break;
+                            default:
+                                oProductoDiario.ID_DIARIO_DIA_SEMANA_DOMINGO = oDiario.ID_DIARIO_DIA_SEMANA;
+                                oProductoDiario.PRECIO_DOMINGO = oDiario.PRECIO;
+                                break;
                         }
+                        //    }
+                        //}
+
                     }
                 }
             }
@@ -121,12 +121,12 @@ namespace BLL
 
         public List<ProductoDiario> ObtenerDiarios()
         {
-            List<Diario> lstDiarios = null;
+            List<DiarioDiaSemana> lstDiarios = null;
             List<ProductoDiario> lstDiariosProducto = null;
 
             try
             {
-                using (var loRepDiario = new Repository<Diario>())
+                using (var loRepDiario = new Repository<DiarioDiaSemana>())
                 {
                     lstDiarios = loRepDiario.FindAll();
                 }
@@ -139,13 +139,10 @@ namespace BLL
                     {
                         ProductoDiario oProductoDiario = new ProductoDiario
                         {
-                            ID_DIARIO = new Diario
-                            {
-                                ID_DIARIO = loItemDiario.ID_DIARIO
-                            }.ID_DIARIO,
+                            ID_DIARIO = loItemDiario.COD_DIARIO,
                             NOMBRE = new Producto
                             {
-                                DESCRIPCION = loRepProducto.Find(x => x.ID_PRODUCTO == loItemDiario.COD_PRODUCTO).NOMBRE
+                                DESCRIPCION = loRepProducto.Find(x => x.ID_PRODUCTO == loItemDiario.COD_DIARIO).NOMBRE
                             }.DESCRIPCION
                         };
 
@@ -193,8 +190,8 @@ namespace BLL
                 {
                     int loCodigoDiario;
 
-                    using (var loRepDiario = new Repository<Diario>())
-                        loCodigoDiario = loRepDiario.Find(p => p.COD_PRODUCTO == loProducto.ID_PRODUCTO).ID_DIARIO;
+                    using (var loRepDiario = new Repository<DiarioDiaSemana>())
+                        loCodigoDiario = loRepDiario.Find(p => p.COD_DIARIO == loProducto.ID_PRODUCTO).COD_DIARIO;
 
                     using (var loRepDiarioDiaSemana = new Repository<DiarioDiaSemana>())
                         lstDiasSemana = loRepDiarioDiaSemana.Search(p => p.COD_DIARIO == loCodigoDiario);
