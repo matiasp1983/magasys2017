@@ -33,15 +33,15 @@ namespace BLL
 
                         oProductoDiario = new ProductoDiario
                         {
-                                ID_PRODUCTO = oProducto.ID_PRODUCTO,
-                                FECHA_ALTA = oProducto.FECHA_ALTA,
-                                NOMBRE = oProducto.NOMBRE,
-                                DESCRIPCION = oProducto.DESCRIPCION,
-                                COD_ESTADO = oProducto.COD_ESTADO,
-                                COD_GENERO = oProducto.COD_GENERO,
-                                COD_PROVEEDOR = oProducto.COD_PROVEEDOR,
-                                COD_TIPO_PRODUCTO = oProducto.COD_TIPO_PRODUCTO,
-                                ID_DIARIO = oDiario.COD_DIARIO
+                            ID_PRODUCTO = oProducto.ID_PRODUCTO,
+                            FECHA_ALTA = oProducto.FECHA_ALTA,
+                            NOMBRE = oProducto.NOMBRE,
+                            DESCRIPCION = oProducto.DESCRIPCION,
+                            COD_ESTADO = oProducto.COD_ESTADO,
+                            COD_GENERO = oProducto.COD_GENERO,
+                            COD_PROVEEDOR = oProducto.COD_PROVEEDOR,
+                            COD_TIPO_PRODUCTO = oProducto.COD_TIPO_PRODUCTO,
+                            ID_DIARIO = oDiario.COD_DIARIO
                         };
 
                         //foreach (var loDiarioDiaSemana in lstDiarioDiaSemana)
@@ -49,7 +49,7 @@ namespace BLL
                         //    using (var loRepDiaSemana = new Repository<DiaSemana>())
                         //    {
                         DiaSemana diaSemana = new BLL.DiaSemanaBLL().ObtenerDiaSemana(oDiario.ID_DIA_SEMANA);
-                       
+
                         switch (diaSemana.NOMBRE)
                         {
                             case "Lunes":
@@ -281,22 +281,12 @@ namespace BLL
 
             try
             {
-                using (TransactionScope loTransactionScope = new TransactionScope())
-                {
-                    using (var loRepProducto = new Repository<Producto>())
-                    {
-                        bRes = loRepProducto.Create(oProducto) != null;
+                oProducto.DiarioDiaSemana.Add(loDiarioDiasSemana);
 
-                        if (bRes)
-                        {
-                            using (var loRepDiario = new Repository<DiarioDiaSemana>())
-                            {
-                                loDiarioDiasSemana.COD_DIARIO = oProducto.ID_PRODUCTO;
-                                bRes = loRepDiario.Create(loDiarioDiasSemana) != null;
-                            }
-                        }
-                    }
-                }
+                using (var loRepProducto = new Repository<Producto>())
+                    bRes = loRepProducto.Create(oProducto) != null;
+
+                oProducto.DiarioDiaSemana.Remove(loDiarioDiasSemana);
             }
             catch (Exception)
             {
