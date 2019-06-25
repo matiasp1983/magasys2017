@@ -43,44 +43,46 @@ namespace BLL
                             COD_TIPO_PRODUCTO = oProducto.COD_TIPO_PRODUCTO,
                             ID_DIARIO = oDiario.COD_DIARIO
                         };
-
+                        oProductoDiario.ID_DIARIO_DIA_SEMAMA = oDiario.ID_DIARIO_DIA_SEMANA;
+                        oProductoDiario.PRECIO = oDiario.PRECIO;
+                        oProductoDiario.COD_DIA_SEMAMA = oDiario.ID_DIA_SEMANA;
                         //foreach (var loDiarioDiaSemana in lstDiarioDiaSemana)
                         //{
                         //    using (var loRepDiaSemana = new Repository<DiaSemana>())
                         //    {
-                        DiaSemana diaSemana = new BLL.DiaSemanaBLL().ObtenerDiaSemana(oDiario.ID_DIA_SEMANA);
+                        //DiaSemana diaSemana = new BLL.DiaSemanaBLL().ObtenerDiaSemana(oDiario.ID_DIA_SEMANA);
 
-                        switch (diaSemana.NOMBRE)
-                        {
-                            case "Lunes":
-                                oProductoDiario.ID_DIARIO_DIA_SEMANA_LUNES = oDiario.ID_DIARIO_DIA_SEMANA;
-                                oProductoDiario.PRECIO_LUNES = oDiario.PRECIO;
-                                break;
-                            case "Martes":
-                                oProductoDiario.ID_DIARIO_DIA_SEMANA_MARTES = oDiario.ID_DIARIO_DIA_SEMANA;
-                                oProductoDiario.PRECIO_MARTES = oDiario.PRECIO;
-                                break;
-                            case "Miércoles":
-                                oProductoDiario.ID_DIARIO_DIA_SEMANA_MIERCOLES = oDiario.ID_DIARIO_DIA_SEMANA;
-                                oProductoDiario.PRECIO_MIERCOLES = oDiario.PRECIO;
-                                break;
-                            case "Jueves":
-                                oProductoDiario.ID_DIARIO_DIA_SEMANA_JUEVES = oDiario.ID_DIARIO_DIA_SEMANA;
-                                oProductoDiario.PRECIO_JUEVES = oDiario.PRECIO;
-                                break;
-                            case "Viernes":
-                                oProductoDiario.ID_DIARIO_DIA_SEMANA_VIERNES = oDiario.ID_DIARIO_DIA_SEMANA;
-                                oProductoDiario.PRECIO_VIERNES = oDiario.PRECIO;
-                                break;
-                            case "Sábado":
-                                oProductoDiario.ID_DIARIO_DIA_SEMANA_SABADO = oDiario.ID_DIARIO_DIA_SEMANA;
-                                oProductoDiario.PRECIO_SABADO = oDiario.PRECIO;
-                                break;
-                            default:
-                                oProductoDiario.ID_DIARIO_DIA_SEMANA_DOMINGO = oDiario.ID_DIARIO_DIA_SEMANA;
-                                oProductoDiario.PRECIO_DOMINGO = oDiario.PRECIO;
-                                break;
-                        }
+                        //switch (diaSemana.NOMBRE)
+                        //{
+                        //    case "Lunes":
+                        //        oProductoDiario.ID_DIARIO_DIA_SEMANA_LUNES = oDiario.ID_DIARIO_DIA_SEMANA;
+                        //        oProductoDiario.PRECIO_LUNES = oDiario.PRECIO;
+                        //        break;
+                        //    case "Martes":
+                        //        oProductoDiario.ID_DIARIO_DIA_SEMANA_MARTES = oDiario.ID_DIARIO_DIA_SEMANA;
+                        //        oProductoDiario.PRECIO_MARTES = oDiario.PRECIO;
+                        //        break;
+                        //    case "Miércoles":
+                        //        oProductoDiario.ID_DIARIO_DIA_SEMANA_MIERCOLES = oDiario.ID_DIARIO_DIA_SEMANA;
+                        //        oProductoDiario.PRECIO_MIERCOLES = oDiario.PRECIO;
+                        //        break;
+                        //    case "Jueves":
+                        //        oProductoDiario.ID_DIARIO_DIA_SEMANA_JUEVES = oDiario.ID_DIARIO_DIA_SEMANA;
+                        //        oProductoDiario.PRECIO_JUEVES = oDiario.PRECIO;
+                        //        break;
+                        //    case "Viernes":
+                        //        oProductoDiario.ID_DIARIO_DIA_SEMANA_VIERNES = oDiario.ID_DIARIO_DIA_SEMANA;
+                        //        oProductoDiario.PRECIO_VIERNES = oDiario.PRECIO;
+                        //        break;
+                        //    case "Sábado":
+                        //        oProductoDiario.ID_DIARIO_DIA_SEMANA_SABADO = oDiario.ID_DIARIO_DIA_SEMANA;
+                        //        oProductoDiario.PRECIO_SABADO = oDiario.PRECIO;
+                        //        break;
+                        //    default:
+                        //        oProductoDiario.ID_DIARIO_DIA_SEMANA_DOMINGO = oDiario.ID_DIARIO_DIA_SEMANA;
+                        //        oProductoDiario.PRECIO_DOMINGO = oDiario.PRECIO;
+                        //        break;
+                        //}
                         //    }
                         //}
 
@@ -296,7 +298,7 @@ namespace BLL
             return bRes;
         }
 
-        public bool ModificarDiario(Producto oProducto, List<DiarioDiaSemana> lstDiarioDiasSemanas)
+        public bool ModificarDiario(Producto oProducto, DiarioDiaSemana oDiarioDiaSemana)
         {
             var bRes = false;
 
@@ -312,18 +314,8 @@ namespace BLL
                         {
                             using (var loRepDiarioDiaSemana = new Repository<DiarioDiaSemana>())
                             {
-                                foreach (var loDiarioDiaSemana in lstDiarioDiasSemanas)
-                                {
-                                    var oDiarioDiaSemana = new DiarioDiaSemana
-                                    {
-                                        ID_DIARIO_DIA_SEMANA = loDiarioDiaSemana.ID_DIARIO_DIA_SEMANA,
-                                        COD_DIARIO = loDiarioDiaSemana.COD_DIARIO,
-                                        ID_DIA_SEMANA = loDiarioDiaSemana.ID_DIA_SEMANA,
-                                        PRECIO = loDiarioDiaSemana.PRECIO
-                                    };
-
-                                    bRes = loRepDiarioDiaSemana.Update(oDiarioDiaSemana);
-                                }
+                                bRes = loRepDiarioDiaSemana.Update(oDiarioDiaSemana);
+                                
                             }
                         }
                     }
@@ -355,20 +347,10 @@ namespace BLL
         public int COD_PROVEEDOR { get; set; }
         public int COD_TIPO_PRODUCTO { get; set; }
         public int ID_DIARIO { get; set; }
-        public int ID_DIARIO_DIA_SEMANA_LUNES { get; set; }
-        public int ID_DIARIO_DIA_SEMANA_MARTES { get; set; }
-        public int ID_DIARIO_DIA_SEMANA_MIERCOLES { get; set; }
-        public int ID_DIARIO_DIA_SEMANA_JUEVES { get; set; }
-        public int ID_DIARIO_DIA_SEMANA_VIERNES { get; set; }
-        public int ID_DIARIO_DIA_SEMANA_SABADO { get; set; }
-        public int ID_DIARIO_DIA_SEMANA_DOMINGO { get; set; }
-        public double? PRECIO_LUNES { get; set; }
-        public double? PRECIO_MARTES { get; set; }
-        public double? PRECIO_MIERCOLES { get; set; }
-        public double? PRECIO_JUEVES { get; set; }
-        public double? PRECIO_VIERNES { get; set; }
-        public double? PRECIO_SABADO { get; set; }
-        public double? PRECIO_DOMINGO { get; set; }
+        public int COD_DIA_SEMAMA { get; set; }
+        public int ID_DIARIO_DIA_SEMAMA { get; set; }
+        public double? PRECIO { get; set; }
+
     }
 
     public class DiarioEdicion

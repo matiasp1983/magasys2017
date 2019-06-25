@@ -100,96 +100,30 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="col-sm-4 control-label">Precio Lunes </label>
+                                            <label class="col-sm-4 control-label">Dia de la Semana </label>
 
                                             <div class="col-sm-8">
                                                 <div class="input-group m-b" id="divPrecioLunesDiario">
                                                     <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                                    <asp:TextBox ID="txtPrecioLunesDiario" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
+                                                    <asp:TextBox ID="txtDiaDeLaSemanaDiario" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off" Enabled="False"></asp:TextBox>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="col-sm-4 control-label">Precio Martes </label>
+                                            <label class="col-sm-4 control-label">Precio </label>
 
                                             <div class="col-sm-8">
                                                 <div class="input-group m-b" id="divPrecioMartesDiario">
                                                     <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                                    <asp:TextBox ID="txtPrecioMartesDiario" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
+                                                    <asp:TextBox ID="txtPrecioDiario" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-sm-4 control-label">Precio Mi&eacute;rcoles </label>
-
-                                            <div class="col-sm-8">
-                                                <div class="input-group m-b" id="divPrecioMiercolesDiario">
-                                                    <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                                    <asp:TextBox ID="txtPrecioMiercolesDiario" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-sm-4 control-label">Precio Jueves </label>
-
-                                            <div class="col-sm-8">
-                                                <div class="input-group m-b" id="divPrecioJuevesDiario">
-                                                    <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                                    <asp:TextBox ID="txtPrecioJuevesDiario" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-sm-4 control-label">Precio Viernes </label>
-
-                                            <div class="col-sm-8">
-                                                <div class="input-group m-b" id="divPrecioViernesDiario">
-                                                    <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                                    <asp:TextBox ID="txtPrecioViernesDiario" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-sm-4 control-label">Precio S&aacute;bado </label>
-
-                                            <div class="col-sm-8">
-                                                <div class="input-group m-b" id="divPrecioSabadoDiario">
-                                                    <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                                    <asp:TextBox ID="txtPrecioSabadoDiario" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-sm-4 control-label">Precio Domingo </label>
-
-                                            <div class="col-sm-8">
-                                                <div class="input-group m-b" id="divPrecioDomingoDiario">
-                                                    <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                                    <asp:TextBox ID="txtPrecioDomingoDiario" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>                            
+                             </div>                            
                         </div>
                     </div>
                     <div class="hr-line-dashed"></div>                    
@@ -231,35 +165,15 @@
                      <%=ddlGenero.UniqueID%>: {
                          required: true
                      },
-                     <%=txtPrecioLunesDiario.UniqueID%>: {
+                     <%=txtDiaDeLaSemanaDiario.UniqueID%>: {
+                         required: true,
+                     },
+                     <%=txtPrecioDiario.UniqueID%>: {
                          number: true,
                          min: 1
                      },
-                     <%=txtPrecioMartesDiario.UniqueID%>: {
-                         number: true,
-                         min: 1
-                     },
-                     <%=txtPrecioMiercolesDiario.UniqueID%>: {
-                         number: true,
-                         min: 1
-                     },
-                     <%=txtPrecioJuevesDiario.UniqueID%>: {
-                         number: true,
-                         min: 1
-                     },
-                     <%=txtPrecioViernesDiario.UniqueID%>: {
-                         number: true,
-                         min: 1
-                     },
-                     <%=txtPrecioSabadoDiario.UniqueID%>: {
-                         number: true,
-                         min: 1
-                     },
-                     <%=txtPrecioDomingoDiario.UniqueID%>: {
-                         number: true,
-                         min: 1
-                     }
-                },
+                     
+                
         messages: {
                      <%=txtNombre.UniqueID%>: {
                         required: "Este campo es requerido."
@@ -270,36 +184,15 @@
                      <%=ddlGenero.UniqueID%>: {
                          required: "Este campo es requerido."
                      },
-                     <%=txtPrecioLunesDiario.UniqueID%>: {
-                         number: "Ingrese un número válido.",
-                         min: "Ingrese un valor mayor o igual a 1."
+                     <%=txtDiaDeLaSemanaDiario.UniqueID%>: {
+                         required: "Este campo es requerido."
                      },
-                     <%=txtPrecioMartesDiario.UniqueID%>: {
+                     <%=txtPrecioDiario.UniqueID%>: {
                          number: "Ingrese un número válido.",
                          min: "Ingrese un valor mayor o igual a 1."
-                     },
-                     <%=txtPrecioMiercolesDiario.UniqueID%>: {
-                         number: "Ingrese un número válido.",
-                         min: "Ingrese un valor mayor o igual a 1."
-                     },
-                     <%=txtPrecioJuevesDiario.UniqueID%>: {
-                         number: "Ingrese un número válido.",
-                         min: "Ingrese un valor mayor o igual a 1."
-                     },
-                     <%=txtPrecioViernesDiario.UniqueID%>: {
-                         number: "Ingrese un número válido.",
-                         min: "Ingrese un valor mayor o igual a 1."
-                     },
-                     <%=txtPrecioSabadoDiario.UniqueID%>: {
-                         number: "Ingrese un número válido.",
-                         min: "Ingrese un valor mayor o igual a 1."
-                     },
-                     <%=txtPrecioDomingoDiario.UniqueID%>: {
-                         number: "Ingrese un número válido.",
-                         min: "Ingrese un valor mayor o igual a 1."
-                     }
-                }
-            });
+                     },        
+                
+            );
         }
 
         function Select2() {

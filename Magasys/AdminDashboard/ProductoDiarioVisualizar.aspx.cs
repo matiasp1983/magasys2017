@@ -43,26 +43,18 @@ namespace PL.AdminDashboard
                         txtFechaAlta.Text = oProductoDiario.FECHA_ALTA.ToString("dd/MM/yyyy");
                     txtNombre.Text = oProductoDiario.NOMBRE;
                     txtDescripcion.Text = oProductoDiario.DESCRIPCION;
+
+                    BLL.DAL.DiaSemana diaSemana = new BLL.DiaSemanaBLL().ObtenerDiaSemana(oProductoDiario.COD_DIA_SEMAMA);
+                    txtDiaDeLaSemana.Text = diaSemana.NOMBRE;
+                    txtPrecioDiario.Text = oProductoDiario.PRECIO.Value.ToString();
+
                     var loProveedor = new BLL.ProveedorBLL().ObtenerProveedor(oProductoDiario.COD_PROVEEDOR);
                     if (loProveedor != null)
                         txtProveedor.Text = loProveedor.RAZON_SOCIAL;
                     var loGenero = new BLL.GeneroBLL().ObtenerGenero(oProductoDiario.COD_GENERO);
                     if (loGenero != null)
                         txtGenero.Text = loGenero.NOMBRE;                    
-                    if (oProductoDiario.PRECIO_LUNES.HasValue)
-                        txtPrecioLunesDiario.Text = oProductoDiario.PRECIO_LUNES.Value.ToString();
-                    if (oProductoDiario.PRECIO_MARTES.HasValue)
-                        txtPrecioMartesDiario.Text = oProductoDiario.PRECIO_MARTES.Value.ToString();
-                    if (oProductoDiario.PRECIO_MIERCOLES.HasValue)
-                        txtPrecioMiercolesDiario.Text = oProductoDiario.PRECIO_MIERCOLES.Value.ToString();
-                    if (oProductoDiario.PRECIO_JUEVES.HasValue)
-                        txtPrecioJuevesDiario.Text = oProductoDiario.PRECIO_JUEVES.Value.ToString();
-                    if (oProductoDiario.PRECIO_VIERNES.HasValue)
-                        txtPrecioViernesDiario.Text = oProductoDiario.PRECIO_VIERNES.Value.ToString();
-                    if (oProductoDiario.PRECIO_SABADO.HasValue)
-                        txtPrecioSabadoDiario.Text = oProductoDiario.PRECIO_SABADO.Value.ToString();
-                    if (oProductoDiario.PRECIO_DOMINGO.HasValue)
-                        txtPrecioDomingoDiario.Text = oProductoDiario.PRECIO_DOMINGO.Value.ToString();
+                    
                 }
                 else
                     Response.Redirect("ProductoListado.aspx", false);

@@ -103,67 +103,22 @@ namespace PL.AdminDashboard {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl divDiario;
         
         /// <summary>
-        /// Control txtPrecioLunesDiario.
+        /// Control txtDiaDeLaSemanaDiario.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPrecioLunesDiario;
+        protected global::System.Web.UI.WebControls.TextBox txtDiaDeLaSemanaDiario;
         
         /// <summary>
-        /// Control txtPrecioMartesDiario.
+        /// Control txtPrecioDiario.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPrecioMartesDiario;
-        
-        /// <summary>
-        /// Control txtPrecioMiercolesDiario.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPrecioMiercolesDiario;
-        
-        /// <summary>
-        /// Control txtPrecioJuevesDiario.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPrecioJuevesDiario;
-        
-        /// <summary>
-        /// Control txtPrecioViernesDiario.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPrecioViernesDiario;
-        
-        /// <summary>
-        /// Control txtPrecioSabadoDiario.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPrecioSabadoDiario;
-        
-        /// <summary>
-        /// Control txtPrecioDomingoDiario.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtPrecioDomingoDiario;
+        protected global::System.Web.UI.WebControls.TextBox txtPrecioDiario;
         
         /// <summary>
         /// Control btnGuardar.
