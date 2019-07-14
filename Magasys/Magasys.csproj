@@ -154,6 +154,9 @@
     <Content Include="AdminDashboard\ProductoSuplementoVisualizar.aspx" />
     <Content Include="AdminDashboard\ProveedorEditar.aspx" />
     <Content Include="AdminDashboard\Reserva.aspx" />
+    <Content Include="AdminDashboard\ReservaEditar.aspx" />
+    <Content Include="AdminDashboard\ReservaListado.aspx" />
+    <Content Include="AdminDashboard\ReservaVisualizar.aspx" />
     <Content Include="AdminDashboard\Venta.aspx" />
     <Content Include="AdminDashboard\VentaListado.aspx" />
     <Content Include="CustomersWebSite\Index.aspx" />
@@ -477,6 +480,27 @@
     </Compile>
     <Compile Include="AdminDashboard\Reserva.aspx.designer.cs">
       <DependentUpon>Reserva.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\ReservaEditar.aspx.cs">
+      <DependentUpon>ReservaEditar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\ReservaEditar.aspx.designer.cs">
+      <DependentUpon>ReservaEditar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\ReservaListado.aspx.cs">
+      <DependentUpon>ReservaListado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\ReservaListado.aspx.designer.cs">
+      <DependentUpon>ReservaListado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\ReservaVisualizar.aspx.cs">
+      <DependentUpon>ReservaVisualizar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\ReservaVisualizar.aspx.designer.cs">
+      <DependentUpon>ReservaVisualizar.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminDashboard\Venta.aspx.cs">
       <DependentUpon>Venta.aspx</DependentUpon>

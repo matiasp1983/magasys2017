@@ -10,240 +10,195 @@
 namespace PL.AdminDashboard {
     
     
-    public partial class MasterPage {
+    public partial class ReservaListado {
         
         /// <summary>
-        /// Control head.
+        /// Control FormReservaListado.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
+        protected global::System.Web.UI.HtmlControls.HtmlForm FormReservaListado;
         
         /// <summary>
-        /// Control liPrincipal.
+        /// Control txtFechaIniReservaDesde.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liPrincipal;
+        protected global::System.Web.UI.WebControls.TextBox txtFechaIniReservaDesde;
         
         /// <summary>
-        /// Control liProveedores.
+        /// Control txtFechaIniReservaHasta.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liProveedores;
+        protected global::System.Web.UI.WebControls.TextBox txtFechaIniReservaHasta;
         
         /// <summary>
-        /// Control liAltaProveedor.
+        /// Control txtFechaFinReservaDesde.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liAltaProveedor;
+        protected global::System.Web.UI.WebControls.TextBox txtFechaFinReservaDesde;
         
         /// <summary>
-        /// Control liProveedorListado.
+        /// Control txtFechaFinReservaHasta.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liProveedorListado;
+        protected global::System.Web.UI.WebControls.TextBox txtFechaFinReservaHasta;
         
         /// <summary>
-        /// Control liProductos.
+        /// Control ddlTipoReserva.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liProductos;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTipoReserva;
         
         /// <summary>
-        /// Control liAltaProducto.
+        /// Control txtNombreProducto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liAltaProducto;
+        protected global::System.Web.UI.WebControls.TextBox txtNombreProducto;
         
         /// <summary>
-        /// Control liProductoListado.
+        /// Control ddlEstado.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liProductoListado;
+        protected global::System.Web.UI.WebControls.DropDownList ddlEstado;
         
         /// <summary>
-        /// Control liAltaGenero.
+        /// Control ddlFormaEntrega.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liAltaGenero;
+        protected global::System.Web.UI.WebControls.DropDownList ddlFormaEntrega;
         
         /// <summary>
-        /// Control liGeneroListado.
+        /// Control ddlTipoDocumento.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liGeneroListado;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTipoDocumento;
         
         /// <summary>
-        /// Control liClientes.
+        /// Control txtNroDocumento.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liClientes;
+        protected global::System.Web.UI.WebControls.TextBox txtNroDocumento;
         
         /// <summary>
-        /// Control liAltaCliente.
+        /// Control txtNombre.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liAltaCliente;
+        protected global::System.Web.UI.WebControls.TextBox txtNombre;
         
         /// <summary>
-        /// Control liClienteListado.
+        /// Control txtApellido.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liClienteListado;
+        protected global::System.Web.UI.WebControls.TextBox txtApellido;
         
         /// <summary>
-        /// Control liVenta.
+        /// Control txtAlias.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liVenta;
+        protected global::System.Web.UI.WebControls.TextBox txtAlias;
         
         /// <summary>
-        /// Control liRegistrarVenta.
+        /// Control btnBuscar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liRegistrarVenta;
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnBuscar;
         
         /// <summary>
-        /// Control liVentaListado.
+        /// Control btnLimpiar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liVentaListado;
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnLimpiar;
         
         /// <summary>
-        /// Control liDeposito.
+        /// Control lsvReservas.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liDeposito;
+        protected global::System.Web.UI.WebControls.ListView lsvReservas;
         
         /// <summary>
-        /// Control liProductoIngreso.
+        /// Control dvMensajeLsvReservas.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liProductoIngreso;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvMensajeLsvReservas;
         
         /// <summary>
-        /// Control liProductoIngresoListado.
+        /// Control btnCancelarAnular.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liProductoIngresoListado;
+        protected global::System.Web.UI.WebControls.Button btnCancelarAnular;
         
         /// <summary>
-        /// Control liProductoDevolucion.
+        /// Control btnAnular.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liProductoDevolucion;
+        protected global::System.Web.UI.WebControls.Button btnAnular;
         
         /// <summary>
-        /// Control liProductoDevolucionListado.
+        /// Control hdIdReservaAnular.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liProductoDevolucionListado;
-        
-        /// <summary>
-        /// Control liReserva.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liReserva;
-        
-        /// <summary>
-        /// Control liRegistrarReserva.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liRegistrarReserva;
-        
-        /// <summary>
-        /// Control liReservaListado.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liReservaListado;
-        
-        /// <summary>
-        /// Control contentMaster.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder contentMaster;
-        
-        /// <summary>
-        /// Control script.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder script;
+        protected global::System.Web.UI.WebControls.HiddenField hdIdReservaAnular;
     }
 }

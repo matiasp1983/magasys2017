@@ -174,6 +174,7 @@
     <Compile Include="Filters\IngresoProductoFiltro.cs" />
     <Compile Include="Filters\ProductoFiltro.cs" />
     <Compile Include="Filters\ProveedorFiltro.cs" />
+    <Compile Include="Filters\ReservaFiltro.cs" />
     <Compile Include="Filters\VentaFiltro.cs" />
     <Compile Include="FormaPagoBLL.cs" />
     <Compile Include="GeneroBLL.cs" />

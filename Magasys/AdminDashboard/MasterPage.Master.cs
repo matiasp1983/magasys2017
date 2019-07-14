@@ -106,6 +106,11 @@ namespace PL.AdminDashboard
                 liReserva.Attributes["class"] = "active";
                 liRegistrarReserva.Attributes["class"] = "active";
             }
+            if (loActivePage.Contains("ReservaListado.aspx"))
+            {
+                liReserva.Attributes["class"] = "active";
+                liReservaListado.Attributes["class"] = "active";
+            }
         }
 
         #endregion
