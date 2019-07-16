@@ -40,6 +40,25 @@ namespace BLL
             return loIdReserva;
         }
 
+        public Reserva ObtenerReserva(long idReserva)
+        {
+            Reserva oReserva = null;
+
+            try
+            {
+                using (var rep = new Repository<Reserva>())
+                {
+                    oReserva = rep.Find(p => p.ID_RESERVA == idReserva);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return oReserva;
+        }
+
         public bool AltaReserva(Reserva oReserva)
         {
             var bRes = false;
@@ -67,6 +86,37 @@ namespace BLL
                 using (var rep = new Repository<Reserva>())
                 {
                     bRes = rep.Update(oReserva);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return bRes;
+        }
+
+        public bool FinalizarReservas()
+        {
+            var bRes = false;
+            DateTime lv_fecha = DateTime.Now.Date;
+
+            try
+            {
+                using (var loRepReserva = new Repository<Reserva>())
+                {   // Buscar reservas Confirmadas con Fecha Fin menor a la fecha del día.
+                    var lstReserva = loRepReserva.Search(p => p.COD_ESTADO == 7 && p.FECHA_FIN < lv_fecha);
+
+                    if (lstReserva.Count > 0)
+                    {
+                        foreach (var loReserva in lstReserva)
+                        {
+                            loReserva.COD_ESTADO = 8;
+                            bRes = loRepReserva.Update(loReserva);
+                            if (!bRes)
+                                break;
+                        }
+                    }
                 }
             }
             catch (Exception)

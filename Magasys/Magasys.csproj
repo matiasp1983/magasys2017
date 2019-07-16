@@ -155,6 +155,7 @@
     <Content Include="AdminDashboard\ProveedorEditar.aspx" />
     <Content Include="AdminDashboard\Reserva.aspx" />
     <Content Include="AdminDashboard\ReservaEditar.aspx" />
+    <Content Include="AdminDashboard\ReservaFinalizar.aspx" />
     <Content Include="AdminDashboard\ReservaListado.aspx" />
     <Content Include="AdminDashboard\ReservaVisualizar.aspx" />
     <Content Include="AdminDashboard\Venta.aspx" />
@@ -487,6 +488,13 @@
     </Compile>
     <Compile Include="AdminDashboard\ReservaEditar.aspx.designer.cs">
       <DependentUpon>ReservaEditar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\ReservaFinalizar.aspx.cs">
+      <DependentUpon>ReservaFinalizar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\ReservaFinalizar.aspx.designer.cs">
+      <DependentUpon>ReservaFinalizar.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminDashboard\ReservaListado.aspx.cs">
       <DependentUpon>ReservaListado.aspx</DependentUpon>

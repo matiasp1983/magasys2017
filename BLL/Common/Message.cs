@@ -101,6 +101,13 @@
         public const string MsjeReservaAnularFailure = "La reserva no se pudo anular.";
         public const string MsjeReservaFinalizadaNoEditar = "La reserva Finalizada no se puede modificar.";
         public const string MsjeReservaAnuladaNoEditar = "La reserva Anulada no se puede modificar.";
+        public const string MsjeReservaNoExiste = "La reserva ingresada no existe.";
+        public const string MsjeReservaNoSePuedeFinalizar = "La reserva no se pudo finalizar, no cuenta con el estado requerido.";
+        public const string MsjeReservaErrorFinalizar = "La reserva no se pudo finalizar.";
+        public const string MsjeReservaNoCaducada = "La reserva no ha caducado.";
+        public const string MsjeReservaProcesamientoFinalizado = "El procesamiento finalizó con éxito.";
+        public const string MsjeReservaSinCaducar = "No hay reservas para procesar.";
+        public const string MsjeReservaCargarCodigo = "Se debe completar el código de la reserva.";
 
         #endregion
 
