@@ -126,7 +126,7 @@ namespace PL.AdminDashboard
             BLL.DAL.Reserva loReserva = new BLL.DAL.Reserva()
             {
                 FECHA = DateTime.Now,
-                COD_ESTADO = 6, //Confirmada
+                COD_ESTADO = 7, //Confirmada
                 COD_CLIENTE = oCliente.ID_CLIENTE,
                 FECHA_INICIO = Convert.ToDateTime(txtFechaInicio.Text),
                 COD_TIPO_RESERVA = 2, //Periódica
