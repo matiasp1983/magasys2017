@@ -47,14 +47,15 @@
                 <div class="col-lg-5">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>Procesar todas las reservas</h5>
+                            <h5>Procesar todas las reservas de productos</h5>
                         </div>
                         <div class="ibox-content">
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="col-md-5">
                                         <div class="form-group">
-                                            <asp:Button ID="btnEjecutar" runat="server" Text="Ejecutar" CssClass="btn btn-primary" OnClick="BtnEjecutar_Click"/>
+                                            <asp:Button ID="btnEjecutar" runat="server" Text="Ejecutar" CssClass="btn btn-primary" OnClick="BtnEjecutar_Click"/><br><br>
+                                            <small>Se Finalizarán todas las reservas concluidas.</small>
                                         </div>
                                     </div>
                                 </div>
