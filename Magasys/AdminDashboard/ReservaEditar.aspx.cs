@@ -26,12 +26,6 @@ namespace PL.AdminDashboard
                     return;
                 }
 
-                if (ddlTipoReserva.SelectedValue == "1" && String.IsNullOrEmpty(txtFechaFin.Text))
-                {
-                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.InfoModal(Message.MsjeReservaUnicaFechafin)); //"Para la reserva Única, el campo Fecha de fin es requerido."
-                    return;
-                }
-
                 if (Session[Enums.Session.IdReserva.ToString()] != null)
                 {
                     var lvIdReserva = Convert.ToInt32(Session[Enums.Session.IdReserva.ToString()]);
@@ -39,6 +33,12 @@ namespace PL.AdminDashboard
                     using (var repReserva = new Repository<BLL.DAL.Reserva>())
                     {
                         var oReserva = repReserva.Find(p => p.ID_RESERVA == lvIdReserva);
+
+                        if (oReserva.COD_TIPO_RESERVA == 1 && String.IsNullOrEmpty(txtFechaFin.Text))
+                        {
+                            Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.InfoModal(Message.MsjeReservaUnicaFechafin)); //"Para la reserva Única, el campo Fecha de fin es requerido."
+                            return;
+                        }
 
                         if (rdbEnvioDomicilio.Checked == true && String.IsNullOrEmpty(oReserva.Cliente.DIRECCION_MAPS))
                         {
@@ -106,7 +106,7 @@ namespace PL.AdminDashboard
                             rdbRetiraEnLocal.Checked = true; // "Retira en Local"
                         else
                             rdbEnvioDomicilio.Checked = true; // "Envío a Domicilio"
-                        CargarTipoReserva(oReserva.COD_TIPO_RESERVA);
+                        txtTipoReserva.Text = oReserva.TipoReserva.DESCRIPCION;
                         txtEstado.Text = oReserva.Estado.NOMBRE;
                         txtTipoDocumento.Text = oReserva.Cliente.TipoDocumento.DESCRIPCION;
                         txtNumeroDocumento.Text = oReserva.Cliente.NRO_DOCUMENTO.ToString();
@@ -126,25 +126,6 @@ namespace PL.AdminDashboard
             }
         }
 
-        private void CargarTipoReserva(long idTipoReserva)
-        {
-            var oReserva = new BLL.ReservaBLL();
-
-            try
-            {
-                ddlTipoReserva.DataSource = oReserva.ObtenerTipoReserva();
-                ddlTipoReserva.DataTextField = "DESCRIPCION";
-                ddlTipoReserva.DataValueField = "ID_TIPO_RESERVA";
-                ddlTipoReserva.DataBind();
-                ddlTipoReserva.SelectedValue = idTipoReserva.ToString();
-            }
-            catch (Exception ex)
-            {
-                Logger loLogger = LogManager.GetCurrentClassLogger();
-                loLogger.Error(ex);
-            }
-        }
-
         private BLL.DAL.Reserva CargarReservaDesdeControles()
         {
             BLL.DAL.Reserva loReserva = new BLL.DAL.Reserva();
@@ -155,7 +136,6 @@ namespace PL.AdminDashboard
             {
                 var oReserva = repReserva.Find(p => p.ID_RESERVA == lvIdReserva);
 
-                oReserva.COD_TIPO_RESERVA = Convert.ToInt32(ddlTipoReserva.SelectedValue);
                 if (rdbRetiraEnLocal.Checked == true && oReserva.ENVIO_DOMICILIO != null)
                     oReserva.ENVIO_DOMICILIO = null;
                 else if (rdbEnvioDomicilio.Checked == true && oReserva.ENVIO_DOMICILIO == null)

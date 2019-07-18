@@ -62,9 +62,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Tipo de Reserva</label>
                                 <div class="col-sm-10">
-                                    <div id="divTipoReserva">
-                                        <asp:DropDownList ID="ddlTipoReserva" runat="server" CssClass="form-control"></asp:DropDownList>
-                                    </div>
+                                    <asp:TextBox ID="txtTipoReserva" runat="server" CssClass="form-control" Enabled="false" autocomplete="off"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
