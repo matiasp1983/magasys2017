@@ -61,6 +61,7 @@
                         <ul class="nav nav-second-level collapse">
                             <li id="liAltaCliente" runat="server"><a href="Cliente.aspx">Nuevo Cliente</a></li>
                             <li id="liClienteListado" runat="server"><a href="ClienteListado.aspx">Listado de Clientes</a></li>                            
+                            <li id="liVisualizarDeudas" runat="server"><a href="VisualizarDeudas.aspx">Buscar Deudas</a></li>
                         </ul>
                     </li>
                     <li id="liVenta" runat="server">

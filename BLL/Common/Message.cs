@@ -120,5 +120,11 @@
         public const string MsjeGeneroSuccessModificacion = "El Genero se modificó correctamente.";
 
         #endregion
+
+        #region Deudas
+
+        public const string MsjeVisualizarDeudasSinResultados = "No se encontraron deudas para la búsqueda seleccionada.";
+
+        #endregion
     }
 }
