@@ -183,7 +183,7 @@
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="5">
                                         <thead>
                                             <tr>
-                                                <th class="text-left">Código</th>
+                                                <th class="text-left">Nombre del Cliente</th>
                                                 <th class="text-left">Nombre del Producto</th>
                                                 <th data-hide="phone,tablet">Código de Cliente</th>
                                                 <th data-hide="phone,tablet">Tipo de Reserva</th>
@@ -206,7 +206,7 @@
                                 <ItemTemplate>
                                     <tr>
                                         <td class="text-left">
-                                            <asp:Label ID="lblCodigoReserva" runat="server" Text='<%#Eval("ID_RESERVA").ToString()%>'></asp:Label>
+                                            <asp:Label ID="lblNombreCliente" runat="server" Text='<%#Eval("NOMBRE_CLIENTE").ToString()%>'></asp:Label>
                                         </td>
                                         <td>
                                             <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE_PRODUCTO").ToString().Length > 23 ? String.Format("{0}...", Eval("NOMBRE_PRODUCTO").ToString().Remove(23).TrimEnd()):Eval("NOMBRE_PRODUCTO")%>'></asp:Label>
@@ -228,6 +228,9 @@
                                                     <asp:HiddenField ID="hdIdReserva" runat="server" />
                                                 </a>                                                
                                             </div>
+                                        </td>
+                                        <td>
+                                            <asp:Label ID="lblCodigoReserva" runat="server" Text='<%#Eval("ID_RESERVA").ToString()%>' Visible="false"></asp:Label>
                                         </td>
                                     </tr>
                                 </ItemTemplate>

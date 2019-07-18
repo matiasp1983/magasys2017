@@ -205,6 +205,7 @@ namespace BLL
                         oReservaListado = new ReservaListado
                         {
                             ID_RESERVA = loReserva.ID_RESERVA,
+                            NOMBRE_CLIENTE = loReserva.Cliente.APELLIDO + " " + loReserva.Cliente.NOMBRE,
                             NOMBRE_PRODUCTO = loReserva.Producto.NOMBRE,
                             COD_CLIENTE = loReserva.COD_CLIENTE,
                             TIPO_RESERVA = loReserva.TipoReserva.DESCRIPCION
@@ -236,6 +237,7 @@ namespace BLL
     public class ReservaListado
     {
         public int ID_RESERVA { get; set; }
+        public String NOMBRE_CLIENTE { get; set; }
         public string NOMBRE_PRODUCTO { get; set; }
         public int? COD_CLIENTE { get; set; }
         public string TIPO_RESERVA { get; set; }
