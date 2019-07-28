@@ -210,7 +210,7 @@
                                         <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                             <thead>
                                                 <tr>
-                                                    <th></th>
+                                                    <td></td>
                                                     <th class="text-left">C&oacute;digo</th>
                                                     <th>Nombre</th>
                                                     <th>Tipo de Producto</th>
@@ -232,7 +232,7 @@
                                     <ItemTemplate>
                                         <tr>
                                             <td>
-                                                <input id="rdbCodigoProducto" type="radio" name="CodigoProducto" onclick='GuardarCodigoProducto(<%#Eval("ID_PRODUCTO").ToString()%>)'/>                                                
+                                                <input id="rdbCodigoProducto&<%#Eval("ID_PRODUCTO").ToString()%>" name="CodigoProducto" class="i-checks" type="radio"/>                                                
                                             </td>
                                             <td class="text-left">
                                                 <asp:Label ID="lblCodigoProducto" runat="server" Text='<%#Eval("ID_PRODUCTO").ToString()%>'></asp:Label>
@@ -276,7 +276,14 @@
             $(document).ready(function () {
                 $('.i-checks').iCheck({
                     radioClass: 'iradio_square-green'
+                }).on('ifChecked', function (e) {                    
+                    var isChecked = e.currentTarget.checked;
+                    var codigo = e.currentTarget.id.split('&')[1];                    
+                    if (isChecked == true) {
+                        $('#<%=hfCodigoProducto.ClientID%>').val(codigo); 
+                    }
                 });
+
                 LoadFootable();
                 LoadDatePicker();
                 ValidarForm();
@@ -364,10 +371,5 @@
                     allowClear: true
                 });
         }
-
-        function GuardarCodigoProducto(codigo) {
-            $('#<%=hfCodigoProducto.ClientID%>').val(codigo);            
-        }
-
     </script>
 </asp:Content>
