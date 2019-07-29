@@ -244,5 +244,12 @@ namespace BLL
         public string FORMA_ENTREGA { get; set; }
     }
 
+    public class ReservaClienteListado
+    {
+        public int ID_RESERVA { get; set; }
+        public string CLIENTE { get; set; }
+        public string PRODUCTO { get; set; }
+    }
+
     #endregion
 }
