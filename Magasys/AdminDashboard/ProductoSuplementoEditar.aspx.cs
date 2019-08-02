@@ -95,19 +95,17 @@ namespace PL.AdminDashboard
 
         private BLL.DAL.Producto CargarProductoDesdeControles()
         {
-            if (Session[Enums.Session.ProductoSuplemento.ToString()] == null)
-                return null;
-
-            var oProducto = new BLL.DAL.Producto
+            var oProducto = new BLL.DAL.Producto();
+            if (Session[Enums.Session.ProductoSuplemento.ToString()] != null)
             {
-                ID_PRODUCTO = ((BLL.ProductoSuplemento)base.Session[Enums.Session.ProductoSuplemento.ToString()]).ID_PRODUCTO,
-                FECHA_ALTA = ((BLL.ProductoSuplemento)base.Session[Enums.Session.ProductoSuplemento.ToString()]).FECHA_ALTA,
-                COD_ESTADO = ((BLL.ProductoSuplemento)base.Session[Enums.Session.ProductoSuplemento.ToString()]).COD_ESTADO,
-                COD_TIPO_PRODUCTO = ((BLL.ProductoSuplemento)base.Session[Enums.Session.ProductoSuplemento.ToString()]).COD_TIPO_PRODUCTO,
-                NOMBRE = txtNombre.Text,
-                COD_PROVEEDOR = Convert.ToInt32(ddlProveedor.SelectedValue),
-                COD_GENERO = Convert.ToInt32(ddlGenero.SelectedValue)
-            };
+                oProducto.ID_PRODUCTO = ((BLL.ProductoSuplemento)base.Session[Enums.Session.ProductoSuplemento.ToString()]).ID_PRODUCTO;
+                oProducto.FECHA_ALTA = ((BLL.ProductoSuplemento)base.Session[Enums.Session.ProductoSuplemento.ToString()]).FECHA_ALTA;
+                oProducto.COD_ESTADO = ((BLL.ProductoSuplemento)base.Session[Enums.Session.ProductoSuplemento.ToString()]).COD_ESTADO;
+                oProducto.COD_TIPO_PRODUCTO = ((BLL.ProductoSuplemento)base.Session[Enums.Session.ProductoSuplemento.ToString()]).COD_TIPO_PRODUCTO;
+                oProducto.NOMBRE = txtNombre.Text;
+                oProducto.COD_PROVEEDOR = Convert.ToInt32(ddlProveedor.SelectedValue);
+                oProducto.COD_GENERO = Convert.ToInt32(ddlGenero.SelectedValue);
+            }
 
             if (!String.IsNullOrEmpty(txtDescripcion.Text))
                 oProducto.DESCRIPCION = txtDescripcion.Text;
@@ -119,23 +117,23 @@ namespace PL.AdminDashboard
 
         private BLL.DAL.Suplemento CargarSuplementoDesdeControles()
         {
-            if (Session[Enums.Session.ProductoSuplemento.ToString()] == null)
-                return null;
-
-            var oSuplemento = new BLL.DAL.Suplemento
+            var oSuplemento = new BLL.DAL.Suplemento();
+            if (Session[Enums.Session.ProductoSuplemento.ToString()] != null)
             {
-                COD_PRODUCTO = ((BLL.ProductoSuplemento)base.Session[Enums.Session.ProductoSuplemento.ToString()]).ID_PRODUCTO,
-                ID_SUPLEMENTO = ((BLL.ProductoSuplemento)base.Session[Enums.Session.ProductoSuplemento.ToString()]).ID_SUPLEMENTO,
-                COD_DIARIO = Convert.ToInt32(ddlDiarioSuplemento.SelectedValue),
-                PRECIO = Convert.ToDouble(txtPrecioSuplemento.Text),
-                CANTIDAD_ENTREGAS = Convert.ToInt32(txtCantidadDeEntregaSuplemento.Text)
-            };
-
-            if (!String.IsNullOrEmpty(ddlDiaDeEntregaSuplemento.SelectedValue))
-                oSuplemento.ID_DIA_SEMANA = Convert.ToInt32(ddlDiaDeEntregaSuplemento.SelectedValue);
-            else
-                oSuplemento.ID_DIA_SEMANA = null;
-
+                //var oDiario = new BLL.DiarioBLL().ObtenerDiario(((BLL.ProductoSuplemento)base.Session[Enums.Session.ProductoSuplemento.ToString()]).ID_PRODUCTO);
+                oSuplemento.ID_SUPLEMENTO = ((BLL.ProductoSuplemento)base.Session[Enums.Session.ProductoSuplemento.ToString()]).ID_SUPLEMENTO;
+                oSuplemento.COD_PRODUCTO = ((BLL.ProductoSuplemento)base.Session[Enums.Session.ProductoSuplemento.ToString()]).ID_PRODUCTO;
+            }
+            var oDiarioSuplemento = new BLL.DiarioBLL().ObtenerDiario(Convert.ToInt32(ddlDiarioSuplemento.SelectedValue));
+                oSuplemento.COD_DIARIO = oDiarioSuplemento.ID_DIARIO_DIA_SEMAMA;
+                oSuplemento.PRECIO = Convert.ToDouble(txtPrecioSuplemento.Text);
+                oSuplemento.CANTIDAD_ENTREGAS = Convert.ToInt32(txtCantidadDeEntregaSuplemento.Text);
+                            
+                if (!String.IsNullOrEmpty(ddlDiaDeEntregaSuplemento.SelectedValue))
+                    oSuplemento.ID_DIA_SEMANA = Convert.ToInt32(ddlDiaDeEntregaSuplemento.SelectedValue);
+                else
+                    oSuplemento.ID_DIA_SEMANA = null;
+            
             return oSuplemento;
         }
 
