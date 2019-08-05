@@ -37,6 +37,16 @@
           <Property Name="DIRECCION_MAPS" Type="varchar(max)" />
           <Property Name="FECHA_BAJA" Type="datetime" />
         </EntityType>
+        <EntityType Name="Cobro">
+          <Key>
+            <PropertyRef Name="ID_COBRO" />
+          </Key>
+          <Property Name="ID_COBRO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FECHA" Type="datetime" Nullable="false" />
+          <Property Name="COD_ESTADO" Type="int" Nullable="false" />
+          <Property Name="COD_CLIENTE" Type="int" Nullable="false" />
+          <Property Name="TOTAL" Type="float" Nullable="false" />
+        </EntityType>
         <EntityType Name="Coleccion">
           <Key>
             <PropertyRef Name="ID_COLECCION" />
@@ -46,6 +56,15 @@
           <Property Name="COD_PERIODICIDAD" Type="int" Nullable="false" />
           <Property Name="ID_DIA_SEMANA" Type="int" />
           <Property Name="CANTIDAD_ENTREGAS" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DetalleCobro">
+          <Key>
+            <PropertyRef Name="ID_DETALLE_COBRO" />
+          </Key>
+          <Property Name="ID_DETALLE_COBRO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="COD_COBRO" Type="int" Nullable="false" />
+          <Property Name="COD_VENTA" Type="int" Nullable="false" />
+          <Property Name="SUBTOTAL" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="DetalleProductoDevolucion">
           <Key>
@@ -329,6 +348,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Cobro_Cliente">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Cobro" Type="Self.Cobro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Principal>
+            <Dependent Role="Cobro">
+              <PropertyRef Name="COD_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cobro_Estado">
+          <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
+          <End Role="Cobro" Type="Self.Cobro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="ID_ESTADO" />
+            </Principal>
+            <Dependent Role="Cobro">
+              <PropertyRef Name="COD_ESTADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Coleccion_DiaSemana">
           <End Role="DiaSemana" Type="Self.DiaSemana" Multiplicity="0..1" />
           <End Role="Coleccion" Type="Self.Coleccion" Multiplicity="*" />
@@ -362,6 +405,30 @@
             </Principal>
             <Dependent Role="Coleccion">
               <PropertyRef Name="COD_PRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleCobro_Cobro">
+          <End Role="Cobro" Type="Self.Cobro" Multiplicity="1" />
+          <End Role="DetalleCobro" Type="Self.DetalleCobro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cobro">
+              <PropertyRef Name="ID_COBRO" />
+            </Principal>
+            <Dependent Role="DetalleCobro">
+              <PropertyRef Name="COD_COBRO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleCobro_Venta">
+          <End Role="Venta" Type="Self.Venta" Multiplicity="1" />
+          <End Role="DetalleCobro" Type="Self.DetalleCobro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venta">
+              <PropertyRef Name="ID_VENTA" />
+            </Principal>
+            <Dependent Role="DetalleCobro">
+              <PropertyRef Name="COD_VENTA" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -845,10 +912,43 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="MAGASYSModelStoreContainer">
           <EntitySet Name="Anio" EntityType="Self.Anio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cobro" EntityType="Self.Cobro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Coleccion" EntityType="Self.Coleccion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetalleCobro" EntityType="Self.DetalleCobro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DetalleProductoDevolucion" EntityType="Self.DetalleProductoDevolucion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DetalleProductoIngreso" EntityType="Self.DetalleProductoIngreso" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DetalleVenta" EntityType="Self.DetalleVenta" Schema="dbo" store:Type="Tables" />
@@ -880,6 +980,14 @@
             <End Role="TipoDocumento" EntitySet="TipoDocumento" />
             <End Role="Cliente" EntitySet="Cliente" />
           </AssociationSet>
+          <AssociationSet Name="FK_Cobro_Cliente" Association="Self.FK_Cobro_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Cobro" EntitySet="Cobro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cobro_Estado" Association="Self.FK_Cobro_Estado">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Cobro" EntitySet="Cobro" />
+          </AssociationSet>
           <AssociationSet Name="FK_Coleccion_DiaSemana" Association="Self.FK_Coleccion_DiaSemana">
             <End Role="DiaSemana" EntitySet="DiaSemana" />
             <End Role="Coleccion" EntitySet="Coleccion" />
@@ -891,6 +999,14 @@
           <AssociationSet Name="FK_Coleccion_Producto" Association="Self.FK_Coleccion_Producto">
             <End Role="Producto" EntitySet="Producto" />
             <End Role="Coleccion" EntitySet="Coleccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleCobro_Cobro" Association="Self.FK_DetalleCobro_Cobro">
+            <End Role="Cobro" EntitySet="Cobro" />
+            <End Role="DetalleCobro" EntitySet="DetalleCobro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleCobro_Venta" Association="Self.FK_DetalleCobro_Venta">
+            <End Role="Venta" EntitySet="Venta" />
+            <End Role="DetalleCobro" EntitySet="DetalleCobro" />
           </AssociationSet>
           <AssociationSet Name="FK_DetalleIngresoProducto_Estado" Association="Self.FK_DetalleIngresoProducto_Estado">
             <End Role="Estado" EntitySet="Estado" />
@@ -1060,7 +1176,9 @@
         <EntityContainer Name="MAGASYSEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Anio" EntityType="MAGASYSModel.Anio" />
           <EntitySet Name="Cliente" EntityType="MAGASYSModel.Cliente" />
+          <EntitySet Name="Cobro" EntityType="MAGASYSModel.Cobro" />
           <EntitySet Name="Coleccion" EntityType="MAGASYSModel.Coleccion" />
+          <EntitySet Name="DetalleCobro" EntityType="MAGASYSModel.DetalleCobro" />
           <EntitySet Name="DetalleProductoDevolucion" EntityType="MAGASYSModel.DetalleProductoDevolucion" />
           <EntitySet Name="DetalleProductoIngreso" EntityType="MAGASYSModel.DetalleProductoIngreso" />
           <EntitySet Name="DetalleVenta" EntityType="MAGASYSModel.DetalleVenta" />
@@ -1092,6 +1210,10 @@
             <End Role="TipoDocumento" EntitySet="TipoDocumento" />
             <End Role="Cliente" EntitySet="Cliente" />
           </AssociationSet>
+          <AssociationSet Name="FK_Cobro_Cliente" Association="MAGASYSModel.FK_Cobro_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Cobro" EntitySet="Cobro" />
+          </AssociationSet>
           <AssociationSet Name="FK_Reserva_Cliente" Association="MAGASYSModel.FK_Reserva_Cliente">
             <End Role="Cliente" EntitySet="Cliente" />
             <End Role="Reserva" EntitySet="Reserva" />
@@ -1099,6 +1221,14 @@
           <AssociationSet Name="FK_Venta_Cliente" Association="MAGASYSModel.FK_Venta_Cliente">
             <End Role="Cliente" EntitySet="Cliente" />
             <End Role="Venta" EntitySet="Venta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cobro_Estado" Association="MAGASYSModel.FK_Cobro_Estado">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Cobro" EntitySet="Cobro" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleCobro_Cobro" Association="MAGASYSModel.FK_DetalleCobro_Cobro">
+            <End Role="Cobro" EntitySet="Cobro" />
+            <End Role="DetalleCobro" EntitySet="DetalleCobro" />
           </AssociationSet>
           <AssociationSet Name="FK_Coleccion_DiaSemana" Association="MAGASYSModel.FK_Coleccion_DiaSemana">
             <End Role="DiaSemana" EntitySet="DiaSemana" />
@@ -1111,6 +1241,10 @@
           <AssociationSet Name="FK_Coleccion_Producto" Association="MAGASYSModel.FK_Coleccion_Producto">
             <End Role="Producto" EntitySet="Producto" />
             <End Role="Coleccion" EntitySet="Coleccion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetalleCobro_Venta" Association="MAGASYSModel.FK_DetalleCobro_Venta">
+            <End Role="Venta" EntitySet="Venta" />
+            <End Role="DetalleCobro" EntitySet="DetalleCobro" />
           </AssociationSet>
           <AssociationSet Name="FK_DetalleProductoDevolucion_ProductoDevolucion" Association="MAGASYSModel.FK_DetalleProductoDevolucion_ProductoDevolucion">
             <End Role="ProductoDevolucion" EntitySet="ProductoDevolucion" />
@@ -1264,6 +1398,36 @@
             <End Role="Reserva" EntitySet="Reserva" />
             <End Role="ReservaEdicion" EntitySet="ReservaEdicion" />
           </AssociationSet>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(MAGASYSModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(MAGASYSModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
         <EntityType Name="Anio">
           <Key>
@@ -1297,8 +1461,22 @@
           <Property Name="DIRECCION_MAPS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="FECHA_BAJA" Type="DateTime" Precision="3" />
           <NavigationProperty Name="TipoDocumento" Relationship="MAGASYSModel.FK_Cliente_TipoDocumento1" FromRole="Cliente" ToRole="TipoDocumento" />
+          <NavigationProperty Name="Cobro" Relationship="MAGASYSModel.FK_Cobro_Cliente" FromRole="Cliente" ToRole="Cobro" />
           <NavigationProperty Name="Reserva" Relationship="MAGASYSModel.FK_Reserva_Cliente" FromRole="Cliente" ToRole="Reserva" />
           <NavigationProperty Name="Venta" Relationship="MAGASYSModel.FK_Venta_Cliente" FromRole="Cliente" ToRole="Venta" />
+        </EntityType>
+        <EntityType Name="Cobro">
+          <Key>
+            <PropertyRef Name="ID_COBRO" />
+          </Key>
+          <Property Name="ID_COBRO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="COD_ESTADO" Type="Int32" Nullable="false" />
+          <Property Name="COD_CLIENTE" Type="Int32" Nullable="false" />
+          <Property Name="TOTAL" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Cliente" Relationship="MAGASYSModel.FK_Cobro_Cliente" FromRole="Cobro" ToRole="Cliente" />
+          <NavigationProperty Name="Estado" Relationship="MAGASYSModel.FK_Cobro_Estado" FromRole="Cobro" ToRole="Estado" />
+          <NavigationProperty Name="DetalleCobro" Relationship="MAGASYSModel.FK_DetalleCobro_Cobro" FromRole="Cobro" ToRole="DetalleCobro" />
         </EntityType>
         <EntityType Name="Coleccion">
           <Key>
@@ -1312,6 +1490,17 @@
           <NavigationProperty Name="DiaSemana" Relationship="MAGASYSModel.FK_Coleccion_DiaSemana" FromRole="Coleccion" ToRole="DiaSemana" />
           <NavigationProperty Name="Periodicidad" Relationship="MAGASYSModel.FK_Coleccion_Periodicidad" FromRole="Coleccion" ToRole="Periodicidad" />
           <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_Coleccion_Producto" FromRole="Coleccion" ToRole="Producto" />
+        </EntityType>
+        <EntityType Name="DetalleCobro">
+          <Key>
+            <PropertyRef Name="ID_DETALLE_COBRO" />
+          </Key>
+          <Property Name="ID_DETALLE_COBRO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="COD_COBRO" Type="Int32" Nullable="false" />
+          <Property Name="COD_VENTA" Type="Int32" Nullable="false" />
+          <Property Name="SUBTOTAL" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Cobro" Relationship="MAGASYSModel.FK_DetalleCobro_Cobro" FromRole="DetalleCobro" ToRole="Cobro" />
+          <NavigationProperty Name="Venta" Relationship="MAGASYSModel.FK_DetalleCobro_Venta" FromRole="DetalleCobro" ToRole="Venta" />
         </EntityType>
         <EntityType Name="DetalleProductoDevolucion">
           <Key>
@@ -1381,6 +1570,7 @@
           <Property Name="ID_ESTADO" Type="Int32" Nullable="false" />
           <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="AMBITO" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Cobro" Relationship="MAGASYSModel.FK_Cobro_Estado" FromRole="Estado" ToRole="Cobro" />
           <NavigationProperty Name="DetalleProductoIngreso" Relationship="MAGASYSModel.FK_DetalleIngresoProducto_Estado" FromRole="Estado" ToRole="DetalleProductoIngreso" />
           <NavigationProperty Name="ProductoIngreso" Relationship="MAGASYSModel.FK_IngresoProducto_Estado" FromRole="Estado" ToRole="ProductoIngreso" />
           <NavigationProperty Name="ProductoEdicion" Relationship="MAGASYSModel.FK_Producto_Edicion_Estado" FromRole="Estado" ToRole="ProductoEdicion" />
@@ -1661,6 +1851,7 @@
           <Property Name="COD_CLIENTE" Type="Int32" />
           <Property Name="COD_FORMA_PAGO" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Cliente" Relationship="MAGASYSModel.FK_Venta_Cliente" FromRole="Venta" ToRole="Cliente" />
+          <NavigationProperty Name="DetalleCobro" Relationship="MAGASYSModel.FK_DetalleCobro_Venta" FromRole="Venta" ToRole="DetalleCobro" />
           <NavigationProperty Name="DetalleVenta" Relationship="MAGASYSModel.FK_DetalleVenta_Venta" FromRole="Venta" ToRole="DetalleVenta" />
           <NavigationProperty Name="Estado" Relationship="MAGASYSModel.FK_Venta_Estado" FromRole="Venta" ToRole="Estado" />
           <NavigationProperty Name="FormaPago" Relationship="MAGASYSModel.FK_Venta_FormaPago" FromRole="Venta" ToRole="FormaPago" />
@@ -1674,6 +1865,18 @@
             </Principal>
             <Dependent Role="Cliente">
               <PropertyRef Name="TIPO_DOCUMENTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cobro_Cliente">
+          <End Type="MAGASYSModel.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="MAGASYSModel.Cobro" Role="Cobro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Principal>
+            <Dependent Role="Cobro">
+              <PropertyRef Name="COD_CLIENTE" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1698,6 +1901,30 @@
             </Principal>
             <Dependent Role="Venta">
               <PropertyRef Name="COD_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cobro_Estado">
+          <End Type="MAGASYSModel.Estado" Role="Estado" Multiplicity="1" />
+          <End Type="MAGASYSModel.Cobro" Role="Cobro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="ID_ESTADO" />
+            </Principal>
+            <Dependent Role="Cobro">
+              <PropertyRef Name="COD_ESTADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleCobro_Cobro">
+          <End Type="MAGASYSModel.Cobro" Role="Cobro" Multiplicity="1" />
+          <End Type="MAGASYSModel.DetalleCobro" Role="DetalleCobro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cobro">
+              <PropertyRef Name="ID_COBRO" />
+            </Principal>
+            <Dependent Role="DetalleCobro">
+              <PropertyRef Name="COD_COBRO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1734,6 +1961,18 @@
             </Principal>
             <Dependent Role="Coleccion">
               <PropertyRef Name="COD_PRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetalleCobro_Venta">
+          <End Type="MAGASYSModel.Venta" Role="Venta" Multiplicity="1" />
+          <End Type="MAGASYSModel.DetalleCobro" Role="DetalleCobro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venta">
+              <PropertyRef Name="ID_VENTA" />
+            </Principal>
+            <Dependent Role="DetalleCobro">
+              <PropertyRef Name="COD_VENTA" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2193,6 +2432,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2233,6 +2483,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Cobro">
+            <EntityTypeMapping TypeName="MAGASYSModel.Cobro">
+              <MappingFragment StoreEntitySet="Cobro">
+                <ScalarProperty Name="TOTAL" ColumnName="TOTAL" />
+                <ScalarProperty Name="COD_CLIENTE" ColumnName="COD_CLIENTE" />
+                <ScalarProperty Name="COD_ESTADO" ColumnName="COD_ESTADO" />
+                <ScalarProperty Name="FECHA" ColumnName="FECHA" />
+                <ScalarProperty Name="ID_COBRO" ColumnName="ID_COBRO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Coleccion">
             <EntityTypeMapping TypeName="MAGASYSModel.Coleccion">
               <MappingFragment StoreEntitySet="Coleccion">
@@ -2241,6 +2502,16 @@
                 <ScalarProperty Name="COD_PERIODICIDAD" ColumnName="COD_PERIODICIDAD" />
                 <ScalarProperty Name="COD_PRODUCTO" ColumnName="COD_PRODUCTO" />
                 <ScalarProperty Name="ID_COLECCION" ColumnName="ID_COLECCION" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetalleCobro">
+            <EntityTypeMapping TypeName="MAGASYSModel.DetalleCobro">
+              <MappingFragment StoreEntitySet="DetalleCobro">
+                <ScalarProperty Name="SUBTOTAL" ColumnName="SUBTOTAL" />
+                <ScalarProperty Name="COD_VENTA" ColumnName="COD_VENTA" />
+                <ScalarProperty Name="COD_COBRO" ColumnName="COD_COBRO" />
+                <ScalarProperty Name="ID_DETALLE_COBRO" ColumnName="ID_DETALLE_COBRO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2541,6 +2812,30 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="MAGASYSModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="MAGASYSModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="MAGASYSModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="MAGASYSModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MAGASYSModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="MAGASYSModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MAGASYSModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="MAGASYSModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="MAGASYSModel.Store.sp_upgraddiagrams" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -22,6 +22,8 @@ public partial class Cliente
     public Cliente()
     {
 
+        this.Cobro = new HashSet<Cobro>();
+
         this.Reserva = new HashSet<Reserva>();
 
         this.Venta = new HashSet<Venta>();
@@ -74,6 +76,10 @@ public partial class Cliente
 
 
     public virtual TipoDocumento TipoDocumento { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<Cobro> Cobro { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 

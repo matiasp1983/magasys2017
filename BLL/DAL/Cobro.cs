@@ -15,47 +15,37 @@ namespace BLL.DAL
 using System;
     using System.Collections.Generic;
     
-public partial class Venta
+public partial class Cobro
 {
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public Venta()
+    public Cobro()
     {
 
         this.DetalleCobro = new HashSet<DetalleCobro>();
 
-        this.DetalleVenta = new HashSet<DetalleVenta>();
-
     }
 
 
-    public int ID_VENTA { get; set; }
+    public int ID_COBRO { get; set; }
 
     public System.DateTime FECHA { get; set; }
 
     public int COD_ESTADO { get; set; }
 
+    public int COD_CLIENTE { get; set; }
+
     public double TOTAL { get; set; }
-
-    public Nullable<int> COD_CLIENTE { get; set; }
-
-    public int COD_FORMA_PAGO { get; set; }
 
 
 
     public virtual Cliente Cliente { get; set; }
 
+    public virtual Estado Estado { get; set; }
+
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<DetalleCobro> DetalleCobro { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<DetalleVenta> DetalleVenta { get; set; }
-
-    public virtual Estado Estado { get; set; }
-
-    public virtual FormaPago FormaPago { get; set; }
 
 }
 
