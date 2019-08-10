@@ -53,23 +53,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Pagado</label>
-                                <div class="col-sm-10">
-                                    <div class="i-checks">
-                                        <label>
-                                            <input runat="server" type="radio" id="rdbPagadoSi">
-                                            <i></i>Si </label>
-                                    </div>
-                                    <div class="i-checks">
-                                        <label>
-                                            <input runat="server" type="radio" id="rdbPagadoNo">
-                                            <i></i>No </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

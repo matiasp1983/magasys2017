@@ -49,24 +49,6 @@ namespace PL.AdminDashboard {
         protected global::System.Web.UI.WebControls.DropDownList ddlFormaPago;
         
         /// <summary>
-        /// Control rdbPagadoSi.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdbPagadoSi;
-        
-        /// <summary>
-        /// Control rdbPagadoNo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton rdbPagadoNo;
-        
-        /// <summary>
         /// Control ddlTipoDocumento.
         /// </summary>
         /// <remarks>

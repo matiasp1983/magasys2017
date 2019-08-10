@@ -24,7 +24,6 @@ namespace PL.AdminDashboard
             {
                 txtFechaVenta.Text = DateTime.Now.ToString("dd/MM/yyyy");
                 txtCodigoVenta.Text = new BLL.VentaBLL().ObtenerProximaVenta().ToString();
-                rdbPagadoSi.Checked = true;
                 CargarFormaDePago();
                 CargarTiposDocumento();
 
@@ -48,11 +47,6 @@ namespace PL.AdminDashboard
                     if (oVenta.TOTAL > 0)
                         lblTotal.Text = oVenta.TOTAL.ToString();
                     ddlFormaPago.SelectedValue = oVenta.COD_FORMA_PAGO.ToString();
-                    if (oVenta.COD_ESTADO == 5)
-                    {
-                        rdbPagadoSi.Checked = true;
-                        rdbPagadoNo.Checked = false;
-                    }
                     Session.Remove(Enums.Session.Venta.ToString());
                 }
 
@@ -121,7 +115,7 @@ namespace PL.AdminDashboard
             if (!String.IsNullOrEmpty(lblTotal.Text))
                 oVenta.TOTAL = Convert.ToDouble(lblTotal.Text);
             oVenta.COD_FORMA_PAGO = Convert.ToInt32(ddlFormaPago.SelectedValue);
-            if (rdbPagadoSi.Checked)
+            if (ddlFormaPago.SelectedValue == "1")
                 oVenta.COD_ESTADO = 5;
             else
                 oVenta.COD_ESTADO = 4;
@@ -137,14 +131,10 @@ namespace PL.AdminDashboard
         {
             bool loResutado = false;
             List<DetalleVenta> lstDetalleVenta = new List<DetalleVenta>();
+            List<DetalleCobro> lstDetalleCobro = new List<DetalleCobro>();
+            BLL.DAL.Cobro oCobro = new BLL.DAL.Cobro();
 
             var oCliente = (BLL.DAL.Cliente)Session[Enums.Session.Cliente.ToString()];
-
-            if (ddlFormaPago.SelectedValue == "1" && rdbPagadoNo.Checked) // Para una venta de Contado debe indicar Pagado Sí.
-            {
-                Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.InfoModal(Message.MsjeVentaAviso));
-                return;
-            }
 
             if (ddlFormaPago.SelectedValue == "2" && String.IsNullOrEmpty(txtApellido.Text))
             {
@@ -180,13 +170,16 @@ namespace PL.AdminDashboard
                 COD_FORMA_PAGO = Convert.ToInt32(ddlFormaPago.SelectedValue)
             };
 
-            if (rdbPagadoSi.Checked)
-                oVenta.COD_ESTADO = 5;
+            if (ddlFormaPago.SelectedValue == "1") // Si la venta es de Contado
+                oVenta.COD_ESTADO = 5; // Pagada    
             else
-                oVenta.COD_ESTADO = 4;
+                oVenta.COD_ESTADO = 4; // A Cuenta  
 
             if (oCliente != null)
+            {
                 oVenta.COD_CLIENTE = oCliente.ID_CLIENTE;
+                oCobro.COD_CLIENTE = oCliente.ID_CLIENTE;
+            }
 
             foreach (var loItem in lsvVenta.Items)
             {
@@ -206,6 +199,22 @@ namespace PL.AdminDashboard
 
             if (loResutado)
                 loResutado = new VentaBLL().AltaVenta(oVenta, lstDetalleVenta);
+
+            if (loResutado && ddlFormaPago.SelectedValue == "1") // Si la venta se paga se debe registrar el Cobro
+            {
+                oCobro.FECHA = DateTime.Now;
+                oCobro.COD_ESTADO = 13; //Registrado
+                oCobro.TOTAL = Convert.ToDouble(lblTotal.Text);
+
+                DetalleCobro oDetalleCobro = new DetalleCobro()
+                {
+                    COD_VENTA = oVenta.ID_VENTA,
+                    SUBTOTAL = Convert.ToDouble(lblTotal.Text)
+                };
+
+                lstDetalleCobro.Add(oDetalleCobro);
+                loResutado = new CobroBLL().AltaCobro(oCobro, lstDetalleCobro);
+            }
 
             if (loResutado)
             {
@@ -1057,7 +1066,6 @@ namespace PL.AdminDashboard
         {
             txtCodigoVenta.Text = new BLL.VentaBLL().ObtenerProximaVenta().ToString();
             ddlFormaPago.SelectedIndex = 0;
-            rdbPagadoNo.Checked = true;
             ddlTipoDocumento.SelectedIndex = 0;
             txtNroDocumento.Text = String.Empty;
             txtNombre.Text = String.Empty;
