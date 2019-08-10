@@ -65,7 +65,6 @@
         public const string MsjeVentaSuccessAlta = "La venta se registró correctamente.";
         public const string MsjeVentaFailure = "La venta no se pudo registrar.";
         public const string MsjeVentaCantidadInvalida = "La cantidad ingresada no es válida.";
-        public const string MsjeVentaAviso = "Para una venta de Contado debe indicar Pagado Sí.";
         public const string MsjeListadoVentaFiltrarTotalSinResultados = "No se encontraron Ventas para la búsqueda seleccionada.";
         public const string MsjeVentaAnularFailure = "La venta no se pudo anular.";
         public const string MsjeVentaAnularOk = "La venta se pudo anular.";
