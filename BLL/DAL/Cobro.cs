@@ -33,7 +33,7 @@ public partial class Cobro
 
     public int COD_ESTADO { get; set; }
 
-    public int COD_CLIENTE { get; set; }
+    public Nullable<int> COD_CLIENTE { get; set; }
 
     public double TOTAL { get; set; }
 

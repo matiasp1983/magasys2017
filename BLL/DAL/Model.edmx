@@ -44,7 +44,7 @@
           <Property Name="ID_COBRO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FECHA" Type="datetime" Nullable="false" />
           <Property Name="COD_ESTADO" Type="int" Nullable="false" />
-          <Property Name="COD_CLIENTE" Type="int" Nullable="false" />
+          <Property Name="COD_CLIENTE" Type="int" />
           <Property Name="TOTAL" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="Coleccion">
@@ -119,7 +119,7 @@
           </Key>
           <Property Name="ID_ESTADO" Type="int" Nullable="false" />
           <Property Name="NOMBRE" Type="nchar" MaxLength="10" Nullable="false" />
-          <Property Name="AMBITO" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="AMBITO" Type="nchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="FormaPago">
           <Key>
@@ -349,7 +349,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Cobro_Cliente">
-          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
           <End Role="Cobro" Type="Self.Cobro" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Cliente">
@@ -1174,6 +1174,36 @@
     <edmx:ConceptualModels>
       <Schema Namespace="MAGASYSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="MAGASYSEntities" annotation:LazyLoadingEnabled="true">
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(MAGASYSModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(MAGASYSModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
           <EntitySet Name="Anio" EntityType="MAGASYSModel.Anio" />
           <EntitySet Name="Cliente" EntityType="MAGASYSModel.Cliente" />
           <EntitySet Name="Cobro" EntityType="MAGASYSModel.Cobro" />
@@ -1398,37 +1428,18 @@
             <End Role="Reserva" EntitySet="Reserva" />
             <End Role="ReservaEdicion" EntitySet="ReservaEdicion" />
           </AssociationSet>
-          <FunctionImport Name="sp_alterdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_creatediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="version" Mode="In" Type="Int32" />
-            <Parameter Name="definition" Mode="In" Type="Binary" />
-          </FunctionImport>
-          <FunctionImport Name="sp_dropdiagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(MAGASYSModel.sp_helpdiagramdefinition_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(MAGASYSModel.sp_helpdiagrams_Result)">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="sp_renamediagram">
-            <Parameter Name="diagramname" Mode="In" Type="String" />
-            <Parameter Name="owner_id" Mode="In" Type="Int32" />
-            <Parameter Name="new_diagramname" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="sp_upgraddiagrams" />
-        </EntityContainer>
+          </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
         <EntityType Name="Anio">
           <Key>
             <PropertyRef Name="DESCRIPCION" />
@@ -1472,7 +1483,7 @@
           <Property Name="ID_COBRO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="COD_ESTADO" Type="Int32" Nullable="false" />
-          <Property Name="COD_CLIENTE" Type="Int32" Nullable="false" />
+          <Property Name="COD_CLIENTE" Type="Int32" />
           <Property Name="TOTAL" Type="Double" Nullable="false" />
           <NavigationProperty Name="Cliente" Relationship="MAGASYSModel.FK_Cobro_Cliente" FromRole="Cobro" ToRole="Cliente" />
           <NavigationProperty Name="Estado" Relationship="MAGASYSModel.FK_Cobro_Estado" FromRole="Cobro" ToRole="Estado" />
@@ -1569,7 +1580,7 @@
           </Key>
           <Property Name="ID_ESTADO" Type="Int32" Nullable="false" />
           <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="AMBITO" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="AMBITO" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Cobro" Relationship="MAGASYSModel.FK_Cobro_Estado" FromRole="Estado" ToRole="Cobro" />
           <NavigationProperty Name="DetalleProductoIngreso" Relationship="MAGASYSModel.FK_DetalleIngresoProducto_Estado" FromRole="Estado" ToRole="DetalleProductoIngreso" />
           <NavigationProperty Name="ProductoIngreso" Relationship="MAGASYSModel.FK_IngresoProducto_Estado" FromRole="Estado" ToRole="ProductoIngreso" />
@@ -1869,7 +1880,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Cobro_Cliente">
-          <End Type="MAGASYSModel.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="MAGASYSModel.Cliente" Role="Cliente" Multiplicity="0..1" />
           <End Type="MAGASYSModel.Cobro" Role="Cobro" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Cliente">
@@ -2432,23 +2443,36 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="sp_helpdiagramdefinition_Result">
-          <Property Type="Int32" Name="version" Nullable="true" />
-          <Property Type="Binary" Name="definition" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="sp_helpdiagrams_Result">
-          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-          <Property Type="Int32" Name="OwnerID" Nullable="false" />
-        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="MAGASYSModelStoreContainer" CdmEntityContainer="MAGASYSEntities">
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="MAGASYSModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="MAGASYSModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="MAGASYSModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="MAGASYSModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MAGASYSModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="MAGASYSModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MAGASYSModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="MAGASYSModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="MAGASYSModel.Store.sp_upgraddiagrams" />
           <EntitySetMapping Name="Anio">
             <EntityTypeMapping TypeName="MAGASYSModel.Anio">
               <MappingFragment StoreEntitySet="Anio">
@@ -2812,31 +2836,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="MAGASYSModel.Store.sp_alterdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="MAGASYSModel.Store.sp_creatediagram" />
-          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="MAGASYSModel.Store.sp_dropdiagram" />
-          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="MAGASYSModel.Store.sp_helpdiagramdefinition">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="MAGASYSModel.sp_helpdiagramdefinition_Result">
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="MAGASYSModel.Store.sp_helpdiagrams">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="MAGASYSModel.sp_helpdiagrams_Result">
-                <ScalarProperty Name="Database" ColumnName="Database" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="Owner" ColumnName="Owner" />
-                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="MAGASYSModel.Store.sp_renamediagram" />
-          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="MAGASYSModel.Store.sp_upgraddiagrams" />
-        </EntityContainerMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>
