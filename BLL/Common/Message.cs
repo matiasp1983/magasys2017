@@ -70,6 +70,7 @@
         public const string MsjeVentaAnularOk = "La venta se pudo anular.";
         public const string MsjeVentaValidaCtaCorriente = "Debe seleccionar un cliente.";
         public const string MsjeVentaValidaClienteCtaCorriente = "Los datos del cliente no son válidos.";
+        public const string MsjeListadoVentaACuentaSinResultados = "No se encontraron Ventas para cobrar.";
 
         #endregion
 
@@ -123,6 +124,13 @@
         #region Deudas
 
         public const string MsjeVisualizarDeudasSinResultados = "No se encontraron deudas para la búsqueda seleccionada.";
+
+        #endregion
+
+        #region Cobro
+
+        public const string MsjeCobroSuccessAlta = "El cobro se registró correctamente.";
+        public const string MsjeCobroFailure = "El cobro no se pudo registrar.";
 
         #endregion
     }

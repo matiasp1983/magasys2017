@@ -24,7 +24,9 @@
             Venta,
             AltaReservaAltaCliente,
             Genero,
-            IdReserva
+            IdReserva,
+            IdClienteCobro,
+            CobroVisualizarIdVenta
         } 
 
         #endregion

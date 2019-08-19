@@ -76,6 +76,11 @@ namespace PL.AdminDashboard
                 liClientes.Attributes["class"] = "active";
                 liVisualizarDeudas.Attributes["class"] = "active";
             }
+            if (loActivePage.Contains("Cobro.aspx"))
+            {
+                liClientes.Attributes["class"] = "active";
+                liRegistrarCobro.Attributes["class"] = "active";
+            }
             if (loActivePage.Contains("ProductoIngreso.aspx"))
             {
                 liDeposito.Attributes["class"] = "active";

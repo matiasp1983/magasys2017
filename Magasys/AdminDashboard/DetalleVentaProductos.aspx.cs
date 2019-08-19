@@ -23,16 +23,25 @@ namespace PL.AdminDashboard
         {
             List<BLL.VentaListado> lstVentaListado = null;
             BLL.VentaListado oVentaListado = null;
-
             lsvDetalleVenta.DataSource = null;
             lsvDetalleVenta.Visible = false;
+            int loIdVenta = 0;
 
             if (Convert.ToInt32(Session[Enums.Session.IdVenta.ToString()]) > 0)
             {
+                loIdVenta = Convert.ToInt32(Session[Enums.Session.IdVenta.ToString()]);
+                Session.Remove(Enums.Session.IdVenta.ToString());
+            }
+            else if (Convert.ToInt32(Session[Enums.Session.CobroVisualizarIdVenta.ToString()]) > 0)
+            {
+                loIdVenta = Convert.ToInt32(Session[Enums.Session.CobroVisualizarIdVenta.ToString()]);
+                Session.Remove(Enums.Session.CobroVisualizarIdVenta.ToString());
+            }
+
+            if (loIdVenta > 0)
+            {
                 using (var loRepVenta = new Repository<BLL.DAL.Venta>())
                 {
-                    var loIdVenta = Convert.ToInt32(Session[Enums.Session.IdVenta.ToString()]);
-
                     var loVenta = loRepVenta.Find(p => p.ID_VENTA == loIdVenta);
 
                     if (loVenta != null)
@@ -76,8 +85,6 @@ namespace PL.AdminDashboard
                     }
                 }
             }
-
-            Session.Remove(Enums.Session.IdVenta.ToString());
         }
 
         #endregion

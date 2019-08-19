@@ -54,6 +54,7 @@
   <ItemGroup>
     <Compile Include="AnioBLL.cs" />
     <Compile Include="ClienteBLL.cs" />
+    <Compile Include="CobroBLL.cs" />
     <Compile Include="ColeccionBLL.cs" />
     <Compile Include="Common\Enums.cs" />
     <Compile Include="Common\Message.cs" />
@@ -65,7 +66,13 @@
     <Compile Include="DAL\Cliente.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\Cobro.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\Coleccion.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\DetalleCobro.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\DetalleProductoDevolucion.cs">
@@ -147,6 +154,12 @@
     <Compile Include="DAL\Revista.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\sp_helpdiagrams_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\Suplemento.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -203,7 +216,9 @@
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="DAL\Model.edmx.diagram">
       <DependentUpon>Model.edmx</DependentUpon>
     </None>

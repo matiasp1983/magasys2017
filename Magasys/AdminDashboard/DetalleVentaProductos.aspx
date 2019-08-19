@@ -119,7 +119,6 @@
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                         <thead>
                                             <tr>
-                                                <%--<th class="text-left">C&oacute;digo</th>--%>
                                                 <th>C&oacute;digo Edici&oacute;n</th>
                                                 <th>Edici&oacute;n</th>
                                                 <th>Tipo de Producto</th>
@@ -142,9 +141,6 @@
                                 </LayoutTemplate>
                                 <ItemTemplate>
                                     <tr>
-<%--                                        <td class="text-left">
-                                            <asp:Label ID="lblCodigoProducto" runat="server" Text='<%#Eval("ID_VENTA").ToString()%>'></asp:Label>
-                                        </td>--%>
                                         <td class="text-left">
                                             <asp:Label ID="lblCodigoEdicion" runat="server" Text='<%#Eval("COD_EDICION").ToString()%>'></asp:Label>
                                         </td>

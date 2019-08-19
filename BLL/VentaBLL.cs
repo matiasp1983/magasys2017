@@ -59,6 +59,68 @@ namespace BLL
             return bRes;
         }
 
+        public bool AnularVenta(int idVenta)
+        {
+            var bRes = false;
+
+            try
+            {
+                using (var loRepVenta = new Repository<Venta>())
+                {
+                    var loVenta = loRepVenta.Find(p => p.ID_VENTA == idVenta);
+
+                    if (loVenta != null)
+                    {
+                        foreach (var oDetalleVenta in loVenta.DetalleVenta)
+                        {
+                            var oProductoEdicion = new ProductoEdicionBLL().ObtenerEdicion(oDetalleVenta.COD_PRODUCTO_EDICION);
+                            oProductoEdicion.CANTIDAD_DISPONIBLE = oProductoEdicion.CANTIDAD_DISPONIBLE + oDetalleVenta.CANTIDAD;
+                            bRes = new ProductoEdicionBLL().ModificarProductoEdicion(oProductoEdicion);
+                            if (!bRes)
+                                break;
+                        }
+
+                        if (bRes)
+                        {
+                            loVenta.COD_ESTADO = 6;
+                            bRes = loRepVenta.Update(loVenta);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return bRes;
+        }
+
+        public bool PagarVenta(int idVenta)
+        {
+            var bRes = false;
+
+            try
+            {
+                using (var loRepVenta = new Repository<Venta>())
+                {
+                    var loVenta = loRepVenta.Find(p => p.ID_VENTA == idVenta);
+
+                    if (loVenta != null)
+                    {
+                        loVenta.COD_ESTADO = 5; // Venta Pagada
+                        bRes = loRepVenta.Update(loVenta);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return bRes;
+        }
+
         public List<VentaListado> ObtenerVentas(VentaFiltro oVentaFiltro)
         {
             List<VentaListado> lstVentaListado = null;
@@ -127,31 +189,31 @@ namespace BLL
             return lstVentaListado;
         }
 
-        public bool AnularVenta(int idVenta)
+        public List<VentaListado> ObtenerVentasACuenta(int codCliente)
         {
-            var bRes = false;
+            List<VentaListado> lstVentaListado = null;
+            List<Venta> lstVenta = null;
 
             try
             {
                 using (var loRepVenta = new Repository<Venta>())
                 {
-                    var loVenta = loRepVenta.Find(p => p.ID_VENTA == idVenta);
-
-                    if (loVenta != null)
+                    lstVenta = loRepVenta.Search(p => p.COD_ESTADO == 4 && p.COD_CLIENTE == codCliente).OrderByDescending(p => p.ID_VENTA).ToList();
+                    if (lstVenta.Count > 0)
                     {
-                        foreach (var oDetalleVenta in loVenta.DetalleVenta)
-                        {
-                            var oProductoEdicion = new ProductoEdicionBLL().ObtenerEdicion(oDetalleVenta.COD_PRODUCTO_EDICION);
-                            oProductoEdicion.CANTIDAD_DISPONIBLE = oProductoEdicion.CANTIDAD_DISPONIBLE + oDetalleVenta.CANTIDAD;
-                            bRes = new ProductoEdicionBLL().ModificarProductoEdicion(oProductoEdicion);
-                            if (!bRes)
-                                break;
-                        }
+                        VentaListado oVentaListado;
+                        lstVentaListado = new List<VentaListado>();
 
-                        if (bRes)
+                        foreach (var loVenta in lstVenta)
                         {
-                            loVenta.COD_ESTADO = 6;
-                            bRes = loRepVenta.Update(loVenta);
+                            oVentaListado = new VentaListado
+                            {
+                                ID_VENTA = loVenta.ID_VENTA,
+                                FECHA = loVenta.FECHA,
+                                TOTAL = "$ " + loVenta.TOTAL.ToString()
+                            };
+
+                            lstVentaListado.Add(oVentaListado);
                         }
                     }
                 }
@@ -161,7 +223,7 @@ namespace BLL
                 throw;
             }
 
-            return bRes;
+            return lstVentaListado;
         }
 
         #endregion

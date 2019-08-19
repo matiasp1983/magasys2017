@@ -127,6 +127,61 @@ namespace BLL
             return lstClienteListado;
         }
 
+        public List<ClienteListadoGrilla> ObtenerClientesGrilla(ClienteFiltro oClienteFiltro)
+        {
+            List<ClienteListadoGrilla> lstClienteListado = null;
+            List<Cliente> lstCliente = null;
+
+            try
+            {
+                using (var rep = new Repository<Cliente>())
+                {
+                    lstCliente = rep.Search(p => p.FECHA_BAJA == null && p.COD_ESTADO == 1).OrderByDescending(p => p.ID_CLIENTE).ToList();
+
+                    if (lstCliente.Count > 0)
+                    {
+                        if (!String.IsNullOrEmpty(oClienteFiltro.Alias))
+                            lstCliente = lstCliente.FindAll(p => p.ALIAS != null && p.ALIAS.ToUpper().Contains(oClienteFiltro.Alias.ToUpper()));
+
+                        if (oClienteFiltro.Tipo_documento > 0 && oClienteFiltro.Nro_documento > 0 && lstCliente.Count > 0)
+                            lstCliente = lstCliente.FindAll(p => p.TIPO_DOCUMENTO == oClienteFiltro.Tipo_documento && p.NRO_DOCUMENTO == oClienteFiltro.Nro_documento);
+
+                        if (!String.IsNullOrEmpty(oClienteFiltro.Apellido) && lstCliente.Count > 0)
+                            lstCliente = lstCliente.FindAll(p => p.APELLIDO.ToUpper().Contains(oClienteFiltro.Apellido.ToUpper()));
+
+                        if (!String.IsNullOrEmpty(oClienteFiltro.Nombre) && lstCliente.Count > 0)
+                            lstCliente = lstCliente.FindAll(p => p.NOMBRE.ToUpper().Contains(oClienteFiltro.Nombre.ToUpper()));
+                    }
+
+                    ClienteListadoGrilla oClienteListado;
+                    lstClienteListado = new List<ClienteListadoGrilla>();
+
+                    if (lstCliente != null)
+                    {
+                        foreach (var loCliente in lstCliente)
+                        {
+                            oClienteListado = new ClienteListadoGrilla
+                            {
+                                ID_CLIENTE = loCliente.ID_CLIENTE,
+                                NOMBRE_CLIENTE = loCliente.APELLIDO + " " + loCliente.NOMBRE,
+                                TIPO_DOCUMENTO = loCliente.TipoDocumento.DESCRIPCION,
+                                NRO_DOCUMENTO = loCliente.NRO_DOCUMENTO,
+                                ALIAS = loCliente.ALIAS
+                            };
+
+                            lstClienteListado.Add(oClienteListado);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return lstClienteListado;
+        }
+
         public bool ModificarCliente(Cliente oCliente)
         {
             var bRes = false;
@@ -157,6 +212,15 @@ namespace BLL
         public int NRO_DOCUMENTO { get; set; }
         public string NOMBRE { get; set; }
         public string APELLIDO { get; set; }
+    }
+
+    public class ClienteListadoGrilla
+    {
+        public int ID_CLIENTE { get; set; }
+        public string NOMBRE_CLIENTE { get; set; }
+        public string TIPO_DOCUMENTO { get; set; }
+        public int NRO_DOCUMENTO { get; set; }
+        public string ALIAS { get; set; }
     }
 
     #endregion

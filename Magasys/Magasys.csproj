@@ -73,6 +73,8 @@
     <Content Include="AdminDashboard\ClienteEditar.aspx" />
     <Content Include="AdminDashboard\ClienteListado.aspx" />
     <Content Include="AdminDashboard\ClienteVisualizar.aspx" />
+    <Content Include="AdminDashboard\Cobro.aspx" />
+    <Content Include="AdminDashboard\CobroCliente.aspx" />
     <Content Include="AdminDashboard\css\bootstrap.css.map" />
     <Content Include="AdminDashboard\css\bootstrap.min.css.map" />
     <Content Include="AdminDashboard\css\plugins\footable\fonts\footable.eot" />
@@ -154,6 +156,7 @@
     <Content Include="AdminDashboard\ProductoSuplementoVisualizar.aspx" />
     <Content Include="AdminDashboard\ProveedorEditar.aspx" />
     <Content Include="AdminDashboard\Reserva.aspx" />
+    <Content Include="AdminDashboard\ReservaEdicion.aspx" />
     <Content Include="AdminDashboard\ReservaEditar.aspx" />
     <Content Include="AdminDashboard\ReservaFinalizar.aspx" />
     <Content Include="AdminDashboard\ReservaListado.aspx" />
@@ -258,6 +261,20 @@
     </Compile>
     <Compile Include="AdminDashboard\ClienteVisualizar.aspx.designer.cs">
       <DependentUpon>ClienteVisualizar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\Cobro.aspx.cs">
+      <DependentUpon>Cobro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\Cobro.aspx.designer.cs">
+      <DependentUpon>Cobro.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\CobroCliente.aspx.cs">
+      <DependentUpon>CobroCliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\CobroCliente.aspx.designer.cs">
+      <DependentUpon>CobroCliente.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminDashboard\DetalleProductoDevoluciones.aspx.cs">
       <DependentUpon>DetalleProductoDevoluciones.aspx</DependentUpon>
@@ -482,6 +499,13 @@
     </Compile>
     <Compile Include="AdminDashboard\Reserva.aspx.designer.cs">
       <DependentUpon>Reserva.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\ReservaEdicion.aspx.cs">
+      <DependentUpon>ReservaEdicion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\ReservaEdicion.aspx.designer.cs">
+      <DependentUpon>ReservaEdicion.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminDashboard\ReservaEditar.aspx.cs">
       <DependentUpon>ReservaEditar.aspx</DependentUpon>
