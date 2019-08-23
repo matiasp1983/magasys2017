@@ -26,7 +26,8 @@
             Genero,
             IdReserva,
             IdClienteCobro,
-            CobroVisualizarIdVenta
+            CobroVisualizarIdVenta,
+            IdCobro
         } 
 
         #endregion

@@ -75,6 +75,7 @@
     <Content Include="AdminDashboard\ClienteVisualizar.aspx" />
     <Content Include="AdminDashboard\Cobro.aspx" />
     <Content Include="AdminDashboard\CobroCliente.aspx" />
+    <Content Include="AdminDashboard\CobroListado.aspx" />
     <Content Include="AdminDashboard\css\bootstrap.css.map" />
     <Content Include="AdminDashboard\css\bootstrap.min.css.map" />
     <Content Include="AdminDashboard\css\plugins\footable\fonts\footable.eot" />
@@ -86,6 +87,7 @@
     <Content Include="AdminDashboard\css\plugins\select2\select2.min.css" />
     <Content Include="AdminDashboard\css\plugins\sweetalert\sweetalert.css" />
     <Content Include="AdminDashboard\css\style.googlemap.css" />
+    <Content Include="AdminDashboard\DetalleCobro.aspx" />
     <Content Include="AdminDashboard\DetalleProductoDevoluciones.aspx" />
     <Content Include="AdminDashboard\DetalleProductoIngresos.aspx" />
     <Content Include="AdminDashboard\DetalleProductoIngresosEditar.aspx" />
@@ -275,6 +277,20 @@
     </Compile>
     <Compile Include="AdminDashboard\CobroCliente.aspx.designer.cs">
       <DependentUpon>CobroCliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\CobroListado.aspx.cs">
+      <DependentUpon>CobroListado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\CobroListado.aspx.designer.cs">
+      <DependentUpon>CobroListado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\DetalleCobro.aspx.cs">
+      <DependentUpon>DetalleCobro.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\DetalleCobro.aspx.designer.cs">
+      <DependentUpon>DetalleCobro.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminDashboard\DetalleProductoDevoluciones.aspx.cs">
       <DependentUpon>DetalleProductoDevoluciones.aspx</DependentUpon>

@@ -131,6 +131,9 @@
 
         public const string MsjeCobroSuccessAlta = "El cobro se registró correctamente.";
         public const string MsjeCobroFailure = "El cobro no se pudo registrar.";
+        public const string MsjeListadoCobroFiltrarTotalSinResultados = "No se encontraron Cobros para la búsqueda seleccionada.";
+        public const string MsjeCobroAnularOk = "El cobro se pudo anular.";
+        public const string MsjeCobroAnularFailure = "El cobro no se pudo anular.";
 
         #endregion
     }

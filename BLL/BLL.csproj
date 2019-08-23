@@ -182,6 +182,7 @@
     <Compile Include="DiaSemanaBLL.cs" />
     <Compile Include="EstadoBLL.cs" />
     <Compile Include="Filters\ClienteFiltro.cs" />
+    <Compile Include="Filters\CobroFiltro.cs" />
     <Compile Include="Filters\EstadoFiltro.cs" />
     <Compile Include="Filters\GeneroFiltro.cs" />
     <Compile Include="Filters\IngresoProductoFiltro.cs" />

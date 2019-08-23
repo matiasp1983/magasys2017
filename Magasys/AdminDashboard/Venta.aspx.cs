@@ -131,7 +131,7 @@ namespace PL.AdminDashboard
         {
             bool loResutado = false;
             List<DetalleVenta> lstDetalleVenta = new List<DetalleVenta>();
-            List<DetalleCobro> lstDetalleCobro = new List<DetalleCobro>();
+            List<BLL.DAL.DetalleCobro> lstDetalleCobro = new List<BLL.DAL.DetalleCobro>();
             BLL.DAL.Cobro oCobro = new BLL.DAL.Cobro();
 
             var oCliente = (BLL.DAL.Cliente)Session[Enums.Session.Cliente.ToString()];
@@ -206,7 +206,7 @@ namespace PL.AdminDashboard
                 oCobro.COD_ESTADO = 13; //Registrado
                 oCobro.TOTAL = Convert.ToDouble(lblTotal.Text);
 
-                DetalleCobro oDetalleCobro = new DetalleCobro()
+                BLL.DAL.DetalleCobro oDetalleCobro = new BLL.DAL.DetalleCobro()
                 {
                     COD_VENTA = oVenta.ID_VENTA,
                     SUBTOTAL = Convert.ToDouble(lblTotal.Text)

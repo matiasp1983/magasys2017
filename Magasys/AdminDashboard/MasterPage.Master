@@ -63,6 +63,7 @@
                             <li id="liClienteListado" runat="server"><a href="ClienteListado.aspx">Listado de Clientes</a></li>                            
                             <li id="liVisualizarDeudas" runat="server"><a href="VisualizarDeudas.aspx">Buscar Deudas</a></li>
                             <li id="liRegistrarCobro" runat="server"><a href="Cobro.aspx">Registrar Cobro</a></li>
+                            <li id="liCobroListado" runat="server"><a href="CobroListado.aspx">Listado de Cobros</a></li>                            
                         </ul>
                     </li>
                     <li id="liVenta" runat="server">

@@ -205,7 +205,7 @@ namespace PL.AdminDashboard
 
         protected void BtnGuardarCobro_Click(object sender, EventArgs e)
         {
-            List<DetalleCobro> lstDetalleCobro = new List<DetalleCobro>();
+            List<BLL.DAL.DetalleCobro> lstDetalleCobro = new List<BLL.DAL.DetalleCobro>();
             BLL.DAL.Cobro oCobro = new BLL.DAL.Cobro();
             bool loResutado = false;
 
@@ -216,7 +216,7 @@ namespace PL.AdminDashboard
 
             foreach (var loItem in lsvCobro.Items)
             {
-                DetalleCobro oDetalleCobro = new DetalleCobro()
+                BLL.DAL.DetalleCobro oDetalleCobro = new BLL.DAL.DetalleCobro()
                 {
                     COD_VENTA = Convert.ToInt32(((Label)loItem.Controls[1]).Text.ToString()),
                     SUBTOTAL = Convert.ToDouble(((Label)loItem.Controls[3]).Text.ToString().Split(' ').Last())
