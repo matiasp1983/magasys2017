@@ -41,6 +41,9 @@ namespace BLL
                             ID_DIA_SEMANA = oColeccion.ID_DIA_SEMANA,
                             CANTIDAD_DE_ENTREGAS = oColeccion.CANTIDAD_ENTREGAS
                         };
+
+                        if (oProducto.COD_IMAGEN != null)
+                            oProductoColeccion.IMAGEN = oProducto.Imagen;
                     }
                 }
             }
@@ -193,6 +196,15 @@ namespace BLL
             {
                 using (TransactionScope loTransactionScope = new TransactionScope())
                 {
+                    if (oProducto.Imagen != null)
+                    {
+                        using (var loRepImagen = new Repository<Imagen>())
+                        {
+                            var loImangen = loRepImagen.Create(oProducto.Imagen);
+                            oProducto.COD_IMAGEN = loImangen.ID_IMAGEN;
+                        }
+                    }
+
                     using (var loRepProducto = new Repository<Producto>())
                     {
                         bRes = loRepProducto.Update(oProducto);
@@ -209,7 +221,7 @@ namespace BLL
                     loTransactionScope.Complete();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 throw;
             }
@@ -236,6 +248,7 @@ namespace BLL
         public int COD_PERIODICIDAD { get; set; }
         public int? ID_DIA_SEMANA { get; set; }
         public int CANTIDAD_DE_ENTREGAS { get; set; }
+        public BLL.DAL.Imagen IMAGEN { get; set; }
     }
 
     public class ColeccionEdicion
