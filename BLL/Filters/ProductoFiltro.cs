@@ -14,6 +14,7 @@ namespace BLL.Filters
         public long CodTipoProducto { get; set; }
         public long CodEstado { get; set; }
         public long CodProveedor { get; set; }
+        public long CodGenero { get; set; }
 
         #endregion
     }

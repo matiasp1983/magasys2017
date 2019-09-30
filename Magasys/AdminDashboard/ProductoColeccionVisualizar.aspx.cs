@@ -63,6 +63,14 @@ namespace PL.AdminDashboard
 
                     if (oProductoColeccion.CANTIDAD_DE_ENTREGAS > 0)
                         txtCantidadDeEntregaColeccion.Text = oProductoColeccion.CANTIDAD_DE_ENTREGAS.ToString();
+
+                    if (oProductoColeccion.IMAGEN != null)
+                    {
+                        // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
+                        string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProductoColeccion.IMAGEN.IMAGEN1);
+                        imgPreview.ImageUrl = loImagenDataURL64;
+                        lblTitulo.Text = oProductoColeccion.IMAGEN.NOMBRE;
+                    }
                 }
                 else
                     Response.Redirect("ProductoListado.aspx", false);

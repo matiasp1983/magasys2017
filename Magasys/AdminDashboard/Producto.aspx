@@ -21,13 +21,13 @@
             </div>
         </div>
         <div class="wrapper wrapper-content animated fadeInRight">
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">                    
-                    <h2>Informaci&oacute;n General</h2>
-                </div>
-                <div class="ibox-content">
-                    <div class="row">
-                        <div class="col-md-6">
+            <div class="col-md-6">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">                    
+                        <h2>Informaci&oacute;n General</h2>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Nombre</label>
 
@@ -36,7 +36,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="row">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Descripci&oacute;n</label>
 
@@ -45,9 +45,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
+                        <div class="row">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Proveedor</label>
 
@@ -58,7 +56,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="row">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">G&eacute;nero</label>
 
@@ -72,322 +70,366 @@
                     </div>
                 </div>
             </div>
-            <div class="ibox float-e-margins">
-                <div class="ibox-title">                    
-                    <h2>Tipo de Producto</h2>
-                </div>
-                <div class="ibox-content">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <div class="col-sm-10">
-                                    <asp:DropDownList ID="ddlTipoProducto" runat="server" CssClass="select2_tipoproducto form-control" AutoPostBack="true" OnSelectedIndexChanged="DdlTipoProducto_SelectedIndexChanged"></asp:DropDownList>
-                                </div>
-                            </div>
-                        </div>
+            <div class="col-md-6">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">                    
+                        <h2>Imagen</h2>
                     </div>
-                    <div class="col-lg-12">
-                        <div class="panel panel-primary">                            
-                            <div id="divDiario" runat="server" class="panel-body" visible="true">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-sm-4 control-label">Precio Lunes </label>
-
-                                            <div class="col-sm-8">
-                                                <div class="input-group m-b" id="divPrecioLunesDiario">
-                                                    <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                                    <asp:TextBox ID="txtPrecioLunesDiario" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-sm-4 control-label">Precio Martes </label>
-
-                                            <div class="col-sm-8">
-                                                <div class="input-group m-b" id="divPrecioMartesDiario">
-                                                    <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                                    <asp:TextBox ID="txtPrecioMartesDiario" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-sm-4 control-label">Precio Mi&eacute;rcoles </label>
-
-                                            <div class="col-sm-8">
-                                                <div class="input-group m-b" id="divPrecioMiercolesDiario">
-                                                    <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                                    <asp:TextBox ID="txtPrecioMiercolesDiario" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-sm-4 control-label">Precio Jueves </label>
-
-                                            <div class="col-sm-8">
-                                                <div class="input-group m-b" id="divPrecioJuevesDiario">
-                                                    <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                                    <asp:TextBox ID="txtPrecioJuevesDiario" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-sm-4 control-label">Precio Viernes </label>
-
-                                            <div class="col-sm-8">
-                                                <div class="input-group m-b" id="divPrecioViernesDiario">
-                                                    <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                                    <asp:TextBox ID="txtPrecioViernesDiario" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-sm-4 control-label">Precio S&aacute;bado </label>
-
-                                            <div class="col-sm-8">
-                                                <div class="input-group m-b" id="divPrecioSabadoDiario">
-                                                    <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                                    <asp:TextBox ID="txtPrecioSabadoDiario" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-sm-4 control-label">Precio Domingo </label>
-
-                                            <div class="col-sm-8">
-                                                <div class="input-group m-b" id="divPrecioDomingoDiario">
-                                                    <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                                    <asp:TextBox ID="txtPrecioDomingoDiario" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="divRevista" runat="server" class="panel-body" visible="false">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label">D&iacute;a de entrega</label>
-
-                                            <div class="col-sm-9">
-                                                <asp:DropDownList ID="ddlDiaDeEntregaRevista" runat="server" CssClass="select2_diadeentregarevista form-control"></asp:DropDownList>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label">Periodicidad</label>
-
-                                            <div class="col-sm-9">
-                                                <div id="divPeriodicidadRevista">
-                                                    <asp:DropDownList ID="ddlPeriodicidadRevista" runat="server" CssClass="select2_periodicidadrevista form-control"></asp:DropDownList>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label">Precio</label>
-
-                                            <div class="col-sm-9">
-                                                <div class="input-group m-b" id="divPrecioRevista">
-                                                    <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                                    <asp:TextBox ID="txtPrecioRevista" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="divColeccion" runat="server" class="panel-body" visible="false">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label">D&iacute;a de entrega</label>
-
-                                            <div class="col-sm-9">
-                                                <asp:DropDownList ID="ddlDiaDeEntregaColeccion" runat="server" CssClass="select2_diadeentregacoleccion form-control"></asp:DropDownList>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label">Periodicidad</label>
-
-                                            <div class="col-sm-9">
-                                                <div id="divPeriodicidadColeccion">
-                                                    <asp:DropDownList ID="ddlPeriodicidadColeccion" runat="server" CssClass="select2_periodicidadcoleccion form-control"></asp:DropDownList>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label">Cantidad de entregas</label>
-
-                                            <div class="col-sm-9">
-                                                <asp:TextBox ID="txtCantidadDeEntregaColeccion" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="divLibro" runat="server" class="panel-body" visible="false">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label">Autor</label>
-
-                                            <div class="col-sm-9">
-                                                <asp:TextBox ID="txtAutorLibro" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off"></asp:TextBox>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label">A&ntilde;o de edici&oacute;n</label>
-
-                                            <div class="col-sm-9">
-                                                <div id="divAnioEdicionLibro">
-                                                    <asp:DropDownList ID="ddlAnioEdicionLibro" runat="server" CssClass="select2_anioeditoriallibro form-control"></asp:DropDownList>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label">Editorial</label>
-
-                                            <div class="col-sm-9">
-                                                <asp:TextBox ID="txtEditorialLibro" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off"></asp:TextBox>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label">Precio</label>
-
-                                            <div class="col-sm-9">
-                                                <div class="input-group m-b" id="divPrecioLibro">
-                                                    <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                                    <asp:TextBox ID="txtPrecioLibro" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="divSuplemento" runat="server" class="panel-body" visible="false">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label">D&iacute;a de entrega</label>
-
-                                            <div class="col-sm-9">
-                                                <asp:DropDownList ID="ddlDiaDeEntregaSuplemento" runat="server" CssClass="select2_diadeentregasuplemento form-control"></asp:DropDownList>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label">Diario</label>
-
-                                            <div class="col-sm-9">
-                                                <div id="divDiarioSuplemento">
-                                                    <asp:DropDownList ID="ddlDiarioSuplemento" runat="server" CssClass="select2_diariosuplemento form-control"></asp:DropDownList>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label">Precio</label>
-
-                                            <div class="col-sm-9">
-                                                <div class="input-group m-b" id="divPrecioSuplemento">
-                                                    <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                                    <asp:TextBox ID="txtPrecioSuplemento" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label">Cantidad de entregas</label>
-
-                                            <div class="col-sm-9">
-                                                <asp:TextBox ID="txtCantidadDeEntregaSuplemento" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div id="divPelicula" runat="server" class="panel-body" visible="false">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label">A&ntilde;o de estreno</label>
-
-                                            <div class="col-sm-9">
-                                                <div id="divAnioDeEstrenoPelicula">
-                                                    <asp:DropDownList ID="ddlAnioDeEstrenoPelicula" runat="server" CssClass="select2_aniodeestrenopelicula form-control"></asp:DropDownList>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="col-sm-3 control-label">Precio</label>
-
-                                            <div class="col-sm-9">
-                                                <div class="input-group m-b" id="divPrecioPelicula">
-                                                    <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                                    <asp:TextBox ID="txtPrecioPelicula" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="col-md-3 col-md-offset-3">
+                                    <asp:Image ID="imgPreview" Width="200px" runat="server" ImageUrl="~/AdminDashboard/img/preview_icons.png" />
                                 </div>
                             </div>
                         </div>
-                    </div>                    
-                    <div class="hr-line-dashed"></div>
-                    <div class="form-group">
-                        <div class="col-xs-12 col-sm-6 col-md-8"></div>
-                        <div class="col-xs-12 col-md-4" style="text-align: right">
-                            <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-success" OnClick="BtnGuardar_Click" />
-                            <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-primary" OnClick="BtnCancelar_Click" formnovalidate="" />                            
+                        <div class="row">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Archivo</label>
+
+                                <div class="col-sm-8">
+                                    <asp:FileUpload ID="fuploadImagen" accept=".jpg" runat="server" CssClass="form-control" /> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Título de Imagen</label>
+
+                                <div class="col-sm-8">
+                                    <asp:TextBox ID="txtTitulo" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">                      
+                                <div class="col-sm-7 col-md-offset-5">                              
+                                    <asp:Button ID="btnSubir" runat="server" Text="Adjuntar Imagen" CssClass="btn btn-success" OnClick="BtnSubir_Click" formnovalidate="formnovalidate" />
+                                    <asp:Button ID="btnLimpiarImagen" runat="server" Text="Limpiar Imagen" CssClass="btn btn-warning" OnClick="BtnLimpiarImagen_Click" formnovalidate="formnovalidate" />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div class="ibox float-e-margins">
+            <div class="ibox-title">                    
+                <h2>Tipo de Producto</h2>
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <div class="col-sm-10">
+                                <asp:DropDownList ID="ddlTipoProducto" runat="server" CssClass="select2_tipoproducto form-control" AutoPostBack="true" OnSelectedIndexChanged="DdlTipoProducto_SelectedIndexChanged"></asp:DropDownList>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="panel panel-primary">                            
+                        <div id="divDiario" runat="server" class="panel-body" visible="false">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Precio Lunes </label>
+
+                                        <div class="col-sm-8">
+                                            <div class="input-group m-b" id="divPrecioLunesDiario">
+                                                <span class="input-group-addon"><i class="fa fa-usd"></i></span>
+                                                <asp:TextBox ID="txtPrecioLunesDiario" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Precio Martes </label>
+
+                                        <div class="col-sm-8">
+                                            <div class="input-group m-b" id="divPrecioMartesDiario">
+                                                <span class="input-group-addon"><i class="fa fa-usd"></i></span>
+                                                <asp:TextBox ID="txtPrecioMartesDiario" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Precio Mi&eacute;rcoles </label>
+
+                                        <div class="col-sm-8">
+                                            <div class="input-group m-b" id="divPrecioMiercolesDiario">
+                                                <span class="input-group-addon"><i class="fa fa-usd"></i></span>
+                                                <asp:TextBox ID="txtPrecioMiercolesDiario" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Precio Jueves </label>
+
+                                        <div class="col-sm-8">
+                                            <div class="input-group m-b" id="divPrecioJuevesDiario">
+                                                <span class="input-group-addon"><i class="fa fa-usd"></i></span>
+                                                <asp:TextBox ID="txtPrecioJuevesDiario" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Precio Viernes </label>
+
+                                        <div class="col-sm-8">
+                                            <div class="input-group m-b" id="divPrecioViernesDiario">
+                                                <span class="input-group-addon"><i class="fa fa-usd"></i></span>
+                                                <asp:TextBox ID="txtPrecioViernesDiario" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Precio S&aacute;bado </label>
+
+                                        <div class="col-sm-8">
+                                            <div class="input-group m-b" id="divPrecioSabadoDiario">
+                                                <span class="input-group-addon"><i class="fa fa-usd"></i></span>
+                                                <asp:TextBox ID="txtPrecioSabadoDiario" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Precio Domingo </label>
+
+                                        <div class="col-sm-8">
+                                            <div class="input-group m-b" id="divPrecioDomingoDiario">
+                                                <span class="input-group-addon"><i class="fa fa-usd"></i></span>
+                                                <asp:TextBox ID="txtPrecioDomingoDiario" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="divRevista" runat="server" class="panel-body" visible="false">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">D&iacute;a de entrega</label>
+
+                                        <div class="col-sm-9">
+                                            <asp:DropDownList ID="ddlDiaDeEntregaRevista" runat="server" CssClass="select2_diadeentregarevista form-control"></asp:DropDownList>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Periodicidad</label>
+
+                                        <div class="col-sm-9">
+                                            <div id="divPeriodicidadRevista">
+                                                <asp:DropDownList ID="ddlPeriodicidadRevista" runat="server" CssClass="select2_periodicidadrevista form-control"></asp:DropDownList>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Precio</label>
+
+                                        <div class="col-sm-9">
+                                            <div class="input-group m-b" id="divPrecioRevista">
+                                                <span class="input-group-addon"><i class="fa fa-usd"></i></span>
+                                                <asp:TextBox ID="txtPrecioRevista" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="divColeccion" runat="server" class="panel-body" visible="true">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">D&iacute;a de entrega</label>
+
+                                        <div class="col-sm-9">
+                                            <asp:DropDownList ID="ddlDiaDeEntregaColeccion" runat="server" CssClass="select2_diadeentregacoleccion form-control"></asp:DropDownList>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Periodicidad</label>
+
+                                        <div class="col-sm-9">
+                                            <div id="divPeriodicidadColeccion">
+                                                <asp:DropDownList ID="ddlPeriodicidadColeccion" runat="server" CssClass="select2_periodicidadcoleccion form-control"></asp:DropDownList>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Cantidad de entregas</label>
+
+                                        <div class="col-sm-9">
+                                            <asp:TextBox ID="txtCantidadDeEntregaColeccion" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="divLibro" runat="server" class="panel-body" visible="false">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Autor</label>
+
+                                        <div class="col-sm-9">
+                                            <asp:TextBox ID="txtAutorLibro" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">A&ntilde;o de edici&oacute;n</label>
+
+                                        <div class="col-sm-9">
+                                            <div id="divAnioEdicionLibro">
+                                                <asp:DropDownList ID="ddlAnioEdicionLibro" runat="server" CssClass="select2_anioeditoriallibro form-control"></asp:DropDownList>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Editorial</label>
+
+                                        <div class="col-sm-9">
+                                            <asp:TextBox ID="txtEditorialLibro" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Precio</label>
+
+                                        <div class="col-sm-9">
+                                            <div class="input-group m-b" id="divPrecioLibro">
+                                                <span class="input-group-addon"><i class="fa fa-usd"></i></span>
+                                                <asp:TextBox ID="txtPrecioLibro" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="divSuplemento" runat="server" class="panel-body" visible="false">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">D&iacute;a de entrega</label>
+
+                                        <div class="col-sm-9">
+                                            <asp:DropDownList ID="ddlDiaDeEntregaSuplemento" runat="server" CssClass="select2_diadeentregasuplemento form-control"></asp:DropDownList>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Diario</label>
+
+                                        <div class="col-sm-9">
+                                            <div id="divDiarioSuplemento">
+                                                <asp:DropDownList ID="ddlDiarioSuplemento" runat="server" CssClass="select2_diariosuplemento form-control"></asp:DropDownList>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Precio</label>
+
+                                        <div class="col-sm-9">
+                                            <div class="input-group m-b" id="divPrecioSuplemento">
+                                                <span class="input-group-addon"><i class="fa fa-usd"></i></span>
+                                                <asp:TextBox ID="txtPrecioSuplemento" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Cantidad de entregas</label>
+
+                                        <div class="col-sm-9">
+                                            <asp:TextBox ID="txtCantidadDeEntregaSuplemento" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="divPelicula" runat="server" class="panel-body" visible="false">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">A&ntilde;o de estreno</label>
+
+                                        <div class="col-sm-9">
+                                            <div id="divAnioDeEstrenoPelicula">
+                                                <asp:DropDownList ID="ddlAnioDeEstrenoPelicula" runat="server" CssClass="select2_aniodeestrenopelicula form-control"></asp:DropDownList>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Precio</label>
+
+                                        <div class="col-sm-9">
+                                            <div class="input-group m-b" id="divPrecioPelicula">
+                                                <span class="input-group-addon"><i class="fa fa-usd"></i></span>
+                                                <asp:TextBox ID="txtPrecioPelicula" runat="server" CssClass="form-control" MaxLength="6" autocomplete="off"></asp:TextBox>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>                    
+                <div class="hr-line-dashed"></div>
+                <div class="form-group">
+                    <div class="col-xs-12 col-sm-6 col-md-8"></div>
+                    <div class="col-xs-12 col-md-4" style="text-align: right">
+                        <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-success" OnClick="BtnGuardar_Click" />
+                        <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-primary" OnClick="BtnCancelar_Click" formnovalidate="" />                            
+                    </div>
+                </div>
+            </div>
+        </div>
         </div>
     </form>
 </asp:Content>

@@ -18,6 +18,36 @@ namespace PL.AdminDashboard
                 CargarProductoColeccionDesdeSession();
         }
 
+        protected void BtnSubir_Click(object sender, EventArgs e)
+        {
+            // Obtener tamaño de la imagen seleccionada
+            int loTamanioImagen = fuploadImagen.PostedFile.ContentLength;
+            // Obtener tamaño de la imagen en byte
+            byte[] loImagenOriginal = new byte[loTamanioImagen];
+
+            //// Asociar byte a imagen
+            fuploadImagen.PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
+
+            var oImagen = new BLL.DAL.Imagen
+            {
+                IMAGEN1 = loImagenOriginal,
+                NOMBRE = txtTitulo.Text
+            };
+
+            Session.Add(Enums.Session.Imagen.ToString(), oImagen);
+
+            // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
+            string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(loImagenOriginal);
+            imgPreview.ImageUrl = loImagenDataURL64;
+        }
+
+        protected void BtnLimpiarImagen_Click(object sender, EventArgs e)
+        {
+            imgPreview.ImageUrl = "~/AdminDashboard/img/preview_icons.png";
+            txtTitulo.Text = String.Empty;
+            Session.Remove(Enums.Session.Imagen.ToString());
+        }
+
         protected void BtnGuardar_Click(object sender, EventArgs e)
         {
             try
@@ -32,14 +62,15 @@ namespace PL.AdminDashboard
                     loResutado = new BLL.ColeccionBLL().ModificarColeccion(oProducto, oColeccion);
 
                     if (loResutado)
+                    {
+                        Session.Remove(Enums.Session.Imagen.ToString());
                         Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeProductoSuccessModificacion, "Modificación Producto Colección", "ProductoListado.aspx"));
+                    }
                     else
                         Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProductoFailure));
                 }
                 else
-                {
                     Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProductoFailure));
-                }
             }
             catch (Exception ex)
             {
@@ -54,6 +85,7 @@ namespace PL.AdminDashboard
 
         protected void BtnCancelar_Click(object sender, EventArgs e)
         {
+            Session.Remove(Enums.Session.Imagen.ToString());
             Session.Remove(Enums.Session.ProductoColeccion.ToString());
             Response.Redirect("ProductoListado.aspx", false);
         }
@@ -81,6 +113,14 @@ namespace PL.AdminDashboard
                     CargarDiasDeSemana(oProductoColeccion.ID_DIA_SEMANA);
                     CargarPeriodicidades(oProductoColeccion.COD_PERIODICIDAD);
                     txtCantidadDeEntregaColeccion.Text = oProductoColeccion.CANTIDAD_DE_ENTREGAS.ToString();
+
+                    if (oProductoColeccion.IMAGEN != null)
+                    {
+                        // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
+                        string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProductoColeccion.IMAGEN.IMAGEN1);
+                        imgPreview.ImageUrl = loImagenDataURL64;
+                        txtTitulo.Text = oProductoColeccion.IMAGEN.NOMBRE;
+                    }
                 }
                 else
                     Response.Redirect("ProductoListado.aspx", false);
@@ -112,6 +152,12 @@ namespace PL.AdminDashboard
                 oProducto.DESCRIPCION = txtDescripcion.Text;
             else
                 oProducto.DESCRIPCION = null;
+
+            // Cargar Imagen
+            if ((BLL.DAL.Imagen)Session[Enums.Session.Imagen.ToString()] != null)  // Nueva Imagen
+                oProducto.Imagen = (BLL.DAL.Imagen)Session[Enums.Session.Imagen.ToString()];
+            else if (imgPreview.ImageUrl != "~/AdminDashboard/img/preview_icons.png" && ((BLL.ProductoColeccion)Session[Enums.Session.ProductoColeccion.ToString()]).IMAGEN != null) // Mantenemos la imagen
+                oProducto.COD_IMAGEN = ((BLL.ProductoColeccion)Session[Enums.Session.ProductoColeccion.ToString()]).IMAGEN.ID_IMAGEN;
 
             return oProducto;
         }

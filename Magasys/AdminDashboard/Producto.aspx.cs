@@ -3,6 +3,7 @@ using BLL.DAL;
 using NLog;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web.UI.WebControls;
 
@@ -51,6 +52,44 @@ namespace PL.AdminDashboard
                     divDiario.Visible = true;
                     break;
             }
+        }
+
+        protected void BtnSubir_Click(object sender, EventArgs e)
+        {
+            // Obtener tamaño de la imagen seleccionada
+            int loTamanioImagen = fuploadImagen.PostedFile.ContentLength;
+
+            if (loTamanioImagen == 0) // Conrolar que exista una imagen para subir
+                return;
+
+            // Obtener tamaño de la imagen en byte
+            byte[] loImagenOriginal = new byte[loTamanioImagen];
+
+            //// Asociar byte a imagen
+            fuploadImagen.PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
+
+
+            //// Convertir imagen seleccionada en binaria
+            //Bitmap loImagenOriginalBinaria = new Bitmap(fuploadImagen.PostedFile.InputStream);
+
+            var oImagen = new BLL.DAL.Imagen
+            {
+                IMAGEN1 = loImagenOriginal,
+                NOMBRE = txtTitulo.Text
+            };
+
+            Session.Add(Enums.Session.Imagen.ToString(), oImagen);
+
+            // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
+            string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(loImagenOriginal);
+            imgPreview.ImageUrl = loImagenDataURL64;
+        }
+
+        protected void BtnLimpiarImagen_Click(object sender, EventArgs e)
+        {
+            imgPreview.ImageUrl = "~/AdminDashboard/img/preview_icons.png";
+            txtTitulo.Text = String.Empty;
+            Session.Remove(Enums.Session.Imagen.ToString());
         }
 
         protected void BtnGuardar_Click(object sender, EventArgs e)
@@ -113,6 +152,7 @@ namespace PL.AdminDashboard
 
         protected void BtnCancelar_Click(object sender, EventArgs e)
         {
+            Session.Remove(Enums.Session.Imagen.ToString());
             Response.Redirect("ProductoListado.aspx", false);
         }
 
@@ -311,6 +351,10 @@ namespace PL.AdminDashboard
             else
                 oProducto.DESCRIPCION = null;
 
+            // Cargar Imagen
+            if ((BLL.DAL.Imagen)Session[Enums.Session.Imagen.ToString()] != null)
+                oProducto.Imagen = (BLL.DAL.Imagen)Session[Enums.Session.Imagen.ToString()];
+
             return oProducto;
         }
 
@@ -424,6 +468,7 @@ namespace PL.AdminDashboard
             divPelicula.Controls.OfType<DropDownList>().ToList().ForEach(y => y.SelectedIndex = 0);
             divPelicula.Controls.OfType<TextBox>().ToList().ForEach(x => x.Text = String.Empty);
             OcultarDivTipoProducto(true);
+            Session.Remove(Enums.Session.Imagen.ToString());
         }
 
         private string ObtenerParteDeNombreIDTexbox(string pCadena)
@@ -437,7 +482,7 @@ namespace PL.AdminDashboard
             loNuevoString = loNuevoString.Substring(loIniciaString, loCortar);
 
             return loNuevoString;
-        }        
+        }
 
         #endregion
     }

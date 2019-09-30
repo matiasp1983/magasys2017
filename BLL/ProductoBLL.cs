@@ -120,6 +120,53 @@ namespace BLL
             return lstProductoListado;
         }
 
+        public List<ProductoListado> ObtenerProductosConImagen(ProductoFiltro oProductoFiltro)
+        {
+            List<Producto> lstProducto = null;
+            List<ProductoListado> lstProductoListado = null;
+
+            try
+            {
+                using (var loRepProducto = new Repository<Producto>())
+                {
+                    lstProducto = loRepProducto.Search(p => p.COD_ESTADO == 1 && p.COD_TIPO_PRODUCTO == oProductoFiltro.CodTipoProducto);
+
+                    if (!String.IsNullOrEmpty(oProductoFiltro.NombreProducto) && lstProducto.Count > 0)
+                        lstProducto = lstProducto.FindAll(p => p.NOMBRE.ToUpper().Contains(oProductoFiltro.NombreProducto.ToUpper()));
+
+                    if (!String.IsNullOrEmpty(oProductoFiltro.DescripcionProducto) && lstProducto.Count > 0)
+                        lstProducto = lstProducto.FindAll(p => !string.IsNullOrEmpty(p.DESCRIPCION) && p.DESCRIPCION.ToUpper().Contains(oProductoFiltro.DescripcionProducto.ToUpper()));
+
+                    if (oProductoFiltro.CodEstado > 0 && lstProducto.Count > 0)
+                        lstProducto = lstProducto.FindAll(p => p.COD_GENERO == oProductoFiltro.CodGenero);
+
+                    ProductoListado oProductoListado;
+                    lstProductoListado = new List<ProductoListado>();
+
+                    foreach (var loProducto in lstProducto)
+                    {
+                        oProductoListado = new ProductoListado
+                        {
+                            ID_PRODUCTO = loProducto.ID_PRODUCTO,
+                            NOMBRE = loProducto.NOMBRE,
+                            DESC_TIPO_PRODUCTO = loProducto.TipoProducto.DESCRIPCION
+                        };
+
+                        if (!String.IsNullOrEmpty(loProducto.DESCRIPCION))
+                            oProductoListado.DESCRIPCION = loProducto.DESCRIPCION;
+
+                        lstProductoListado.Add(oProductoListado);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return lstProductoListado;
+        }
+
         #endregion
     }
 
@@ -138,6 +185,7 @@ namespace BLL
         public string DESC_PROVEEDOR { get; set; }
         public int COD_TIPO_PRODUCTO { get; set; }
         public string DESC_TIPO_PRODUCTO { get; set; }
+        public byte IMAGEN { get; set; }
     }
 
     #endregion
