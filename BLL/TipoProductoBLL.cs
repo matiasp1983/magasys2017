@@ -1,6 +1,7 @@
 ﻿using BLL.DAL;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BLL
 {
@@ -16,7 +17,7 @@ namespace BLL
             {
                 using (var rep = new Repository<TipoProducto>())
                 {
-                    lstTipoProducto = rep.FindAll();
+                    lstTipoProducto = rep.FindAll().OrderBy(p => p.DESCRIPCION).ToList();
                 }
             }
             catch (Exception)
