@@ -64,6 +64,7 @@ namespace PL.AdminDashboard
                     if (loResutado)
                     {
                         Session.Remove(Enums.Session.Imagen.ToString());
+                        Session.Remove(Enums.Session.ProductoColeccion.ToString());
                         Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeProductoSuccessModificacion, "Modificación Producto Colección", "ProductoListado.aspx"));
                     }
                     else
@@ -79,8 +80,6 @@ namespace PL.AdminDashboard
                 Logger loLogger = LogManager.GetCurrentClassLogger();
                 loLogger.Error(ex);
             }
-
-            Session.Remove(Enums.Session.ProductoColeccion.ToString());
         }
 
         protected void BtnCancelar_Click(object sender, EventArgs e)

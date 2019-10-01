@@ -57,6 +57,8 @@ public partial class Producto
 
     public int COD_TIPO_PRODUCTO { get; set; }
 
+    public Nullable<int> COD_IMAGEN { get; set; }
+
     public Nullable<System.DateTime> FECHA_BAJA { get; set; }
 
 
@@ -72,6 +74,8 @@ public partial class Producto
     public virtual Estado Estado { get; set; }
 
     public virtual Genero Genero { get; set; }
+
+    public virtual Imagen Imagen { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 

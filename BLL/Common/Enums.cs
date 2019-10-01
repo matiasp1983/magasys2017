@@ -27,7 +27,8 @@
             IdReserva,
             IdClienteCobro,
             CobroVisualizarIdVenta,
-            IdCobro
+            IdCobro,
+            Imagen
         } 
 
         #endregion

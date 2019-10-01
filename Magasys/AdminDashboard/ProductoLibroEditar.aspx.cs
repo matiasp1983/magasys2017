@@ -1,8 +1,6 @@
 ﻿using BLL.Common;
 using NLog;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -16,6 +14,36 @@ namespace PL.AdminDashboard
         {
             if (!IsPostBack)
                 CargarProductoLibroDesdeSession();
+        }
+
+        protected void BtnSubir_Click(object sender, EventArgs e)
+        {
+            // Obtener tamaño de la imagen seleccionada
+            int loTamanioImagen = fuploadImagen.PostedFile.ContentLength;
+            // Obtener tamaño de la imagen en byte
+            byte[] loImagenOriginal = new byte[loTamanioImagen];
+
+            //// Asociar byte a imagen
+            fuploadImagen.PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
+
+            var oImagen = new BLL.DAL.Imagen
+            {
+                IMAGEN1 = loImagenOriginal,
+                NOMBRE = txtTitulo.Text
+            };
+
+            Session.Add(Enums.Session.Imagen.ToString(), oImagen);
+
+            // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
+            string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(loImagenOriginal);
+            imgPreview.ImageUrl = loImagenDataURL64;
+        }
+
+        protected void BtnLimpiarImagen_Click(object sender, EventArgs e)
+        {
+            imgPreview.ImageUrl = "~/AdminDashboard/img/preview_icons.png";
+            txtTitulo.Text = String.Empty;
+            Session.Remove(Enums.Session.Imagen.ToString());
         }
 
         protected void BtnGuardar_Click(object sender, EventArgs e)
@@ -32,7 +60,11 @@ namespace PL.AdminDashboard
                     loResutado = new BLL.LibroBLL().ModificarLibro(oProducto, oLibro);
 
                     if (loResutado)
+                    {
+                        Session.Remove(Enums.Session.Imagen.ToString());
+                        Session.Remove(Enums.Session.ProductoLibro.ToString());
                         Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeProductoSuccessModificacion, "Modificación Producto Libro", "ProductoListado.aspx"));
+                    }
                     else
                         Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProductoFailure));
                 }
@@ -48,12 +80,11 @@ namespace PL.AdminDashboard
                 Logger loLogger = LogManager.GetCurrentClassLogger();
                 loLogger.Error(ex);
             }
-
-            Session.Remove(Enums.Session.ProductoLibro.ToString());
         }
 
         protected void BtnCancelar_Click(object sender, EventArgs e)
         {
+            Session.Remove(Enums.Session.Imagen.ToString());
             Session.Remove(Enums.Session.ProductoLibro.ToString());
             Response.Redirect("ProductoListado.aspx", false);
         }
@@ -82,6 +113,14 @@ namespace PL.AdminDashboard
                     CargarAnio(oProductoLibro.ANIO);
                     txtEditorialLibro.Text = oProductoLibro.EDITORIAL;
                     txtPrecioLibro.Text = oProductoLibro.PRECIO.ToString();
+
+                    if (oProductoLibro.IMAGEN != null)
+                    {
+                        // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
+                        string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProductoLibro.IMAGEN.IMAGEN1);
+                        imgPreview.ImageUrl = loImagenDataURL64;
+                        txtTitulo.Text = oProductoLibro.IMAGEN.NOMBRE;
+                    }
                 }
                 else
                     Response.Redirect("ProductoListado.aspx", false);
@@ -113,6 +152,12 @@ namespace PL.AdminDashboard
                 oProducto.DESCRIPCION = txtDescripcion.Text;
             else
                 oProducto.DESCRIPCION = null;
+
+            // Cargar Imagen
+            if ((BLL.DAL.Imagen)Session[Enums.Session.Imagen.ToString()] != null)  // Nueva Imagen
+                oProducto.Imagen = (BLL.DAL.Imagen)Session[Enums.Session.Imagen.ToString()];
+            else if (imgPreview.ImageUrl != "~/AdminDashboard/img/preview_icons.png" && ((BLL.ProductoLibro)Session[Enums.Session.ProductoLibro.ToString()]).IMAGEN != null) // Mantenemos la imagen
+                oProducto.COD_IMAGEN = ((BLL.ProductoLibro)Session[Enums.Session.ProductoLibro.ToString()]).IMAGEN.ID_IMAGEN;
 
             return oProducto;
         }

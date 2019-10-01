@@ -59,7 +59,7 @@
                                 <label class="col-sm-2 control-label">Descripci&oacute;n</label>
 
                                 <div class="col-sm-10">
-                                    <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off"></asp:TextBox>
+                                    <asp:TextBox ID="txtDescripcion" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
                                 </div>
                             </div>
                         </div>

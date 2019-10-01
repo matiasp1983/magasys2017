@@ -49,6 +49,8 @@ public partial class ProductoEdicion
 
     public string DESCRIPCION { get; set; }
 
+    public Nullable<int> COD_IMAGEN { get; set; }
+
     public int CANTIDAD_DISPONIBLE { get; set; }
 
     public double PRECIO { get; set; }
@@ -70,6 +72,8 @@ public partial class ProductoEdicion
     public virtual ICollection<DetalleVenta> DetalleVenta { get; set; }
 
     public virtual Estado Estado { get; set; }
+
+    public virtual Imagen Imagen { get; set; }
 
     public virtual Producto Producto { get; set; }
 

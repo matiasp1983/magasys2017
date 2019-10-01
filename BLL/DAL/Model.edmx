@@ -135,6 +135,14 @@
           <Property Name="ID_GENERO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Imagen">
+          <Key>
+            <PropertyRef Name="ID_IMAGEN" />
+          </Key>
+          <Property Name="ID_IMAGEN" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IMAGEN" Type="image" Nullable="false" />
+          <Property Name="NOMBRE" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="Libro">
           <Key>
             <PropertyRef Name="ID_LIBRO" />
@@ -178,11 +186,12 @@
           <Property Name="ID_PRODUCTO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FECHA_ALTA" Type="datetime" Nullable="false" />
           <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="DESCRIPCION" Type="varchar" MaxLength="50" />
+          <Property Name="DESCRIPCION" Type="nvarchar(max)" />
           <Property Name="COD_ESTADO" Type="int" Nullable="false" />
           <Property Name="COD_GENERO" Type="int" Nullable="false" />
           <Property Name="COD_PROVEEDOR" Type="int" Nullable="false" />
           <Property Name="COD_TIPO_PRODUCTO" Type="int" Nullable="false" />
+          <Property Name="COD_IMAGEN" Type="int" />
           <Property Name="FECHA_BAJA" Type="datetime" />
         </EntityType>
         <EntityType Name="ProductoDevolucion">
@@ -205,6 +214,7 @@
           <Property Name="COD_ESTADO" Type="int" Nullable="false" />
           <Property Name="NOMBRE" Type="varchar" MaxLength="50" />
           <Property Name="DESCRIPCION" Type="varchar" MaxLength="50" />
+          <Property Name="COD_IMAGEN" Type="int" />
           <Property Name="CANTIDAD_DISPONIBLE" Type="int" Nullable="false" />
           <Property Name="PRECIO" Type="float" Nullable="false" />
           <Property Name="FECHA_DEVOLUCION_REAL" Type="datetime" />
@@ -293,16 +303,6 @@
           <Property Name="CANTIDAD_ENTREGAS" Type="int" Nullable="false" />
           <Property Name="PRECIO" Type="float" Nullable="false" />
           <Property Name="COD_DIARIO" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="TipoDocumento">
           <Key>
@@ -648,6 +648,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Producto_Imagen">
+          <End Role="Imagen" Type="Self.Imagen" Multiplicity="0..1" />
+          <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Imagen">
+              <PropertyRef Name="ID_IMAGEN" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="COD_IMAGEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Producto_Proveedor">
           <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="1" />
           <End Role="Producto" Type="Self.Producto" Multiplicity="*" />
@@ -681,6 +693,18 @@
             </Principal>
             <Dependent Role="ProductoDevolucion">
               <PropertyRef Name="COD_ESTADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductoEdicion_Imagen">
+          <End Role="Imagen" Type="Self.Imagen" Multiplicity="0..1" />
+          <End Role="ProductoEdicion" Type="Self.ProductoEdicion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Imagen">
+              <PropertyRef Name="ID_IMAGEN" />
+            </Principal>
+            <Dependent Role="ProductoEdicion">
+              <PropertyRef Name="COD_IMAGEN" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -957,6 +981,7 @@
           <EntitySet Name="Estado" EntityType="Self.Estado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FormaPago" EntityType="Self.FormaPago" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Genero" EntityType="Self.Genero" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Imagen" EntityType="Self.Imagen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Libro" EntityType="Self.Libro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Localidad" EntityType="Self.Localidad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pelicula" EntityType="Self.Pelicula" Schema="dbo" store:Type="Tables" />
@@ -971,7 +996,6 @@
           <EntitySet Name="ReservaEdicion" EntityType="Self.ReservaEdicion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Revista" EntityType="Self.Revista" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Suplemento" EntityType="Self.Suplemento" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoDocumento" EntityType="Self.TipoDocumento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoProducto" EntityType="Self.TipoProducto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoReserva" EntityType="Self.TipoReserva" Schema="dbo" store:Type="Tables" />
@@ -1080,6 +1104,10 @@
             <End Role="Genero" EntitySet="Genero" />
             <End Role="Producto" EntitySet="Producto" />
           </AssociationSet>
+          <AssociationSet Name="FK_Producto_Imagen" Association="Self.FK_Producto_Imagen">
+            <End Role="Imagen" EntitySet="Imagen" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
           <AssociationSet Name="FK_Producto_Proveedor" Association="Self.FK_Producto_Proveedor">
             <End Role="Proveedor" EntitySet="Proveedor" />
             <End Role="Producto" EntitySet="Producto" />
@@ -1091,6 +1119,10 @@
           <AssociationSet Name="FK_ProductoDevolucion_Estado" Association="Self.FK_ProductoDevolucion_Estado">
             <End Role="Estado" EntitySet="Estado" />
             <End Role="ProductoDevolucion" EntitySet="ProductoDevolucion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductoEdicion_Imagen" Association="Self.FK_ProductoEdicion_Imagen">
+            <End Role="Imagen" EntitySet="Imagen" />
+            <End Role="ProductoEdicion" EntitySet="ProductoEdicion" />
           </AssociationSet>
           <AssociationSet Name="FK_Proveedor_Estado" Association="Self.FK_Proveedor_Estado">
             <End Role="Estado" EntitySet="Estado" />
@@ -1217,6 +1249,7 @@
           <EntitySet Name="Estado" EntityType="MAGASYSModel.Estado" />
           <EntitySet Name="FormaPago" EntityType="MAGASYSModel.FormaPago" />
           <EntitySet Name="Genero" EntityType="MAGASYSModel.Genero" />
+          <EntitySet Name="Imagen" EntityType="MAGASYSModel.Imagen" />
           <EntitySet Name="Libro" EntityType="MAGASYSModel.Libro" />
           <EntitySet Name="Localidad" EntityType="MAGASYSModel.Localidad" />
           <EntitySet Name="Pelicula" EntityType="MAGASYSModel.Pelicula" />
@@ -1231,7 +1264,6 @@
           <EntitySet Name="ReservaEdicion" EntityType="MAGASYSModel.ReservaEdicion" />
           <EntitySet Name="Revista" EntityType="MAGASYSModel.Revista" />
           <EntitySet Name="Suplemento" EntityType="MAGASYSModel.Suplemento" />
-          <EntitySet Name="sysdiagrams" EntityType="MAGASYSModel.sysdiagrams" />
           <EntitySet Name="TipoDocumento" EntityType="MAGASYSModel.TipoDocumento" />
           <EntitySet Name="TipoProducto" EntityType="MAGASYSModel.TipoProducto" />
           <EntitySet Name="TipoReserva" EntityType="MAGASYSModel.TipoReserva" />
@@ -1363,6 +1395,14 @@
           <AssociationSet Name="FK_Producto_Genero" Association="MAGASYSModel.FK_Producto_Genero">
             <End Role="Genero" EntitySet="Genero" />
             <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producto_Imagen" Association="MAGASYSModel.FK_Producto_Imagen">
+            <End Role="Imagen" EntitySet="Imagen" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductoEdicion_Imagen" Association="MAGASYSModel.FK_ProductoEdicion_Imagen">
+            <End Role="Imagen" EntitySet="Imagen" />
+            <End Role="ProductoEdicion" EntitySet="ProductoEdicion" />
           </AssociationSet>
           <AssociationSet Name="FK_Libro_Producto" Association="MAGASYSModel.FK_Libro_Producto">
             <End Role="Producto" EntitySet="Producto" />
@@ -1608,6 +1648,16 @@
           <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_Producto_Genero" FromRole="Genero" ToRole="Producto" />
         </EntityType>
+        <EntityType Name="Imagen">
+          <Key>
+            <PropertyRef Name="ID_IMAGEN" />
+          </Key>
+          <Property Name="ID_IMAGEN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IMAGEN1" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_Producto_Imagen" FromRole="Imagen" ToRole="Producto" />
+          <NavigationProperty Name="ProductoEdicion" Relationship="MAGASYSModel.FK_ProductoEdicion_Imagen" FromRole="Imagen" ToRole="ProductoEdicion" />
+        </EntityType>
         <EntityType Name="Libro">
           <Key>
             <PropertyRef Name="ID_LIBRO" />
@@ -1657,16 +1707,18 @@
           <Property Name="ID_PRODUCTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FECHA_ALTA" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="COD_ESTADO" Type="Int32" Nullable="false" />
           <Property Name="COD_GENERO" Type="Int32" Nullable="false" />
           <Property Name="COD_PROVEEDOR" Type="Int32" Nullable="false" />
           <Property Name="COD_TIPO_PRODUCTO" Type="Int32" Nullable="false" />
+          <Property Name="COD_IMAGEN" Type="Int32" />
           <Property Name="FECHA_BAJA" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Coleccion" Relationship="MAGASYSModel.FK_Coleccion_Producto" FromRole="Producto" ToRole="Coleccion" />
           <NavigationProperty Name="DiarioDiaSemana" Relationship="MAGASYSModel.FK_DiarioDiaSemana_Producto" FromRole="Producto" ToRole="DiarioDiaSemana" />
           <NavigationProperty Name="Estado" Relationship="MAGASYSModel.FK_Producto_Estado1" FromRole="Producto" ToRole="Estado" />
           <NavigationProperty Name="Genero" Relationship="MAGASYSModel.FK_Producto_Genero" FromRole="Producto" ToRole="Genero" />
+          <NavigationProperty Name="Imagen" Relationship="MAGASYSModel.FK_Producto_Imagen" FromRole="Producto" ToRole="Imagen" />
           <NavigationProperty Name="Libro" Relationship="MAGASYSModel.FK_Libro_Producto" FromRole="Producto" ToRole="Libro" />
           <NavigationProperty Name="Pelicula" Relationship="MAGASYSModel.FK_Pelicula_Producto" FromRole="Producto" ToRole="Pelicula" />
           <NavigationProperty Name="ProductoEdicion" Relationship="MAGASYSModel.FK_Producto_Edicion_Producto" FromRole="Producto" ToRole="ProductoEdicion" />
@@ -1698,6 +1750,7 @@
           <Property Name="COD_ESTADO" Type="Int32" Nullable="false" />
           <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="COD_IMAGEN" Type="Int32" />
           <Property Name="CANTIDAD_DISPONIBLE" Type="Int32" Nullable="false" />
           <Property Name="PRECIO" Type="Double" Nullable="false" />
           <Property Name="FECHA_DEVOLUCION_REAL" Type="DateTime" Precision="3" />
@@ -1705,6 +1758,7 @@
           <NavigationProperty Name="DetalleProductoIngreso" Relationship="MAGASYSModel.FK_DetalleIngresoProducto_Producto_Edicion" FromRole="ProductoEdicion" ToRole="DetalleProductoIngreso" />
           <NavigationProperty Name="DetalleVenta" Relationship="MAGASYSModel.FK_DetalleVenta_ProductoEdicion" FromRole="ProductoEdicion" ToRole="DetalleVenta" />
           <NavigationProperty Name="Estado" Relationship="MAGASYSModel.FK_Producto_Edicion_Estado" FromRole="ProductoEdicion" ToRole="Estado" />
+          <NavigationProperty Name="Imagen" Relationship="MAGASYSModel.FK_ProductoEdicion_Imagen" FromRole="ProductoEdicion" ToRole="Imagen" />
           <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_Producto_Edicion_Producto" FromRole="ProductoEdicion" ToRole="Producto" />
           <NavigationProperty Name="ReservaEdicion" Relationship="MAGASYSModel.FK_ReservaEdicion_ProductoEdicion" FromRole="ProductoEdicion" ToRole="ReservaEdicion" />
         </EntityType>
@@ -1816,16 +1870,6 @@
           <NavigationProperty Name="DiarioDiaSemana" Relationship="MAGASYSModel.FK_Suplemento_DiarioDiaSemana" FromRole="Suplemento" ToRole="DiarioDiaSemana" />
           <NavigationProperty Name="DiaSemana" Relationship="MAGASYSModel.FK_Suplemento_DiaSemana" FromRole="Suplemento" ToRole="DiaSemana" />
           <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_Suplemento_Producto" FromRole="Suplemento" ToRole="Producto" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="TipoDocumento">
           <Key>
@@ -2251,6 +2295,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Producto_Imagen">
+          <End Type="MAGASYSModel.Imagen" Role="Imagen" Multiplicity="0..1" />
+          <End Type="MAGASYSModel.Producto" Role="Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Imagen">
+              <PropertyRef Name="ID_IMAGEN" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="COD_IMAGEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductoEdicion_Imagen">
+          <End Type="MAGASYSModel.Imagen" Role="Imagen" Multiplicity="0..1" />
+          <End Type="MAGASYSModel.ProductoEdicion" Role="ProductoEdicion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Imagen">
+              <PropertyRef Name="ID_IMAGEN" />
+            </Principal>
+            <Dependent Role="ProductoEdicion">
+              <PropertyRef Name="COD_IMAGEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Libro_Producto">
           <End Type="MAGASYSModel.Producto" Role="Producto" Multiplicity="1" />
           <End Type="MAGASYSModel.Libro" Role="Libro" Multiplicity="*" />
@@ -2616,6 +2684,15 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Imagen">
+            <EntityTypeMapping TypeName="MAGASYSModel.Imagen">
+              <MappingFragment StoreEntitySet="Imagen">
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="IMAGEN1" ColumnName="IMAGEN" />
+                <ScalarProperty Name="ID_IMAGEN" ColumnName="ID_IMAGEN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Libro">
             <EntityTypeMapping TypeName="MAGASYSModel.Libro">
               <MappingFragment StoreEntitySet="Libro">
@@ -2660,6 +2737,7 @@
             <EntityTypeMapping TypeName="MAGASYSModel.Producto">
               <MappingFragment StoreEntitySet="Producto">
                 <ScalarProperty Name="FECHA_BAJA" ColumnName="FECHA_BAJA" />
+                <ScalarProperty Name="COD_IMAGEN" ColumnName="COD_IMAGEN" />
                 <ScalarProperty Name="COD_TIPO_PRODUCTO" ColumnName="COD_TIPO_PRODUCTO" />
                 <ScalarProperty Name="COD_PROVEEDOR" ColumnName="COD_PROVEEDOR" />
                 <ScalarProperty Name="COD_GENERO" ColumnName="COD_GENERO" />
@@ -2686,6 +2764,7 @@
                 <ScalarProperty Name="FECHA_DEVOLUCION_REAL" ColumnName="FECHA_DEVOLUCION_REAL" />
                 <ScalarProperty Name="PRECIO" ColumnName="PRECIO" />
                 <ScalarProperty Name="CANTIDAD_DISPONIBLE" ColumnName="CANTIDAD_DISPONIBLE" />
+                <ScalarProperty Name="COD_IMAGEN" ColumnName="COD_IMAGEN" />
                 <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
                 <ScalarProperty Name="COD_ESTADO" ColumnName="COD_ESTADO" />
@@ -2786,17 +2865,6 @@
                 <ScalarProperty Name="ID_DIA_SEMANA" ColumnName="ID_DIA_SEMANA" />
                 <ScalarProperty Name="COD_PRODUCTO" ColumnName="COD_PRODUCTO" />
                 <ScalarProperty Name="ID_SUPLEMENTO" ColumnName="ID_SUPLEMENTO" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="MAGASYSModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
