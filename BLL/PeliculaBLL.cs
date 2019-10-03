@@ -40,6 +40,9 @@ namespace BLL
                             ANIO = oPelicula.ANIO,
                             PRECIO = oPelicula.PRECIO
                         };
+
+                        if (oProducto.COD_IMAGEN != null)
+                            oProductoPelicula.IMAGEN = oProducto.Imagen;
                     }
                 }
             }
@@ -192,6 +195,15 @@ namespace BLL
             {
                 using (TransactionScope loTransactionScope = new TransactionScope())
                 {
+                    if (oProducto.Imagen != null)
+                    {
+                        using (var loRepImagen = new Repository<Imagen>())
+                        {
+                            var loImangen = loRepImagen.Create(oProducto.Imagen);
+                            oProducto.COD_IMAGEN = loImangen.ID_IMAGEN;
+                        }
+                    }
+
                     using (var loRepProducto = new Repository<Producto>())
                     {
                         bRes = loRepProducto.Update(oProducto);
@@ -234,6 +246,7 @@ namespace BLL
         public int ID_PELICULA { get; set; }
         public int ANIO { get; set; }
         public double PRECIO { get; set; }
+        public BLL.DAL.Imagen IMAGEN { get; set; }
     }
 
     public class PeliculaEdicion
