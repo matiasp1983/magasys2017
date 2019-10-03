@@ -51,6 +51,14 @@ namespace PL.AdminDashboard
                         txtGenero.Text = loGenero.NOMBRE;
                     txtAnioDeEstrenoPelicula.Text = oProductoPelicula.ANIO.ToString();
                     txtPrecioPelicula.Text = oProductoPelicula.PRECIO.ToString();
+
+                    if (oProductoPelicula.IMAGEN != null)
+                    {
+                        // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
+                        string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProductoPelicula.IMAGEN.IMAGEN1);
+                        imgPreview.ImageUrl = loImagenDataURL64;
+                        lblTitulo.Text = oProductoPelicula.IMAGEN.NOMBRE;
+                    }
                 }
                 else
                     Response.Redirect("ProductoListado.aspx", false);
