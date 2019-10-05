@@ -41,6 +41,9 @@ namespace BLL
                             ID_DIA_SEMANA = oRevista.ID_DIA_SEMANA,
                             PRECIO = oRevista.PRECIO
                         };
+
+                        if (oProducto.COD_IMAGEN != null)
+                            oProductoRevista.IMAGEN = oProducto.Imagen;
                     }
                 }
             }
@@ -194,6 +197,16 @@ namespace BLL
             {
                 using (TransactionScope loTransactionScope = new TransactionScope())
                 {
+
+                    if (oProducto.Imagen != null)
+                    {
+                        using (var loRepImagen = new Repository<Imagen>())
+                        {
+                            var loImangen = loRepImagen.Create(oProducto.Imagen);
+                            oProducto.COD_IMAGEN = loImangen.ID_IMAGEN;
+                        }
+                    }
+
                     using (var loRepProducto = new Repository<Producto>())
                     {
                         bRes = loRepProducto.Update(oProducto);
@@ -237,6 +250,7 @@ namespace BLL
         public int COD_PERIODICIDAD { get; set; }
         public int? ID_DIA_SEMANA { get; set; }
         public double PRECIO { get; set; }
+        public BLL.DAL.Imagen IMAGEN { get; set; }
     }
 
     public class RevistaEdicion
