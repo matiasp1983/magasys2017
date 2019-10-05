@@ -53,16 +53,24 @@ namespace PL.AdminDashboard
                     if (oProductoRevista.ID_DIA_SEMANA.HasValue)
                     {
                         var loDiaSemana = new BLL.DiaSemanaBLL().ObtenerDiaSemana(oProductoRevista.ID_DIA_SEMANA);
-                        if (loDiaSemana != null)                        
-                            txtDiaDeEntregaRevista.Text = loDiaSemana.NOMBRE;                        
+                        if (loDiaSemana != null)
+                            txtDiaDeEntregaRevista.Text = loDiaSemana.NOMBRE;
                     }
 
                     var loPeriodicidad = new BLL.PeriodicidadBLL().ObtenerPeriodicidad(oProductoRevista.COD_PERIODICIDAD);
-                    if (loPeriodicidad != null)                    
+                    if (loPeriodicidad != null)
                         txtPeriodicidadRevista.Text = loPeriodicidad.NOMBRE;
-                    
+
                     if (oProductoRevista.PRECIO > 0)
                         txtPrecioRevista.Text = oProductoRevista.PRECIO.ToString();
+
+                    if (oProductoRevista.IMAGEN != null)
+                    {
+                        // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
+                        string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProductoRevista.IMAGEN.IMAGEN1);
+                        imgPreview.ImageUrl = loImagenDataURL64;
+                        lblTitulo.Text = oProductoRevista.IMAGEN.NOMBRE;
+                    }
                 }
                 else
                     Response.Redirect("ProductoListado.aspx", false);
