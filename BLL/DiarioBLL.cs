@@ -14,7 +14,6 @@ namespace BLL
         {
             Producto oProducto = null;
             DiarioDiaSemana oDiario = null;
-            //List<DiarioDiaSemana> lstDiarioDiaSemana = null;
             ProductoDiario oProductoDiario = null;
 
             try
@@ -26,10 +25,6 @@ namespace BLL
                     using (var loRepDiario = new Repository<DiarioDiaSemana>())
                     {
                         oDiario = loRepDiario.Find(x => x.COD_DIARIO == oProducto.ID_PRODUCTO);
-
-                        //using (var loRepDiarioDiaSemana = new Repository<DiarioDiaSemana>())
-                        //{
-                        //    lstDiarioDiaSemana = loRepDiarioDiaSemana.Search(x => x.COD_DIARIO == oDiario.ID_DIARIO);
 
                         oProductoDiario = new ProductoDiario
                         {
@@ -97,20 +92,18 @@ namespace BLL
             return oProductoDiario;
         }
 
-        public ProductoDiario ObtenerDiarioPorIdDiario(int idDiario)
+        public Producto ObtenerDiarioPorIdDiario(int idDiario)
         {
-            ProductoDiario oProductoDiario = null;
-            DiarioDiaSemana oDiario = null;
+            Producto oProducto = null;
 
             try
             {
                 using (var rep = new Repository<DiarioDiaSemana>())
                 {
-                    oDiario = rep.Find(p => p.ID_DIARIO_DIA_SEMANA == idDiario);
-                }
-                if (oDiario != null)
-                {
-                    oProductoDiario = ObtenerDiario(oDiario.ID_DIARIO_DIA_SEMANA);
+                    var oDiario = rep.Find(p => p.ID_DIARIO_DIA_SEMANA == idDiario);
+
+                    if (oDiario != null)
+                        oProducto = oDiario.Producto;
                 }
             }
             catch (Exception)
@@ -118,7 +111,7 @@ namespace BLL
                 throw;
             }
 
-            return oProductoDiario;
+            return oProducto;
         }
 
         public List<ProductoDiario> ObtenerDiarios()
@@ -315,7 +308,7 @@ namespace BLL
                             using (var loRepDiarioDiaSemana = new Repository<DiarioDiaSemana>())
                             {
                                 bRes = loRepDiarioDiaSemana.Update(oDiarioDiaSemana);
-                                
+
                             }
                         }
                     }
