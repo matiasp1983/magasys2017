@@ -20,6 +20,10 @@ namespace PL.AdminDashboard
         {
             // Obtener tamaño de la imagen seleccionada
             int loTamanioImagen = fuploadImagen.PostedFile.ContentLength;
+
+            if (loTamanioImagen == 0)
+                return;
+
             // Obtener tamaño de la imagen en byte
             byte[] loImagenOriginal = new byte[loTamanioImagen];
 
@@ -154,8 +158,8 @@ namespace PL.AdminDashboard
             // Cargar Imagen
             if ((BLL.DAL.Imagen)Session[Enums.Session.Imagen.ToString()] != null)  // Nueva Imagen
                 oProducto.Imagen = (BLL.DAL.Imagen)Session[Enums.Session.Imagen.ToString()];
-            else if (imgPreview.ImageUrl != "~/AdminDashboard/img/preview_icons.png" && ((BLL.ProductoColeccion)Session[Enums.Session.ProductoColeccion.ToString()]).IMAGEN != null) // Mantenemos la imagen
-                oProducto.COD_IMAGEN = ((BLL.ProductoColeccion)Session[Enums.Session.ProductoColeccion.ToString()]).IMAGEN.ID_IMAGEN;
+            else if (imgPreview.ImageUrl != "~/AdminDashboard/img/preview_icons.png" && ((BLL.ProductoPelicula)Session[Enums.Session.ProductoPelicula.ToString()]).IMAGEN != null) // Mantenemos la imagen
+                oProducto.COD_IMAGEN = ((BLL.ProductoPelicula)Session[Enums.Session.ProductoPelicula.ToString()]).IMAGEN.ID_IMAGEN;
 
             return oProducto;
         }
