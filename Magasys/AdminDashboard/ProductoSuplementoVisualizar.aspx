@@ -90,6 +90,22 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label">Imagen</label>
+
+                                <div class="col-md-10">
+                                    <asp:Image ID="imgPreview" Width="200px" runat="server" ImageUrl="~/AdminDashboard/img/preview_icons.png" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 col-md-offset-1">
+                            <asp:Label ID="lblTitulo" runat="server"></asp:Label>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="ibox float-e-margins">
