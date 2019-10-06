@@ -227,7 +227,8 @@ namespace PL.AdminDashboard
                 ddlDiarioSuplemento.DataBind();
                 ddlDiarioSuplemento.Items.Insert(0, new ListItem(String.Empty, String.Empty));
 
-                ddlDiarioSuplemento.SelectedValue = idDiario.ToString();
+                var loProductoDiario = new BLL.DiarioBLL().ObtenerDiarioPorIdDiario(Convert.ToInt32(idDiario));
+                ddlDiarioSuplemento.SelectedValue = loProductoDiario.ID_PRODUCTO.ToString();
 
             }
             catch (Exception ex)
