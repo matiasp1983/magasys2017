@@ -41,46 +41,9 @@ namespace BLL
                         oProductoDiario.ID_DIARIO_DIA_SEMAMA = oDiario.ID_DIARIO_DIA_SEMANA;
                         oProductoDiario.PRECIO = oDiario.PRECIO;
                         oProductoDiario.COD_DIA_SEMAMA = oDiario.ID_DIA_SEMANA;
-                        //foreach (var loDiarioDiaSemana in lstDiarioDiaSemana)
-                        //{
-                        //    using (var loRepDiaSemana = new Repository<DiaSemana>())
-                        //    {
-                        //DiaSemana diaSemana = new BLL.DiaSemanaBLL().ObtenerDiaSemana(oDiario.ID_DIA_SEMANA);
 
-                        //switch (diaSemana.NOMBRE)
-                        //{
-                        //    case "Lunes":
-                        //        oProductoDiario.ID_DIARIO_DIA_SEMANA_LUNES = oDiario.ID_DIARIO_DIA_SEMANA;
-                        //        oProductoDiario.PRECIO_LUNES = oDiario.PRECIO;
-                        //        break;
-                        //    case "Martes":
-                        //        oProductoDiario.ID_DIARIO_DIA_SEMANA_MARTES = oDiario.ID_DIARIO_DIA_SEMANA;
-                        //        oProductoDiario.PRECIO_MARTES = oDiario.PRECIO;
-                        //        break;
-                        //    case "Miércoles":
-                        //        oProductoDiario.ID_DIARIO_DIA_SEMANA_MIERCOLES = oDiario.ID_DIARIO_DIA_SEMANA;
-                        //        oProductoDiario.PRECIO_MIERCOLES = oDiario.PRECIO;
-                        //        break;
-                        //    case "Jueves":
-                        //        oProductoDiario.ID_DIARIO_DIA_SEMANA_JUEVES = oDiario.ID_DIARIO_DIA_SEMANA;
-                        //        oProductoDiario.PRECIO_JUEVES = oDiario.PRECIO;
-                        //        break;
-                        //    case "Viernes":
-                        //        oProductoDiario.ID_DIARIO_DIA_SEMANA_VIERNES = oDiario.ID_DIARIO_DIA_SEMANA;
-                        //        oProductoDiario.PRECIO_VIERNES = oDiario.PRECIO;
-                        //        break;
-                        //    case "Sábado":
-                        //        oProductoDiario.ID_DIARIO_DIA_SEMANA_SABADO = oDiario.ID_DIARIO_DIA_SEMANA;
-                        //        oProductoDiario.PRECIO_SABADO = oDiario.PRECIO;
-                        //        break;
-                        //    default:
-                        //        oProductoDiario.ID_DIARIO_DIA_SEMANA_DOMINGO = oDiario.ID_DIARIO_DIA_SEMANA;
-                        //        oProductoDiario.PRECIO_DOMINGO = oDiario.PRECIO;
-                        //        break;
-                        //}
-                        //    }
-                        //}
-
+                        if (oProducto.COD_IMAGEN != null)
+                            oProductoDiario.IMAGEN = oProducto.Imagen;
                     }
                 }
             }
@@ -299,6 +262,15 @@ namespace BLL
             {
                 using (TransactionScope loTransactionScope = new TransactionScope())
                 {
+                    if (oProducto.Imagen != null)
+                    {
+                        using (var loRepImagen = new Repository<Imagen>())
+                        {
+                            var loImangen = loRepImagen.Create(oProducto.Imagen);
+                            oProducto.COD_IMAGEN = loImangen.ID_IMAGEN;
+                        }
+                    }
+
                     using (var loRepProducto = new Repository<Producto>())
                     {
                         bRes = loRepProducto.Update(oProducto);
@@ -308,7 +280,6 @@ namespace BLL
                             using (var loRepDiarioDiaSemana = new Repository<DiarioDiaSemana>())
                             {
                                 bRes = loRepDiarioDiaSemana.Update(oDiarioDiaSemana);
-
                             }
                         }
                     }
@@ -343,7 +314,7 @@ namespace BLL
         public int COD_DIA_SEMAMA { get; set; }
         public int ID_DIARIO_DIA_SEMAMA { get; set; }
         public double? PRECIO { get; set; }
-
+        public BLL.DAL.Imagen IMAGEN { get; set; }
     }
 
     public class DiarioEdicion
