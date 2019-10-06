@@ -1,8 +1,6 @@
 ﻿using BLL.Common;
 using NLog;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -16,6 +14,40 @@ namespace PL.AdminDashboard
         {
             if (!IsPostBack)
                 CargarProductoSuplementoDesdeSession();
+        }
+
+        protected void BtnSubir_Click(object sender, EventArgs e)
+        {
+            // Obtener tamaño de la imagen seleccionada
+            int loTamanioImagen = fuploadImagen.PostedFile.ContentLength;
+
+            if (loTamanioImagen == 0)
+                return;
+
+            // Obtener tamaño de la imagen en byte
+            byte[] loImagenOriginal = new byte[loTamanioImagen];
+
+            //// Asociar byte a imagen
+            fuploadImagen.PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
+
+            var oImagen = new BLL.DAL.Imagen
+            {
+                IMAGEN1 = loImagenOriginal,
+                NOMBRE = txtTitulo.Text
+            };
+
+            Session.Add(Enums.Session.Imagen.ToString(), oImagen);
+
+            // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
+            string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(loImagenOriginal);
+            imgPreview.ImageUrl = loImagenDataURL64;
+        }
+
+        protected void BtnLimpiarImagen_Click(object sender, EventArgs e)
+        {
+            imgPreview.ImageUrl = "~/AdminDashboard/img/preview_icons.png";
+            txtTitulo.Text = String.Empty;
+            Session.Remove(Enums.Session.Imagen.ToString());
         }
 
         protected void BtnGuardar_Click(object sender, EventArgs e)
@@ -32,7 +64,11 @@ namespace PL.AdminDashboard
                     loResutado = new BLL.SuplementoBLL().ModificarSuplemento(oProducto, oSuplemento);
 
                     if (loResutado)
+                    {
+                        Session.Remove(Enums.Session.Imagen.ToString());
+                        Session.Remove(Enums.Session.ProductoSuplemento.ToString());
                         Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeProductoSuccessModificacion, "Modificación Producto Suplemento", "ProductoListado.aspx"));
+                    }
                     else
                         Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProductoFailure));
                 }
@@ -48,12 +84,11 @@ namespace PL.AdminDashboard
                 Logger loLogger = LogManager.GetCurrentClassLogger();
                 loLogger.Error(ex);
             }
-
-            Session.Remove(Enums.Session.ProductoSuplemento.ToString());
         }
 
         protected void BtnCancelar_Click(object sender, EventArgs e)
         {
+            Session.Remove(Enums.Session.Imagen.ToString());
             Session.Remove(Enums.Session.ProductoSuplemento.ToString());
             Response.Redirect("ProductoListado.aspx", false);
         }
@@ -82,6 +117,14 @@ namespace PL.AdminDashboard
                     CargarDiario(oProductoSuplemento.COD_DIARIO);
                     txtPrecioSuplemento.Text = oProductoSuplemento.PRECIO.ToString();
                     txtCantidadDeEntregaSuplemento.Text = oProductoSuplemento.CANTIDAD_DE_ENTREGAS.ToString();
+
+                    if (oProductoSuplemento.IMAGEN != null)
+                    {
+                        // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
+                        string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProductoSuplemento.IMAGEN.IMAGEN1);
+                        imgPreview.ImageUrl = loImagenDataURL64;
+                        txtTitulo.Text = oProductoSuplemento.IMAGEN.NOMBRE;
+                    }
                 }
                 else
                     Response.Redirect("ProductoListado.aspx", false);
@@ -112,6 +155,12 @@ namespace PL.AdminDashboard
             else
                 oProducto.DESCRIPCION = null;
 
+            // Cargar Imagen
+            if ((BLL.DAL.Imagen)Session[Enums.Session.Imagen.ToString()] != null)  // Nueva Imagen
+                oProducto.Imagen = (BLL.DAL.Imagen)Session[Enums.Session.Imagen.ToString()];
+            else if (imgPreview.ImageUrl != "~/AdminDashboard/img/preview_icons.png" && ((BLL.ProductoSuplemento)Session[Enums.Session.ProductoSuplemento.ToString()]).IMAGEN != null) // Mantenemos la imagen
+                oProducto.COD_IMAGEN = ((BLL.ProductoSuplemento)Session[Enums.Session.ProductoSuplemento.ToString()]).IMAGEN.ID_IMAGEN;
+
             return oProducto;
         }
 
@@ -125,15 +174,15 @@ namespace PL.AdminDashboard
                 oSuplemento.COD_PRODUCTO = ((BLL.ProductoSuplemento)base.Session[Enums.Session.ProductoSuplemento.ToString()]).ID_PRODUCTO;
             }
             var oDiarioSuplemento = new BLL.DiarioBLL().ObtenerDiario(Convert.ToInt32(ddlDiarioSuplemento.SelectedValue));
-                oSuplemento.COD_DIARIO = oDiarioSuplemento.ID_DIARIO_DIA_SEMAMA;
-                oSuplemento.PRECIO = Convert.ToDouble(txtPrecioSuplemento.Text);
-                oSuplemento.CANTIDAD_ENTREGAS = Convert.ToInt32(txtCantidadDeEntregaSuplemento.Text);
-                            
-                if (!String.IsNullOrEmpty(ddlDiaDeEntregaSuplemento.SelectedValue))
-                    oSuplemento.ID_DIA_SEMANA = Convert.ToInt32(ddlDiaDeEntregaSuplemento.SelectedValue);
-                else
-                    oSuplemento.ID_DIA_SEMANA = null;
-            
+            oSuplemento.COD_DIARIO = oDiarioSuplemento.ID_DIARIO_DIA_SEMAMA;
+            oSuplemento.PRECIO = Convert.ToDouble(txtPrecioSuplemento.Text);
+            oSuplemento.CANTIDAD_ENTREGAS = Convert.ToInt32(txtCantidadDeEntregaSuplemento.Text);
+
+            if (!String.IsNullOrEmpty(ddlDiaDeEntregaSuplemento.SelectedValue))
+                oSuplemento.ID_DIA_SEMANA = Convert.ToInt32(ddlDiaDeEntregaSuplemento.SelectedValue);
+            else
+                oSuplemento.ID_DIA_SEMANA = null;
+
             return oSuplemento;
         }
 
