@@ -20,6 +20,10 @@ namespace PL.AdminDashboard
         {
             // Obtener tamaño de la imagen seleccionada
             int loTamanioImagen = fuploadImagen.PostedFile.ContentLength;
+
+            if (loTamanioImagen == 0)
+                return;
+
             // Obtener tamaño de la imagen en byte
             byte[] loImagenOriginal = new byte[loTamanioImagen];
 
