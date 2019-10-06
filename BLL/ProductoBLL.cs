@@ -2,6 +2,7 @@
 using BLL.Filters;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BLL
 {
@@ -19,7 +20,7 @@ namespace BLL
             {
                 using (var loRepProducto = new Repository<Producto>())
                 {
-                    lstProductos = loRepProducto.FindAll();
+                    lstProductos = loRepProducto.FindAll().OrderByDescending(p => p.ID_PRODUCTO).ToList();
 
                     if (oProductoFiltro.IdProducto > 0 && lstProductos.Count > 0)
                         lstProductos = lstProductos.FindAll(p => p.ID_PRODUCTO.ToString().Contains(oProductoFiltro.IdProducto.ToString()));
