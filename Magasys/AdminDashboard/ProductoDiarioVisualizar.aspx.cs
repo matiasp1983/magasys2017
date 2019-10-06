@@ -42,19 +42,30 @@ namespace PL.AdminDashboard
                     if (!String.IsNullOrEmpty(oProductoDiario.FECHA_ALTA.ToString()))
                         txtFechaAlta.Text = oProductoDiario.FECHA_ALTA.ToString("dd/MM/yyyy");
                     txtNombre.Text = oProductoDiario.NOMBRE;
-                    txtDescripcion.Text = oProductoDiario.DESCRIPCION;
+
+                    if (oProductoDiario.DESCRIPCION != null)
+                        txtDescripcion.Text = oProductoDiario.DESCRIPCION;
 
                     BLL.DAL.DiaSemana diaSemana = new BLL.DiaSemanaBLL().ObtenerDiaSemana(oProductoDiario.COD_DIA_SEMAMA);
                     txtDiaDeLaSemana.Text = diaSemana.NOMBRE;
-                    txtPrecioDiario.Text = oProductoDiario.PRECIO.Value.ToString();
+
+                    if (oProductoDiario.PRECIO != null)
+                        txtPrecioDiario.Text = oProductoDiario.PRECIO.Value.ToString();
 
                     var loProveedor = new BLL.ProveedorBLL().ObtenerProveedor(oProductoDiario.COD_PROVEEDOR);
                     if (loProveedor != null)
                         txtProveedor.Text = loProveedor.RAZON_SOCIAL;
                     var loGenero = new BLL.GeneroBLL().ObtenerGenero(oProductoDiario.COD_GENERO);
                     if (loGenero != null)
-                        txtGenero.Text = loGenero.NOMBRE;                    
-                    
+                        txtGenero.Text = loGenero.NOMBRE;
+
+                    if (oProductoDiario.IMAGEN != null)
+                    {
+                        // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
+                        string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProductoDiario.IMAGEN.IMAGEN1);
+                        imgPreview.ImageUrl = loImagenDataURL64;
+                        lblTitulo.Text = oProductoDiario.IMAGEN.NOMBRE;
+                    }
                 }
                 else
                     Response.Redirect("ProductoListado.aspx", false);
@@ -64,7 +75,7 @@ namespace PL.AdminDashboard
                 Logger loLogger = LogManager.GetCurrentClassLogger();
                 loLogger.Error(ex);
             }
-        }        
+        }
 
         #endregion
     }
