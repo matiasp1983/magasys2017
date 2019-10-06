@@ -127,6 +127,8 @@ namespace PL.AdminDashboard
                         foreach (var loDiarioDiaSemana in lstDiarioDiasSemanas)
                         {
                             oProducto.NOMBRE = string.Format("{0} - {1}", loNombre, loDiarioDiaSemana.DiaSemana.NOMBRE);
+                            loDiarioDiaSemana.ID_DIA_SEMANA = loDiarioDiaSemana.DiaSemana.ID_DIA_SEMANA;
+                            loDiarioDiaSemana.DiaSemana = null;
                             loResutado = new BLL.DiarioBLL().AltaDiario(oProducto, loDiarioDiaSemana);
                         }
 
