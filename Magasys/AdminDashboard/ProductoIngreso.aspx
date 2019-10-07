@@ -145,7 +145,7 @@
                                         </td>
                                         <td>
                                             <div id="dvPrecio" style="width: 100%">
-                                                <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-control" MaxLength="5" autocomplete="off"></asp:TextBox>
+                                                <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-control" MaxLength="10" autocomplete="off"></asp:TextBox>
                                             </div>
                                         </td>
                                         <td>
@@ -220,7 +220,7 @@
                                         </td>
                                         <td>
                                             <div id="dvPrecio" style="width: 100%">
-                                                <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-control" MaxLength="5" autocomplete="off"></asp:TextBox>
+                                                <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-control" MaxLength="10" autocomplete="off"></asp:TextBox>
                                             </div>
                                         </td>
                                         <td>
@@ -245,13 +245,15 @@
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                         <thead>
                                             <tr>
-                                                <th class="text-left">C&oacute;digo</th>
+                                                <th class="text-left" data-toggle="true">C&oacute;digo</th>
                                                 <th>Nombre</th>
                                                 <th data-hide="phone,tablet">Edici&oacute;n</th>
                                                 <th data-hide="phone,tablet">Descripci&oacute;n</th>
-                                                <th data-hide="phone,tablet">Precio</th>
-                                                <th data-hide="phone,tablet">Cantidad</th>
-                                                <th data-hide="phone,tablet">Fecha Devoluci&oacute;n</th>
+                                                <th data-hide="all">Precio</th>
+                                                <th data-hide="all">Cantidad</th>
+                                                <th data-hide="all">Fecha Devoluci&oacute;n</th>
+                                                <th data-hide="all">Imagen</th>
+                                                <th data-hide="all"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -286,7 +288,7 @@
                                         </td>
                                         <td>
                                             <div id="dvPrecio" style="width: 100%">
-                                                <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-control" MaxLength="5" autocomplete="off"></asp:TextBox>
+                                                <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-control" MaxLength="10" autocomplete="off"></asp:TextBox>
                                             </div>
                                         </td>
                                         <td>
@@ -300,6 +302,16 @@
                                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                                     <asp:TextBox ID="txtFechaDevolucion" runat="server" CssClass="form-control" MaxLength="10" autocomplete="off"></asp:TextBox>
                                                 </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="width: 100%">
+                                                <asp:FileUpload ID="fuploadImagen" accept=".jpg" runat="server" CssClass="form-control" />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="width: 100%">
+                                                <asp:TextBox ID="txtTitulo" runat="server" CssClass="form-control" autocomplete="off" placeholder="Título de la Imagen"></asp:TextBox>
                                             </div>
                                         </td>
                                     </tr>
@@ -356,7 +368,7 @@
                                         </td>
                                         <td>
                                             <div id="dvPrecio" style="width: 100%">
-                                                <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-control" MaxLength="5" autocomplete="off"></asp:TextBox>
+                                                <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-control" MaxLength="10" autocomplete="off"></asp:TextBox>
                                             </div>
                                         </td>
                                         <td>
@@ -431,7 +443,7 @@
                                         </td>
                                         <td>
                                             <div id="dvPrecio" style="width: 100%">
-                                                <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-control" MaxLength="5" autocomplete="off"></asp:TextBox>
+                                                <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-control" MaxLength="10" autocomplete="off"></asp:TextBox>
                                             </div>
                                         </td>
                                         <td>
@@ -506,7 +518,7 @@
                                         </td>
                                         <td>
                                             <div id="dvPrecio" style="width: 100%">
-                                                <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-control" MaxLength="5" autocomplete="off"></asp:TextBox>
+                                                <asp:TextBox ID="txtPrecio" runat="server" CssClass="form-control" MaxLength="10" autocomplete="off"></asp:TextBox>
                                             </div>
                                         </td>
                                         <td>
