@@ -166,13 +166,15 @@
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                         <thead>
                                             <tr>
-                                                <th class="text-left">C&oacute;digo</th>
+                                                <th class="text-left" data-toggle="true">C&oacute;digo</th>
                                                 <th>Nombre</th>
                                                 <th data-hide="phone,tablet">Edici&oacute;n</th>
                                                 <th data-hide="phone,tablet">Descripci&oacute;n</th>
-                                                <th data-hide="phone,tablet">Precio</th>
-                                                <th data-hide="phone,tablet">Cantidad</th>
-                                                <th data-hide="phone,tablet">Fecha Devoluci&oacute;n</th>
+                                                <th data-hide="all">Precio</th>
+                                                <th data-hide="all">Cantidad</th>
+                                                <th data-hide="all">Fecha Devoluci&oacute;n</th>
+                                                <th data-hide="all">Imagen</th>
+                                                <th data-hide="all"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -209,6 +211,16 @@
                                         </td>
                                         <td>
                                             <asp:Label ID="lblFechaDevolucion" runat="server" Text='<%#(Eval("FECHA_DEVOLUCION") != null) ? Convert.ToDateTime(Eval("FECHA_DEVOLUCION")).ToString("dd/MM/yyyy"):null%>'></asp:Label>
+                                        </td>
+                                        <td>
+                                            <div style="width: 100%">
+                                                <img src="<%#Eval("IMAGEN.ImageUrl")%>" style="width:200px"/>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="width: 100%">
+                                                <asp:Label ID="lblTitulo" runat="server" Text='<%#(Eval("TITULO") != null) ? Eval("TITULO").ToString().Length > 50 ? String.Format("{0}...", Eval("TITULO").ToString().Remove(50).TrimEnd()):Eval("TITULO"):null%>'></asp:Label>
+                                            </div>
                                         </td>
                                     </tr>
                                 </ItemTemplate>

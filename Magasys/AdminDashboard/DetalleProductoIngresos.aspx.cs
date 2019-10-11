@@ -123,7 +123,15 @@ namespace PL.AdminDashboard
                                         oColeccionEdicion.DESCRIPCION = oProductoEdicion.DESCRIPCION;
                                     if (loDetalleProductoIngreso.FECHA_DEVOLUCION != null)
                                         oColeccionEdicion.FECHA_DEVOLUCION = Convert.ToDateTime(loDetalleProductoIngreso.FECHA_DEVOLUCION);
+                                    if (oProductoEdicion.Imagen != null)
+                                    {
+                                        oColeccionEdicion.IMAGEN = new System.Web.UI.WebControls.Image();
 
+                                        // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
+                                        string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProductoEdicion.Imagen.IMAGEN1);
+                                        oColeccionEdicion.IMAGEN.ImageUrl = loImagenDataURL64;
+                                        oColeccionEdicion.TITULO = oProductoEdicion.Imagen.NOMBRE;
+                                    }
 
                                     break;
 
