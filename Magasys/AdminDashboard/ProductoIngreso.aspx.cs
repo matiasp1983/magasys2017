@@ -433,7 +433,7 @@ namespace PL.AdminDashboard
                         oProductoEdicion.COD_ESTADO = 1;
                         oProductoEdicion.PRECIO = Convert.ToDouble(((TextBox)loItem.Controls[11]).Text);
                         oProductoEdicion.CANTIDAD_DISPONIBLE = Convert.ToInt32(((TextBox)loItem.Controls[13]).Text);
-                        if (!String.IsNullOrEmpty(oImagen.NOMBRE)) // Asociar de la Imagen
+                        if (oImagen != null) // Asociar de la Imagen
                             oProductoEdicion.Imagen = oImagen;
                         oDetalleProductoIngreso.COD_PRODUCTO_EDICION = new BLL.ProductoEdicionBLL().AltaProductoEdicion(oProductoEdicion);
                         if (oDetalleProductoIngreso.COD_PRODUCTO_EDICION == 0)
@@ -449,7 +449,7 @@ namespace PL.AdminDashboard
                         oProductoEdicion.FECHA_EDICION = Convert.ToDateTime(((TextBox)loItem.Controls[9]).Text);
                         oProductoEdicion.PRECIO = Convert.ToDouble(((TextBox)loItem.Controls[11]).Text);
                         oProductoEdicion.CANTIDAD_DISPONIBLE = oProductoEdicion.CANTIDAD_DISPONIBLE + Convert.ToInt32(((TextBox)loItem.Controls[13]).Text);
-                        if (!String.IsNullOrEmpty(oImagen.NOMBRE)) // Asociar de la Imagen
+                        if (oImagen != null) // Asociar de la Imagen
                             oProductoEdicion.Imagen = oImagen;
                         loResutado = new BLL.ProductoEdicionBLL().ModificarProductoEdicion(oProductoEdicion);
                         if (loResutado == false)
@@ -575,7 +575,7 @@ namespace PL.AdminDashboard
                         if (!String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[9]).Text)))
                             oProductoEdicion.DESCRIPCION = Convert.ToString(((TextBox)loItem.Controls[9]).Text);
                         oDetalleProductoIngreso.COD_PRODUCTO_EDICION = new BLL.ProductoEdicionBLL().AltaProductoEdicion(oProductoEdicion);
-                        if (!String.IsNullOrEmpty(oImagen.NOMBRE)) // Asociar de la Imagen
+                        if (oImagen != null) // Asociar de la Imagen
                             oProductoEdicion.Imagen = oImagen;
                         if (oDetalleProductoIngreso.COD_PRODUCTO_EDICION == 0)
                         {
@@ -592,7 +592,7 @@ namespace PL.AdminDashboard
                         oProductoEdicion.CANTIDAD_DISPONIBLE = oProductoEdicion.CANTIDAD_DISPONIBLE + Convert.ToInt32(((TextBox)loItem.Controls[13]).Text);
                         if (!String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[9]).Text)))
                             oProductoEdicion.DESCRIPCION = Convert.ToString(((TextBox)loItem.Controls[9]).Text);
-                        if (!String.IsNullOrEmpty(oImagen.NOMBRE)) // Asociar de la Imagen
+                        if (oImagen != null) // Asociar de la Imagen
                             oProductoEdicion.Imagen = oImagen;
                         loResutado = new BLL.ProductoEdicionBLL().ModificarProductoEdicion(oProductoEdicion);
                         if (loResutado == false)
@@ -712,7 +712,7 @@ namespace PL.AdminDashboard
                         oProductoEdicion.CANTIDAD_DISPONIBLE = Convert.ToInt32(((TextBox)loItem.Controls[11]).Text);
                         if (!String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[7]).Text)))
                             oProductoEdicion.DESCRIPCION = Convert.ToString(((TextBox)loItem.Controls[7]).Text);
-                        if (!String.IsNullOrEmpty(oImagen.NOMBRE)) // Asociar de la Imagen
+                        if (oImagen != null) // Asociar de la Imagen
                             oProductoEdicion.Imagen = oImagen;
                         oDetalleProductoIngreso.COD_PRODUCTO_EDICION = new BLL.ProductoEdicionBLL().AltaProductoEdicion(oProductoEdicion);
                         if (oDetalleProductoIngreso.COD_PRODUCTO_EDICION == 0)
@@ -729,7 +729,7 @@ namespace PL.AdminDashboard
                         oProductoEdicion.CANTIDAD_DISPONIBLE = oProductoEdicion.CANTIDAD_DISPONIBLE + Convert.ToInt32(((TextBox)loItem.Controls[11]).Text);
                         if (!String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[7]).Text)))
                             oProductoEdicion.DESCRIPCION = Convert.ToString(((TextBox)loItem.Controls[7]).Text);
-                        if (!String.IsNullOrEmpty(oImagen.NOMBRE)) // Asociar de la Imagen
+                        if (oImagen != null) // Asociar de la Imagen
                             oProductoEdicion.Imagen = oImagen;
                         loResutado = new BLL.ProductoEdicionBLL().ModificarProductoEdicion(oProductoEdicion);
                         if (loResutado == false)
@@ -849,7 +849,7 @@ namespace PL.AdminDashboard
                         oProductoEdicion.CANTIDAD_DISPONIBLE = Convert.ToInt32(((TextBox)loItem.Controls[13]).Text);
                         if (!String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[9]).Text)))
                             oProductoEdicion.DESCRIPCION = Convert.ToString(((TextBox)loItem.Controls[9]).Text);
-                        if (!String.IsNullOrEmpty(oImagen.NOMBRE)) // Asociar de la Imagen
+                        if (oImagen != null) // Asociar de la Imagen
                             oProductoEdicion.Imagen = oImagen;
                         oDetalleProductoIngreso.COD_PRODUCTO_EDICION = new BLL.ProductoEdicionBLL().AltaProductoEdicion(oProductoEdicion);
                         if (oDetalleProductoIngreso.COD_PRODUCTO_EDICION == 0)
@@ -866,7 +866,7 @@ namespace PL.AdminDashboard
                         oProductoEdicion.CANTIDAD_DISPONIBLE = oProductoEdicion.CANTIDAD_DISPONIBLE + Convert.ToInt32(((TextBox)loItem.Controls[13]).Text);
                         if (!String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[9]).Text)))
                             oProductoEdicion.DESCRIPCION = Convert.ToString(((TextBox)loItem.Controls[9]).Text);
-                        if (!String.IsNullOrEmpty(oImagen.NOMBRE)) // Asociar de la Imagen
+                        if (oImagen != null) // Asociar de la Imagen
                             oProductoEdicion.Imagen = oImagen;
                         loResutado = new BLL.ProductoEdicionBLL().ModificarProductoEdicion(oProductoEdicion);
                         if (loResutado == false)
@@ -988,7 +988,7 @@ namespace PL.AdminDashboard
                             oProductoEdicion.FECHA_EDICION = Convert.ToDateTime(((TextBox)loItem.Controls[7]).Text);
                         if (!String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[9]).Text)))
                             oProductoEdicion.DESCRIPCION = Convert.ToString(((TextBox)loItem.Controls[9]).Text);
-                        if (!String.IsNullOrEmpty(oImagen.NOMBRE)) // Asociar de la Imagen
+                        if (oImagen != null) // Asociar de la Imagen
                             oProductoEdicion.Imagen = oImagen;
                         oDetalleProductoIngreso.COD_PRODUCTO_EDICION = new BLL.ProductoEdicionBLL().AltaProductoEdicion(oProductoEdicion);
                         if (oDetalleProductoIngreso.COD_PRODUCTO_EDICION == 0)
@@ -1007,7 +1007,7 @@ namespace PL.AdminDashboard
                             oProductoEdicion.FECHA_EDICION = Convert.ToDateTime(((TextBox)loItem.Controls[7]).Text);
                         if (!String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[9]).Text)))
                             oProductoEdicion.DESCRIPCION = Convert.ToString(((TextBox)loItem.Controls[9]).Text);
-                        if (!String.IsNullOrEmpty(oImagen.NOMBRE)) // Asociar de la Imagen
+                        if (oImagen != null) // Asociar de la Imagen
                             oProductoEdicion.Imagen = oImagen;
                         loResutado = new BLL.ProductoEdicionBLL().ModificarProductoEdicion(oProductoEdicion);
                         if (loResutado == false)
@@ -1129,7 +1129,7 @@ namespace PL.AdminDashboard
                             oProductoEdicion.FECHA_EDICION = Convert.ToDateTime(((TextBox)loItem.Controls[7]).Text);
                         if (!String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[9]).Text)))
                             oProductoEdicion.DESCRIPCION = Convert.ToString(((TextBox)loItem.Controls[9]).Text);
-                        if (!String.IsNullOrEmpty(oImagen.NOMBRE)) // Asociar de la Imagen
+                        if (oImagen != null) // Asociar de la Imagen
                             oProductoEdicion.Imagen = oImagen;
                         oDetalleProductoIngreso.COD_PRODUCTO_EDICION = new BLL.ProductoEdicionBLL().AltaProductoEdicion(oProductoEdicion);
                         if (oDetalleProductoIngreso.COD_PRODUCTO_EDICION == 0)
@@ -1148,7 +1148,7 @@ namespace PL.AdminDashboard
                             oProductoEdicion.FECHA_EDICION = Convert.ToDateTime(((TextBox)loItem.Controls[7]).Text);
                         if (!String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[9]).Text)))
                             oProductoEdicion.DESCRIPCION = Convert.ToString(((TextBox)loItem.Controls[9]).Text);
-                        if (!String.IsNullOrEmpty(oImagen.NOMBRE)) // Asociar de la Imagen
+                        if (oImagen != null) // Asociar de la Imagen
                             oProductoEdicion.Imagen = oImagen;
                         loResutado = new BLL.ProductoEdicionBLL().ModificarProductoEdicion(oProductoEdicion);
                         if (loResutado == false)
