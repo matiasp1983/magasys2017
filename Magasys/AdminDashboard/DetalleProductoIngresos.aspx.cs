@@ -87,6 +87,15 @@ namespace PL.AdminDashboard
                                     };
                                     if (loDetalleProductoIngreso.FECHA_DEVOLUCION != null)
                                         oDiarioEdicion.FECHA_DEVOLUCION = Convert.ToDateTime(loDetalleProductoIngreso.FECHA_DEVOLUCION);
+                                    if (oProductoEdicion.Imagen != null)
+                                    {
+                                        oDiarioEdicion.IMAGEN = new System.Web.UI.WebControls.Image();
+
+                                        // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
+                                        string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProductoEdicion.Imagen.IMAGEN1);
+                                        oDiarioEdicion.IMAGEN.ImageUrl = loImagenDataURL64;
+                                        oDiarioEdicion.TITULO = oProductoEdicion.Imagen.NOMBRE;
+                                    }
 
                                     break;
 
@@ -105,6 +114,15 @@ namespace PL.AdminDashboard
                                         oRevistaEdicion.DESCRIPCION = oProductoEdicion.DESCRIPCION;
                                     if (loDetalleProductoIngreso.FECHA_DEVOLUCION != null)
                                         oRevistaEdicion.FECHA_DEVOLUCION = Convert.ToDateTime(loDetalleProductoIngreso.FECHA_DEVOLUCION);
+                                    if (oProductoEdicion.Imagen != null)
+                                    {
+                                        oRevistaEdicion.IMAGEN = new System.Web.UI.WebControls.Image();
+
+                                        // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
+                                        string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProductoEdicion.Imagen.IMAGEN1);
+                                        oRevistaEdicion.IMAGEN.ImageUrl = loImagenDataURL64;
+                                        oRevistaEdicion.TITULO = oProductoEdicion.Imagen.NOMBRE;
+                                    }
 
                                     break;
 
@@ -153,6 +171,15 @@ namespace PL.AdminDashboard
                                         oLibroEdicion.DESCRIPCION = oProductoEdicion.DESCRIPCION;
                                     if (loDetalleProductoIngreso.FECHA_DEVOLUCION != null)
                                         oLibroEdicion.FECHA_DEVOLUCION = Convert.ToDateTime(loDetalleProductoIngreso.FECHA_DEVOLUCION);
+                                    if (oProductoEdicion.Imagen != null)
+                                    {
+                                        oLibroEdicion.IMAGEN = new System.Web.UI.WebControls.Image();
+
+                                        // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
+                                        string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProductoEdicion.Imagen.IMAGEN1);
+                                        oLibroEdicion.IMAGEN.ImageUrl = loImagenDataURL64;
+                                        oLibroEdicion.TITULO = oProductoEdicion.Imagen.NOMBRE;
+                                    }
 
                                     break;
 
@@ -173,6 +200,15 @@ namespace PL.AdminDashboard
                                         oSuplementoEdicion.DESCRIPCION = oProductoEdicion.DESCRIPCION;
                                     if (loDetalleProductoIngreso.FECHA_DEVOLUCION != null)
                                         oSuplementoEdicion.FECHA_DEVOLUCION = Convert.ToDateTime(loDetalleProductoIngreso.FECHA_DEVOLUCION);
+                                    if (oProductoEdicion.Imagen != null)
+                                    {
+                                        oSuplementoEdicion.IMAGEN = new System.Web.UI.WebControls.Image();
+
+                                        // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
+                                        string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProductoEdicion.Imagen.IMAGEN1);
+                                        oSuplementoEdicion.IMAGEN.ImageUrl = loImagenDataURL64;
+                                        oSuplementoEdicion.TITULO = oProductoEdicion.Imagen.NOMBRE;
+                                    }
 
                                     break;
 
@@ -194,6 +230,15 @@ namespace PL.AdminDashboard
                                         oPeliculaEdicion.DESCRIPCION = oProductoEdicion.DESCRIPCION;
                                     if (loDetalleProductoIngreso.FECHA_DEVOLUCION != null)
                                         oPeliculaEdicion.FECHA_DEVOLUCION = Convert.ToDateTime(loDetalleProductoIngreso.FECHA_DEVOLUCION);
+                                    if (oProductoEdicion.Imagen != null)
+                                    {
+                                        oPeliculaEdicion.IMAGEN = new System.Web.UI.WebControls.Image();
+
+                                        // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
+                                        string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProductoEdicion.Imagen.IMAGEN1);
+                                        oPeliculaEdicion.IMAGEN.ImageUrl = loImagenDataURL64;
+                                        oPeliculaEdicion.TITULO = oProductoEdicion.Imagen.NOMBRE;
+                                    }
 
                                     break;
                             }
