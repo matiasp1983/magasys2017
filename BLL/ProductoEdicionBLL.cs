@@ -35,6 +35,15 @@ namespace BLL
             var bRes = false;
             try
             {
+                if (oProductoEdicion.Imagen != null)
+                {
+                    using (var loRepImagen = new Repository<Imagen>())
+                    {
+                        var loImangen = loRepImagen.Create(oProductoEdicion.Imagen);
+                        oProductoEdicion.COD_IMAGEN = loImangen.ID_IMAGEN;
+                    }
+                }
+
                 using (var rep = new Repository<ProductoEdicion>())
                 {
                     bRes = rep.Update(oProductoEdicion);
