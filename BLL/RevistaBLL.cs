@@ -266,6 +266,8 @@ namespace BLL
         public int CANTIDAD_DISPONIBLE { get; set; }
         public int CANTIDAD { get; set; }
         public System.DateTime? FECHA_DEVOLUCION { get; set; }
+        public System.Web.UI.WebControls.Image IMAGEN { get; set; }
+        public string TITULO { get; set; }
     }
 
     #endregion
