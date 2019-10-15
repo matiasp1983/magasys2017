@@ -108,7 +108,8 @@ namespace PL.AdminDashboard
                     CargarGenero(oProductoDiario.COD_GENERO);
                     BLL.DAL.DiaSemana diaSemana = new BLL.DiaSemanaBLL().ObtenerDiaSemana(oProductoDiario.COD_DIA_SEMAMA);
                     txtDiaDeLaSemanaDiario.Text = diaSemana.NOMBRE;
-                    txtPrecioDiario.Text = oProductoDiario.PRECIO.Value.ToString();
+                    if (oProductoDiario.PRECIO.HasValue)
+                        txtPrecioDiario.Text = oProductoDiario.PRECIO.Value.ToString();
 
                     if (oProductoDiario.IMAGEN != null)
                     {
@@ -163,7 +164,8 @@ namespace PL.AdminDashboard
             BLL.DAL.DiarioDiaSemana oDiarioDiaSemana = new BLL.DAL.DiarioDiaSemana();
 
             var oDiaSemana = new BLL.DiaSemanaBLL().ObtenerDiaSemana(txtDiaDeLaSemanaDiario.Text);
-            oDiarioDiaSemana.PRECIO = Convert.ToDouble(txtPrecioDiario.Text);
+            if (!String.IsNullOrEmpty(txtPrecioDiario.Text))
+                oDiarioDiaSemana.PRECIO = Convert.ToDouble(txtPrecioDiario.Text);
             oDiarioDiaSemana.ID_DIA_SEMANA = oDiaSemana.ID_DIA_SEMANA;
             oDiarioDiaSemana.ID_DIARIO_DIA_SEMANA = ((BLL.ProductoDiario)base.Session[Enums.Session.ProductoDiario.ToString()]).ID_DIARIO_DIA_SEMAMA;
             oDiarioDiaSemana.COD_DIARIO = ((BLL.ProductoDiario)base.Session[Enums.Session.ProductoDiario.ToString()]).ID_DIARIO;
