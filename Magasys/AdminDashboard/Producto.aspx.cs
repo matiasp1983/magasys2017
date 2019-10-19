@@ -471,6 +471,7 @@ namespace PL.AdminDashboard
             divPelicula.Controls.OfType<TextBox>().ToList().ForEach(x => x.Text = String.Empty);
             OcultarDivTipoProducto(true);
             Session.Remove(Enums.Session.Imagen.ToString());
+            imgPreview.ImageUrl = "~/AdminDashboard/img/preview_icons.png";
         }
 
         private string ObtenerParteDeNombreIDTexbox(string pCadena)
