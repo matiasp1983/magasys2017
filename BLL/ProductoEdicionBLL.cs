@@ -85,7 +85,7 @@ namespace BLL
             return bRes;
         }
 
-        public ProductoEdicion ConsultarExistenciaEdicion(string nroEdicion, int tipoProducto)
+        public ProductoEdicion ConsultarExistenciaEdicion(int codProducto, string nroEdicion, int tipoProducto)
         {
             ProductoEdicion oProductoEdicion = null;
 
@@ -93,7 +93,7 @@ namespace BLL
             {
                 using (var res = new Repository<ProductoEdicion>())
                 {
-                    oProductoEdicion = res.Find(p => p.EDICION == nroEdicion && p.COD_TIPO_PRODUCTO == tipoProducto);
+                    oProductoEdicion = res.Find(p => p.COD_PRODUCTO == codProducto && p.EDICION == nroEdicion && p.COD_TIPO_PRODUCTO == tipoProducto);
                 }
             }
             catch (Exception ex)
