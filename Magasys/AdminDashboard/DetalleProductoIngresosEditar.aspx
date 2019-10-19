@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminDashboard/MasterPage.Master" AutoEventWireup="true" CodeBehind="DetalleProductoIngresosEditar.aspx.cs" Inherits="PL.AdminDashboard.DetalleProductoIngresosEditar" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="contentMaster" runat="server">
     <div class="row wrapper border-bottom white-bg page-heading">
@@ -31,14 +32,19 @@
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                         <thead>
                                             <tr>
-                                                <th class="text-left">C&oacute;digo</th>
+                                                <th class="text-left" data-toggle="true">C&oacute;digo</th>
                                                 <th>Nombre</th>
                                                 <th>Tipo de Producto</th>
                                                 <th data-hide="phone,tablet">Edici&oacute;n</th>
                                                 <th data-hide="phone,tablet">Fecha Edici&oacute;n</th>
-                                                <th data-hide="phone,tablet">Precio</th>
-                                                <th data-hide="phone,tablet">Cantidad</th>
-                                                <th data-hide="phone,tablet">Fecha Devoluci&oacute;n</th>
+                                                <th data-hide="all">Precio</th>
+                                                <th data-hide="all">Cantidad</th>
+                                                <th data-hide="all">Fecha Devoluci&oacute;n</th>
+                                                <th data-hide="all">Imagen</th>
+                                                <th data-hide="all"></th>
+                                                <th data-hide="all"></th>  
+                                                <th data-hide="all"></th>                                                  
+                                                <th data-hide="all">Eliminar Imagen</th>  
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -93,6 +99,31 @@
                                                 </div>
                                             </div>
                                         </td>
+                                        <td>
+                                            <div style="width: 100%">
+                                                <img src="<%#Eval("IMAGEN.ImageUrl")%>" style="width:200px"/>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="width: 100%">
+                                                <asp:Label ID="lblTitulo" runat="server" Text='<%#(Eval("TITULO") != null) ? Eval("TITULO").ToString().Length > 50 ? String.Format("{0}...", Eval("TITULO").ToString().Remove(50).TrimEnd()):Eval("TITULO"):null%>'></asp:Label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="width: 100%">
+                                                <asp:FileUpload ID="fuploadImagen" accept=".jpg" runat="server" CssClass="form-control" />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="width: 100%">                                                
+                                                <asp:TextBox ID="txtTitulo" runat="server" CssClass="form-control" autocomplete="off" placeholder="Título de la Imagen"></asp:TextBox>
+                                            </div>
+                                        </td>                                        
+                                        <td>                                            
+                                            <div style="width: 100%">                                               
+                                                <asp:CheckBox ID="chkEliminar" runat="server" class="i-checks" />
+                                            </div>
+                                        </td>
                                     </tr>
                                 </ItemTemplate>
                             </asp:ListView>
@@ -102,15 +133,20 @@
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                         <thead>
                                             <tr>
-                                                <th class="text-left">C&oacute;digo</th>
+                                                <th class="text-left" data-toggle="true">C&oacute;digo</th>
                                                 <th>Nombre</th>
                                                 <th>Tipo de Producto</th>
                                                 <th data-hide="phone,tablet">Edici&oacute;n</th>
                                                 <th data-hide="phone,tablet">Fecha Edici&oacute;n</th>
-                                                <th data-hide="phone,tablet">Descripci&oacute;n</th>
-                                                <th data-hide="phone,tablet">Precio</th>
-                                                <th data-hide="phone,tablet">Cantidad</th>
-                                                <th data-hide="phone,tablet">Fecha Devoluci&oacute;n</th>
+                                                <th data-hide="all">Descripci&oacute;n</th>
+                                                <th data-hide="all">Precio</th>
+                                                <th data-hide="all">Cantidad</th>
+                                                <th data-hide="all">Fecha Devoluci&oacute;n</th>
+                                                <th data-hide="all">Imagen</th>
+                                                <th data-hide="all"></th>
+                                                <th data-hide="all"></th>  
+                                                <th data-hide="all"></th>                                                  
+                                                <th data-hide="all">Eliminar Imagen</th>                                       
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -170,6 +206,31 @@
                                                 </div>
                                             </div>
                                         </td>
+                                        <td>
+                                            <div style="width: 100%">
+                                                <img src="<%#Eval("IMAGEN.ImageUrl")%>" style="width:200px"/>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="width: 100%">
+                                                <asp:Label ID="lblTitulo" runat="server" Text='<%#(Eval("TITULO") != null) ? Eval("TITULO").ToString().Length > 50 ? String.Format("{0}...", Eval("TITULO").ToString().Remove(50).TrimEnd()):Eval("TITULO"):null%>'></asp:Label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="width: 100%">
+                                                <asp:FileUpload ID="fuploadImagen" accept=".jpg" runat="server" CssClass="form-control" />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="width: 100%">                                                
+                                                <asp:TextBox ID="txtTitulo" runat="server" CssClass="form-control" autocomplete="off" placeholder="Título de la Imagen"></asp:TextBox>
+                                            </div>
+                                        </td>                                        
+                                        <td>                                            
+                                            <div style="width: 100%">                                               
+                                                <asp:CheckBox ID="chkEliminar" runat="server" class="i-checks" />
+                                            </div>
+                                        </td>
                                     </tr>
                                 </ItemTemplate>
                             </asp:ListView>
@@ -179,14 +240,19 @@
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                         <thead>
                                             <tr>
-                                                <th class="text-left">C&oacute;digo</th>
+                                                <th class="text-left" data-toggle="true">C&oacute;digo</th>
                                                 <th>Nombre</th>
                                                 <th>Tipo de Producto</th>
                                                 <th data-hide="phone,tablet">Edici&oacute;n</th>
                                                 <th data-hide="phone,tablet">Descripci&oacute;n</th>
-                                                <th data-hide="phone,tablet">Precio</th>
-                                                <th data-hide="phone,tablet">Cantidad</th>
-                                                <th data-hide="phone,tablet">Fecha Devoluci&oacute;n</th>
+                                                <th data-hide="all">Precio</th>
+                                                <th data-hide="all">Cantidad</th>
+                                                <th data-hide="all">Fecha Devoluci&oacute;n</th>
+                                                <th data-hide="all">Imagen</th>
+                                                <th data-hide="all"></th>
+                                                <th data-hide="all"></th>  
+                                                <th data-hide="all"></th>                                                  
+                                                <th data-hide="all">Eliminar Imagen</th>                                               
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -238,6 +304,31 @@
                                                 </div>
                                             </div>
                                         </td>
+                                        <td>
+                                            <div style="width: 100%">
+                                                <img src="<%#Eval("IMAGEN.ImageUrl")%>" style="width:200px"/>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="width: 100%">
+                                                <asp:Label ID="lblTitulo" runat="server" Text='<%#(Eval("TITULO") != null) ? Eval("TITULO").ToString().Length > 50 ? String.Format("{0}...", Eval("TITULO").ToString().Remove(50).TrimEnd()):Eval("TITULO"):null%>'></asp:Label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="width: 100%">
+                                                <asp:FileUpload ID="fuploadImagen" accept=".jpg" runat="server" CssClass="form-control" />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="width: 100%">                                                
+                                                <asp:TextBox ID="txtTitulo" runat="server" CssClass="form-control" autocomplete="off" placeholder="Título de la Imagen"></asp:TextBox>
+                                            </div>
+                                        </td>                                        
+                                        <td>                                            
+                                            <div style="width: 100%">                                               
+                                                <asp:CheckBox ID="chkEliminar" runat="server" class="i-checks" />
+                                            </div>
+                                        </td>
                                     </tr>
                                 </ItemTemplate>
                             </asp:ListView>
@@ -247,15 +338,20 @@
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                         <thead>
                                             <tr>
-                                                <th class="text-left">C&oacute;digo</th>
+                                                <th class="text-left" data-toggle="true">C&oacute;digo</th>
                                                 <th>Nombre</th>
                                                 <th>Tipo de Producto</th>
                                                 <th>Autor</th>
                                                 <th data-hide="phone,tablet">Edici&oacute;n</th>
-                                                <th data-hide="phone,tablet">Descripci&oacute;n</th>
-                                                <th data-hide="phone,tablet">Precio</th>
-                                                <th data-hide="phone,tablet">Cantidad</th>
-                                                <th data-hide="phone,tablet">Fecha Devoluci&oacute;n</th>
+                                                <th data-hide="all">Descripci&oacute;n</th>
+                                                <th data-hide="all">Precio</th>
+                                                <th data-hide="all">Cantidad</th>
+                                                <th data-hide="all">Fecha Devoluci&oacute;n</th>
+                                                <th data-hide="all">Imagen</th>
+                                                <th data-hide="all"></th>
+                                                <th data-hide="all"></th>  
+                                                <th data-hide="all"></th>                                                  
+                                                <th data-hide="all">Eliminar Imagen</th>                                
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -310,6 +406,31 @@
                                                 </div>
                                             </div>
                                         </td>
+                                        <td>
+                                            <div style="width: 100%">
+                                                <img src="<%#Eval("IMAGEN.ImageUrl")%>" style="width:200px"/>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="width: 100%">
+                                                <asp:Label ID="lblTitulo" runat="server" Text='<%#(Eval("TITULO") != null) ? Eval("TITULO").ToString().Length > 50 ? String.Format("{0}...", Eval("TITULO").ToString().Remove(50).TrimEnd()):Eval("TITULO"):null%>'></asp:Label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="width: 100%">
+                                                <asp:FileUpload ID="fuploadImagen" accept=".jpg" runat="server" CssClass="form-control" />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="width: 100%">                                                
+                                                <asp:TextBox ID="txtTitulo" runat="server" CssClass="form-control" autocomplete="off" placeholder="Título de la Imagen"></asp:TextBox>
+                                            </div>
+                                        </td>                                        
+                                        <td>                                            
+                                            <div style="width: 100%">                                               
+                                                <asp:CheckBox ID="chkEliminar" runat="server" class="i-checks" />
+                                            </div>
+                                        </td>
                                     </tr>
                                 </ItemTemplate>
                             </asp:ListView>
@@ -319,15 +440,20 @@
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                         <thead>
                                             <tr>
-                                                <th class="text-left">C&oacute;digo</th>
+                                                <th class="text-left" data-toggle="true">C&oacute;digo</th>
                                                 <th>Nombre</th>
                                                 <th>Tipo de Producto</th>
                                                 <th data-hide="phone,tablet">Edici&oacute;n</th>
                                                 <th data-hide="phone,tablet">Fecha Edici&oacute;n</th>
-                                                <th data-hide="phone,tablet">Descripci&oacute;n</th>
-                                                <th data-hide="phone,tablet">Precio</th>
-                                                <th data-hide="phone,tablet">Cantidad</th>
-                                                <th data-hide="phone,tablet">Fecha Devoluci&oacute;n</th>
+                                                <th data-hide="all">Descripci&oacute;n</th>
+                                                <th data-hide="all">Precio</th>
+                                                <th data-hide="all">Cantidad</th>
+                                                <th data-hide="all">Fecha Devoluci&oacute;n</th>
+                                                <th data-hide="all">Imagen</th>
+                                                <th data-hide="all"></th>
+                                                <th data-hide="all"></th>  
+                                                <th data-hide="all"></th>                                                  
+                                                <th data-hide="all">Eliminar Imagen</th>                                                
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -387,6 +513,31 @@
                                                 </div>
                                             </div>
                                         </td>
+                                        <td>
+                                            <div style="width: 100%">
+                                                <img src="<%#Eval("IMAGEN.ImageUrl")%>" style="width:200px"/>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="width: 100%">
+                                                <asp:Label ID="lblTitulo" runat="server" Text='<%#(Eval("TITULO") != null) ? Eval("TITULO").ToString().Length > 50 ? String.Format("{0}...", Eval("TITULO").ToString().Remove(50).TrimEnd()):Eval("TITULO"):null%>'></asp:Label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="width: 100%">
+                                                <asp:FileUpload ID="fuploadImagen" accept=".jpg" runat="server" CssClass="form-control" />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="width: 100%">                                                
+                                                <asp:TextBox ID="txtTitulo" runat="server" CssClass="form-control" autocomplete="off" placeholder="Título de la Imagen"></asp:TextBox>
+                                            </div>
+                                        </td>                                        
+                                        <td>                                            
+                                            <div style="width: 100%">                                               
+                                                <asp:CheckBox ID="chkEliminar" runat="server" class="i-checks" />
+                                            </div>
+                                        </td>
                                     </tr>
                                 </ItemTemplate>
                             </asp:ListView>
@@ -396,15 +547,20 @@
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                         <thead>
                                             <tr>
-                                                <th class="text-left">C&oacute;digo</th>
+                                                <th class="text-left" data-toggle="true">C&oacute;digo</th>
                                                 <th>Nombre</th>
                                                 <th>Tipo de Producto</th>
                                                 <th data-hide="phone,tablet">Edici&oacute;n</th>
                                                 <th data-hide="phone,tablet">Fecha Edici&oacute;n</th>
-                                                <th data-hide="phone,tablet">Descripci&oacute;n</th>
-                                                <th data-hide="phone,tablet">Precio</th>
-                                                <th data-hide="phone,tablet">Cantidad</th>
-                                                <th data-hide="phone,tablet">Fecha Devoluci&oacute;n</th>
+                                                <th data-hide="all">Descripci&oacute;n</th>
+                                                <th data-hide="all">Precio</th>
+                                                <th data-hide="all">Cantidad</th>
+                                                <th data-hide="all">Fecha Devoluci&oacute;n</th>
+                                                <th data-hide="all">Imagen</th>
+                                                <th data-hide="all"></th>
+                                                <th data-hide="all"></th>  
+                                                <th data-hide="all"></th>                                                  
+                                                <th data-hide="all">Eliminar Imagen</th>                                             
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -464,6 +620,31 @@
                                                 </div>
                                             </div>
                                         </td>
+                                        <td>
+                                            <div style="width: 100%">
+                                                <img src="<%#Eval("IMAGEN.ImageUrl")%>" style="width:200px"/>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="width: 100%">
+                                                <asp:Label ID="lblTitulo" runat="server" Text='<%#(Eval("TITULO") != null) ? Eval("TITULO").ToString().Length > 50 ? String.Format("{0}...", Eval("TITULO").ToString().Remove(50).TrimEnd()):Eval("TITULO"):null%>'></asp:Label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="width: 100%">
+                                                <asp:FileUpload ID="fuploadImagen" accept=".jpg" runat="server" CssClass="form-control" />
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div style="width: 100%">                                                
+                                                <asp:TextBox ID="txtTitulo" runat="server" CssClass="form-control" autocomplete="off" placeholder="Título de la Imagen"></asp:TextBox>
+                                            </div>
+                                        </td>                                        
+                                        <td>                                            
+                                            <div style="width: 100%">                                               
+                                                <asp:CheckBox ID="chkEliminar" runat="server" class="i-checks" />
+                                            </div>
+                                        </td>
                                     </tr>
                                 </ItemTemplate>
                             </asp:ListView>
@@ -484,6 +665,7 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="script" runat="server">
+    <script src="js/plugins/iCheck/icheck.min.js"></script>
     <script type="text/javascript">
         if (window.jQuery) {
             $(document).ready(function () {
@@ -528,4 +710,12 @@
         }
 
     </script>
+            <script>
+                $(document).ready(function () {
+                    $('.i-checks').iCheck({
+                        checkboxClass: 'icheckbox_square-green',
+                        radioClass: 'iradio_square-green',
+                    });
+                });
+        </script>
 </asp:Content>

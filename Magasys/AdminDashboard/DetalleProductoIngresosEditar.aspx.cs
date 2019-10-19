@@ -35,13 +35,12 @@ namespace PL.AdminDashboard
             {
                 if (GuardarEdicion())
                 {
-                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeProductoIngresoSuccessModificacion, "Modificación de Ingreso de productos"));
+                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeProductoIngresoSuccessModificacion, "Modificación de Ingreso de productos", "ProductoIngresoListado.aspx"));
                     Session.Remove(Enums.Session.IdIngresoProductos.ToString());
                 }
                 else
                 {
                     Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeProductoIngresoFailure));
-                    Session.Remove(Enums.Session.IdIngresoProductos.ToString());
                 }
             }
             catch (Exception ex)
@@ -131,6 +130,15 @@ namespace PL.AdminDashboard
                                     };
                                     if (loDetalleProductoIngreso.FECHA_DEVOLUCION != null)
                                         oDiarioEdicion.FECHA_DEVOLUCION = Convert.ToDateTime(loDetalleProductoIngreso.FECHA_DEVOLUCION);
+                                    if (oProductoEdicion.Imagen != null)
+                                    {
+                                        oDiarioEdicion.IMAGEN = new System.Web.UI.WebControls.Image();
+
+                                        // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
+                                        string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProductoEdicion.Imagen.IMAGEN1);
+                                        oDiarioEdicion.IMAGEN.ImageUrl = loImagenDataURL64;
+                                        oDiarioEdicion.TITULO = oProductoEdicion.Imagen.NOMBRE;
+                                    }
 
                                     break;
 
@@ -150,6 +158,15 @@ namespace PL.AdminDashboard
                                         oRevistaEdicion.DESCRIPCION = oProductoEdicion.DESCRIPCION;
                                     if (loDetalleProductoIngreso.FECHA_DEVOLUCION != null)
                                         oRevistaEdicion.FECHA_DEVOLUCION = Convert.ToDateTime(loDetalleProductoIngreso.FECHA_DEVOLUCION);
+                                    if (oProductoEdicion.Imagen != null)
+                                    {
+                                        oRevistaEdicion.IMAGEN = new System.Web.UI.WebControls.Image();
+
+                                        // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
+                                        string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProductoEdicion.Imagen.IMAGEN1);
+                                        oRevistaEdicion.IMAGEN.ImageUrl = loImagenDataURL64;
+                                        oRevistaEdicion.TITULO = oProductoEdicion.Imagen.NOMBRE;
+                                    }
 
                                     break;
 
@@ -169,7 +186,15 @@ namespace PL.AdminDashboard
                                         oColeccionEdicion.DESCRIPCION = oProductoEdicion.DESCRIPCION;
                                     if (loDetalleProductoIngreso.FECHA_DEVOLUCION != null)
                                         oColeccionEdicion.FECHA_DEVOLUCION = Convert.ToDateTime(loDetalleProductoIngreso.FECHA_DEVOLUCION);
+                                    if (oProductoEdicion.Imagen != null)
+                                    {
+                                        oColeccionEdicion.IMAGEN = new System.Web.UI.WebControls.Image();
 
+                                        // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
+                                        string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProductoEdicion.Imagen.IMAGEN1);
+                                        oColeccionEdicion.IMAGEN.ImageUrl = loImagenDataURL64;
+                                        oColeccionEdicion.TITULO = oProductoEdicion.Imagen.NOMBRE;
+                                    }
 
                                     break;
 
@@ -192,6 +217,15 @@ namespace PL.AdminDashboard
                                         oLibroEdicion.DESCRIPCION = oProductoEdicion.DESCRIPCION;
                                     if (loDetalleProductoIngreso.FECHA_DEVOLUCION != null)
                                         oLibroEdicion.FECHA_DEVOLUCION = Convert.ToDateTime(loDetalleProductoIngreso.FECHA_DEVOLUCION);
+                                    if (oProductoEdicion.Imagen != null)
+                                    {
+                                        oLibroEdicion.IMAGEN = new System.Web.UI.WebControls.Image();
+
+                                        // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
+                                        string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProductoEdicion.Imagen.IMAGEN1);
+                                        oLibroEdicion.IMAGEN.ImageUrl = loImagenDataURL64;
+                                        oLibroEdicion.TITULO = oProductoEdicion.Imagen.NOMBRE;
+                                    }
 
                                     break;
 
@@ -213,6 +247,15 @@ namespace PL.AdminDashboard
                                         oSuplementoEdicion.DESCRIPCION = oProductoEdicion.DESCRIPCION;
                                     if (loDetalleProductoIngreso.FECHA_DEVOLUCION != null)
                                         oSuplementoEdicion.FECHA_DEVOLUCION = Convert.ToDateTime(loDetalleProductoIngreso.FECHA_DEVOLUCION);
+                                    if (oProductoEdicion.Imagen != null)
+                                    {
+                                        oSuplementoEdicion.IMAGEN = new System.Web.UI.WebControls.Image();
+
+                                        // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
+                                        string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProductoEdicion.Imagen.IMAGEN1);
+                                        oSuplementoEdicion.IMAGEN.ImageUrl = loImagenDataURL64;
+                                        oSuplementoEdicion.TITULO = oProductoEdicion.Imagen.NOMBRE;
+                                    }
 
                                     break;
 
@@ -235,6 +278,15 @@ namespace PL.AdminDashboard
                                         oPeliculaEdicion.DESCRIPCION = oProductoEdicion.DESCRIPCION;
                                     if (loDetalleProductoIngreso.FECHA_DEVOLUCION != null)
                                         oPeliculaEdicion.FECHA_DEVOLUCION = Convert.ToDateTime(loDetalleProductoIngreso.FECHA_DEVOLUCION);
+                                    if (oProductoEdicion.Imagen != null)
+                                    {
+                                        oPeliculaEdicion.IMAGEN = new System.Web.UI.WebControls.Image();
+
+                                        // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
+                                        string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProductoEdicion.Imagen.IMAGEN1);
+                                        oPeliculaEdicion.IMAGEN.ImageUrl = loImagenDataURL64;
+                                        oPeliculaEdicion.TITULO = oProductoEdicion.Imagen.NOMBRE;
+                                    }
 
                                     break;
                             }
@@ -343,6 +395,7 @@ namespace PL.AdminDashboard
             ProductoEdicion oProductoEdicion = null;
             List<DetalleProductoIngreso> lstDetalleProductoIngreso = null;
             DetalleProductoIngreso oDetalleProductoIngreso = null;
+            BLL.DAL.Imagen oImagen = null;
 
             lstDetalleProductoIngreso = new List<DetalleProductoIngreso>();
             lstDetalleProductoIngreso = (List<DetalleProductoIngreso>)Session[Enums.Session.DetalleIngresoProductos.ToString()];
@@ -381,7 +434,7 @@ namespace PL.AdminDashboard
                 var loTipoProducto = new TipoProductoBLL().ObtenerTipoProducto(Convert.ToString(((Label)loItem.Controls[5]).Text));
 
                 // Buscar por nro. edición y tipo de producto.
-                oProductoEdicion = new ProductoEdicionBLL().ConsultarExistenciaEdicion(Convert.ToString(((Label)loItem.Controls[7]).Text), loTipoProducto.ID_TIPO_PRODUCTO);
+                oProductoEdicion = new ProductoEdicionBLL().ConsultarExistenciaEdicion(Convert.ToInt32(((Label)loItem.Controls[1]).Text), Convert.ToString(((Label)loItem.Controls[7]).Text), loTipoProducto.ID_TIPO_PRODUCTO);
 
                 if (oProductoEdicion != null)
                 {
@@ -416,13 +469,6 @@ namespace PL.AdminDashboard
                         loProductoEdicionModificado = loDetalleModificado = loModificado = true;
                     }
 
-                    if (loProductoEdicionModificado)
-                    {
-                        loResutado = new BLL.ProductoEdicionBLL().ModificarProductoEdicion(oProductoEdicion);
-                        if (loResutado == false)
-                            return loResutado;
-                    }
-
                     if (!String.IsNullOrEmpty(((TextBox)loItem.Controls[15]).Text))
                         loFechaDevolucion = Convert.ToDateTime(((TextBox)loItem.Controls[15]).Text);
 
@@ -430,6 +476,36 @@ namespace PL.AdminDashboard
                     {
                         oDetalleProductoIngreso.FECHA_DEVOLUCION = loFechaDevolucion;
                         loDetalleModificado = loModificado = true;
+                    }
+
+                    // Obtener tamaño de la IMAGEN seleccionada
+                    int loTamanioImagen = ((FileUpload)loItem.Controls[19]).PostedFile.ContentLength;
+                    // Para grabar la IMAGEN se debe ingresar el Título
+                    if (loTamanioImagen > 0 && !String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[21]).Text)))
+                    {
+                        // Obtener tamaño de la IMAGEN en byte
+                        byte[] loImagenOriginal = new byte[loTamanioImagen];
+
+                        //// Asociar byte a IMAGEN
+                        ((FileUpload)loItem.Controls[19]).PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
+
+                        oImagen = new Imagen();
+                        oImagen.IMAGEN1 = loImagenOriginal;
+                        oImagen.NOMBRE = Convert.ToString(((TextBox)loItem.Controls[21]).Text);
+                        oProductoEdicion.Imagen = oImagen;
+                        loProductoEdicionModificado = loModificado = true;
+                    }
+                    else if (((CheckBox)loItem.Controls[23]).Checked && oProductoEdicion.COD_IMAGEN != null)
+                    {
+                        oProductoEdicion.COD_IMAGEN = null;
+                        loProductoEdicionModificado = loModificado = true;
+                    }
+
+                    if (loProductoEdicionModificado)
+                    {
+                        loResutado = new BLL.ProductoEdicionBLL().ModificarProductoEdicion(oProductoEdicion);
+                        if (loResutado == false)
+                            return loResutado;
                     }
 
                     if (loDetalleModificado)
@@ -455,6 +531,7 @@ namespace PL.AdminDashboard
             ProductoEdicion oProductoEdicion = null;
             List<DetalleProductoIngreso> lstDetalleProductoIngreso = null;
             DetalleProductoIngreso oDetalleProductoIngreso = null;
+            BLL.DAL.Imagen oImagen = null;
 
             lstDetalleProductoIngreso = new List<DetalleProductoIngreso>();
             lstDetalleProductoIngreso = (List<DetalleProductoIngreso>)Session[Enums.Session.DetalleIngresoProductos.ToString()];
@@ -493,7 +570,7 @@ namespace PL.AdminDashboard
                 var loTipoProducto = new TipoProductoBLL().ObtenerTipoProducto(Convert.ToString(((Label)loItem.Controls[5]).Text));
 
                 // Buscar por nro. edición y tipo de producto.
-                oProductoEdicion = new ProductoEdicionBLL().ConsultarExistenciaEdicion(Convert.ToString(((Label)loItem.Controls[7]).Text), loTipoProducto.ID_TIPO_PRODUCTO);
+                oProductoEdicion = new ProductoEdicionBLL().ConsultarExistenciaEdicion(Convert.ToInt32(((Label)loItem.Controls[1]).Text), Convert.ToString(((Label)loItem.Controls[7]).Text), loTipoProducto.ID_TIPO_PRODUCTO);
 
                 if (oProductoEdicion != null)
                 {
@@ -553,6 +630,36 @@ namespace PL.AdminDashboard
                         loDetalleModificado = loModificado = true;
                     }
 
+                    // Obtener tamaño de la IMAGEN seleccionada
+                    int loTamanioImagen = ((FileUpload)loItem.Controls[21]).PostedFile.ContentLength;
+                    // Para grabar la IMAGEN se debe ingresar el Título
+                    if (loTamanioImagen > 0 && !String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[23]).Text)))
+                    {
+                        // Obtener tamaño de la IMAGEN en byte
+                        byte[] loImagenOriginal = new byte[loTamanioImagen];
+
+                        //// Asociar byte a IMAGEN
+                        ((FileUpload)loItem.Controls[21]).PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
+
+                        oImagen = new Imagen();
+                        oImagen.IMAGEN1 = loImagenOriginal;
+                        oImagen.NOMBRE = Convert.ToString(((TextBox)loItem.Controls[23]).Text);
+                        oProductoEdicion.Imagen = oImagen;
+                        loProductoEdicionModificado = loModificado = true;
+                    }
+                    else if (((CheckBox)loItem.Controls[25]).Checked && oProductoEdicion.COD_IMAGEN != null)
+                    {
+                        oProductoEdicion.COD_IMAGEN = null;
+                        loProductoEdicionModificado = loModificado = true;
+                    }
+
+                    if (loProductoEdicionModificado)
+                    {
+                        loResutado = new BLL.ProductoEdicionBLL().ModificarProductoEdicion(oProductoEdicion);
+                        if (loResutado == false)
+                            return loResutado;
+                    }
+
                     if (loDetalleModificado)
                         loResutado = new ProductoIngresoBLL().ModificarDetalleProductoIngreso(oDetalleProductoIngreso);
                 }
@@ -576,6 +683,7 @@ namespace PL.AdminDashboard
             ProductoEdicion oProductoEdicion = null;
             List<DetalleProductoIngreso> lstDetalleProductoIngreso = null;
             DetalleProductoIngreso oDetalleProductoIngreso = null;
+            BLL.DAL.Imagen oImagen = null;
 
             lstDetalleProductoIngreso = new List<DetalleProductoIngreso>();
             lstDetalleProductoIngreso = (List<DetalleProductoIngreso>)Session[Enums.Session.DetalleIngresoProductos.ToString()];
@@ -610,7 +718,7 @@ namespace PL.AdminDashboard
                 var loTipoProducto = new TipoProductoBLL().ObtenerTipoProducto(Convert.ToString(((Label)loItem.Controls[5]).Text));
 
                 // Buscar por nro. edición y tipo de producto.
-                oProductoEdicion = new ProductoEdicionBLL().ConsultarExistenciaEdicion(Convert.ToString(((Label)loItem.Controls[7]).Text), loTipoProducto.ID_TIPO_PRODUCTO);
+                oProductoEdicion = new ProductoEdicionBLL().ConsultarExistenciaEdicion(Convert.ToInt32(((Label)loItem.Controls[1]).Text), Convert.ToString(((Label)loItem.Controls[7]).Text), loTipoProducto.ID_TIPO_PRODUCTO);
 
                 if (oProductoEdicion != null)
                 {
@@ -645,6 +753,29 @@ namespace PL.AdminDashboard
                             oProductoEdicion.DESCRIPCION = Convert.ToString(((TextBox)loItem.Controls[9]).Text);
                         else
                             oProductoEdicion.DESCRIPCION = null;
+                        loProductoEdicionModificado = loModificado = true;
+                    }
+
+                    // Obtener tamaño de la IMAGEN seleccionada
+                    int loTamanioImagen = ((FileUpload)loItem.Controls[19]).PostedFile.ContentLength;
+                    // Para grabar la IMAGEN se debe ingresar el Título
+                    if (loTamanioImagen > 0 && !String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[21]).Text)))
+                    {
+                        // Obtener tamaño de la IMAGEN en byte
+                        byte[] loImagenOriginal = new byte[loTamanioImagen];
+
+                        //// Asociar byte a IMAGEN
+                        ((FileUpload)loItem.Controls[19]).PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
+
+                        oImagen = new Imagen();
+                        oImagen.IMAGEN1 = loImagenOriginal;
+                        oImagen.NOMBRE = Convert.ToString(((TextBox)loItem.Controls[21]).Text);
+                        oProductoEdicion.Imagen = oImagen;
+                        loProductoEdicionModificado = loModificado = true;
+                    }
+                    else if (((CheckBox)loItem.Controls[23]).Checked && oProductoEdicion.COD_IMAGEN != null)
+                    {
+                        oProductoEdicion.COD_IMAGEN = null;
                         loProductoEdicionModificado = loModificado = true;
                     }
 
@@ -687,6 +818,7 @@ namespace PL.AdminDashboard
             ProductoEdicion oProductoEdicion = null;
             List<DetalleProductoIngreso> lstDetalleProductoIngreso = null;
             DetalleProductoIngreso oDetalleProductoIngreso = null;
+            BLL.DAL.Imagen oImagen = null;
 
             lstDetalleProductoIngreso = new List<DetalleProductoIngreso>();
             lstDetalleProductoIngreso = (List<DetalleProductoIngreso>)Session[Enums.Session.DetalleIngresoProductos.ToString()];
@@ -721,7 +853,7 @@ namespace PL.AdminDashboard
                 var loTipoProducto = new TipoProductoBLL().ObtenerTipoProducto(Convert.ToString(((Label)loItem.Controls[5]).Text));
 
                 // Buscar por nro. edición y tipo de producto.
-                oProductoEdicion = new ProductoEdicionBLL().ConsultarExistenciaEdicion(Convert.ToString(((Label)loItem.Controls[9]).Text), loTipoProducto.ID_TIPO_PRODUCTO);
+                oProductoEdicion = new ProductoEdicionBLL().ConsultarExistenciaEdicion(Convert.ToInt32(((Label)loItem.Controls[1]).Text), Convert.ToString(((Label)loItem.Controls[9]).Text), loTipoProducto.ID_TIPO_PRODUCTO);
 
                 if (oProductoEdicion != null)
                 {
@@ -756,6 +888,29 @@ namespace PL.AdminDashboard
                             oProductoEdicion.DESCRIPCION = Convert.ToString(((TextBox)loItem.Controls[11]).Text);
                         else
                             oProductoEdicion.DESCRIPCION = null;
+                        loProductoEdicionModificado = loModificado = true;
+                    }
+
+                    // Obtener tamaño de la IMAGEN seleccionada
+                    int loTamanioImagen = ((FileUpload)loItem.Controls[21]).PostedFile.ContentLength;
+                    // Para grabar la IMAGEN se debe ingresar el Título
+                    if (loTamanioImagen > 0 && !String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[23]).Text)))
+                    {
+                        // Obtener tamaño de la IMAGEN en byte
+                        byte[] loImagenOriginal = new byte[loTamanioImagen];
+
+                        //// Asociar byte a IMAGEN
+                        ((FileUpload)loItem.Controls[21]).PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
+
+                        oImagen = new Imagen();
+                        oImagen.IMAGEN1 = loImagenOriginal;
+                        oImagen.NOMBRE = Convert.ToString(((TextBox)loItem.Controls[23]).Text);
+                        oProductoEdicion.Imagen = oImagen;
+                        loProductoEdicionModificado = loModificado = true;
+                    }
+                    else if (((CheckBox)loItem.Controls[25]).Checked && oProductoEdicion.COD_IMAGEN != null)
+                    {
+                        oProductoEdicion.COD_IMAGEN = null;
                         loProductoEdicionModificado = loModificado = true;
                     }
 
@@ -799,6 +954,7 @@ namespace PL.AdminDashboard
             ProductoEdicion oProductoEdicion = null;
             List<DetalleProductoIngreso> lstDetalleProductoIngreso = null;
             DetalleProductoIngreso oDetalleProductoIngreso = null;
+            BLL.DAL.Imagen oImagen = null;
 
             lstDetalleProductoIngreso = new List<DetalleProductoIngreso>();
             lstDetalleProductoIngreso = (List<DetalleProductoIngreso>)Session[Enums.Session.DetalleIngresoProductos.ToString()];
@@ -834,7 +990,7 @@ namespace PL.AdminDashboard
                 var loTipoProducto = new TipoProductoBLL().ObtenerTipoProducto(Convert.ToString(((Label)loItem.Controls[5]).Text));
 
                 // Buscar por nro. edición y tipo de producto.
-                oProductoEdicion = new ProductoEdicionBLL().ConsultarExistenciaEdicion(Convert.ToString(((Label)loItem.Controls[7]).Text), loTipoProducto.ID_TIPO_PRODUCTO);
+                oProductoEdicion = new ProductoEdicionBLL().ConsultarExistenciaEdicion(Convert.ToInt32(((Label)loItem.Controls[1]).Text), Convert.ToString(((Label)loItem.Controls[7]).Text), loTipoProducto.ID_TIPO_PRODUCTO);
 
                 if (oProductoEdicion != null)
                 {
@@ -881,6 +1037,29 @@ namespace PL.AdminDashboard
                         loProductoEdicionModificado = loModificado = true;
                     }
 
+                    // Obtener tamaño de la IMAGEN seleccionada
+                    int loTamanioImagen = ((FileUpload)loItem.Controls[21]).PostedFile.ContentLength;
+                    // Para grabar la IMAGEN se debe ingresar el Título
+                    if (loTamanioImagen > 0 && !String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[23]).Text)))
+                    {
+                        // Obtener tamaño de la IMAGEN en byte
+                        byte[] loImagenOriginal = new byte[loTamanioImagen];
+
+                        //// Asociar byte a IMAGEN
+                        ((FileUpload)loItem.Controls[21]).PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
+
+                        oImagen = new Imagen();
+                        oImagen.IMAGEN1 = loImagenOriginal;
+                        oImagen.NOMBRE = Convert.ToString(((TextBox)loItem.Controls[23]).Text);
+                        oProductoEdicion.Imagen = oImagen;
+                        loProductoEdicionModificado = loModificado = true;
+                    }
+                    else if (((CheckBox)loItem.Controls[25]).Checked && oProductoEdicion.COD_IMAGEN != null)
+                    {
+                        oProductoEdicion.COD_IMAGEN = null;
+                        loProductoEdicionModificado = loModificado = true;
+                    }
+
                     if (loProductoEdicionModificado)
                     {
                         loResutado = new BLL.ProductoEdicionBLL().ModificarProductoEdicion(oProductoEdicion);
@@ -921,6 +1100,7 @@ namespace PL.AdminDashboard
             ProductoEdicion oProductoEdicion = null;
             List<DetalleProductoIngreso> lstDetalleProductoIngreso = null;
             DetalleProductoIngreso oDetalleProductoIngreso = null;
+            BLL.DAL.Imagen oImagen = null;
 
             lstDetalleProductoIngreso = new List<DetalleProductoIngreso>();
             lstDetalleProductoIngreso = (List<DetalleProductoIngreso>)Session[Enums.Session.DetalleIngresoProductos.ToString()];
@@ -956,7 +1136,7 @@ namespace PL.AdminDashboard
                 var loTipoProducto = new TipoProductoBLL().ObtenerTipoProducto(Convert.ToString(((Label)loItem.Controls[5]).Text));
 
                 // Buscar por nro. edición y tipo de producto.
-                oProductoEdicion = new ProductoEdicionBLL().ConsultarExistenciaEdicion(Convert.ToString(((Label)loItem.Controls[7]).Text), loTipoProducto.ID_TIPO_PRODUCTO);
+                oProductoEdicion = new ProductoEdicionBLL().ConsultarExistenciaEdicion(Convert.ToInt32(((Label)loItem.Controls[1]).Text), Convert.ToString(((Label)loItem.Controls[7]).Text), loTipoProducto.ID_TIPO_PRODUCTO);
 
                 if (oProductoEdicion != null)
                 {
@@ -1000,6 +1180,29 @@ namespace PL.AdminDashboard
                             oProductoEdicion.DESCRIPCION = Convert.ToString(((TextBox)loItem.Controls[11]).Text);
                         else
                             oProductoEdicion.DESCRIPCION = null;
+                        loProductoEdicionModificado = loModificado = true;
+                    }
+
+                    // Obtener tamaño de la IMAGEN seleccionada
+                    int loTamanioImagen = ((FileUpload)loItem.Controls[21]).PostedFile.ContentLength;
+                    // Para grabar la IMAGEN se debe ingresar el Título
+                    if (loTamanioImagen > 0 && !String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[23]).Text)))
+                    {
+                        // Obtener tamaño de la IMAGEN en byte
+                        byte[] loImagenOriginal = new byte[loTamanioImagen];
+
+                        //// Asociar byte a IMAGEN
+                        ((FileUpload)loItem.Controls[21]).PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
+
+                        oImagen = new Imagen();
+                        oImagen.IMAGEN1 = loImagenOriginal;
+                        oImagen.NOMBRE = Convert.ToString(((TextBox)loItem.Controls[23]).Text);
+                        oProductoEdicion.Imagen = oImagen;
+                        loProductoEdicionModificado = loModificado = true;
+                    }
+                    else if (((CheckBox)loItem.Controls[25]).Checked && oProductoEdicion.COD_IMAGEN != null)
+                    {
+                        oProductoEdicion.COD_IMAGEN = null;
                         loProductoEdicionModificado = loModificado = true;
                     }
 
