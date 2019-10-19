@@ -404,7 +404,7 @@ namespace PL.AdminDashboard
                     var oDetalleProductoIngreso = new DetalleProductoIngreso();
 
                     // Buscar nro. edición, si existe se actualiza la cantidad y los datos que se carguen, caso contrario, se crea la edición.
-                    oProductoEdicion = new BLL.ProductoEdicionBLL().ConsultarExistenciaEdicion(Convert.ToString(((TextBox)loItem.Controls[7]).Text), Convert.ToInt32(ddlTipoProducto.SelectedValue));
+                    oProductoEdicion = new BLL.ProductoEdicionBLL().ConsultarExistenciaEdicion(Convert.ToInt32(((Label)loItem.Controls[1]).Text), Convert.ToString(((TextBox)loItem.Controls[7]).Text), Convert.ToInt32(ddlTipoProducto.SelectedValue));
 
                     // Obtener tamaño de la IMAGEN seleccionada
                     int loTamanioImagen = ((FileUpload)loItem.Controls[17]).PostedFile.ContentLength;
@@ -543,7 +543,7 @@ namespace PL.AdminDashboard
                     var oDetalleProductoIngreso = new DetalleProductoIngreso();
 
                     // Buscar nro. edición, si existe se actualiza la cantidad y los datos que se carguen, caso contrario, se crea la edición.
-                    oProductoEdicion = new BLL.ProductoEdicionBLL().ConsultarExistenciaEdicion(Convert.ToString(((TextBox)loItem.Controls[5]).Text), Convert.ToInt32(ddlTipoProducto.SelectedValue));
+                    oProductoEdicion = new BLL.ProductoEdicionBLL().ConsultarExistenciaEdicion(Convert.ToInt32(((Label)loItem.Controls[1]).Text), Convert.ToString(((TextBox)loItem.Controls[5]).Text), Convert.ToInt32(ddlTipoProducto.SelectedValue));
 
                     // Obtener tamaño de la IMAGEN seleccionada
                     int loTamanioImagen = ((FileUpload)loItem.Controls[17]).PostedFile.ContentLength;
@@ -682,7 +682,7 @@ namespace PL.AdminDashboard
                     var oDetalleProductoIngreso = new DetalleProductoIngreso();
 
                     // Buscar nro. edición, si existe se actualiza la cantidad y los datos que se carguen, caso contrario, se crea la edición.
-                    oProductoEdicion = new BLL.ProductoEdicionBLL().ConsultarExistenciaEdicion(Convert.ToString(((TextBox)loItem.Controls[5]).Text), Convert.ToInt32(ddlTipoProducto.SelectedValue));
+                    oProductoEdicion = new BLL.ProductoEdicionBLL().ConsultarExistenciaEdicion(Convert.ToInt32(((Label)loItem.Controls[1]).Text), Convert.ToString(((TextBox)loItem.Controls[5]).Text), Convert.ToInt32(ddlTipoProducto.SelectedValue));
 
                     // Obtener tamaño de la IMAGEN seleccionada
                     int loTamanioImagen = ((FileUpload)loItem.Controls[15]).PostedFile.ContentLength;
@@ -819,7 +819,7 @@ namespace PL.AdminDashboard
                     var oDetalleProductoIngreso = new DetalleProductoIngreso();
 
                     // Buscar nro. edición, si existe se actualiza la cantidad y los datos que se carguen, caso contrario, se crea la edición.
-                    oProductoEdicion = new BLL.ProductoEdicionBLL().ConsultarExistenciaEdicion(Convert.ToString(((TextBox)loItem.Controls[7]).Text), Convert.ToInt32(ddlTipoProducto.SelectedValue));
+                    oProductoEdicion = new BLL.ProductoEdicionBLL().ConsultarExistenciaEdicion(Convert.ToInt32(((Label)loItem.Controls[1]).Text), Convert.ToString(((TextBox)loItem.Controls[7]).Text), Convert.ToInt32(ddlTipoProducto.SelectedValue));
 
                     // Obtener tamaño de la IMAGEN seleccionada
                     int loTamanioImagen = ((FileUpload)loItem.Controls[17]).PostedFile.ContentLength;
@@ -956,7 +956,7 @@ namespace PL.AdminDashboard
                     var oDetalleProductoIngreso = new DetalleProductoIngreso();
 
                     // Buscar nro. edición, si existe se actualiza la cantidad y los datos que se carguen, caso contrario, se crea la edición.
-                    oProductoEdicion = new BLL.ProductoEdicionBLL().ConsultarExistenciaEdicion(Convert.ToString(((TextBox)loItem.Controls[5]).Text), Convert.ToInt32(ddlTipoProducto.SelectedValue));
+                    oProductoEdicion = new BLL.ProductoEdicionBLL().ConsultarExistenciaEdicion(Convert.ToInt32(((Label)loItem.Controls[1]).Text), Convert.ToString(((TextBox)loItem.Controls[5]).Text), Convert.ToInt32(ddlTipoProducto.SelectedValue));
 
                     // Obtener tamaño de la IMAGEN seleccionada
                     int loTamanioImagen = ((FileUpload)loItem.Controls[17]).PostedFile.ContentLength;
@@ -1097,7 +1097,7 @@ namespace PL.AdminDashboard
                     var oDetalleProductoIngreso = new DetalleProductoIngreso();
 
                     // Buscar nro. edición, si existe se actualiza la cantidad y los datos que se carguen, caso contrario, se crea la edición.
-                    oProductoEdicion = new BLL.ProductoEdicionBLL().ConsultarExistenciaEdicion(Convert.ToString(((TextBox)loItem.Controls[5]).Text), Convert.ToInt32(ddlTipoProducto.SelectedValue));
+                    oProductoEdicion = new BLL.ProductoEdicionBLL().ConsultarExistenciaEdicion(Convert.ToInt32(((Label)loItem.Controls[1]).Text), Convert.ToString(((TextBox)loItem.Controls[5]).Text), Convert.ToInt32(ddlTipoProducto.SelectedValue));
 
                     // Obtener tamaño de la IMAGEN seleccionada
                     int loTamanioImagen = ((FileUpload)loItem.Controls[17]).PostedFile.ContentLength;
