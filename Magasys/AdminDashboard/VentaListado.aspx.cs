@@ -162,7 +162,7 @@ namespace PL.AdminDashboard
                 ddlEstado.DataBind();
                 ddlEstado.Items.Insert(0, new ListItem("Pagada", "5"));
                 ddlEstado.Items.Insert(1, new ListItem("A Cuenta", "4"));
-                ddlEstado.Items.Insert(2, new ListItem("Anulado", "3"));
+                ddlEstado.Items.Insert(2, new ListItem("Anulada", "6"));
             }
             catch (Exception ex)
             {
