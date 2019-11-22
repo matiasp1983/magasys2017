@@ -61,6 +61,7 @@ namespace BLL
         {
             var bRes = false;
             ProductoEdicion oProductoEdicion = null;
+            ProductoEdicion oProductoEdicionAux = null;
 
             try
             {
@@ -71,10 +72,36 @@ namespace BLL
 
                 if (oProductoEdicion != null)
                 {
-                    oProductoEdicion.CANTIDAD_DISPONIBLE = oProductoEdicion.CANTIDAD_DISPONIBLE - cantidad;
+                    oProductoEdicionAux = new ProductoEdicion
+                    {
+                        ID_PRODUCTO_EDICION = oProductoEdicion.ID_PRODUCTO_EDICION,
+                        COD_PRODUCTO = oProductoEdicion.COD_PRODUCTO,
+                        COD_TIPO_PRODUCTO = oProductoEdicion.COD_TIPO_PRODUCTO,
+                        COD_ESTADO = oProductoEdicion.COD_ESTADO,
+                        EDICION = oProductoEdicion.EDICION,
+                        PRECIO = oProductoEdicion.PRECIO
+                    };
+
+                    if (oProductoEdicion.FECHA_EDICION != null)
+                        oProductoEdicionAux.FECHA_EDICION = oProductoEdicion.FECHA_EDICION;
+
+                    if (!String.IsNullOrEmpty(oProductoEdicion.NOMBRE))
+                        oProductoEdicionAux.NOMBRE = oProductoEdicion.NOMBRE;
+
+                    if (!String.IsNullOrEmpty(oProductoEdicion.DESCRIPCION))
+                        oProductoEdicionAux.DESCRIPCION = oProductoEdicion.DESCRIPCION;
+
+                    if (oProductoEdicion.COD_IMAGEN != null)
+                        oProductoEdicionAux.COD_IMAGEN = oProductoEdicion.COD_IMAGEN;
+
+                    oProductoEdicionAux.CANTIDAD_DISPONIBLE = oProductoEdicion.CANTIDAD_DISPONIBLE - cantidad;
+
                     if (fechaDevolucionReal != null)
-                        oProductoEdicion.FECHA_DEVOLUCION_REAL = fechaDevolucionReal;
-                    bRes = ModificarProductoEdicion(oProductoEdicion);
+                        oProductoEdicionAux.FECHA_DEVOLUCION_REAL = fechaDevolucionReal;
+                    else if (oProductoEdicion.FECHA_DEVOLUCION_REAL != null)
+                        oProductoEdicionAux.FECHA_DEVOLUCION_REAL = oProductoEdicion.FECHA_DEVOLUCION_REAL;
+
+                    bRes = ModificarProductoEdicion(oProductoEdicionAux);
                 }
             }
             catch (Exception ex)
