@@ -708,7 +708,7 @@
                         <div class="form-group" style="margin-bottom: 10px">
                             <div class="col-xs-12 col-sm-6 col-md-8"></div>
                             <div class="col-xs-12 col-md-4" style="text-align: right">
-                                <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-success" OnClick="BtnGuardarVenta_Click" />
+                                <asp:Button ID="btnGuardar" runat="server" Text="Registrar Venta" CssClass="btn btn-success" OnClick="BtnGuardarVenta_Click" />
                                 <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-primary" OnClick="BtnCancelarVenta_Click" formnovalidate="" />
                             </div>
 
