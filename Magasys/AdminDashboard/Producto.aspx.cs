@@ -3,7 +3,6 @@ using BLL.DAL;
 using NLog;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Web.UI.WebControls;
 
@@ -408,10 +407,12 @@ namespace PL.AdminDashboard
 
         private BLL.DAL.Suplemento CargarSuplementoDesdeControles()
         {
-            var oSuplemento = new BLL.DAL.Suplemento
+            var oDiarioSuplemento = new BLL.DiarioBLL().ObtenerDiario(Convert.ToInt32(ddlDiarioSuplemento.SelectedValue));
+
+            var oSuplemento = new Suplemento
             {
                 ID_DIA_SEMANA = Convert.ToInt32(ddlDiaDeEntregaSuplemento.SelectedValue),
-                COD_DIARIO = Convert.ToInt32(ddlDiarioSuplemento.SelectedValue),
+                COD_DIARIO = oDiarioSuplemento.ID_DIARIO_DIA_SEMAMA,
                 PRECIO = Convert.ToDouble(txtPrecioSuplemento.Text),
                 CANTIDAD_ENTREGAS = Convert.ToInt32(txtCantidadDeEntregaSuplemento.Text)
             };
