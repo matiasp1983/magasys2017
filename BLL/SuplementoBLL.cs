@@ -40,7 +40,8 @@ namespace BLL
                             CANTIDAD_DE_ENTREGAS = oSuplemento.CANTIDAD_ENTREGAS,
                             COD_DIARIO = oSuplemento.COD_DIARIO,
                             PRECIO = oSuplemento.PRECIO,
-                            ID_DIA_SEMANA = oSuplemento.ID_DIA_SEMANA
+                            ID_DIA_SEMANA = oSuplemento.ID_DIA_SEMANA,
+                            NOMBRE_DIARIO = oSuplemento.DiarioDiaSemana.Producto.NOMBRE
                         };
 
                         if (oProducto.COD_IMAGEN != null)
@@ -254,6 +255,7 @@ namespace BLL
         public double PRECIO { get; set; }
         public int CANTIDAD_DE_ENTREGAS { get; set; }
         public BLL.DAL.Imagen IMAGEN { get; set; }
+        public string NOMBRE_DIARIO { get; set; }
     }
 
     public class SuplementoEdicion
