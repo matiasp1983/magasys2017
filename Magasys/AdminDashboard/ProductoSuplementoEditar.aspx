@@ -143,7 +143,9 @@
                                             <label class="col-sm-3 control-label">D&iacute;a de entrega</label>
 
                                             <div class="col-sm-9">
-                                                <asp:DropDownList ID="ddlDiaDeEntregaSuplemento" runat="server" CssClass="select2_diadeentregasuplemento form-control"></asp:DropDownList>
+                                                <div id="divDiaDeEntregaSuplemento">
+                                                    <asp:DropDownList ID="ddlDiaDeEntregaSuplemento" runat="server" CssClass="select2_diadeentregasuplemento form-control"></asp:DropDownList>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -224,6 +226,9 @@
                      <%=ddlGenero.UniqueID%>: {
                          required: true
                      },
+                     <%=ddlDiaDeEntregaSuplemento.UniqueID%>: {
+                         required: true
+                     },
                      <%=ddlDiarioSuplemento.UniqueID%>: {
                          required: true
                      },
@@ -247,6 +252,9 @@
                          required: "Este campo es requerido."
                      },
                      <%=ddlGenero.UniqueID%>: {
+                         required: "Este campo es requerido."
+                     },
+                     <%=ddlDiaDeEntregaSuplemento.UniqueID%>: {
                          required: "Este campo es requerido."
                      },
                      <%=ddlDiarioSuplemento.UniqueID%>: {
