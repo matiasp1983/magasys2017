@@ -138,6 +138,7 @@
     <Content Include="AdminDashboard\js\plugins\select2\select2.full.min.js" />
     <Content Include="AdminDashboard\js\plugins\sweetalert\sweetalert.min.js" />
     <Content Include="AdminDashboard\js\plugins\validate\jquery.validate.js" />
+    <Content Include="AdminDashboard\Login.aspx" />
     <Content Include="AdminDashboard\MasterPage.Master" />
     <Content Include="AdminDashboard\ProductoColeccionEditar.aspx" />
     <Content Include="AdminDashboard\ProductoColeccionVisualizar.aspx" />
@@ -347,6 +348,13 @@
     </Compile>
     <Compile Include="AdminDashboard\Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminDashboard\MasterPage.Master.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>

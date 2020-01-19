@@ -28,7 +28,7 @@
                             </span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear"><span class="block m-t-xs"><strong class="font-bold">I am Groot</strong>
-                                </span><span class="text-muted text-xs block">Administrador <b class="caret"></b></span></span></a>
+                                </span><span class="text-muted text-xs block"><asp:Label ID="lblUsuarioLogout" runat="server" Text="Usuario" Font-Bold="True" Font-Names="Calibri"></asp:Label> <b class="caret"></b></span></span></a>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
                                 <li><a href="#">Cerrar sesión</a></li>
                             </ul>

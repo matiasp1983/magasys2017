@@ -121,7 +121,7 @@ namespace BLL
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
 
             return lstClienteListado;
@@ -176,7 +176,7 @@ namespace BLL
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
 
             return lstClienteListado;

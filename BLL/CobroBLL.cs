@@ -60,7 +60,7 @@ namespace BLL
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
 
             return bRes;
@@ -124,7 +124,7 @@ namespace BLL
 
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
 
             return lstCobroListado;

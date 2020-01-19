@@ -205,7 +205,7 @@ namespace BLL
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
 
             return lstProductoDevolucionListado;
@@ -242,7 +242,7 @@ namespace BLL
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
 
             return bRes;

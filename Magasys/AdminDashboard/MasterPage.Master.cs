@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Globalization;
+using BLL.Common;
+using BLL.DAL;
 using NLog;
 
 namespace PL.AdminDashboard
@@ -11,6 +14,22 @@ namespace PL.AdminDashboard
         {
             try
             {
+                /*if (!IsPostBack)
+                {
+                    if (Session[MagasysSessionBLL.DefaultSessionsId.Usuario.ToString()] != null)
+                    {
+                        TextInfo loText = new CultureInfo("es-AR", false).TextInfo;
+                        var loUsuario = (Usuario)Session[MagasysSessionBLL.DefaultSessionsId.Usuario.ToString()];
+                        lblUsuarioLogout.Text = loText.ToTitleCase(loUsuario.Apellido + " " + loUsuario.Nombre).ToString();
+                        Response.ClearHeaders();
+                        Response.AddHeader("Cache-Control", "no-cache, no-store, max-age=0, must-revalidate");
+                        Response.AddHeader("Pragma", "no-cache");
+                    }
+                    else
+                    {
+                        Response.Redirect("Login.aspx", true);
+                    }
+                }*/
                 MenuPrincipal();
             }
             catch (Exception ex)
@@ -18,6 +37,14 @@ namespace PL.AdminDashboard
                 Logger loLogger = LogManager.GetCurrentClassLogger();
                 loLogger.Error(ex);
             }
+        }
+
+        protected void Page_Init(object sender, EventArgs e)
+        {
+            /*if (Session[MagasysSessionBLL.DefaultSessionsId.Usuario.ToString()] == null)
+            {
+                Response.Redirect("Login.aspx", true);
+            }*/
         }
 
         #endregion

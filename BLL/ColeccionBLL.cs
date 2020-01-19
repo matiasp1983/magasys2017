@@ -223,7 +223,7 @@ namespace BLL
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
 
             return bRes;
