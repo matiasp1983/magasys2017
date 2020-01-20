@@ -327,21 +327,23 @@
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
-            <PropertyRef Name="idUsuario" />
+            <PropertyRef Name="ID_USUARIO" />
           </Key>
-          <Property Name="idUsuario" Type="int" Nullable="false" />
-          <Property Name="NombreUsuario" Type="varchar" MaxLength="50" />
-          <Property Name="Nombre" Type="varchar" MaxLength="50" />
-          <Property Name="Apellido" Type="varchar" MaxLength="50" />
-          <Property Name="Contrasenia" Type="varchar" MaxLength="100" />
-          <Property Name="IdUsuarioTipo" Type="int" Nullable="false" />
+          <Property Name="ID_USUARIO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE_USUARIO" Type="varchar" MaxLength="50" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="50" />
+          <Property Name="APELLIDO" Type="varchar" MaxLength="50" />
+          <Property Name="CONTRASENIA" Type="varchar" MaxLength="100" />
+          <Property Name="AVATAR" Type="image" />
+          <Property Name="FECHA_BAJA" Type="datetime" />
+          <Property Name="ID_USUARIO_TIPO" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="UsuarioTipo">
           <Key>
-            <PropertyRef Name="idUsuarioTipo" />
+            <PropertyRef Name="ID_USUARIO_TIPO" />
           </Key>
-          <Property Name="idUsuarioTipo" Type="int" Nullable="false" />
-          <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+          <Property Name="ID_USUARIO_TIPO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Venta">
           <Key>
@@ -920,13 +922,13 @@
         </Association>
         <Association Name="FK_Usuario_UsuarioTipo">
           <End Role="UsuarioTipo" Type="Self.UsuarioTipo" Multiplicity="1" />
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="UsuarioTipo">
-              <PropertyRef Name="idUsuarioTipo" />
+              <PropertyRef Name="ID_USUARIO_TIPO" />
             </Principal>
             <Dependent Role="Usuario">
-              <PropertyRef Name="IdUsuarioTipo" />
+              <PropertyRef Name="ID_USUARIO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1242,8 +1244,6 @@
           <EntitySet Name="TipoDocumento" EntityType="MAGASYSModel.TipoDocumento" />
           <EntitySet Name="TipoProducto" EntityType="MAGASYSModel.TipoProducto" />
           <EntitySet Name="TipoReserva" EntityType="MAGASYSModel.TipoReserva" />
-          <EntitySet Name="Usuario" EntityType="MAGASYSModel.Usuario" />
-          <EntitySet Name="UsuarioTipo" EntityType="MAGASYSModel.UsuarioTipo" />
           <EntitySet Name="Venta" EntityType="MAGASYSModel.Venta" />
           <AssociationSet Name="FK_Cliente_TipoDocumento1" Association="MAGASYSModel.FK_Cliente_TipoDocumento1">
             <End Role="TipoDocumento" EntitySet="TipoDocumento" />
@@ -1445,11 +1445,13 @@
             <End Role="Reserva" EntitySet="Reserva" />
             <End Role="ReservaEdicion" EntitySet="ReservaEdicion" />
           </AssociationSet>
+          <EntitySet Name="Usuario" EntityType="MAGASYSModel.Usuario" />
+          <EntitySet Name="UsuarioTipo" EntityType="MAGASYSModel.UsuarioTipo" />
           <AssociationSet Name="FK_Usuario_UsuarioTipo" Association="MAGASYSModel.FK_Usuario_UsuarioTipo">
             <End Role="UsuarioTipo" EntitySet="UsuarioTipo" />
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="Anio">
           <Key>
             <PropertyRef Name="DESCRIPCION" />
@@ -1864,26 +1866,6 @@
           <Property Name="ID_TIPO_RESERVA" Type="Int32" Nullable="false" />
           <Property Name="DESCRIPCION" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Reserva" Relationship="MAGASYSModel.FK_Reserva_TipoReserva" FromRole="TipoReserva" ToRole="Reserva" />
-        </EntityType>
-        <EntityType Name="Usuario">
-          <Key>
-            <PropertyRef Name="idUsuario" />
-          </Key>
-          <Property Name="idUsuario" Type="Int32" Nullable="false" />
-          <Property Name="NombreUsuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Apellido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Contrasenia" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="IdUsuarioTipo" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="UsuarioTipo" Relationship="MAGASYSModel.FK_Usuario_UsuarioTipo" FromRole="Usuario" ToRole="UsuarioTipo" />
-        </EntityType>
-        <EntityType Name="UsuarioTipo">
-          <Key>
-            <PropertyRef Name="idUsuarioTipo" />
-          </Key>
-          <Property Name="idUsuarioTipo" Type="Int32" Nullable="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Usuario" Relationship="MAGASYSModel.FK_Usuario_UsuarioTipo" FromRole="UsuarioTipo" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Venta">
           <Key>
@@ -2501,15 +2483,37 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="ID_USUARIO" />
+          </Key>
+          <Property Name="ID_USUARIO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE_USUARIO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NOMBRE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="APELLIDO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CONTRASENIA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AVATAR" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="FECHA_BAJA" Type="DateTime" Precision="3" />
+          <Property Name="ID_USUARIO_TIPO" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="UsuarioTipo" Relationship="MAGASYSModel.FK_Usuario_UsuarioTipo" FromRole="Usuario" ToRole="UsuarioTipo" />
+        </EntityType>
+        <EntityType Name="UsuarioTipo">
+          <Key>
+            <PropertyRef Name="ID_USUARIO_TIPO" />
+          </Key>
+          <Property Name="ID_USUARIO_TIPO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Usuario" Relationship="MAGASYSModel.FK_Usuario_UsuarioTipo" FromRole="UsuarioTipo" ToRole="Usuario" />
+        </EntityType>
         <Association Name="FK_Usuario_UsuarioTipo">
           <End Type="MAGASYSModel.UsuarioTipo" Role="UsuarioTipo" Multiplicity="1" />
-          <End Type="MAGASYSModel.Usuario" Role="Usuario" Multiplicity="*" />
+          <End Type="MAGASYSModel.Usuario" Role="Usuario" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="UsuarioTipo">
-              <PropertyRef Name="idUsuarioTipo" />
+              <PropertyRef Name="ID_USUARIO_TIPO" />
             </Principal>
             <Dependent Role="Usuario">
-              <PropertyRef Name="IdUsuarioTipo" />
+              <PropertyRef Name="ID_USUARIO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2870,26 +2874,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Usuario">
-            <EntityTypeMapping TypeName="MAGASYSModel.Usuario">
-              <MappingFragment StoreEntitySet="Usuario">
-                <ScalarProperty Name="IdUsuarioTipo" ColumnName="IdUsuarioTipo" />
-                <ScalarProperty Name="Contrasenia" ColumnName="Contrasenia" />
-                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
-                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
-                <ScalarProperty Name="NombreUsuario" ColumnName="NombreUsuario" />
-                <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UsuarioTipo">
-            <EntityTypeMapping TypeName="MAGASYSModel.UsuarioTipo">
-              <MappingFragment StoreEntitySet="UsuarioTipo">
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
-                <ScalarProperty Name="idUsuarioTipo" ColumnName="idUsuarioTipo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Venta">
             <EntityTypeMapping TypeName="MAGASYSModel.Venta">
               <MappingFragment StoreEntitySet="Venta">
@@ -2899,6 +2883,28 @@
                 <ScalarProperty Name="COD_ESTADO" ColumnName="COD_ESTADO" />
                 <ScalarProperty Name="FECHA" ColumnName="FECHA" />
                 <ScalarProperty Name="ID_VENTA" ColumnName="ID_VENTA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="MAGASYSModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="ID_USUARIO_TIPO" ColumnName="ID_USUARIO_TIPO" />
+                <ScalarProperty Name="FECHA_BAJA" ColumnName="FECHA_BAJA" />
+                <ScalarProperty Name="AVATAR" ColumnName="AVATAR" />
+                <ScalarProperty Name="CONTRASENIA" ColumnName="CONTRASENIA" />
+                <ScalarProperty Name="APELLIDO" ColumnName="APELLIDO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="NOMBRE_USUARIO" ColumnName="NOMBRE_USUARIO" />
+                <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UsuarioTipo">
+            <EntityTypeMapping TypeName="MAGASYSModel.UsuarioTipo">
+              <MappingFragment StoreEntitySet="UsuarioTipo">
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="ID_USUARIO_TIPO" ColumnName="ID_USUARIO_TIPO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -18,24 +18,13 @@ using System;
 public partial class UsuarioTipo
 {
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public UsuarioTipo()
-    {
+    public int ID_USUARIO_TIPO { get; set; }
 
-        this.Usuario = new HashSet<Usuario>();
-
-    }
-
-
-    public int idUsuarioTipo { get; set; }
-
-    public string Descripcion { get; set; }
+    public string DESCRIPCION { get; set; }
 
 
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<Usuario> Usuario { get; set; }
+    public virtual Usuario Usuario { get; set; }
 
 }
 

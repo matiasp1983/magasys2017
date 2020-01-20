@@ -196,6 +196,7 @@
     <Compile Include="Filters\VentaFiltro.cs" />
     <Compile Include="FormaPagoBLL.cs" />
     <Compile Include="GeneroBLL.cs" />
+    <Compile Include="LoginBLL.cs" />
     <Compile Include="ProductoDevolucionBLL.cs" />
     <Compile Include="ProductoIngresoBLL.cs" />
     <Compile Include="LibroBLL.cs" />

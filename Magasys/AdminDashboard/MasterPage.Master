@@ -27,10 +27,10 @@
                                 <img alt="imageProfile" class="img-circle" src="img/groot.jpg" />
                             </span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                <span class="clear"><span class="block m-t-xs"><strong class="font-bold">I am Groot</strong>
+                                <span class="clear"><span class="block m-t-xs"><strong class="font-bold">Bienvenido</strong>
                                 </span><span class="text-muted text-xs block"><asp:Label ID="lblUsuarioLogout" runat="server" Text="Usuario" Font-Bold="True" Font-Names="Calibri"></asp:Label> <b class="caret"></b></span></span></a>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
-                                <li><a href="#">Cerrar sesión</a></li>
+                                <li><a href="Logout.aspx">Cerrar sesión</a></li>
                             </ul>
                         </div>
                         <div class="logo-element">
@@ -104,7 +104,7 @@
                     </div>
                     <ul class="nav navbar-top-links navbar-right">
                         <li>
-                            <a href="#">
+                            <a href="Logout.aspx">
                                 <i class="fa fa-sign-out"></i>Cerrar sesión
                             </a>
                         </li>

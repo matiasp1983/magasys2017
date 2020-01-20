@@ -14,13 +14,13 @@ namespace PL.AdminDashboard
         {
             try
             {
-                /*if (!IsPostBack)
+                if (!IsPostBack)
                 {
                     if (Session[MagasysSessionBLL.DefaultSessionsId.Usuario.ToString()] != null)
                     {
                         TextInfo loText = new CultureInfo("es-AR", false).TextInfo;
                         var loUsuario = (Usuario)Session[MagasysSessionBLL.DefaultSessionsId.Usuario.ToString()];
-                        lblUsuarioLogout.Text = loText.ToTitleCase(loUsuario.Apellido + " " + loUsuario.Nombre).ToString();
+                        lblUsuarioLogout.Text = loText.ToUpper(loUsuario.APELLIDO + " " + loUsuario.NOMBRE).ToString();
                         Response.ClearHeaders();
                         Response.AddHeader("Cache-Control", "no-cache, no-store, max-age=0, must-revalidate");
                         Response.AddHeader("Pragma", "no-cache");
@@ -29,7 +29,7 @@ namespace PL.AdminDashboard
                     {
                         Response.Redirect("Login.aspx", true);
                     }
-                }*/
+                }
                 MenuPrincipal();
             }
             catch (Exception ex)
@@ -41,10 +41,10 @@ namespace PL.AdminDashboard
 
         protected void Page_Init(object sender, EventArgs e)
         {
-            /*if (Session[MagasysSessionBLL.DefaultSessionsId.Usuario.ToString()] == null)
+            if (Session[MagasysSessionBLL.DefaultSessionsId.Usuario.ToString()] == null)
             {
                 Response.Redirect("Login.aspx", true);
-            }*/
+            }
         }
 
         #endregion

@@ -168,6 +168,7 @@
     <Content Include="AdminDashboard\VentaListado.aspx" />
     <Content Include="AdminDashboard\VisualizarDeudas.aspx" />
     <Content Include="CustomersWebSite\Index.aspx" />
+    <Content Include="AdminDashboard\Logout.aspx" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -593,6 +594,13 @@
     </Compile>
     <Compile Include="CustomersWebSite\MasterPage.Master.designer.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\Logout.aspx.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\Logout.aspx.designer.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

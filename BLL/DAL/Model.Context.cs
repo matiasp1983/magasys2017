@@ -94,11 +94,11 @@ public partial class MAGASYSEntities : DbContext
 
     public virtual DbSet<TipoReserva> TipoReserva { get; set; }
 
+    public virtual DbSet<Venta> Venta { get; set; }
+
     public virtual DbSet<Usuario> Usuario { get; set; }
 
     public virtual DbSet<UsuarioTipo> UsuarioTipo { get; set; }
-
-    public virtual DbSet<Venta> Venta { get; set; }
 
 }
 

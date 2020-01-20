@@ -18,17 +18,21 @@ using System;
 public partial class Usuario
 {
 
-    public int idUsuario { get; set; }
+    public int ID_USUARIO { get; set; }
 
-    public string NombreUsuario { get; set; }
+    public string NOMBRE_USUARIO { get; set; }
 
-    public string Nombre { get; set; }
+    public string NOMBRE { get; set; }
 
-    public string Apellido { get; set; }
+    public string APELLIDO { get; set; }
 
-    public string Contrasenia { get; set; }
+    public string CONTRASENIA { get; set; }
 
-    public int IdUsuarioTipo { get; set; }
+    public byte[] AVATAR { get; set; }
+
+    public Nullable<System.DateTime> FECHA_BAJA { get; set; }
+
+    public int ID_USUARIO_TIPO { get; set; }
 
 
 

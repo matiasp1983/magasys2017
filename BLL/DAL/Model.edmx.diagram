@@ -36,8 +36,6 @@
         <EntityTypeShape EntityType="MAGASYSModel.TipoDocumento" Width="1.5" PointX="6" PointY="8.5" />
         <EntityTypeShape EntityType="MAGASYSModel.TipoProducto" Width="1.5" PointX="6" PointY="17.125" />
         <EntityTypeShape EntityType="MAGASYSModel.TipoReserva" Width="1.5" PointX="8.25" PointY="36" />
-        <EntityTypeShape EntityType="MAGASYSModel.Usuario" Width="1.5" PointX="3" PointY="1" />
-        <EntityTypeShape EntityType="MAGASYSModel.UsuarioTipo" Width="1.5" PointX="0.75" PointY="1.375" />
         <EntityTypeShape EntityType="MAGASYSModel.Venta" Width="1.5" PointX="6" PointY="23.875" />
         <AssociationConnector Association="MAGASYSModel.FK_Cliente_TipoDocumento1" />
         <AssociationConnector Association="MAGASYSModel.FK_Cobro_Cliente" />
@@ -89,8 +87,10 @@
         <AssociationConnector Association="MAGASYSModel.FK_Proveedor_Provincia" />
         <AssociationConnector Association="MAGASYSModel.FK_Reserva_TipoReserva" />
         <AssociationConnector Association="MAGASYSModel.FK_ReservaEdicion_Reserva" />
+        <EntityTypeShape EntityType="MAGASYSModel.Usuario" Width="1.5" PointX="3" PointY="1" />
+        <EntityTypeShape EntityType="MAGASYSModel.UsuarioTipo" Width="1.5" PointX="0.75" PointY="1.5" />
         <AssociationConnector Association="MAGASYSModel.FK_Usuario_UsuarioTipo" />
-      </Diagram>
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

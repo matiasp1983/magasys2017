@@ -11,12 +11,12 @@ namespace PL.AdminDashboard
 {
     public partial class Genero : System.Web.UI.Page
     {
+        #region Eventos
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
-
-        #region Eventos
 
         protected void BtnGuardar_Click(object sender, EventArgs e)
         {
@@ -73,9 +73,9 @@ namespace PL.AdminDashboard
             {
                 ID_GENERO = 0,
                 NOMBRE = txtNombre.Text
-                
+
             };
-            
+
             return oGenero;
         }
 
@@ -84,7 +84,7 @@ namespace PL.AdminDashboard
             FormGenero.Controls.OfType<TextBox>().ToList().ForEach(x => x.Text = String.Empty);
         }
 
-            #endregion
+        #endregion
 
-        }
+    }
 }

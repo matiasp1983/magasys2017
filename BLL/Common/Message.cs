@@ -136,5 +136,12 @@
         public const string MsjeCobroAnularFailure = "El cobro no se pudo anular.";
 
         #endregion
+
+        #region Login
+
+        public const string MsjeLoginUsuarioYOContraseniaVacios = "Usuario y/o Contraseña no pueden estar vacíos.";
+        public const string MsjeLoginUsuarioIncorrecto = "Usuario y/o Contraseña incorrecto.";
+
+        #endregion
     }
 }

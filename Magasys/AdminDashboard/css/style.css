@@ -4714,11 +4714,11 @@ body.mini-navbar.fixed-sidebar .logo-element {
   padding: 100px 20px 20px 20px;
 }
 .logo-name {
-  color: #e6e6e6;
-  font-size: 180px;
-  font-weight: 800;
-  letter-spacing: -10px;
-  margin-bottom: 0;
+    color: #2f4050;
+    font-size: 50px !important;
+    font-weight: 800;
+    letter-spacing: 5px;
+    margin-bottom: 0;
 }
 .middle-box h1 {
   font-size: 170px;
