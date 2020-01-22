@@ -13,16 +13,16 @@
     <link href="font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href="css/animate.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" />
-    <link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet"/>
+    <link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet" />
 </head>
 
 <body class="gray-bg">
     <div class="middle-box text-center loginscreen animated fadeInDown">
         <div>
             <div>
-                <h1 class="logo-name">MAGASYS</h1>
+                <h1 class="logo-name">M+</h1>
             </div>
-            <p>Inicie Sesi&oacute;n</p>
+            <h3>Inicie Sesi&oacute;n</h3>
             <form id="form1" runat="server">
                 <div class="form-group">
                     <asp:TextBox ID="txtUsuario" runat="server" class="form-control" placeholder="Usuario"></asp:TextBox>
@@ -30,16 +30,12 @@
                 <div class="form-group">
                     <asp:TextBox ID="txtContrasenia" runat="server" class="form-control" placeholder="Contraseña" TextMode="Password"></asp:TextBox>
                 </div>
-
                 <asp:Button ID="btnLogin" runat="server" Text="Login" CssClass="btn btn-primary block full-width m-b" OnClick="btnLogin_Click" />
-
-                <p class="text-muted text-center"><small>¿No tiene una cuenta?</small></p>
-                <a class="btn btn-sm btn-white btn-block" href="register.html">Crea una cuenta</a>
             </form>
             <p class="m-t"><small>©2020 All Rights Reserved. Magasys</small> </p>
         </div>
     </div>
-    
+
     <script src="js/jquery-3.1.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
 </body>

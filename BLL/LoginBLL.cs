@@ -14,6 +14,7 @@ namespace BLL
             {
                 var loResultado = false;
                 Usuario loUsuario;
+
                 using (var rep = new Repository<Usuario>())
                 {
                     loUsuario = rep.Find(p => p.NOMBRE_USUARIO.ToUpper() == oUsuario.NOMBRE_USUARIO.ToUpper() && p.FECHA_BAJA.HasValue == false);
@@ -30,6 +31,7 @@ namespace BLL
                 }
                 else
                     return null;
+
             }
             catch (Exception ex)
             {

@@ -28,7 +28,9 @@
                             </span>
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear"><span class="block m-t-xs"><strong class="font-bold">Bienvenido</strong>
-                                </span><span class="text-muted text-xs block"><asp:Label ID="lblUsuarioLogout" runat="server" Text="Usuario" Font-Bold="True" Font-Names="Calibri"></asp:Label> <b class="caret"></b></span></span></a>
+                                </span><span class="text-muted text-xs block">
+                                    <asp:Label ID="lblUsuarioLogout" runat="server" Text="Usuario" Font-Bold="True" Font-Names="Calibri"></asp:Label>
+                                    <b class="caret"></b></span></span></a>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
                                 <li><a href="Logout.aspx">Cerrar sesión</a></li>
                             </ul>
@@ -38,13 +40,13 @@
                         </div>
                     </li>
                     <li id="liPrincipal" runat="server">
-                        <a href="Index.aspx"><i class="fa fa-home"></i><span class="nav-label">Principal</span> <span class="fa arrow"></span></a>                        
-                    </li>                    
+                        <a href="Index.aspx"><i class="fa fa-home"></i><span class="nav-label">Principal</span> <span class="fa arrow"></span></a>
+                    </li>
                     <li id="liProveedores" runat="server">
                         <a href="#"><i class="fa fa-briefcase"></i><span class="nav-label">Proveedores</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
                             <li id="liAltaProveedor" runat="server"><a href="Proveedor.aspx">Nuevo Proveedor</a></li>
-                            <li id="liProveedorListado" runat="server"><a href="ProveedorListado.aspx">Listado de Proveedores</a></li>                            
+                            <li id="liProveedorListado" runat="server"><a href="ProveedorListado.aspx">Listado de Proveedores</a></li>
                         </ul>
                     </li>
                     <li id="liProductos" runat="server">
@@ -60,34 +62,41 @@
                         <a href="#"><i class="fa fa-child"></i><span class="nav-label">Clientes</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
                             <li id="liAltaCliente" runat="server"><a href="Cliente.aspx">Nuevo Cliente</a></li>
-                            <li id="liClienteListado" runat="server"><a href="ClienteListado.aspx">Listado de Clientes</a></li>                            
+                            <li id="liClienteListado" runat="server"><a href="ClienteListado.aspx">Listado de Clientes</a></li>
                             <li id="liVisualizarDeudas" runat="server"><a href="VisualizarDeudas.aspx">Buscar Deudas</a></li>
                             <li id="liRegistrarCobro" runat="server"><a href="Cobro.aspx">Registrar Cobro</a></li>
-                            <li id="liCobroListado" runat="server"><a href="CobroListado.aspx">Listado de Cobros</a></li>                            
+                            <li id="liCobroListado" runat="server"><a href="CobroListado.aspx">Listado de Cobros</a></li>
                         </ul>
                     </li>
                     <li id="liVenta" runat="server">
                         <a href="#"><i class="fa fa-gift"></i><span class="nav-label">Venta</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
-                            <li id="liRegistrarVenta" runat="server"><a href="Venta.aspx">Registrar Venta</a></li>    
+                            <li id="liRegistrarVenta" runat="server"><a href="Venta.aspx">Registrar Venta</a></li>
                             <li id="liVentaListado" runat="server"><a href="VentaListado.aspx">Listado de Ventas</a></li>
                         </ul>
                     </li>
                     <li id="liDeposito" runat="server">
                         <a href="#"><i class="fa fa-archive"></i><span class="nav-label">Depósito</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
-                            <li id="liProductoIngreso" runat="server"><a href="ProductoIngreso.aspx">Ingreso de Producto</a></li>    
+                            <li id="liProductoIngreso" runat="server"><a href="ProductoIngreso.aspx">Ingreso de Producto</a></li>
                             <li id="liProductoIngresoListado" runat="server"><a href="ProductoIngresoListado.aspx">Listado Ingreso de Producto</a></li>
-                            <li id="liProductoDevolucion" runat="server"><a href="ProductoDevolucion.aspx">Registrar Devoluciones</a></li>    
+                            <li id="liProductoDevolucion" runat="server"><a href="ProductoDevolucion.aspx">Registrar Devoluciones</a></li>
                             <li id="liProductoDevolucionListado" runat="server"><a href="ProductoDevolucionListado.aspx">Listado de Devoluciones</a></li>
                         </ul>
                     </li>
                     <li id="liReserva" runat="server">
                         <a href="#"><i class="fa fa-list-alt"></i><span class="nav-label">Reserva</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
-                            <li id="liRegistrarReserva" runat="server"><a href="Reserva.aspx">Registrar Reserva</a></li>    
+                            <li id="liRegistrarReserva" runat="server"><a href="Reserva.aspx">Registrar Reserva</a></li>
                             <li id="liReservaFinalizar" runat="server"><a href="ReservaFinalizar.aspx">Finalizar Reserva</a></li>
                             <li id="liReservaListado" runat="server"><a href="ReservaListado.aspx">Listado de Reservas</a></li>
+                        </ul>
+                    </li>
+                    <li id="liUsuarios" runat="server" visible="false">
+                        <a href="#"><i class="fa fa-briefcase"></i><span class="nav-label">Usuarios</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li id="liAltaUsuario" runat="server"><a href="Usuario.aspx">Nuevo Usuario</a></li>
+                            <li id="liUsuarioListado" runat="server"><a href="UsuarioListado.aspx">Listado de Usuarios</a></li>
                         </ul>
                     </li>
                 </ul>

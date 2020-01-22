@@ -29,8 +29,15 @@
             CobroVisualizarIdVenta,
             IdCobro,
             Imagen
-        } 
+        }        
 
         #endregion
+    }
+
+    public static class TipoUsuario
+    {
+        public const int Administrador = 1;
+        public const int Empleado = 2;
+        public const int Cliente = 3;
     }
 }

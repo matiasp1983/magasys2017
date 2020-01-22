@@ -18,15 +18,13 @@ namespace BLL.Common
             {
                 HttpContext.Current.Session[DefaultSessionsId.Usuario.ToString()] = value;
             }
-        }
+        }      
 
         public sealed class DefaultSessionsId
         {
             private readonly string NombreSesion;
 
-            public static readonly DefaultSessionsId Usuario = new DefaultSessionsId("MagasysUsuario");
-            public static readonly DefaultSessionsId UsuarioNombre = new DefaultSessionsId("MagasysUsuarioNombre");
-            public static readonly DefaultSessionsId UsuarioApellido = new DefaultSessionsId("MagasysUsuarioApellido");
+            public static readonly DefaultSessionsId Usuario = new DefaultSessionsId("MagasysUsuario");            
 
             public DefaultSessionsId(string pNombreSesion)
             {
@@ -37,7 +35,6 @@ namespace BLL.Common
             {
                 return this.NombreSesion;
             }
-
         }
 
         #endregion

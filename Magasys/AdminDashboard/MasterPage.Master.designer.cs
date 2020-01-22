@@ -274,6 +274,33 @@ namespace PL.AdminDashboard {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liReservaListado;
         
         /// <summary>
+        /// Control liUsuarios.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liUsuarios;
+        
+        /// <summary>
+        /// Control liAltaUsuario.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liAltaUsuario;
+        
+        /// <summary>
+        /// Control liUsuarioListado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liUsuarioListado;
+        
+        /// <summary>
         /// Control contentMaster.
         /// </summary>
         /// <remarks>
