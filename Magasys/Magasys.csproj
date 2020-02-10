@@ -164,6 +164,7 @@
     <Content Include="AdminDashboard\ReservaFinalizar.aspx" />
     <Content Include="AdminDashboard\ReservaListado.aspx" />
     <Content Include="AdminDashboard\ReservaVisualizar.aspx" />
+    <Content Include="AdminDashboard\UsuarioListado.aspx" />
     <Content Include="AdminDashboard\Venta.aspx" />
     <Content Include="AdminDashboard\VentaListado.aspx" />
     <Content Include="AdminDashboard\VisualizarDeudas.aspx" />
@@ -233,6 +234,7 @@
     <Content Include="AdminDashboard\ProveedorListado.aspx" />
     <Content Include="AdminDashboard\ProveedorVisualizar.aspx" />
     <Content Include="favicon.ico" />
+    <Content Include="AdminDashboard\Usuario.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -560,6 +562,13 @@
     <Compile Include="AdminDashboard\ReservaVisualizar.aspx.designer.cs">
       <DependentUpon>ReservaVisualizar.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AdminDashboard\UsuarioListado.aspx.cs">
+      <DependentUpon>UsuarioListado.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\UsuarioListado.aspx.designer.cs">
+      <DependentUpon>UsuarioListado.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AdminDashboard\Venta.aspx.cs">
       <DependentUpon>Venta.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -603,6 +612,13 @@
       <DependentUpon>Logout.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="AdminDashboard\Usuario.aspx.cs">
+      <DependentUpon>Usuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\Usuario.aspx.designer.cs">
+      <DependentUpon>Usuario.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AdminDashboard\logs\" />

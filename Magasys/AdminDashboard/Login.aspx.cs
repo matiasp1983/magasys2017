@@ -1,6 +1,5 @@
 ﻿using BLL;
 using BLL.Common;
-using BLL.DAL;
 using NLog;
 using System;
 using System.Web.UI;
@@ -55,7 +54,7 @@ namespace PL.AdminDashboard
         {
             bool loResultado = false;
 
-            Usuario oUsuario = new Usuario
+            BLL.DAL.Usuario oUsuario = new BLL.DAL.Usuario
             {
                 NOMBRE_USUARIO = txtUsuario.Text,
                 CONTRASENIA = txtContrasenia.Text

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Globalization;
 using BLL.Common;
-using BLL.DAL;
 using NLog;
 
 namespace PL.AdminDashboard
@@ -14,14 +13,14 @@ namespace PL.AdminDashboard
         {
             try
             {
-                Usuario loUsuario = null;
+                BLL.DAL.Usuario loUsuario = null;
 
                 if (!IsPostBack)
                 {
                     if (Session[MagasysSessionBLL.DefaultSessionsId.Usuario.ToString()] != null)
                     {
                         TextInfo loText = new CultureInfo("es-AR", false).TextInfo;
-                        loUsuario = (Usuario)Session[MagasysSessionBLL.DefaultSessionsId.Usuario.ToString()];
+                        loUsuario = (BLL.DAL.Usuario)Session[MagasysSessionBLL.DefaultSessionsId.Usuario.ToString()];
                         lblUsuarioLogout.Text = loText.ToUpper(loUsuario.APELLIDO + " " + loUsuario.NOMBRE).ToString();
                         Response.ClearHeaders();
                         Response.AddHeader("Cache-Control", "no-cache, no-store, max-age=0, must-revalidate");
@@ -54,7 +53,7 @@ namespace PL.AdminDashboard
 
         #region Métodos Privados
 
-        private void MenuPrincipal(Usuario pUsuario)
+        private void MenuPrincipal(BLL.DAL.Usuario pUsuario)
         {
             String loActivePage = Request.RawUrl;
             if (loActivePage.Contains("Index.aspx"))
@@ -172,6 +171,12 @@ namespace PL.AdminDashboard
                     {
                         liUsuarios.Attributes["class"] = "active";
                         liAltaUsuario.Attributes["class"] = "active";
+                    }
+
+                    if (loActivePage.Contains("UsuarioListado.aspx"))
+                    {
+                        liUsuarios.Attributes["class"] = "active";
+                        liUsuarioListado.Attributes["class"] = "active";
                     }
                 }
             }
