@@ -23,5 +23,20 @@ namespace PL
         {
 
         }
+
+        protected void BtnSubirImagen_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void BtnLimpiarImagen_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void ddlTipoUsuario_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

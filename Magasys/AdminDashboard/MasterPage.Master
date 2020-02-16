@@ -22,15 +22,14 @@
             <div class="sidebar-collapse">
                 <ul class="nav metismenu" id="side-menu">
                     <li class="nav-header">
-                        <div class="dropdown profile-element">
+                        <div class="dropdown profile-element" style="text-align:center; cursor: default">
                             <span>
-                                <img alt="imageProfile" class="img-circle" src="img/groot.jpg" />
-                            </span>
-                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                                <span class="clear"><span class="block m-t-xs"><strong class="font-bold">Bienvenido</strong>
+                                <img id="imgPerfil" runat="server" alt="imageProfile" style="width:125px; height:125px" class="img-circle" src="img/perfil_default.png" />
+                            </span>                            
+                                <span class="clear"><span class="block m-t-sm"><strong class="font-bold" style="font-size:15px; color:#DFE4ED">Bienvenido</strong>
                                 </span><span class="text-muted text-xs block">
-                                    <asp:Label ID="lblUsuarioLogout" runat="server" Text="Usuario" Font-Bold="True" Font-Names="Calibri"></asp:Label>
-                                    <b class="caret"></b></span></span></a>
+                                    <asp:Label ID="lblUsuarioLogout" runat="server" Text="Usuario" Font-Bold="True" Font-Names="inherit" Font-Size="Medium"></asp:Label>
+                                   </span></span>
                             <ul class="dropdown-menu animated fadeInRight m-t-xs">
                                 <li><a href="Logout.aspx">Cerrar sesión</a></li>
                             </ul>
@@ -123,7 +122,7 @@
             <asp:ContentPlaceHolder ID="contentMaster" runat="server" />
             <div class="footer">
                 <div class="text-center">
-                    <strong>Copyright</strong> Magasys &copy; 2018
+                    <strong>Copyright</strong> Magasys &copy; 2020
                
                 </div>
             </div>
