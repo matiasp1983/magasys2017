@@ -150,6 +150,71 @@ namespace BLL
             return oProductoEdicion;
         }
 
+        public List<ProdEdicionCustomersWebSite> ObtenerEdiciones(long codigo_tipo_producto, long codigo_producto)
+        {
+            List<ProdEdicionCustomersWebSite> lstProdEdicionColeccion = null;
+            List<ProductoEdicion> lstProductoEdicion = null;
+
+            try
+            {
+                using (var loRepProductoEdicion = new Repository<ProductoEdicion>())
+                {
+                    // conultar si se debe controlar Sock:p.CANTIDAD_DISPONIBLE > 0, me parece que no!!
+                    lstProductoEdicion = loRepProductoEdicion.Search(p => p.COD_ESTADO == 1 && p.COD_TIPO_PRODUCTO == codigo_tipo_producto && p.COD_PRODUCTO == codigo_producto);
+
+                    ProdEdicionCustomersWebSite oProdEdicionColeccionCustomersWebSite;
+                    lstProdEdicionColeccion = new List<ProdEdicionCustomersWebSite>();
+
+                    foreach (var loProductoEdicion in lstProductoEdicion)
+                    {
+                        oProdEdicionColeccionCustomersWebSite = new ProdEdicionCustomersWebSite
+                        {
+                            COD_PRODUCTO_EDICION = loProductoEdicion.ID_PRODUCTO_EDICION,
+                            PRECIO = string.Format(System.Globalization.CultureInfo.GetCultureInfo("de-DE"), "{0:0.00}", loProductoEdicion.PRECIO),
+                            EDICION = loProductoEdicion.EDICION
+                        };
+
+                        if (loProductoEdicion.DESCRIPCION != null)
+                            oProdEdicionColeccionCustomersWebSite.DESCRIPCION = loProductoEdicion.DESCRIPCION;
+
+                        oProdEdicionColeccionCustomersWebSite.IMAGEN = new System.Web.UI.WebControls.Image();
+
+                        if (loProductoEdicion.Imagen != null)
+                        {
+                            // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
+                            string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(loProductoEdicion.Imagen.IMAGEN1);
+                            oProdEdicionColeccionCustomersWebSite.IMAGEN.ImageUrl = loImagenDataURL64;
+                        }
+
+                        // COntrolar que en la Fecha_Edicion no sea Null y dar formato a la fecha
+                        oProdEdicionColeccionCustomersWebSite.FECHA_EDICION = loProductoEdicion.FECHA_EDICION?.ToString("dd/MM/yyyy") ?? string.Empty;
+
+                        lstProdEdicionColeccion.Add(oProdEdicionColeccionCustomersWebSite);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return lstProdEdicionColeccion;
+        }
+
         #endregion
     }
+
+    #region Clases
+
+    public class ProdEdicionCustomersWebSite
+    {
+        public System.Web.UI.WebControls.Image IMAGEN { get; set; }
+        public int COD_PRODUCTO_EDICION { get; set; }
+        public string DESCRIPCION { get; set; }
+        public string EDICION { get; set; }
+        public string PRECIO { get; set; }
+        public string FECHA_EDICION { get; set; }
+    }
+
+    #endregion
 }

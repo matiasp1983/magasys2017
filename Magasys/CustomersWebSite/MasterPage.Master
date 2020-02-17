@@ -1,20 +1,92 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage.master.cs" Inherits="PL.CustomersWebSite.MasterPage" %>
 
 <!DOCTYPE html>
-
 <html>
-<head runat="server">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title></title>
-    <asp:ContentPlaceHolder ID="head" runat="server">
-    </asp:ContentPlaceHolder>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAGASYS</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/plugins/datapicker/datepicker3.css" rel="stylesheet">
+    <link href="css/plugins/footable/footable.core.css" rel="stylesheet">
+    <link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="css/plugins/select2/select2.min.css" rel="stylesheet">
+    <asp:ContentPlaceHolder ID="head" runat="server" />
 </head>
-<body>
-    <form id="form1" runat="server">
-        <div>
-            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-            </asp:ContentPlaceHolder>
+
+<body class="top-navigation">
+
+    <div id="wrapper">
+        <div id="page-wrapper" class="gray-bg">
+            <div class="row border-bottom white-bg">
+                <nav class="navbar navbar-static-top" role="navigation">
+                    <div class="navbar-header">
+                        <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+                            <i class="fa fa-reorder"></i>
+                        </button>
+                        <a href="#" class="navbar-brand">Magasys</a>
+                    </div>
+                    <div class="navbar-collapse collapse" id="navbar">
+                        <ul class="nav navbar-nav">
+                            <li class="active">
+                                <a aria-expanded="false" role="button" href="layouts.html">Mi Reserva</a>
+                            </li>
+                            <li class="dropdown">
+                                <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown">Reserva <span class="caret"></span></a>
+                                <ul role="menu" class="dropdown-menu">
+                                    <li><a href="">Nueva reserva</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown">Cuenta Corriente <span class="caret"></span></a>
+                                <ul role="menu" class="dropdown-menu">
+                                    <li><a href="">Ver por fecha</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-top-links navbar-right">
+                            <li>
+                                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                                    <i class="fa fa-list-alt"></i>  <span class="label label-warning">16</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="login.html">
+                                    <i class="fa fa-sign-out"></i>Log out
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>            
+            <asp:ContentPlaceHolder ID="contentMaster" runat="server" />
+            <div class="footer">
+                <div>
+                    <strong>Copyright</strong> Magasys Company &copy; 2019           
+                </div>
+            </div>
         </div>
-    </form>
+    </div>
+
+    <!-- Mainly scripts -->
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- Custom and plugin javascript -->
+    <script src="js/inspinia.js"></script>
+    <script src="js/plugins/pace/pace.min.js"></script>
+    <!-- FooTable -->
+    <script src="js/plugins/footable/footable.all.min.js"></script>
+    <!-- Jquery Validate -->
+    <script src="js/plugins/validate/jquery.validate.js"></script>
+    <!-- Select2 -->
+    <script src="js/plugins/select2/select2.full.min.js"></script>
+
+    <asp:ContentPlaceHolder ID="script" runat="server" />
 </body>
+
 </html>

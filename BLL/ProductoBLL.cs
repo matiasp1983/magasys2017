@@ -168,6 +168,104 @@ namespace BLL
             return lstProductoListado;
         }
 
+        public List<ProductoCustomersWebSite> ObtenerProductosSeleccionados(ProductoFiltro oProductoFiltro)
+        {
+            List<ProductoCustomersWebSite> lstProductoCustomersWebSite = null;
+            List<Producto> lstProducto = null;
+
+            try
+            {
+                using (var loRepProducto = new Repository<Producto>())
+                {
+                    lstProducto = loRepProducto.Search(p => p.COD_ESTADO == 1 && p.COD_TIPO_PRODUCTO == oProductoFiltro.CodTipoProducto);
+
+                    if (oProductoFiltro.CodGenero > 0 && lstProducto.Count > 0)
+                        lstProducto = lstProducto.FindAll(p => p.COD_GENERO == oProductoFiltro.CodGenero);
+
+                    if (!String.IsNullOrEmpty(oProductoFiltro.NombreProducto) && lstProducto.Count > 0)
+                        lstProducto = lstProducto.FindAll(p => p.NOMBRE.ToUpper().Contains(oProductoFiltro.NombreProducto.ToUpper()));
+
+                    if (!String.IsNullOrEmpty(oProductoFiltro.DescripcionProducto) && lstProducto.Count > 0)
+                        lstProducto = lstProducto.FindAll(p => (!string.IsNullOrEmpty(p.DESCRIPCION) && p.DESCRIPCION.ToUpper().Contains(oProductoFiltro.DescripcionProducto.ToUpper())));
+
+                    ProductoCustomersWebSite oProductoCustomersWebSite;
+                    lstProductoCustomersWebSite = new List<ProductoCustomersWebSite>();
+
+                    foreach (var loProduto in lstProducto)
+                    {
+                        oProductoCustomersWebSite = new ProductoCustomersWebSite
+                        {
+                            COD_PRODUCTO = loProduto.ID_PRODUCTO,
+                            NOMBRE_PRODUCTO = loProduto.NOMBRE.ToUpper(),
+                            COD_TIPO_PRODUCTO = loProduto.COD_TIPO_PRODUCTO,
+                            TIPO_PRODUCTO = loProduto.TipoProducto.DESCRIPCION
+                        };
+
+                        oProductoCustomersWebSite.IMAGEN = new System.Web.UI.WebControls.Image();
+
+                        if (loProduto.Imagen != null)
+                        {
+                            // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
+                            string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(loProduto.Imagen.IMAGEN1);
+                            oProductoCustomersWebSite.IMAGEN.ImageUrl = loImagenDataURL64;
+                        }
+
+                        if (!String.IsNullOrEmpty(loProduto.DESCRIPCION))
+                            oProductoCustomersWebSite.DESCRIPCION = loProduto.DESCRIPCION;
+
+                        // Obener los precios por tipo de producto
+                        switch (loProduto.COD_TIPO_PRODUCTO)
+                        {
+                            case 1:
+                                var oProductoDiario = new DiarioBLL().ObtenerDiario(loProduto.ID_PRODUCTO);
+                                if (oProductoDiario.PRECIO != null)
+                                    oProductoCustomersWebSite.PRECIO = string.Format(System.Globalization.CultureInfo.GetCultureInfo("de-DE"), "{0:0.00}", oProductoDiario.PRECIO);
+                                break;
+
+                            case 4:
+                                var oProductoLibro = new LibroBLL().ObtenerLibro(loProduto.ID_PRODUCTO);
+                                if (!String.IsNullOrEmpty(oProductoLibro.EDITORIAL))
+                                    oProductoCustomersWebSite.EDITORIAL = "Editorial: " + oProductoLibro.EDITORIAL;
+                                if (!String.IsNullOrEmpty(oProductoLibro.AUTOR))
+                                    oProductoCustomersWebSite.AUTOR = "Autor: " + oProductoLibro.AUTOR;
+                                if (oProductoLibro.ANIO > 0)
+                                    oProductoCustomersWebSite.ANIO = "Año: " + oProductoLibro.ANIO.ToString();
+                                oProductoCustomersWebSite.PRECIO = string.Format(System.Globalization.CultureInfo.GetCultureInfo("de-DE"), "{0:0.00}", oProductoLibro.PRECIO);
+                                break;
+
+                            case 5:
+                                var oProductoSuplemento = new SuplementoBLL().ObtenerSuplemento(loProduto.ID_PRODUCTO);
+                                oProductoCustomersWebSite.NOMBRE_DIARIO = "Diario: " + oProductoSuplemento.NOMBRE_DIARIO;
+
+                                break;
+
+                            case 6:
+                                var oProductoPelicula = new PeliculaBLL().ObtenerPelicula(loProduto.ID_PRODUCTO);
+                                if (oProductoPelicula.ANIO > 0)
+                                    oProductoCustomersWebSite.ANIO = "Año: " + oProductoPelicula.ANIO.ToString();
+                                oProductoCustomersWebSite.PRECIO = string.Format(System.Globalization.CultureInfo.GetCultureInfo("de-DE"), "{0:0.00}", oProductoPelicula.PRECIO);
+
+                                break;
+
+                            default:
+                                break;
+                        }
+
+                        if (oProductoCustomersWebSite.PRECIO == null)
+                            oProductoCustomersWebSite.PRECIO = "0,00";
+
+                        lstProductoCustomersWebSite.Add(oProductoCustomersWebSite);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return lstProductoCustomersWebSite;
+        }
+
         #endregion
     }
 
@@ -187,6 +285,23 @@ namespace BLL
         public int COD_TIPO_PRODUCTO { get; set; }
         public string DESC_TIPO_PRODUCTO { get; set; }
         public byte IMAGEN { get; set; }
+    }
+
+    public class ProductoCustomersWebSite
+    {
+        public System.Web.UI.WebControls.Image IMAGEN { get; set; }
+        public int COD_PRODUCTO { get; set; }
+        public string NOMBRE_PRODUCTO { get; set; }
+        public string DESCRIPCION { get; set; }
+        public int COD_TIPO_PRODUCTO { get; set; }
+        public string TIPO_PRODUCTO { get; set; }
+        public string EDICION { get; set; }
+        public int CANTIDAD_DISPONIBLE { get; set; }
+        public string PRECIO { get; set; }
+        public string EDITORIAL { get; set; }
+        public string AUTOR { get; set; }
+        public string ANIO { get; set; }
+        public string NOMBRE_DIARIO { get; set; }
     }
 
     #endregion

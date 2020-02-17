@@ -255,7 +255,7 @@
     </form>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="script" runat="server">
-    <script src="https://maps.googleapis.com/maps/api/js?key=CLAVE_AQUI&libraries=places&callback=initMap" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB59e_fh71w0-GgkFuO_cD5ILETaLOkX3w&libraries=places&callback=initMap" async defer></script>
     
     <script type="text/javascript">
 

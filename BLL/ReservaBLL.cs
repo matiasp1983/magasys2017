@@ -229,6 +229,92 @@ namespace BLL
             return lstReservaListado;
         }
 
+        public List<ReservaListado> ObtenerReservasPorCliente(ReservaFiltro oReservaFiltro)
+        {
+            List<ReservaListado> lstReservaListado = null;
+            List<Reserva> lstReserva = null;
+
+            try
+            {
+                using (var loRepReserva = new Repository<Reserva>())
+                {
+                    lstReserva = loRepReserva.Search(p => p.COD_ESTADO == oReservaFiltro.COD_ESTADO && p.COD_CLIENTE == oReservaFiltro.COD_CLIENTE).OrderByDescending(p => p.ID_RESERVA).ToList();
+
+                    if (lstReserva.Count > 0)
+                    {
+                        if (lstReserva.Count > 0 && oReservaFiltro.COD_TIPO_RESERVA != 0)
+                            lstReserva = lstReserva.FindAll(p => p.COD_TIPO_RESERVA == oReservaFiltro.COD_TIPO_RESERVA);
+
+                        if (lstReserva.Count > 0 && !String.IsNullOrEmpty(oReservaFiltro.NOMBRE_PRODUCTO))
+                            lstReserva = lstReserva.FindAll(p => p.Producto.NOMBRE.ToUpper().Contains(oReservaFiltro.NOMBRE_PRODUCTO.ToUpper()));
+
+                        if (oReservaFiltro.FECHAINICIORESERVADESDE != null)
+                            lstReserva = lstReserva.FindAll(p => p.FECHA_INICIO == oReservaFiltro.FECHAINICIORESERVADESDE);
+
+                        if (oReservaFiltro.FECHAFINRESERVADESDE != null)
+                            lstReserva = lstReserva.FindAll(p => p.FECHA_FIN == oReservaFiltro.FECHAFINRESERVADESDE);
+
+                        if (lstReserva.Count > 0 && oReservaFiltro.COD_FORMA_ENTREGA == "Retira en Local")
+                            lstReserva = lstReserva.FindAll(p => p.ENVIO_DOMICILIO == null);
+                        else if (lstReserva.Count > 0 && oReservaFiltro.COD_FORMA_ENTREGA == "Envío a Domicilio")
+                            lstReserva = lstReserva.FindAll(p => p.ENVIO_DOMICILIO != null);
+                    }
+
+                    ReservaListado oReservaListado;
+                    lstReservaListado = new List<ReservaListado>();
+
+                    foreach (var loReserva in lstReserva)
+                    {
+                        oReservaListado = new ReservaListado
+                        {
+                            ID_RESERVA = loReserva.ID_RESERVA,
+                            FECHA = loReserva.FECHA,
+                            TIPO_RESERVA = loReserva.TipoReserva.DESCRIPCION,
+                            NOMBRE_PRODUCTO = loReserva.Producto.NOMBRE
+                        };
+
+                        if (loReserva.FECHA_INICIO != null)
+                            oReservaListado.FECHA_INICIO = Convert.ToDateTime(loReserva.FECHA_INICIO);
+
+                        if (loReserva.FECHA_FIN != null)
+                            oReservaListado.FECHA_FIN = Convert.ToDateTime(loReserva.FECHA_FIN);
+
+                        if (loReserva.ENVIO_DOMICILIO == null)
+                            oReservaListado.FORMA_ENTREGA = "Retira en Local";
+                        else
+                            oReservaListado.FORMA_ENTREGA = "Envío a Domicilio";
+
+                        lstReservaListado.Add(oReservaListado);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return lstReservaListado;
+        }
+
+        public int ObtenerCantidadReservasConfirmadasMensuales(long codCliente)
+        {
+            int lCantidadReservas = 0;
+
+            try
+            {
+                using (var loRepReserva = new Repository<Reserva>())
+                {
+                    lCantidadReservas = loRepReserva.Search(p => p.COD_ESTADO == 7 && p.COD_CLIENTE == codCliente && ((p.COD_TIPO_RESERVA == 1 && p.FECHA.Year == DateTime.Now.Year && p.FECHA.Month == DateTime.Now.Month) || (p.COD_TIPO_RESERVA == 2 && p.FECHA_FIN != null && p.FECHA_FIN.Value >= DateTime.Now) || (p.COD_TIPO_RESERVA == 2 && p.FECHA_FIN != null && p.FECHA_FIN.Value.Year == DateTime.Now.Year && p.FECHA_FIN.Value.Month == DateTime.Now.Month) || (p.COD_TIPO_RESERVA == 2 && p.FECHA_FIN == null))).Count;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return lCantidadReservas;
+        }
+
         #endregion
     }
 
@@ -237,11 +323,15 @@ namespace BLL
     public class ReservaListado
     {
         public int ID_RESERVA { get; set; }
+        public System.DateTime FECHA { get; set; }
         public String NOMBRE_CLIENTE { get; set; }
         public string NOMBRE_PRODUCTO { get; set; }
         public int? COD_CLIENTE { get; set; }
         public string TIPO_RESERVA { get; set; }
         public string FORMA_ENTREGA { get; set; }
+        public System.DateTime? FECHA_INICIO { get; set; }
+        public System.DateTime? FECHA_FIN { get; set; }
+        public string ESTADO { get; set; }
     }
 
     public class ReservaClienteListado
@@ -249,6 +339,18 @@ namespace BLL
         public int ID_RESERVA { get; set; }
         public string CLIENTE { get; set; }
         public string PRODUCTO { get; set; }
+    }
+
+    public class ReservaCustomerWebSite
+    {
+        public string COD_PRODUCTO { get; set; }
+        public string COD_PRODUCTO_EDICION { get; set; }
+        public string NOMBRE { get; set; }
+        public string DESCRIPCION { get; set; }
+        public string FECHA_EDICION { get; set; }
+        public string PRECIO { get; set; }
+        public int CANTIDAD { get; set; }
+        public string SUBTOTAL { get; set; }
     }
 
     #endregion

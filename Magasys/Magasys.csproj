@@ -170,8 +170,65 @@
     <Content Include="AdminDashboard\Venta.aspx" />
     <Content Include="AdminDashboard\VentaListado.aspx" />
     <Content Include="AdminDashboard\VisualizarDeudas.aspx" />
+    <Content Include="CustomersWebSite\css\animate.css" />
+    <Content Include="CustomersWebSite\css\bootstrap.css" />
+    <Content Include="CustomersWebSite\css\bootstrap.min.css" />
+    <Content Include="CustomersWebSite\css\patterns\1.png" />
+    <Content Include="CustomersWebSite\css\patterns\2.png" />
+    <Content Include="CustomersWebSite\css\patterns\3.png" />
+    <Content Include="CustomersWebSite\css\patterns\4.png" />
+    <Content Include="CustomersWebSite\css\patterns\5.png" />
+    <Content Include="CustomersWebSite\css\patterns\6.png" />
+    <Content Include="CustomersWebSite\css\patterns\7.png" />
+    <Content Include="CustomersWebSite\css\patterns\congruent_pentagon.png" />
+    <Content Include="CustomersWebSite\css\patterns\header-profile-skin-1.png" />
+    <Content Include="CustomersWebSite\css\patterns\header-profile-skin-2.png" />
+    <Content Include="CustomersWebSite\css\patterns\header-profile-skin-3.png" />
+    <Content Include="CustomersWebSite\css\patterns\header-profile.png" />
+    <Content Include="CustomersWebSite\css\patterns\otis_redding.png" />
+    <Content Include="CustomersWebSite\css\patterns\shattered.png" />
+    <Content Include="CustomersWebSite\css\patterns\triangular.png" />
+    <Content Include="CustomersWebSite\css\plugins\awesome-bootstrap-checkbox\awesome-bootstrap-checkbox.css" />
+    <Content Include="CustomersWebSite\css\plugins\datapicker\datepicker3.css" />
+    <Content Include="CustomersWebSite\css\plugins\footable\fonts\footable.svg" />
+    <Content Include="CustomersWebSite\css\plugins\footable\footable.core.css" />
+    <Content Include="CustomersWebSite\css\plugins\iCheck\custom.css" />
+    <Content Include="CustomersWebSite\css\plugins\iCheck\green%402x.png" />
+    <Content Include="CustomersWebSite\css\plugins\iCheck\green.png" />
+    <Content Include="CustomersWebSite\css\plugins\select2\select2.min.css" />
+    <Content Include="CustomersWebSite\css\plugins\sweetalert\sweetalert.css" />
+    <Content Include="CustomersWebSite\css\plugins\switchery\switchery.css" />
+    <Content Include="CustomersWebSite\css\plugins\touchspin\jquery.bootstrap-touchspin.min.css" />
+    <Content Include="CustomersWebSite\css\style.css" />
+    <Content Include="CustomersWebSite\css\style.googlemap.css" />
+    <Content Include="CustomersWebSite\font-awesome\css\font-awesome.css" />
+    <Content Include="CustomersWebSite\font-awesome\css\font-awesome.min.css" />
+    <Content Include="CustomersWebSite\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="CustomersWebSite\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="CustomersWebSite\fonts\opensans.css" />
+    <Content Include="CustomersWebSite\fonts\roboto.css" />
     <Content Include="CustomersWebSite\Index.aspx" />
     <Content Include="AdminDashboard\Logout.aspx" />
+    <Content Include="CustomersWebSite\js\bootstrap.min.js" />
+    <Content Include="CustomersWebSite\js\inspinia.js" />
+    <Content Include="CustomersWebSite\js\jquery-3.1.1.min.js" />
+    <Content Include="CustomersWebSite\js\plugins\datapicker\bootstrap-datepicker.es.js" />
+    <Content Include="CustomersWebSite\js\plugins\datapicker\bootstrap-datepicker.js" />
+    <Content Include="CustomersWebSite\js\plugins\footable\footable.all.min.js" />
+    <Content Include="CustomersWebSite\js\plugins\iCheck\icheck.min.js" />
+    <Content Include="CustomersWebSite\js\plugins\jasny\jasny-bootstrap.min.js" />
+    <Content Include="CustomersWebSite\js\plugins\metisMenu\jquery.metisMenu.js" />
+    <Content Include="CustomersWebSite\js\plugins\pace\pace.min.js" />
+    <Content Include="CustomersWebSite\js\plugins\select2\select2.full.min.js" />
+    <Content Include="CustomersWebSite\js\plugins\slimscroll\jquery.slimscroll.min.js" />
+    <Content Include="CustomersWebSite\js\plugins\sweetalert\sweetalert.min.js" />
+    <Content Include="CustomersWebSite\js\plugins\switchery\switchery.js" />
+    <Content Include="CustomersWebSite\js\plugins\touchspin\jquery.bootstrap-touchspin.min.js" />
+    <Content Include="CustomersWebSite\js\plugins\validate\jquery.validate.js" />
+    <Content Include="CustomersWebSite\RegistrarReserva.aspx" />
+    <Content Include="CustomersWebSite\Reserva.aspx" />
+    <Content Include="CustomersWebSite\ReservaColeccion.aspx" />
+    <Content Include="CustomersWebSite\ReservaRevista.aspx" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -180,6 +237,52 @@
     <Content Include="AdminDashboard\fonts\mem5YaGs126MiZpBA-UNirkOUuhp.woff2" />
     <Content Include="AdminDashboard\fonts\mem5YaGs126MiZpBA-UN_r8OUuhp.woff2" />
     <Content Include="AdminDashboard\fonts\mem8YaGs126MiZpBA-UFVZ0b.woff2" />
+    <Content Include="CustomersWebSite\css\bootstrap.css.map" />
+    <Content Include="CustomersWebSite\css\bootstrap.min.css.map" />
+    <Content Include="CustomersWebSite\css\plugins\footable\fonts\footable.eot" />
+    <Content Include="CustomersWebSite\css\plugins\footable\fonts\footable.ttf" />
+    <Content Include="CustomersWebSite\css\plugins\footable\fonts\footable.woff" />
+    <Content Include="CustomersWebSite\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="CustomersWebSite\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="CustomersWebSite\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="CustomersWebSite\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="CustomersWebSite\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="CustomersWebSite\font-awesome\less\animated.less" />
+    <Content Include="CustomersWebSite\font-awesome\less\bordered-pulled.less" />
+    <Content Include="CustomersWebSite\font-awesome\less\core.less" />
+    <Content Include="CustomersWebSite\font-awesome\less\fixed-width.less" />
+    <Content Include="CustomersWebSite\font-awesome\less\font-awesome.less" />
+    <Content Include="CustomersWebSite\font-awesome\less\icons.less" />
+    <Content Include="CustomersWebSite\font-awesome\less\larger.less" />
+    <Content Include="CustomersWebSite\font-awesome\less\list.less" />
+    <Content Include="CustomersWebSite\font-awesome\less\mixins.less" />
+    <Content Include="CustomersWebSite\font-awesome\less\path.less" />
+    <Content Include="CustomersWebSite\font-awesome\less\rotated-flipped.less" />
+    <Content Include="CustomersWebSite\font-awesome\less\screen-reader.less" />
+    <Content Include="CustomersWebSite\font-awesome\less\stacked.less" />
+    <Content Include="CustomersWebSite\font-awesome\less\variables.less" />
+    <Content Include="CustomersWebSite\font-awesome\scss\font-awesome.scss" />
+    <Content Include="CustomersWebSite\font-awesome\scss\_animated.scss" />
+    <Content Include="CustomersWebSite\font-awesome\scss\_bordered-pulled.scss" />
+    <Content Include="CustomersWebSite\font-awesome\scss\_core.scss" />
+    <Content Include="CustomersWebSite\font-awesome\scss\_fixed-width.scss" />
+    <Content Include="CustomersWebSite\font-awesome\scss\_icons.scss" />
+    <Content Include="CustomersWebSite\font-awesome\scss\_larger.scss" />
+    <Content Include="CustomersWebSite\font-awesome\scss\_list.scss" />
+    <Content Include="CustomersWebSite\font-awesome\scss\_mixins.scss" />
+    <Content Include="CustomersWebSite\font-awesome\scss\_path.scss" />
+    <Content Include="CustomersWebSite\font-awesome\scss\_rotated-flipped.scss" />
+    <Content Include="CustomersWebSite\font-awesome\scss\_screen-reader.scss" />
+    <Content Include="CustomersWebSite\font-awesome\scss\_stacked.scss" />
+    <Content Include="CustomersWebSite\font-awesome\scss\_variables.scss" />
+    <Content Include="CustomersWebSite\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="CustomersWebSite\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="CustomersWebSite\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="CustomersWebSite\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="CustomersWebSite\fonts\mem5YaGs126MiZpBA-UN7rgOUuhp.woff2" />
+    <Content Include="CustomersWebSite\fonts\mem5YaGs126MiZpBA-UNirkOUuhp.woff2" />
+    <Content Include="CustomersWebSite\fonts\mem5YaGs126MiZpBA-UN_r8OUuhp.woff2" />
+    <Content Include="CustomersWebSite\fonts\mem8YaGs126MiZpBA-UFVZ0b.woff2" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -613,6 +716,34 @@
     <Compile Include="AdminDashboard\Logout.aspx.designer.cs">
       <DependentUpon>Logout.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CustomersWebSite\RegistrarReserva.aspx.cs">
+      <DependentUpon>RegistrarReserva.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomersWebSite\RegistrarReserva.aspx.designer.cs">
+      <DependentUpon>RegistrarReserva.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomersWebSite\Reserva.aspx.cs">
+      <DependentUpon>Reserva.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomersWebSite\Reserva.aspx.designer.cs">
+      <DependentUpon>Reserva.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomersWebSite\ReservaColeccion.aspx.cs">
+      <DependentUpon>ReservaColeccion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomersWebSite\ReservaColeccion.aspx.designer.cs">
+      <DependentUpon>ReservaColeccion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomersWebSite\ReservaRevista.aspx.cs">
+      <DependentUpon>ReservaRevista.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomersWebSite\ReservaRevista.aspx.designer.cs">
+      <DependentUpon>ReservaRevista.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AdminDashboard\Usuario.aspx.cs">
       <DependentUpon>Usuario.aspx</DependentUpon>
@@ -642,7 +773,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>1676</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

@@ -208,6 +208,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ProveedorBLL.cs" />
     <Compile Include="ProvinciaBLL.cs" />
+    <Compile Include="Redimencion.cs" />
     <Compile Include="ReservaBLL.cs" />
     <Compile Include="RevistaBLL.cs" />
     <Compile Include="RolBLL.cs" />

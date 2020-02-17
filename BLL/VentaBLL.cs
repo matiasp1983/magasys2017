@@ -226,6 +226,25 @@ namespace BLL
             return lstVentaListado;
         }
 
+        public double ObtenerTotalAPagar(long codCliente)
+        {
+            double lTotal = 0;
+
+            try
+            {
+                using (var loRepVenta = new Repository<Venta>())
+                {
+                    loRepVenta.Search(p => p.COD_ESTADO == 4 && p.COD_CLIENTE == codCliente).ForEach(x => lTotal = lTotal + x.TOTAL);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return lTotal;
+        }
+
         #endregion
     }
 

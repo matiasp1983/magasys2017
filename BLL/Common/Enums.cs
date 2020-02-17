@@ -29,7 +29,10 @@
             CobroVisualizarIdVenta,
             IdCobro,
             Imagen,
-            ImagenUsuario
+            ImagenUsuario,
+            ProductoReserva,
+            ListadoReserva,
+            ListadoReservaEdicion
         }        
 
         #endregion

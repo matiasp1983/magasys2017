@@ -14,6 +14,7 @@ namespace BLL.Filters
         public string NOMBRE_PRODUCTO { get; set; }
         public int COD_ESTADO { get; set; }
         public String COD_FORMA_ENTREGA { get; set; }
+        public int COD_CLIENTE { get; set; }
         public int TIPO_DOCUMENTO { get; set; }
         public int NRO_DOCUMENTO { get; set; }
         public string APELLIDO { get; set; }
