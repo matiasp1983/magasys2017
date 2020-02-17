@@ -26,16 +26,7 @@
                     <div class="ibox-title">
                         <h2>Informaci&oacute;n General</h2>
                     </div>
-                    <div class="ibox-content">
-                        <div class="row">
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Nombre Usuario</label>
-
-                                <div class="col-sm-10">
-                                    <asp:TextBox ID="txtNombreUsuario" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off"></asp:TextBox>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="ibox-content">                        
                         <div class="row">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Nombre</label>
@@ -56,29 +47,38 @@
                         </div>
                         <div class="row">
                             <div class="form-group">
+                                <label class="col-sm-2 control-label">Nombre de Usuario</label>
+
+                                <div class="col-sm-10">
+                                    <asp:TextBox ID="txtNombreUsuario" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
                                 <label class="col-sm-2 control-label">Contrase&ntilde;a</label>
 
                                 <div class="col-sm-10">
-                                    <asp:TextBox ID="txtContrasenia" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off" TextMode="Password"></asp:TextBox>
+                                    <asp:TextBox ID="txtContrasenia" runat="server" CssClass="form-control" MaxLength="30" autocomplete="off" TextMode="Password"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Repetir Contrase&ntilde;a</label>
+                                <label class="col-sm-2 control-label">Confirmaci&oacute;n Contrase&ntilde;a</label>
 
                                 <div class="col-sm-10">
-                                    <asp:TextBox ID="txtContraseniaRepetir" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off" TextMode="Password"></asp:TextBox>
+                                    <asp:TextBox ID="txtContraseniaConfirmacion" runat="server" CssClass="form-control" MaxLength="30" autocomplete="off" TextMode="Password"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Tipo Usuario</label>
+                                <label class="col-sm-2 control-label">Rol de Usuario</label>
 
                                 <div class="col-sm-10">
-                                    <div id="divTipoUsuario">
-                                        <asp:DropDownList ID="ddlTipoUsuario" runat="server" CssClass="select2_tipo_usuario form-control" OnSelectedIndexChanged="ddlTipoUsuario_SelectedIndexChanged"></asp:DropDownList>
+                                    <div id="divRol">
+                                        <asp:DropDownList ID="ddlRol" runat="server" CssClass="select2_rol form-control" OnSelectedIndexChanged="ddlRol_SelectedIndexChanged"></asp:DropDownList>
                                     </div>
                                 </div>
                             </div>
@@ -147,13 +147,56 @@
         }
 
         function ValidarForm() {
-
+            $(FormUsuario).validate({
+                rules: {
+                    <%=txtNombreUsuario.UniqueID%>: {
+                        required: true
+                    },
+                    <%=txtNombre.UniqueID%>: {
+                        required: true
+                    },
+                    <%=txtApellido.UniqueID%>: {
+                        required: true
+                    },
+                    <%=txtContrasenia.UniqueID%>: {
+                        required: true
+                    },
+                    <%=txtContraseniaConfirmacion.UniqueID%>: {
+                        required: true,                        
+                        equalTo: "#<%=txtContrasenia.ClientID %>"                        
+                    },
+                    <%=ddlRol.UniqueID%>: {
+                        required: true
+                    }
+                },
+                messages: {
+                    <%=txtNombreUsuario.UniqueID%>: {
+                        required: "Este campo es requerido."
+                    },
+                    <%=txtNombre.UniqueID%>: {
+                        required: "Este campo es requerido."
+                    },
+                    <%=txtApellido.UniqueID%>: {
+                        required: "Este campo es requerido."
+                    },
+                    <%=txtContrasenia.UniqueID%>: {
+                        required: "Este campo es requerido."
+                    },
+                    <%=txtContraseniaConfirmacion.UniqueID%>: {
+                        required: "Este campo es requerido.",
+						equalTo: "Las contraseñas no coinciden. Vuelva a intentarlo."
+					},
+                    <%=ddlRol.UniqueID%>: {
+                        required: "Este campo es requerido."
+                    }
+                }
+            });
         }
 
         function Select2() {
-            $(".select2_tipo_usuario").select2(
+            $(".select2_rol").select2(
                 {
-                    placeholder: 'Seleccione un Tipo Usuario',
+                    placeholder: 'Seleccione un Rol',
                     width: '100%',
                     allowClear: true
                 });

@@ -163,7 +163,7 @@ namespace PL.AdminDashboard
 
             if (pUsuario != null)
             {
-                if (pUsuario.ID_USUARIO_TIPO.Equals(TipoUsuario.Administrador))
+                if (pUsuario.ID_ROL.Equals(RolUsuario.Administrador))
                 {
                     liUsuarios.Visible = true;
 

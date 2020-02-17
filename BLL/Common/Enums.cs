@@ -28,13 +28,14 @@
             IdClienteCobro,
             CobroVisualizarIdVenta,
             IdCobro,
-            Imagen
+            Imagen,
+            ImagenUsuario
         }        
 
         #endregion
     }
 
-    public static class TipoUsuario
+    public static class RolUsuario
     {
         public const int Administrador = 1;
         public const int Empleado = 2;

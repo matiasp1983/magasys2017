@@ -293,6 +293,13 @@
           <Property Name="ID_DIA_SEMANA" Type="int" />
           <Property Name="PRECIO" Type="float" Nullable="false" />
         </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="ID_ROL" />
+          </Key>
+          <Property Name="ID_ROL" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DESCRIPCION" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Suplemento">
           <Key>
             <PropertyRef Name="ID_SUPLEMENTO" />
@@ -336,14 +343,7 @@
           <Property Name="CONTRASENIA" Type="varchar" MaxLength="100" />
           <Property Name="AVATAR" Type="image" />
           <Property Name="FECHA_BAJA" Type="datetime" />
-          <Property Name="ID_USUARIO_TIPO" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="UsuarioTipo">
-          <Key>
-            <PropertyRef Name="ID_USUARIO_TIPO" />
-          </Key>
-          <Property Name="ID_USUARIO_TIPO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="DESCRIPCION" Type="nvarchar" MaxLength="50" />
+          <Property Name="ID_ROL" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Venta">
           <Key>
@@ -920,15 +920,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Usuario_UsuarioTipo">
-          <End Role="UsuarioTipo" Type="Self.UsuarioTipo" Multiplicity="1" />
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+        <Association Name="FK_Usuario_Rol">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="UsuarioTipo">
-              <PropertyRef Name="ID_USUARIO_TIPO" />
+            <Principal Role="Rol">
+              <PropertyRef Name="ID_ROL" />
             </Principal>
             <Dependent Role="Usuario">
-              <PropertyRef Name="ID_USUARIO" />
+              <PropertyRef Name="ID_ROL" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -996,12 +996,12 @@
           <EntitySet Name="Reserva" EntityType="Self.Reserva" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReservaEdicion" EntityType="Self.ReservaEdicion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Revista" EntityType="Self.Revista" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Suplemento" EntityType="Self.Suplemento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoDocumento" EntityType="Self.TipoDocumento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoProducto" EntityType="Self.TipoProducto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoReserva" EntityType="Self.TipoReserva" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UsuarioTipo" EntityType="Self.UsuarioTipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Venta" EntityType="Self.Venta" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Cliente_TipoDocumento1" Association="Self.FK_Cliente_TipoDocumento1">
             <End Role="TipoDocumento" EntitySet="TipoDocumento" />
@@ -1191,8 +1191,8 @@
             <End Role="Producto" EntitySet="Producto" />
             <End Role="Suplemento" EntitySet="Suplemento" />
           </AssociationSet>
-          <AssociationSet Name="FK_Usuario_UsuarioTipo" Association="Self.FK_Usuario_UsuarioTipo">
-            <End Role="UsuarioTipo" EntitySet="UsuarioTipo" />
+          <AssociationSet Name="FK_Usuario_Rol" Association="Self.FK_Usuario_Rol">
+            <End Role="Rol" EntitySet="Rol" />
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
           <AssociationSet Name="FK_Venta_Cliente" Association="Self.FK_Venta_Cliente">
@@ -1445,10 +1445,10 @@
             <End Role="Reserva" EntitySet="Reserva" />
             <End Role="ReservaEdicion" EntitySet="ReservaEdicion" />
           </AssociationSet>
+          <EntitySet Name="Rol" EntityType="MAGASYSModel.Rol" />
           <EntitySet Name="Usuario" EntityType="MAGASYSModel.Usuario" />
-          <EntitySet Name="UsuarioTipo" EntityType="MAGASYSModel.UsuarioTipo" />
-          <AssociationSet Name="FK_Usuario_UsuarioTipo" Association="MAGASYSModel.FK_Usuario_UsuarioTipo">
-            <End Role="UsuarioTipo" EntitySet="UsuarioTipo" />
+          <AssociationSet Name="FK_Usuario_Rol" Association="MAGASYSModel.FK_Usuario_Rol">
+            <End Role="Rol" EntitySet="Rol" />
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
           </EntityContainer>
@@ -2483,6 +2483,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="ID_ROL" />
+          </Key>
+          <Property Name="ID_ROL" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Usuario" Relationship="MAGASYSModel.FK_Usuario_Rol" FromRole="Rol" ToRole="Usuario" />
+        </EntityType>
         <EntityType Name="Usuario">
           <Key>
             <PropertyRef Name="ID_USUARIO" />
@@ -2494,26 +2502,18 @@
           <Property Name="CONTRASENIA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="AVATAR" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="FECHA_BAJA" Type="DateTime" Precision="3" />
-          <Property Name="ID_USUARIO_TIPO" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="UsuarioTipo" Relationship="MAGASYSModel.FK_Usuario_UsuarioTipo" FromRole="Usuario" ToRole="UsuarioTipo" />
+          <Property Name="ID_ROL" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Rol" Relationship="MAGASYSModel.FK_Usuario_Rol" FromRole="Usuario" ToRole="Rol" />
         </EntityType>
-        <EntityType Name="UsuarioTipo">
-          <Key>
-            <PropertyRef Name="ID_USUARIO_TIPO" />
-          </Key>
-          <Property Name="ID_USUARIO_TIPO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DESCRIPCION" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Usuario" Relationship="MAGASYSModel.FK_Usuario_UsuarioTipo" FromRole="UsuarioTipo" ToRole="Usuario" />
-        </EntityType>
-        <Association Name="FK_Usuario_UsuarioTipo">
-          <End Type="MAGASYSModel.UsuarioTipo" Role="UsuarioTipo" Multiplicity="1" />
-          <End Type="MAGASYSModel.Usuario" Role="Usuario" Multiplicity="0..1" />
+        <Association Name="FK_Usuario_Rol">
+          <End Type="MAGASYSModel.Rol" Role="Rol" Multiplicity="1" />
+          <End Type="MAGASYSModel.Usuario" Role="Usuario" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="UsuarioTipo">
-              <PropertyRef Name="ID_USUARIO_TIPO" />
+            <Principal Role="Rol">
+              <PropertyRef Name="ID_ROL" />
             </Principal>
             <Dependent Role="Usuario">
-              <PropertyRef Name="ID_USUARIO" />
+              <PropertyRef Name="ID_ROL" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2886,10 +2886,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Rol">
+            <EntityTypeMapping TypeName="MAGASYSModel.Rol">
+              <MappingFragment StoreEntitySet="Rol">
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="ID_ROL" ColumnName="ID_ROL" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Usuario">
             <EntityTypeMapping TypeName="MAGASYSModel.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
-                <ScalarProperty Name="ID_USUARIO_TIPO" ColumnName="ID_USUARIO_TIPO" />
+                <ScalarProperty Name="ID_ROL" ColumnName="ID_ROL" />
                 <ScalarProperty Name="FECHA_BAJA" ColumnName="FECHA_BAJA" />
                 <ScalarProperty Name="AVATAR" ColumnName="AVATAR" />
                 <ScalarProperty Name="CONTRASENIA" ColumnName="CONTRASENIA" />
@@ -2897,14 +2905,6 @@
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
                 <ScalarProperty Name="NOMBRE_USUARIO" ColumnName="NOMBRE_USUARIO" />
                 <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UsuarioTipo">
-            <EntityTypeMapping TypeName="MAGASYSModel.UsuarioTipo">
-              <MappingFragment StoreEntitySet="UsuarioTipo">
-                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
-                <ScalarProperty Name="ID_USUARIO_TIPO" ColumnName="ID_USUARIO_TIPO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -31,15 +31,6 @@ namespace PL {
         protected global::System.Web.UI.WebControls.Label lblBreadcrumbActive;
         
         /// <summary>
-        /// Control txtNombreUsuario.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNombreUsuario;
-        
-        /// <summary>
         /// Control txtNombre.
         /// </summary>
         /// <remarks>
@@ -58,6 +49,15 @@ namespace PL {
         protected global::System.Web.UI.WebControls.TextBox txtApellido;
         
         /// <summary>
+        /// Control txtNombreUsuario.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtNombreUsuario;
+        
+        /// <summary>
         /// Control txtContrasenia.
         /// </summary>
         /// <remarks>
@@ -67,22 +67,22 @@ namespace PL {
         protected global::System.Web.UI.WebControls.TextBox txtContrasenia;
         
         /// <summary>
-        /// Control txtContraseniaRepetir.
+        /// Control txtContraseniaConfirmacion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtContraseniaRepetir;
+        protected global::System.Web.UI.WebControls.TextBox txtContraseniaConfirmacion;
         
         /// <summary>
-        /// Control ddlTipoUsuario.
+        /// Control ddlRol.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTipoUsuario;
+        protected global::System.Web.UI.WebControls.DropDownList ddlRol;
         
         /// <summary>
         /// Control imgPreview.

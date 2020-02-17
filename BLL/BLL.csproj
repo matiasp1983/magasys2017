@@ -161,6 +161,9 @@
     <Compile Include="DAL\Revista.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\Rol.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\Suplemento.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -174,9 +177,6 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Usuario.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\UsuarioTipo.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Venta.cs">
@@ -210,6 +210,7 @@
     <Compile Include="ProvinciaBLL.cs" />
     <Compile Include="ReservaBLL.cs" />
     <Compile Include="RevistaBLL.cs" />
+    <Compile Include="RolBLL.cs" />
     <Compile Include="SuplementoBLL.cs" />
     <Compile Include="TipoDocumentoBLL.cs" />
     <Compile Include="TipoProductoBLL.cs" />

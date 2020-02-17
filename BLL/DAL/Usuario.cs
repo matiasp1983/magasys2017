@@ -32,11 +32,11 @@ public partial class Usuario
 
     public Nullable<System.DateTime> FECHA_BAJA { get; set; }
 
-    public int ID_USUARIO_TIPO { get; set; }
+    public int ID_ROL { get; set; }
 
 
 
-    public virtual UsuarioTipo UsuarioTipo { get; set; }
+    public virtual Rol Rol { get; set; }
 
 }
 

@@ -15,16 +15,27 @@ namespace BLL.DAL
 using System;
     using System.Collections.Generic;
     
-public partial class UsuarioTipo
+public partial class Rol
 {
 
-    public int ID_USUARIO_TIPO { get; set; }
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+    public Rol()
+    {
+
+        this.Usuario = new HashSet<Usuario>();
+
+    }
+
+
+    public int ID_ROL { get; set; }
 
     public string DESCRIPCION { get; set; }
 
 
 
-    public virtual Usuario Usuario { get; set; }
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<Usuario> Usuario { get; set; }
 
 }
 

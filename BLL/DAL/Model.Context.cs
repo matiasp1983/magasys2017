@@ -96,9 +96,9 @@ public partial class MAGASYSEntities : DbContext
 
     public virtual DbSet<Venta> Venta { get; set; }
 
-    public virtual DbSet<Usuario> Usuario { get; set; }
+    public virtual DbSet<Rol> Rol { get; set; }
 
-    public virtual DbSet<UsuarioTipo> UsuarioTipo { get; set; }
+    public virtual DbSet<Usuario> Usuario { get; set; }
 
 }
 

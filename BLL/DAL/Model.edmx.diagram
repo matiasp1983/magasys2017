@@ -87,9 +87,9 @@
         <AssociationConnector Association="MAGASYSModel.FK_Proveedor_Provincia" />
         <AssociationConnector Association="MAGASYSModel.FK_Reserva_TipoReserva" />
         <AssociationConnector Association="MAGASYSModel.FK_ReservaEdicion_Reserva" />
+        <EntityTypeShape EntityType="MAGASYSModel.Rol" Width="1.5" PointX="0.75" PointY="1.5" />
         <EntityTypeShape EntityType="MAGASYSModel.Usuario" Width="1.5" PointX="3" PointY="1" />
-        <EntityTypeShape EntityType="MAGASYSModel.UsuarioTipo" Width="1.5" PointX="0.75" PointY="1.5" />
-        <AssociationConnector Association="MAGASYSModel.FK_Usuario_UsuarioTipo" />
+        <AssociationConnector Association="MAGASYSModel.FK_Usuario_Rol" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
