@@ -342,6 +342,7 @@
           <Property Name="APELLIDO" Type="varchar" MaxLength="50" />
           <Property Name="CONTRASENIA" Type="varchar" MaxLength="100" />
           <Property Name="AVATAR" Type="image" />
+          <Property Name="FECHA_ALTA" Type="datetime" />
           <Property Name="FECHA_BAJA" Type="datetime" />
           <Property Name="ID_ROL" Type="int" Nullable="false" />
         </EntityType>
@@ -2504,6 +2505,7 @@
           <Property Name="FECHA_BAJA" Type="DateTime" Precision="3" />
           <Property Name="ID_ROL" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Rol" Relationship="MAGASYSModel.FK_Usuario_Rol" FromRole="Usuario" ToRole="Rol" />
+          <Property Name="FECHA_ALTA" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK_Usuario_Rol">
           <End Type="MAGASYSModel.Rol" Role="Rol" Multiplicity="1" />
@@ -2897,6 +2899,7 @@
           <EntitySetMapping Name="Usuario">
             <EntityTypeMapping TypeName="MAGASYSModel.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="FECHA_ALTA" ColumnName="FECHA_ALTA" />
                 <ScalarProperty Name="ID_ROL" ColumnName="ID_ROL" />
                 <ScalarProperty Name="FECHA_BAJA" ColumnName="FECHA_BAJA" />
                 <ScalarProperty Name="AVATAR" ColumnName="AVATAR" />

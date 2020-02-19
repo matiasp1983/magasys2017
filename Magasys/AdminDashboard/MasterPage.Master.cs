@@ -22,6 +22,13 @@ namespace PL.AdminDashboard
                         TextInfo loText = new CultureInfo("es-AR", false).TextInfo;
                         loUsuario = (BLL.DAL.Usuario)Session[MagasysSessionBLL.DefaultSessionsId.Usuario.ToString()];
                         lblUsuarioLogout.Text = loText.ToUpper(loUsuario.APELLIDO + " " + loUsuario.NOMBRE).ToString();
+
+                        if (loUsuario.AVATAR != null)
+                        {
+                            string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(loUsuario.AVATAR);
+                            imgPerfil.ImageUrl = loImagenDataURL64;
+                        }
+
                         Response.ClearHeaders();
                         Response.AddHeader("Cache-Control", "no-cache, no-store, max-age=0, must-revalidate");
                         Response.AddHeader("Pragma", "no-cache");

@@ -214,6 +214,7 @@
     <Compile Include="SuplementoBLL.cs" />
     <Compile Include="TipoDocumentoBLL.cs" />
     <Compile Include="TipoProductoBLL.cs" />
+    <Compile Include="UsuarioBLL.cs" />
     <Compile Include="VentaBLL.cs" />
   </ItemGroup>
   <ItemGroup>

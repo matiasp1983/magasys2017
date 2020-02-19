@@ -34,6 +34,8 @@ public partial class Usuario
 
     public int ID_ROL { get; set; }
 
+    public Nullable<System.DateTime> FECHA_ALTA { get; set; }
+
 
 
     public virtual Rol Rol { get; set; }

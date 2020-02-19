@@ -147,23 +147,30 @@
         }
 
         function ValidarForm() {
+
+            jQuery.validator.addMethod("lettersonly", function (value, element) { return this.optional(element) || /^[a-zñÑáéíóúÁÉÍÓÚ\s]+$/i.test(value); }, "Este campo solo permite letras.");
+
             $(FormUsuario).validate({
                 rules: {
                     <%=txtNombreUsuario.UniqueID%>: {
                         required: true
                     },
                     <%=txtNombre.UniqueID%>: {
-                        required: true
+                        required: true,
+                        lettersonly: true
                     },
                     <%=txtApellido.UniqueID%>: {
-                        required: true
+                        required: true,
+                        lettersonly: true
                     },
                     <%=txtContrasenia.UniqueID%>: {
-                        required: true
+                        required: true,
+                        minlength: 8
                     },
                     <%=txtContraseniaConfirmacion.UniqueID%>: {
                         required: true,                        
-                        equalTo: "#<%=txtContrasenia.ClientID %>"                        
+                        equalTo: "#<%=txtContrasenia.ClientID %>",
+                        minlength: 8
                     },
                     <%=ddlRol.UniqueID%>: {
                         required: true
@@ -180,11 +187,13 @@
                         required: "Este campo es requerido."
                     },
                     <%=txtContrasenia.UniqueID%>: {
-                        required: "Este campo es requerido."
+                        required: "Este campo es requerido.",
+                        minlength: "Usa 8 caracteres o más para tu contraseña."
                     },
                     <%=txtContraseniaConfirmacion.UniqueID%>: {
                         required: "Este campo es requerido.",
-						equalTo: "Las contraseñas no coinciden. Vuelva a intentarlo."
+                        equalTo: "Las contraseñas no coinciden. Vuelva a intentarlo.",
+                        minlength: "Usa 8 caracteres o más para tu contraseña."
 					},
                     <%=ddlRol.UniqueID%>: {
                         required: "Este campo es requerido."

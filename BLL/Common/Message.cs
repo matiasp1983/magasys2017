@@ -143,5 +143,13 @@
         public const string MsjeLoginUsuarioIncorrecto = "Usuario y/o Contraseña incorrecto.";
 
         #endregion
+
+        #region Usuario
+
+        public const string MsjeUsuarioSuccessAlta = "El usuario se guardó correctamente.";
+        public const string MsjeUsuarioSuccessModificacion = "El usuario se modificó correctamente.";
+        public const string MsjeUsuarioFailure = "El usuario no se pudo guardar.";        
+
+        #endregion
     }
 }
