@@ -69,9 +69,14 @@
                                                     <td  style="width: 150px">
                                                         <h4>
                                                             <dt>Subtotal</dt>
-                                                            <asp:Label ID="lblSubTotal" runat="server" Text='<%#Eval("SUBTOTAL").ToString()%>'></asp:Label>
+                                                            <div id="divSubTotal_<%#Eval("COD_PRODUCTO").ToString()%>">
+                                                                <asp:Label ID="lblSubTotal" runat="server" Text='<%#Eval("SUBTOTAL").ToString()%>'></asp:Label>
+                                                            </div>
                                                         </h4>                                                        
                                                     </td>
+                                                    <div id="divCodProducto">
+                                                        <asp:TextBox ID="hfCodProducto" runat="server" Value='<%#Eval("COD_PRODUCTO").ToString()%>'/>
+                                                    </div>
                                                 </tr>
                                             </tbody>                                          
                                         </table>
@@ -144,17 +149,24 @@
     <script src="js/plugins/iCheck/icheck.min.js"></script>
 
     <script type="text/javascript">
-        $('#divCantidad > input').TouchSpin({
-            verticalbuttons: true
-        }).on('touchspin.on.startspin', function (e) {
+    
+            $('#divCantidad > input').TouchSpin({
+                verticalbuttons: true
+            }).on('touchspin.on.startspin', function (e) {
 
-            var loCantidad = e.currentTarget.value;
-            var loPrecio = e.currentTarget.title.split(';')[1].replace('$', '').replace(',','.');
-            
+                var value = parseFloat("554,20".replace(",", "."));
+                var loCantidad = e.currentTarget.value;
+                var loPrecio = parseFloat(e.currentTarget.title.split(';')[1].replace('$', '').replace(',', '.'));
 
-            loPrecio = loPrecio * loCantidad; //Subtotal
-            e.currentTarget.title.split(';')[1] = '$ ' + loPrecio.replace('.', ',');
-        });
+                var loSubtotal = loPrecio * loCantidad; //Subtotal
+
+                //e.currentTarget.title = '$' + loSubtotal.toFixed(2).replace('.', ',');
+
+                $('#divSubTotal_' + $('#divCodProducto > input').val() + ' > span').html('$' + loSubtotal.toFixed(2).replace('.', ','));
+
+
+                //e.currentTarget.title.split(';')[1] = '$ ' + loPrecio.replace('.', ',');   $(').text('$ ' + loSubtotal.toFixed(2).replace('.', ','));
+            });
 
 
     </script>
