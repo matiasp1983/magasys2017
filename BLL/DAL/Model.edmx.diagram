@@ -90,6 +90,7 @@
         <EntityTypeShape EntityType="MAGASYSModel.Rol" Width="1.5" PointX="0.75" PointY="1.5" />
         <EntityTypeShape EntityType="MAGASYSModel.Usuario" Width="1.5" PointX="3" PointY="1" />
         <AssociationConnector Association="MAGASYSModel.FK_Usuario_Rol" />
+        <AssociationConnector Association="MAGASYSModel.FK_Usuario_Estado" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

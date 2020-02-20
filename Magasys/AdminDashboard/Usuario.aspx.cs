@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -110,7 +111,8 @@ namespace PL
                 APELLIDO = txtApellido.Text,
                 NOMBRE_USUARIO = txtNombreUsuario.Text,
                 CONTRASENIA = txtContraseniaConfirmacion.Text,
-                FECHA_ALTA = DateTime.Now
+                FECHA_ALTA = DateTime.Now,
+                COD_ESTADO = 1
             };
 
             if (!String.IsNullOrEmpty(ddlRol.SelectedValue))
@@ -128,7 +130,17 @@ namespace PL
             FormUsuario.Controls.OfType<DropDownList>().ToList().ForEach(y => y.SelectedIndex = 0);            
             Session.Remove(Enums.Session.ImagenUsuario.ToString());
             imgPreview.ImageUrl = "~/AdminDashboard/img/perfil_default.png";
-        }
+        }        
+
+        #endregion
+
+        #region Métodos Públicos
+
+        [WebMethod]
+        public static bool ValidarNombreUsuario(string pNombreUsuario)
+        {
+            return new BLL.UsuarioBLL().ConsultarExistenciaNombreUsuario(pNombreUsuario);
+        }       
 
         #endregion
     }

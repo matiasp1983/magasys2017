@@ -26,7 +26,7 @@
                     <div class="ibox-title">
                         <h2>Informaci&oacute;n General</h2>
                     </div>
-                    <div class="ibox-content">                        
+                    <div class="ibox-content">
                         <div class="row">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Nombre</label>
@@ -153,51 +153,68 @@
             $(FormUsuario).validate({
                 rules: {
                     <%=txtNombreUsuario.UniqueID%>: {
-                        required: true
-                    },
-                    <%=txtNombre.UniqueID%>: {
-                        required: true,
-                        lettersonly: true
-                    },
-                    <%=txtApellido.UniqueID%>: {
-                        required: true,
-                        lettersonly: true
-                    },
-                    <%=txtContrasenia.UniqueID%>: {
-                        required: true,
-                        minlength: 8
-                    },
-                    <%=txtContraseniaConfirmacion.UniqueID%>: {
-                        required: true,                        
-                        equalTo: "#<%=txtContrasenia.ClientID %>",
-                        minlength: 8
-                    },
-                    <%=ddlRol.UniqueID%>: {
-                        required: true
+                required: true,
+                remote: function () {
+                    return {
+                        type: "POST",
+                        url: "Usuario.aspx/ValidarNombreUsuario",
+                        data: JSON.stringify({ 'pNombreUsuario': $("#<%=txtNombreUsuario.ClientID%>").val() }),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        dataFilter: function (data) {
+                            var msg = JSON.parse(data);
+                            if (msg.hasOwnProperty('d'))
+                                return msg.d;
+                            else
+                                return msg;
+                            }
+                        }
                     }
                 },
-                messages: {
-                    <%=txtNombreUsuario.UniqueID%>: {
-                        required: "Este campo es requerido."
-                    },
                     <%=txtNombre.UniqueID%>: {
-                        required: "Este campo es requerido."
-                    },
+                    required: true,
+                    lettersonly: true
+                },
                     <%=txtApellido.UniqueID%>: {
-                        required: "Este campo es requerido."
-                    },
+                    required: true,
+                    lettersonly: true
+                },
                     <%=txtContrasenia.UniqueID%>: {
-                        required: "Este campo es requerido.",
-                        minlength: "Usa 8 caracteres o más para tu contraseña."
-                    },
+                    required: true,
+                    minlength: 8
+                },
                     <%=txtContraseniaConfirmacion.UniqueID%>: {
-                        required: "Este campo es requerido.",
-                        equalTo: "Las contraseñas no coinciden. Vuelva a intentarlo.",
-                        minlength: "Usa 8 caracteres o más para tu contraseña."
-					},
+                    required: true,
+                    equalTo: "#<%=txtContrasenia.ClientID %>",
+                    minlength: 8
+                },
                     <%=ddlRol.UniqueID%>: {
-                        required: "Este campo es requerido."
-                    }
+                    required: true
+                }
+                },
+        messages: {
+                    <%=txtNombreUsuario.UniqueID%>: {
+                    required: "Este campo es requerido.",
+                    remote: "Este nombre de usuario ya está en uso. Elige otro."
+                },
+                    <%=txtNombre.UniqueID%>: {
+                    required: "Este campo es requerido."
+                },
+                    <%=txtApellido.UniqueID%>: {
+                    required: "Este campo es requerido."
+                },
+                    <%=txtContrasenia.UniqueID%>: {
+                    required: "Este campo es requerido.",
+                    minlength: "Usa 8 caracteres o más para tu contraseña."
+                },
+                    <%=txtContraseniaConfirmacion.UniqueID%>: {
+                    required: "Este campo es requerido.",
+                    equalTo: "Las contraseñas no coinciden. Vuelva a intentarlo.",
+                    minlength: "Usa 8 caracteres o más para tu contraseña."
+                },
+                    <%=ddlRol.UniqueID%>: {
+                    required: "Este campo es requerido."
+                   }   
                 }
             });
         }

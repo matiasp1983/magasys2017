@@ -36,9 +36,13 @@ public partial class Usuario
 
     public Nullable<System.DateTime> FECHA_ALTA { get; set; }
 
+    public int COD_ESTADO { get; set; }
+
 
 
     public virtual Rol Rol { get; set; }
+
+    public virtual Estado Estado { get; set; }
 
 }
 

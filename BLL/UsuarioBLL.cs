@@ -149,7 +149,27 @@ namespace BLL
 
         //    return bRes;
         //}
-        
+
+        public bool ConsultarExistenciaNombreUsuario(string pNombreUsuario)
+        {
+            bool bEsNuevoNombreUsuario = false;
+
+            try
+            {
+                using (var res = new Repository<Usuario>())
+                {
+                    var oUsuario = res.Find(p => p.NOMBRE_USUARIO == pNombreUsuario && p.COD_ESTADO == 1 && p.FECHA_BAJA == null);
+                    bEsNuevoNombreUsuario = oUsuario == null;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return bEsNuevoNombreUsuario;
+        }
+
         #endregion
     }
 }
