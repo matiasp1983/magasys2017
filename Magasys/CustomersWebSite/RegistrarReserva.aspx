@@ -60,10 +60,9 @@
                                                             <button runat="server" id="btnEliminar" class="text-muted" onserverclick="BtnEliminar_Click"><i class="fa fa-trash"></i> Eliminar</button>
                                                         </div>
                                                     </td>
-
                                                     <td style="width: 100px">
                                                         <div id="divCantidad">
-                                                            <asp:TextBox ID="txtCantidad" runat="server" Text='<%#Eval("CANTIDAD").ToString()%>' autocomplete="off" title='<%#string.Format("{0};{1}", Eval("CANTIDAD").ToString(), Eval("PRECIO").ToString())%>'></asp:TextBox>
+                                                            <asp:TextBox ID="txtCantidad" runat="server" Text='<%#Eval("CANTIDAD").ToString()%>' autocomplete="off" title='<%#string.Format("{0};{1}", Eval("PRECIO").ToString(), Eval("COD_PRODUCTO").ToString())%>'></asp:TextBox>
                                                         </div>
                                                     </td>
                                                     <td  style="width: 150px">
@@ -73,10 +72,7 @@
                                                                 <asp:Label ID="lblSubTotal" runat="server" Text='<%#Eval("SUBTOTAL").ToString()%>'></asp:Label>
                                                             </div>
                                                         </h4>                                                        
-                                                    </td>
-                                                    <div id="divCodProducto">
-                                                        <asp:TextBox ID="hfCodProducto" runat="server" Value='<%#Eval("COD_PRODUCTO").ToString()%>'/>
-                                                    </div>
+                                                    </td>                                                  
                                                 </tr>
                                             </tbody>                                          
                                         </table>
@@ -85,17 +81,12 @@
                             </asp:ListView>
                         </div>
                         <div class="ibox-content">
-
                             <button class="btn btn-primary pull-right"><i class="fa fa fa-shopping-cart"></i>Checkout</button>
                             <button class="btn btn-white"><i class="fa fa-arrow-left"></i>Continue shopping</button>
-
                         </div>
                     </div>
                 </div>
-
-
                 <div class="col-md-3">
-
                     <div class="ibox">
                         <div class="ibox-title">
                             <h5>Cart Summary</h5>
@@ -123,22 +114,13 @@
                             <h5>Support</h5>
                         </div>
                         <div class="ibox-content text-center">
-
-
-
                             <h3><i class="fa fa-phone"></i>+43 100 783 001</h3>
                             <span class="small">Please contact with us if you have any questions. We are avalible 24h.
                             </span>
-
-
                         </div>
                     </div>
                 </div>
             </div>
-
-
-
-
         </div>
     </form>
 </asp:Content>
@@ -149,25 +131,17 @@
     <script src="js/plugins/iCheck/icheck.min.js"></script>
 
     <script type="text/javascript">
-    
+        
             $('#divCantidad > input').TouchSpin({
                 verticalbuttons: true
             }).on('touchspin.on.startspin', function (e) {
+                
+                var loCantidad = parseInt(e.currentTarget.value);
+                var loPrecio = parseFloat(e.currentTarget.title.split(';')[0].replace('$', '').replace(',', '.'));
+                var loCodigoProducto = e.currentTarget.title.split(';')[1];
+                var loSubtotal = parseFloat(loPrecio * loCantidad);
 
-                var value = parseFloat("554,20".replace(",", "."));
-                var loCantidad = e.currentTarget.value;
-                var loPrecio = parseFloat(e.currentTarget.title.split(';')[1].replace('$', '').replace(',', '.'));
-
-                var loSubtotal = loPrecio * loCantidad; //Subtotal
-
-                //e.currentTarget.title = '$' + loSubtotal.toFixed(2).replace('.', ',');
-
-                $('#divSubTotal_' + $('#divCodProducto > input').val() + ' > span').html('$' + loSubtotal.toFixed(2).replace('.', ','));
-
-
-                //e.currentTarget.title.split(';')[1] = '$ ' + loPrecio.replace('.', ',');   $(').text('$ ' + loSubtotal.toFixed(2).replace('.', ','));
+                $('#divSubTotal_' + loCodigoProducto).html('$' + loSubtotal.toFixed(2).replace('.', ','));                
             });
-
-
     </script>
 </asp:Content>
