@@ -111,7 +111,7 @@
 
         #endregion
 
-        #region MensajesGenero
+        #region Mensajes Genero
 
         public const string MsjeGeneroSuccessAlta = "El Genero se guardó correctamente.";
         public const string MsjeGeneroFailure = "El Genero no se pudo guardar.";
@@ -121,13 +121,13 @@
 
         #endregion
 
-        #region Deudas
+        #region Mensajes Deudas
 
         public const string MsjeVisualizarDeudasSinResultados = "No se encontraron deudas para la búsqueda seleccionada.";
 
         #endregion
 
-        #region Cobro
+        #region Mensajes Cobro
 
         public const string MsjeCobroSuccessAlta = "El cobro se registró correctamente.";
         public const string MsjeCobroFailure = "El cobro no se pudo registrar.";
@@ -137,18 +137,19 @@
 
         #endregion
 
-        #region Login
+        #region Mensajes Login
 
         public const string MsjeLoginUsuarioYOContraseniaVacios = "Usuario y/o Contraseña no pueden estar vacíos.";
         public const string MsjeLoginUsuarioIncorrecto = "Usuario y/o Contraseña incorrecto.";
 
         #endregion
 
-        #region Usuario
+        #region Mensajes Usuario
 
         public const string MsjeUsuarioSuccessAlta = "El usuario se guardó correctamente.";
         public const string MsjeUsuarioSuccessModificacion = "El usuario se modificó correctamente.";
-        public const string MsjeUsuarioFailure = "El usuario no se pudo guardar.";        
+        public const string MsjeUsuarioFailure = "El usuario no se pudo guardar.";
+        public const string MsjeListadoUsuarioFiltrarTotalSinResultados = "No se encontraron Usuarios para la búsqueda seleccionada.";        
 
         #endregion
     }

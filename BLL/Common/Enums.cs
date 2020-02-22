@@ -32,7 +32,8 @@
             ImagenUsuario,
             ProductoReserva,
             ListadoReserva,
-            ListadoReservaEdicion
+            ListadoReservaEdicion,
+            Usuario
         }        
 
         #endregion

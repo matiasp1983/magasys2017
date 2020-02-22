@@ -342,7 +342,7 @@
           <Property Name="APELLIDO" Type="varchar" MaxLength="50" />
           <Property Name="CONTRASENIA" Type="varchar" MaxLength="100" />
           <Property Name="AVATAR" Type="image" />
-          <Property Name="FECHA_ALTA" Type="datetime" />
+          <Property Name="FECHA_ALTA" Type="datetime" Nullable="false" />
           <Property Name="FECHA_BAJA" Type="datetime" />
           <Property Name="ID_ROL" Type="int" Nullable="false" />
           <Property Name="COD_ESTADO" Type="int" Nullable="false" />
@@ -922,30 +922,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Usuario_Estado">
-          <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Estado">
-              <PropertyRef Name="ID_ESTADO" />
-            </Principal>
-            <Dependent Role="Usuario">
-              <PropertyRef Name="COD_ESTADO" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Usuario_Rol">
-          <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
-          <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Rol">
-              <PropertyRef Name="ID_ROL" />
-            </Principal>
-            <Dependent Role="Usuario">
-              <PropertyRef Name="ID_ROL" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Venta_Cliente">
           <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
           <End Role="Venta" Type="Self.Venta" Multiplicity="*" />
@@ -1204,14 +1180,6 @@
           <AssociationSet Name="FK_Suplemento_Producto" Association="Self.FK_Suplemento_Producto">
             <End Role="Producto" EntitySet="Producto" />
             <End Role="Suplemento" EntitySet="Suplemento" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Usuario_Estado" Association="Self.FK_Usuario_Estado">
-            <End Role="Estado" EntitySet="Estado" />
-            <End Role="Usuario" EntitySet="Usuario" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Usuario_Rol" Association="Self.FK_Usuario_Rol">
-            <End Role="Rol" EntitySet="Rol" />
-            <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
           <AssociationSet Name="FK_Venta_Cliente" Association="Self.FK_Venta_Cliente">
             <End Role="Cliente" EntitySet="Cliente" />
@@ -2527,7 +2495,7 @@
           <Property Name="FECHA_BAJA" Type="DateTime" Precision="3" />
           <Property Name="ID_ROL" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Rol" Relationship="MAGASYSModel.FK_Usuario_Rol" FromRole="Usuario" ToRole="Rol" />
-          <Property Name="FECHA_ALTA" Type="DateTime" Precision="3" />
+          <Property Name="FECHA_ALTA" Type="DateTime" Precision="3" Nullable="false" />
           <Property Name="COD_ESTADO" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Estado" Relationship="MAGASYSModel.FK_Usuario_Estado" FromRole="Usuario" ToRole="Estado" />
         </EntityType>

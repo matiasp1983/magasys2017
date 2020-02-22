@@ -10,86 +10,127 @@ namespace BLL
     {
         #region Métodos Públicos
 
-        //public Proveedor ObtenerProveedor(long idProveedor)
-        //{
-        //    Proveedor oProveedor = null;
+        public Usuario ObtenerUsuario(long idUsuario)
+        {
+            Usuario oUsuario = null;
 
-        //    try
-        //    {
-        //        using (var rep = new Repository<Proveedor>())
-        //        {
-        //            oProveedor = rep.Find(p => p.ID_PROVEEDOR == idProveedor);
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
+            try
+            {
+                using (var rep = new Repository<Usuario>())
+                {
+                    oUsuario = rep.Find(p => p.ID_USUARIO == idUsuario);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
-        //    return oProveedor;
-        //}
+            return oUsuario;
+        }
 
-        //public List<Proveedor> ObtenerProveedores(ProveedorFiltro oProveedorFiltro)
-        //{
-        //    List<Proveedor> lstProveedores = null;
+        public List<UsuarioListado> ObtenerUsuarios(UsuarioFiltro oUsuarioFiltro)
+        {
+            List<UsuarioListado> lstUsuarioListado = null;
+            List<Usuario> lstUsuarios = null;
 
-        //    try
-        //    {
-        //        using (var rep = new Repository<Proveedor>())
-        //        {
-        //            lstProveedores = rep.Search(p => p.FECHA_BAJA == null && p.COD_ESTADO == 1);
+            try
+            {
+                using (var rep = new Repository<Usuario>())
+                {
+                    lstUsuarios = rep.Search(p => p.FECHA_BAJA == null && p.COD_ESTADO == 1 && !p.NOMBRE_USUARIO.ToUpper().Equals("ADMIN"));
 
-        //            lstProveedores.Sort((x, y) => y.FECHA_ALTA.CompareTo(x.FECHA_ALTA));
+                    lstUsuarios.Sort((x, y) => y.FECHA_ALTA.CompareTo(x.FECHA_ALTA));
 
-        //            if (lstProveedores.Count > 0)
-        //            {
-        //                if (oProveedorFiltro.IdProveedor == -1)
-        //                    lstProveedores = lstProveedores.FindAll(p => p.ID_PROVEEDOR == oProveedorFiltro.IdProveedor);
-        //                else if (oProveedorFiltro.IdProveedor > 0)
-        //                    lstProveedores = lstProveedores.FindAll(p => p.ID_PROVEEDOR == oProveedorFiltro.IdProveedor);
+                    if (lstUsuarios.Count > 0)
+                    {
+                        if (oUsuarioFiltro.IdUsuario == -1)
+                            lstUsuarios = lstUsuarios.FindAll(p => p.ID_USUARIO == oUsuarioFiltro.IdUsuario);
+                        else if (oUsuarioFiltro.IdUsuario > 0)
+                            lstUsuarios = lstUsuarios.FindAll(p => p.ID_USUARIO == oUsuarioFiltro.IdUsuario);
 
-        //                if (!String.IsNullOrEmpty(oProveedorFiltro.Cuit) && lstProveedores.Count > 0)
-        //                    lstProveedores = lstProveedores.FindAll(p => p.CUIT == oProveedorFiltro.Cuit);
+                        if (!String.IsNullOrEmpty(oUsuarioFiltro.NombreUsuario) && lstUsuarios.Count > 0)
+                            lstUsuarios = lstUsuarios.FindAll(p => p.NOMBRE_USUARIO == oUsuarioFiltro.NombreUsuario);
 
-        //                if (oProveedorFiltro.FechaAltaDesde != null && oProveedorFiltro.FechaAltaHasta != null && lstProveedores.Count > 0)
-        //                    lstProveedores = lstProveedores.FindAll(p => p.FECHA_ALTA.Date >= oProveedorFiltro.FechaAltaDesde && p.FECHA_ALTA.Date <= oProveedorFiltro.FechaAltaHasta);
-        //                else if (oProveedorFiltro.FechaAltaDesde != null && oProveedorFiltro.FechaAltaHasta == null && lstProveedores.Count > 0)
-        //                    lstProveedores = lstProveedores.FindAll(p => p.FECHA_ALTA.Date >= oProveedorFiltro.FechaAltaDesde && oProveedorFiltro.FechaAltaHasta == null);
-        //                else if (oProveedorFiltro.FechaAltaDesde == null && oProveedorFiltro.FechaAltaHasta != null && lstProveedores.Count > 0)
-        //                    lstProveedores = lstProveedores.FindAll(p => p.FECHA_ALTA.Date <= oProveedorFiltro.FechaAltaHasta && oProveedorFiltro.FechaAltaDesde == null);
+                        if (!String.IsNullOrEmpty(oUsuarioFiltro.Nombre) && lstUsuarios.Count > 0)
+                            lstUsuarios = lstUsuarios.FindAll(p => p.NOMBRE == oUsuarioFiltro.NombreUsuario);
 
-        //                if (!String.IsNullOrEmpty(oProveedorFiltro.RazonSocial) && lstProveedores.Count > 0)
-        //                    lstProveedores = lstProveedores.FindAll(p => p.RAZON_SOCIAL.ToUpper().Contains(oProveedorFiltro.RazonSocial.ToUpper()));
-        //            }
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
+                        if (!String.IsNullOrEmpty(oUsuarioFiltro.Apellido) && lstUsuarios.Count > 0)
+                            lstUsuarios = lstUsuarios.FindAll(p => p.APELLIDO == oUsuarioFiltro.Apellido);
 
-        //    return lstProveedores;
-        //}
+                        if (oUsuarioFiltro.IdRol > 0 && lstUsuarios.Count > 0)
+                            lstUsuarios = lstUsuarios.FindAll(p => p.ID_ROL == oUsuarioFiltro.IdRol);
+                    }
 
-        //public List<Proveedor> ObtenerProveedores()
-        //{
-        //    List<Proveedor> lstProveedores = null;
+                    UsuarioListado oUsuarioListado;
+                    lstUsuarioListado = new List<UsuarioListado>();
 
-        //    try
-        //    {
-        //        using (var rep = new Repository<Proveedor>())
-        //        {
-        //            lstProveedores = rep.Search(p => p.FECHA_BAJA == null && p.COD_ESTADO == 1);
-        //            lstProveedores.Sort((x, y) => String.Compare(x.RAZON_SOCIAL, y.RAZON_SOCIAL));
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
+                    if (lstUsuarios != null)
+                    {
+                        foreach (var loUsuario in lstUsuarios)
+                        {
+                            oUsuarioListado = new UsuarioListado
+                            {
+                                ID_USUARIO = loUsuario.ID_USUARIO,
+                                NOMBRE_USUARIO = loUsuario.NOMBRE_USUARIO,
+                                NOMBRE = loUsuario.NOMBRE,
+                                APELLIDO = loUsuario.APELLIDO,
+                                ROL = loUsuario.Rol.DESCRIPCION
+                            };
 
-        //    return lstProveedores;
-        //}
+                            lstUsuarioListado.Add(oUsuarioListado);
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return lstUsuarioListado;
+        }
+
+        public List<UsuarioListado> ObtenerUsuarios()
+        {
+            List<UsuarioListado> lstUsuarioListado = null;
+            List<Usuario> lstUsuarios = null;
+
+            try
+            {
+                using (var rep = new Repository<Usuario>())
+                {
+                    lstUsuarios = rep.Search(p => p.FECHA_BAJA == null && p.COD_ESTADO == 1 && !p.NOMBRE_USUARIO.ToUpper().Equals("ADMIN"));
+                    lstUsuarios.Sort((x, y) => y.FECHA_ALTA.CompareTo(x.FECHA_ALTA));
+
+                    UsuarioListado oUsuarioListado;
+                    lstUsuarioListado = new List<UsuarioListado>();
+
+                    if (lstUsuarios != null)
+                    {
+                        foreach (var loUsuario in lstUsuarios)
+                        {
+                            oUsuarioListado = new UsuarioListado
+                            {
+                                ID_USUARIO = loUsuario.ID_USUARIO,
+                                NOMBRE_USUARIO = loUsuario.NOMBRE_USUARIO,
+                                NOMBRE = loUsuario.NOMBRE,
+                                APELLIDO = loUsuario.APELLIDO,
+                                ROL = loUsuario.Rol.DESCRIPCION
+                            };
+
+                            lstUsuarioListado.Add(oUsuarioListado);
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return lstUsuarioListado;
+        }
 
         public bool AltaUsuario(Usuario oUsuario)
         {
@@ -111,44 +152,44 @@ namespace BLL
             return bRes;
         }
 
-        //public bool BajaProveedor(long idProveedor)
-        //{
-        //    var bRes = false;
-        //    try
-        //    {
-        //        using (var rep = new Repository<Proveedor>())
-        //        {
-        //            Proveedor oProveedor = rep.Find(p => p.ID_PROVEEDOR == idProveedor);
-        //            oProveedor.FECHA_BAJA = DateTime.Now;
-        //            oProveedor.COD_ESTADO = 2;
-        //            bRes = rep.Update(oProveedor);
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
+        public bool BajaUsuario(long idUsuario)
+        {
+            var bRes = false;
+            try
+            {
+                using (var rep = new Repository<Usuario>())
+                {
+                    Usuario oUsuario = rep.Find(p => p.ID_USUARIO == idUsuario);
+                    oUsuario.FECHA_BAJA = DateTime.Now;
+                    oUsuario.COD_ESTADO = 2;
+                    bRes = rep.Update(oUsuario);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
-        //    return bRes;
-        //}
+            return bRes;
+        }
 
-        //public bool ModificarProveedor(Proveedor oProveedor)
-        //{
-        //    var bRes = false;
-        //    try
-        //    {
-        //        using (var rep = new Repository<Proveedor>())
-        //        {
-        //            bRes = rep.Update(oProveedor);
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
+        public bool ModificarUsuario(Usuario oUsuario)
+        {
+            var bRes = false;
+            try
+            {
+                using (var rep = new Repository<Usuario>())
+                {
+                    bRes = rep.Update(oUsuario);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
-        //    return bRes;
-        //}
+            return bRes;
+        }
 
         public bool ConsultarExistenciaNombreUsuario(string pNombreUsuario)
         {
@@ -172,4 +213,17 @@ namespace BLL
 
         #endregion
     }
+
+    #region Clases
+
+    public class UsuarioListado
+    {
+        public int ID_USUARIO { get; set; }
+        public string NOMBRE { get; set; }
+        public string APELLIDO { get; set; }
+        public string NOMBRE_USUARIO { get; set; }
+        public string ROL { get; set; }
+    }
+
+    #endregion
 }

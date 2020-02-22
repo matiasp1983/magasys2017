@@ -34,7 +34,7 @@ public partial class Usuario
 
     public int ID_ROL { get; set; }
 
-    public Nullable<System.DateTime> FECHA_ALTA { get; set; }
+    public System.DateTime FECHA_ALTA { get; set; }
 
     public int COD_ESTADO { get; set; }
 
