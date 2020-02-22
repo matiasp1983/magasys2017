@@ -55,6 +55,15 @@ namespace PL.CustomersWebSite
                         PRECIO = ((Label)loItem.Controls[5].Controls[1]).Text
                     };
 
+                    oProductoCustomersWebSite.IMAGEN = new Image();
+
+                    if (!String.IsNullOrEmpty(((HtmlImage)loItem.Controls[3]).Src))
+                    {
+                        // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
+                        string loImagenDataURL64 = ((HtmlImage)loItem.Controls[3]).Src;
+                        oProductoCustomersWebSite.IMAGEN.ImageUrl = loImagenDataURL64;
+                    }
+
                     lstProductoCustomersWebSite.Add(oProductoCustomersWebSite);
                 }
             }
@@ -139,7 +148,7 @@ namespace PL.CustomersWebSite
                     //Ocultar el Precio
                     HtmlGenericControl divPrecio = ((HtmlGenericControl)e.Item.FindControl("divPrecio"));
                     divPrecio.Visible = false;
-                                       
+
                     btnEdiciones.Attributes.Add("value", string.Format("{0},{1}", loCodTipoProducto, loCodigoProducto));
                 }
                 else

@@ -40,6 +40,15 @@ namespace PL.CustomersWebSite
                         FECHA_EDICION = ((Label)loItem.Controls[11]).Text
                     };
 
+                    oProdEdicionCustomersWebSite.IMAGEN = new Image();
+
+                    if (!String.IsNullOrEmpty(((HtmlImage)loItem.Controls[3]).Src))
+                    {
+                        // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
+                        string loImagenDataURL64 = ((HtmlImage)loItem.Controls[3]).Src;
+                        oProdEdicionCustomersWebSite.IMAGEN.ImageUrl = loImagenDataURL64;
+                    }
+
                     lstProdEdicionCustomersWebSite.Add(oProdEdicionCustomersWebSite);
                 }
             }

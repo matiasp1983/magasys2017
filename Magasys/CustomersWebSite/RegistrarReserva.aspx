@@ -26,13 +26,16 @@
                                             <tbody>
                                                 <tr>
                                                     <td style="width: 90px">
-                                                        <div class="cart-product-imitation">
+                                                        <div class="cart-product-imitation" style="padding: 0px">
+                                                            <img id="imgProducto" runat="server" style="width: 90px" />
                                                         </div>
                                                     </td>
                                                     <td class="desc">
                                                         <h3>
                                                             <a href="#" class="text-navy">
                                                                 <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE").ToString()%>'></asp:Label>
+                                                                <asp:Label ID="lblCodigoProducto" runat="server" Text='<%#(Eval("COD_PRODUCTO") != null) ? Eval("COD_PRODUCTO").ToString():null%>' Visible="False"></asp:Label>
+                                                                <asp:Label ID="lblCodigoProductoEdicion" runat="server" Text='<%#(Eval("COD_PRODUCTO_EDICION") != null) ? Eval("COD_PRODUCTO_EDICION").ToString():null%>' Visible="False"></asp:Label>
                                                             </a>
                                                         </h3>
                                                         <p class="small">
@@ -49,10 +52,13 @@
                                                             <dt>Forma de entrega</dt>                                                                
                                                             <div class="i-checks">
                                                                 <label style="font-weight:500">
-                                                                    <input runat="server" type="radio" id="Radio1">
+                                                                    <%--<input runat="server" type="radio" id="Radio1">--%>
+                                                                    <%--<asp:RadioButton ID="RadioButton1" runat="server" />--%>
+                                                                    <asp:RadioButton ID="rdbRetiroLocal" runat="server" Text='<%# Eval("RETIRA_LOCAL") %>' GroupName="grEnvio" />
                                                                     <i></i>Retira en Local</label>
                                                                 <label style="font-weight:500">
-                                                                    <input runat="server" type="radio" id="Radio3">
+                                                                    <%--<input runat="server" type="radio" id="Radio3">--%>
+                                                                    <asp:RadioButton ID="rdbEnvioDomicilio" runat="server" Text='<%# Eval("ENVIO_DOMICILIO") %>' GroupName="grEnvio" />
                                                                     <i></i>Envío a Domicilio</label>
                                                             </div>                                                         
                                                         </dl>
@@ -62,7 +68,7 @@
                                                     </td>
                                                     <td style="width: 100px">
                                                         <div id="divCantidad">
-                                                            <asp:TextBox ID="txtCantidad" runat="server" Text='<%#Eval("CANTIDAD").ToString()%>' autocomplete="off" title='<%#string.Format("{0};{1}", Eval("PRECIO").ToString(), Eval("COD_PRODUCTO").ToString())%>'></asp:TextBox>
+                                                            <asp:TextBox ID="txtCantidad" runat="server" Text='<%#Eval("CANTIDAD").ToString()%>' autocomplete="off" title='<%#string.Format("{0};{1}", Eval("PRECIO").ToString(), Eval("COD_PRODUCTO").ToString())%>' Enabled="True" MaxLength="0" ReadOnly="True"></asp:TextBox>                                                        
                                                         </div>
                                                     </td>
                                                     <td  style="width: 150px">
@@ -133,7 +139,9 @@
     <script type="text/javascript">
         
             $('#divCantidad > input').TouchSpin({
-                verticalbuttons: true
+                verticalbuttons: true,
+                min: 1,
+                max: 99
             }).on('touchspin.on.startspin', function (e) {
                 
                 var loCantidad = parseInt(e.currentTarget.value);

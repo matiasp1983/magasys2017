@@ -290,7 +290,7 @@ namespace BLL
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
 
             return lstReservaListado;
@@ -309,7 +309,7 @@ namespace BLL
             }
             catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
 
             return lCantidadReservas;
@@ -343,6 +343,7 @@ namespace BLL
 
     public class ReservaCustomerWebSite
     {
+        public System.Web.UI.WebControls.Image IMAGEN { get; set; }
         public string COD_PRODUCTO { get; set; }
         public string COD_PRODUCTO_EDICION { get; set; }
         public string NOMBRE { get; set; }
@@ -351,6 +352,8 @@ namespace BLL
         public string PRECIO { get; set; }
         public int CANTIDAD { get; set; }
         public string SUBTOTAL { get; set; }
+        public bool RETIRA_LOCAL { get; set; }
+        public bool ENVIO_DOMICILIO { get; set; }
     }
 
     #endregion

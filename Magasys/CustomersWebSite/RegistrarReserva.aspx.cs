@@ -1,10 +1,11 @@
 ﻿using BLL;
 using BLL.Common;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 namespace PL.CustomersWebSite
@@ -21,52 +22,72 @@ namespace PL.CustomersWebSite
 
         protected void lsvProductos_ItemDataBound(object sender, ListViewItemEventArgs e)
         {
-            //try
-            //{
-            //    if (e.Item.ItemType != ListViewItemType.DataItem) return;
+            string loCodProducto;
+            string loCodProductoEdicion;
 
-            //    var loImagen = ((ProductoCustomersWebSite)e.Item.DataItem).IMAGEN;
-            //    HtmlImage imgProducto = ((HtmlImage)e.Item.FindControl("imgProducto"));
+            try
+            {
+                if (e.Item.ItemType != ListViewItemType.DataItem) return;
 
-            //    if (string.IsNullOrEmpty(loImagen.ImageUrl))
-            //        imgProducto.Attributes.Add("src", "~/AdminDashboard/img/preview_icons.png");
-            //    else
-            //        imgProducto.Attributes.Add("src", loImagen.ImageUrl);
+                var loImagen = ((ReservaCustomerWebSite)e.Item.DataItem).IMAGEN;
+                HtmlImage imgProducto = ((HtmlImage)e.Item.FindControl("imgProducto"));
 
-            //    var loCodTipoProducto = ((ProductoCustomersWebSite)e.Item.DataItem).COD_TIPO_PRODUCTO;
-            //    var loCodigoProducto = ((ProductoCustomersWebSite)e.Item.DataItem).COD_PRODUCTO.ToString();
+                if (string.IsNullOrEmpty(loImagen.ImageUrl))
+                    imgProducto.Attributes.Add("src", "~/AdminDashboard/img/preview_icons.png");
+                else
+                    imgProducto.Attributes.Add("src", loImagen.ImageUrl);
 
-            //    HtmlButton btnEdiciones = ((HtmlButton)e.Item.FindControl("btnEdiciones"));
+                if (((ReservaCustomerWebSite)e.Item.DataItem).COD_PRODUCTO != null)
+                    loCodProducto = ((ReservaCustomerWebSite)e.Item.DataItem).COD_PRODUCTO.ToString();
+                else
+                    loCodProducto = string.Empty;
 
-            //    if (loCodTipoProducto == 3 || loCodTipoProducto == 2)  //Producto Colección, Revista
-            //    {
-            //        HtmlInputCheckBox chkCodigoProducto = ((HtmlInputCheckBox)e.Item.FindControl("chkCodigoProducto"));
-            //        if (chkCodigoProducto != null)
-            //        {
-            //            chkCodigoProducto.Attributes.Add("style", "width: 23px; height: 23px; margin:0px;");
-            //            chkCodigoProducto.Visible = false;
-            //        }
+                if (((ReservaCustomerWebSite)e.Item.DataItem).COD_PRODUCTO_EDICION != null)
+                    loCodProductoEdicion = ((ReservaCustomerWebSite)e.Item.DataItem).COD_PRODUCTO_EDICION.ToString();
+                else
+                    loCodProductoEdicion = string.Empty;
 
-            //        //Ocultar el Precio
-            //        Label lblPrecio = ((Label)e.Item.FindControl("lblPrecio"));
-            //        lblPrecio.Visible = false;
-            //        btnEdiciones.Attributes.Add("value", string.Format("{0},{1}", loCodTipoProducto, loCodigoProducto));
-            //    }
-            //    else
-            //        btnEdiciones.Visible = false;
-            //}
-            //catch (Exception ex)
-            //{
-            //    Logger loLogger = LogManager.GetCurrentClassLogger();
-            //    loLogger.Error(ex);
-            //}
+                HtmlButton btnEliminar = ((HtmlButton)e.Item.FindControl("btnEliminar"));
+
+                var loCodigo = String.Format("{0}-{1}", loCodProducto, loCodProductoEdicion);
+
+                btnEliminar.Attributes.Add("value", loCodigo);
+            }
+            catch (Exception ex)
+            {
+                Logger loLogger = LogManager.GetCurrentClassLogger();
+                loLogger.Error(ex);
+            }
         }
 
         protected void BtnEliminar_Click(object sender, EventArgs e)
         {
+            ListViewDataItem loItemProducto;
+            ListViewDataItem loItemProductoEdicion;
 
+            var loCodigos = ((HtmlButton)sender).Attributes["value"];
+
+            var loCodigosItem = loCodigos.Split('-');
+            var loCodigoProducto = loCodigosItem[0];
+            var loCodigoProductoEdicion = loCodigosItem[1];
+
+            // Eliminar Producto del listado
+            if (!String.IsNullOrWhiteSpace(loCodigoProducto))
+            {
+                loItemProducto = lsvProductos.Items.Where(x => ((Label)x.Controls[5]).Text.ToString().Equals(loCodigoProducto)).First();
+                lsvProductos.Items.Remove(loItemProducto);
+            }
+
+            // Eliminar la Edición del listado
+            if (!String.IsNullOrWhiteSpace(loCodigoProductoEdicion))
+            {
+                loItemProductoEdicion = lsvProductos.Items.Where(x => ((Label)x.Controls[7]).Text.ToString().Equals(loCodigoProductoEdicion)).First();
+                lsvProductos.Items.Remove(loItemProductoEdicion);
+            }
+
+            lsvProductos.DataSource = MapListViewToListObject(lsvProductos);
+            lsvProductos.DataBind();
         }
-
 
         #endregion
 
@@ -102,7 +123,8 @@ namespace PL.CustomersWebSite
                             DESCRIPCION = oProductoCustomersWebSite.DESCRIPCION,
                             PRECIO = oProductoCustomersWebSite.PRECIO,
                             CANTIDAD = 1,
-                            SUBTOTAL = oProductoCustomersWebSite.PRECIO
+                            SUBTOTAL = oProductoCustomersWebSite.PRECIO,
+                            IMAGEN = oProductoCustomersWebSite.IMAGEN
                         };
 
                         lstReservaCustomerWebSite.Add(oReservaCustomerWebSite);
@@ -136,7 +158,8 @@ namespace PL.CustomersWebSite
                             FECHA_EDICION = oProdEdicionCustomersWebSite.FECHA_EDICION,
                             PRECIO = oProdEdicionCustomersWebSite.PRECIO,
                             CANTIDAD = 1,
-                            SUBTOTAL = oProdEdicionCustomersWebSite.PRECIO
+                            SUBTOTAL = oProdEdicionCustomersWebSite.PRECIO,
+                            IMAGEN = oProdEdicionCustomersWebSite.IMAGEN
                         };
 
                         lstReservaCustomerWebSite.Add(oReservaCustomerWebSite);
@@ -149,6 +172,36 @@ namespace PL.CustomersWebSite
                 lsvProductos.DataSource = lstReservaCustomerWebSite;
                 lsvProductos.DataBind();
             }
+        }
+
+        private List<ReservaCustomerWebSite> MapListViewToListObject(ListView pListView)
+        {
+            List<ReservaCustomerWebSite> lstReservaCustomerWebSite = new List<ReservaCustomerWebSite>();
+
+            foreach (var loItem in pListView.Items)
+            {
+                ReservaCustomerWebSite oReservaCustomerWebSite = new ReservaCustomerWebSite
+                {
+                    NOMBRE = ((Label)loItem.Controls[3]).Text,
+                    COD_PRODUCTO = ((Label)loItem.Controls[5]).Text,
+                    COD_PRODUCTO_EDICION = ((Label)loItem.Controls[7]).Text,
+                    DESCRIPCION = ((Label)loItem.Controls[9]).Text,
+                    FECHA_EDICION = ((Label)loItem.Controls[11]).Text,
+                    PRECIO = ((Label)loItem.Controls[13]).Text,
+                    RETIRA_LOCAL = ((RadioButton)loItem.Controls[17]).Checked,
+                    ENVIO_DOMICILIO = ((RadioButton)loItem.Controls[20]).Checked,
+                    CANTIDAD = Convert.ToInt32(((TextBox)loItem.Controls[24]).Text),
+                    SUBTOTAL = ((Label)loItem.Controls[26]).Text
+                };
+
+                oReservaCustomerWebSite.IMAGEN = new Image();
+                if (!String.IsNullOrEmpty(((HtmlImage)loItem.Controls[1]).Src))
+                    oReservaCustomerWebSite.IMAGEN.ImageUrl = ((HtmlImage)loItem.Controls[1]).Src;
+
+                lstReservaCustomerWebSite.Add(oReservaCustomerWebSite);
+            }
+
+            return lstReservaCustomerWebSite;
         }
 
         #endregion
