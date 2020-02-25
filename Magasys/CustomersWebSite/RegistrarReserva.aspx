@@ -2,7 +2,8 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="css/plugins/touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet">
-    <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="css/plugins/iCheck/custom.css" rel="stylesheet">        
+    <link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="contentMaster" runat="server">
     <form id="FormRegistrarReserva" runat="server" class="form-horizontal">
@@ -136,6 +137,8 @@
     <script src="js/plugins/touchspin/jquery.bootstrap-touchspin.min.js"></script>
     <!-- iCheck -->
     <script src="js/plugins/iCheck/icheck.min.js"></script>
+    <!-- Sweet alert -->
+    <script src="js/plugins/sweetalert/sweetalert.min.js"></script>
 
     <script type="text/javascript">
 
@@ -173,27 +176,48 @@
                 if (this.cells[1].children[4].children[1].children[0].className == "iradio_square-green checked") {
                     loFormaDeEntrega = "L"
                 }
-                var loCantidad = this.cells[2].children[0].children[0].children[1].value.trim();
-                var loSubTotal = this.cells[3].children[0].children[1].textContent.replace("$",'').trim();
+                var loCantidad = this.cells[2].children[0].children[0].children[1].value.trim();                
 
-                loReservas.push(loFormaDeEntrega + ";" + loCantidad + ";" + loSubTotal);
+                loReservas.push(loFormaDeEntrega + ";" + loCantidad);
             });          
             
             $.ajax({
                 type: "POST",
-                url: "RegistrarReserva.aspx/GuargarReserva",
+                url: "RegistrarReserva.aspx/GuardarReserva",
                 data: JSON.stringify({ 'pReservas': loReservas }),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
-                success: function (response) {
-                    var msg = JSON.parse(response);
-                    if (msg.hasOwnProperty('d'))
-                        return msg.d;
-                    else
-                        return msg;
+                success: function (data) {
+                var msg = JSON.parse(data.d);
+                    if (msg) {
+                        swal({
+                        title: "Confirmación Reserva",
+                        text: "La reserva se guardó correctamente.",
+                        type: "success",
+                        confirmButtonText: 'Aceptar',
+                        }, function () {
+                            var loLocation = window.location;
+                            var loPathName = loLocation.pathname.substring(0, loLocation.pathname.lastIndexOf('/') + 1);
+                            var url = loLocation.href.substring(0, loLocation.href.length - ((loLocation.pathname + loLocation.search + loLocation.hash).length - loPathName.length));
+                            window.location.href = url + 'Reserva.aspx';
+                        });
+                    }
+                    else {
+                        swal({
+                        title: "Confirmación Reserva",
+                        text: "La reserva no se pudo guardar.",
+                        type: "warning",
+                        confirmButtonText: 'Aceptar'
+                        });
+                    }
                 },
-                failure: function (response) {
-                   console.log(response.d);
+                failure: function (data) {
+                    swal({
+                        title: "Confirmación Reserva",
+                        text: "La reserva no se pudo guardar.",
+                        type: "warning",
+                        confirmButtonText: 'Aceptar'
+                    });
                 }
             });
         }

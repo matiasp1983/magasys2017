@@ -181,11 +181,46 @@ namespace PL.CustomersWebSite
         #region Métodos Públicos
 
         [WebMethod]
-        public static bool GuargarReserva(string pReservas)
+        public static bool GuardarReserva(string[] pReservas)
         {
-            return true;
+            try
+            {
+                var loListReservas = pReservas.ToList();
+
+                foreach (var item in loListReservas)
+                {
+                    var loSplitReseva = item.Split(';');
+                    ItemReserva loItemReserva = new ItemReserva
+                    {
+                        FormaDeEntrega = loSplitReseva[0].ToString(),
+                        Cantidad = Convert.ToInt32(loSplitReseva[1].ToString())
+                    };
+
+                    /*Aquí va el código que guarda la reserva en la base de datos.*/
+                    /*Por cada vuelva inserta un registro de la base.*/
+
+                   return true;
+                }               
+            }
+            catch (Exception ex)
+            {
+                Logger loLogger = LogManager.GetCurrentClassLogger();
+                loLogger.Error(ex);
+            }
+
+            return false;
         }
 
         #endregion
     }
+
+    #region Clases
+
+    public class ItemReserva
+    {
+        public String FormaDeEntrega { get; set; }
+        public int Cantidad { get; set; }        
+    }
+
+    #endregion
 }
