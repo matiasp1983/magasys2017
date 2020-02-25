@@ -60,7 +60,7 @@ namespace PL.CustomersWebSite
             }
         }
 
-        protected void BtnEliminar_Click(object sender, EventArgs e)
+        /*protected void BtnEliminar_Click(object sender, EventArgs e)
         {
             ListViewDataItem loItemProducto;
             ListViewDataItem loItemProductoEdicion;
@@ -87,7 +87,7 @@ namespace PL.CustomersWebSite
 
             lsvProductos.DataSource = MapListViewToListObject(lsvProductos);
             lsvProductos.DataBind();
-        }
+        }*/
 
         #endregion
 
@@ -111,7 +111,7 @@ namespace PL.CustomersWebSite
                         oProductoMod.CANTIDAD += 1;
                         var loPrecio = oProductoMod.PRECIO.Replace(",", ".").Replace("$", "").Trim();
                         var loSubTotal = oProductoMod.SUBTOTAL.Replace(",", ".").Replace("$", "").Trim();
-                        oProductoMod.SUBTOTAL = "$ " + string.Format(System.Globalization.CultureInfo.GetCultureInfo("de-DE"), "{0:0.00}", (double.Parse(loPrecio) + double.Parse(loSubTotal)));
+                        oProductoMod.SUBTOTAL = "$" + string.Format(System.Globalization.CultureInfo.GetCultureInfo("de-DE"), "{0:0.00}", (double.Parse(loPrecio) + double.Parse(loSubTotal)));
                         lstReservaCustomerWebSite[lstReservaCustomerWebSite.FindIndex(p => p.COD_PRODUCTO == oProductoCustomersWebSite.COD_PRODUCTO.ToString())] = oProductoMod;
                     }
                     else
@@ -145,7 +145,7 @@ namespace PL.CustomersWebSite
                         oProductoMod.CANTIDAD += 1;
                         var loPrecio = oProductoMod.PRECIO.Replace(",", ".").Replace("$", "").Trim();
                         var loSubTotal = oProductoMod.SUBTOTAL.Replace(",", ".").Replace("$", "").Trim();
-                        oProductoMod.SUBTOTAL = "$ " + string.Format(System.Globalization.CultureInfo.GetCultureInfo("de-DE"), "{0:0.00}", (double.Parse(loPrecio) + double.Parse(loSubTotal)));
+                        oProductoMod.SUBTOTAL = "$" + string.Format(System.Globalization.CultureInfo.GetCultureInfo("de-DE"), "{0:0.00}", (double.Parse(loPrecio) + double.Parse(loSubTotal)));
                         lstReservaCustomerWebSite[lstReservaCustomerWebSite.FindIndex(p => p.COD_PRODUCTO_EDICION == oProdEdicionCustomersWebSite.COD_PRODUCTO_EDICION.ToString())] = oProductoMod;
                     }
                     else

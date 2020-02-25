@@ -120,7 +120,7 @@ namespace PL.CustomersWebSite
 
         private void ObtenerTotalAPagar()
         {
-            lblTotalAPagar.Text = "$ " + new BLL.VentaBLL().ObtenerTotalAPagar(56).ToString();
+            lblTotalAPagar.Text = "$" + new BLL.VentaBLL().ObtenerTotalAPagar(56).ToString();
         }
 
         private void ObtenerReservasConfirmadasMensuales()

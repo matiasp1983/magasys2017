@@ -170,7 +170,7 @@ namespace BLL
                             ID_VENTA = loVenta.ID_VENTA,
                             FECHA = loVenta.FECHA,
                             FORMA_PAGO = loVenta.FormaPago.DESCRIPCION,
-                            TOTAL = "$ " + loVenta.TOTAL.ToString()
+                            TOTAL = "$" + loVenta.TOTAL.ToString()
                         };
 
                         if (loVenta.COD_CLIENTE != null)
@@ -210,7 +210,7 @@ namespace BLL
                             {
                                 ID_VENTA = loVenta.ID_VENTA,
                                 FECHA = loVenta.FECHA,
-                                TOTAL = "$ " + loVenta.TOTAL.ToString()
+                                TOTAL = "$" + loVenta.TOTAL.ToString()
                             };
 
                             lstVentaListado.Add(oVentaListado);

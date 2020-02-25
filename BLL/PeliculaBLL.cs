@@ -132,7 +132,7 @@ namespace BLL
                                     NOMBRE = loProductoEdicion.Producto.NOMBRE, //nombre del Producto
                                     TIPO_PRODUCTO = loProductoEdicion.Producto.TipoProducto.DESCRIPCION,
                                     EDICION = loProductoEdicion.EDICION,
-                                    PRECIO = "$ " + loProductoEdicion.PRECIO.ToString(),
+                                    PRECIO = "$" + loProductoEdicion.PRECIO.ToString(),
                                     CANTIDAD_DISPONIBLE = loProductoEdicion.CANTIDAD_DISPONIBLE
                                 };
 

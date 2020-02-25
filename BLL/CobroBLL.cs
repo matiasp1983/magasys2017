@@ -111,7 +111,7 @@ namespace BLL
                         {
                             ID_COBRO = loCobro.ID_COBRO,
                             FECHA = loCobro.FECHA,
-                            TOTAL = "$ " + loCobro.TOTAL.ToString()
+                            TOTAL = "$" + loCobro.TOTAL.ToString()
                         };
 
                         if (loCobro.COD_CLIENTE != null)

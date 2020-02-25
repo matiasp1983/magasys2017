@@ -474,7 +474,7 @@ namespace PL.AdminDashboard
                                         EDICION = ((Label)loItem.Controls[7]).Text.ToString(),
                                         PRECIO_UNITARIO = ((Label)loItem.Controls[11]).Text.ToString(),
                                         CANTIDAD = Convert.ToInt32(((TextBox)loItem.Controls[15]).Text.ToString()),
-                                        VALOR_TOTAL = "$ " + loValorTotal.ToString()
+                                        VALOR_TOTAL = "$" + loValorTotal.ToString()
                                     };
 
                                     lstVentaProductos.Add(oVentaProductos);
@@ -520,7 +520,7 @@ namespace PL.AdminDashboard
                                         EDICION = ((Label)loItem.Controls[7]).Text.ToString(),
                                         PRECIO_UNITARIO = ((Label)loItem.Controls[13]).Text.ToString(),
                                         CANTIDAD = Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString()),
-                                        VALOR_TOTAL = "$ " + loValorTotal.ToString()
+                                        VALOR_TOTAL = "$" + loValorTotal.ToString()
                                     };
 
                                     lstVentaProductos.Add(oVentaProductos);
@@ -566,7 +566,7 @@ namespace PL.AdminDashboard
                                         EDICION = ((Label)loItem.Controls[7]).Text.ToString(),
                                         PRECIO_UNITARIO = ((Label)loItem.Controls[11]).Text.ToString(),
                                         CANTIDAD = Convert.ToInt32(((TextBox)loItem.Controls[15]).Text.ToString()),
-                                        VALOR_TOTAL = "$ " + loValorTotal.ToString()
+                                        VALOR_TOTAL = "$" + loValorTotal.ToString()
                                     };
 
                                     lstVentaProductos.Add(oVentaProductos);
@@ -612,7 +612,7 @@ namespace PL.AdminDashboard
                                         EDICION = ((Label)loItem.Controls[7]).Text.ToString(),
                                         PRECIO_UNITARIO = ((Label)loItem.Controls[13]).Text.ToString(),
                                         CANTIDAD = Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString()),
-                                        VALOR_TOTAL = "$ " + loValorTotal.ToString()
+                                        VALOR_TOTAL = "$" + loValorTotal.ToString()
                                     };
 
                                     lstVentaProductos.Add(oVentaProductos);
@@ -658,7 +658,7 @@ namespace PL.AdminDashboard
                                         EDICION = ((Label)loItem.Controls[7]).Text.ToString(),
                                         PRECIO_UNITARIO = ((Label)loItem.Controls[13]).Text.ToString(),
                                         CANTIDAD = Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString()),
-                                        VALOR_TOTAL = "$ " + loValorTotal.ToString()
+                                        VALOR_TOTAL = "$" + loValorTotal.ToString()
                                     };
 
                                     lstVentaProductos.Add(oVentaProductos);
@@ -704,7 +704,7 @@ namespace PL.AdminDashboard
                                         EDICION = ((Label)loItem.Controls[7]).Text.ToString(),
                                         PRECIO_UNITARIO = ((Label)loItem.Controls[13]).Text.ToString(),
                                         CANTIDAD = Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString()),
-                                        VALOR_TOTAL = "$ " + loValorTotal.ToString()
+                                        VALOR_TOTAL = "$" + loValorTotal.ToString()
                                     };
 
                                     lstVentaProductos.Add(oVentaProductos);

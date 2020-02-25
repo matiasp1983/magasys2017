@@ -82,7 +82,7 @@ namespace PL.AdminDashboard
                                         NOMBRE = loNombre,
                                         EDICION = oProductoEdicion.EDICION,
                                         FECHA_EDICION = Convert.ToDateTime(oProductoEdicion.FECHA_EDICION),
-                                        PRECIO = "$ " + oProductoEdicion.PRECIO.ToString(),
+                                        PRECIO = "$" + oProductoEdicion.PRECIO.ToString(),
                                         CANTIDAD_DISPONIBLE = loDetalleProductoIngreso.CANTIDAD_UNIDADES
                                     };
                                     if (loDetalleProductoIngreso.FECHA_DEVOLUCION != null)
@@ -107,7 +107,7 @@ namespace PL.AdminDashboard
                                         NOMBRE = loNombre,
                                         EDICION = oProductoEdicion.EDICION,
                                         FECHA_EDICION = Convert.ToDateTime(oProductoEdicion.FECHA_EDICION),
-                                        PRECIO = "$ " + oProductoEdicion.PRECIO,
+                                        PRECIO = "$" + oProductoEdicion.PRECIO,
                                         CANTIDAD_DISPONIBLE = loDetalleProductoIngreso.CANTIDAD_UNIDADES
                                     };
                                     if (oProductoEdicion.DESCRIPCION != null)
@@ -134,7 +134,7 @@ namespace PL.AdminDashboard
                                         NOMBRE = loNombre,
                                         EDICION = oProductoEdicion.EDICION,
                                         FECHA_EDICION = Convert.ToDateTime(oProductoEdicion.FECHA_EDICION),
-                                        PRECIO = "$ " + oProductoEdicion.PRECIO,
+                                        PRECIO = "$" + oProductoEdicion.PRECIO,
                                         CANTIDAD_DISPONIBLE = loDetalleProductoIngreso.CANTIDAD_UNIDADES
                                     };
                                     if (oProductoEdicion.DESCRIPCION != null)
@@ -160,7 +160,7 @@ namespace PL.AdminDashboard
                                         COD_PRODUCTO = oProductoEdicion.COD_PRODUCTO,
                                         NOMBRE = loNombre,
                                         EDICION = oProductoEdicion.EDICION,
-                                        PRECIO = "$ " + oProductoEdicion.PRECIO.ToString(),
+                                        PRECIO = "$" + oProductoEdicion.PRECIO.ToString(),
                                         CANTIDAD_DISPONIBLE = loDetalleProductoIngreso.CANTIDAD_UNIDADES
                                     };
 
@@ -190,7 +190,7 @@ namespace PL.AdminDashboard
                                         COD_PRODUCTO = oProductoEdicion.COD_PRODUCTO,
                                         NOMBRE = loNombre,
                                         EDICION = oProductoEdicion.EDICION,
-                                        PRECIO = "$ " + oProductoEdicion.PRECIO.ToString(),
+                                        PRECIO = "$" + oProductoEdicion.PRECIO.ToString(),
                                         CANTIDAD_DISPONIBLE = loDetalleProductoIngreso.CANTIDAD_UNIDADES
                                     };
 
@@ -219,7 +219,7 @@ namespace PL.AdminDashboard
                                         COD_PRODUCTO = oProductoEdicion.COD_PRODUCTO,
                                         NOMBRE = loNombre,
                                         EDICION = oProductoEdicion.EDICION,
-                                        PRECIO = "$ " + oProductoEdicion.PRECIO.ToString(),
+                                        PRECIO = "$" + oProductoEdicion.PRECIO.ToString(),
                                         CANTIDAD_DISPONIBLE = loDetalleProductoIngreso.CANTIDAD_UNIDADES
                                     };
 

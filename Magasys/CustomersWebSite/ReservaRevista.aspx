@@ -68,7 +68,7 @@
                                             </div>
                                             <div class="product-desc">
                                                 <span class="product-price">
-                                                    <asp:Label ID="lblPrecio" runat="server" Text='<%#(Eval("PRECIO") != null) ? string.Format("$ {0}",Eval("PRECIO").ToString()):string.Empty%>'></asp:Label>
+                                                    <asp:Label ID="lblPrecio" runat="server" Text='<%#(Eval("PRECIO") != null) ? string.Format("${0}",Eval("PRECIO").ToString()):string.Empty%>'></asp:Label>
                                                 </span>
                                                 <div style="font-size: 14px; font-weight: 600; color: #1ab394;">
                                                     <asp:Label ID="lblEdicion" runat="server" Text='<%#string.Format("Edición: {0}",Eval("EDICION").ToString())%>'></asp:Label>

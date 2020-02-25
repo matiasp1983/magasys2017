@@ -214,7 +214,7 @@ namespace BLL
                                     TIPO_PRODUCTO = loProductoEdicion.Producto.TipoProducto.DESCRIPCION,
                                     EDICION = loProductoEdicion.EDICION,
                                     FECHA_EDICION = Convert.ToDateTime(loProductoEdicion.FECHA_EDICION),
-                                    PRECIO = "$ " + loProductoEdicion.PRECIO.ToString(),
+                                    PRECIO = "$" + loProductoEdicion.PRECIO.ToString(),
                                     CANTIDAD_DISPONIBLE = loProductoEdicion.CANTIDAD_DISPONIBLE
                                 };
 

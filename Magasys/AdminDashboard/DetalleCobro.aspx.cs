@@ -93,7 +93,7 @@ namespace PL.AdminDashboard
                                 ID_VENTA = loDetalleCobro.COD_VENTA,
                                 FECHA = loDetalleCobro.Venta.FECHA,
                                 FORMA_PAGO = loDetalleCobro.Venta.FormaPago.DESCRIPCION,
-                                TOTAL = "$ " + loDetalleCobro.Venta.TOTAL.ToString()
+                                TOTAL = "$" + loDetalleCobro.Venta.TOTAL.ToString()
                             };
 
                             lstVentaListado.Add(oVentaListado);

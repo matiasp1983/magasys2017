@@ -68,9 +68,9 @@ namespace PL.AdminDashboard
                                 COD_EDICION = loDetalleVenta.COD_PRODUCTO_EDICION,
                                 EDICION = loDetalleVenta.ProductoEdicion.EDICION,
                                 TIPO_PRODUCTO = loDetalleVenta.ProductoEdicion.Producto.TipoProducto.DESCRIPCION,
-                                PRECIO_UNITARIO = "$ " + loDetalleVenta.PRECIO_UNIDAD.ToString(),
+                                PRECIO_UNITARIO = "$" + loDetalleVenta.PRECIO_UNIDAD.ToString(),
                                 CANTIDAD = loDetalleVenta.CANTIDAD,
-                                SUBTOTAL = "$ " + loDetalleVenta.SUBTOTAL.ToString()
+                                SUBTOTAL = "$" + loDetalleVenta.SUBTOTAL.ToString()
                             };
 
                             lstVentaListado.Add(oVentaListado);

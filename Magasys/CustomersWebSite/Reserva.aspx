@@ -124,7 +124,7 @@
                                             <div class="product-desc">
                                                 <div id="divPrecio" runat="server">
                                                     <span class="product-price">
-                                                        <asp:Label ID="lblPrecio" runat="server" Text='<%#(Eval("PRECIO") != null) ? string.Format("$ {0}",Eval("PRECIO").ToString()):string.Empty%>'></asp:Label>
+                                                        <asp:Label ID="lblPrecio" runat="server" Text='<%#(Eval("PRECIO") != null) ? string.Format("${0}",Eval("PRECIO").ToString()):string.Empty%>'></asp:Label>
                                                     </span>
                                                 </div>
                                                 <div style="font-size: 14px; font-weight: 600; color: #1ab394;">

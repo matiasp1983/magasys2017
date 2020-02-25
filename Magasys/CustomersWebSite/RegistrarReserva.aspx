@@ -14,15 +14,15 @@
                             <span class="pull-right">(<strong>5</strong>) items</span>
                             <h5>Productos de tu reserva</h5>
                         </div>
-                        <div class="ibox-content">
+                        <div id="divIboxContent" class="ibox-content">
                             <asp:ListView ID="lsvProductos" runat="server" OnItemDataBound="lsvProductos_ItemDataBound">
                                 <LayoutTemplate>
                                     <div class="row" id="itemPlaceholder" runat="server">
                                     </div>
                                 </LayoutTemplate>
                                 <ItemTemplate>
-                                    <div class="table-responsive">                                          
-                                        <table class="table shoping-cart-table">                                          
+                                    <div id="divTabla_<%#Eval("COD_PRODUCTO").ToString()%>" class="table-responsive">
+                                        <table class="table shoping-cart-table">
                                             <tbody>
                                                 <tr>
                                                     <td style="width: 90px">
@@ -41,7 +41,7 @@
                                                         <p class="small">
                                                             <asp:Label ID="lblDescripcion" runat="server" Text='<%#Eval("DESCRIPCION").ToString()%>'></asp:Label>
                                                         </p>
-                                                        <p class="small">                                                            
+                                                        <p class="small">
                                                             <asp:Label ID="lblFechaEdicion" runat="server" Text='<%#(Eval("FECHA_EDICION") != null) ? Eval("FECHA_EDICION").ToString():null%>'></asp:Label>
                                                         </p>
                                                         <dl class="small m-b-none">
@@ -49,45 +49,46 @@
                                                             <asp:Label ID="lblPrecio" runat="server" Text='<%#Eval("PRECIO").ToString()%>'></asp:Label>
                                                         </dl>
                                                         <dl class="small m-b-none">
-                                                            <dt>Forma de entrega</dt>                                                                
+                                                            <dt>Forma de entrega</dt>
                                                             <div class="i-checks">
-                                                                <label style="font-weight:500">
-                                                                    <%--<input runat="server" type="radio" id="Radio1">--%>
-                                                                    <%--<asp:RadioButton ID="RadioButton1" runat="server" />--%>
-                                                                    <asp:RadioButton ID="rdbRetiroLocal" runat="server" Text='<%# Eval("RETIRA_LOCAL") %>' GroupName="grEnvio" />
-                                                                    <i></i>Retira en Local</label>
-                                                                <label style="font-weight:500">
-                                                                    <%--<input runat="server" type="radio" id="Radio3">--%>
-                                                                    <asp:RadioButton ID="rdbEnvioDomicilio" runat="server" Text='<%# Eval("ENVIO_DOMICILIO") %>' GroupName="grEnvio" />
-                                                                    <i></i>Envío a Domicilio</label>
-                                                            </div>                                                         
+                                                                <input runat="server" type="radio" id="rdbRetiraEnLocal" checked>
+                                                                Retira en Local&nbsp;
+                                                                    <input runat="server" type="radio" id="rdbEnvioDomicilio">
+                                                                Envío a Domicilio
+                                                            </div>
+                                                            <div id="divFormaDeEntrega_<%#Eval("COD_PRODUCTO").ToString()%>">
+                                                                 <asp:HiddenField ID="hdFormaDeEntrega" runat="server"/>
+                                                            </div>
                                                         </dl>
                                                         <div class="m-t-sm">
-                                                            <button runat="server" id="btnEliminar" class="text-muted" onserverclick="BtnEliminar_Click"><i class="fa fa-trash"></i> Eliminar</button>
+                                                            <a class="btn btn-outline btn-default btn-xl" title="Eliminar" onclick="EliminarProducto(this);">Eliminar&nbsp;<i class="fa fa-trash"></i>
+                                                                <asp:HiddenField ID="hdCodProducto" runat="server" Value='<%#Eval("COD_PRODUCTO").ToString()%>' />
+                                                            </a>
                                                         </div>
                                                     </td>
                                                     <td style="width: 100px">
                                                         <div id="divCantidad">
-                                                            <asp:TextBox ID="txtCantidad" runat="server" Text='<%#Eval("CANTIDAD").ToString()%>' autocomplete="off" title='<%#string.Format("{0};{1}", Eval("PRECIO").ToString(), Eval("COD_PRODUCTO").ToString())%>' Enabled="True" MaxLength="0" ReadOnly="True"></asp:TextBox>                                                        
+                                                            <asp:TextBox ID="txtCantidad" runat="server" Text='<%#Eval("CANTIDAD").ToString()%>' autocomplete="off" title='<%#string.Format("{0};{1}", Eval("PRECIO").ToString(), Eval("COD_PRODUCTO").ToString())%>' Enabled="True" MaxLength="0" ReadOnly="True"></asp:TextBox>
                                                         </div>
                                                     </td>
-                                                    <td  style="width: 150px">
+                                                    <td style="width: 150px">
                                                         <h4>
                                                             <dt>Subtotal</dt>
                                                             <div id="divSubTotal_<%#Eval("COD_PRODUCTO").ToString()%>">
                                                                 <asp:Label ID="lblSubTotal" runat="server" Text='<%#Eval("SUBTOTAL").ToString()%>'></asp:Label>
                                                             </div>
-                                                        </h4>                                                        
-                                                    </td>                                                  
+                                                        </h4>
+                                                    </td>
                                                 </tr>
-                                            </tbody>                                          
+                                            </tbody>
                                         </table>
                                     </div>
                                 </ItemTemplate>
                             </asp:ListView>
                         </div>
                         <div class="ibox-content">
-                            <button class="btn btn-primary pull-right"><i class="fa fa fa-shopping-cart"></i>Checkout</button>
+                            <a class="btn btn-primary pull-right" onclick="ConfirmarReserva();">Confirmar Reservar&nbsp;<i class="fa fa fa-shopping-cart"></i>
+                            </a>
                             <button class="btn btn-white"><i class="fa fa-arrow-left"></i>Continue shopping</button>
                         </div>
                     </div>
@@ -137,19 +138,64 @@
     <script src="js/plugins/iCheck/icheck.min.js"></script>
 
     <script type="text/javascript">
-        
-            $('#divCantidad > input').TouchSpin({
-                verticalbuttons: true,
-                min: 1,
-                max: 99
-            }).on('touchspin.on.startspin', function (e) {
-                
-                var loCantidad = parseInt(e.currentTarget.value);
-                var loPrecio = parseFloat(e.currentTarget.title.split(';')[0].replace('$', '').replace(',', '.'));
-                var loCodigoProducto = e.currentTarget.title.split(';')[1];
-                var loSubtotal = parseFloat(loPrecio * loCantidad);
 
-                $('#divSubTotal_' + loCodigoProducto).html('$' + loSubtotal.toFixed(2).replace('.', ','));                
+        $('.i-checks').iCheck({
+            radioClass: 'iradio_square-green'
+        });
+
+        $('#divCantidad > input').TouchSpin({
+            verticalbuttons: true,
+            min: 1,
+            max: 99
+        }).on('touchspin.on.startspin', function (e) {
+
+            var loCantidad = parseInt(e.currentTarget.value);
+            var loPrecio = parseFloat(e.currentTarget.title.split(';')[0].replace('$', '').replace(',', '.'));
+            var loCodigoProducto = e.currentTarget.title.split(';')[1];
+            var loSubtotal = parseFloat(loPrecio * loCantidad);
+
+            $('#divSubTotal_' + loCodigoProducto).html('$' + loSubtotal.toFixed(2).replace('.', ','));
+        });
+
+        function EliminarProducto(control) {
+            if (window.jQuery) {
+                var loCodigo = control.lastElementChild.defaultValue;
+                $('#divTabla_' + loCodigo).remove();
+            }
+        }
+
+        function ConfirmarReserva() {
+
+            var loReservas = [];
+
+            $('#divIboxContent > div > table > tbody > tr').each(function () {
+                var loFormaDeEntrega = "D";
+                if (this.cells[1].children[4].children[1].children[0].className == "iradio_square-green checked") {
+                    loFormaDeEntrega = "L"
+                }
+                var loCantidad = this.cells[2].children[0].children[0].children[1].value.trim();
+                var loSubTotal = this.cells[3].children[0].children[1].textContent.replace("$",'').trim();
+
+                loReservas.push(loFormaDeEntrega + ";" + loCantidad + ";" + loSubTotal);
             });
+
+            console.log(loReservas);
+
+            /*var lommm;
+            $.ajax({
+                type: "POST",
+                url: "RegistrarReserva.aspx/GuargarReserva",
+                data: JSON.stringify({ 'mmm': lommm }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    console.log(response.d);
+                },
+                failure: function (response) {
+                   console.log(response.d);
+                }
+            });*/
+        }
+
     </script>
 </asp:Content>
