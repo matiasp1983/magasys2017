@@ -68,7 +68,7 @@
                                                     </td>
                                                     <td style="width: 100px">
                                                         <div id="divCantidad">
-                                                            <asp:TextBox ID="txtCantidad" runat="server" Text='<%#Eval("CANTIDAD").ToString()%>' autocomplete="off" title='<%#string.Format("{0};{1}", Eval("PRECIO").ToString(), Eval("COD_PRODUCTO").ToString())%>' Enabled="True" MaxLength="0" ReadOnly="True"></asp:TextBox>
+                                                            <asp:TextBox ID="txtCantidad" runat="server" Text='<%#Eval("CANTIDAD").ToString()%>' autocomplete="off" title='<%#string.Format("{0};{1}", Eval("PRECIO").ToString(), Eval("COD_PRODUCTO").ToString())%>' Enabled="True" MaxLength="0" ReadOnly="True" BackColor="White"></asp:TextBox>
                                                         </div>
                                                     </td>
                                                     <td style="width: 150px">
@@ -177,24 +177,25 @@
                 var loSubTotal = this.cells[3].children[0].children[1].textContent.replace("$",'').trim();
 
                 loReservas.push(loFormaDeEntrega + ";" + loCantidad + ";" + loSubTotal);
-            });
-
-            console.log(loReservas);
-
-            /*var lommm;
+            });          
+            
             $.ajax({
                 type: "POST",
                 url: "RegistrarReserva.aspx/GuargarReserva",
-                data: JSON.stringify({ 'mmm': lommm }),
+                data: JSON.stringify({ 'pReservas': loReservas }),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
-                    console.log(response.d);
+                    var msg = JSON.parse(response);
+                    if (msg.hasOwnProperty('d'))
+                        return msg.d;
+                    else
+                        return msg;
                 },
                 failure: function (response) {
                    console.log(response.d);
                 }
-            });*/
+            });
         }
 
     </script>

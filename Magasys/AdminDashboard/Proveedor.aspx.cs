@@ -167,6 +167,10 @@ namespace PL.AdminDashboard
             FormProveedor.Controls.OfType<DropDownList>().ToList().ForEach(y => y.SelectedIndex = 0);
         }
 
+        #endregion
+
+        #region Métodos Públicos
+
         [WebMethod]
         public static ArrayList CargarLocalidades(string idProvincia)
         {

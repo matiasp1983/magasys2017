@@ -4,6 +4,7 @@ using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
@@ -58,36 +59,7 @@ namespace PL.CustomersWebSite
                 Logger loLogger = LogManager.GetCurrentClassLogger();
                 loLogger.Error(ex);
             }
-        }
-
-        /*protected void BtnEliminar_Click(object sender, EventArgs e)
-        {
-            ListViewDataItem loItemProducto;
-            ListViewDataItem loItemProductoEdicion;
-
-            var loCodigos = ((HtmlButton)sender).Attributes["value"];
-
-            var loCodigosItem = loCodigos.Split('-');
-            var loCodigoProducto = loCodigosItem[0];
-            var loCodigoProductoEdicion = loCodigosItem[1];
-
-            // Eliminar Producto del listado
-            if (!String.IsNullOrWhiteSpace(loCodigoProducto))
-            {
-                loItemProducto = lsvProductos.Items.Where(x => ((Label)x.Controls[5]).Text.ToString().Equals(loCodigoProducto)).First();
-                lsvProductos.Items.Remove(loItemProducto);
-            }
-
-            // Eliminar la Edición del listado
-            if (!String.IsNullOrWhiteSpace(loCodigoProductoEdicion))
-            {
-                loItemProductoEdicion = lsvProductos.Items.Where(x => ((Label)x.Controls[7]).Text.ToString().Equals(loCodigoProductoEdicion)).First();
-                lsvProductos.Items.Remove(loItemProductoEdicion);
-            }
-
-            lsvProductos.DataSource = MapListViewToListObject(lsvProductos);
-            lsvProductos.DataBind();
-        }*/
+        }       
 
         #endregion
 
@@ -202,6 +174,16 @@ namespace PL.CustomersWebSite
             }
 
             return lstReservaCustomerWebSite;
+        }
+
+        #endregion
+
+        #region Métodos Públicos
+
+        [WebMethod]
+        public static bool GuargarReserva(string pReservas)
+        {
+            return true;
         }
 
         #endregion
