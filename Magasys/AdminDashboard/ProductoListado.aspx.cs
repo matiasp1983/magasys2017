@@ -50,8 +50,8 @@ namespace PL.AdminDashboard
                 HtmlButton btnModificar = ((HtmlButton)e.Item.FindControl("btnModificar"));
                 btnModificar.Attributes.Add("value", string.Format("{0},{1}", loIdProducto, loDescTipoProducto));
 
-                HiddenField hdIdCuitProveedorBaja = ((HiddenField)e.Item.FindControl("hdIdCuitProveedorBaja"));
-                hdIdCuitProveedorBaja.Value = loIdProducto.ToString();
+                //HiddenField hdIdCuitProveedorBaja = ((HiddenField)e.Item.FindControl("hdIdCuitProveedorBaja"));
+                //hdIdCuitProveedorBaja.Value = loIdProducto.ToString();
             }
             catch (Exception ex)
             {

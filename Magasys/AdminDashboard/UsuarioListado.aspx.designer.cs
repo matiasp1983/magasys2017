@@ -139,12 +139,12 @@ namespace PL.AdminDashboard {
         protected global::System.Web.UI.WebControls.Button btnBaja;
         
         /// <summary>
-        /// Control hdIdUsuarioBaja.
+        /// Control hdIdUsuarioBajaModal.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdIdUsuarioBaja;
+        protected global::System.Web.UI.WebControls.HiddenField hdIdUsuarioBajaModal;
     }
 }

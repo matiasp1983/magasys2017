@@ -40,8 +40,8 @@ namespace PL.AdminDashboard
             {
                 if (e.Item.ItemType != ListViewItemType.DataItem) return;
 
-                var loIdUsuario = ((BLL.DAL.Usuario)e.Item.DataItem).ID_USUARIO.ToString();
-                var loNombreUsuario = ((BLL.DAL.Usuario)e.Item.DataItem).NOMBRE_USUARIO.ToString();
+                var loIdUsuario = ((BLL.UsuarioListado)e.Item.DataItem).ID_USUARIO.ToString();
+                var loNombreUsuario = ((BLL.UsuarioListado)e.Item.DataItem).NOMBRE_USUARIO.ToString();
 
                 HtmlButton btnVisualizar = ((HtmlButton)e.Item.FindControl("btnVisualizar"));
                 btnVisualizar.Attributes.Add("value", loIdUsuario);
@@ -99,9 +99,9 @@ namespace PL.AdminDashboard
         {
             try
             {
-                if (!String.IsNullOrEmpty(hdIdUsuarioBaja.Value))
+                if (!String.IsNullOrEmpty(hdIdUsuarioBajaModal.Value))
                 {
-                    var loIdUsuario = Convert.ToInt64(hdIdUsuarioBaja.Value);
+                    var loIdUsuario = Convert.ToInt64(hdIdUsuarioBajaModal.Value);
                     var oUsuario = new BLL.UsuarioBLL();
                     if (oUsuario.BajaUsuario(loIdUsuario))
                     {

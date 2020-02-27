@@ -176,7 +176,7 @@
                                                 OnClick="BtnBaja_Click" />
                                         </div>
                                     </div>
-                                    <asp:HiddenField ID="hdIdUsuarioBaja" runat="server" Value="" />
+                                    <asp:HiddenField ID="hdIdUsuarioBajaModal" runat="server" Value="" />
                                 </div>
                             </div>
                         </div>
@@ -188,7 +188,7 @@
 </asp:Content>
 <asp:Content ID="Content6" ContentPlaceHolderID="script" runat="server">
     <script type="text/javascript">
-        var hdIdUsuarioBaja = '#<%=hdIdUsuarioBaja.ClientID%>';
+        var hdIdUsuarioBajaModal = '#<%=hdIdUsuarioBajaModal.ClientID%>';
         var lblNombreUsuarioBaja = '#<%=lblNombreUsuarioBaja.ClientID%>';
     </script>
     <script type="text/javascript">
@@ -227,7 +227,7 @@
                 var loArreglo = loValores.split(",", 2);
                 var loId = loArreglo[0];
                 var loNombreUsuario = loArreglo[1];
-                $(hdIdUsuarioBaja).val(loId);
+                $(hdIdUsuarioBajaModal).val(loId);
                 $(lblNombreUsuarioBaja).text(loNombreUsuario);
             }
         }
