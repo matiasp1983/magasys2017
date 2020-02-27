@@ -346,6 +346,7 @@ namespace PL.AdminDashboard
             bool loResutado = false;
             bool loGrabarEdicion = false;
             List<DetalleProductoIngreso> lstDetalleProductoIngreso = null;
+            List<BLL.DAL.ReservaEdicion> lstReservasConfirmar = new List<BLL.DAL.ReservaEdicion>();
             ProductoEdicion oProductoEdicion = null;
             BLL.DAL.ProductoIngreso oProductoIngreso = null;
             BLL.DAL.Imagen oImagen = null;
@@ -393,7 +394,6 @@ namespace PL.AdminDashboard
                 }
 
                 lstDetalleProductoIngreso = new List<DetalleProductoIngreso>();
-
                 foreach (var loItem in lsvDiarios.Items)
                 {
                     if (String.IsNullOrEmpty(((TextBox)loItem.Controls[7]).Text))
@@ -456,6 +456,25 @@ namespace PL.AdminDashboard
                             return loResutado;
                     }
 
+                    // Consultar si existen reservas para ese producto
+
+                    var oReservaFiltro = CargarReservaFiltro(Convert.ToString(((Label)loItem.Controls[3]).Text));
+                    var lstReserva = new BLL.ReservaBLL().ObtenerReservas(oReservaFiltro);
+                    if (lstReserva.Any())
+                    {
+                        // Agregar los resultados en una lista con TODAS las reservas porque asi como está borra los anteriores
+
+                        foreach (var loReserva in lstReserva)
+                        {
+                            BLL.DAL.ReservaEdicion oReservaEdicion = new BLL.DAL.ReservaEdicion();
+                            oReservaEdicion.COD_PROD_EDICION = oProductoEdicion.ID_PRODUCTO_EDICION;
+                            oReservaEdicion.COD_RESERVA = loReserva.ID_RESERVA;
+                            oReservaEdicion.FECHA = DateTime.Now;
+                            oReservaEdicion.COD_ESTADO = 10;
+                            lstReservasConfirmar.Add(oReservaEdicion);
+                        }
+                    }
+
                     oDetalleProductoIngreso.CANTIDAD_UNIDADES = Convert.ToInt32(((TextBox)loItem.Controls[13]).Text);
                     oDetalleProductoIngreso.COD_ESTADO = 1;
                     if (!String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[15]).Text)))
@@ -471,6 +490,21 @@ namespace PL.AdminDashboard
                     oProductoIngreso.COD_PROVEEDOR = Convert.ToInt32(ddlProveedor.SelectedValue);
                     loResutado = new BLL.ProductoIngresoBLL().AltaIngreso(oProductoIngreso, lstDetalleProductoIngreso);
                 }
+
+                // Llamar pantalla para Confirmar las reservas
+
+                List<BLL.DAL.ReservaEdicion> lstReservasConfirmadas = lstReservasConfirmar;
+
+                // Registrar las Confirmadas
+
+                foreach (var loReservaConfirmada in lstReservasConfirmadas)
+                {
+                    loReservaConfirmada.ID_RESERVA_EDICION = new BLL.ReservaEdicionBLL().ObtenerProximaReserva();
+                    loResutado = new BLL.ReservaEdicionBLL().AltaReservaEdicion(loReservaConfirmada);
+
+                }
+
+
             }
             catch (Exception)
             {
@@ -485,6 +519,7 @@ namespace PL.AdminDashboard
             bool loResutado = false;
             bool loGrabarEdicion = false;
             List<DetalleProductoIngreso> lstDetalleProductoIngreso = null;
+            List<BLL.DAL.ReservaEdicion> lstReservasConfirmar = new List<BLL.DAL.ReservaEdicion>();
             ProductoEdicion oProductoEdicion = null;
             BLL.DAL.ProductoIngreso oProductoIngreso = null;
             BLL.DAL.Imagen oImagen = null;
@@ -574,6 +609,7 @@ namespace PL.AdminDashboard
                         oProductoEdicion.CANTIDAD_DISPONIBLE = Convert.ToInt32(((TextBox)loItem.Controls[13]).Text);
                         if (!String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[9]).Text)))
                             oProductoEdicion.DESCRIPCION = Convert.ToString(((TextBox)loItem.Controls[9]).Text);
+
                         oDetalleProductoIngreso.COD_PRODUCTO_EDICION = new BLL.ProductoEdicionBLL().AltaProductoEdicion(oProductoEdicion);
                         if (oImagen != null) // Asociar de la Imagen
                             oProductoEdicion.Imagen = oImagen;
@@ -599,6 +635,25 @@ namespace PL.AdminDashboard
                             return loResutado;
                     }
 
+                    // Consultar si existen reservas para ese producto
+
+                    var oReservaFiltro = CargarReservaFiltro(Convert.ToString(((Label)loItem.Controls[3]).Text));
+                    var lstReserva = new BLL.ReservaBLL().ObtenerReservas(oReservaFiltro);
+                    if (lstReserva.Any())
+                    {
+                        // Agregar los resultados en una lista con TODAS las reservas porque asi como está borra los anteriores
+
+                        foreach (var loReserva in lstReserva)
+                        {
+                            BLL.DAL.ReservaEdicion oReservaEdicion = new BLL.DAL.ReservaEdicion();
+                            oReservaEdicion.COD_PROD_EDICION = oProductoEdicion.ID_PRODUCTO_EDICION;
+                            oReservaEdicion.COD_RESERVA = loReserva.ID_RESERVA;
+                            oReservaEdicion.FECHA = DateTime.Now;
+                            oReservaEdicion.COD_ESTADO = 10;
+                            lstReservasConfirmar.Add(oReservaEdicion);
+                        }
+                    }
+
                     oDetalleProductoIngreso.CANTIDAD_UNIDADES = Convert.ToInt32(((TextBox)loItem.Controls[13]).Text);
                     oDetalleProductoIngreso.COD_ESTADO = 1;
                     if (!String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[15]).Text)))
@@ -614,6 +669,19 @@ namespace PL.AdminDashboard
                     oProductoIngreso.COD_PROVEEDOR = Convert.ToInt32(ddlProveedor.SelectedValue);
                     loResutado = new BLL.ProductoIngresoBLL().AltaIngreso(oProductoIngreso, lstDetalleProductoIngreso);
                 }
+
+                // Llamar pantalla para Confirmar las reservas
+
+                List<BLL.DAL.ReservaEdicion> lstReservasConfirmadas = lstReservasConfirmar;
+
+                // Registrar las Confirmadas
+
+                foreach (var loReservaConfirmada in lstReservasConfirmadas)
+                {
+                    loReservaConfirmada.ID_RESERVA_EDICION = new BLL.ReservaEdicionBLL().ObtenerProximaReserva();
+                    loResutado = new BLL.ReservaEdicionBLL().AltaReservaEdicion(loReservaConfirmada);
+
+                }
             }
             catch (Exception)
             {
@@ -628,6 +696,7 @@ namespace PL.AdminDashboard
             bool loResutado = false;
             bool loGrabarEdicion = false;
             List<DetalleProductoIngreso> lstDetalleProductoIngreso = null;
+            List<BLL.DAL.ReservaEdicion> lstReservasConfirmar = new List<BLL.DAL.ReservaEdicion>();
             ProductoEdicion oProductoEdicion = null;
             BLL.DAL.ProductoIngreso oProductoIngreso = null;
             BLL.DAL.Imagen oImagen = null;
@@ -736,6 +805,25 @@ namespace PL.AdminDashboard
                             return loResutado;
                     }
 
+                    // Consultar si existen reservas para ese producto
+
+                    var oReservaFiltro = CargarReservaFiltro(Convert.ToString(((Label)loItem.Controls[3]).Text));
+                    var lstReserva = new BLL.ReservaBLL().ObtenerReservas(oReservaFiltro);
+                    if (lstReserva.Any())
+                    {
+                        // Agregar los resultados en una lista con TODAS las reservas porque asi como está borra los anteriores
+
+                        foreach (var loReserva in lstReserva)
+                        {
+                            BLL.DAL.ReservaEdicion oReservaEdicion = new BLL.DAL.ReservaEdicion();
+                            oReservaEdicion.COD_PROD_EDICION = oProductoEdicion.ID_PRODUCTO_EDICION;
+                            oReservaEdicion.COD_RESERVA = loReserva.ID_RESERVA;
+                            oReservaEdicion.FECHA = DateTime.Now;
+                            oReservaEdicion.COD_ESTADO = 10;
+                            lstReservasConfirmar.Add(oReservaEdicion);
+                        }
+                    }
+
                     oDetalleProductoIngreso.CANTIDAD_UNIDADES = Convert.ToInt32(((TextBox)loItem.Controls[11]).Text);
                     oDetalleProductoIngreso.COD_ESTADO = 1;
                     if (!String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[13]).Text)))
@@ -751,6 +839,19 @@ namespace PL.AdminDashboard
                     oProductoIngreso.COD_PROVEEDOR = Convert.ToInt32(ddlProveedor.SelectedValue);
                     loResutado = new BLL.ProductoIngresoBLL().AltaIngreso(oProductoIngreso, lstDetalleProductoIngreso);
                 }
+
+                // Llamar pantalla para Confirmar las reservas
+
+                List<BLL.DAL.ReservaEdicion> lstReservasConfirmadas = lstReservasConfirmar;
+
+                // Registrar las Confirmadas
+
+                foreach (var loReservaConfirmada in lstReservasConfirmadas)
+                {
+                    loReservaConfirmada.ID_RESERVA_EDICION = new BLL.ReservaEdicionBLL().ObtenerProximaReserva();
+                    loResutado = new BLL.ReservaEdicionBLL().AltaReservaEdicion(loReservaConfirmada);
+
+                }
             }
             catch (Exception)
             {
@@ -765,6 +866,7 @@ namespace PL.AdminDashboard
             bool loResutado = false;
             bool loGrabarEdicion = false;
             List<DetalleProductoIngreso> lstDetalleProductoIngreso = null;
+            List<BLL.DAL.ReservaEdicion> lstReservasConfirmar = new List<BLL.DAL.ReservaEdicion>();
             ProductoEdicion oProductoEdicion = null;
             BLL.DAL.ProductoIngreso oProductoIngreso = null;
             BLL.DAL.Imagen oImagen = null;
@@ -873,6 +975,25 @@ namespace PL.AdminDashboard
                             return loResutado;
                     }
 
+                    // Consultar si existen reservas para ese producto
+
+                    var oReservaFiltro = CargarReservaFiltro(Convert.ToString(((Label)loItem.Controls[3]).Text));
+                    var lstReserva = new BLL.ReservaBLL().ObtenerReservas(oReservaFiltro);
+                    if (lstReserva.Any())
+                    {
+                        // Agregar los resultados en una lista con TODAS las reservas porque asi como está borra los anteriores
+
+                        foreach (var loReserva in lstReserva)
+                        {
+                            BLL.DAL.ReservaEdicion oReservaEdicion = new BLL.DAL.ReservaEdicion();
+                            oReservaEdicion.COD_PROD_EDICION = oProductoEdicion.ID_PRODUCTO_EDICION;
+                            oReservaEdicion.COD_RESERVA = loReserva.ID_RESERVA;
+                            oReservaEdicion.FECHA = DateTime.Now;
+                            oReservaEdicion.COD_ESTADO = 10;
+                            lstReservasConfirmar.Add(oReservaEdicion);
+                        }
+                    }
+
                     oDetalleProductoIngreso.CANTIDAD_UNIDADES = Convert.ToInt32(((TextBox)loItem.Controls[13]).Text);
                     oDetalleProductoIngreso.COD_ESTADO = 1;
                     if (!String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[15]).Text)))
@@ -887,6 +1008,19 @@ namespace PL.AdminDashboard
                     oProductoIngreso.COD_ESTADO = 1;
                     oProductoIngreso.COD_PROVEEDOR = Convert.ToInt32(ddlProveedor.SelectedValue);
                     loResutado = new BLL.ProductoIngresoBLL().AltaIngreso(oProductoIngreso, lstDetalleProductoIngreso);
+                }
+
+                // Llamar pantalla para Confirmar las reservas
+
+                List<BLL.DAL.ReservaEdicion> lstReservasConfirmadas = lstReservasConfirmar;
+
+                // Registrar las Confirmadas
+
+                foreach (var loReservaConfirmada in lstReservasConfirmadas)
+                {
+                    loReservaConfirmada.ID_RESERVA_EDICION = new BLL.ReservaEdicionBLL().ObtenerProximaReserva();
+                    loResutado = new BLL.ReservaEdicionBLL().AltaReservaEdicion(loReservaConfirmada);
+
                 }
             }
             catch (Exception)
@@ -902,6 +1036,7 @@ namespace PL.AdminDashboard
             bool loResutado = false;
             bool loGrabarEdicion = false;
             List<DetalleProductoIngreso> lstDetalleProductoIngreso = null;
+            List<BLL.DAL.ReservaEdicion> lstReservasConfirmar = new List<BLL.DAL.ReservaEdicion>();
             ProductoEdicion oProductoEdicion = null;
             BLL.DAL.ProductoIngreso oProductoIngreso = null;
             BLL.DAL.Imagen oImagen = null;
@@ -1014,6 +1149,25 @@ namespace PL.AdminDashboard
                             return loResutado;
                     }
 
+                    // Consultar si existen reservas para ese producto
+
+                    var oReservaFiltro = CargarReservaFiltro(Convert.ToString(((Label)loItem.Controls[3]).Text));
+                    var lstReserva = new BLL.ReservaBLL().ObtenerReservas(oReservaFiltro);
+                    if (lstReserva.Any())
+                    {
+                        // Agregar los resultados en una lista con TODAS las reservas porque asi como está borra los anteriores
+
+                        foreach (var loReserva in lstReserva)
+                        {
+                            BLL.DAL.ReservaEdicion oReservaEdicion = new BLL.DAL.ReservaEdicion();
+                            oReservaEdicion.COD_PROD_EDICION = oProductoEdicion.ID_PRODUCTO_EDICION;
+                            oReservaEdicion.COD_RESERVA = loReserva.ID_RESERVA;
+                            oReservaEdicion.FECHA = DateTime.Now;
+                            oReservaEdicion.COD_ESTADO = 10;
+                            lstReservasConfirmar.Add(oReservaEdicion);
+                        }
+                    }
+
                     oDetalleProductoIngreso.CANTIDAD_UNIDADES = Convert.ToInt32(((TextBox)loItem.Controls[13]).Text);
                     oDetalleProductoIngreso.COD_ESTADO = 1;
                     if (!String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[15]).Text)))
@@ -1028,6 +1182,19 @@ namespace PL.AdminDashboard
                     oProductoIngreso.COD_ESTADO = 1;
                     oProductoIngreso.COD_PROVEEDOR = Convert.ToInt32(ddlProveedor.SelectedValue);
                     loResutado = new BLL.ProductoIngresoBLL().AltaIngreso(oProductoIngreso, lstDetalleProductoIngreso);
+                }
+
+                // Llamar pantalla para Confirmar las reservas
+
+                List<BLL.DAL.ReservaEdicion> lstReservasConfirmadas = lstReservasConfirmar;
+
+                // Registrar las Confirmadas
+
+                foreach (var loReservaConfirmada in lstReservasConfirmadas)
+                {
+                    loReservaConfirmada.ID_RESERVA_EDICION = new BLL.ReservaEdicionBLL().ObtenerProximaReserva();
+                    loResutado = new BLL.ReservaEdicionBLL().AltaReservaEdicion(loReservaConfirmada);
+
                 }
             }
             catch (Exception)
@@ -1043,6 +1210,7 @@ namespace PL.AdminDashboard
             bool loResutado = false;
             bool loGrabarEdicion = false;
             List<DetalleProductoIngreso> lstDetalleProductoIngreso = null;
+            List<BLL.DAL.ReservaEdicion> lstReservasConfirmar = new List<BLL.DAL.ReservaEdicion>();
             ProductoEdicion oProductoEdicion = null;
             BLL.DAL.ProductoIngreso oProductoIngreso = null;
             BLL.DAL.Imagen oImagen = null;
@@ -1155,6 +1323,25 @@ namespace PL.AdminDashboard
                             return loResutado;
                     }
 
+                    // Consultar si existen reservas para ese producto
+
+                    var oReservaFiltro = CargarReservaFiltro(Convert.ToString(((Label)loItem.Controls[3]).Text));
+                    var lstReserva = new BLL.ReservaBLL().ObtenerReservas(oReservaFiltro);
+                    if (lstReserva.Any())
+                    {
+                        // Agregar los resultados en una lista con TODAS las reservas porque asi como está borra los anteriores
+
+                        foreach (var loReserva in lstReserva)
+                        {
+                            BLL.DAL.ReservaEdicion oReservaEdicion = new BLL.DAL.ReservaEdicion();
+                            oReservaEdicion.COD_PROD_EDICION = oProductoEdicion.ID_PRODUCTO_EDICION;
+                            oReservaEdicion.COD_RESERVA = loReserva.ID_RESERVA;
+                            oReservaEdicion.FECHA = DateTime.Now;
+                            oReservaEdicion.COD_ESTADO = 10;
+                            lstReservasConfirmar.Add(oReservaEdicion);
+                        }
+                    }
+
                     oDetalleProductoIngreso.CANTIDAD_UNIDADES = Convert.ToInt32(((TextBox)loItem.Controls[13]).Text);
                     oDetalleProductoIngreso.COD_ESTADO = 1;
                     if (!String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[15]).Text)))
@@ -1169,6 +1356,19 @@ namespace PL.AdminDashboard
                     oProductoIngreso.COD_ESTADO = 1;
                     oProductoIngreso.COD_PROVEEDOR = Convert.ToInt32(ddlProveedor.SelectedValue);
                     loResutado = new BLL.ProductoIngresoBLL().AltaIngreso(oProductoIngreso, lstDetalleProductoIngreso);
+                }
+
+                // Llamar pantalla para Confirmar las reservas
+
+                List<BLL.DAL.ReservaEdicion> lstReservasConfirmadas = lstReservasConfirmar;
+
+                // Registrar las Confirmadas
+
+                foreach (var loReservaConfirmada in lstReservasConfirmadas)
+                {
+                    loReservaConfirmada.ID_RESERVA_EDICION = new BLL.ReservaEdicionBLL().ObtenerProximaReserva();
+                    loResutado = new BLL.ReservaEdicionBLL().AltaReservaEdicion(loReservaConfirmada);
+
                 }
             }
             catch (Exception)
@@ -1193,7 +1393,30 @@ namespace PL.AdminDashboard
             btnCancelar.Visible = false;
         }
 
+        private ReservaFiltro CargarReservaFiltro(String nombre)
+        {
+            ReservaFiltro oReservaFiltro = new ReservaFiltro();
+              
+            oReservaFiltro.NOMBRE_PRODUCTO = nombre;
+            oReservaFiltro.COD_ESTADO = 7;
+
+            return oReservaFiltro;
+        }
+
         #endregion
 
+        #region Clases
+
+        public class ReservaListado
+        {
+            public int ID_RESERVA { get; set; }
+            public String NOMBRE_CLIENTE { get; set; }
+            public string NOMBRE_PRODUCTO { get; set; }
+            public int? COD_CLIENTE { get; set; }
+            public string TIPO_RESERVA { get; set; }
+            public string FORMA_ENTREGA { get; set; }
+        }
+
+        #endregion
     }
 }

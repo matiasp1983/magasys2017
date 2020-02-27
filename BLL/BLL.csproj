@@ -158,6 +158,7 @@
     <Compile Include="DAL\ReservaEdicion.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="ReservaEdicionBLL.cs" />
     <Compile Include="DAL\Revista.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
