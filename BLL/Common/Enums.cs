@@ -33,7 +33,8 @@
             ProductoReserva,
             ListadoReserva,
             ListadoReservaEdicion,
-            Usuario
+            Usuario,
+            ImagenUsuarioCliente
         }        
 
         #endregion
