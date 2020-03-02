@@ -24,7 +24,7 @@
                     <li class="nav-header">
                         <div class="dropdown profile-element" style="text-align:center; cursor: default">
                             <span>                               
-                                <asp:Image ID="imgPerfil" runat="server" Width="125px" Height="125px" CssClass="img-circle" ImageUrl="~/AdminDashboard/img/perfil_default.png"/>
+                                <asp:Image ID="imgPerfil" runat="server" CssClass="img-circle img-lg" ImageUrl="~/AdminDashboard/img/perfil_default.png"/>
                             </span>                            
                                 <span class="clear"><span class="block m-t-sm"><strong class="font-bold" style="font-size:15px; color:#DFE4ED">Bienvenido</strong>
                                 </span><span class="text-muted text-xs block">
