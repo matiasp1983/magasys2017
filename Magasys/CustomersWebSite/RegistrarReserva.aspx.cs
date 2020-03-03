@@ -59,7 +59,7 @@ namespace PL.CustomersWebSite
                 Logger loLogger = LogManager.GetCurrentClassLogger();
                 loLogger.Error(ex);
             }
-        }       
+        }
 
         #endregion
 
@@ -91,6 +91,7 @@ namespace PL.CustomersWebSite
                         oReservaCustomerWebSite = new ReservaCustomerWebSite
                         {
                             COD_PRODUCTO = oProductoCustomersWebSite.COD_PRODUCTO.ToString(),
+                            COD_TIPO_PRODUCTO = oProductoCustomersWebSite.COD_TIPO_PRODUCTO,
                             NOMBRE = oProductoCustomersWebSite.NOMBRE_PRODUCTO,
                             DESCRIPCION = oProductoCustomersWebSite.DESCRIPCION,
                             PRECIO = oProductoCustomersWebSite.PRECIO,
@@ -125,6 +126,7 @@ namespace PL.CustomersWebSite
                         oReservaCustomerWebSite = new ReservaCustomerWebSite
                         {
                             COD_PRODUCTO_EDICION = oProdEdicionCustomersWebSite.COD_PRODUCTO_EDICION.ToString(),
+                            COD_TIPO_PRODUCTO = oProdEdicionCustomersWebSite.COD_TIPO_PRODUCTO,
                             NOMBRE = oProdEdicionCustomersWebSite.EDICION,
                             DESCRIPCION = oProdEdicionCustomersWebSite.DESCRIPCION,
                             FECHA_EDICION = oProdEdicionCustomersWebSite.FECHA_EDICION,
@@ -199,8 +201,8 @@ namespace PL.CustomersWebSite
                     /*Aquí va el código que guarda la reserva en la base de datos.*/
                     /*Por cada vuelva inserta un registro de la base.*/
 
-                   return true;
-                }               
+                    return true;
+                }
             }
             catch (Exception ex)
             {
@@ -219,7 +221,7 @@ namespace PL.CustomersWebSite
     public class ItemReserva
     {
         public String FormaDeEntrega { get; set; }
-        public int Cantidad { get; set; }        
+        public int Cantidad { get; set; }
     }
 
     #endregion
