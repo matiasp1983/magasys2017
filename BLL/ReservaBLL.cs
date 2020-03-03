@@ -345,6 +345,7 @@ namespace BLL
     {
         public System.Web.UI.WebControls.Image IMAGEN { get; set; }
         public string COD_PRODUCTO { get; set; }
+        public int COD_TIPO_PRODUCTO { get; set; }
         public string COD_PRODUCTO_EDICION { get; set; }
         public string NOMBRE { get; set; }
         public string DESCRIPCION { get; set; }
