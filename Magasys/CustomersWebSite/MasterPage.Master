@@ -53,6 +53,38 @@
                                     <i class="fa fa-list-alt"></i>  <span class="label label-warning">16</span>
                                 </a>
                             </li>
+
+                            <li class="dropdown">
+                                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                                    <img src="img/a4.jpg" class="img-circle img-sm" data-toggle="modal"/>
+                                </a>
+                                <ul class="dropdown-menu dropdown-messages">
+                                    <li>
+                                        <div class="dropdown-messages-box">
+                                            <div>
+                                                <img class="img-circle img-md" src="img/a4.jpg">
+                                            </div>
+            <%--                                <a href="profile.html" class="pull-left">
+                                                <img alt="image" class="img-circle" src="img/a7.jpg">
+                                            </a>--%>
+            <%--                                <div class="media-body">
+                                                <small class="pull-right">46h ago</small>
+                                                <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
+                                                <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
+                                            </div>--%>
+                                        </div>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <div class="text-center link-block">
+                                            <a href="InfoPersonal.aspx">
+                                                <strong>Gestionar tu cuenta</strong>
+                                                <i class="fa fa-angle-right"></i>
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
                             <li>
                                 <a href="login.html">
                                     <i class="fa fa-sign-out"></i>Log out
@@ -65,7 +97,7 @@
             <asp:ContentPlaceHolder ID="contentMaster" runat="server" />
             <div class="footer">
                 <div>
-                    <strong>Copyright</strong> Magasys Company &copy; 2019           
+                    <strong>Copyright</strong> Magasys Company &copy; 2020           
                 </div>
             </div>
         </div>

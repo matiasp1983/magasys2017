@@ -9,9 +9,13 @@ namespace PL.CustomersWebSite
 {
     public partial class MasterPage : System.Web.UI.MasterPage
     {
+        #region Eventos
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
+
+        #endregion
     }
 }
