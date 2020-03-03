@@ -50,6 +50,7 @@ namespace PL.CustomersWebSite
                     oProductoCustomersWebSite = new ProductoCustomersWebSite
                     {
                         COD_PRODUCTO = Convert.ToInt32(((HtmlInputCheckBox)loItem.Controls[1]).Attributes["title"].Split(';')[0]),
+                        COD_TIPO_PRODUCTO = Convert.ToInt32(ddlTipoProducto.SelectedValue),
                         NOMBRE_PRODUCTO = ((Label)loItem.Controls[7]).Text,
                         DESCRIPCION = ((Label)loItem.Controls[9]).Text,
                         PRECIO = ((Label)loItem.Controls[5].Controls[1]).Text
@@ -159,6 +160,11 @@ namespace PL.CustomersWebSite
                 Logger loLogger = LogManager.GetCurrentClassLogger();
                 loLogger.Error(ex);
             }
+        }
+
+        protected void BtnReservarEdiciones_Click(object sender, EventArgs e)
+        {
+
         }
 
         #endregion
