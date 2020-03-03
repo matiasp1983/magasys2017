@@ -34,6 +34,7 @@ namespace PL.CustomersWebSite
                     oProdEdicionCustomersWebSite = new ProdEdicionCustomersWebSite
                     {
                         COD_PRODUCTO_EDICION = Convert.ToInt32(((HtmlInputCheckBox)loItem.Controls[1]).Attributes["title"].Split(';')[0]),
+                        COD_TIPO_PRODUCTO = 2,
                         EDICION = ((Label)loItem.Controls[7]).Text,
                         DESCRIPCION = ((Label)loItem.Controls[9]).Text,
                         PRECIO = ((Label)loItem.Controls[5]).Text,
