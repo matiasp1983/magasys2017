@@ -73,7 +73,7 @@
                                         <div class="form-group">
                                             <label class="col-sm-10 control-label">Estado</label>   
                                             <div id="divEstado">
-                                                <asp:DropDownList ID="ddlEstado" runat="server" CssClass="form-control"></asp:DropDownList>                                            
+                                                <asp:DropDownList ID="ddlEstado" runat="server" CssClass="select2_estado form-control"></asp:DropDownList>                                            
                                             </div>   
                                         </div>
                                     </div>
@@ -278,6 +278,13 @@
             $(".select2_formapago").select2(
             {
                     placeholder: 'Seleccione una Forma de Pago',
+                    width: '100%',
+                    allowClear: true
+            });
+
+            $(".select2_estado").select2(
+            {
+                    placeholder: 'Seleccione un Estado',
                     width: '100%',
                     allowClear: true
             });

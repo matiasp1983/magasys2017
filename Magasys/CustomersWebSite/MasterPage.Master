@@ -79,6 +79,9 @@
     <!-- Custom and plugin javascript -->
     <script src="js/inspinia.js"></script>
     <script src="js/plugins/pace/pace.min.js"></script>
+    <!-- Data picker -->
+    <script src="js/plugins/datapicker/bootstrap-datepicker.js"></script>
+    <script src="js/plugins/datapicker/bootstrap-datepicker.es.js"></script>
     <!-- FooTable -->
     <script src="js/plugins/footable/footable.all.min.js"></script>
     <!-- Jquery Validate -->

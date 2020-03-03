@@ -173,11 +173,21 @@
                 });
 
                 LoadFootable();
+                Select2();
             });
         }
 
         function LoadFootable() {
             $('.footable').footable();
+        }
+
+        function Select2() {
+            $(".select2_tipodocumento").select2(
+                {
+                    placeholder: 'Seleccione un Tipo de Documento',
+                    width: '100%',
+                    allowClear: true
+                });
         }
 
     </script>

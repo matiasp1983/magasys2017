@@ -48,7 +48,7 @@
                                 <label class="col-sm-2 control-label">Forma de Pago</label>
                                 <div class="col-sm-10">
                                     <div id="divFormaPago">
-                                        <asp:DropDownList ID="ddlFormaPago" runat="server" CssClass="form-control"></asp:DropDownList>
+                                        <asp:DropDownList ID="ddlFormaPago" runat="server" CssClass="select2_formapago form-control"></asp:DropDownList>
                                     </div>
                                 </div>
                             </div>
@@ -68,7 +68,7 @@
                                 <label class="col-sm-3 control-label">Tipo de Documento</label>
                                 <div class="col-sm-2">
                                     <div id="divTipoDocumento">
-                                        <asp:DropDownList ID="ddlTipoDocumento" runat="server" CssClass="form-control"></asp:DropDownList>
+                                        <asp:DropDownList ID="ddlTipoDocumento" runat="server" CssClass="select2_tipodocumento form-control"></asp:DropDownList>
                                     </div>
                                 </div>
                                 <label class="col-sm-4 control-label">Número de Documento</label>
@@ -762,6 +762,20 @@
         }
 
         function Select2() {
+            $(".select2_formapago").select2(
+                {
+                    placeholder: 'Seleccione una Forma de Pago',
+                    width: '100%',
+                    allowClear: true
+                });
+
+            $(".select2_tipodocumento").select2(
+                {
+                    placeholder: 'Seleccione un Tipo de Documento',
+                    width: '100%',
+                    allowClear: true
+                });
+
             $(".select2_proveedor").select2(
                 {
                     placeholder: 'Seleccione un Proveedor',

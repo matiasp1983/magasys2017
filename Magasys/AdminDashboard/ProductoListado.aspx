@@ -192,7 +192,8 @@
         if (window.jQuery) {
             $(document).ready(function () {                
                 KeypressEnterDisabled();
-                LoadFootable();                
+                LoadFootable();
+                Select2();
             });
         }
 
@@ -207,6 +208,29 @@
 
         function LoadFootable() {
             $('.footable').footable();
+        }
+
+        function Select2() {
+            $(".select2_tipoproducto").select2(
+                {
+                    placeholder: 'Seleccione un Tipo de Producto',
+                    width: '100%',
+                    allowClear: true
+                });
+
+            $(".select2_estado").select2(
+                {
+                    placeholder: 'Seleccione un Estado',
+                    width: '100%',
+                    allowClear: true                    
+                });
+
+             $(".select2_proveedor").select2(
+                {
+                    placeholder: 'Seleccione un Proveedor',
+                    width: '100%',
+                    allowClear: true                    
+                });
         }
 
     </script>

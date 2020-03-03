@@ -48,7 +48,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="col-sm-10 control-label">Tipo de Documento</label>
-                                            <asp:DropDownList ID="ddlTipoDocumento" runat="server" CssClass="select2_tipoproducto form-control"></asp:DropDownList>
+                                            <asp:DropDownList ID="ddlTipoDocumento" runat="server" CssClass="select2_tipodocumento form-control"></asp:DropDownList>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
@@ -165,12 +165,22 @@
     <script type="text/javascript">
         if (window.jQuery) {
             $(document).ready(function () {                
-                LoadFootable();  
+                LoadFootable();
+                Select2();
             });
         }
 
         function LoadFootable() {
             $('.footable').footable();
+        }
+
+        function Select2() {
+            $(".select2_tipodocumento").select2(
+                {
+                    placeholder: 'Seleccione un Tipo de Documento',
+                    width: '100%',
+                    allowClear: true
+                });
         }
     </script>
 </asp:Content>

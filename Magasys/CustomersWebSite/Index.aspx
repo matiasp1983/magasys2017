@@ -42,7 +42,7 @@
                                         <div class="form-group">
                                             <label class="control-label">Estado</label>
                                             <div id="divEstado">
-                                                <asp:DropDownList ID="ddlEstado" runat="server" CssClass="form-control"></asp:DropDownList>                                            
+                                                <asp:DropDownList ID="ddlEstado" runat="server" CssClass="select2_estado form-control"></asp:DropDownList>                                            
                                             </div>  
                                         </div>
                                     </div>
@@ -247,6 +247,13 @@
         }
 
         function Select2() {
+            $(".select2_estado").select2(
+                {
+                    placeholder: 'Seleccione un Estado',
+                    width: '100%',
+                    allowClear: true
+                });
+
             $(".select2_tiporeserva").select2(
                 {
                     placeholder: 'Seleccione un Tipo de Reserva',
