@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="css/plugins/touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet">
-    <link href="css/plugins/iCheck/custom.css" rel="stylesheet">        
+    <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
     <link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="contentMaster" runat="server">
@@ -58,14 +58,31 @@
                                                                 Envío a Domicilio
                                                             </div>
                                                             <div id="divFormaDeEntrega_<%#Eval("COD_PRODUCTO").ToString()%>">
-                                                                 <asp:HiddenField ID="hdFormaDeEntrega" runat="server"/>
+                                                                <asp:HiddenField ID="hdFormaDeEntrega" runat="server" />
                                                             </div>
                                                         </dl>
-                                                        <div class="m-t-sm">
-                                                            <a class="btn btn-outline btn-default btn-xl" title="Eliminar" onclick="EliminarProducto(this);">Eliminar&nbsp;<i class="fa fa-trash"></i>
-                                                                <asp:HiddenField ID="hdCodProducto" runat="server" Value='<%#Eval("COD_PRODUCTO").ToString()%>' />
-                                                            </a>
-                                                        </div>
+                                                        <dl class="small m-b-none">
+                                                            <div id="divFechas" runat="server" visible="false">
+                                                                <div class="col-sm-2" style="margin-right: 20px">
+                                                                    <div class="form-group" id="dpFechaInicio">
+                                                                        <label class="control-label">Fecha Inicio de Reserva</label>
+                                                                        <div class="input-group date">
+                                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                                            <asp:TextBox ID="txtFechaIniReserva" runat="server" CssClass="input-sm form-control" autocomplete="off"></asp:TextBox>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-2" style="margin-right: 20px">
+                                                                    <div class="form-group" id="dpFechaFin">
+                                                                        <label class="control-label">Fecha Fin de Reserva</label>
+                                                                        <div class="input-group date">
+                                                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                                                            <asp:TextBox ID="txtFechaFinReserva" runat="server" CssClass="input-sm form-control" autocomplete="off"></asp:TextBox>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </dl>
                                                     </td>
                                                     <td style="width: 100px">
                                                         <div id="divCantidad">
@@ -79,6 +96,11 @@
                                                                 <asp:Label ID="lblSubTotal" runat="server" Text='<%#Eval("SUBTOTAL").ToString()%>'></asp:Label>
                                                             </div>
                                                         </h4>
+                                                    </td>
+                                                    <td style="width: 150px">
+                                                        <a class="btn btn-outline btn-danger" title="Eliminar" onclick="EliminarProducto(this);">Eliminar&nbsp;<i class="fa fa-trash"></i>
+                                                            <asp:HiddenField ID="hdCodProducto" runat="server" Value='<%#Eval("COD_PRODUCTO").ToString()%>' />
+                                                        </a>
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -142,6 +164,34 @@
 
     <script type="text/javascript">
 
+        if (window.jQuery) {
+            $(document).ready(function () {
+                LoadDatePicker();                
+            });
+        }
+
+        function LoadDatePicker() {
+            $('#dpFechaInicio .input-group.date').datepicker({
+                todayBtn: "linked",
+                clearBtn: true,
+                forceParse: true,
+                autoclose: true,
+                language: "es",
+                format: "dd/mm/yyyy",
+                keyboardNavigation: false
+            });
+
+            $('#dpFechaFin .input-group.date').datepicker({
+                todayBtn: "linked",
+                clearBtn: true,
+                forceParse: true,
+                autoclose: true,
+                language: "es",
+                format: "dd/mm/yyyy",
+                keyboardNavigation: false
+            });
+        }        
+
         $('.i-checks').iCheck({
             radioClass: 'iradio_square-green'
         });
@@ -176,11 +226,20 @@
                 if (this.cells[1].children[4].children[1].children[0].className == "iradio_square-green checked") {
                     loFormaDeEntrega = "L"
                 }
-                var loCantidad = this.cells[2].children[0].children[0].children[1].value.trim();                
+                var loCantidad = this.cells[2].children[0].children[0].children[1].value.trim();
 
-                loReservas.push(loFormaDeEntrega + ";" + loCantidad);
-            });          
-            
+                var loFechaInicio = "";
+                var loFechaFin = "";
+
+                if (this.cells[1].children[5].childElementCount > 0) {
+
+                    loFechaInicio = this.cells[1].children[5].children[0].children[0].children[0].children[1].children[1].value.trim();
+                    loFechaFin = this.cells[1].children[5].children[0].children[1].children[0].children[1].children[1].value.trim();
+                }
+
+                loReservas.push(loFormaDeEntrega + ";" + loCantidad + ";" + loFechaInicio + ";" + loFechaFin);
+            });
+
             $.ajax({
                 type: "POST",
                 url: "RegistrarReserva.aspx/GuardarReserva",
@@ -188,13 +247,13 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
-                var msg = JSON.parse(data.d);
+                    var msg = JSON.parse(data.d);
                     if (msg) {
                         swal({
-                        title: "Confirmación Reserva",
-                        text: "La reserva se guardó correctamente.",
-                        type: "success",
-                        confirmButtonText: 'Aceptar',
+                            title: "Confirmación Reserva",
+                            text: "La reserva se guardó correctamente.",
+                            type: "success",
+                            confirmButtonText: 'Aceptar',
                         }, function () {
                             var loLocation = window.location;
                             var loPathName = loLocation.pathname.substring(0, loLocation.pathname.lastIndexOf('/') + 1);
@@ -204,10 +263,10 @@
                     }
                     else {
                         swal({
-                        title: "Confirmación Reserva",
-                        text: "La reserva no se pudo guardar.",
-                        type: "warning",
-                        confirmButtonText: 'Aceptar'
+                            title: "Confirmación Reserva",
+                            text: "La reserva no se pudo guardar.",
+                            type: "warning",
+                            confirmButtonText: 'Aceptar'
                         });
                     }
                 },

@@ -46,13 +46,15 @@ namespace PL.CustomersWebSite
                 if (((ReservaCustomerWebSite)e.Item.DataItem).COD_PRODUCTO_EDICION != null)
                     loCodProductoEdicion = ((ReservaCustomerWebSite)e.Item.DataItem).COD_PRODUCTO_EDICION.ToString();
                 else
-                    loCodProductoEdicion = string.Empty;
+                    loCodProductoEdicion = string.Empty;                
 
-                HtmlButton btnEliminar = ((HtmlButton)e.Item.FindControl("btnEliminar"));
+                var loCodTipoProducto = ((ReservaCustomerWebSite)e.Item.DataItem).COD_TIPO_PRODUCTO;
 
-                var loCodigo = String.Format("{0}-{1}", loCodProducto, loCodProductoEdicion);
-
-                btnEliminar.Attributes.Add("value", loCodigo);
+                if (loCodTipoProducto == 1 || loCodTipoProducto == 2 || loCodTipoProducto == 5)
+                {
+                    HtmlGenericControl divFechas = ((HtmlGenericControl)e.Item.FindControl("divFechas"));
+                    divFechas.Visible = true;
+                }
             }
             catch (Exception ex)
             {
@@ -198,11 +200,21 @@ namespace PL.CustomersWebSite
                         Cantidad = Convert.ToInt32(loSplitReseva[1].ToString())
                     };
 
+                    if (!string.IsNullOrEmpty(loSplitReseva[2].ToString()))
+                        loItemReserva.FechaInicioReserva = Convert.ToDateTime(loSplitReseva[2].ToString());
+                    else
+                        loItemReserva.FechaInicioReserva = null;
+
+                    if (!string.IsNullOrEmpty(loSplitReseva[3].ToString()))
+                        loItemReserva.FechaFinReserva = Convert.ToDateTime(loSplitReseva[3].ToString());
+                    else
+                        loItemReserva.FechaFinReserva = null;                    
+
                     /*Aquí va el código que guarda la reserva en la base de datos.*/
                     /*Por cada vuelva inserta un registro de la base.*/
-
-                    return true;
                 }
+
+                return true;
             }
             catch (Exception ex)
             {
@@ -222,6 +234,8 @@ namespace PL.CustomersWebSite
     {
         public String FormaDeEntrega { get; set; }
         public int Cantidad { get; set; }
+        public DateTime? FechaInicioReserva { get; set; }
+        public DateTime? FechaFinReserva { get; set; }
     }
 
     #endregion
