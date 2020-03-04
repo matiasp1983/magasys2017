@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
+using BLL.Common;
+using BLL.DAL;
 using System.Web.UI.WebControls;
 
 namespace PL.AdminDashboard
@@ -23,6 +25,24 @@ namespace PL.AdminDashboard
 
         protected void BtnGuardar_Click(object sender, EventArgs e)
         {
+            ListView lsvReservas = new ListView();
+            List< BLL.ReservaClienteListado> lstReservas = new List<BLL.ReservaClienteListado>();
+
+            foreach (var loItem in lsvReservaEdicion.Items)
+            {
+                BLL.ReservaClienteListado oReservaEdicion = new BLL.ReservaClienteListado();
+                    //{
+                    //    ID_RESERVA = loItem.ID_RESERVA,
+                    //    PRODUCTO = loItem.NOMBRE_PRODUCTO,
+                    //    CLIENTE = loItem.NOMBRE_CLIENTE
+                    //};
+
+                    lstReservas.Add(oReservaEdicion);
+                
+                //
+            }
+            Session.Add(Enums.Session.ListadoVenta.ToString(), lsvReservas);
+
 
         }
 
@@ -37,25 +57,32 @@ namespace PL.AdminDashboard
 
         private void CargarGrilla() // EL SIGUIENTE CÓDIGO ES DE EJEMPLO PARA PODER VISUALIZAR LA GRILLA!!
         {
-            List<ReservaClienteListado> lstReservaClienteListado = new List<ReservaClienteListado>();
-            ReservaClienteListado oReservaListado = new ReservaClienteListado();
-            oReservaListado.ID_RESERVA = 1;
-            oReservaListado.CLIENTE = "Maria";
-            oReservaListado.PRODUCTO = "Revista Gente";
-            lstReservaClienteListado.Add(oReservaListado);
-            ReservaClienteListado oReservaListado2 = new ReservaClienteListado();
-            oReservaListado2.ID_RESERVA = 2;
-            oReservaListado2.CLIENTE = "Maria";
-            oReservaListado2.PRODUCTO = "Revista Gente";
-            lstReservaClienteListado.Add(oReservaListado2);
-            ReservaClienteListado oReservaListado3 = new ReservaClienteListado();
-            oReservaListado3.ID_RESERVA = 3;
-            oReservaListado3.CLIENTE = "Maria";
-            oReservaListado3.PRODUCTO = "Revista Gente";
-            lstReservaClienteListado.Add(oReservaListado3);
-            lsvReservaEdicion.DataSource = lstReservaClienteListado;
+            ListView lsvReservas = (ListView)Session[Enums.Session.ListadoReservaConfirmar.ToString()];
+            List<ReservaClienteListado> lstReservasConfirmar = MapListViewToListObject(lsvReservas);
+ 
+            lsvReservaEdicion.DataSource = lstReservasConfirmar;
             lsvReservaEdicion.DataBind();
+            Session.Remove(Enums.Session.ListadoReservaConfirmar.ToString());
         }
+
+        private List<ReservaClienteListado> MapListViewToListObject(object v)
+        {
+            throw new NotImplementedException();
+        }
+
+        private List<ReservaClienteListado> MapListViewToListObject(ListView pListView)
+        {
+            bool loResultado = false;
+
+            List<ReservaClienteListado> lstReservas = (List<ReservaClienteListado>)pListView.DataSource;
+             
+            if (loResultado)
+                lstReservas = null;
+
+            return lstReservas;
+        }
+
+
 
         #endregion
     }

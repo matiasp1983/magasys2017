@@ -33,6 +33,8 @@
             ProductoReserva,
             ListadoReserva,
             ListadoReservaEdicion,
+            ListadoReservaConfirmar,
+            ListadoReservaConfirmada,
             Usuario,
             ImagenUsuarioCliente
         }        

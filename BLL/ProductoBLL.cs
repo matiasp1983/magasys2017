@@ -77,6 +77,25 @@ namespace BLL
             return lstProductoListado;
         }
 
+        public Producto ObtenerProductoPorCodigo(int codProducto)
+        {
+            Producto oProducto = null;
+
+            try
+            {
+                using (var rep = new Repository<Producto>())
+                {
+                    oProducto = rep.Find(p => p.ID_PRODUCTO == codProducto);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return oProducto;
+        }
+
         public List<ProductoListado> ObtenerProductosPorTipoProducto(ProductoFiltro oProductoFiltro)
         {
             List<Producto> lstProducto = null;
