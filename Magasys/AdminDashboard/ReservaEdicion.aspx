@@ -25,6 +25,7 @@
                                                     <td>                                                        
                                                         <button id="check-all" class="btn btn-sm btn-primary pull-left m-t-n-xs">Seleccionar todo</button>
                                                     </td>
+                                                    <th>Reserva</th>
                                                     <th>Nombre del Cliente</th>
                                                     <th>Producto</th>
                                                 </tr>
@@ -43,8 +44,11 @@
                                     </LayoutTemplate>
                                     <ItemTemplate>
                                         <tr>
-                                            <td>
-                                                <input id="chkCodigoReserva&<%#Eval("ID_RESERVA").ToString()%>" type="checkbox" class="i-checks" name="input[]" />                                                
+                                            <td>                                                
+                                                <input id="chkCodigoReserva" runat="server" class="i-checks" type="checkbox" />
+                                            </td>
+                                            <td class="text-left">
+                                                <asp:Label ID="lblIdReserva" runat="server" Text='<%#Eval("ID_RESERVA").ToString()%>'></asp:Label>
                                             </td>
                                             <td class="text-left">
                                                 <asp:Label ID="lblCliente" runat="server" Text='<%#Eval("CLIENTE").ToString()%>'></asp:Label>

@@ -7,6 +7,7 @@ using System.Web.UI;
 using BLL.Common;
 using BLL.DAL;
 using System.Web.UI.WebControls;
+using System.Web.UI.HtmlControls;
 
 namespace PL.AdminDashboard
 {
@@ -26,24 +27,23 @@ namespace PL.AdminDashboard
         protected void BtnGuardar_Click(object sender, EventArgs e)
         {
             ListView lsvReservas = new ListView();
-            List< BLL.ReservaClienteListado> lstReservas = new List<BLL.ReservaClienteListado>();
+            List<ReservaClienteListado> lstReservas = new List<BLL.ReservaClienteListado>();
 
             foreach (var loItem in lsvReservaEdicion.Items)
             {
-                BLL.ReservaClienteListado oReservaEdicion = new BLL.ReservaClienteListado();
-                    //{
-                    //    ID_RESERVA = loItem.ID_RESERVA,
-                    //    PRODUCTO = loItem.NOMBRE_PRODUCTO,
-                    //    CLIENTE = loItem.NOMBRE_CLIENTE
-                    //};
+                if (((HtmlInputCheckBox)loItem.Controls[2]).Checked)
+                {
+                    ReservaClienteListado oReservaEdicion = new BLL.ReservaClienteListado
+                    {
+                        ID_RESERVA = Convert.ToInt32(((Label)loItem.Controls[4]).Text),
+                        PRODUCTO = ((Label)loItem.Controls[8]).Text,
+                        CLIENTE = ((Label)loItem.Controls[6]).Text
+                    };
 
                     lstReservas.Add(oReservaEdicion);
-                
-                //
+                }
             }
             Session.Add(Enums.Session.ListadoVenta.ToString(), lsvReservas);
-
-
         }
 
         protected void BtnCancelar_Click(object sender, EventArgs e)
@@ -59,7 +59,7 @@ namespace PL.AdminDashboard
         {
             ListView lsvReservas = (ListView)Session[Enums.Session.ListadoReservaConfirmar.ToString()];
             List<ReservaClienteListado> lstReservasConfirmar = MapListViewToListObject(lsvReservas);
- 
+
             lsvReservaEdicion.DataSource = lstReservasConfirmar;
             lsvReservaEdicion.DataBind();
             Session.Remove(Enums.Session.ListadoReservaConfirmar.ToString());
@@ -75,14 +75,12 @@ namespace PL.AdminDashboard
             bool loResultado = false;
 
             List<ReservaClienteListado> lstReservas = (List<ReservaClienteListado>)pListView.DataSource;
-             
+
             if (loResultado)
                 lstReservas = null;
 
             return lstReservas;
         }
-
-
 
         #endregion
     }
