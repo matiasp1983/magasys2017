@@ -28,6 +28,7 @@
                                                     <th>Reserva</th>
                                                     <th>Nombre del Cliente</th>
                                                     <th>Producto</th>
+                                                    <th>Cod Producto</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -55,6 +56,9 @@
                                             </td>
                                             <td>
                                                 <asp:Label ID="lblPorducto" runat="server" Text='<%#Eval("PRODUCTO").ToString().Length > 50 ? String.Format("{0}...", Eval("PRODUCTO").ToString().Remove(50).TrimEnd()):Eval("PRODUCTO")%>'></asp:Label>
+                                            </td>
+                                            <td>
+                                                <asp:Label ID="LblProdEdi" runat="server" Text='<%#Eval("CODPRODUCTOEDICION").ToString().Length > 50 ? String.Format("{0}...", Eval("CODPRODUCTOEDICION").ToString().Remove(50).TrimEnd()):Eval("CODPRODUCTOEDICION")%>'></asp:Label>
                                             </td>
                                         </tr>
                                     </ItemTemplate>

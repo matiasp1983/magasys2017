@@ -26,24 +26,39 @@ namespace PL.AdminDashboard
 
         protected void BtnGuardar_Click(object sender, EventArgs e)
         {
-            ListView lsvReservas = new ListView();
-            List<ReservaClienteListado> lstReservas = new List<BLL.ReservaClienteListado>();
-
-            foreach (var loItem in lsvReservaEdicion.Items)
+            bool loResutado = false;
+            List<ReservaClienteListado> lstReservasConfirmar = (List<ReservaClienteListado>)lsvReservaEdicion.DataSource;
+            try
             {
-                if (((HtmlInputCheckBox)loItem.Controls[2]).Checked)
+                foreach (var loItem in lsvReservaEdicion.Items)
                 {
-                    ReservaClienteListado oReservaEdicion = new BLL.ReservaClienteListado
-                    {
-                        ID_RESERVA = Convert.ToInt32(((Label)loItem.Controls[4]).Text),
-                        PRODUCTO = ((Label)loItem.Controls[8]).Text,
-                        CLIENTE = ((Label)loItem.Controls[6]).Text
-                    };
+                    
 
-                    lstReservas.Add(oReservaEdicion);
+                    if (((HtmlInputCheckBox)loItem.Controls[1]).Checked)
+                    {
+                        BLL.DAL.ReservaEdicion oReservaConfirmada = new BLL.DAL.ReservaEdicion()
+                        {
+                            ID_RESERVA_EDICION = new BLL.ReservaEdicionBLL().ObtenerProximaReserva(),
+                            COD_RESERVA = Convert.ToInt32(((Label)loItem.Controls[3]).Text),
+                            COD_PROD_EDICION = Convert.ToInt32(((Label)loItem.Controls[9]).Text),
+                            FECHA = DateTime.Now,
+                            COD_ESTADO = 10
+
+                        };
+
+                        loResutado = new BLL.ReservaEdicionBLL().AltaReservaEdicion(oReservaConfirmada);
+                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeProductoIngresoSuccessAlta, "Alta de Ingreso de productos"));
+                        Response.Redirect("Index.aspx", false);
+
+                    }
                 }
             }
-            Session.Add(Enums.Session.ListadoVenta.ToString(), lsvReservas);
+
+            catch (Exception)
+            {
+                throw;
+            }
+
         }
 
         protected void BtnCancelar_Click(object sender, EventArgs e)
@@ -63,11 +78,6 @@ namespace PL.AdminDashboard
             lsvReservaEdicion.DataSource = lstReservasConfirmar;
             lsvReservaEdicion.DataBind();
             Session.Remove(Enums.Session.ListadoReservaConfirmar.ToString());
-        }
-
-        private List<ReservaClienteListado> MapListViewToListObject(object v)
-        {
-            throw new NotImplementedException();
         }
 
         private List<ReservaClienteListado> MapListViewToListObject(ListView pListView)

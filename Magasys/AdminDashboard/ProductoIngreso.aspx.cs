@@ -470,7 +470,8 @@ namespace PL.AdminDashboard
                             {
                                 ID_RESERVA = loReserva.ID_RESERVA,
                                 PRODUCTO = loReserva.NOMBRE_PRODUCTO,
-                                CLIENTE = loReserva.NOMBRE_CLIENTE
+                                CLIENTE = loReserva.NOMBRE_CLIENTE,
+                                CODPRODUCTOEDICION = oProductoEdicion.ID_PRODUCTO_EDICION
                             };
 
                             lstReservasConfirmar.Add(oReservaEdicion);
@@ -495,28 +496,13 @@ namespace PL.AdminDashboard
 
                 // Llamar pantalla para Confirmar las reservas
 
+                ListView lsvReservas = new ListView();
                 if (lstReservasConfirmar.Any())
                 {
-                    ListView lsvReservas = new ListView();
                     lsvReservas.DataSource = lstReservasConfirmar;
                     Session.Add(Enums.Session.ListadoReservaConfirmar.ToString(), lsvReservas);
                     Response.Redirect("ReservaEdicion.aspx", false);
                 }
-
-                // List<BLL.DAL.ReservaEdicion> lstReservasConfirmadas = lstReservasConfirmar;
-                List<BLL.DAL.ReservaEdicion> lstReservasConfirmadas = new List<BLL.DAL.ReservaEdicion>();
-
-                // Registrar las Confirmadas
-
-                foreach (var loReservaConfirmada in lstReservasConfirmadas)
-                {
-                    loReservaConfirmada.FECHA = DateTime.Now;
-                    loReservaConfirmada.COD_ESTADO = 10;
-                    loReservaConfirmada.ID_RESERVA_EDICION = new BLL.ReservaEdicionBLL().ObtenerProximaReserva();
-                    loResutado = new BLL.ReservaEdicionBLL().AltaReservaEdicion(loReservaConfirmada);
-
-                }
-
 
             }
             catch (Exception)
@@ -662,7 +648,8 @@ namespace PL.AdminDashboard
                             {
                                 ID_RESERVA = loReserva.ID_RESERVA,
                                 PRODUCTO = loReserva.NOMBRE_PRODUCTO,
-                                CLIENTE = loReserva.NOMBRE_CLIENTE
+                                CLIENTE = loReserva.NOMBRE_CLIENTE,
+                                CODPRODUCTOEDICION = oProductoEdicion.ID_PRODUCTO_EDICION
                             };
 
                             lstReservasConfirmar.Add(oReservaEdicion);
@@ -687,29 +674,17 @@ namespace PL.AdminDashboard
 
                 // Llamar pantalla para Confirmar las reservas
 
+                ListView lsvReservas = new ListView();
+
                 if (lstReservasConfirmar.Any())
                 {
-                    ListView lsvReservas = new ListView();
+                    
                     lsvReservas.DataSource = lstReservasConfirmar;
                     Session.Add(Enums.Session.ListadoReservaConfirmar.ToString(), lsvReservas);
+
                     Response.Redirect("ReservaEdicion.aspx", false);
                 }
 
-
-
-                // List<BLL.DAL.ReservaEdicion> lstReservasConfirmadas = lstReservasConfirmar;
-                List<BLL.DAL.ReservaEdicion> lstReservasConfirmadas = new List<BLL.DAL.ReservaEdicion>();
-               
-                // Registrar las Confirmadas
-
-                foreach (var loReservaConfirmada in lstReservasConfirmadas)
-                {
-                    loReservaConfirmada.FECHA = DateTime.Now;
-                    loReservaConfirmada.COD_ESTADO = 10;
-                    loReservaConfirmada.ID_RESERVA_EDICION = new BLL.ReservaEdicionBLL().ObtenerProximaReserva();
-                    loResutado = new BLL.ReservaEdicionBLL().AltaReservaEdicion(loReservaConfirmada);
-
-                }
             }
             catch (Exception)
             {
@@ -847,7 +822,8 @@ namespace PL.AdminDashboard
                             {
                                 ID_RESERVA = loReserva.ID_RESERVA,
                                 PRODUCTO = loReserva.NOMBRE_PRODUCTO,
-                                CLIENTE = loReserva.NOMBRE_CLIENTE
+                                CLIENTE = loReserva.NOMBRE_CLIENTE,
+                                CODPRODUCTOEDICION = oProductoEdicion.ID_PRODUCTO_EDICION
                             };
 
                             lstReservasConfirmar.Add(oReservaEdicion);
@@ -872,27 +848,16 @@ namespace PL.AdminDashboard
 
                 // Llamar pantalla para Confirmar las reservas
 
+                ListView lsvReservas = new ListView();
                 if (lstReservasConfirmar.Any())
                 {
-                    ListView lsvReservas = new ListView();
+                    
                     lsvReservas.DataSource = lstReservasConfirmar;
                     Session.Add(Enums.Session.ListadoReservaConfirmar.ToString(), lsvReservas);
                     Response.Redirect("ReservaEdicion.aspx", false);
                 }
 
-                // List<BLL.DAL.ReservaEdicion> lstReservasConfirmadas = lstReservasConfirmar;
-                List<BLL.DAL.ReservaEdicion> lstReservasConfirmadas = new List<BLL.DAL.ReservaEdicion>();
-
-                // Registrar las Confirmadas
-
-                foreach (var loReservaConfirmada in lstReservasConfirmadas)
-                {
-                    loReservaConfirmada.FECHA = DateTime.Now;
-                    loReservaConfirmada.COD_ESTADO = 10;
-                    loReservaConfirmada.ID_RESERVA_EDICION = new BLL.ReservaEdicionBLL().ObtenerProximaReserva();
-                    loResutado = new BLL.ReservaEdicionBLL().AltaReservaEdicion(loReservaConfirmada);
-
-                }
+ 
             }
             catch (Exception)
             {
@@ -1030,7 +995,8 @@ namespace PL.AdminDashboard
                             {
                                 ID_RESERVA = loReserva.ID_RESERVA,
                                 PRODUCTO = loReserva.NOMBRE_PRODUCTO,
-                                CLIENTE = loReserva.NOMBRE_CLIENTE
+                                CLIENTE = loReserva.NOMBRE_CLIENTE,
+                                CODPRODUCTOEDICION = oProductoEdicion.ID_PRODUCTO_EDICION
                             };
 
                             lstReservasConfirmar.Add(oReservaEdicion);
@@ -1055,28 +1021,15 @@ namespace PL.AdminDashboard
 
                 // Llamar pantalla para Confirmar las reservas
 
+                ListView lsvReservas = new ListView();
                 if (lstReservasConfirmar.Any())
                 {
-                    ListView lsvReservas = new ListView();
+                    
                     lsvReservas.DataSource = lstReservasConfirmar;
                     Session.Add(Enums.Session.ListadoReservaConfirmar.ToString(), lsvReservas);
                     Response.Redirect("ReservaEdicion.aspx", false);
                 }
-
-                // List<BLL.DAL.ReservaEdicion> lstReservasConfirmadas = lstReservasConfirmar;
-                List<BLL.DAL.ReservaEdicion> lstReservasConfirmadas = new List<BLL.DAL.ReservaEdicion>();
-
-                // Registrar las Confirmadas
-
-                foreach (var loReservaConfirmada in lstReservasConfirmadas)
-                {
-                    loReservaConfirmada.FECHA = DateTime.Now;
-                    loReservaConfirmada.COD_ESTADO = 10;
-                    loReservaConfirmada.ID_RESERVA_EDICION = new BLL.ReservaEdicionBLL().ObtenerProximaReserva();
-                    loResutado = new BLL.ReservaEdicionBLL().AltaReservaEdicion(loReservaConfirmada);
-
-                }
-            }
+                            }
             catch (Exception)
             {
                 throw;
@@ -1217,7 +1170,8 @@ namespace PL.AdminDashboard
                             {
                                 ID_RESERVA = loReserva.ID_RESERVA,
                                 PRODUCTO = loReserva.NOMBRE_PRODUCTO,
-                                CLIENTE = loReserva.NOMBRE_CLIENTE
+                                CLIENTE = loReserva.NOMBRE_CLIENTE,
+                                CODPRODUCTOEDICION = oProductoEdicion.ID_PRODUCTO_EDICION
                             };
 
                             lstReservasConfirmar.Add(oReservaEdicion);
@@ -1242,27 +1196,15 @@ namespace PL.AdminDashboard
 
                 // Llamar pantalla para Confirmar las reservas
 
+                ListView lsvReservas = new ListView();
                 if (lstReservasConfirmar.Any())
                 {
-                    ListView lsvReservas = new ListView();
+
                     lsvReservas.DataSource = lstReservasConfirmar;
                     Session.Add(Enums.Session.ListadoReservaConfirmar.ToString(), lsvReservas);
                     Response.Redirect("ReservaEdicion.aspx", false);
                 }
 
-                // List<BLL.DAL.ReservaEdicion> lstReservasConfirmadas = lstReservasConfirmar;
-                List<BLL.DAL.ReservaEdicion> lstReservasConfirmadas = new List<BLL.DAL.ReservaEdicion>();
-
-                // Registrar las Confirmadas
-
-                foreach (var loReservaConfirmada in lstReservasConfirmadas)
-                {
-                    loReservaConfirmada.FECHA = DateTime.Now;
-                    loReservaConfirmada.COD_ESTADO = 10;
-                    loReservaConfirmada.ID_RESERVA_EDICION = new BLL.ReservaEdicionBLL().ObtenerProximaReserva();
-                    loResutado = new BLL.ReservaEdicionBLL().AltaReservaEdicion(loReservaConfirmada);
-
-                }
             }
             catch (Exception)
             {
@@ -1404,7 +1346,8 @@ namespace PL.AdminDashboard
                             {
                                 ID_RESERVA = loReserva.ID_RESERVA,
                                 PRODUCTO = loReserva.NOMBRE_PRODUCTO,
-                                CLIENTE = loReserva.NOMBRE_CLIENTE
+                                CLIENTE = loReserva.NOMBRE_CLIENTE,
+                                CODPRODUCTOEDICION = oProductoEdicion.ID_PRODUCTO_EDICION
                             };
 
                             lstReservasConfirmar.Add(oReservaEdicion);
@@ -1429,27 +1372,15 @@ namespace PL.AdminDashboard
 
                 // Llamar pantalla para Confirmar las reservas
 
+                ListView lsvReservas = new ListView();
                 if (lstReservasConfirmar.Any())
                 {
-                    ListView lsvReservas = new ListView();
+
                     lsvReservas.DataSource = lstReservasConfirmar;
                     Session.Add(Enums.Session.ListadoReservaConfirmar.ToString(), lsvReservas);
                     Response.Redirect("ReservaEdicion.aspx", false);
                 }
 
-                // List<BLL.DAL.ReservaEdicion> lstReservasConfirmadas = lstReservasConfirmar;
-                List<BLL.DAL.ReservaEdicion> lstReservasConfirmadas = new List<BLL.DAL.ReservaEdicion>();
-
-                // Registrar las Confirmadas
-
-                foreach (var loReservaConfirmada in lstReservasConfirmadas)
-                {
-                    loReservaConfirmada.FECHA = DateTime.Now;
-                    loReservaConfirmada.COD_ESTADO = 10;
-                    loReservaConfirmada.ID_RESERVA_EDICION = new BLL.ReservaEdicionBLL().ObtenerProximaReserva();
-                    loResutado = new BLL.ReservaEdicionBLL().AltaReservaEdicion(loReservaConfirmada);
-
-                }
             }
             catch (Exception)
             {
@@ -1481,6 +1412,18 @@ namespace PL.AdminDashboard
             oReservaFiltro.COD_ESTADO = 7;
 
             return oReservaFiltro;
+        }
+
+        private List<BLL.ReservaClienteListado> MapListViewToListObject(ListView pListView)
+        {
+            bool loResultado = false;
+
+            List<BLL.ReservaClienteListado> lstReservas = (List<BLL.ReservaClienteListado>)pListView.DataSource;
+
+            if (loResultado)
+                lstReservas = null;
+
+            return lstReservas;
         }
 
         #endregion

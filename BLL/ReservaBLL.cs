@@ -339,6 +339,7 @@ namespace BLL
         public int ID_RESERVA { get; set; }
         public string CLIENTE { get; set; }
         public string PRODUCTO { get; set; }
+        public int CODPRODUCTOEDICION { get; set; }
     }
 
     public class ReservaCustomerWebSite

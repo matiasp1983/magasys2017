@@ -35,6 +35,7 @@
             ListadoReservaEdicion,
             ListadoReservaConfirmar,
             ListadoReservaConfirmada,
+            IdProductoEdicion,
             Usuario,
             ImagenUsuarioCliente
         }        
