@@ -146,40 +146,15 @@
                                                     <asp:Label ID="lblAnio" runat="server" Text='<%#(Eval("ANIO") != null) ? Eval("ANIO").ToString():null%>'></asp:Label>
                                                 </p>
                                                 <div class="m-t text-righ">
-                                                    <button type="reset" id="btnEdiciones" runat="server" onserverclick="BtnMostrarEdiciones_Click" class="btn btn-xs btn-outline btn-primary">
+                                                    <button type="button" id="btnEdiciones" runat="server" onserverclick="BtnMostrarEdiciones_Click" class="btn btn-xs btn-outline btn-primary">
                                                         <a href="#">VER EDICIONES <i class="fa fa-long-arrow-right"></i></a>
                                                     </button>
                                                 </div>
                                                 <div class="m-t text-righ">
-<%--                                                    <button type="reset" id="btnReservarEdic" class="btn btn-xs btn-outline btn-primary" data-toggle="modal" data-target="#ModalProducto">RESERVAR EDICIONES
+                                                    <a id="btnReservarEdiciones" runat="server" href="#" class="btn btn-xs btn-outline btn-primary" data-toggle="modal" data-target="#ModalProducto" onclick="CargarIdProductoReservaEdicionModal(this);">RESERVAR EDICIONES
                                                         <i class="fa fa-long-arrow-right"></i>
-                                                    </button>--%>
-                                                    <a id="btnReservarEdic" href="#" class="btn btn-xs btn-outline btn-primary" data-toggle="modal" data-target="#ModalProducto">RESERVAR EDICIONES <i class="fa fa-long-arrow-right"></i> </a>
-                                                </div>
-                                                <div id="ModalProducto" class="modal" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content animated bounce">
-                                                            <div class="modal-body">
-                                                                <div style="display: block; width: 80px; height: 80px; border: 4px solid gray; border-radius: 50%; margin: 20px auto; padding: 0; position: relative; box-sizing: content-box; border-color: #F8BB86;">
-                                                                    <span style="position: absolute; width: 5px; height: 47px; left: 50%; top: 10px; -webkit-border-radius: 2px; border-radius: 2px; margin-left: -2px; background-color: #F8BB86;"></span>
-                                                                    <span style="position: absolute; width: 7px; height: 7px; -webkit-border-radius: 50%; border-radius: 50%; margin-left: -3px; left: 50%; bottom: 10px; background-color: #F8BB86;"></span>
-                                                                </div>
-                                                                <h2 style="color: #575757; font-size: 30px; text-align: center; font-weight: 600; text-transform: none; position: relative; margin: 25px 0; padding: 0; line-height: 40px; display: block;">¿Quiere reservar todas las Ediciones?</h2>
-<%--                                                                <p style="color: #797979; font-size: 16px; font-weight: 300; position: relative; text-align: center; float: none; margin: 0; padding: 0; line-height: normal;">
-                                                                    Se dará de baja el proveedor con CUIT: 
-                                           
-                                                                </p>--%>
-                                                            </div>
-                                                            <div class="modal-footer" style="text-align: center; padding-top: 0px;">
-                                                                <asp:Button ID="btnCancelar" runat="server" CssClass="btn btn-default" Text="Cancelar"
-                                                                    Style="background-color: #D0D0D0; color: white; border: none; box-shadow: none; font-size: 17px; font-weight: 500; border-radius: 5px; padding: 10px 32px; margin: 26px 5px 0 5px; cursor: pointer;"
-                                                                    data-dismiss="modal" />
-                                                                <asp:Button ID="btnReservarEdiciones" runat="server" CssClass="btn btn-danger" Text="Aceptar" Style="display: inline-block; box-shadow: rgba(221, 107, 85, 0.8) 0px 0px 2px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px inset; color: white; border: none; box-shadow: none; font-size: 17px; font-weight: 500; -webkit-border-radius: 4px; border-radius: 5px; padding: 10px 32px; margin: 26px 5px 0 5px; cursor: pointer; background-color: #DD6B55"
-                                                                    OnClick="BtnReservarEdiciones_Click" />
-                                                            </div>
-                                                        </div>
-                                                        <asp:HiddenField ID="hdIdProducto" runat="server" Value="" />
-                                                    </div>
+                                                        <asp:HiddenField ID="hdIdProductoReservaEdicion" runat="server" />
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>
@@ -187,6 +162,26 @@
                                 </div>
                             </ItemTemplate>
                         </asp:ListView>
+                        <div id="ModalProducto" class="modal" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+                            <div class="modal-dialog">
+                                <div class="modal-content animated bounce">
+                                    <div class="modal-body">                                       
+                                        <h2 style="color: #575757; font-size: 30px; text-align: center; font-weight: 600; text-transform: none; position: relative; margin: 25px 0; padding: 0; line-height: 40px; display: block;">¿Quiere reservar todas las Ediciones?</h2>
+                                        <p style="color: #797979; font-size: 16px; font-weight: 300; position: relative; text-align: center; float: none; margin: 0; padding: 0; line-height: normal;">
+                                                Del producto: <b>
+                                                    <asp:Label ID="lblNombreProductoReservaEdicionSeleccionado" runat="server"></asp:Label></b>.                                           
+                                            </p>
+                                    </div>
+                                    <div class="modal-footer" style="text-align: center; padding-top: 0px;">                                        
+                                        <asp:Button ID="btnReservarEdicionesSeleccionado" runat="server" CssClass="btn btn-success" Text="Aceptar" OnClick="BtnReservaEdicionSeleccionado_Click" Style="display: inline-block; box-shadow: rgba(221, 107, 85, 0.8) 0px 0px 2px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px inset; color: white; border: none; box-shadow: none; font-size: 17px; font-weight: 500; -webkit-border-radius: 4px; border-radius: 5px; padding: 10px 32px; margin: 26px 5px 0 5px; cursor: pointer; background-color: #1c84c6"/>
+                                        <asp:Button ID="btnCancelar" runat="server" CssClass="btn btn-default" Text="Cancelar"
+                                            Style="background-color: #D0D0D0; color: white; border: none; box-shadow: none; font-size: 17px; font-weight: 500; border-radius: 5px; padding: 10px 32px; margin: 26px 5px 0 5px; cursor: pointer;"
+                                            data-dismiss="modal" />
+                                    </div>
+                                </div>
+                                <asp:HiddenField ID="hdIdProductoReservaEdicionSeleccionado" runat="server" Value="" />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -199,6 +194,8 @@
 
     <script type="text/javascript">
         var FormReserva = '#<%=FormReserva.ClientID%>';
+        var hdIdProductoReservaEdicionSeleccionado = '#<%=hdIdProductoReservaEdicionSeleccionado.ClientID%>';
+        var lblNombreProductoReservaEdicionSeleccionado = '#<%=lblNombreProductoReservaEdicionSeleccionado.ClientID%>';
         var loTotal = parseFloat($('#<%=lblTotalAbonar.ClientID%>').text());
 
         if (window.jQuery) {
@@ -220,7 +217,7 @@
                     loTotal += parseFloat(loPrecio);
                     $('#<%=lblTotalAbonar.ClientID%>').text(loTotal.toFixed(2).replace('.', ','));
                 }
-                });
+            });
 
             $('.i-checks').on('ifUnchecked', function (e) {
                 var isChecked = e.currentTarget.checked;
@@ -237,14 +234,14 @@
             $(FormReserva).validate({
                 rules: {
                      <%=ddlTipoProducto.UniqueID%>: {
-                    required: true
+                        required: true
+                    },
                 },
-                },
-        messages: {
+                messages: {
                      <%=ddlTipoProducto.UniqueID%>: {
-                required: "Este campo es requerido."
-            },
-        }
+                        required: "Este campo es requerido."
+                  },
+                }
            });
         }
 
@@ -262,6 +259,17 @@
                     width: '100%',
                     allowClear: true
                 });
+        }
+
+        function CargarIdProductoReservaEdicionModal(control) {
+            if (window.jQuery) {
+                var loValores = control.lastElementChild.defaultValue;
+                var loArreglo = loValores.split(",", 2);
+                var loIdProducto = loArreglo[0];
+                var loNombreProducto = loArreglo[1];
+                $(hdIdProductoReservaEdicionSeleccionado).val(loIdProducto);
+                $(lblNombreProductoReservaEdicionSeleccionado).text(loNombreProducto);
+            }
         }
 
     </script>

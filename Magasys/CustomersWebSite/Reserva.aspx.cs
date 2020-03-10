@@ -134,8 +134,10 @@ namespace PL.CustomersWebSite
 
                 var loCodTipoProducto = ((ProductoCustomersWebSite)e.Item.DataItem).COD_TIPO_PRODUCTO;
                 var loCodigoProducto = ((ProductoCustomersWebSite)e.Item.DataItem).COD_PRODUCTO.ToString();
+                var loNombreProducto = ((ProductoCustomersWebSite)e.Item.DataItem).NOMBRE_PRODUCTO.ToString();
 
                 HtmlButton btnEdiciones = ((HtmlButton)e.Item.FindControl("btnEdiciones"));
+                HtmlAnchor btnReservarEdiciones = ((HtmlAnchor)e.Item.FindControl("btnReservarEdiciones"));
 
                 if (loCodTipoProducto == 3 || loCodTipoProducto == 2)  //Producto Colección, Revista
                 {
@@ -151,9 +153,16 @@ namespace PL.CustomersWebSite
                     divPrecio.Visible = false;
 
                     btnEdiciones.Attributes.Add("value", string.Format("{0},{1}", loCodTipoProducto, loCodigoProducto));
+
+                    HiddenField hdIdProductoReservaEdicion = ((HiddenField)e.Item.FindControl("hdIdProductoReservaEdicion"));
+                    // Se concatena el IdProducto y el Nombre del Producto:
+                    hdIdProductoReservaEdicion.Value = string.Format("{0},{1}", loCodigoProducto, loNombreProducto); ;
                 }
                 else
+                {
                     btnEdiciones.Visible = false;
+                    btnReservarEdiciones.Visible = false;
+                }
             }
             catch (Exception ex)
             {
@@ -162,9 +171,30 @@ namespace PL.CustomersWebSite
             }
         }
 
-        protected void BtnReservarEdiciones_Click(object sender, EventArgs e)
+        protected void BtnReservaEdicionSeleccionado_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                if (!String.IsNullOrEmpty(hdIdProductoReservaEdicionSeleccionado.Value))
+                {
+                    var loIdProductoReservaEdicionSeleccionado = Convert.ToInt64(hdIdProductoReservaEdicionSeleccionado.Value);
+                    if (Session[Enums.Session.ProductoReservaEdicionSeleccionados.ToString()] == null)
+                    {
+                        Session[Enums.Session.ProductoReservaEdicionSeleccionados.ToString()] = loIdProductoReservaEdicionSeleccionado;
+                    }
+                    else
+                    {
+                        var loProductosSeleccionados = Session[Enums.Session.ProductoReservaEdicionSeleccionados.ToString()];
+                        if (!string.IsNullOrEmpty(loProductosSeleccionados.ToString()) && !loProductosSeleccionados.ToString().Contains(loIdProductoReservaEdicionSeleccionado.ToString()))
+                            Session[Enums.Session.ProductoReservaEdicionSeleccionados.ToString()] += String.Format(";{0}", loIdProductoReservaEdicionSeleccionado);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger loLogger = LogManager.GetCurrentClassLogger();
+                loLogger.Error(ex);
+            }
         }
 
         #endregion

@@ -37,7 +37,8 @@
             ListadoReservaConfirmada,
             IdProductoEdicion,
             Usuario,
-            ImagenUsuarioCliente
+            ImagenUsuarioCliente,
+            ProductoReservaEdicionSeleccionados
         }        
 
         #endregion
