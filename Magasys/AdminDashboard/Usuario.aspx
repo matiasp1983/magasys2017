@@ -54,21 +54,31 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row" id="pwd-container1">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Contrase&ntilde;a</label>
 
                                 <div class="col-sm-10">
-                                    <asp:TextBox ID="txtContrasenia" runat="server" CssClass="form-control" MaxLength="30" autocomplete="off" TextMode="Password"></asp:TextBox>
+                                    <asp:TextBox ID="txtContrasenia" runat="server" CssClass="form-control example1" MaxLength="30" autocomplete="off" TextMode="Password"></asp:TextBox>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Confirmaci&oacute;n Contrase&ntilde;a</label>
 
                                 <div class="col-sm-10">
                                     <asp:TextBox ID="txtContraseniaConfirmacion" runat="server" CssClass="form-control" MaxLength="30" autocomplete="off" TextMode="Password"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                 <label class="col-sm-2 control-label"></label>
+                                <div class="col-sm-10">
+                                    <div class="pwstrength_viewport_progress"></div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-2 control-label"></label>
+                                <div class="col-sm-10">
+                                    <div id="messages" class="col-sm-10"></div>
                                 </div>
                             </div>
                         </div>
@@ -135,7 +145,9 @@
         </div>
     </form>
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="script" runat="server">
+<asp:Content ID="Content3" ContentPlaceHolderID="script" runat="server">    
+    <script src="js/plugins/pwstrength/pwstrength-bootstrap.min.js"></script>
+    <script src="js/plugins/pwstrength/zxcvbn.js"></script>
     <script type="text/javascript">
         var FormUsuario = '#<%=FormUsuario.ClientID%>';
 
@@ -143,6 +155,7 @@
             $(document).ready(function () {
                 ValidarForm();
                 Select2();
+                Pwstrength();
             });
         }
 
@@ -226,6 +239,21 @@
                     width: '100%',
                     allowClear: true
                 });
+        }
+
+        function Pwstrength() {
+            var options1 = {};
+            options1.ui = {
+                container: "#pwd-container1",
+                showVerdictsInsideProgressBar: true,
+                viewports: {
+                    progress: ".pwstrength_viewport_progress"
+                }
+            };
+            options1.common = {
+                debug: false
+            };
+            $('.example1').pwstrength(options1);
         }
     </script>
 </asp:Content>

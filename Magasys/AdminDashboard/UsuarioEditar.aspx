@@ -76,20 +76,11 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Contrase&ntilde;a</label>
 
-                                <div class="col-sm-10">
-                                    <asp:TextBox ID="txtContrasenia" runat="server" CssClass="form-control" MaxLength="30" autocomplete="off" TextMode="Password"></asp:TextBox>
+                                <div class="col-sm-5">
+                                    <asp:TextBox ID="txtContrasenia" runat="server" CssClass="form-control" Enabled="false" MaxLength="30" autocomplete="off" TextMode="Password"></asp:TextBox>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Confirmaci&oacute;n Contrase&ntilde;a</label>
-
-                                <div class="col-sm-10">
-                                    <asp:TextBox ID="txtContraseniaConfirmacion" runat="server" CssClass="form-control" MaxLength="30" autocomplete="off" TextMode="Password"></asp:TextBox>
-                                </div>
-                            </div>
-                        </div>
+                        </div>                       
                         <div class="row">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Rol de Usuario</label>
@@ -200,12 +191,7 @@
                     <%=txtContrasenia.UniqueID%>: {
                     required: true,
                     minlength: 8
-                },
-                    <%=txtContraseniaConfirmacion.UniqueID%>: {
-                    required: true,
-                    equalTo: "#<%=txtContrasenia.ClientID %>",
-                    minlength: 8
-                },
+                },                    
                     <%=ddlRol.UniqueID%>: {
                     required: true
                 }
@@ -224,12 +210,7 @@
                     <%=txtContrasenia.UniqueID%>: {
                     required: "Este campo es requerido.",
                     minlength: "Usa 8 caracteres o más para tu contraseña."
-                },
-                    <%=txtContraseniaConfirmacion.UniqueID%>: {
-                    required: "Este campo es requerido.",
-                    equalTo: "Las contraseñas no coinciden. Vuelva a intentarlo.",
-                    minlength: "Usa 8 caracteres o más para tu contraseña."
-                },
+                },                    
                     <%=ddlRol.UniqueID%>: {
                     required: "Este campo es requerido."
                    }   

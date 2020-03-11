@@ -131,8 +131,7 @@ namespace PL
                     txtApellido.Text = oUsuario.APELLIDO.ToString();
                     txtNombreUsuario.Text = oUsuario.NOMBRE_USUARIO;
 
-                    txtContrasenia.Attributes["value"] = oUsuario.CONTRASENIA;
-                    txtContraseniaConfirmacion.Attributes["value"] = oUsuario.CONTRASENIA;
+                    txtContrasenia.Attributes["value"] = oUsuario.CONTRASENIA;                    
 
                     CargarRoles(oUsuario.ID_ROL);
 

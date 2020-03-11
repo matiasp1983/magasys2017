@@ -137,6 +137,8 @@
     <Content Include="AdminDashboard\img\perfil_default.png" />
     <Content Include="AdminDashboard\img\preview_icons.png" />
     <Content Include="AdminDashboard\js\plugins\iCheck\icheck.min.js" />
+    <Content Include="AdminDashboard\js\plugins\pwstrength\pwstrength-bootstrap.min.js" />
+    <Content Include="AdminDashboard\js\plugins\pwstrength\zxcvbn.js" />
     <Content Include="AdminDashboard\js\plugins\select2\select2.full.min.js" />
     <Content Include="AdminDashboard\js\plugins\sweetalert\sweetalert.min.js" />
     <Content Include="AdminDashboard\js\plugins\validate\jquery.validate.js" />
