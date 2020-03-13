@@ -25,7 +25,9 @@ namespace PL
         protected void BtnGuardar_Click(object sender, EventArgs e)
         {
             try
-            {                
+            {
+                //Response.Write(txtContrasenia.Attributes["value"]);
+
                 /*var oUsuario = CargarUsuarioDesdeControles();
                 bool loResutado = new BLL.UsuarioBLL().AltaUsuario(oUsuario);
 
@@ -171,16 +173,12 @@ namespace PL
             }
         }
 
-        #endregion
-
-        #region Métodos Públicos
-
-        [WebMethod]
-        public static bool ValidarNombreUsuario(string pNombreUsuario)
+        protected void btnCambiarContrasenia_Click(object sender, EventArgs e)
         {
-            return new BLL.UsuarioBLL().ConsultarExistenciaNombreUsuario(pNombreUsuario);
-        }       
+            if ((!string.IsNullOrEmpty(txtContraseniaNueva.Text) && !string.IsNullOrEmpty(txtContraseniaNuevaConfirmar.Text)) && txtContraseniaNueva.Text.Equals(txtContraseniaNuevaConfirmar.Text))            
+                txtContrasenia.Attributes["value"] = txtContraseniaNueva.Text;
+        }
 
-        #endregion
+        #endregion        
     }
 }

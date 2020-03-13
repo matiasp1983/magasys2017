@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="contentMaster" runat="server">
-    <form id="FormUsuario" runat="server" class="form-horizontal">
+    <form id="FormUsuarioEditar" runat="server" class="form-horizontal">
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
                 <h2>Datos del Producto</h2>
@@ -79,6 +79,9 @@
                                 <div class="col-sm-5">
                                     <asp:TextBox ID="txtContrasenia" runat="server" CssClass="form-control" Enabled="false" MaxLength="30" autocomplete="off" TextMode="Password"></asp:TextBox>
                                 </div>
+                                <div class="col-sm-5">
+                                    <a data-toggle="modal" class="btn btn-primary" href="#modal-cambiarcontarsenia">Cambiar Contrase&ntilde;a</a>
+                                </div>
                             </div>
                         </div>                       
                         <div class="row">
@@ -142,16 +145,48 @@
                 </div>
             </div>
         </div>
+        <div id="modal-cambiarcontarsenia" class="modal fade" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="row" id="pwd-container1">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label>Contrase&ntilde;a Nueva</label>
+                                    <asp:TextBox ID="txtContraseniaNueva" runat="server" CssClass="form-control example1" MaxLength="30" autocomplete="off" TextMode="Password" placeholder="Contraseña nueva"></asp:TextBox>
+                                </div>
+                                <div class="form-group">
+                                    <label>Confirmar la Contrase&ntilde;a Nueva</label>
+                                    <asp:TextBox ID="txtContraseniaNuevaConfirmar" runat="server" CssClass="form-control" MaxLength="30" autocomplete="off" TextMode="Password" placeholder="Confirmar la contraseña nueva"></asp:TextBox>
+                                </div>
+                                <div class="form-group">                                    
+                                    <div class="col-sm-12">
+                                        <div class="pwstrength_viewport_progress"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <asp:Button ID="btnCambiarContrasenia" CssClass="btn btn-success" runat="server" Text="Cambiar la Contraseña" OnClick="btnCambiarContrasenia_Click" />
+                                    <asp:Button ID="btnCancelarCambiarContrasenia" CssClass="btn btn-primary" runat="server" Text="Cancelar" formnovalidate="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </form>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="script" runat="server">
+    <script src="js/plugins/pwstrength/pwstrength-bootstrap.min.js"></script>
+    <script src="js/plugins/pwstrength/zxcvbn.js"></script>
     <script type="text/javascript">
-        var FormUsuario = '#<%=FormUsuario.ClientID%>';
+        var FormUsuarioEditar = '#<%=FormUsuarioEditar.ClientID%>';
 
         if (window.jQuery) {
             $(document).ready(function () {
                 ValidarForm();
                 Select2();
+                Pwstrength();
             });
         }
 
@@ -159,27 +194,8 @@
 
             jQuery.validator.addMethod("lettersonly", function (value, element) { return this.optional(element) || /^[a-zñÑáéíóúÁÉÍÓÚ\s]+$/i.test(value); }, "Este campo solo permite letras.");
 
-            $(FormUsuario).validate({
-                rules: {
-                    <%=txtNombreUsuario.UniqueID%>: {
-                required: true,
-                remote: function () {
-                    return {
-                        type: "POST",
-                        url: "Usuario.aspx/ValidarNombreUsuario",
-                        data: JSON.stringify({ 'pNombreUsuario': $("#<%=txtNombreUsuario.ClientID%>").val() }),
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        dataFilter: function (data) {
-                            var msg = JSON.parse(data);
-                            if (msg.hasOwnProperty('d'))
-                                return msg.d;
-                            else
-                                return msg;
-                            }
-                        }
-                    }
-                },
+            $(FormUsuarioEditar).validate({
+                 rules: {
                     <%=txtNombre.UniqueID%>: {
                     required: true,
                     lettersonly: true
@@ -188,35 +204,41 @@
                     required: true,
                     lettersonly: true
                 },
-                    <%=txtContrasenia.UniqueID%>: {
-                    required: true,
-                    minlength: 8
-                },                    
                     <%=ddlRol.UniqueID%>: {
                     required: true
+                },
+                    <%=txtContraseniaNueva.UniqueID%>: {
+                    required: true,
+                    minlength: 8
+                },
+                    <%=txtContraseniaNuevaConfirmar.UniqueID%>: {
+                    required: true,
+                    equalTo: "#<%=txtContraseniaNueva.ClientID %>",
+                    minlength: 8
                 }
-                },
-        messages: {
-                    <%=txtNombreUsuario.UniqueID%>: {
-                    required: "Este campo es requerido.",
-                    remote: "Este nombre de usuario ya está en uso. Elige otro."
-                },
+                    },
+        messages: {                    
                     <%=txtNombre.UniqueID%>: {
                     required: "Este campo es requerido."
                 },
                     <%=txtApellido.UniqueID%>: {
                     required: "Este campo es requerido."
-                },
-                    <%=txtContrasenia.UniqueID%>: {
-                    required: "Este campo es requerido.",
-                    minlength: "Usa 8 caracteres o más para tu contraseña."
-                },                    
+                },                                        
                     <%=ddlRol.UniqueID%>: {
                     required: "Este campo es requerido."
-                   }   
+                },
+                    <%=txtContraseniaNueva.UniqueID%>: {
+                    required: "Este campo es requerido.",
+                    minlength: "Usa 8 caracteres o más para tu contraseña."
+                },
+                    <%=txtContraseniaNuevaConfirmar.UniqueID%>: {
+                    required: "Este campo es requerido.",
+                    equalTo: "Las contraseñas no coinciden. Vuelva a intentarlo.",
+                    minlength: "Usa 8 caracteres o más para tu contraseña."
+                   }    
                 }
             });
-        }
+        }      
 
         function Select2() {
             $(".select2_rol").select2(
@@ -226,5 +248,28 @@
                     allowClear: true
                 });
         }
+
+        function Pwstrength() {
+            var options1 = {};
+            options1.ui = {
+                container: "#pwd-container1",
+                showVerdictsInsideProgressBar: true,
+                viewports: {
+                    progress: ".pwstrength_viewport_progress"
+                }
+            };
+            options1.common = {
+                debug: false
+            };
+            $('.example1').pwstrength(options1);
+        }
+
+        <%--$('#<%=btnCambiarContrasenia.ClientID%>').click(function () {
+            var loContraseniaNueva = $('#<%=txtContraseniaNueva.ClientID%>').val();
+            var lotxtContraseniaNuevaConfirmar = $('#<%=txtContraseniaNuevaConfirmar.ClientID%>').val();
+            if ((loContraseniaNueva != "" && lotxtContraseniaNuevaConfirmar != "") && loContraseniaNueva === lotxtContraseniaNuevaConfirmar) {
+                $('#<%=txtContrasenia.ClientID%>').val(loContraseniaNueva);
+            }
+        });--%>
     </script>
 </asp:Content>

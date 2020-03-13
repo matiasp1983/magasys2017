@@ -74,13 +74,7 @@
                                 <div class="col-sm-10">
                                     <div class="pwstrength_viewport_progress"></div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label"></label>
-                                <div class="col-sm-10">
-                                    <div id="messages" class="col-sm-10"></div>
-                                </div>
-                            </div>
+                            </div>                            
                         </div>
                         <div class="row">
                             <div class="form-group">
