@@ -7,7 +7,7 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace PL.AdminDashboard {
+namespace PL.CustomersWebSite {
     
     
     public partial class Logout {

@@ -17,10 +17,10 @@ namespace PL.AdminDashboard
 
                 if (!IsPostBack)
                 {
-                    if (Session[MagasysSessionBLL.DefaultSessionsId.Usuario.ToString()] != null)
+                    if (Session[AdminDashboardSessionBLL.DefaultSessionsId.Usuario.ToString()] != null)
                     {
                         TextInfo loText = new CultureInfo("es-AR", false).TextInfo;
-                        loUsuario = (BLL.DAL.Usuario)Session[MagasysSessionBLL.DefaultSessionsId.Usuario.ToString()];
+                        loUsuario = (BLL.DAL.Usuario)Session[AdminDashboardSessionBLL.DefaultSessionsId.Usuario.ToString()];
                         lblUsuarioLogout.Text = loText.ToUpper(loUsuario.APELLIDO + " " + loUsuario.NOMBRE).ToString();
 
                         if (loUsuario.AVATAR != null)
@@ -50,7 +50,7 @@ namespace PL.AdminDashboard
 
         protected void Page_Init(object sender, EventArgs e)
         {
-            if (Session[MagasysSessionBLL.DefaultSessionsId.Usuario.ToString()] == null)
+            if (Session[AdminDashboardSessionBLL.DefaultSessionsId.Usuario.ToString()] == null)
             {
                 Response.Redirect("Login.aspx", true);
             }

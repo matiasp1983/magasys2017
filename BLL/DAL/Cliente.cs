@@ -73,6 +73,8 @@ public partial class Cliente
 
     public Nullable<System.DateTime> FECHA_BAJA { get; set; }
 
+    public Nullable<int> COD_USUARIO { get; set; }
+
 
 
     public virtual TipoDocumento TipoDocumento { get; set; }
@@ -88,6 +90,8 @@ public partial class Cliente
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Venta> Venta { get; set; }
+
+    public virtual Usuario Usuario { get; set; }
 
 }
 

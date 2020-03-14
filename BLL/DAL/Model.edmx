@@ -36,6 +36,7 @@
           <Property Name="LOCALIDAD" Type="varchar" MaxLength="50" />
           <Property Name="DIRECCION_MAPS" Type="varchar(max)" />
           <Property Name="FECHA_BAJA" Type="datetime" />
+          <Property Name="COD_USUARIO" Type="int" />
         </EntityType>
         <EntityType Name="Cobro">
           <Key>
@@ -358,7 +359,7 @@
           <Property Name="COD_CLIENTE" Type="int" />
           <Property Name="COD_FORMA_PAGO" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Cliente_TipoDocumento1">
+        <Association Name="FK_Cliente_TipoDocumento">
           <End Role="TipoDocumento" Type="Self.TipoDocumento" Multiplicity="1" />
           <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
           <ReferentialConstraint>
@@ -367,6 +368,18 @@
             </Principal>
             <Dependent Role="Cliente">
               <PropertyRef Name="TIPO_DOCUMENTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cliente_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="ID_USUARIO" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="COD_USUARIO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -993,8 +1006,12 @@
           <EntitySet Name="TipoReserva" EntityType="Self.TipoReserva" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Venta" EntityType="Self.Venta" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Cliente_TipoDocumento1" Association="Self.FK_Cliente_TipoDocumento1">
+          <AssociationSet Name="FK_Cliente_TipoDocumento" Association="Self.FK_Cliente_TipoDocumento">
             <End Role="TipoDocumento" EntitySet="TipoDocumento" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cliente_Usuario" Association="Self.FK_Cliente_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Cliente" EntitySet="Cliente" />
           </AssociationSet>
           <AssociationSet Name="FK_Cobro_Cliente" Association="Self.FK_Cobro_Cliente">
@@ -1441,6 +1458,10 @@
             <End Role="Estado" EntitySet="Estado" />
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
+          <AssociationSet Name="FK_Cliente_Usuario" Association="MAGASYSModel.FK_Cliente_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Anio">
           <Key>
@@ -1477,6 +1498,8 @@
           <NavigationProperty Name="Cobro" Relationship="MAGASYSModel.FK_Cobro_Cliente" FromRole="Cliente" ToRole="Cobro" />
           <NavigationProperty Name="Reserva" Relationship="MAGASYSModel.FK_Reserva_Cliente" FromRole="Cliente" ToRole="Reserva" />
           <NavigationProperty Name="Venta" Relationship="MAGASYSModel.FK_Venta_Cliente" FromRole="Cliente" ToRole="Venta" />
+          <Property Name="COD_USUARIO" Type="Int32" />
+          <NavigationProperty Name="Usuario" Relationship="MAGASYSModel.FK_Cliente_Usuario" FromRole="Cliente" ToRole="Usuario" />
         </EntityType>
         <EntityType Name="Cobro">
           <Key>
@@ -2498,6 +2521,7 @@
           <Property Name="FECHA_ALTA" Type="DateTime" Precision="3" Nullable="false" />
           <Property Name="COD_ESTADO" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Estado" Relationship="MAGASYSModel.FK_Usuario_Estado" FromRole="Usuario" ToRole="Estado" />
+          <NavigationProperty Name="Cliente" Relationship="MAGASYSModel.FK_Cliente_Usuario" FromRole="Usuario" ToRole="Cliente" />
         </EntityType>
         <Association Name="FK_Usuario_Rol">
           <End Type="MAGASYSModel.Rol" Role="Rol" Multiplicity="1" />
@@ -2523,6 +2547,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Cliente_Usuario">
+          <End Type="MAGASYSModel.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="MAGASYSModel.Cliente" Role="Cliente" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="ID_USUARIO" />
+            </Principal>
+            <Dependent Role="Cliente">
+              <PropertyRef Name="COD_USUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2539,6 +2575,7 @@
           <EntitySetMapping Name="Cliente">
             <EntityTypeMapping TypeName="MAGASYSModel.Cliente">
               <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="COD_USUARIO" ColumnName="COD_USUARIO" />
                 <ScalarProperty Name="FECHA_BAJA" ColumnName="FECHA_BAJA" />
                 <ScalarProperty Name="DIRECCION_MAPS" ColumnName="DIRECCION_MAPS" />
                 <ScalarProperty Name="LOCALIDAD" ColumnName="LOCALIDAD" />

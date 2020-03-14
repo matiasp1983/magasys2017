@@ -86,8 +86,8 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="login.html">
-                                    <i class="fa fa-sign-out"></i>Log out
+                                <a href="Logout.aspx">
+                                    <i class="fa fa-sign-out"></i>Cerrar sesión
                                 </a>
                             </li>
                         </ul>
@@ -97,7 +97,7 @@
             <asp:ContentPlaceHolder ID="contentMaster" runat="server" />
             <div class="footer">
                 <div>
-                    <strong>Copyright</strong> Magasys Company &copy; 2020           
+                    <strong>Copyright</strong> Magasys &copy; 2020           
                 </div>
             </div>
         </div>

@@ -2,7 +2,7 @@
 using BLL.Common;
 using System;
 
-namespace PL.AdminDashboard
+namespace PL.CustomersWebSite
 {
     public partial class Logout : System.Web.UI.Page
     {
@@ -10,11 +10,11 @@ namespace PL.AdminDashboard
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session[AdminDashboardSessionBLL.DefaultSessionsId.Usuario.ToString()] != null)
+            if (Session[CustomersWebSiteSessionBLL.DefaultSessionsId.Usuario.ToString()] != null)
             {
-                if (new LoginBLL().CerrarSessionAdminDashboard())
+                if (new LoginBLL().CerrarSessionCustomersWebSite())
                 {
-                    Session[AdminDashboardSessionBLL.DefaultSessionsId.Usuario.ToString()] = null;                    
+                    Session[CustomersWebSiteSessionBLL.DefaultSessionsId.Usuario.ToString()] = null;
                     Session.Abandon();
                     Response.Redirect("Login.aspx", false);
                 }

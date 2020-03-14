@@ -18,6 +18,15 @@ using System;
 public partial class Usuario
 {
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+    public Usuario()
+    {
+
+        this.Cliente = new HashSet<Cliente>();
+
+    }
+
+
     public int ID_USUARIO { get; set; }
 
     public string NOMBRE_USUARIO { get; set; }
@@ -43,6 +52,10 @@ public partial class Usuario
     public virtual Rol Rol { get; set; }
 
     public virtual Estado Estado { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<Cliente> Cliente { get; set; }
 
 }
 

@@ -1,10 +1,9 @@
 ﻿using BLL.DAL;
-using System;
 using System.Web;
 
 namespace BLL.Common
 {
-    public static class MagasysSessionBLL
+    public static class AdminDashboardSessionBLL
     {
         #region Propiedades
 
@@ -24,7 +23,7 @@ namespace BLL.Common
         {
             private readonly string NombreSesion;
 
-            public static readonly DefaultSessionsId Usuario = new DefaultSessionsId("MagasysUsuario");            
+            public static readonly DefaultSessionsId Usuario = new DefaultSessionsId("AdminDashboardUsuario");            
 
             public DefaultSessionsId(string pNombreSesion)
             {

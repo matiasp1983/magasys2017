@@ -59,8 +59,9 @@
     <Compile Include="ClienteBLL.cs" />
     <Compile Include="CobroBLL.cs" />
     <Compile Include="ColeccionBLL.cs" />
+    <Compile Include="Common\CustomersWebSiteSessionBLL.cs" />
     <Compile Include="Common\Enums.cs" />
-    <Compile Include="Common\MagasysSessionBLL.cs" />
+    <Compile Include="Common\AdminDashboardSessionBLL.cs" />
     <Compile Include="Common\Message.cs" />
     <Compile Include="Common\MessageManager.cs" />
     <Compile Include="Common\Utilities.cs" />

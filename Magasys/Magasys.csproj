@@ -211,6 +211,7 @@
     <Content Include="CustomersWebSite\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="CustomersWebSite\fonts\opensans.css" />
     <Content Include="CustomersWebSite\fonts\roboto.css" />
+    <Content Include="CustomersWebSite\img\a4.jpg" />
     <Content Include="CustomersWebSite\Index.aspx" />
     <Content Include="AdminDashboard\Logout.aspx" />
     <Content Include="CustomersWebSite\InfoPersonal.aspx" />
@@ -232,6 +233,8 @@
     <Content Include="CustomersWebSite\js\plugins\switchery\switchery.js" />
     <Content Include="CustomersWebSite\js\plugins\touchspin\jquery.bootstrap-touchspin.min.js" />
     <Content Include="CustomersWebSite\js\plugins\validate\jquery.validate.js" />
+    <Content Include="CustomersWebSite\Login.aspx" />
+    <Content Include="CustomersWebSite\Logout.aspx" />
     <Content Include="CustomersWebSite\RegistrarReserva.aspx" />
     <Content Include="CustomersWebSite\Reserva.aspx" />
     <Content Include="CustomersWebSite\ReservaColeccion.aspx" />
@@ -730,6 +733,20 @@
     <Compile Include="CustomersWebSite\InfoPersonal.aspx.designer.cs">
       <DependentUpon>InfoPersonal.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CustomersWebSite\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomersWebSite\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomersWebSite\Logout.aspx.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomersWebSite\Logout.aspx.designer.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CustomersWebSite\MasterPage.Master.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -781,9 +798,7 @@
       <DependentUpon>Usuario.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="AdminDashboard\logs\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj">
       <Project>{27b35fe1-47fa-44ce-87b2-568778163ec1}</Project>

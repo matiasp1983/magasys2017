@@ -4,7 +4,7 @@ using NLog;
 using System;
 using System.Web.UI;
 
-namespace PL.AdminDashboard
+namespace PL.CustomersWebSite
 {
     public partial class Login : System.Web.UI.Page
     {
@@ -60,7 +60,7 @@ namespace PL.AdminDashboard
                 CONTRASENIA = txtContrasenia.Text
             };
 
-            loResultado = new LoginBLL().IniciarSessionAdminDashboard(oUsuario) != null;
+            loResultado = new LoginBLL().IniciarSessionCustomersWebSite(oUsuario) != null;
 
             return loResultado;
         } 
