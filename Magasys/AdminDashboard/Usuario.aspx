@@ -82,7 +82,7 @@
 
                                 <div class="col-sm-10">
                                     <div id="divRol">
-                                        <asp:DropDownList ID="ddlRol" runat="server" CssClass="select2_rol form-control" OnSelectedIndexChanged="ddlRol_SelectedIndexChanged"></asp:DropDownList>
+                                        <asp:DropDownList ID="ddlRol" runat="server" CssClass="select2_rol form-control"></asp:DropDownList>
                                     </div>
                                 </div>
                             </div>

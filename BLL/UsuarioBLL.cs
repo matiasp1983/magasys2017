@@ -181,6 +181,7 @@ namespace BLL
             {
                 using (var rep = new Repository<Usuario>())
                 {
+                    oUsuario.CONTRASENIA = Eramake.eCryptography.Encrypt(oUsuario.CONTRASENIA);
                     bRes = rep.Update(oUsuario);
                 }
             }

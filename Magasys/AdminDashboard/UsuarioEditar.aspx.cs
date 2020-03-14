@@ -26,18 +26,26 @@ namespace PL
         {
             try
             {
-                //Response.Write(txtContrasenia.Attributes["value"]);
+                var oUsuario = CargarUsuarioDesdeControles();
 
-                /*var oUsuario = CargarUsuarioDesdeControles();
-                bool loResutado = new BLL.UsuarioBLL().AltaUsuario(oUsuario);
-
-                if (loResutado)
+                if (oUsuario != null)
                 {
-                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeUsuarioSuccessAlta, "Alta Usuario"));
-                    LimpiarCampos();
+                    bool loResutado = new BLL.UsuarioBLL().ModificarUsuario(oUsuario);
+
+                    if (loResutado)
+                    {
+                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeUsuarioSuccessModificacion, "Modificación Usuario","UsuarioListado.aspx"));                        
+                    }
+                    else
+                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeUsuarioFailure));
                 }
                 else
-                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeUsuarioFailure));*/
+                {
+                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeUsuarioFailure));
+                }
+
+                Session.Remove(Enums.Session.Usuario.ToString());
+                Session.Remove(Enums.Session.ImagenUsuario.ToString());               
             }
             catch (Exception ex)
             {
@@ -46,7 +54,7 @@ namespace PL
                 Logger loLogger = LogManager.GetCurrentClassLogger();
                 loLogger.Error(ex);
             }
-        }
+        }        
 
         protected void BtnCancelar_Click(object sender, EventArgs e)
         {
@@ -77,43 +85,48 @@ namespace PL
             Session.Remove(Enums.Session.ImagenUsuario.ToString());
         }
 
-        protected void ddlRol_SelectedIndexChanged(object sender, EventArgs e)
+        protected void btnCambiarContrasenia_Click(object sender, EventArgs e)
         {
-
+            if ((!string.IsNullOrEmpty(txtContraseniaNueva.Text) && !string.IsNullOrEmpty(txtContraseniaNuevaConfirmar.Text)) && txtContraseniaNueva.Text.Equals(txtContraseniaNuevaConfirmar.Text))
+                txtContrasenia.Attributes["value"] = txtContraseniaNueva.Text;
         }
 
         #endregion
 
         #region Métodos Privados        
 
-        //private BLL.DAL.Usuario CargarUsuarioDesdeControles()
-        //{
-        //    var oUsuario = new BLL.DAL.Usuario
-        //    {
-        //        NOMBRE = txtNombre.Text,
-        //        APELLIDO = txtApellido.Text,
-        //        NOMBRE_USUARIO = txtNombreUsuario.Text,
-        //        CONTRASENIA = txtContraseniaConfirmacion.Text,
-        //        FECHA_ALTA = DateTime.Now,
-        //        COD_ESTADO = 1
-        //    };
+        private BLL.DAL.Usuario CargarUsuarioDesdeControles()
+        {
+            var oUsuario = new BLL.DAL.Usuario
+            {
+                NOMBRE = txtNombre.Text,
+                APELLIDO = txtApellido.Text,
+                CONTRASENIA = txtContrasenia.Attributes["value"]
+            };
 
-        //    if (!String.IsNullOrEmpty(ddlRol.SelectedValue))
-        //        oUsuario.ID_ROL = Convert.ToInt32(ddlRol.SelectedValue);         
+            if (Session[Enums.Session.Usuario.ToString()] != null)
+            {
+                oUsuario.ID_USUARIO = ((BLL.DAL.Usuario)base.Session[Enums.Session.Usuario.ToString()]).ID_USUARIO;
+                oUsuario.FECHA_ALTA = ((BLL.DAL.Usuario)base.Session[Enums.Session.Usuario.ToString()]).FECHA_ALTA;
+                oUsuario.NOMBRE_USUARIO = ((BLL.DAL.Usuario)base.Session[Enums.Session.Usuario.ToString()]).NOMBRE_USUARIO;
+                oUsuario.COD_ESTADO = ((BLL.DAL.Usuario)base.Session[Enums.Session.Usuario.ToString()]).COD_ESTADO;
+            }
 
-        //    if ((byte[])Session[Enums.Session.ImagenUsuario.ToString()] != null)
-        //        oUsuario.AVATAR = (byte[])Session[Enums.Session.ImagenUsuario.ToString()];
+            if (!String.IsNullOrEmpty(ddlRol.SelectedValue))
+                oUsuario.ID_ROL = Convert.ToInt32(ddlRol.SelectedValue);
 
-        //    return oUsuario;
-        //}
+            if ((byte[])Session[Enums.Session.ImagenUsuario.ToString()] != null)
+                oUsuario.AVATAR = (byte[])Session[Enums.Session.ImagenUsuario.ToString()];
+            else
+            {
+                if (((BLL.DAL.Usuario)base.Session[Enums.Session.Usuario.ToString()]).AVATAR != null)
+                {
+                    oUsuario.AVATAR = ((BLL.DAL.Usuario)base.Session[Enums.Session.Usuario.ToString()]).AVATAR;
+                }
+            }
 
-        //private void LimpiarCampos()
-        //{
-        //    FormUsuario.Controls.OfType<TextBox>().ToList().ForEach(x => x.Text = String.Empty);
-        //    FormUsuario.Controls.OfType<DropDownList>().ToList().ForEach(y => y.SelectedIndex = 0);            
-        //    Session.Remove(Enums.Session.ImagenUsuario.ToString());
-        //    imgPreview.ImageUrl = "~/AdminDashboard/img/perfil_default.png";
-        //}        
+            return oUsuario;
+        }
 
         private void CargarUsuarioDesdeSession()
         {
@@ -171,13 +184,7 @@ namespace PL
                 Logger loLogger = LogManager.GetCurrentClassLogger();
                 loLogger.Error(ex);
             }
-        }
-
-        protected void btnCambiarContrasenia_Click(object sender, EventArgs e)
-        {
-            if ((!string.IsNullOrEmpty(txtContraseniaNueva.Text) && !string.IsNullOrEmpty(txtContraseniaNuevaConfirmar.Text)) && txtContraseniaNueva.Text.Equals(txtContraseniaNuevaConfirmar.Text))            
-                txtContrasenia.Attributes["value"] = txtContraseniaNueva.Text;
-        }
+        }       
 
         #endregion        
     }

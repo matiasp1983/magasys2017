@@ -8,6 +8,25 @@ namespace BLL
     {
         #region Métodos Públicos
 
+        public Rol ObtenerRol(long idRol)
+        {
+            Rol oRol = null;
+
+            try
+            {
+                using (var rep = new Repository<Rol>())
+                {
+                    oRol = rep.Find(p => p.ID_ROL == idRol);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return oRol;
+        }
+
         public List<Rol> ObtenerRoles()
         {
             List<Rol> lstRoles = null;

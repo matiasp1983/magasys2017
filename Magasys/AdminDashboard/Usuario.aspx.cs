@@ -73,12 +73,7 @@ namespace PL
         {
             imgPreview.ImageUrl = "~/AdminDashboard/img/perfil_default.png";            
             Session.Remove(Enums.Session.ImagenUsuario.ToString());
-        }
-
-        protected void ddlRol_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
+        }        
         
         #endregion
 

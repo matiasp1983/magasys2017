@@ -90,7 +90,7 @@
 
                                 <div class="col-sm-10">
                                     <div id="divRol">
-                                        <asp:DropDownList ID="ddlRol" runat="server" CssClass="select2_rol form-control" OnSelectedIndexChanged="ddlRol_SelectedIndexChanged"></asp:DropDownList>
+                                        <asp:DropDownList ID="ddlRol" runat="server" CssClass="select2_rol form-control"></asp:DropDownList>
                                     </div>
                                 </div>
                             </div>
@@ -263,13 +263,6 @@
             };
             $('.example1').pwstrength(options1);
         }
-
-        <%--$('#<%=btnCambiarContrasenia.ClientID%>').click(function () {
-            var loContraseniaNueva = $('#<%=txtContraseniaNueva.ClientID%>').val();
-            var lotxtContraseniaNuevaConfirmar = $('#<%=txtContraseniaNuevaConfirmar.ClientID%>').val();
-            if ((loContraseniaNueva != "" && lotxtContraseniaNuevaConfirmar != "") && loContraseniaNueva === lotxtContraseniaNuevaConfirmar) {
-                $('#<%=txtContrasenia.ClientID%>').val(loContraseniaNueva);
-            }
-        });--%>
+        
     </script>
 </asp:Content>

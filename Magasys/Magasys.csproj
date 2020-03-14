@@ -170,6 +170,7 @@
     <Content Include="AdminDashboard\ReservaVisualizar.aspx" />
     <Content Include="AdminDashboard\UsuarioEditar.aspx" />
     <Content Include="AdminDashboard\UsuarioListado.aspx" />
+    <Content Include="AdminDashboard\UsuarioVisualizar.aspx" />
     <Content Include="AdminDashboard\Venta.aspx" />
     <Content Include="AdminDashboard\VentaListado.aspx" />
     <Content Include="AdminDashboard\VisualizarDeudas.aspx" />
@@ -683,6 +684,13 @@
     </Compile>
     <Compile Include="AdminDashboard\UsuarioListado.aspx.designer.cs">
       <DependentUpon>UsuarioListado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\UsuarioVisualizar.aspx.cs">
+      <DependentUpon>UsuarioVisualizar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\UsuarioVisualizar.aspx.designer.cs">
+      <DependentUpon>UsuarioVisualizar.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminDashboard\Venta.aspx.cs">
       <DependentUpon>Venta.aspx</DependentUpon>
