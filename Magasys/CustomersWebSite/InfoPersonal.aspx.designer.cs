@@ -94,6 +94,42 @@ namespace PL.CustomersWebSite {
         protected global::System.Web.UI.WebControls.TextBox txtContrasenia;
         
         /// <summary>
+        /// Control txtContraseniaNueva.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtContraseniaNueva;
+        
+        /// <summary>
+        /// Control txtContraseniaNuevaConfirmar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtContraseniaNuevaConfirmar;
+        
+        /// <summary>
+        /// Control btnCambiarContrasenia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCambiarContrasenia;
+        
+        /// <summary>
+        /// Control btnCancelarCambiarContrasenia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelarCambiarContrasenia;
+        
+        /// <summary>
         /// Control imgPreview.
         /// </summary>
         /// <remarks>

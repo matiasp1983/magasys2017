@@ -100,6 +100,12 @@ namespace PL.CustomersWebSite
             //Response.Redirect("ClienteListado.aspx", false);
         }
 
+        protected void btnCambiarContrasenia_Click(object sender, EventArgs e)
+        {
+            if ((!string.IsNullOrEmpty(txtContraseniaNueva.Text) && !string.IsNullOrEmpty(txtContraseniaNuevaConfirmar.Text)) && txtContraseniaNueva.Text.Equals(txtContraseniaNuevaConfirmar.Text))
+                txtContrasenia.Attributes["value"] = txtContraseniaNueva.Text;
+        }
+
         #endregion
 
         #region Métodos Privados

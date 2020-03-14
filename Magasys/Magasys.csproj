@@ -213,6 +213,7 @@
     <Content Include="CustomersWebSite\fonts\roboto.css" />
     <Content Include="CustomersWebSite\Index.aspx" />
     <Content Include="AdminDashboard\Logout.aspx" />
+    <Content Include="CustomersWebSite\InfoPersonal.aspx" />
     <Content Include="CustomersWebSite\js\bootstrap.min.js" />
     <Content Include="CustomersWebSite\js\inspinia.js" />
     <Content Include="CustomersWebSite\js\jquery-3.1.1.min.js" />
@@ -223,6 +224,8 @@
     <Content Include="CustomersWebSite\js\plugins\jasny\jasny-bootstrap.min.js" />
     <Content Include="CustomersWebSite\js\plugins\metisMenu\jquery.metisMenu.js" />
     <Content Include="CustomersWebSite\js\plugins\pace\pace.min.js" />
+    <Content Include="CustomersWebSite\js\plugins\pwstrength\pwstrength-bootstrap.min.js" />
+    <Content Include="CustomersWebSite\js\plugins\pwstrength\zxcvbn.js" />
     <Content Include="CustomersWebSite\js\plugins\select2\select2.full.min.js" />
     <Content Include="CustomersWebSite\js\plugins\slimscroll\jquery.slimscroll.min.js" />
     <Content Include="CustomersWebSite\js\plugins\sweetalert\sweetalert.min.js" />
@@ -719,6 +722,13 @@
     </Compile>
     <Compile Include="CustomersWebSite\Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomersWebSite\InfoPersonal.aspx.cs">
+      <DependentUpon>InfoPersonal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomersWebSite\InfoPersonal.aspx.designer.cs">
+      <DependentUpon>InfoPersonal.aspx</DependentUpon>
     </Compile>
     <Compile Include="CustomersWebSite\MasterPage.Master.cs">
       <DependentUpon>MasterPage.Master</DependentUpon>

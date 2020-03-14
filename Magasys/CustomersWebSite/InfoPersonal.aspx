@@ -85,39 +85,31 @@
                                                 <asp:TextBox ID="txtContrasenia" runat="server" CssClass="form-control" MaxLength="30" autocomplete="off" TextMode="Password" Enabled="False"></asp:TextBox>
                                             </div>
                                             <div class="col-sm-3">
-                                                <a data-toggle="modal" class="btn btn-white" href="#modal-form">Cambiar</a>
+                                                <a data-toggle="modal" class="btn btn-white" href="#modal-cambiarcontarsenia">Cambiar</a>
                                             </div>
-                                            <div id="modal-form" class="modal fade" aria-hidden="true">
+                                            <div id="modal-cambiarcontarsenia" class="modal fade" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                     <div class="modal-content">
                                                         <div class="modal-body">
-                                                            <div class="row">
-                                                                <div class="col-sm-6 b-r">
-                                                                    <h3 class="m-t-none m-b">Sign in</h3>
-
-                                                                    <p>Sign in today for more expirience.</p>
-
-                                                                    <form role="form">
-                                                                        <div class="form-group">
-                                                                            <label>Email</label>
-                                                                            <input type="email" placeholder="Enter email" class="form-control"></div>
-                                                                        <div class="form-group">
-                                                                            <label>Password</label>
-                                                                            <input type="password" placeholder="Password" class="form-control"></div>
-                                                                        <div>
-                                                                            <button class="btn btn-sm btn-primary pull-right m-t-n-xs" type="submit"><strong>Log in</strong></button>
-                                                                            <label>
-                                                                                <input type="checkbox" class="i-checks">
-                                                                                Remember me </label>
+                                                            <div class="row" id="pwd-container1">
+                                                                <div class="col-sm-12">
+                                                                    <div class="form-group">
+                                                                        <label>Contrase&ntilde;a Nueva</label>
+                                                                        <asp:TextBox ID="txtContraseniaNueva" runat="server" CssClass="form-control example1" MaxLength="30" autocomplete="off" TextMode="Password" placeholder="Contraseña nueva"></asp:TextBox>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <label>Confirmar la Contrase&ntilde;a Nueva</label>
+                                                                        <asp:TextBox ID="txtContraseniaNuevaConfirmar" runat="server" CssClass="form-control" MaxLength="30" autocomplete="off" TextMode="Password" placeholder="Confirmar la contraseña nueva"></asp:TextBox>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <div class="col-sm-12">
+                                                                            <div class="pwstrength_viewport_progress"></div>
                                                                         </div>
-                                                                    </form>
-                                                                </div>
-                                                                <div class="col-sm-6">
-                                                                    <h4>Not a member?</h4>
-                                                                    <p>You can create an account:</p>
-                                                                    <p class="text-center">
-                                                                        <a href=""><i class="fa fa-sign-in big-icon"></i></a>
-                                                                    </p>
+                                                                    </div>
+                                                                    <div>
+                                                                        <asp:Button ID="btnCambiarContrasenia" CssClass="btn btn-success" runat="server" Text="Cambiar la Contraseña" OnClick="btnCambiarContrasenia_Click" />
+                                                                        <asp:Button ID="btnCancelarCambiarContrasenia" CssClass="btn btn-primary" runat="server" Text="Cancelar" formnovalidate="" />
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -237,7 +229,7 @@
                                                             <div id="map" style="width: 100%; height: 400px;"></div>
                                                             <div class="clearfix">&nbsp;</div>
                                                             <div id="infowindow-content">
-                                                                <img src="" width="16" height="16" id="place-icon">
+                                                                <img src="#" width="16" height="16" id="place-icon">
                                                                 <span id="place-name" class="title"></span>
                                                                 <br>
                                                                 <span id="place-address"></span>
@@ -357,6 +349,9 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="script" runat="server">
+    <script src="js/plugins/pwstrength/pwstrength-bootstrap.min.js"></script>
+    <script src="js/plugins/pwstrength/zxcvbn.js"></script>
+
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB59e_fh71w0-GgkFuO_cD5ILETaLOkX3w&libraries=places&callback=initMap" async defer></script>
     
     <script type="text/javascript">
@@ -367,6 +362,7 @@
         if (window.jQuery) {
             $(document).ready(function () {
                 ValidarForm();
+                Pwstrength();
             });
         }       
 
@@ -408,7 +404,16 @@
                             depends: function (element) { return $('#<%=txtCalle.ClientID%>').val().length > 0 }
                         },
                         normalizer: function (value) { return $.trim(value); }
-                    }                    
+                    },
+                    <%=txtContraseniaNueva.UniqueID%>: {
+                        required: true,
+                        minlength: 8
+                    },
+                    <%=txtContraseniaNuevaConfirmar.UniqueID%>: {
+                        required: true,
+                        equalTo: "#<%=txtContraseniaNueva.ClientID %>",
+                        minlength: 8
+                    }
 				},
             messages: {
                     <%=txtNombre.UniqueID%>: {
@@ -437,7 +442,16 @@
                     },
                     <%=txtBarrio.UniqueID%>: {
                         required: "Este campo es requerido."
-                    }                    
+                    },
+                    <%=txtContraseniaNueva.UniqueID%>: {
+                        required: "Este campo es requerido.",
+                        minlength: "Usa 8 caracteres o más para tu contraseña."
+                    },
+                    <%=txtContraseniaNuevaConfirmar.UniqueID%>: {
+                        required: "Este campo es requerido.",
+                        equalTo: "Las contraseñas no coinciden. Vuelva a intentarlo.",
+                        minlength: "Usa 8 caracteres o más para tu contraseña."
+                   }                    
                 }
             });
         }        
@@ -555,5 +569,21 @@
             // Limpiar caja de texto id: pacInput
             document.getElementById("pacInput").value = "";   
         }
+
+        function Pwstrength() {
+            var options1 = {};
+            options1.ui = {
+                container: "#pwd-container1",
+                showVerdictsInsideProgressBar: true,
+                viewports: {
+                    progress: ".pwstrength_viewport_progress"
+                }
+            };
+            options1.common = {
+                debug: false
+            };
+            $('.example1').pwstrength(options1);
+        }
+
     </script>
 </asp:Content>
