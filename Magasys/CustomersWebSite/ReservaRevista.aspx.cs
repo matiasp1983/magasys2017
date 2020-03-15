@@ -38,7 +38,8 @@ namespace PL.CustomersWebSite
                         EDICION = ((Label)loItem.Controls[7]).Text,
                         DESCRIPCION = ((Label)loItem.Controls[9]).Text,
                         PRECIO = ((Label)loItem.Controls[5]).Text,
-                        FECHA_EDICION = ((Label)loItem.Controls[11]).Text
+                        FECHA_EDICION = ((Label)loItem.Controls[11]).Text,
+                        COD_PRODUCTO = Convert.ToInt32(((Label)loItem.Controls[13]).Text)
                     };
 
                     oProdEdicionCustomersWebSite.IMAGEN = new Image();

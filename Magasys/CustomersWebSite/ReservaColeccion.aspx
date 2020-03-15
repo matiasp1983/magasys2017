@@ -76,6 +76,9 @@
                                                 <p class="text-success">
                                                     <asp:Label ID="lblDescripcion" runat="server" Text='<%#(Eval("DESCRIPCION") != null) ? Eval("DESCRIPCION").ToString():null%>'></asp:Label>
                                                 </p>
+                                                <p class="text-success">
+                                                    <asp:Label ID="lblCodProducto" runat="server" Text='<%#Eval("COD_PRODUCTO").ToString()%>' Visible ="false"></asp:Label>
+                                                </p>
                                             </div>
                                         </div>
                                     </div>

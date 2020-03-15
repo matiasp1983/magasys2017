@@ -79,6 +79,9 @@
                                                 <p class="text-muted">
                                                     <asp:Label ID="lblFechaEdicion" runat="server" Text='<%#string.Format("Fecha Edición: {0}",Eval("FECHA_EDICION").ToString())%>'></asp:Label>
                                                 </p>
+                                                <p class="text-success">
+                                                    <asp:Label ID="lblCodProducto" runat="server" Text='<%#Eval("COD_PRODUCTO").ToString()%>' Visible ="false"></asp:Label>
+                                                </p>
                                             </div>
                                         </div>
                                     </div>

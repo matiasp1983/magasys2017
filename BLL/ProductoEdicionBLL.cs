@@ -170,6 +170,7 @@ namespace BLL
                         oProdEdicionColeccionCustomersWebSite = new ProdEdicionCustomersWebSite
                         {
                             COD_PRODUCTO_EDICION = loProductoEdicion.ID_PRODUCTO_EDICION,
+                            COD_PRODUCTO = Convert.ToInt32(codigo_producto),
                             PRECIO = string.Format(System.Globalization.CultureInfo.GetCultureInfo("de-DE"), "{0:0.00}", loProductoEdicion.PRECIO),
                             EDICION = loProductoEdicion.EDICION
                         };
@@ -210,6 +211,7 @@ namespace BLL
     {
         public System.Web.UI.WebControls.Image IMAGEN { get; set; }
         public int COD_PRODUCTO_EDICION { get; set; }
+        public int COD_PRODUCTO { get; set; }
         public int COD_TIPO_PRODUCTO { get; set; }
         public string DESCRIPCION { get; set; }
         public string EDICION { get; set; }

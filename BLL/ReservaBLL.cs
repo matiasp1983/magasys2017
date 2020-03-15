@@ -233,6 +233,8 @@ namespace BLL
         {
             List<ReservaListado> lstReservaListado = null;
             List<Reserva> lstReserva = null;
+            ReservaEdicion oReservaEdicion = null;
+
 
             try
             {
@@ -284,6 +286,22 @@ namespace BLL
                         else
                             oReservaListado.FORMA_ENTREGA = "Envío a Domicilio";
 
+                        using (var loRepReservaEdicion = new Repository<ReservaEdicion>())
+                        {
+                            oReservaEdicion = loRepReservaEdicion.Find(p => p.COD_RESERVA == loReserva.ID_RESERVA);
+
+                            if (oReservaEdicion != null)
+                            {
+                                oReservaListado.COD_EDICION = oReservaEdicion.COD_PROD_EDICION.ToString();
+                                oReservaListado.EDICION = oReservaEdicion.ProductoEdicion.EDICION;
+                                if (oReservaEdicion.ProductoEdicion.NOMBRE != null)
+                                    oReservaListado.NOMBRE_EDICION = oReservaEdicion.ProductoEdicion.NOMBRE;
+                                if (oReservaEdicion.ProductoEdicion.DESCRIPCION != null)
+                                    oReservaListado.DESC_EDICION = oReservaEdicion.ProductoEdicion.DESCRIPCION;
+                                oReservaListado.PRECIO_EDICION = oReservaEdicion.ProductoEdicion.PRECIO.ToString();
+                            }
+                        }
+
                         lstReservaListado.Add(oReservaListado);
                     }
                 }
@@ -323,15 +341,20 @@ namespace BLL
     public class ReservaListado
     {
         public int ID_RESERVA { get; set; }
-        public System.DateTime FECHA { get; set; }
+        public DateTime FECHA { get; set; }
         public String NOMBRE_CLIENTE { get; set; }
         public string NOMBRE_PRODUCTO { get; set; }
         public int? COD_CLIENTE { get; set; }
         public string TIPO_RESERVA { get; set; }
         public string FORMA_ENTREGA { get; set; }
-        public System.DateTime? FECHA_INICIO { get; set; }
-        public System.DateTime? FECHA_FIN { get; set; }
+        public DateTime? FECHA_INICIO { get; set; }
+        public DateTime? FECHA_FIN { get; set; }
         public string ESTADO { get; set; }
+        public string COD_EDICION { get; set; }
+        public string EDICION { get; set; }
+        public string NOMBRE_EDICION { get; set; }
+        public string DESC_EDICION { get; set; }
+        public string PRECIO_EDICION { get; set; }
     }
 
     public class ReservaClienteListado
@@ -356,6 +379,7 @@ namespace BLL
         public string SUBTOTAL { get; set; }
         public bool RETIRA_LOCAL { get; set; }
         public bool ENVIO_DOMICILIO { get; set; }
+        public string PRODUCTO_EDICION { get; set; } // para concatenar el producto con la edición y poder identificar unívocamente el registro para eliminar.
     }
 
     #endregion
