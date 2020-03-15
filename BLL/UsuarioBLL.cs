@@ -18,8 +18,7 @@ namespace BLL
             {
                 using (var rep = new Repository<Usuario>())
                 {
-                    oUsuario = rep.Find(p => p.ID_USUARIO == idUsuario);
-                    oUsuario.CONTRASENIA = Eramake.eCryptography.Decrypt(oUsuario.CONTRASENIA);
+                    oUsuario = rep.Find(p => p.ID_USUARIO == idUsuario);                    
                 }
             }
             catch (Exception)
@@ -141,7 +140,7 @@ namespace BLL
             {
                 using (var rep = new Repository<Usuario>())
                 {
-                    oUsuario.CONTRASENIA = Eramake.eCryptography.Encrypt(oUsuario.CONTRASENIA);
+                    oUsuario.CONTRASENIA = BCrypt.Net.BCrypt.HashPassword(oUsuario.CONTRASENIA);
                     bRes = rep.Create(oUsuario) != null;
                 }
             }
@@ -181,7 +180,7 @@ namespace BLL
             {
                 using (var rep = new Repository<Usuario>())
                 {
-                    oUsuario.CONTRASENIA = Eramake.eCryptography.Encrypt(oUsuario.CONTRASENIA);
+                    oUsuario.CONTRASENIA = BCrypt.Net.BCrypt.HashPassword(oUsuario.CONTRASENIA);
                     bRes = rep.Update(oUsuario);
                 }
             }

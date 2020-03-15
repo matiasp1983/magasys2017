@@ -20,8 +20,8 @@ namespace BLL
                     loUsuario = rep.Find(p => p.NOMBRE_USUARIO.ToUpper() == oUsuario.NOMBRE_USUARIO.ToUpper() && p.FECHA_BAJA.HasValue == false && p.ID_ROL != RolUsuario.Cliente);
 
                     if (loUsuario != null)
-                        if (!string.IsNullOrEmpty(loUsuario.CONTRASENIA))
-                            loResultado = (Eramake.eCryptography.Decrypt(loUsuario.CONTRASENIA) == oUsuario.CONTRASENIA);
+                        if (!string.IsNullOrEmpty(loUsuario.CONTRASENIA))                         
+                            loResultado = (BCrypt.Net.BCrypt.Verify(oUsuario.CONTRASENIA, loUsuario.CONTRASENIA));                        
                 }
 
                 if (loResultado)
@@ -58,7 +58,7 @@ namespace BLL
 
                     if (loUsuario != null)
                         if (!string.IsNullOrEmpty(loUsuario.CONTRASENIA))
-                            loResultado = (Eramake.eCryptography.Decrypt(loUsuario.CONTRASENIA) == oUsuario.CONTRASENIA);
+                            loResultado = (BCrypt.Net.BCrypt.Verify(oUsuario.CONTRASENIA, loUsuario.CONTRASENIA));
                 }
 
                 if (loResultado)
