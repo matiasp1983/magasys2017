@@ -350,7 +350,7 @@
                         digits: "Ingrese solo dígitos."
                     },
                     <%=txtEmail.UniqueID%>: {
-                        email: "Formato de correo incorrecto."
+                        email: "Formato de email incorrecto."
                     },
                     <%=txtCalle.UniqueID%>: {
                         required: "Este campo es requerido."

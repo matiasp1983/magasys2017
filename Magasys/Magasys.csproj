@@ -211,6 +211,7 @@
     <Content Include="CustomersWebSite\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="CustomersWebSite\fonts\opensans.css" />
     <Content Include="CustomersWebSite\fonts\roboto.css" />
+    <Content Include="CustomersWebSite\ForgotPassword.aspx" />
     <Content Include="CustomersWebSite\img\a4.jpg" />
     <Content Include="CustomersWebSite\Index.aspx" />
     <Content Include="AdminDashboard\Logout.aspx" />
@@ -718,6 +719,13 @@
     </Compile>
     <Compile Include="AdminDashboard\VisualizarDeudas.aspx.designer.cs">
       <DependentUpon>VisualizarDeudas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomersWebSite\ForgotPassword.aspx.cs">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomersWebSite\ForgotPassword.aspx.designer.cs">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
     </Compile>
     <Compile Include="CustomersWebSite\Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>

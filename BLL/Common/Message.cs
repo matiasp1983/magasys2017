@@ -149,7 +149,16 @@
         public const string MsjeUsuarioSuccessAlta = "El usuario se guardó correctamente.";
         public const string MsjeUsuarioSuccessModificacion = "El usuario se modificó correctamente.";
         public const string MsjeUsuarioFailure = "El usuario no se pudo guardar.";
-        public const string MsjeListadoUsuarioFiltrarTotalSinResultados = "No se encontraron Usuarios para la búsqueda seleccionada.";        
+        public const string MsjeListadoUsuarioFiltrarTotalSinResultados = "No se encontraron Usuarios para la búsqueda seleccionada.";
+
+        #endregion
+
+        #region Mensajes ForgotPassword
+
+        public const string MsjeForgotPasswordEmailVacio = "Email no pueden estar vacío.";
+        public const string MsjeForgotPasswordIncorrecto = "Formato de email incorrecto.";
+        public const string MsjeForgotPasswordSuccess = "Te enviaremos un email con instrucciones para reestrablecer tu contraseña. Si no lo ves en tu carpeta de Recibidos, revisá el correo no deseado.";        
+        public const string MsjeForgotPasswordFailure = "El Email no se pudo enviar.";        
 
         #endregion
     }

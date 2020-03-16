@@ -374,7 +374,7 @@
                     },
                     <%=txtEmail.UniqueID%>: {
                         required: "Este campo es requerido.",
-                        email: "Formato de correo incorrecto."
+                        email: "Formato de email incorrecto."
                     },
                     <%=txtCalle.UniqueID%>: {
                         required: "Este campo es requerido."

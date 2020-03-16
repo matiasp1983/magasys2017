@@ -51,26 +51,25 @@
                         </div>
                         <asp:Button ID="btnLogin" runat="server" Text="Login" CssClass="btn btn-primary block full-width m-b" OnClick="btnLogin_Click" />
 
-                        <a href="#">
-                            <small>Forgot password?</small>
+                        <a href="ForgotPassword.aspx">
+                            <small>¿Se te olvid&oacute; tu contrase&ntilde;a?</small>
                         </a>
 
                         <p class="text-muted text-center">
-                            <small>Do not have an account?</small>
+                            <small>¿No tiene una cuenta?</small>
                         </p>
-                        <a class="btn btn-sm btn-white btn-block" href="register.html">Create an account</a>
-                    </form>
-                    <p class="m-t"><small>©2020 All Rights Reserved. Magasys</small> </p>
+                        <a class="btn btn-sm btn-white btn-block" href="register.html">Crea una cuenta</a>
+                    </form>                    
                 </div>
             </div>
         </div>
         <hr />
         <div class="row">
             <div class="col-md-6">
-                Copyright Magasys
+                All Rights Reserved. Magasys
             </div>
             <div class="col-md-6 text-right">
-                <small>© 2020</small>
+                <small>©2020</small>
             </div>
         </div>
     </div>
