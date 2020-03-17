@@ -1,12 +1,7 @@
 ﻿using BLL.Common;
 using NLog;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace PL.CustomersWebSite
 {
@@ -25,11 +20,23 @@ namespace PL.CustomersWebSite
             {
                 if (ValidarCamposObligatorios())
                 {
-                    if (ValidarEmail())
-                        if (EnviarEmail())
-                            Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeForgotPasswordSuccess, "Recupero de contraseña", "Login.aspx"));
+                    var loForgotPassword = new BLL.ForgotPasswordBLL();
+                    var loCliente = new BLL.ClienteBLL();
+
+                    if (loForgotPassword.ValidarEmail(txtEmail.Text))
+                    {
+                        var loUsuarioHash = loCliente.ConsultarExistenciaCliente(txtEmail.Text);
+
+                        if (!string.IsNullOrEmpty(loUsuarioHash))
+                        {
+                            if (loForgotPassword.EnviarEmail(txtEmail.Text, loUsuarioHash))
+                                Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeForgotPasswordSuccess, "Recupero de contraseña", "Login.aspx"));
+                            else
+                                Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeForgotPasswordFailure));
+                        }
                         else
-                            Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeForgotPasswordFailure));
+                            Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeForgotPasswordFailureNoCliente));
+                    }
                     else
                         Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeForgotPasswordIncorrecto));
                 }
@@ -60,26 +67,6 @@ namespace PL.CustomersWebSite
                 loResutado = true;
 
             return loResutado;
-        }
-
-        private bool ValidarEmail()
-        {
-            bool loResultado = false;
-            string loExpresion;
-            loExpresion = @"^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)" +
-                @"*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$";
-            if (Regex.IsMatch(txtEmail.Text, loExpresion))
-            {
-                if (Regex.Replace(txtEmail.Text, loExpresion, string.Empty).Length == 0)
-                    loResultado = true;
-            }
-
-            return loResultado;
-        }
-
-        private bool EnviarEmail()
-        {
-            return true;
         }
 
         #endregion

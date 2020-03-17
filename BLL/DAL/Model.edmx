@@ -347,6 +347,7 @@
           <Property Name="FECHA_BAJA" Type="datetime" />
           <Property Name="ID_ROL" Type="int" Nullable="false" />
           <Property Name="COD_ESTADO" Type="int" Nullable="false" />
+          <Property Name="RECUPERAR_CONTRASENIA" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Venta">
           <Key>
@@ -2522,6 +2523,7 @@
           <Property Name="COD_ESTADO" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Estado" Relationship="MAGASYSModel.FK_Usuario_Estado" FromRole="Usuario" ToRole="Estado" />
           <NavigationProperty Name="Cliente" Relationship="MAGASYSModel.FK_Cliente_Usuario" FromRole="Usuario" ToRole="Cliente" />
+          <Property Name="RECUPERAR_CONTRASENIA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Usuario_Rol">
           <End Type="MAGASYSModel.Rol" Role="Rol" Multiplicity="1" />
@@ -2940,6 +2942,7 @@
           <EntitySetMapping Name="Usuario">
             <EntityTypeMapping TypeName="MAGASYSModel.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="RECUPERAR_CONTRASENIA" ColumnName="RECUPERAR_CONTRASENIA" />
                 <ScalarProperty Name="COD_ESTADO" ColumnName="COD_ESTADO" />
                 <ScalarProperty Name="FECHA_ALTA" ColumnName="FECHA_ALTA" />
                 <ScalarProperty Name="ID_ROL" ColumnName="ID_ROL" />

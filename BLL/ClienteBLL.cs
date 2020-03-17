@@ -68,6 +68,30 @@ namespace BLL
             return bEsNuevoCliente;
         }
 
+        public string ConsultarExistenciaCliente(string email)
+        {
+            string bExiste = string.Empty;
+
+            try
+            {
+                using (var rep = new Repository<Cliente>())
+                {
+                    var oCliente = rep.Find(p => p.EMAIL.Equals(email) && p.FECHA_BAJA == null && p.COD_ESTADO == 1);
+
+                    if (oCliente != null)
+                    {
+                        bExiste = BCrypt.Net.BCrypt.HashPassword(oCliente.ID_CLIENTE.ToString());
+                    }                    
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return bExiste;
+        }
+
         public bool AltaCliente(Cliente oCliente)
         {
             var bRes = false;

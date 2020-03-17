@@ -240,6 +240,7 @@
     <Content Include="CustomersWebSite\Reserva.aspx" />
     <Content Include="CustomersWebSite\ReservaColeccion.aspx" />
     <Content Include="CustomersWebSite\ReservaRevista.aspx" />
+    <Content Include="CustomersWebSite\RestorePassword.aspx" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -796,6 +797,13 @@
     </Compile>
     <Compile Include="CustomersWebSite\ReservaRevista.aspx.designer.cs">
       <DependentUpon>ReservaRevista.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomersWebSite\RestorePassword.aspx.cs">
+      <DependentUpon>RestorePassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomersWebSite\RestorePassword.aspx.designer.cs">
+      <DependentUpon>RestorePassword.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AdminDashboard\Usuario.aspx.cs">

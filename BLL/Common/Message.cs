@@ -157,8 +157,9 @@
 
         public const string MsjeForgotPasswordEmailVacio = "Email no pueden estar vacío.";
         public const string MsjeForgotPasswordIncorrecto = "Formato de email incorrecto.";
-        public const string MsjeForgotPasswordSuccess = "Te enviaremos un email con instrucciones para reestrablecer tu contraseña. Si no lo ves en tu carpeta de Recibidos, revisá el correo no deseado.";        
-        public const string MsjeForgotPasswordFailure = "El Email no se pudo enviar.";        
+        public const string MsjeForgotPasswordSuccess = "Te enviaremos un email con instrucciones para restrablecer tu contraseña. Si no lo ves en tu carpeta de Recibidos, revisá el correo no deseado.";        
+        public const string MsjeForgotPasswordFailure = "El Email no se pudo enviar.";
+        public const string MsjeForgotPasswordFailureNoCliente = "El dato ingresado no corresponde a un cliente de Magasys.";
 
         #endregion
     }

@@ -47,6 +47,8 @@ public partial class Usuario
 
     public int COD_ESTADO { get; set; }
 
+    public string RECUPERAR_CONTRASENIA { get; set; }
+
 
 
     public virtual Rol Rol { get; set; }
