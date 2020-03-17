@@ -85,7 +85,7 @@ namespace PL
 
             try
             {
-                ddlRol.DataSource = oRol.ObtenerRoles();
+                ddlRol.DataSource = oRol.ObtenerRolesAdminDashboard();
                 ddlRol.DataTextField = "DESCRIPCION";
                 ddlRol.DataValueField = "ID_ROL";
                 ddlRol.DataBind();

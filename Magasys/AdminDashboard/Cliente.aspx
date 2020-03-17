@@ -300,7 +300,8 @@
                         digits: true
                     },
                     <%=txtEmail.UniqueID%>: {
-                        email: true,
+                        required: true,
+                        email: true
                     },
                     <%=txtDepartamento.UniqueID%>: {
                         required: {
@@ -337,6 +338,7 @@
                         digits: "Ingrese solo dígitos."
                     },
                     <%=txtEmail.UniqueID%>: {
+                        required: "Este campo es requerido.",
                         email: "Formato de email incorrecto."
                     },
                     <%=txtCalle.UniqueID%>: {

@@ -1,4 +1,5 @@
-﻿using BLL.DAL;
+﻿using BLL.Common;
+using BLL.DAL;
 using BLL.Filters;
 using System;
 using System.Collections.Generic;
@@ -89,6 +90,25 @@ namespace BLL
             }
 
             return lstUsuarioListado;
+        }
+
+        public Usuario ObtenerUsuario(string pUsarioHash)
+        {
+            Usuario oUsuario = null;
+
+            try
+            {
+                using (var rep = new Repository<Usuario>())
+                {
+                    oUsuario = rep.Find(p => p.RECUPERAR_CONTRASENIA == pUsarioHash && p.ID_ROL == RolUsuario.Cliente);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return oUsuario;
         }
 
         public List<UsuarioListado> ObtenerUsuarios()

@@ -35,7 +35,27 @@ namespace BLL
             {
                 using (var rep = new Repository<Rol>())
                 {
-                    lstRoles = rep.FindAll();                    
+                    lstRoles = rep.FindAll();
+                    lstRoles.Sort((x, y) => String.Compare(x.DESCRIPCION, y.DESCRIPCION));
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return lstRoles;
+        }
+
+        public List<Rol> ObtenerRolesAdminDashboard()
+        {
+            List<Rol> lstRoles = null;
+
+            try
+            {
+                using (var rep = new Repository<Rol>())
+                {
+                    lstRoles = rep.Search(x => !x.DESCRIPCION.Equals("CLIENTE"));
                     lstRoles.Sort((x, y) => String.Compare(x.DESCRIPCION, y.DESCRIPCION));
                 }
             }
@@ -48,5 +68,5 @@ namespace BLL
         }
 
         #endregion
-    }    
+    }
 }

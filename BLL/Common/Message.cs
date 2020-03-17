@@ -162,5 +162,15 @@
         public const string MsjeForgotPasswordFailureNoCliente = "El dato ingresado no corresponde a un cliente de Magasys.";
 
         #endregion
+
+        #region Mensajes RestorePassword
+
+        public const string MsjeRestorePasswordContraseniaNuevaConfirmarContraseniaVacios = "Contraseña Nueva y/o su Confirmación no pueden estar vacíos.";
+        public const string MsjeRestorePasswordLength = "Usa 8 caracteres o más para tu contraseña.";
+        public const string MsjeRestorePasswordCoincidencia = "Las contraseñas no coinciden. Vuelva a intentarlo.";
+        public const string MsjeMsjeRestorePasswordSuccessAlta = "La contraseña se guardó correctamente.";
+        public const string MsjeMsjeRestorePasswordFailure = "La contraseña no se pudo guardar.";
+
+        #endregion
     }
 }
