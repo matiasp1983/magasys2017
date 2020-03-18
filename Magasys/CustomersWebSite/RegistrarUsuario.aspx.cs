@@ -24,13 +24,58 @@ namespace PL.CustomersWebSite
         {
             try
             {
-                var oUsuario = CargarUsuarioDesdeControles();
-                bool loResutado = new BLL.UsuarioBLL().AltaUsuario(oUsuario);
+                var loTipoDocumento = 0;
+                var loNroDocumento = 0;                               
 
-                if (loResutado)
+                if (!String.IsNullOrEmpty(ddlTipoDocumento.SelectedValue))
+                    loTipoDocumento = Convert.ToInt32(ddlTipoDocumento.SelectedValue);
+
+                loNroDocumento = Convert.ToInt32(txtNroDocumento.Text);
+
+                var oCliente = new BLL.ClienteBLL().ObtenerCliente(loTipoDocumento, loNroDocumento);
+
+                if (oCliente == null)
                 {
-                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeUsuarioSuccessAlta, "Alta Usuario"));
-                    LimpiarCampos();
+                    oCliente = new BLL.DAL.Cliente
+                    {
+                        TIPO_DOCUMENTO = loTipoDocumento,
+                        NRO_DOCUMENTO = loNroDocumento,
+                        FECHA_ALTA = DateTime.Now,
+                        COD_ESTADO = 1,
+                        NOMBRE = txtNombre.Text,
+                        APELLIDO = txtApellido.Text,
+                        TELEFONO_MOVIL = txtTelefonoMovil.Text,
+                        EMAIL = txtEmail.Text
+                    };           
+                    
+                    oCliente = new BLL.ClienteBLL().AltaClienteReturnCliente(oCliente);
+                }
+               
+                var oUsuario = new BLL.DAL.Usuario
+                {
+                    NOMBRE = txtNombre.Text,
+                    APELLIDO = txtApellido.Text,
+                    NOMBRE_USUARIO = txtNombreUsuario.Text,
+                    CONTRASENIA = txtContraseniaConfirmacion.Text,
+                    FECHA_ALTA = DateTime.Now,
+                    COD_ESTADO = 1,
+                    ID_ROL = 3,
+                    RECUPERAR_CONTRASENIA = oCliente.ID_CLIENTE.ToString()
+                };
+
+                if ((byte[])Session[Enums.Session.ImagenUsuario.ToString()] != null)
+                    oUsuario.AVATAR = (byte[])Session[Enums.Session.ImagenUsuario.ToString()];
+
+                oUsuario = new BLL.UsuarioBLL().AltaUsuarioReturnUsuario(oUsuario);
+
+                if (oUsuario != null)
+                {
+                    oCliente.COD_USUARIO = oUsuario.ID_USUARIO;
+
+                    if(new BLL.ClienteBLL().ModificarCliente(oCliente)) {
+
+                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeUsuarioSuccessAlta, "Alta Usuario", "Index.aspx"));
+                    }
                 }
                 else
                     Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeUsuarioFailure));
@@ -92,36 +137,7 @@ namespace PL.CustomersWebSite
                 Logger loLogger = LogManager.GetCurrentClassLogger();
                 loLogger.Error(ex);
             }
-        }
-
-        private BLL.DAL.Usuario CargarUsuarioDesdeControles()
-        {
-            var oUsuario = new BLL.DAL.Usuario
-            {
-                NOMBRE = txtNombre.Text,
-                APELLIDO = txtApellido.Text,
-                NOMBRE_USUARIO = txtNombreUsuario.Text,
-                CONTRASENIA = txtContraseniaConfirmacion.Text,
-                FECHA_ALTA = DateTime.Now,
-                COD_ESTADO = 1
-            };
-
-            if (!String.IsNullOrEmpty(ddlTipoDocumento.SelectedValue))
-                oUsuario.ID_ROL = Convert.ToInt32(ddlTipoDocumento.SelectedValue);
-
-            if ((byte[])Session[Enums.Session.ImagenUsuario.ToString()] != null)
-                oUsuario.AVATAR = (byte[])Session[Enums.Session.ImagenUsuario.ToString()];
-
-            return oUsuario;
-        }
-
-        private void LimpiarCampos()
-        {
-            FormRegistrarUsuario.Controls.OfType<TextBox>().ToList().ForEach(x => x.Text = String.Empty);
-            FormRegistrarUsuario.Controls.OfType<DropDownList>().ToList().ForEach(y => y.SelectedIndex = 0);
-            Session.Remove(Enums.Session.ImagenUsuario.ToString());
-            imgPreview.ImageUrl = "~/AdminDashboard/img/perfil_default.png";
-        }
+        }        
 
         #endregion
 

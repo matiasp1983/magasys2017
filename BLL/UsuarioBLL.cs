@@ -160,8 +160,36 @@ namespace BLL
             {
                 using (var rep = new Repository<Usuario>())
                 {
+                    if (!string.IsNullOrEmpty(oUsuario.RECUPERAR_CONTRASENIA))
+                        oUsuario.RECUPERAR_CONTRASENIA = BCrypt.Net.BCrypt.HashPassword(oUsuario.RECUPERAR_CONTRASENIA);
+
                     oUsuario.CONTRASENIA = BCrypt.Net.BCrypt.HashPassword(oUsuario.CONTRASENIA);
+
                     bRes = rep.Create(oUsuario) != null;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return bRes;
+        }
+
+        public Usuario AltaUsuarioReturnUsuario(Usuario oUsuario)
+        {
+            Usuario bRes = null;
+
+            try
+            {
+                using (var rep = new Repository<Usuario>())
+                {
+                    if (!string.IsNullOrEmpty(oUsuario.RECUPERAR_CONTRASENIA))
+                        oUsuario.RECUPERAR_CONTRASENIA = BCrypt.Net.BCrypt.HashPassword(oUsuario.RECUPERAR_CONTRASENIA);
+
+                    oUsuario.CONTRASENIA = BCrypt.Net.BCrypt.HashPassword(oUsuario.CONTRASENIA);
+
+                    bRes = rep.Create(oUsuario);
                 }
             }
             catch (Exception)

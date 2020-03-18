@@ -233,7 +233,7 @@
                 remote: function () {
                     return {
                         type: "POST",
-                        url: "Usuario.aspx/ValidarNombreUsuario",
+                        url: "RegistrarUsuario.aspx/ValidarNombreUsuario",
                         data: JSON.stringify({ 'pNombreUsuario': $("#<%=txtNombreUsuario.ClientID%>").val() }),
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",

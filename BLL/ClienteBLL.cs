@@ -80,8 +80,14 @@ namespace BLL
 
                     if (oCliente != null)
                     {
-                        bExiste = BCrypt.Net.BCrypt.HashPassword(oCliente.ID_CLIENTE.ToString());
-                    }                    
+                        using (var repUsuario = new Repository<Usuario>())
+                        {
+                            if (oCliente.COD_USUARIO != null)
+                            {
+                                bExiste = repUsuario.Find(x => x.ID_USUARIO == oCliente.COD_USUARIO).RECUPERAR_CONTRASENIA;                                
+                            }
+                        }
+                    }
                 }
             }
             catch (Exception)
@@ -101,6 +107,25 @@ namespace BLL
                 using (var rep = new Repository<Cliente>())
                 {
                     bRes = rep.Create(oCliente) != null;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return bRes;
+        }
+
+        public Cliente AltaClienteReturnCliente(Cliente oCliente)
+        {
+            Cliente bRes = null;
+
+            try
+            {
+                using (var rep = new Repository<Cliente>())
+                {
+                    bRes = rep.Create(oCliente);
                 }
             }
             catch (Exception)
