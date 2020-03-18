@@ -237,6 +237,7 @@
     <Content Include="CustomersWebSite\Login.aspx" />
     <Content Include="CustomersWebSite\Logout.aspx" />
     <Content Include="CustomersWebSite\RegistrarReserva.aspx" />
+    <Content Include="CustomersWebSite\RegistrarUsuario.aspx" />
     <Content Include="CustomersWebSite\Reserva.aspx" />
     <Content Include="CustomersWebSite\ReservaColeccion.aspx" />
     <Content Include="CustomersWebSite\ReservaRevista.aspx" />
@@ -776,6 +777,13 @@
     </Compile>
     <Compile Include="CustomersWebSite\RegistrarReserva.aspx.designer.cs">
       <DependentUpon>RegistrarReserva.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomersWebSite\RegistrarUsuario.aspx.cs">
+      <DependentUpon>RegistrarUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomersWebSite\RegistrarUsuario.aspx.designer.cs">
+      <DependentUpon>RegistrarUsuario.aspx</DependentUpon>
     </Compile>
     <Compile Include="CustomersWebSite\Reserva.aspx.cs">
       <DependentUpon>Reserva.aspx</DependentUpon>

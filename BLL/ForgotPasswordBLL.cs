@@ -75,7 +75,7 @@ namespace BLL
                                 </tr>
                                 <tr>
                                     <td style='padding: 0 10px 20px;'>
-                                        Si no solicitaste el cambio de contraseña, ignora este email
+                                        Si no solicitaste el cambio de contraseña, ignora este email.
                                     </td>
                                 </tr>
                                 <tr>

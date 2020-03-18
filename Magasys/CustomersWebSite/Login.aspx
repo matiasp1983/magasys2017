@@ -58,7 +58,7 @@
                         <p class="text-muted text-center">
                             <small>¿No tiene una cuenta?</small>
                         </p>
-                        <a class="btn btn-sm btn-white btn-block" href="register.html">Crea una cuenta</a>
+                        <a class="btn btn-sm btn-white btn-block" href="RegistrarUsuario.aspx">Crea una cuenta</a>
                     </form>                    
                 </div>
             </div>

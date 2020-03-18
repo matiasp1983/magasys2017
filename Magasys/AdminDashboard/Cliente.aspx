@@ -32,7 +32,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Tipo de Documento</label>
                                 <div class="col-sm-10">
-                                    <asp:DropDownList ID="ddlTipoDocumento" runat="server" CssClass="form-control"></asp:DropDownList>
+                                    <asp:DropDownList ID="ddlTipoDocumento" runat="server" CssClass="select2_tipodocumento form-control"></asp:DropDownList>
                                 </div>
                             </div>
                         </div>
@@ -265,6 +265,7 @@
         if (window.jQuery) {
             $(document).ready(function () {
                 ValidarForm();
+                Select2();
             });
         }       
 
@@ -352,7 +353,16 @@
                     }                    
                 }
             });
-        }        
+        }
+
+        function Select2() {
+            $(".select2_tipodocumento").select2(
+                {
+                    placeholder: 'Seleccione un Tipo de Documento',
+                    width: '100%',
+                    allowClear: true
+                });
+        }
 
         function initMap() {
             var map = new google.maps.Map(document.getElementById('map'), {
