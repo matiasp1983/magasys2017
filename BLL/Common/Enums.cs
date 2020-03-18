@@ -30,6 +30,7 @@
             IdCobro,
             Imagen,
             ImagenUsuario,
+            ImagenUsuarioRegistrar,
             ProductoReserva,
             ListadoReserva,
             ListadoReservaEdicion,

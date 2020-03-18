@@ -63,8 +63,8 @@ namespace PL.CustomersWebSite
                     RECUPERAR_CONTRASENIA = oCliente.ID_CLIENTE.ToString()
                 };
 
-                if ((byte[])Session[Enums.Session.ImagenUsuario.ToString()] != null)
-                    oUsuario.AVATAR = (byte[])Session[Enums.Session.ImagenUsuario.ToString()];
+                if ((byte[])Session[Enums.Session.ImagenUsuarioRegistrar.ToString()] != null)
+                    oUsuario.AVATAR = (byte[])Session[Enums.Session.ImagenUsuarioRegistrar.ToString()];
 
                 oUsuario = new BLL.UsuarioBLL().AltaUsuarioReturnUsuario(oUsuario);
 
@@ -105,7 +105,7 @@ namespace PL.CustomersWebSite
 
             fuploadImagen.PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
 
-            Session.Add(Enums.Session.ImagenUsuario.ToString(), loImagenOriginal);
+            Session.Add(Enums.Session.ImagenUsuarioRegistrar.ToString(), loImagenOriginal);
 
             string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(loImagenOriginal);
             imgPreview.ImageUrl = loImagenDataURL64;
@@ -114,7 +114,7 @@ namespace PL.CustomersWebSite
         protected void BtnLimpiarImagen_Click(object sender, EventArgs e)
         {
             imgPreview.ImageUrl = "~/AdminDashboard/img/perfil_default.png";
-            Session.Remove(Enums.Session.ImagenUsuario.ToString());
+            Session.Remove(Enums.Session.ImagenUsuarioRegistrar.ToString());
         }
 
         #endregion
