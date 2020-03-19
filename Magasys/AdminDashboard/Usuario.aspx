@@ -6,7 +6,7 @@
     <form id="FormUsuario" runat="server" class="form-horizontal">
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
-                <h2>Datos del Producto</h2>
+                <h2>Datos del Usuario</h2>
                 <ol class="breadcrumb">
                     <li>Principal
                     </li>
