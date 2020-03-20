@@ -164,19 +164,10 @@
                                 <label class="col-sm-2 control-label">Archivo</label>
 
                                 <div class="col-sm-8">
-                                    <asp:FileUpload ID="fuploadImagen" accept=".jpg" runat="server" CssClass="form-control" />
+                                    <asp:FileUpload ID="fuploadImagen" runat="server" CssClass="form-control" onchange="ShowImagePreview(this);"/>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="hr-line-dashed"></div>
-                            <div class="form-group">
-                                <div class="col-sm-7 col-md-offset-5">
-                                    <asp:Button ID="btnSubirImagen" runat="server" Text="Adjuntar Imagen" CssClass="btn btn-success" OnClick="BtnSubirImagen_Click" formnovalidate="formnovalidate" />
-                                    <asp:Button ID="btnLimpiarImagen" runat="server" Text="Limpiar Imagen" CssClass="btn btn-warning" OnClick="BtnLimpiarImagen_Click" formnovalidate="formnovalidate" />
-                                </div>
-                            </div>
-                        </div>
+                        </div>                        
                     </div>
                 </div>
             </div>
@@ -339,6 +330,17 @@
             };
             $('.example1').pwstrength(options1);
         }
+
+        function ShowImagePreview(input) {  
+            if (input.files && input.files[0]) {  
+                var reader = new FileReader();  
+                reader.onload = function (e) {  
+                    $('#<%=imgPreview.ClientID%>').prop('src', e.target.result);  
+                };  
+                reader.readAsDataURL(input.files[0]);  
+            }  
+        }
+
     </script>
 </body>
 </html>

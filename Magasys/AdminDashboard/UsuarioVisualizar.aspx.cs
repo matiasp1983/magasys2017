@@ -29,7 +29,7 @@ namespace PL
 
         protected void BtnCancelar_Click(object sender, EventArgs e)
         {
-            Session.Remove(Enums.Session.ImagenUsuario.ToString());
+            Session.Remove(Enums.Session.Usuario.ToString());
             Response.Redirect("UsuarioListado.aspx", false);
         }      
 
@@ -62,9 +62,9 @@ namespace PL
                         txtRol.Text = loRol.DESCRIPCION;
 
                     if (oUsuario.AVATAR != null)
-                    {                        
+                    {
                         string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oUsuario.AVATAR);
-                        imgPreview.ImageUrl = loImagenDataURL64;                        
+                        imgPreview.ImageUrl = loImagenDataURL64;
                     }
                 }
                 else

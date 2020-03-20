@@ -70,11 +70,11 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                 <label class="col-sm-2 control-label"></label>
+                                <label class="col-sm-2 control-label"></label>
                                 <div class="col-sm-10">
                                     <div class="pwstrength_viewport_progress"></div>
                                 </div>
-                            </div>                            
+                            </div>
                         </div>
                         <div class="row">
                             <div class="form-group">
@@ -108,19 +108,10 @@
                                 <label class="col-sm-2 control-label">Archivo</label>
 
                                 <div class="col-sm-8">
-                                    <asp:FileUpload ID="fuploadImagen" accept=".jpg" runat="server" CssClass="form-control" />
+                                    <asp:FileUpload ID="fuploadImagen" runat="server" CssClass="form-control" onchange="ShowImagePreview(this);"/>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="hr-line-dashed"></div>
-                            <div class="form-group">
-                                <div class="col-sm-7 col-md-offset-5">
-                                    <asp:Button ID="btnSubirImagen" runat="server" Text="Adjuntar Imagen" CssClass="btn btn-success" OnClick="BtnSubirImagen_Click" formnovalidate="formnovalidate" />
-                                    <asp:Button ID="btnLimpiarImagen" runat="server" Text="Limpiar Imagen" CssClass="btn btn-warning" OnClick="BtnLimpiarImagen_Click" formnovalidate="formnovalidate" />
-                                </div>
-                            </div>
-                        </div>
+                        </div>                        
                     </div>
                 </div>
             </div>
@@ -139,7 +130,7 @@
         </div>
     </form>
 </asp:Content>
-<asp:Content ID="Content3" ContentPlaceHolderID="script" runat="server">    
+<asp:Content ID="Content3" ContentPlaceHolderID="script" runat="server">
     <script src="js/plugins/pwstrength/pwstrength-bootstrap.min.js"></script>
     <script src="js/plugins/pwstrength/zxcvbn.js"></script>
     <script type="text/javascript">
@@ -174,10 +165,10 @@
                                 return msg.d;
                             else
                                 return msg;
-                            }
                         }
                     }
-                },
+                }
+            },
                     <%=txtNombre.UniqueID%>: {
                     required: true,
                     lettersonly: true
@@ -201,28 +192,28 @@
                 },
         messages: {
                     <%=txtNombreUsuario.UniqueID%>: {
-                    required: "Este campo es requerido.",
+                required: "Este campo es requerido.",
                     remote: "Este nombre de usuario ya está en uso. Elige otro."
-                },
+            },
                     <%=txtNombre.UniqueID%>: {
-                    required: "Este campo es requerido."
-                },
+                required: "Este campo es requerido."
+            },
                     <%=txtApellido.UniqueID%>: {
-                    required: "Este campo es requerido."
-                },
+                required: "Este campo es requerido."
+            },
                     <%=txtContrasenia.UniqueID%>: {
-                    required: "Este campo es requerido.",
+                required: "Este campo es requerido.",
                     minlength: "Usa 8 caracteres o más para tu contraseña."
-                },
+            },
                     <%=txtContraseniaConfirmacion.UniqueID%>: {
-                    required: "Este campo es requerido.",
+                required: "Este campo es requerido.",
                     equalTo: "Las contraseñas no coinciden. Vuelva a intentarlo.",
-                    minlength: "Usa 8 caracteres o más para tu contraseña."
-                },
+                        minlength: "Usa 8 caracteres o más para tu contraseña."
+            },
                     <%=ddlRol.UniqueID%>: {
-                    required: "Este campo es requerido."
-                   }   
-                }
+                required: "Este campo es requerido."
+            }
+        }
             });
         }
 
@@ -249,5 +240,16 @@
             };
             $('.example1').pwstrength(options1);
         }
+
+        function ShowImagePreview(input) {  
+            if (input.files && input.files[0]) {  
+                var reader = new FileReader();  
+                reader.onload = function (e) {  
+                    $('#<%=imgPreview.ClientID%>').prop('src', e.target.result);  
+                };  
+                reader.readAsDataURL(input.files[0]);  
+            }  
+        }
+
     </script>
 </asp:Content>

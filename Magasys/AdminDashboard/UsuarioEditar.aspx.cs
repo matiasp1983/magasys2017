@@ -44,8 +44,7 @@ namespace PL
                     Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeUsuarioFailure));
                 }
 
-                Session.Remove(Enums.Session.Usuario.ToString());
-                Session.Remove(Enums.Session.ImagenUsuario.ToString());               
+                Session.Remove(Enums.Session.Usuario.ToString());                               
             }
             catch (Exception ex)
             {
@@ -58,32 +57,9 @@ namespace PL
 
         protected void BtnCancelar_Click(object sender, EventArgs e)
         {
-            Session.Remove(Enums.Session.ImagenUsuario.ToString());
+            Session.Remove(Enums.Session.Usuario.ToString());
             Response.Redirect("UsuarioListado.aspx", false);
-        }
-
-        protected void BtnSubirImagen_Click(object sender, EventArgs e)
-        {            
-            int loTamanioImagen = fuploadImagen.PostedFile.ContentLength;
-
-            if (loTamanioImagen == 0)
-                return;
-            
-            byte[] loImagenOriginal = new byte[loTamanioImagen];
-            
-            fuploadImagen.PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);           
-
-            Session.Add(Enums.Session.ImagenUsuario.ToString(), loImagenOriginal);
-            
-            string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(loImagenOriginal);
-            imgPreview.ImageUrl = loImagenDataURL64;
-        }
-
-        protected void BtnLimpiarImagen_Click(object sender, EventArgs e)
-        {
-            imgPreview.ImageUrl = "~/AdminDashboard/img/perfil_default.png";            
-            Session.Remove(Enums.Session.ImagenUsuario.ToString());
-        }
+        }                
 
         protected void btnCambiarContrasenia_Click(object sender, EventArgs e)
         {
@@ -115,13 +91,24 @@ namespace PL
             if (!String.IsNullOrEmpty(ddlRol.SelectedValue))
                 oUsuario.ID_ROL = Convert.ToInt32(ddlRol.SelectedValue);
 
-            if ((byte[])Session[Enums.Session.ImagenUsuario.ToString()] != null)
-                oUsuario.AVATAR = (byte[])Session[Enums.Session.ImagenUsuario.ToString()];
+            imgPreview.ImageUrl = string.Empty;            
+
+            if (fuploadImagen.PostedFile.ContentLength != 0)
+            {                
+                int loTamanioImagen = fuploadImagen.PostedFile.ContentLength;
+                byte[] loImagenOriginal = new byte[loTamanioImagen];
+                fuploadImagen.PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
+                oUsuario.AVATAR = loImagenOriginal;
+                string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(loImagenOriginal);
+                imgPreview.ImageUrl = loImagenDataURL64;
+            }
             else
             {
                 if (((BLL.DAL.Usuario)base.Session[Enums.Session.Usuario.ToString()]).AVATAR != null)
                 {
                     oUsuario.AVATAR = ((BLL.DAL.Usuario)base.Session[Enums.Session.Usuario.ToString()]).AVATAR;
+                    string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oUsuario.AVATAR);
+                    imgPreview.ImageUrl = loImagenDataURL64;
                 }
             }
 
@@ -151,9 +138,9 @@ namespace PL
                     CargarRoles(oUsuario.ID_ROL);
 
                     if (oUsuario.AVATAR != null)
-                    {                        
+                    {
                         string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oUsuario.AVATAR);
-                        imgPreview.ImageUrl = loImagenDataURL64;                        
+                        imgPreview.ImageUrl = loImagenDataURL64;
                     }
                 }
                 else

@@ -63,8 +63,13 @@ namespace PL.CustomersWebSite
                     RECUPERAR_CONTRASENIA = oCliente.ID_CLIENTE.ToString()
                 };
 
-                if ((byte[])Session[Enums.Session.ImagenUsuarioRegistrar.ToString()] != null)
-                    oUsuario.AVATAR = (byte[])Session[Enums.Session.ImagenUsuarioRegistrar.ToString()];
+                if (fuploadImagen.PostedFile.ContentLength != 0)
+                {
+                    int loTamanioImagen = fuploadImagen.PostedFile.ContentLength;
+                    byte[] loImagenOriginal = new byte[loTamanioImagen];
+                    fuploadImagen.PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
+                    oUsuario.AVATAR = loImagenOriginal;
+                }
 
                 oUsuario = new BLL.UsuarioBLL().AltaUsuarioReturnUsuario(oUsuario);
 
@@ -75,6 +80,7 @@ namespace PL.CustomersWebSite
                     if(new BLL.ClienteBLL().ModificarCliente(oCliente)) {
 
                         Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeUsuarioSuccessAlta, "Alta Usuario", "Index.aspx"));
+                        LimpiarCampos();
                     }
                 }
                 else
@@ -92,30 +98,7 @@ namespace PL.CustomersWebSite
         protected void BtnCancelar_Click(object sender, EventArgs e)
         {            
             Response.Redirect("Login.aspx", false);
-        }
-
-        protected void BtnSubirImagen_Click(object sender, EventArgs e)
-        {
-            int loTamanioImagen = fuploadImagen.PostedFile.ContentLength;
-
-            if (loTamanioImagen == 0)
-                return;
-
-            byte[] loImagenOriginal = new byte[loTamanioImagen];
-
-            fuploadImagen.PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
-
-            Session.Add(Enums.Session.ImagenUsuarioRegistrar.ToString(), loImagenOriginal);
-
-            string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(loImagenOriginal);
-            imgPreview.ImageUrl = loImagenDataURL64;
-        }
-
-        protected void BtnLimpiarImagen_Click(object sender, EventArgs e)
-        {
-            imgPreview.ImageUrl = "~/AdminDashboard/img/perfil_default.png";
-            Session.Remove(Enums.Session.ImagenUsuarioRegistrar.ToString());
-        }
+        }                
 
         #endregion
 
@@ -131,13 +114,21 @@ namespace PL.CustomersWebSite
                 ddlTipoDocumento.DataTextField = "DESCRIPCION";
                 ddlTipoDocumento.DataValueField = "ID_TIPO_DOCUMENTO";
                 ddlTipoDocumento.DataBind();
+                ddlTipoDocumento.Items.Insert(0, new ListItem(String.Empty, String.Empty));
             }
             catch (Exception ex)
             {
                 Logger loLogger = LogManager.GetCurrentClassLogger();
                 loLogger.Error(ex);
             }
-        }        
+        }
+
+        private void LimpiarCampos()
+        {
+            FormRegistrarUsuario.Controls.OfType<TextBox>().ToList().ForEach(x => x.Text = String.Empty);
+            FormRegistrarUsuario.Controls.OfType<DropDownList>().ToList().ForEach(y => y.SelectedIndex = 0);
+            imgPreview.ImageUrl = "~/AdminDashboard/img/perfil_default.png";
+        }
 
         #endregion
 

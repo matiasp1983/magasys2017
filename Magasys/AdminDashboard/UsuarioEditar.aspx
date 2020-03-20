@@ -83,7 +83,7 @@
                                     <a data-toggle="modal" class="btn btn-primary" href="#modal-cambiarcontarsenia">Cambiar Contrase&ntilde;a</a>
                                 </div>
                             </div>
-                        </div>                       
+                        </div>
                         <div class="row">
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Rol de Usuario</label>
@@ -116,19 +116,10 @@
                                 <label class="col-sm-2 control-label">Archivo</label>
 
                                 <div class="col-sm-8">
-                                    <asp:FileUpload ID="fuploadImagen" accept=".jpg" runat="server" CssClass="form-control" />
+                                    <asp:FileUpload ID="fuploadImagen" runat="server" CssClass="form-control" onchange="ShowImagePreview(this);"/>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="hr-line-dashed"></div>
-                            <div class="form-group">
-                                <div class="col-sm-7 col-md-offset-5">
-                                    <asp:Button ID="btnSubirImagen" runat="server" Text="Adjuntar Imagen" CssClass="btn btn-success" OnClick="BtnSubirImagen_Click" formnovalidate="formnovalidate" />
-                                    <asp:Button ID="btnLimpiarImagen" runat="server" Text="Limpiar Imagen" CssClass="btn btn-warning" OnClick="BtnLimpiarImagen_Click" formnovalidate="formnovalidate" />
-                                </div>
-                            </div>
-                        </div>
+                        </div>                        
                     </div>
                 </div>
             </div>
@@ -159,7 +150,7 @@
                                     <label>Confirmar la Contrase&ntilde;a Nueva</label>
                                     <asp:TextBox ID="txtContraseniaNuevaConfirmar" runat="server" CssClass="form-control" MaxLength="30" autocomplete="off" TextMode="Password" placeholder="Confirmar la contraseña nueva"></asp:TextBox>
                                 </div>
-                                <div class="form-group">                                    
+                                <div class="form-group">
                                     <div class="col-sm-12">
                                         <div class="pwstrength_viewport_progress"></div>
                                     </div>
@@ -195,11 +186,11 @@
             jQuery.validator.addMethod("lettersonly", function (value, element) { return this.optional(element) || /^[a-zñÑáéíóúÁÉÍÓÚ\s]+$/i.test(value); }, "Este campo solo permite letras.");
 
             $(FormUsuarioEditar).validate({
-                 rules: {
+                rules: {
                     <%=txtNombre.UniqueID%>: {
-                    required: true,
-                    lettersonly: true
-                },
+                required: true,
+                lettersonly: true
+            },
                     <%=txtApellido.UniqueID%>: {
                     required: true,
                     lettersonly: true
@@ -217,28 +208,28 @@
                     minlength: 8
                 }
                     },
-        messages: {                    
+        messages: {
                     <%=txtNombre.UniqueID%>: {
-                    required: "Este campo es requerido."
-                },
+                required: "Este campo es requerido."
+            },
                     <%=txtApellido.UniqueID%>: {
-                    required: "Este campo es requerido."
-                },                                        
+                required: "Este campo es requerido."
+            },
                     <%=ddlRol.UniqueID%>: {
-                    required: "Este campo es requerido."
-                },
+                required: "Este campo es requerido."
+            },
                     <%=txtContraseniaNueva.UniqueID%>: {
-                    required: "Este campo es requerido.",
+                required: "Este campo es requerido.",
                     minlength: "Usa 8 caracteres o más para tu contraseña."
-                },
+            },
                     <%=txtContraseniaNuevaConfirmar.UniqueID%>: {
-                    required: "Este campo es requerido.",
+                required: "Este campo es requerido.",
                     equalTo: "Las contraseñas no coinciden. Vuelva a intentarlo.",
-                    minlength: "Usa 8 caracteres o más para tu contraseña."
-                   }    
-                }
+                        minlength: "Usa 8 caracteres o más para tu contraseña."
+            }
+        }
             });
-        }      
+        }
 
         function Select2() {
             $(".select2_rol").select2(
@@ -263,6 +254,16 @@
             };
             $('.example1').pwstrength(options1);
         }
-        
+
+        function ShowImagePreview(input) {  
+            if (input.files && input.files[0]) {  
+                var reader = new FileReader();  
+                reader.onload = function (e) {  
+                    $('#<%=imgPreview.ClientID%>').prop('src', e.target.result);  
+                };  
+                reader.readAsDataURL(input.files[0]);  
+            }  
+        }
+
     </script>
 </asp:Content>
