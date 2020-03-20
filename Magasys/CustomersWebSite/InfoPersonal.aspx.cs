@@ -18,30 +18,7 @@ namespace PL.CustomersWebSite
         {
             if (!IsPostBack)
                 CargarCliente();
-        }
-
-        protected void BtnSubirImagen_Click(object sender, EventArgs e)
-        {
-            int loTamanioImagen = fuploadImagen.PostedFile.ContentLength;
-
-            if (loTamanioImagen == 0)
-                return;
-
-            byte[] loImagenOriginal = new byte[loTamanioImagen];
-
-            fuploadImagen.PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
-
-            Session.Add(Enums.Session.ImagenUsuarioCliente.ToString(), loImagenOriginal);
-
-            string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(loImagenOriginal);
-            imgPreview.ImageUrl = loImagenDataURL64;
-        }
-
-        protected void BtnLimpiarImagen_Click(object sender, EventArgs e)
-        {
-            imgPreview.ImageUrl = "~/AdminDashboard/img/perfil_default.png";
-            Session.Remove(Enums.Session.ImagenUsuarioCliente.ToString());
-        }
+        }        
 
         protected void BtnBorrarDireccion_Click(object sender, EventArgs e)
         {
@@ -380,6 +357,37 @@ namespace PL.CustomersWebSite
                         loCliente = null;
                 }
             }
+
+            /*Inicio - Usuario*/
+
+            var oUsuario = new BLL.DAL.Usuario();
+
+            imgPreview.ImageUrl = "img/perfil_default.png";
+
+            if (fuploadImagen.PostedFile.ContentLength != 0)
+            {
+                int loTamanioImagen = fuploadImagen.PostedFile.ContentLength;
+                byte[] loImagenOriginal = new byte[loTamanioImagen];
+                fuploadImagen.PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
+                oUsuario.AVATAR = loImagenOriginal;
+                string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(loImagenOriginal);
+                imgPreview.ImageUrl = loImagenDataURL64;
+            }
+            else
+            {
+                if (hdfLimpiariarImagen.Value.Equals("false"))
+                {
+                    if (((BLL.DAL.Usuario)base.Session[Enums.Session.Usuario.ToString()]).AVATAR != null)
+                    {
+                        oUsuario.AVATAR = ((BLL.DAL.Usuario)base.Session[Enums.Session.Usuario.ToString()]).AVATAR;
+                        string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oUsuario.AVATAR);
+                        imgPreview.ImageUrl = loImagenDataURL64;
+                    }
+                }
+            }
+
+            /*Fin - Usuario*/
+
             return loCliente;
         }
 

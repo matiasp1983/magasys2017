@@ -35,8 +35,7 @@
             ListadoReservaConfirmar,
             ListadoReservaConfirmada,
             IdProductoEdicion,
-            Usuario,
-            ImagenUsuarioCliente,
+            Usuario,            
             ProductoReservaEdicionSeleccionados
         }        
 

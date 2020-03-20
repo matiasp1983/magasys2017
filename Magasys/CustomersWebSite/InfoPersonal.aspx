@@ -122,7 +122,7 @@
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label">Avatar</label>
                                             <div class="col-md-3 col-md-offset-3">
-                                                <asp:Image ID="imgPreview" Width="80px" runat="server" ImageUrl="~/AdminDashboard/img/perfil_default.png" />
+                                                <asp:Image ID="imgPreview" Width="80px" runat="server" ImageUrl="~/CustomersWebSite/img/perfil_default.png" />
                                             </div>
                                         </div>
                                     </div>
@@ -134,7 +134,7 @@
                                         <div class="form-group">
                                             <label class="col-sm-2 control-label">Archivo</label>
                                             <div class="col-sm-10">
-                                                <asp:FileUpload ID="fuploadImagen" accept=".jpg" runat="server" CssClass="form-control" />
+                                                <asp:FileUpload ID="fuploadImagen" runat="server" CssClass="form-control" onchange="ShowImagePreview(this);" />
                                             </div>
                                         </div>
                                     </div>
@@ -145,9 +145,9 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <div class="col-sm-7 col-md-offset-2">
-                                                <asp:Button ID="btnSubirImagen" runat="server" Text="Adjuntar Imagen" CssClass="btn btn-success" OnClick="BtnSubirImagen_Click" formnovalidate="formnovalidate" />
-                                                <asp:Button ID="btnLimpiarImagen" runat="server" Text="Limpiar Imagen" CssClass="btn btn-warning" OnClick="BtnLimpiarImagen_Click" formnovalidate="formnovalidate" />
+                                            <div class="col-sm-7 col-md-offset-2">                                                
+                                                <input id="btnLimpiarImagen" type="button" class="btn btn-warning" value="Limpiar Imagen" />
+                                                <asp:HiddenField ID="hdfLimpiariarImagen" runat="server" Value="false" />
                                             </div>
                                         </div>
                                     </div>
@@ -363,6 +363,7 @@
             $(document).ready(function () {
                 ValidarForm();
                 Pwstrength();
+                LimpiarFileUploadImagen();
             });
         }       
 
@@ -583,6 +584,24 @@
                 debug: false
             };
             $('.example1').pwstrength(options1);
+        }
+
+        function ShowImagePreview(input) {  
+            if (input.files && input.files[0]) {  
+                var reader = new FileReader();  
+                reader.onload = function (e) {  
+                    $('#<%=imgPreview.ClientID%>').prop('src', e.target.result);  
+                };  
+                reader.readAsDataURL(input.files[0]);  
+            }  
+        }
+
+        function LimpiarFileUploadImagen() {
+            $('#btnLimpiarImagen').on('click', function () {                                   
+                $('#<%=imgPreview.ClientID%>').prop('src', 'img/perfil_default.png');
+                $('#<%=hdfLimpiariarImagen.ClientID%>').val('true');
+                $('#<%=fuploadImagen.ClientID%>').val('');
+            });
         }
 
     </script>
