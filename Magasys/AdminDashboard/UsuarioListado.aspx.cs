@@ -49,6 +49,12 @@ namespace PL.AdminDashboard
                 HtmlButton btnModificar = ((HtmlButton)e.Item.FindControl("btnModificar"));
                 btnModificar.Attributes.Add("value", loIdUsuario);
 
+                if (((BLL.DAL.Usuario)Session[AdminDashboardSessionBLL.DefaultSessionsId.Usuario.ToString()]).ID_USUARIO.ToString().Equals(loIdUsuario))
+                {
+                    HtmlAnchor btnEliminar = ((HtmlAnchor)e.Item.FindControl("btnEliminar"));
+                    btnEliminar.Style.Add("display", "none"); 
+                }
+
                 HiddenField hdIdUsuarioBaja = ((HiddenField)e.Item.FindControl("hdIdUsuarioBaja"));
 
                 hdIdUsuarioBaja.Value = string.Format("{0},{1}", loIdUsuario, loNombreUsuario);
