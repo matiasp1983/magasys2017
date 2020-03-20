@@ -213,6 +213,8 @@
     <Content Include="CustomersWebSite\fonts\roboto.css" />
     <Content Include="CustomersWebSite\ForgotPassword.aspx" />
     <Content Include="CustomersWebSite\img\a4.jpg" />
+    <Content Include="CustomersWebSite\img\perfil_default.png" />
+    <Content Include="CustomersWebSite\img\preview_icons.png" />
     <Content Include="CustomersWebSite\Index.aspx" />
     <Content Include="AdminDashboard\Logout.aspx" />
     <Content Include="CustomersWebSite\InfoPersonal.aspx" />
@@ -334,7 +336,6 @@
     <Content Include="AdminDashboard\font-awesome\css\font-awesome.min.css" />
     <Content Include="AdminDashboard\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="AdminDashboard\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="AdminDashboard\img\groot.jpg" />
     <Content Include="AdminDashboard\img\profile_small.jpg" />
     <Content Include="AdminDashboard\Index.aspx" />
     <Content Include="AdminDashboard\js\bootstrap.min.js" />

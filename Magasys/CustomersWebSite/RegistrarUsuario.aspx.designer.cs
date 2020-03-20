@@ -121,6 +121,15 @@ namespace PL.CustomersWebSite {
         protected global::System.Web.UI.WebControls.FileUpload fuploadImagen;
         
         /// <summary>
+        /// Control hdfLimpiariarImagen.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdfLimpiariarImagen;
+        
+        /// <summary>
         /// Control btnGuardar.
         /// </summary>
         /// <remarks>

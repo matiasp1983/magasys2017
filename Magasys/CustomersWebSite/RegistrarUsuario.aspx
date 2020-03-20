@@ -155,7 +155,7 @@
                         <div class="row">
                             <div class="form-group">
                                 <div class="col-md-3 col-md-offset-3">
-                                    <asp:Image ID="imgPreview" Width="200px" runat="server" ImageUrl="~/AdminDashboard/img/perfil_default.png" />
+                                    <asp:Image ID="imgPreview" Width="200px" runat="server" ImageUrl="~/CustomersWebSite/img/perfil_default.png" />
                                 </div>
                             </div>
                         </div>
@@ -167,7 +167,16 @@
                                     <asp:FileUpload ID="fuploadImagen" runat="server" CssClass="form-control" onchange="ShowImagePreview(this);"/>
                                 </div>
                             </div>
-                        </div>                        
+                        </div>
+                        <div class="row">
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <div class="col-sm-8 col-md-offset-5">                                    
+                                    <input id="btnLimpiarImagen" type="button" class="btn btn-warning" value="Limpiar Imagen"/>
+                                    <asp:HiddenField ID="hdfLimpiariarImagen" runat="server" Value="false"/>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -201,6 +210,7 @@
                 ValidarForm();
                 Select2();
                 Pwstrength();
+                LimpiarFileUploadImagen();
             });
         }
 
@@ -339,6 +349,14 @@
                 };  
                 reader.readAsDataURL(input.files[0]);  
             }  
+        }
+
+        function LimpiarFileUploadImagen() {
+            $('#btnLimpiarImagen').on('click', function () {                                   
+                $('#<%=imgPreview.ClientID%>').prop('src', 'img/perfil_default.png');
+                $('#<%=hdfLimpiariarImagen.ClientID%>').val('true');
+                $('#<%=fuploadImagen.ClientID%>').val('');
+            });
         }
 
     </script>

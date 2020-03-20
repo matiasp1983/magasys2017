@@ -111,7 +111,15 @@
                                     <asp:FileUpload ID="fuploadImagen" runat="server" CssClass="form-control" onchange="ShowImagePreview(this);"/>
                                 </div>
                             </div>
-                        </div>                        
+                        </div>
+                        <div class="row">
+                            <div class="hr-line-dashed"></div>
+                            <div class="form-group">
+                                <div class="col-sm-8 col-md-offset-5">                                                                                                            
+                                    <input id="btnLimpiarImagen" type="button" class="btn btn-warning" value="Limpiar Imagen"/>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -141,6 +149,7 @@
                 ValidarForm();
                 Select2();
                 Pwstrength();
+                LimpiarFileUploadImagen();
             });
         }
 
@@ -249,6 +258,13 @@
                 };  
                 reader.readAsDataURL(input.files[0]);  
             }  
+        }
+
+        function LimpiarFileUploadImagen() {
+            $('#btnLimpiarImagen').on('click', function () {   
+                $('#<%=imgPreview.ClientID%>').prop('src','img/perfil_default.png');
+                $('#<%=fuploadImagen.ClientID%>').val('');
+            });
         }
 
     </script>

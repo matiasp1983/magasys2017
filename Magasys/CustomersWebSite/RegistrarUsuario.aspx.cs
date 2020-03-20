@@ -63,6 +63,8 @@ namespace PL.CustomersWebSite
                     RECUPERAR_CONTRASENIA = oCliente.ID_CLIENTE.ToString()
                 };
 
+                imgPreview.ImageUrl = "img/perfil_default.png";
+
                 if (fuploadImagen.PostedFile.ContentLength != 0)
                 {
                     int loTamanioImagen = fuploadImagen.PostedFile.ContentLength;
@@ -113,8 +115,7 @@ namespace PL.CustomersWebSite
                 ddlTipoDocumento.DataSource = oTipoDocumento.ObtenerTiposDocumento();
                 ddlTipoDocumento.DataTextField = "DESCRIPCION";
                 ddlTipoDocumento.DataValueField = "ID_TIPO_DOCUMENTO";
-                ddlTipoDocumento.DataBind();
-                ddlTipoDocumento.Items.Insert(0, new ListItem(String.Empty, String.Empty));
+                ddlTipoDocumento.DataBind();                
             }
             catch (Exception ex)
             {

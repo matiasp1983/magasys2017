@@ -91,7 +91,7 @@ namespace PL
             if (!String.IsNullOrEmpty(ddlRol.SelectedValue))
                 oUsuario.ID_ROL = Convert.ToInt32(ddlRol.SelectedValue);
 
-            imgPreview.ImageUrl = string.Empty;            
+            imgPreview.ImageUrl = "img/perfil_default.png";
 
             if (fuploadImagen.PostedFile.ContentLength != 0)
             {                
@@ -104,11 +104,14 @@ namespace PL
             }
             else
             {
-                if (((BLL.DAL.Usuario)base.Session[Enums.Session.Usuario.ToString()]).AVATAR != null)
+                if (hdfLimpiariarImagen.Value.Equals("false"))
                 {
-                    oUsuario.AVATAR = ((BLL.DAL.Usuario)base.Session[Enums.Session.Usuario.ToString()]).AVATAR;
-                    string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oUsuario.AVATAR);
-                    imgPreview.ImageUrl = loImagenDataURL64;
+                    if (((BLL.DAL.Usuario)base.Session[Enums.Session.Usuario.ToString()]).AVATAR != null)
+                    {
+                        oUsuario.AVATAR = ((BLL.DAL.Usuario)base.Session[Enums.Session.Usuario.ToString()]).AVATAR;
+                        string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oUsuario.AVATAR);
+                        imgPreview.ImageUrl = loImagenDataURL64;
+                    }
                 }
             }
 
