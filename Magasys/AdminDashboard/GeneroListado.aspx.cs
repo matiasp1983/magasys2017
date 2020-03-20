@@ -10,6 +10,8 @@ namespace PL.AdminDashboard
 {
     public partial class GeneroListado : System.Web.UI.Page
     {
+        #region Eventos
+
         protected void Page_Load(object sender, EventArgs e)
         {
             OcultarDivsMensajes();
@@ -19,8 +21,6 @@ namespace PL.AdminDashboard
                 CargarGrillaGeneros();
             }
         }
-
-        #region Eventos
 
         protected void BtnBuscar_Click(object sender, EventArgs e)
         {

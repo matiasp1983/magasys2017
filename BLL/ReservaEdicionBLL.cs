@@ -8,7 +8,6 @@ namespace BLL
 {
     public class ReservaEdicionBLL
     {
-
         #region Métodos Públicos
 
         public int ObtenerProximaReserva()
@@ -80,6 +79,5 @@ namespace BLL
         }
 
         #endregion
-
     }
 }

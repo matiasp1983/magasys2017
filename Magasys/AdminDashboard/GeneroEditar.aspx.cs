@@ -11,13 +11,13 @@ namespace PL.AdminDashboard
 {
     public partial class GeneroEditar : System.Web.UI.Page
     {
+        #region Eventos
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
                 CargarGeneroDesdeSession();
         }
-
-        #region Eventos
 
         protected void BtnGuardar_Click(object sender, EventArgs e)
         {
@@ -105,6 +105,5 @@ namespace PL.AdminDashboard
         }
 
         #endregion
-
     }
 }

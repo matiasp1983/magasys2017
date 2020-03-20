@@ -11,6 +11,5 @@ namespace BLL.Filters
         public string Nombre { get; set; }
 
         #endregion
-
     }
 }

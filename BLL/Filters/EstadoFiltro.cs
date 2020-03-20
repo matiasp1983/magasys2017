@@ -11,7 +11,5 @@ namespace BLL.Filters
         public string Ambito { get; set; }
 
         #endregion
-
-
     }
 }

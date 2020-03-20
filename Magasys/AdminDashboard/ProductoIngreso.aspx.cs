@@ -1426,20 +1426,6 @@ namespace PL.AdminDashboard
             return lstReservas;
         }
 
-        #endregion
-
-        #region Clases
-
-        public class ReservaListado
-        {
-            public int ID_RESERVA { get; set; }
-            public String NOMBRE_CLIENTE { get; set; }
-            public string NOMBRE_PRODUCTO { get; set; }
-            public int? COD_CLIENTE { get; set; }
-            public string TIPO_RESERVA { get; set; }
-            public string FORMA_ENTREGA { get; set; }
-        }
-
-        #endregion
-    }
+        #endregion        
+    }    
 }
