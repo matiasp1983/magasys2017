@@ -462,7 +462,7 @@ namespace PL.AdminDashboard
                             {
                                 if (Convert.ToInt32(((TextBox)loItem.Controls[15]).Text.ToString()) > 0 && Convert.ToInt32(((TextBox)loItem.Controls[15]).Text.ToString()) <= Convert.ToInt32(((Label)loItem.Controls[13]).Text.ToString())) //CANTIDAD_DISPONIBLE debe ser mayor a 0 y menor o igual a al Sotck
                                 {
-                                    var loPrecioUnitario = ((Label)loItem.Controls[11]).Text.Split(' ').Last();
+                                    var loPrecioUnitario = ((Label)loItem.Controls[11]).Text.Replace('$', ' ').Trim();
                                     loValorTotal = Convert.ToDouble(loPrecioUnitario) * Convert.ToInt32(((TextBox)loItem.Controls[15]).Text.ToString());
 
                                     VentaProductos oVentaProductos = new VentaProductos
@@ -508,7 +508,7 @@ namespace PL.AdminDashboard
                             {
                                 if (Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString()) > 0 && Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString()) <= Convert.ToInt32(((Label)loItem.Controls[15]).Text.ToString())) //CANTIDAD_DISPONIBLE debe ser mayor a 0 y menor o igual a al Sotck
                                 {
-                                    var loPrecioUnitario = ((Label)loItem.Controls[13]).Text.Split(' ').Last();
+                                    var loPrecioUnitario = ((Label)loItem.Controls[13]).Text.Replace('$', ' ').Trim();
                                     loValorTotal = Convert.ToDouble(loPrecioUnitario) * Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString());
 
                                     VentaProductos oVentaProductos = new VentaProductos
@@ -554,7 +554,7 @@ namespace PL.AdminDashboard
                             {
                                 if (Convert.ToInt32(((TextBox)loItem.Controls[15]).Text.ToString()) > 0 && Convert.ToInt32(((TextBox)loItem.Controls[15]).Text.ToString()) <= Convert.ToInt32(((Label)loItem.Controls[13]).Text.ToString())) //CANTIDAD_DISPONIBLE debe ser mayor a 0 y menor o igual a al Sotck
                                 {
-                                    var loPrecioUnitario = ((Label)loItem.Controls[11]).Text.Split(' ').Last();
+                                    var loPrecioUnitario = ((Label)loItem.Controls[11]).Text.Replace('$', ' ').Trim();
                                     loValorTotal = Convert.ToDouble(loPrecioUnitario) * Convert.ToInt32(((TextBox)loItem.Controls[15]).Text.ToString());
 
                                     VentaProductos oVentaProductos = new VentaProductos
@@ -600,7 +600,7 @@ namespace PL.AdminDashboard
                             {
                                 if (Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString()) > 0 && Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString()) <= Convert.ToInt32(((Label)loItem.Controls[15]).Text.ToString())) //CANTIDAD_DISPONIBLE debe ser mayor a 0 y menor o igual a al Sotck
                                 {
-                                    var loPrecioUnitario = ((Label)loItem.Controls[13]).Text.Split(' ').Last();
+                                    var loPrecioUnitario = ((Label)loItem.Controls[13]).Text.Replace('$', ' ').Trim();
                                     loValorTotal = Convert.ToDouble(loPrecioUnitario) * Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString());
 
                                     VentaProductos oVentaProductos = new VentaProductos
@@ -646,7 +646,7 @@ namespace PL.AdminDashboard
                             {
                                 if (Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString()) > 0 && Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString()) <= Convert.ToInt32(((Label)loItem.Controls[15]).Text.ToString())) //CANTIDAD_DISPONIBLE debe ser mayor a 0 y menor o igual a al Sotck
                                 {
-                                    var loPrecioUnitario = ((Label)loItem.Controls[13]).Text.Split(' ').Last();
+                                    var loPrecioUnitario = ((Label)loItem.Controls[13]).Text.Replace('$', ' ').Trim();
                                     loValorTotal = Convert.ToDouble(loPrecioUnitario) * Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString());
 
                                     VentaProductos oVentaProductos = new VentaProductos
@@ -692,7 +692,7 @@ namespace PL.AdminDashboard
                             {
                                 if (Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString()) > 0 && Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString()) <= Convert.ToInt32(((Label)loItem.Controls[15]).Text.ToString())) //CANTIDAD_DISPONIBLE debe ser mayor a 0 y menor o igual a al Sotck
                                 {
-                                    var loPrecioUnitario = ((Label)loItem.Controls[13]).Text.Split(' ').Last();
+                                    var loPrecioUnitario = ((Label)loItem.Controls[13]).Text.Replace('$', ' ').Trim();
                                     loValorTotal = Convert.ToDouble(loPrecioUnitario) * Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString());
 
                                     VentaProductos oVentaProductos = new VentaProductos
