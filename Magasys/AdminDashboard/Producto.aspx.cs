@@ -1,5 +1,4 @@
 ﻿using BLL.Common;
-using BLL.DAL;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -51,45 +50,7 @@ namespace PL.AdminDashboard
                     divDiario.Visible = true;
                     break;
             }
-        }
-
-        protected void BtnSubir_Click(object sender, EventArgs e)
-        {
-            // Obtener tamaño de la imagen seleccionada
-            int loTamanioImagen = fuploadImagen.PostedFile.ContentLength;
-
-            if (loTamanioImagen == 0) // Conrolar que exista una imagen para subir
-                return;
-
-            // Obtener tamaño de la imagen en byte
-            byte[] loImagenOriginal = new byte[loTamanioImagen];
-
-            //// Asociar byte a imagen
-            fuploadImagen.PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
-
-
-            //// Convertir imagen seleccionada en binaria
-            //Bitmap loImagenOriginalBinaria = new Bitmap(fuploadImagen.PostedFile.InputStream);
-
-            var oImagen = new BLL.DAL.Imagen
-            {
-                IMAGEN1 = loImagenOriginal,
-                NOMBRE = txtTitulo.Text
-            };
-
-            Session.Add(Enums.Session.Imagen.ToString(), oImagen);
-
-            // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
-            string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(loImagenOriginal);
-            imgPreview.ImageUrl = loImagenDataURL64;
-        }
-
-        protected void BtnLimpiarImagen_Click(object sender, EventArgs e)
-        {
-            imgPreview.ImageUrl = "~/AdminDashboard/img/preview_icons.png";
-            txtTitulo.Text = String.Empty;
-            Session.Remove(Enums.Session.Imagen.ToString());
-        }
+        }              
 
         protected void BtnGuardar_Click(object sender, EventArgs e)
         {
@@ -152,8 +113,7 @@ namespace PL.AdminDashboard
         }
 
         protected void BtnCancelar_Click(object sender, EventArgs e)
-        {
-            Session.Remove(Enums.Session.Imagen.ToString());
+        {            
             Response.Redirect("ProductoListado.aspx", false);
         }
 
@@ -352,9 +312,19 @@ namespace PL.AdminDashboard
             else
                 oProducto.DESCRIPCION = null;
 
-            // Cargar Imagen
-            if ((BLL.DAL.Imagen)Session[Enums.Session.Imagen.ToString()] != null)
-                oProducto.Imagen = (BLL.DAL.Imagen)Session[Enums.Session.Imagen.ToString()];
+            if (fuploadImagen.PostedFile.ContentLength != 0)
+            {
+                int loTamanioImagen = fuploadImagen.PostedFile.ContentLength;
+                byte[] loImagenOriginal = new byte[loTamanioImagen];
+                fuploadImagen.PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
+
+                var oImagen = new BLL.DAL.Imagen
+                {
+                    IMAGEN1 = loImagenOriginal                    
+                };                
+                
+                oProducto.Imagen = oImagen;
+            }
 
             return oProducto;
         }
@@ -409,7 +379,7 @@ namespace PL.AdminDashboard
         {
             var oDiarioSuplemento = new BLL.DiarioBLL().ObtenerDiario(Convert.ToInt32(ddlDiarioSuplemento.SelectedValue));
 
-            var oSuplemento = new Suplemento
+            var oSuplemento = new BLL.DAL.Suplemento
             {
                 ID_DIA_SEMANA = Convert.ToInt32(ddlDiaDeEntregaSuplemento.SelectedValue),
                 COD_DIARIO = oDiarioSuplemento.ID_DIARIO_DIA_SEMAMA,
@@ -470,8 +440,7 @@ namespace PL.AdminDashboard
             divSuplemento.Controls.OfType<TextBox>().ToList().ForEach(x => x.Text = String.Empty);
             divPelicula.Controls.OfType<DropDownList>().ToList().ForEach(y => y.SelectedIndex = 0);
             divPelicula.Controls.OfType<TextBox>().ToList().ForEach(x => x.Text = String.Empty);
-            OcultarDivTipoProducto(true);
-            Session.Remove(Enums.Session.Imagen.ToString());
+            OcultarDivTipoProducto(true);            
             imgPreview.ImageUrl = "~/AdminDashboard/img/preview_icons.png";
         }
 

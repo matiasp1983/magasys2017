@@ -14,41 +14,7 @@ namespace PL.AdminDashboard
         {
             if (!IsPostBack)
                 CargarProductoDiarioDesdeSession();
-        }
-
-        protected void BtnSubir_Click(object sender, EventArgs e)
-        {
-            // Obtener tamaño de la imagen seleccionada
-            int loTamanioImagen = fuploadImagen.PostedFile.ContentLength;
-
-            if (loTamanioImagen == 0)
-                return;
-
-            // Obtener tamaño de la imagen en byte
-            byte[] loImagenOriginal = new byte[loTamanioImagen];
-
-            //// Asociar byte a imagen
-            fuploadImagen.PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
-
-            var oImagen = new BLL.DAL.Imagen
-            {
-                IMAGEN1 = loImagenOriginal,
-                NOMBRE = txtTitulo.Text
-            };
-
-            Session.Add(Enums.Session.Imagen.ToString(), oImagen);
-
-            // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
-            string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(loImagenOriginal);
-            imgPreview.ImageUrl = loImagenDataURL64;
-        }
-
-        protected void BtnLimpiarImagen_Click(object sender, EventArgs e)
-        {
-            imgPreview.ImageUrl = "~/AdminDashboard/img/preview_icons.png";
-            txtTitulo.Text = String.Empty;
-            Session.Remove(Enums.Session.Imagen.ToString());
-        }
+        }                
 
         protected void BtnGuardar_Click(object sender, EventArgs e)
         {
@@ -62,8 +28,7 @@ namespace PL.AdminDashboard
                 loResutado = new BLL.DiarioBLL().ModificarDiario(oProducto, oDiarioDiaSemana);
 
                 if (loResutado)
-                {
-                    Session.Remove(Enums.Session.Imagen.ToString());
+                {                    
                     Session.Remove(Enums.Session.ProductoDiario.ToString());
                     Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeProductoSuccessModificacion, "Modificación Producto Diario", "ProductoListado.aspx"));
                 }
@@ -80,8 +45,7 @@ namespace PL.AdminDashboard
         }
 
         protected void BtnCancelar_Click(object sender, EventArgs e)
-        {
-            Session.Remove(Enums.Session.Imagen.ToString());
+        {            
             Session.Remove(Enums.Session.ProductoDiario.ToString());
             Response.Redirect("ProductoListado.aspx", false);
         }
@@ -115,8 +79,7 @@ namespace PL.AdminDashboard
                     {
                         // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
                         string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProductoDiario.IMAGEN.IMAGEN1);
-                        imgPreview.ImageUrl = loImagenDataURL64;
-                        txtTitulo.Text = oProductoDiario.IMAGEN.NOMBRE;
+                        imgPreview.ImageUrl = loImagenDataURL64;                        
                     }
                 }
                 else
@@ -148,13 +111,38 @@ namespace PL.AdminDashboard
             if (!String.IsNullOrEmpty(txtDescripcion.Text))
                 oProducto.DESCRIPCION = txtDescripcion.Text;
             else
-                oProducto.DESCRIPCION = null;
+                oProducto.DESCRIPCION = null;            
 
-            // Cargar Imagen
-            if ((BLL.DAL.Imagen)Session[Enums.Session.Imagen.ToString()] != null)  // Nueva Imagen
-                oProducto.Imagen = (BLL.DAL.Imagen)Session[Enums.Session.Imagen.ToString()];
-            else if (imgPreview.ImageUrl != "~/AdminDashboard/img/preview_icons.png" && ((BLL.ProductoDiario)Session[Enums.Session.ProductoDiario.ToString()]).IMAGEN != null) // Mantenemos la imagen
-                oProducto.COD_IMAGEN = ((BLL.ProductoDiario)Session[Enums.Session.ProductoDiario.ToString()]).IMAGEN.ID_IMAGEN;
+            imgPreview.ImageUrl = "img/preview_icons.png";
+
+            if (fuploadImagen.PostedFile.ContentLength != 0)
+            {
+                int loTamanioImagen = fuploadImagen.PostedFile.ContentLength;
+                byte[] loImagenOriginal = new byte[loTamanioImagen];
+                fuploadImagen.PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
+
+                var oImagen = new BLL.DAL.Imagen
+                {
+                    IMAGEN1 = loImagenOriginal
+                };
+
+                oProducto.Imagen = oImagen;
+
+                string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(loImagenOriginal);
+                imgPreview.ImageUrl = loImagenDataURL64;
+            }
+            else
+            {
+                if (hdfLimpiariarImagen.Value.Equals("false"))
+                {
+                    if (((BLL.ProductoDiario)base.Session[Enums.Session.ProductoDiario.ToString()]).IMAGEN != null)
+                    {
+                        oProducto.Imagen = ((BLL.ProductoDiario)base.Session[Enums.Session.ProductoDiario.ToString()]).IMAGEN;
+                        string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProducto.Imagen.IMAGEN1);
+                        imgPreview.ImageUrl = loImagenDataURL64;
+                    }
+                }
+            }
 
             return oProducto;
         }

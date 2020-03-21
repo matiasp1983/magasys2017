@@ -22,13 +22,13 @@
         </div>
         <div class="wrapper wrapper-content animated fadeInRight">
             <div class="col-md-6">
-                <div class="ibox float-e-margins">                    
-                    <div class="ibox-title">                    
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
                         <h2>Informaci&oacute;n General</h2>
                     </div>
                     <div class="ibox-content">
                         <div class="row">
-                           <div class="form-group">
+                            <div class="form-group">
                                 <label class="col-sm-2 control-label">Código</label>
 
                                 <div class="col-sm-10">
@@ -41,7 +41,7 @@
                                 <label class="col-sm-2 control-label">Fecha Alta</label>
 
                                 <div class="col-sm-10">
-                                     <asp:TextBox ID="txtFechaAlta" runat="server" CssClass="form-control" Enabled="false" autocomplete="off"></asp:TextBox>
+                                    <asp:TextBox ID="txtFechaAlta" runat="server" CssClass="form-control" Enabled="false" autocomplete="off"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
@@ -90,7 +90,7 @@
             </div>
             <div class="col-md-6">
                 <div class="ibox float-e-margins">
-                    <div class="ibox-title">                    
+                    <div class="ibox-title">
                         <h2>Imagen</h2>
                     </div>
                     <div class="ibox-content">
@@ -106,25 +106,16 @@
                                 <label class="col-sm-2 control-label">Archivo</label>
 
                                 <div class="col-sm-8">
-                                    <asp:FileUpload ID="fuploadImagen" accept=".jpg" runat="server" CssClass="form-control" /> 
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Título de Imagen</label>
-
-                                <div class="col-sm-8">
-                                    <asp:TextBox ID="txtTitulo" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
+                                    <asp:FileUpload ID="fuploadImagen" runat="server" CssClass="form-control" onchange="ShowImagePreview(this);" />
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="hr-line-dashed"></div>
-                            <div class="form-group">                      
-                                <div class="col-sm-7 col-md-offset-5">                              
-                                    <asp:Button ID="btnSubir" runat="server" Text="Adjuntar Imagen" CssClass="btn btn-success" OnClick="BtnSubir_Click" formnovalidate="formnovalidate" />
-                                    <asp:Button ID="btnLimpiarImagen" runat="server" Text="Limpiar Imagen" CssClass="btn btn-warning" OnClick="BtnLimpiarImagen_Click" formnovalidate="formnovalidate" />
+                            <div class="form-group">
+                                <div class="col-sm-7 col-md-offset-5">
+                                    <input id="btnLimpiarImagen" type="button" class="btn btn-warning" value="Limpiar Imagen" />
+                                    <asp:HiddenField ID="hdfLimpiariarImagen" runat="server" Value="false" />
                                 </div>
                             </div>
                         </div>
@@ -163,13 +154,13 @@
                                         </div>
                                     </div>
                                 </div>
-                             </div>                            
+                            </div>
                         </div>
                     </div>
-                    <div class="hr-line-dashed"></div>                    
+                    <div class="hr-line-dashed"></div>
                     <div class="form-group">
                         <div class="col-xs-12 col-sm-6 col-md-8"></div>
-                         <div class="col-xs-12 col-md-4" style="text-align: right">
+                        <div class="col-xs-12 col-md-4" style="text-align: right">
                             <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-success" OnClick="BtnGuardar_Click" />
                             <a id="btnCancelar" runat="server" class="btn btn-primary" onserverclick="BtnCancelar_Click">Cancelar</a>
                         </div>
@@ -187,13 +178,14 @@
             $(document).ready(function () {
                 ValidarForm();
                 Select2();
+                LimpiarFileUploadImagen();
             });
         }
 
         function ValidarForm() {
             $(FormProducto).validate({
                 rules: {
-                     <%=txtNombre.UniqueID%>: {
+                    <%=txtNombre.UniqueID%>: {
                         required: true,
                         normalizer: function (value) {                            
                             return $.trim(value);
@@ -211,11 +203,10 @@
                      <%=txtPrecioDiario.UniqueID%>: {
                          number: true,
                          min: 1
-                     },
-                     
-                
-        messages: {
-                     <%=txtNombre.UniqueID%>: {
+                     }
+                },
+                messages: {
+                    <%=txtNombre.UniqueID%>: {
                         required: "Este campo es requerido."
                      },
                      <%=ddlProveedor.UniqueID%>: {
@@ -230,25 +221,44 @@
                      <%=txtPrecioDiario.UniqueID%>: {
                          number: "Ingrese un número válido.",
                          min: "Ingrese un valor mayor o igual a 1."
-                     },        
-                
-            );
+                     }
+                }
+            });
         }
 
         function Select2() {
             $(".select2_proveedor").select2(
-            {
+                {
                     placeholder: 'Seleccione un Proveedor',
                     width: '100%',
-                    allowClear: true                    
-            });
+                    allowClear: true
+                });
 
             $(".select2_genero").select2(
-            {
+                {
                     placeholder: 'Seleccione un Género',
                     width: '100%',
                     allowClear: true
+                });
+        }
+
+        function ShowImagePreview(input) {  
+            if (input.files && input.files[0]) {  
+                var reader = new FileReader();  
+                reader.onload = function (e) {  
+                    $('#<%=imgPreview.ClientID%>').prop('src', e.target.result);  
+                };  
+                reader.readAsDataURL(input.files[0]);  
+            }  
+        }
+
+        function LimpiarFileUploadImagen() {
+            $('#btnLimpiarImagen').on('click', function () {                                   
+                $('#<%=imgPreview.ClientID%>').prop('src', 'img/preview_icons.png');
+                $('#<%=hdfLimpiariarImagen.ClientID%>').val('true');
+                $('#<%=fuploadImagen.ClientID%>').val('');
             });
         }
+
     </script>
 </asp:Content>

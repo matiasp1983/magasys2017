@@ -72,7 +72,7 @@
             </div>
             <div class="col-md-6">
                 <div class="ibox float-e-margins">
-                    <div class="ibox-title">                    
+                    <div class="ibox-title">
                         <h2>Imagen</h2>
                     </div>
                     <div class="ibox-content">
@@ -88,25 +88,15 @@
                                 <label class="col-sm-2 control-label">Archivo</label>
 
                                 <div class="col-sm-8">
-                                    <asp:FileUpload ID="fuploadImagen" accept=".jpg" runat="server" CssClass="form-control" /> 
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Título de Imagen</label>
-
-                                <div class="col-sm-8">
-                                    <asp:TextBox ID="txtTitulo" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
+                                    <asp:FileUpload ID="fuploadImagen" runat="server" CssClass="form-control" onchange="ShowImagePreview(this);" />
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="hr-line-dashed"></div>
-                            <div class="form-group">                      
-                                <div class="col-sm-7 col-md-offset-5">                              
-                                    <asp:Button ID="btnSubir" runat="server" Text="Adjuntar Imagen" CssClass="btn btn-success" OnClick="BtnSubir_Click" formnovalidate="formnovalidate" />
-                                    <asp:Button ID="btnLimpiarImagen" runat="server" Text="Limpiar Imagen" CssClass="btn btn-warning" OnClick="BtnLimpiarImagen_Click" formnovalidate="formnovalidate" />
+                            <div class="form-group">
+                                <div class="col-sm-7 col-md-offset-5">
+                                    <input id="btnLimpiarImagen" type="button" class="btn btn-warning" value="Limpiar Imagen" />
                                 </div>
                             </div>
                         </div>
@@ -443,6 +433,7 @@
             $(document).ready(function () {
                 ValidarForm();
                 Select2();
+                LimpiarFileUploadImagen();
             });
         }       
 
@@ -730,5 +721,23 @@
                     allowClear: true
             });
         }
+
+        function ShowImagePreview(input) {  
+            if (input.files && input.files[0]) {  
+                var reader = new FileReader();  
+                reader.onload = function (e) {  
+                    $('#<%=imgPreview.ClientID%>').prop('src', e.target.result);  
+                };  
+                reader.readAsDataURL(input.files[0]);  
+            }  
+        }
+
+        function LimpiarFileUploadImagen() {
+            $('#btnLimpiarImagen').on('click', function () {   
+                $('#<%=imgPreview.ClientID%>').prop('src','img/preview_icons.png');
+                $('#<%=fuploadImagen.ClientID%>').val('');
+            });
+        }
+
     </script>
 </asp:Content>
