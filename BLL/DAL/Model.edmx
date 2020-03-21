@@ -142,7 +142,6 @@
           </Key>
           <Property Name="ID_IMAGEN" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IMAGEN" Type="image" Nullable="false" />
-          <Property Name="NOMBRE" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Libro">
           <Key>
@@ -1230,7 +1229,6 @@
           <EntitySet Name="Estado" EntityType="MAGASYSModel.Estado" />
           <EntitySet Name="FormaPago" EntityType="MAGASYSModel.FormaPago" />
           <EntitySet Name="Genero" EntityType="MAGASYSModel.Genero" />
-          <EntitySet Name="Imagen" EntityType="MAGASYSModel.Imagen" />
           <EntitySet Name="Libro" EntityType="MAGASYSModel.Libro" />
           <EntitySet Name="Localidad" EntityType="MAGASYSModel.Localidad" />
           <EntitySet Name="Pelicula" EntityType="MAGASYSModel.Pelicula" />
@@ -1377,14 +1375,6 @@
             <End Role="Genero" EntitySet="Genero" />
             <End Role="Producto" EntitySet="Producto" />
           </AssociationSet>
-          <AssociationSet Name="FK_Producto_Imagen" Association="MAGASYSModel.FK_Producto_Imagen">
-            <End Role="Imagen" EntitySet="Imagen" />
-            <End Role="Producto" EntitySet="Producto" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProductoEdicion_Imagen" Association="MAGASYSModel.FK_ProductoEdicion_Imagen">
-            <End Role="Imagen" EntitySet="Imagen" />
-            <End Role="ProductoEdicion" EntitySet="ProductoEdicion" />
-          </AssociationSet>
           <AssociationSet Name="FK_Libro_Producto" Association="MAGASYSModel.FK_Libro_Producto">
             <End Role="Producto" EntitySet="Producto" />
             <End Role="Libro" EntitySet="Libro" />
@@ -1462,6 +1452,15 @@
           <AssociationSet Name="FK_Cliente_Usuario" Association="MAGASYSModel.FK_Cliente_Usuario">
             <End Role="Usuario" EntitySet="Usuario" />
             <End Role="Cliente" EntitySet="Cliente" />
+          </AssociationSet>
+          <EntitySet Name="Imagen" EntityType="MAGASYSModel.Imagen" />
+          <AssociationSet Name="FK_Producto_Imagen" Association="MAGASYSModel.FK_Producto_Imagen">
+            <End Role="Imagen" EntitySet="Imagen" />
+            <End Role="Producto" EntitySet="Producto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductoEdicion_Imagen" Association="MAGASYSModel.FK_ProductoEdicion_Imagen">
+            <End Role="Imagen" EntitySet="Imagen" />
+            <End Role="ProductoEdicion" EntitySet="ProductoEdicion" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Anio">
@@ -1635,16 +1634,6 @@
           <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_Producto_Genero" FromRole="Genero" ToRole="Producto" />
         </EntityType>
-        <EntityType Name="Imagen">
-          <Key>
-            <PropertyRef Name="ID_IMAGEN" />
-          </Key>
-          <Property Name="ID_IMAGEN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IMAGEN1" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
-          <Property Name="NOMBRE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_Producto_Imagen" FromRole="Imagen" ToRole="Producto" />
-          <NavigationProperty Name="ProductoEdicion" Relationship="MAGASYSModel.FK_ProductoEdicion_Imagen" FromRole="Imagen" ToRole="ProductoEdicion" />
-        </EntityType>
         <EntityType Name="Libro">
           <Key>
             <PropertyRef Name="ID_LIBRO" />
@@ -1705,7 +1694,6 @@
           <NavigationProperty Name="DiarioDiaSemana" Relationship="MAGASYSModel.FK_DiarioDiaSemana_Producto" FromRole="Producto" ToRole="DiarioDiaSemana" />
           <NavigationProperty Name="Estado" Relationship="MAGASYSModel.FK_Producto_Estado1" FromRole="Producto" ToRole="Estado" />
           <NavigationProperty Name="Genero" Relationship="MAGASYSModel.FK_Producto_Genero" FromRole="Producto" ToRole="Genero" />
-          <NavigationProperty Name="Imagen" Relationship="MAGASYSModel.FK_Producto_Imagen" FromRole="Producto" ToRole="Imagen" />
           <NavigationProperty Name="Libro" Relationship="MAGASYSModel.FK_Libro_Producto" FromRole="Producto" ToRole="Libro" />
           <NavigationProperty Name="Pelicula" Relationship="MAGASYSModel.FK_Pelicula_Producto" FromRole="Producto" ToRole="Pelicula" />
           <NavigationProperty Name="ProductoEdicion" Relationship="MAGASYSModel.FK_Producto_Edicion_Producto" FromRole="Producto" ToRole="ProductoEdicion" />
@@ -1714,6 +1702,7 @@
           <NavigationProperty Name="Reserva" Relationship="MAGASYSModel.FK_Reserva_Producto" FromRole="Producto" ToRole="Reserva" />
           <NavigationProperty Name="Revista" Relationship="MAGASYSModel.FK_Revista_Producto" FromRole="Producto" ToRole="Revista" />
           <NavigationProperty Name="Suplemento" Relationship="MAGASYSModel.FK_Suplemento_Producto" FromRole="Producto" ToRole="Suplemento" />
+          <NavigationProperty Name="Imagen" Relationship="MAGASYSModel.FK_Producto_Imagen" FromRole="Producto" ToRole="Imagen" />
         </EntityType>
         <EntityType Name="ProductoDevolucion">
           <Key>
@@ -1745,9 +1734,9 @@
           <NavigationProperty Name="DetalleProductoIngreso" Relationship="MAGASYSModel.FK_DetalleIngresoProducto_Producto_Edicion" FromRole="ProductoEdicion" ToRole="DetalleProductoIngreso" />
           <NavigationProperty Name="DetalleVenta" Relationship="MAGASYSModel.FK_DetalleVenta_ProductoEdicion" FromRole="ProductoEdicion" ToRole="DetalleVenta" />
           <NavigationProperty Name="Estado" Relationship="MAGASYSModel.FK_Producto_Edicion_Estado" FromRole="ProductoEdicion" ToRole="Estado" />
-          <NavigationProperty Name="Imagen" Relationship="MAGASYSModel.FK_ProductoEdicion_Imagen" FromRole="ProductoEdicion" ToRole="Imagen" />
           <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_Producto_Edicion_Producto" FromRole="ProductoEdicion" ToRole="Producto" />
           <NavigationProperty Name="ReservaEdicion" Relationship="MAGASYSModel.FK_ReservaEdicion_ProductoEdicion" FromRole="ProductoEdicion" ToRole="ReservaEdicion" />
+          <NavigationProperty Name="Imagen" Relationship="MAGASYSModel.FK_ProductoEdicion_Imagen" FromRole="ProductoEdicion" ToRole="Imagen" />
         </EntityType>
         <EntityType Name="ProductoIngreso">
           <Key>
@@ -2282,30 +2271,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Producto_Imagen">
-          <End Type="MAGASYSModel.Imagen" Role="Imagen" Multiplicity="0..1" />
-          <End Type="MAGASYSModel.Producto" Role="Producto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Imagen">
-              <PropertyRef Name="ID_IMAGEN" />
-            </Principal>
-            <Dependent Role="Producto">
-              <PropertyRef Name="COD_IMAGEN" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProductoEdicion_Imagen">
-          <End Type="MAGASYSModel.Imagen" Role="Imagen" Multiplicity="0..1" />
-          <End Type="MAGASYSModel.ProductoEdicion" Role="ProductoEdicion" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Imagen">
-              <PropertyRef Name="ID_IMAGEN" />
-            </Principal>
-            <Dependent Role="ProductoEdicion">
-              <PropertyRef Name="COD_IMAGEN" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Libro_Producto">
           <End Type="MAGASYSModel.Producto" Role="Producto" Multiplicity="1" />
           <End Type="MAGASYSModel.Libro" Role="Libro" Multiplicity="*" />
@@ -2561,6 +2526,39 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Imagen">
+          <Key>
+            <PropertyRef Name="ID_IMAGEN" />
+          </Key>
+          <Property Name="ID_IMAGEN" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IMAGEN1" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_Producto_Imagen" FromRole="Imagen" ToRole="Producto" />
+          <NavigationProperty Name="ProductoEdicion" Relationship="MAGASYSModel.FK_ProductoEdicion_Imagen" FromRole="Imagen" ToRole="ProductoEdicion" />
+        </EntityType>
+        <Association Name="FK_Producto_Imagen">
+          <End Type="MAGASYSModel.Imagen" Role="Imagen" Multiplicity="0..1" />
+          <End Type="MAGASYSModel.Producto" Role="Producto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Imagen">
+              <PropertyRef Name="ID_IMAGEN" />
+            </Principal>
+            <Dependent Role="Producto">
+              <PropertyRef Name="COD_IMAGEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductoEdicion_Imagen">
+          <End Type="MAGASYSModel.Imagen" Role="Imagen" Multiplicity="0..1" />
+          <End Type="MAGASYSModel.ProductoEdicion" Role="ProductoEdicion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Imagen">
+              <PropertyRef Name="ID_IMAGEN" />
+            </Principal>
+            <Dependent Role="ProductoEdicion">
+              <PropertyRef Name="COD_IMAGEN" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2708,15 +2706,6 @@
               <MappingFragment StoreEntitySet="Genero">
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
                 <ScalarProperty Name="ID_GENERO" ColumnName="ID_GENERO" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Imagen">
-            <EntityTypeMapping TypeName="MAGASYSModel.Imagen">
-              <MappingFragment StoreEntitySet="Imagen">
-                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
-                <ScalarProperty Name="IMAGEN1" ColumnName="IMAGEN" />
-                <ScalarProperty Name="ID_IMAGEN" ColumnName="ID_IMAGEN" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2953,6 +2942,14 @@
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
                 <ScalarProperty Name="NOMBRE_USUARIO" ColumnName="NOMBRE_USUARIO" />
                 <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Imagen">
+            <EntityTypeMapping TypeName="MAGASYSModel.Imagen">
+              <MappingFragment StoreEntitySet="Imagen">
+                <ScalarProperty Name="IMAGEN1" ColumnName="IMAGEN" />
+                <ScalarProperty Name="ID_IMAGEN" ColumnName="ID_IMAGEN" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -136,8 +136,7 @@ namespace PL.AdminDashboard
 
                                         // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
                                         string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProductoEdicion.Imagen.IMAGEN1);
-                                        oDiarioEdicion.IMAGEN.ImageUrl = loImagenDataURL64;
-                                        oDiarioEdicion.TITULO = oProductoEdicion.Imagen.NOMBRE;
+                                        oDiarioEdicion.IMAGEN.ImageUrl = loImagenDataURL64;                                        
                                     }
 
                                     break;
@@ -164,8 +163,7 @@ namespace PL.AdminDashboard
 
                                         // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
                                         string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProductoEdicion.Imagen.IMAGEN1);
-                                        oRevistaEdicion.IMAGEN.ImageUrl = loImagenDataURL64;
-                                        oRevistaEdicion.TITULO = oProductoEdicion.Imagen.NOMBRE;
+                                        oRevistaEdicion.IMAGEN.ImageUrl = loImagenDataURL64;                                        
                                     }
 
                                     break;
@@ -192,8 +190,7 @@ namespace PL.AdminDashboard
 
                                         // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
                                         string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProductoEdicion.Imagen.IMAGEN1);
-                                        oColeccionEdicion.IMAGEN.ImageUrl = loImagenDataURL64;
-                                        oColeccionEdicion.TITULO = oProductoEdicion.Imagen.NOMBRE;
+                                        oColeccionEdicion.IMAGEN.ImageUrl = loImagenDataURL64;                                        
                                     }
 
                                     break;
@@ -223,8 +220,7 @@ namespace PL.AdminDashboard
 
                                         // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
                                         string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProductoEdicion.Imagen.IMAGEN1);
-                                        oLibroEdicion.IMAGEN.ImageUrl = loImagenDataURL64;
-                                        oLibroEdicion.TITULO = oProductoEdicion.Imagen.NOMBRE;
+                                        oLibroEdicion.IMAGEN.ImageUrl = loImagenDataURL64;                                        
                                     }
 
                                     break;
@@ -253,8 +249,7 @@ namespace PL.AdminDashboard
 
                                         // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
                                         string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProductoEdicion.Imagen.IMAGEN1);
-                                        oSuplementoEdicion.IMAGEN.ImageUrl = loImagenDataURL64;
-                                        oSuplementoEdicion.TITULO = oProductoEdicion.Imagen.NOMBRE;
+                                        oSuplementoEdicion.IMAGEN.ImageUrl = loImagenDataURL64;                                        
                                     }
 
                                     break;
@@ -284,8 +279,7 @@ namespace PL.AdminDashboard
 
                                         // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
                                         string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProductoEdicion.Imagen.IMAGEN1);
-                                        oPeliculaEdicion.IMAGEN.ImageUrl = loImagenDataURL64;
-                                        oPeliculaEdicion.TITULO = oProductoEdicion.Imagen.NOMBRE;
+                                        oPeliculaEdicion.IMAGEN.ImageUrl = loImagenDataURL64;                                        
                                     }
 
                                     break;
@@ -490,8 +484,7 @@ namespace PL.AdminDashboard
                         ((FileUpload)loItem.Controls[19]).PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
 
                         oImagen = new Imagen();
-                        oImagen.IMAGEN1 = loImagenOriginal;
-                        oImagen.NOMBRE = Convert.ToString(((TextBox)loItem.Controls[21]).Text);
+                        oImagen.IMAGEN1 = loImagenOriginal;                        
                         oProductoEdicion.Imagen = oImagen;
                         loProductoEdicionModificado = loModificado = true;
                     }
@@ -642,8 +635,7 @@ namespace PL.AdminDashboard
                         ((FileUpload)loItem.Controls[21]).PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
 
                         oImagen = new Imagen();
-                        oImagen.IMAGEN1 = loImagenOriginal;
-                        oImagen.NOMBRE = Convert.ToString(((TextBox)loItem.Controls[23]).Text);
+                        oImagen.IMAGEN1 = loImagenOriginal;                        
                         oProductoEdicion.Imagen = oImagen;
                         loProductoEdicionModificado = loModificado = true;
                     }
@@ -768,8 +760,7 @@ namespace PL.AdminDashboard
                         ((FileUpload)loItem.Controls[19]).PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
 
                         oImagen = new Imagen();
-                        oImagen.IMAGEN1 = loImagenOriginal;
-                        oImagen.NOMBRE = Convert.ToString(((TextBox)loItem.Controls[21]).Text);
+                        oImagen.IMAGEN1 = loImagenOriginal;                        
                         oProductoEdicion.Imagen = oImagen;
                         loProductoEdicionModificado = loModificado = true;
                     }
@@ -903,8 +894,7 @@ namespace PL.AdminDashboard
                         ((FileUpload)loItem.Controls[21]).PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
 
                         oImagen = new Imagen();
-                        oImagen.IMAGEN1 = loImagenOriginal;
-                        oImagen.NOMBRE = Convert.ToString(((TextBox)loItem.Controls[23]).Text);
+                        oImagen.IMAGEN1 = loImagenOriginal;                        
                         oProductoEdicion.Imagen = oImagen;
                         loProductoEdicionModificado = loModificado = true;
                     }
@@ -1049,8 +1039,7 @@ namespace PL.AdminDashboard
                         ((FileUpload)loItem.Controls[21]).PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
 
                         oImagen = new Imagen();
-                        oImagen.IMAGEN1 = loImagenOriginal;
-                        oImagen.NOMBRE = Convert.ToString(((TextBox)loItem.Controls[23]).Text);
+                        oImagen.IMAGEN1 = loImagenOriginal;                        
                         oProductoEdicion.Imagen = oImagen;
                         loProductoEdicionModificado = loModificado = true;
                     }
@@ -1195,8 +1184,7 @@ namespace PL.AdminDashboard
                         ((FileUpload)loItem.Controls[21]).PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
 
                         oImagen = new Imagen();
-                        oImagen.IMAGEN1 = loImagenOriginal;
-                        oImagen.NOMBRE = Convert.ToString(((TextBox)loItem.Controls[23]).Text);
+                        oImagen.IMAGEN1 = loImagenOriginal;                        
                         oProductoEdicion.Imagen = oImagen;
                         loProductoEdicionModificado = loModificado = true;
                     }

@@ -58,8 +58,6 @@ public partial class MAGASYSEntities : DbContext
 
     public virtual DbSet<Genero> Genero { get; set; }
 
-    public virtual DbSet<Imagen> Imagen { get; set; }
-
     public virtual DbSet<Libro> Libro { get; set; }
 
     public virtual DbSet<Localidad> Localidad { get; set; }
@@ -99,6 +97,8 @@ public partial class MAGASYSEntities : DbContext
     public virtual DbSet<Rol> Rol { get; set; }
 
     public virtual DbSet<Usuario> Usuario { get; set; }
+
+    public virtual DbSet<Imagen> Imagen { get; set; }
 
 }
 

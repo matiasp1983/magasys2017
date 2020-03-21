@@ -418,8 +418,7 @@ namespace PL.AdminDashboard
                         ((FileUpload)loItem.Controls[17]).PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
 
                         oImagen = new Imagen();
-                        oImagen.IMAGEN1 = loImagenOriginal;
-                        oImagen.NOMBRE = Convert.ToString(((TextBox)loItem.Controls[19]).Text);
+                        oImagen.IMAGEN1 = loImagenOriginal;                        
                     }
 
                     if (oProductoEdicion == null)
@@ -591,8 +590,7 @@ namespace PL.AdminDashboard
                         ((FileUpload)loItem.Controls[17]).PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
 
                         oImagen = new Imagen();
-                        oImagen.IMAGEN1 = loImagenOriginal;
-                        oImagen.NOMBRE = Convert.ToString(((TextBox)loItem.Controls[19]).Text);
+                        oImagen.IMAGEN1 = loImagenOriginal;                        
                     }
 
                     if (oProductoEdicion == null)
@@ -768,8 +766,7 @@ namespace PL.AdminDashboard
                         ((FileUpload)loItem.Controls[15]).PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
 
                         oImagen = new Imagen();
-                        oImagen.IMAGEN1 = loImagenOriginal;
-                        oImagen.NOMBRE = Convert.ToString(((TextBox)loItem.Controls[17]).Text);
+                        oImagen.IMAGEN1 = loImagenOriginal;                        
                     }
 
                     if (oProductoEdicion == null)
@@ -941,8 +938,7 @@ namespace PL.AdminDashboard
                         ((FileUpload)loItem.Controls[17]).PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
 
                         oImagen = new Imagen();
-                        oImagen.IMAGEN1 = loImagenOriginal;
-                        oImagen.NOMBRE = Convert.ToString(((TextBox)loItem.Controls[19]).Text);
+                        oImagen.IMAGEN1 = loImagenOriginal;                        
                     }
 
                     if (oProductoEdicion == null)
@@ -1112,8 +1108,7 @@ namespace PL.AdminDashboard
                         ((FileUpload)loItem.Controls[17]).PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
 
                         oImagen = new Imagen();
-                        oImagen.IMAGEN1 = loImagenOriginal;
-                        oImagen.NOMBRE = Convert.ToString(((TextBox)loItem.Controls[19]).Text);
+                        oImagen.IMAGEN1 = loImagenOriginal;                        
                     }
 
                     if (oProductoEdicion == null)
@@ -1288,8 +1283,7 @@ namespace PL.AdminDashboard
                         ((FileUpload)loItem.Controls[17]).PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
 
                         oImagen = new Imagen();
-                        oImagen.IMAGEN1 = loImagenOriginal;
-                        oImagen.NOMBRE = Convert.ToString(((TextBox)loItem.Controls[19]).Text);
+                        oImagen.IMAGEN1 = loImagenOriginal;                        
                     }
 
                     if (oProductoEdicion == null)

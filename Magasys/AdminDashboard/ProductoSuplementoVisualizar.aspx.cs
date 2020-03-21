@@ -66,8 +66,7 @@ namespace PL.AdminDashboard
                     {
                         // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
                         string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProductoSuplemento.IMAGEN.IMAGEN1);
-                        imgPreview.ImageUrl = loImagenDataURL64;
-                        lblTitulo.Text = oProductoSuplemento.IMAGEN.NOMBRE;
+                        imgPreview.ImageUrl = loImagenDataURL64;                        
                     }
                 }
                 else

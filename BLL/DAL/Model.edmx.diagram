@@ -18,7 +18,6 @@
         <EntityTypeShape EntityType="MAGASYSModel.Estado" Width="1.5" PointX="0.75" PointY="27.75" />
         <EntityTypeShape EntityType="MAGASYSModel.FormaPago" Width="1.5" PointX="3.75" PointY="23.75" />
         <EntityTypeShape EntityType="MAGASYSModel.Genero" Width="1.5" PointX="6" PointY="19.75" />
-        <EntityTypeShape EntityType="MAGASYSModel.Imagen" Width="1.5" PointX="6" PointY="13.5" />
         <EntityTypeShape EntityType="MAGASYSModel.Libro" Width="1.5" PointX="10.5" PointY="38.875" />
         <EntityTypeShape EntityType="MAGASYSModel.Localidad" Width="1.5" PointX="0.75" PointY="24.5" />
         <EntityTypeShape EntityType="MAGASYSModel.Pelicula" Width="1.5" PointX="10.5" PointY="36.125" />
@@ -69,8 +68,6 @@
         <AssociationConnector Association="MAGASYSModel.FK_Venta_Estado" />
         <AssociationConnector Association="MAGASYSModel.FK_Venta_FormaPago" />
         <AssociationConnector Association="MAGASYSModel.FK_Producto_Genero" />
-        <AssociationConnector Association="MAGASYSModel.FK_Producto_Imagen" />
-        <AssociationConnector Association="MAGASYSModel.FK_ProductoEdicion_Imagen" />
         <AssociationConnector Association="MAGASYSModel.FK_Libro_Producto" />
         <AssociationConnector Association="MAGASYSModel.FK_Localidad_Provincia" />
         <AssociationConnector Association="MAGASYSModel.FK_Proveedor_Localidad" />
@@ -92,6 +89,9 @@
         <AssociationConnector Association="MAGASYSModel.FK_Usuario_Rol" />
         <AssociationConnector Association="MAGASYSModel.FK_Usuario_Estado" />
         <AssociationConnector Association="MAGASYSModel.FK_Cliente_Usuario" />
+        <EntityTypeShape EntityType="MAGASYSModel.Imagen" Width="1.5" PointX="5.375" PointY="0.875" />
+        <AssociationConnector Association="MAGASYSModel.FK_Producto_Imagen" />
+        <AssociationConnector Association="MAGASYSModel.FK_ProductoEdicion_Imagen" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
