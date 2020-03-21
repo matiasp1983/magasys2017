@@ -142,8 +142,9 @@ namespace PL.AdminDashboard
                 {
                     if (((BLL.ProductoPelicula)base.Session[Enums.Session.ProductoPelicula.ToString()]).IMAGEN != null)
                     {
-                        oProducto.Imagen = ((BLL.ProductoPelicula)base.Session[Enums.Session.ProductoPelicula.ToString()]).IMAGEN;
-                        string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProducto.Imagen.IMAGEN1);
+                        var loSessionActual = ((BLL.ProductoPelicula)base.Session[Enums.Session.ProductoPelicula.ToString()]);
+                        oProducto.COD_IMAGEN = loSessionActual.IMAGEN.ID_IMAGEN;                        
+                        string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(loSessionActual.IMAGEN.IMAGEN1);
                         imgPreview.ImageUrl = loImagenDataURL64;
                     }
                 }
