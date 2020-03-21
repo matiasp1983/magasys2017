@@ -40,7 +40,7 @@ namespace PL.AdminDashboard
                     };
 
                     lstVentaListado.Add(oVentaListado);
-                    var loTotal = oVentaListado.TOTAL.Split(' ').Last();
+                    var loTotal = oVentaListado.TOTAL.Replace('$', ' ').Trim();
                     loMontoTotal += Convert.ToInt32(loTotal);
                 }
 
@@ -109,7 +109,7 @@ namespace PL.AdminDashboard
                         };
 
                         lstVentaListado.Add(oVentaListado);
-                        var loTotal = oVentaListado.TOTAL.Split(' ').Last();
+                        var loTotal = oVentaListado.TOTAL.Replace('$', ' ').Trim();
                         loMontoTotal += Convert.ToInt32(loTotal);
                         break;
                     }
@@ -193,7 +193,7 @@ namespace PL.AdminDashboard
             var loItem = lsvCobro.Items.Where(x => ((Label)x.Controls[1]).Text.ToString().Equals(loIdVenta)).First();
             lsvCobro.Items.Remove(loItem);
 
-            var loMonto = ((Label)loItem.Controls[3]).Text.Split(' ').Last();
+            var loMonto = ((Label)loItem.Controls[3]).Text.Replace('$', ' ').Trim();
             loMontoTotal = loMontoTotal - Convert.ToDouble(loMonto);
             lblTotal.Text = loMontoTotal.ToString();
             lsvCobro.DataSource = MapListViewToListObject(lsvCobro);
@@ -219,7 +219,7 @@ namespace PL.AdminDashboard
                 BLL.DAL.DetalleCobro oDetalleCobro = new BLL.DAL.DetalleCobro()
                 {
                     COD_VENTA = Convert.ToInt32(((Label)loItem.Controls[1]).Text.ToString()),
-                    SUBTOTAL = Convert.ToDouble(((Label)loItem.Controls[3]).Text.ToString().Split(' ').Last())
+                    SUBTOTAL = Convert.ToDouble(((Label)loItem.Controls[3]).Text.ToString().Replace('$', ' ').Trim())
                 };
 
                 lstDetalleCobro.Add(oDetalleCobro);
