@@ -24,34 +24,6 @@ namespace PL.AdminDashboard
             }
         }
 
-        protected void DdlTipoProducto_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            OcultarDivTipoProducto();
-
-            switch (((DropDownList)sender).SelectedItem.Text)
-            {
-                case "Revista":
-                    divRevista.Visible = true;
-                    break;
-                case "Colección":
-                    divColeccion.Visible = true;
-                    break;
-                case "Libro":
-                    divLibro.Visible = true;
-                    break;
-                case "Suplemento":
-                    CargarDiarios();
-                    divSuplemento.Visible = true;
-                    break;
-                case "Película":
-                    divPelicula.Visible = true;
-                    break;
-                default:
-                    divDiario.Visible = true;
-                    break;
-            }
-        }              
-
         protected void BtnGuardar_Click(object sender, EventArgs e)
         {
             try
@@ -113,7 +85,7 @@ namespace PL.AdminDashboard
         }
 
         protected void BtnCancelar_Click(object sender, EventArgs e)
-        {            
+        {
             Response.Redirect("ProductoListado.aspx", false);
         }
 
@@ -283,17 +255,7 @@ namespace PL.AdminDashboard
                 Logger loLogger = LogManager.GetCurrentClassLogger();
                 loLogger.Error(ex);
             }
-        }
-
-        private void OcultarDivTipoProducto(bool pDesdeBotonLimpiar = false)
-        {
-            divRevista.Visible = divColeccion.Visible = divLibro.Visible = divSuplemento.Visible = divPelicula.Visible = false;
-
-            if (!pDesdeBotonLimpiar)
-                divDiario.Visible = false;
-            else
-                divDiario.Visible = true;
-        }
+        }        
 
         private BLL.DAL.Producto CargarProductoDesdeControles()
         {
@@ -320,9 +282,9 @@ namespace PL.AdminDashboard
 
                 var oImagen = new BLL.DAL.Imagen
                 {
-                    IMAGEN1 = loImagenOriginal                    
-                };                
-                
+                    IMAGEN1 = loImagenOriginal
+                };
+
                 oProducto.Imagen = oImagen;
             }
 
@@ -439,8 +401,13 @@ namespace PL.AdminDashboard
                 ddlDiarioSuplemento.SelectedIndex = 0;
             divSuplemento.Controls.OfType<TextBox>().ToList().ForEach(x => x.Text = String.Empty);
             divPelicula.Controls.OfType<DropDownList>().ToList().ForEach(y => y.SelectedIndex = 0);
-            divPelicula.Controls.OfType<TextBox>().ToList().ForEach(x => x.Text = String.Empty);
-            OcultarDivTipoProducto(true);            
+            divPelicula.Controls.OfType<TextBox>().ToList().ForEach(x => x.Text = String.Empty);            
+            divColeccion.Attributes.Remove("style");
+            divRevista.Style.Add("display", "none");
+            divLibro.Style.Add("display", "none");
+            divSuplemento.Style.Add("display", "none");
+            divPelicula.Style.Add("display", "none");
+            divDiario.Style.Add("display", "none");
             imgPreview.ImageUrl = "~/AdminDashboard/img/preview_icons.png";
         }
 

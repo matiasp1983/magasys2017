@@ -113,14 +113,14 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <div class="col-sm-10">
-                                <asp:DropDownList ID="ddlTipoProducto" runat="server" CssClass="select2_tipoproducto form-control" AutoPostBack="true" OnSelectedIndexChanged="DdlTipoProducto_SelectedIndexChanged"></asp:DropDownList>
+                                <asp:DropDownList ID="ddlTipoProducto" runat="server" CssClass="select2_tipoproducto form-control"></asp:DropDownList>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-12">
-                    <div class="panel panel-primary">                            
-                        <div id="divDiario" runat="server" class="panel-body" visible="false">
+                    <div class="panel panel-primary">
+                        <div id="divDiario" runat="server" class="panel-body" style="display: none">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -214,7 +214,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="divRevista" runat="server" class="panel-body" visible="false">
+                        <div id="divRevista" runat="server" class="panel-body" style="display: none">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -252,7 +252,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="divColeccion" runat="server" class="panel-body" visible="true">
+                        <div id="divColeccion" runat="server" class="panel-body">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -287,7 +287,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="divLibro" runat="server" class="panel-body" visible="false">
+                        <div id="divLibro" runat="server" class="panel-body" style="display: none">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -334,7 +334,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="divSuplemento" runat="server" class="panel-body" visible="false">
+                        <div id="divSuplemento" runat="server" class="panel-body" style="display: none">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -383,7 +383,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="divPelicula" runat="server" class="panel-body" visible="false">
+                        <div id="divPelicula" runat="server" class="panel-body" style="display: none">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -660,10 +660,12 @@
                     allowClear: true
             });
             
-            $(".select2_tipoproducto").select2(
-            {                    
-                    width: '100%'                    
-            });
+            $(".select2_tipoproducto").select2({
+                width: '100%'
+            }).on('select2:select', function (e) {
+                var loData = e.params.data;
+                MostrarDivTipoProducto(loData.id);
+            });           
 
             $(".select2_diadeentregarevista").select2(
             {
@@ -737,6 +739,52 @@
                 $('#<%=imgPreview.ClientID%>').prop('src','img/preview_icons.png');
                 $('#<%=fuploadImagen.ClientID%>').val('');
             });
+        }
+
+        function MostrarDivTipoProducto(idTipoProducto) {
+            if (idTipoProducto == 1) {
+                $('#<%=divDiario.ClientID%>').removeAttr("style");
+                $('#<%=divRevista.ClientID%>').css('display', 'none');
+                $('#<%=divColeccion.ClientID%>').css('display', 'none');
+                $('#<%=divLibro.ClientID%>').css('display', 'none');
+                $('#<%=divSuplemento.ClientID%>').css('display', 'none');
+                $('#<%=divPelicula.ClientID%>').css('display', 'none');
+            } else if (idTipoProducto == 2) {
+                $('#<%=divRevista.ClientID%>').removeAttr("style");
+                $('#<%=divDiario.ClientID%>').css('display', 'none');
+                $('#<%=divColeccion.ClientID%>').css('display', 'none');
+                $('#<%=divLibro.ClientID%>').css('display', 'none');
+                $('#<%=divSuplemento.ClientID%>').css('display', 'none');
+                $('#<%=divPelicula.ClientID%>').css('display', 'none');
+            } else if (idTipoProducto == 3) {
+                $('#<%=divColeccion.ClientID%>').removeAttr("style");
+                $('#<%=divRevista.ClientID%>').css('display', 'none');
+                $('#<%=divDiario.ClientID%>').css('display', 'none');
+                $('#<%=divLibro.ClientID%>').css('display', 'none');
+                $('#<%=divSuplemento.ClientID%>').css('display', 'none');
+                $('#<%=divPelicula.ClientID%>').css('display', 'none');
+            } else if (idTipoProducto == 4) {
+                $('#<%=divLibro.ClientID%>').removeAttr("style");
+                $('#<%=divDiario.ClientID%>').css('display', 'none');
+                $('#<%=divRevista.ClientID%>').css('display', 'none');
+                $('#<%=divColeccion.ClientID%>').css('display', 'none');
+                $('#<%=divSuplemento.ClientID%>').css('display', 'none');
+                $('#<%=divPelicula.ClientID%>').css('display', 'none');
+            } else if (idTipoProducto == 5) {
+                $('#<%=divSuplemento.ClientID%>').removeAttr("style");
+                $('#<%=divDiario.ClientID%>').css('display', 'none');
+                $('#<%=divRevista.ClientID%>').css('display', 'none');
+                $('#<%=divColeccion.ClientID%>').css('display', 'none');
+                $('#<%=divLibro.ClientID%>').css('display', 'none');
+                $('#<%=divPelicula.ClientID%>').css('display', 'none');
+            } else if (idTipoProducto == 6) {
+                $('#<%=divPelicula.ClientID%>').removeAttr("style");
+                $('#<%=divDiario.ClientID%>').css('display', 'none');
+                $('#<%=divRevista.ClientID%>').css('display', 'none');
+                $('#<%=divColeccion.ClientID%>').css('display', 'none');
+                $('#<%=divLibro.ClientID%>').css('display', 'none');
+                $('#<%=divSuplemento.ClientID%>').css('display', 'none');
+            }
         }
 
     </script>
