@@ -84,7 +84,7 @@
                                                         </dl>
                                                     </td>
                                                     <td style="width: 100px">
-                                                        <div id="divCantidad" runat="server">
+                                                        <div id="divCantidad" runat="server" data-id="divCantidad">
                                                             <asp:TextBox ID="txtCantidad" runat="server" Text='<%#Eval("CANTIDAD").ToString()%>' autocomplete="off" title='<%#string.Format("{0};{1}", Eval("PRECIO").ToString(), Eval("PRODUCTO_EDICION").ToString())%>' Enabled="True" MaxLength="0" ReadOnly="True" BackColor="White"></asp:TextBox>
                                                         </div>
                                                     </td>
@@ -195,11 +195,9 @@
 
         $('.i-checks').iCheck({
             radioClass: 'iradio_square-green'
-        });        
+        });               
 
-        console.log($('#<%=FormRegistrarReserva.ClientID%>'));
-
-        $('#<%=lsvProductos.ClientID%>' + '_divCantidad_ > input').TouchSpin({
+        $('[data-id="divCantidad"] > input').TouchSpin({
             verticalbuttons: true,
             min: 1,
             max: 99
