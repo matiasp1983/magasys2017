@@ -20,7 +20,7 @@
 <body class="gray-bg">
     <form id="FormRegistrarUsuario" runat="server" class="form-horizontal">
         <div class="wrapper wrapper-content animated fadeInRight">
-            <div class="col-md-7">
+            <div class="col-md-8">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h2>Informaci&oacute;n General</h2>
@@ -29,9 +29,9 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">Tipo de Documento</label>
+                                    <label class="col-sm-3 control-label">Tipo de Documento</label>
 
-                                    <div class="col-sm-10">
+                                    <div class="col-sm-8">
                                         <div id="divTipoDocumento">
                                             <asp:DropDownList ID="ddlTipoDocumento" runat="server" CssClass="select2_tipodocumento form-control"></asp:DropDownList>
                                         </div>
@@ -40,9 +40,9 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">N&uacute;mero de Documento</label>
+                                    <label class="col-sm-3 control-label">N&uacute;mero de Documento</label>
 
-                                    <div class="col-sm-10">                                        
+                                    <div class="col-sm-8">                                        
                                         <asp:TextBox ID="txtNroDocumento" runat="server" CssClass="form-control" MaxLength="8" autocomplete="off"></asp:TextBox>                                        
                                     </div>
                                 </div>
@@ -51,18 +51,18 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">Nombre</label>
+                                    <label class="col-sm-3 control-label">Nombre</label>
 
-                                    <div class="col-sm-10">
+                                    <div class="col-sm-8">
                                         <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off"></asp:TextBox>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">Apellido</label>
+                                    <label class="col-sm-3 control-label">Apellido</label>
 
-                                    <div class="col-sm-10">
+                                    <div class="col-sm-8">
                                         <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off"></asp:TextBox>
                                     </div>
                                 </div>
@@ -71,9 +71,9 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">Email</label>
+                                    <label class="col-sm-3 control-label">Email</label>
 
-                                    <div class="col-sm-10">
+                                    <div class="col-sm-8">
                                     <div class="input-group m-b" id="divEmail">
                                         <span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
                                         <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off"></asp:TextBox>
@@ -83,9 +83,9 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">Teléfono Móvil</label>
+                                    <label class="col-sm-3 control-label">Teléfono Móvil</label>
 
-                                    <div class="col-sm-10">
+                                    <div class="col-sm-8">
                                     <div class="input-group m-b" id="divTelefonoMovil">
                                         <span class="input-group-addon"><i class="fa fa-mobile-phone"></i></span>
                                         <asp:TextBox ID="txtTelefonoMovil" runat="server" CssClass="form-control" MaxLength="11" autocomplete="off"></asp:TextBox>
@@ -98,18 +98,18 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">Nombre de Usuario</label>
+                                    <label class="col-sm-3 control-label">Nombre de Usuario</label>
 
-                                    <div class="col-sm-10">
+                                    <div class="col-sm-8">
                                         <asp:TextBox ID="txtNombreUsuario" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off"></asp:TextBox>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label"></label>
+                                    <label class="col-sm-3 control-label"></label>
 
-                                    <div class="col-sm-10">
+                                    <div class="col-sm-8">
                                         
                                     </div>
                                 </div>
@@ -118,18 +118,18 @@
                         <div class="row" id="pwd-container1">
                             <div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Contrase&ntilde;a</label>
+                                <label class="col-sm-3 control-label">Contrase&ntilde;a</label>
 
-                                <div class="col-sm-10">
+                                <div class="col-sm-8">
                                     <asp:TextBox ID="txtContrasenia" runat="server" CssClass="form-control example1" MaxLength="30" autocomplete="off" TextMode="Password"></asp:TextBox>
                                 </div>
                             </div>
                             </div>
                             <div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Confirmaci&oacute;n Contrase&ntilde;a</label>
+                                <label class="col-sm-3 control-label">Confirmaci&oacute;n Contrase&ntilde;a</label>
 
-                                <div class="col-sm-10">
+                                <div class="col-sm-8">
                                     <asp:TextBox ID="txtContraseniaConfirmacion" runat="server" CssClass="form-control" MaxLength="30" autocomplete="off" TextMode="Password"></asp:TextBox>
                                 </div>
                             </div>
@@ -146,7 +146,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-5">
+            <div class="col-md-4">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h2>Avatar</h2>

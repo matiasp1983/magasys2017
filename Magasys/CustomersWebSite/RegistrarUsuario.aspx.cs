@@ -50,6 +50,13 @@ namespace PL.CustomersWebSite
                     
                     oCliente = new BLL.ClienteBLL().AltaClienteReturnCliente(oCliente);
                 }
+                else
+                {                   
+                    oCliente.NOMBRE = txtNombre.Text;
+                    oCliente.APELLIDO = txtApellido.Text;
+                    oCliente.TELEFONO_MOVIL = txtTelefonoMovil.Text;
+                    oCliente.EMAIL = txtEmail.Text;
+                }
                
                 var oUsuario = new BLL.DAL.Usuario
                 {
