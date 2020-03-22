@@ -165,14 +165,9 @@
                                         </td>
                                         <td>
                                             <div style="width: 100%">
-                                                <asp:FileUpload ID="fuploadImagen" accept=".jpg" runat="server" CssClass="form-control" />
+                                                <asp:FileUpload ID="fuploadImagen" runat="server" CssClass="form-control" />
                                             </div>
-                                        </td>
-                                        <td>
-                                            <div style="width: 100%">
-                                                <asp:TextBox ID="txtTitulo" runat="server" CssClass="form-control" autocomplete="off" placeholder="Título de la Imagen"></asp:TextBox>
-                                            </div>
-                                        </td>
+                                        </td>                                       
                                     </tr>
                                 </ItemTemplate>
                             </asp:ListView>
@@ -252,14 +247,9 @@
                                         </td>
                                         <td>
                                             <div style="width: 100%">
-                                                <asp:FileUpload ID="fuploadImagen" accept=".jpg" runat="server" CssClass="form-control" />
+                                                <asp:FileUpload ID="fuploadImagen" runat="server" CssClass="form-control" />
                                             </div>
-                                        </td>
-                                        <td>
-                                            <div style="width: 100%">
-                                                <asp:TextBox ID="txtTitulo" runat="server" CssClass="form-control" autocomplete="off" placeholder="Título de la Imagen"></asp:TextBox>
-                                            </div>
-                                        </td>
+                                        </td>                                        
                                     </tr>
                                 </ItemTemplate>
                             </asp:ListView>
@@ -330,14 +320,9 @@
                                         </td>
                                         <td>
                                             <div style="width: 100%">
-                                                <asp:FileUpload ID="fuploadImagen" accept=".jpg" runat="server" CssClass="form-control" />
+                                                <asp:FileUpload ID="fuploadImagen" runat="server" CssClass="form-control" />
                                             </div>
-                                        </td>
-                                        <td>
-                                            <div style="width: 100%">
-                                                <asp:TextBox ID="txtTitulo" runat="server" CssClass="form-control" autocomplete="off" placeholder="Título de la Imagen"></asp:TextBox>
-                                            </div>
-                                        </td>
+                                        </td>                                        
                                     </tr>
                                 </ItemTemplate>
                             </asp:ListView>
@@ -412,14 +397,9 @@
                                         </td>
                                         <td>
                                             <div style="width: 100%">
-                                                <asp:FileUpload ID="fuploadImagen" accept=".jpg" runat="server" CssClass="form-control" />
+                                                <asp:FileUpload ID="fuploadImagen" runat="server" CssClass="form-control" />
                                             </div>
-                                        </td>
-                                        <td>
-                                            <div style="width: 100%">
-                                                <asp:TextBox ID="txtTitulo" runat="server" CssClass="form-control" autocomplete="off" placeholder="Título de la Imagen"></asp:TextBox>
-                                            </div>
-                                        </td>
+                                        </td>                                        
                                     </tr>
                                 </ItemTemplate>
                             </asp:ListView>
@@ -499,14 +479,9 @@
                                         </td>
                                         <td>
                                             <div style="width: 100%">
-                                                <asp:FileUpload ID="fuploadImagen" accept=".jpg" runat="server" CssClass="form-control" />
+                                                <asp:FileUpload ID="fuploadImagen" runat="server" CssClass="form-control" />
                                             </div>
-                                        </td>
-                                        <td>
-                                            <div style="width: 100%">
-                                                <asp:TextBox ID="txtTitulo" runat="server" CssClass="form-control" autocomplete="off" placeholder="Título de la Imagen"></asp:TextBox>
-                                            </div>
-                                        </td>
+                                        </td>                                        
                                     </tr>
                                 </ItemTemplate>
                             </asp:ListView>
@@ -586,14 +561,9 @@
                                         </td>
                                         <td>
                                             <div style="width: 100%">
-                                                <asp:FileUpload ID="fuploadImagen" accept=".jpg" runat="server" CssClass="form-control" />
+                                                <asp:FileUpload ID="fuploadImagen" runat="server" CssClass="form-control" />
                                             </div>
-                                        </td>
-                                        <td>
-                                            <div style="width: 100%">
-                                                <asp:TextBox ID="txtTitulo" runat="server" CssClass="form-control" autocomplete="off" placeholder="Título de la Imagen"></asp:TextBox>
-                                            </div>
-                                        </td>
+                                        </td>                                        
                                     </tr>
                                 </ItemTemplate>
                             </asp:ListView>

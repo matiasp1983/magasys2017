@@ -408,8 +408,8 @@ namespace PL.AdminDashboard
 
                     // Obtener tamaño de la IMAGEN seleccionada
                     int loTamanioImagen = ((FileUpload)loItem.Controls[17]).PostedFile.ContentLength;
-                    // Para grabar la IMAGEN se debe ingresar el Título
-                    if (loTamanioImagen > 0 && !String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[19]).Text)))
+                    
+                    if (loTamanioImagen > 0)
                     {
                         // Obtener tamaño de la IMAGEN en byte
                         byte[] loImagenOriginal = new byte[loTamanioImagen];
@@ -580,8 +580,8 @@ namespace PL.AdminDashboard
 
                     // Obtener tamaño de la IMAGEN seleccionada
                     int loTamanioImagen = ((FileUpload)loItem.Controls[17]).PostedFile.ContentLength;
-                    // Para grabar la IMAGEN se debe ingresar el Título
-                    if (loTamanioImagen > 0 && !String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[19]).Text)))
+                    
+                    if (loTamanioImagen > 0)
                     {
                         // Obtener tamaño de la IMAGEN en byte
                         byte[] loImagenOriginal = new byte[loTamanioImagen];
@@ -756,8 +756,8 @@ namespace PL.AdminDashboard
 
                     // Obtener tamaño de la IMAGEN seleccionada
                     int loTamanioImagen = ((FileUpload)loItem.Controls[15]).PostedFile.ContentLength;
-                    // Para grabar la IMAGEN se debe ingresar el Título
-                    if (loTamanioImagen > 0 && !String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[17]).Text)))
+                    
+                    if (loTamanioImagen > 0)
                     {
                         // Obtener tamaño de la IMAGEN en byte
                         byte[] loImagenOriginal = new byte[loTamanioImagen];
@@ -928,8 +928,8 @@ namespace PL.AdminDashboard
 
                     // Obtener tamaño de la IMAGEN seleccionada
                     int loTamanioImagen = ((FileUpload)loItem.Controls[17]).PostedFile.ContentLength;
-                    // Para grabar la IMAGEN se debe ingresar el Título
-                    if (loTamanioImagen > 0 && !String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[19]).Text)))
+                    
+                    if (loTamanioImagen > 0)
                     {
                         // Obtener tamaño de la IMAGEN en byte
                         byte[] loImagenOriginal = new byte[loTamanioImagen];
@@ -1098,8 +1098,8 @@ namespace PL.AdminDashboard
 
                     // Obtener tamaño de la IMAGEN seleccionada
                     int loTamanioImagen = ((FileUpload)loItem.Controls[17]).PostedFile.ContentLength;
-                    // Para grabar la IMAGEN se debe ingresar el Título
-                    if (loTamanioImagen > 0 && !String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[19]).Text)))
+                    
+                    if (loTamanioImagen > 0)
                     {
                         // Obtener tamaño de la IMAGEN en byte
                         byte[] loImagenOriginal = new byte[loTamanioImagen];
@@ -1273,8 +1273,8 @@ namespace PL.AdminDashboard
 
                     // Obtener tamaño de la IMAGEN seleccionada
                     int loTamanioImagen = ((FileUpload)loItem.Controls[17]).PostedFile.ContentLength;
-                    // Para grabar la IMAGEN se debe ingresar el Título
-                    if (loTamanioImagen > 0 && !String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[19]).Text)))
+                    
+                    if (loTamanioImagen > 0)
                     {
                         // Obtener tamaño de la IMAGEN en byte
                         byte[] loImagenOriginal = new byte[loTamanioImagen];
