@@ -55,19 +55,19 @@
                             </li>
 
                             <li class="dropdown">
-                                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                                    <img src="img/a4.jpg" class="img-circle img-sm" data-toggle="modal"/>
+                                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" style="padding-top: 10px; padding-bottom: 0px;">
+                                    <img src="img/a4.jpg" class="img-circle img-sm" data-toggle="modal" width="33" height="33"/>
                                 </a>
                                 <ul class="dropdown-menu dropdown-messages">
                                     <li>
                                         <div class="dropdown-messages-box">
                                             <div>
-                                                <img class="img-circle img-md" src="img/a4.jpg">
+                                                <img class="img-thumbnail" src="img/a4.jpg" style="width:110px">
                                             </div>
-            <%--                                <a href="profile.html" class="pull-left">
+                                            <%--<a href="profile.html" class="pull-left">
                                                 <img alt="image" class="img-circle" src="img/a7.jpg">
                                             </a>--%>
-            <%--                                <div class="media-body">
+                                            <%--<div class="media-body">
                                                 <small class="pull-right">46h ago</small>
                                                 <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
                                                 <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
@@ -96,7 +96,7 @@
             </div>            
             <asp:ContentPlaceHolder ID="contentMaster" runat="server" />
             <div class="footer">
-                <div>
+                <div style="text-align:center">
                     <strong>Copyright</strong> Magasys &copy; 2020           
                 </div>
             </div>
