@@ -22,7 +22,7 @@
                                     </div>
                                 </LayoutTemplate>
                                 <ItemTemplate>
-                                    <div id="divTabla_<%#Eval("COD_PRODUCTO").ToString()%>" class="table-responsive">
+                                    <div id="divTabla_<%#Eval("PRODUCTO_EDICION").ToString()%>" class="table-responsive">
                                         <table class="table shoping-cart-table">
                                             <tbody>
                                                 <tr>
@@ -46,8 +46,10 @@
                                                             <asp:Label ID="lblFechaEdicion" runat="server" Text='<%#(Eval("FECHA_EDICION") != null) ? Eval("FECHA_EDICION").ToString():null%>'></asp:Label>
                                                         </p>
                                                         <dl class="small m-b-none">
-                                                            <dt>Precio unitario</dt>
-                                                            <asp:Label ID="lblPrecio" runat="server" Text='<%#Eval("PRECIO").ToString()%>'></asp:Label>
+                                                            <div id="divPrecio" runat="server">
+                                                                <dt>Precio unitario</dt>
+                                                                <asp:Label ID="lblPrecio" runat="server" Text='<%#Eval("PRECIO").ToString()%>'></asp:Label>
+                                                            </div>
                                                         </dl>
                                                         <dl class="small m-b-none">
                                                             <dt>Forma de entrega</dt>
@@ -56,14 +58,11 @@
                                                                 Retira en Local&nbsp;
                                                                     <input runat="server" type="radio" id="rdbEnvioDomicilio">
                                                                 Envío a Domicilio
-                                                            </div>
-                                                            <div id="divFormaDeEntrega_<%#Eval("COD_PRODUCTO").ToString()%>">
-                                                                <asp:HiddenField ID="hdFormaDeEntrega" runat="server" />
-                                                            </div>
+                                                            </div>                                                            
                                                         </dl>
                                                         <dl class="small m-b-none">
                                                             <div id="divFechas" runat="server" visible="false">
-                                                                <div class="col-sm-2" style="margin-right: 20px">
+                                                                <div class="col-sm-5" style="margin-right: 20px">
                                                                     <div class="form-group" id="dpFechaInicio">
                                                                         <label class="control-label">Fecha Inicio de Reserva</label>
                                                                         <div class="input-group date">
@@ -72,7 +71,7 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-2" style="margin-right: 20px">
+                                                                <div class="col-sm-5" style="margin-right: 20px">
                                                                     <div class="form-group" id="dpFechaFin">
                                                                         <label class="control-label">Fecha Fin de Reserva</label>
                                                                         <div class="input-group date">
@@ -85,21 +84,23 @@
                                                         </dl>
                                                     </td>
                                                     <td style="width: 100px">
-                                                        <div id="divCantidad">
-                                                            <asp:TextBox ID="txtCantidad" runat="server" Text='<%#Eval("CANTIDAD").ToString()%>' autocomplete="off" title='<%#string.Format("{0};{1}", Eval("PRECIO").ToString(), Eval("COD_PRODUCTO").ToString())%>' Enabled="True" MaxLength="0" ReadOnly="True" BackColor="White"></asp:TextBox>
+                                                        <div id="divCantidad" runat="server">
+                                                            <asp:TextBox ID="txtCantidad" runat="server" Text='<%#Eval("CANTIDAD").ToString()%>' autocomplete="off" title='<%#string.Format("{0};{1}", Eval("PRECIO").ToString(), Eval("PRODUCTO_EDICION").ToString())%>' Enabled="True" MaxLength="0" ReadOnly="True" BackColor="White"></asp:TextBox>
                                                         </div>
                                                     </td>
                                                     <td style="width: 150px">
-                                                        <h4>
-                                                            <dt>Subtotal</dt>
-                                                            <div id="divSubTotal_<%#Eval("COD_PRODUCTO").ToString()%>">
-                                                                <asp:Label ID="lblSubTotal" runat="server" Text='<%#Eval("SUBTOTAL").ToString()%>'></asp:Label>
-                                                            </div>
-                                                        </h4>
+                                                        <div id="divSubtotal" runat="server">
+                                                            <h4>
+                                                                <dt>Subtotal</dt>
+                                                                <div id="divSubTotal_<%#Eval("PRODUCTO_EDICION").ToString()%>">
+                                                                    <asp:Label ID="lblSubTotal" runat="server" Text='<%#Eval("SUBTOTAL").ToString()%>'></asp:Label>
+                                                                </div>
+                                                            </h4>
+                                                        </div>
                                                     </td>
                                                     <td style="width: 150px">
                                                         <a class="btn btn-outline btn-danger" title="Eliminar" onclick="EliminarProducto(this);">Eliminar&nbsp;<i class="fa fa-trash"></i>
-                                                            <asp:HiddenField ID="hdCodProducto" runat="server" Value='<%#Eval("COD_PRODUCTO").ToString()%>' />
+                                                            <asp:HiddenField ID="hdCodProducto" runat="server" Value='<%#Eval("PRODUCTO_EDICION").ToString()%>' />
                                                         </a>
                                                     </td>
                                                 </tr>
@@ -194,9 +195,11 @@
 
         $('.i-checks').iCheck({
             radioClass: 'iradio_square-green'
-        });
+        });        
 
-        $('#divCantidad > input').TouchSpin({
+        console.log($('#<%=FormRegistrarReserva.ClientID%>'));
+
+        $('#<%=lsvProductos.ClientID%>' + '_divCantidad_ > input').TouchSpin({
             verticalbuttons: true,
             min: 1,
             max: 99

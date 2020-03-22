@@ -25,6 +25,7 @@ namespace PL.CustomersWebSite
         {
             string loCodProducto;
             string loCodProductoEdicion;
+            string loProductoEdicion;
 
             try
             {
@@ -46,7 +47,12 @@ namespace PL.CustomersWebSite
                 if (((ReservaCustomerWebSite)e.Item.DataItem).COD_PRODUCTO_EDICION != null)
                     loCodProductoEdicion = ((ReservaCustomerWebSite)e.Item.DataItem).COD_PRODUCTO_EDICION.ToString();
                 else
-                    loCodProductoEdicion = string.Empty;                
+                    loCodProductoEdicion = string.Empty;
+
+                if (((ReservaCustomerWebSite)e.Item.DataItem).PRODUCTO_EDICION != null)
+                    loProductoEdicion = ((ReservaCustomerWebSite)e.Item.DataItem).PRODUCTO_EDICION.ToString();
+                else
+                    loProductoEdicion = string.Empty;
 
                 var loCodTipoProducto = ((ReservaCustomerWebSite)e.Item.DataItem).COD_TIPO_PRODUCTO;
 
@@ -54,6 +60,15 @@ namespace PL.CustomersWebSite
                 {
                     HtmlGenericControl divFechas = ((HtmlGenericControl)e.Item.FindControl("divFechas"));
                     divFechas.Visible = true;
+                }
+                if (loCodTipoProducto == 3 && loProductoEdicion == loCodProducto) // cuando se trate de la reserva de todas las COLECCIONES
+                {
+                    HtmlGenericControl divCantidad = ((HtmlGenericControl)e.Item.FindControl("divCantidad"));
+                    divCantidad.Visible = false;
+                    HtmlGenericControl divPrecio = ((HtmlGenericControl)e.Item.FindControl("divPrecio"));
+                    divPrecio.Visible = false;
+                    HtmlGenericControl divSubtotal = ((HtmlGenericControl)e.Item.FindControl("divSubtotal"));
+                    divSubtotal.Visible = false;
                 }
             }
             catch (Exception ex)
@@ -93,6 +108,7 @@ namespace PL.CustomersWebSite
                         oReservaCustomerWebSite = new ReservaCustomerWebSite
                         {
                             COD_PRODUCTO = oProductoCustomersWebSite.COD_PRODUCTO.ToString(),
+                            PRODUCTO_EDICION = oProductoCustomersWebSite.COD_PRODUCTO.ToString(),
                             COD_TIPO_PRODUCTO = oProductoCustomersWebSite.COD_TIPO_PRODUCTO,
                             NOMBRE = oProductoCustomersWebSite.NOMBRE_PRODUCTO,
                             DESCRIPCION = oProductoCustomersWebSite.DESCRIPCION,
@@ -128,6 +144,7 @@ namespace PL.CustomersWebSite
                         oReservaCustomerWebSite = new ReservaCustomerWebSite
                         {
                             COD_PRODUCTO_EDICION = oProdEdicionCustomersWebSite.COD_PRODUCTO_EDICION.ToString(),
+                            PRODUCTO_EDICION = oProdEdicionCustomersWebSite.COD_PRODUCTO + "_" + oProdEdicionCustomersWebSite.COD_PRODUCTO_EDICION,
                             COD_TIPO_PRODUCTO = oProdEdicionCustomersWebSite.COD_TIPO_PRODUCTO,
                             NOMBRE = oProdEdicionCustomersWebSite.EDICION,
                             DESCRIPCION = oProdEdicionCustomersWebSite.DESCRIPCION,
@@ -141,6 +158,43 @@ namespace PL.CustomersWebSite
                         lstReservaCustomerWebSite.Add(oReservaCustomerWebSite);
                     }
                 }
+            }
+
+            if (Session[Enums.Session.ProductoReservaEdicionSeleccionados.ToString()] != null)
+            {
+                var loProductos = Session[Enums.Session.ProductoReservaEdicionSeleccionados.ToString()];
+                var lstProductos = loProductos.ToString().Split(';');
+
+                foreach (var item in lstProductos)
+                {
+                    var loProducto = new ProductoBLL().ObtenerProductoPorCodigo(Convert.ToInt32(item));
+
+                    oReservaCustomerWebSite = new ReservaCustomerWebSite
+                    {
+                        PRODUCTO_EDICION = loProducto.ID_PRODUCTO.ToString(),
+                        COD_PRODUCTO = loProducto.ID_PRODUCTO.ToString(),
+                        COD_TIPO_PRODUCTO = loProducto.COD_TIPO_PRODUCTO,
+                        NOMBRE = loProducto.NOMBRE,
+                        DESCRIPCION = loProducto.DESCRIPCION,
+                        PRECIO = string.Empty,
+                        SUBTOTAL = string.Empty
+                    };
+
+                    oReservaCustomerWebSite.IMAGEN = new System.Web.UI.WebControls.Image();
+
+                    if (loProducto.Imagen != null)
+                    {
+                        // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
+                        string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(loProducto.Imagen.IMAGEN1);
+                        oReservaCustomerWebSite.IMAGEN.ImageUrl = loImagenDataURL64;
+                    }
+                    else
+                        oReservaCustomerWebSite.IMAGEN.ImageUrl = "~/AdminDashboard/img/preview_icons.png";
+
+                    lstReservaCustomerWebSite.Add(oReservaCustomerWebSite);
+                }
+
+
             }
 
             if (lstReservaCustomerWebSite.Count > 0)
@@ -208,7 +262,7 @@ namespace PL.CustomersWebSite
                     if (!string.IsNullOrEmpty(loSplitReseva[3].ToString()))
                         loItemReserva.FechaFinReserva = Convert.ToDateTime(loSplitReseva[3].ToString());
                     else
-                        loItemReserva.FechaFinReserva = null;                    
+                        loItemReserva.FechaFinReserva = null;
 
                     /*Aquí va el código que guarda la reserva en la base de datos.*/
                     /*Por cada vuelva inserta un registro de la base.*/
