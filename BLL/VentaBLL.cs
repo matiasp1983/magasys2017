@@ -130,7 +130,10 @@ namespace BLL
             {
                 using (var loRepVenta = new Repository<Venta>())
                 {
-                    lstVenta = loRepVenta.Search(p => p.COD_ESTADO == oVentaFiltro.COD_ESTADO).OrderByDescending(p => p.ID_VENTA).ToList();
+                    if (oVentaFiltro.COD_FORMA_PAGO == 0)
+                        lstVenta = loRepVenta.Search(p => p.COD_ESTADO == oVentaFiltro.COD_ESTADO).OrderByDescending(p => p.ID_VENTA).ToList();
+                    else
+                        lstVenta = loRepVenta.Search(p => p.COD_ESTADO == oVentaFiltro.COD_ESTADO && p.COD_FORMA_PAGO == oVentaFiltro.COD_FORMA_PAGO).OrderByDescending(p => p.ID_VENTA).ToList();
 
                     if (lstVenta.Count > 0)
                     {

@@ -109,6 +109,7 @@ namespace PL.AdminDashboard
                 oVentaFiltro = new VentaFiltro();
 
                 oVentaFiltro.COD_ESTADO = 4; //Estado de la venta: "A Cuenta"
+                oVentaFiltro.COD_FORMA_PAGO = 2; //Forma de pago: "Cuenta corriente"
 
                 if (!String.IsNullOrEmpty(txtFechaVentaDesde.Text))
                     oVentaFiltro.FECHAVENTADESDE = Convert.ToDateTime(txtFechaVentaDesde.Text);

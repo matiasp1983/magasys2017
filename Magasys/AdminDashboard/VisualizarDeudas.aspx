@@ -136,7 +136,6 @@
                                                 <th class="text-left">Código</th>
                                                 <th class="text-left">Fecha Venta</th>
                                                 <th data-hide="phone,tablet">Código de Cliente</th>
-                                                <th data-hide="phone,tablet">Forma de Pago</th>
                                                  <th data-hide="phone,tablet">Total</th>
                                                 <th class="text-right" data-sort-ignore="true">Acci&oacute;n</th>
                                             </tr>
@@ -163,10 +162,7 @@
                                         </td>    
                                         <td class="text-left">
                                             <asp:Label ID="lblCodigoCliente" runat="server" Text='<%#(Eval("COD_CLIENTE") != null) ? Eval("COD_CLIENTE").ToString():null%>'></asp:Label>
-                                        </td>     
-                                        <td class="text-left">
-                                            <asp:Label ID="lblFormaPago" runat="server" Text='<%#Eval("FORMA_PAGO").ToString()%>'></asp:Label>
-                                        </td>     
+                                        </td>        
                                         <td class="text-left">
                                             <asp:Label ID="lblTotal" runat="server" Text='<%#Eval("TOTAL").ToString()%>'></asp:Label>
                                         </td>                                          
