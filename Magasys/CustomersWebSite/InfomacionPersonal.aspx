@@ -1,11 +1,11 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CustomersWebSite/MasterPage.Master" AutoEventWireup="true" CodeBehind="InfoPersonal.aspx.cs" Inherits="PL.CustomersWebSite.InfoPersonal" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CustomersWebSite/MasterPage.Master" AutoEventWireup="true" CodeBehind="InfomacionPersonal.aspx.cs" Inherits="PL.CustomersWebSite.InformacionPersonal" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="css/style.googlemap.css" rel="stylesheet" />
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="contentMaster" runat="server">
     <div class="wrapper wrapper-content">
-        <form id="FormInfoPersonal" runat="server">
+        <form id="FormInformacionPersonal" runat="server">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
@@ -209,7 +209,7 @@
                                     <div class="col-xs-12 col-md-4" style="text-align: right">
 
                                         <button type="button" data-toggle="modal" data-target="#ModalMap" class="btn btn-info">
-                                            <span class="glyphicon glyphicon-map-marker"></span><span id="ubicacion">Seleccionar Ubicación</span>
+                                            <span class="glyphicon glyphicon-map-marker"></span>&nbsp;<span id="ubicacion">Seleccionar Ubicación</span>
                                         </button>
                                         <asp:Button ID="btnBorrarDireccion" runat="server" Text="Borrar Dirección" CssClass="btn btn-warning" OnClick="BtnBorrarDireccion_Click" />
                                         <div class="modal fade" id="ModalMap" tabindex="-1" role="dialog">
@@ -356,7 +356,7 @@
     
     <script type="text/javascript">
 
-        var FormInfoPersonal = '#<%=FormInfoPersonal.ClientID%>';
+        var FormInformacionPersonal = '#<%=FormInformacionPersonal.ClientID%>';
         var autocomplete;
 
         if (window.jQuery) {
@@ -371,7 +371,7 @@
 
             jQuery.validator.addMethod("lettersonly", function (value, element) { return this.optional(element) || /^[a-zñÑáéíóúÁÉÍÓÚ\s]+$/i.test(value); }, "Este campo solo permite letras.");
 
-            $(FormInfoPersonal).validate({
+            $(FormInformacionPersonal).validate({
                 rules: {
                     <%=txtNombre.UniqueID%>: {
                         required: true,

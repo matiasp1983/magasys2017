@@ -10,16 +10,16 @@
 namespace PL.CustomersWebSite {
     
     
-    public partial class InfoPersonal {
+    public partial class InformacionPersonal {
         
         /// <summary>
-        /// Control FormInfoPersonal.
+        /// Control FormInformacionPersonal.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm FormInfoPersonal;
+        protected global::System.Web.UI.HtmlControls.HtmlForm FormInformacionPersonal;
         
         /// <summary>
         /// Control txtCliente.

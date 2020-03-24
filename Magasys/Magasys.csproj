@@ -217,7 +217,7 @@
     <Content Include="CustomersWebSite\img\preview_icons.png" />
     <Content Include="CustomersWebSite\Index.aspx" />
     <Content Include="AdminDashboard\Logout.aspx" />
-    <Content Include="CustomersWebSite\InfoPersonal.aspx" />
+    <Content Include="CustomersWebSite\InfomacionPersonal.aspx" />
     <Content Include="CustomersWebSite\js\bootstrap.min.js" />
     <Content Include="CustomersWebSite\js\inspinia.js" />
     <Content Include="CustomersWebSite\js\jquery-3.1.1.min.js" />
@@ -737,12 +737,12 @@
     <Compile Include="CustomersWebSite\Index.aspx.designer.cs">
       <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CustomersWebSite\InfoPersonal.aspx.cs">
-      <DependentUpon>InfoPersonal.aspx</DependentUpon>
+    <Compile Include="CustomersWebSite\InfomacionPersonal.aspx.cs">
+      <DependentUpon>InfomacionPersonal.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CustomersWebSite\InfoPersonal.aspx.designer.cs">
-      <DependentUpon>InfoPersonal.aspx</DependentUpon>
+    <Compile Include="CustomersWebSite\InfomacionPersonal.aspx.designer.cs">
+      <DependentUpon>InfomacionPersonal.aspx</DependentUpon>
     </Compile>
     <Compile Include="CustomersWebSite\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>

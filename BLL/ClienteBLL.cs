@@ -48,6 +48,25 @@ namespace BLL
             return oCliente;
         }
 
+        public Cliente ObtenerClientePorUsuario(int codUsuario)
+        {
+            Cliente oCliente = null;
+
+            try
+            {
+                using (var rep = new Repository<Cliente>())
+                {
+                    oCliente = rep.Find(p => p.COD_USUARIO == codUsuario);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return oCliente;
+        }
+
         public bool ConsultarExistenciaCliente(int tipoDocumento, int nroDocumento)
         {
             bool bEsNuevoCliente = false;

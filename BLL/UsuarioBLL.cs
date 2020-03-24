@@ -228,7 +228,8 @@ namespace BLL
             {
                 using (var rep = new Repository<Usuario>())
                 {
-                    oUsuario.CONTRASENIA = BCrypt.Net.BCrypt.HashPassword(oUsuario.CONTRASENIA);
+                    if (!ConsultarEsIgualContrasenia(oUsuario.CONTRASENIA))                    
+                        oUsuario.CONTRASENIA = BCrypt.Net.BCrypt.HashPassword(oUsuario.CONTRASENIA);
                     bRes = rep.Update(oUsuario);
                 }
             }
@@ -246,9 +247,9 @@ namespace BLL
 
             try
             {
-                using (var res = new Repository<Usuario>())
+                using (var rep = new Repository<Usuario>())
                 {
-                    var oUsuario = res.Find(p => p.NOMBRE_USUARIO == pNombreUsuario && p.COD_ESTADO == 1 && p.FECHA_BAJA == null);
+                    var oUsuario = rep.Find(p => p.NOMBRE_USUARIO == pNombreUsuario && p.COD_ESTADO == 1 && p.FECHA_BAJA == null);
                     bEsNuevoNombreUsuario = oUsuario == null;
                 }
             }
@@ -258,6 +259,26 @@ namespace BLL
             }
 
             return bEsNuevoNombreUsuario;
+        }
+
+        public bool ConsultarEsIgualContrasenia(string pContrasenia)
+        {
+            bool bEsIgual = false;
+
+            try
+            {
+                using (var rep = new Repository<Usuario>())
+                {
+                    var oUsuario = rep.Find(p => p.CONTRASENIA == pContrasenia && p.COD_ESTADO == 1 && p.FECHA_BAJA == null);
+                    bEsIgual = oUsuario != null;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return bEsIgual;
         }
 
         #endregion

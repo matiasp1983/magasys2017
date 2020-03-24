@@ -27,7 +27,7 @@
                         <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
                             <i class="fa fa-reorder"></i>
                         </button>
-                        <a href="#" class="navbar-brand">Magasys</a>
+                        <a href="Index.aspx" class="navbar-brand">Magasys</a>
                     </div>
                     <div class="navbar-collapse collapse" id="navbar">
                         <ul class="nav navbar-nav">
@@ -55,29 +55,26 @@
                             </li>
 
                             <li class="dropdown">
-                                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" style="padding-top: 10px; padding-bottom: 0px;">
-                                    <img src="img/a4.jpg" class="img-circle img-sm" data-toggle="modal" width="33" height="33"/>
+                                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" style="padding-top: 10px; padding-bottom: 0px;">                                    
+                                    <asp:Image ID="imgPerfil1" runat="server" CssClass="img-circle img-sm" data-toggle="modal" style="width:33px; height:33px"/>
                                 </a>
                                 <ul class="dropdown-menu dropdown-messages">
                                     <li>
                                         <div class="dropdown-messages-box">
-                                            <div>
-                                                <img class="img-thumbnail" src="img/a4.jpg" style="width:110px">
+                                            <div style="float:left">
+                                                <a href="InfomacionPersonal.aspx">                                                    
+                                                    <asp:Image ID="imgPerfil2" runat="server" CssClass="img-thumbnail" style="width:110px"/>
+                                                </a>
                                             </div>
-                                            <%--<a href="profile.html" class="pull-left">
-                                                <img alt="image" class="img-circle" src="img/a7.jpg">
-                                            </a>--%>
-                                            <%--<div class="media-body">
-                                                <small class="pull-right">46h ago</small>
-                                                <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
-                                                <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
-                                            </div>--%>
+                                            <div style="font-size: 15px; padding-bottom:38px; padding-top:25px; padding-right:5px">
+                                                Bienvenido <br /><strong><asp:Label ID="lblUsuarioLogout" runat="server"></asp:Label></strong> <br />
+                                            </div>                                           
                                         </div>
                                     </li>
                                     <li class="divider"></li>
                                     <li>
                                         <div class="text-center link-block">
-                                            <a href="InfoPersonal.aspx">
+                                            <a href="InfomacionPersonal.aspx" style="font-size:15px">
                                                 <strong>Mi Perfil</strong>
                                                 <i class="fa fa-angle-right"></i>
                                             </a>

@@ -8,6 +8,25 @@ namespace BLL
     {
         #region Métodos Públicos
 
+        public TipoDocumento ObtenerTipoDocumento(long idTipoDocumento)
+        {
+            TipoDocumento oTipoDocumento = null;
+
+            try
+            {
+                using (var rep = new Repository<TipoDocumento>())
+                {
+                    oTipoDocumento = rep.Find(p => p.ID_TIPO_DOCUMENTO == idTipoDocumento);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return oTipoDocumento;
+        }
+
         public List<TipoDocumento> ObtenerTiposDocumento()
         {
             List<TipoDocumento> lstTipoDocumento = null;

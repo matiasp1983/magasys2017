@@ -172,5 +172,12 @@
         public const string MsjeMsjeRestorePasswordFailure = "La contraseña no se pudo guardar.";
 
         #endregion
+
+        #region Mensajes InformacionPersonal
+
+        public const string MsjeInformacionPersonalSuccessModificacion = "La información personal se modificó correctamente.";
+        public const string MsjeInformacionPersonal = "La información personal no se pudo guardar.";
+
+        #endregion
     }
 }
