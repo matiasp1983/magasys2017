@@ -33,6 +33,7 @@ namespace PL.CustomersWebSite
 
                 var loImagen = ((ReservaCustomerWebSite)e.Item.DataItem).IMAGEN;
                 HtmlImage imgProducto = ((HtmlImage)e.Item.FindControl("imgProducto"));
+                HtmlGenericControl divFechas = ((HtmlGenericControl)e.Item.FindControl("divFechas"));
 
                 if (string.IsNullOrEmpty(loImagen.ImageUrl))
                     imgProducto.Attributes.Add("src", "~/AdminDashboard/img/preview_icons.png");
@@ -56,12 +57,10 @@ namespace PL.CustomersWebSite
 
                 var loCodTipoProducto = ((ReservaCustomerWebSite)e.Item.DataItem).COD_TIPO_PRODUCTO;
 
-                if (loCodTipoProducto == 1 || loCodTipoProducto == 2 || loCodTipoProducto == 5)
-                {
-                    HtmlGenericControl divFechas = ((HtmlGenericControl)e.Item.FindControl("divFechas"));
+                if (loCodTipoProducto == 1 || loCodTipoProducto == 5)
                     divFechas.Visible = true;
-                }
-                if (loCodTipoProducto == 3 && loProductoEdicion == loCodProducto) // cuando se trate de la reserva de todas las COLECCIONES
+
+                if ((loCodTipoProducto == 3 || loCodTipoProducto == 2) && loProductoEdicion == loCodProducto) // cuando se trate de la reserva de todas las COLECCIONES y REVISTAS
                 {
                     HtmlGenericControl divCantidad = ((HtmlGenericControl)e.Item.FindControl("divCantidad"));
                     divCantidad.Visible = false;
@@ -69,6 +68,8 @@ namespace PL.CustomersWebSite
                     divPrecio.Visible = false;
                     HtmlGenericControl divSubtotal = ((HtmlGenericControl)e.Item.FindControl("divSubtotal"));
                     divSubtotal.Visible = false;
+                    if (loCodTipoProducto == 2) // habilitamos las fechas para todas las ediciones de REVISTA
+                        divFechas.Visible = true;
                 }
             }
             catch (Exception ex)
@@ -144,6 +145,7 @@ namespace PL.CustomersWebSite
                         oReservaCustomerWebSite = new ReservaCustomerWebSite
                         {
                             COD_PRODUCTO_EDICION = oProdEdicionCustomersWebSite.COD_PRODUCTO_EDICION.ToString(),
+                            COD_PRODUCTO = oProdEdicionCustomersWebSite.COD_PRODUCTO.ToString(),
                             PRODUCTO_EDICION = oProdEdicionCustomersWebSite.COD_PRODUCTO + "_" + oProdEdicionCustomersWebSite.COD_PRODUCTO_EDICION,
                             COD_TIPO_PRODUCTO = oProdEdicionCustomersWebSite.COD_TIPO_PRODUCTO,
                             NOMBRE = oProdEdicionCustomersWebSite.EDICION,
@@ -180,7 +182,7 @@ namespace PL.CustomersWebSite
                         SUBTOTAL = string.Empty
                     };
 
-                    oReservaCustomerWebSite.IMAGEN = new System.Web.UI.WebControls.Image();
+                    oReservaCustomerWebSite.IMAGEN = new Image();
 
                     if (loProducto.Imagen != null)
                     {
@@ -204,35 +206,35 @@ namespace PL.CustomersWebSite
             }
         }
 
-        private List<ReservaCustomerWebSite> MapListViewToListObject(ListView pListView)
-        {
-            List<ReservaCustomerWebSite> lstReservaCustomerWebSite = new List<ReservaCustomerWebSite>();
+        //private List<ReservaCustomerWebSite> MapListViewToListObject(ListView pListView)
+        //{
+        //    List<ReservaCustomerWebSite> lstReservaCustomerWebSite = new List<ReservaCustomerWebSite>();
 
-            foreach (var loItem in pListView.Items)
-            {
-                ReservaCustomerWebSite oReservaCustomerWebSite = new ReservaCustomerWebSite
-                {
-                    NOMBRE = ((Label)loItem.Controls[3]).Text,
-                    COD_PRODUCTO = ((Label)loItem.Controls[5]).Text,
-                    COD_PRODUCTO_EDICION = ((Label)loItem.Controls[7]).Text,
-                    DESCRIPCION = ((Label)loItem.Controls[9]).Text,
-                    FECHA_EDICION = ((Label)loItem.Controls[11]).Text,
-                    PRECIO = ((Label)loItem.Controls[13]).Text,
-                    RETIRA_LOCAL = ((RadioButton)loItem.Controls[17]).Checked,
-                    ENVIO_DOMICILIO = ((RadioButton)loItem.Controls[20]).Checked,
-                    CANTIDAD = Convert.ToInt32(((TextBox)loItem.Controls[24]).Text),
-                    SUBTOTAL = ((Label)loItem.Controls[26]).Text
-                };
+        //    foreach (var loItem in pListView.Items)
+        //    {
+        //        ReservaCustomerWebSite oReservaCustomerWebSite = new ReservaCustomerWebSite
+        //        {
+        //            NOMBRE = ((Label)loItem.Controls[3]).Text,
+        //            COD_PRODUCTO = ((Label)loItem.Controls[5]).Text,
+        //            COD_PRODUCTO_EDICION = ((Label)loItem.Controls[7]).Text,
+        //            DESCRIPCION = ((Label)loItem.Controls[9]).Text,
+        //            FECHA_EDICION = ((Label)loItem.Controls[11]).Text,
+        //            PRECIO = ((Label)loItem.Controls[13]).Text,
+        //            RETIRA_LOCAL = ((RadioButton)loItem.Controls[17]).Checked,
+        //            ENVIO_DOMICILIO = ((RadioButton)loItem.Controls[20]).Checked,
+        //            CANTIDAD = Convert.ToInt32(((TextBox)loItem.Controls[24]).Text),
+        //            SUBTOTAL = ((Label)loItem.Controls[26]).Text
+        //        };
 
-                oReservaCustomerWebSite.IMAGEN = new Image();
-                if (!String.IsNullOrEmpty(((HtmlImage)loItem.Controls[1]).Src))
-                    oReservaCustomerWebSite.IMAGEN.ImageUrl = ((HtmlImage)loItem.Controls[1]).Src;
+        //        oReservaCustomerWebSite.IMAGEN = new Image();
+        //        if (!String.IsNullOrEmpty(((HtmlImage)loItem.Controls[1]).Src))
+        //            oReservaCustomerWebSite.IMAGEN.ImageUrl = ((HtmlImage)loItem.Controls[1]).Src;
 
-                lstReservaCustomerWebSite.Add(oReservaCustomerWebSite);
-            }
+        //        lstReservaCustomerWebSite.Add(oReservaCustomerWebSite);
+        //    }
 
-            return lstReservaCustomerWebSite;
-        }
+        //    return lstReservaCustomerWebSite;
+        //}
 
         #endregion
 
@@ -241,34 +243,117 @@ namespace PL.CustomersWebSite
         [WebMethod]
         public static bool GuardarReserva(string[] pReservas)
         {
+            bool loResutado = true;
+            int loUnidadesReserva = 0;
+
             try
             {
                 var loListReservas = pReservas.ToList();
 
+                // Validaciones
                 foreach (var item in loListReservas)
                 {
                     var loSplitReseva = item.Split(';');
-                    ItemReserva loItemReserva = new ItemReserva
+
+                    if (loSplitReseva[2].ToString() == "D") // se debe controlar que el campo DIRECCION_MAPS tenga la dirección
                     {
-                        FormaDeEntrega = loSplitReseva[0].ToString(),
-                        Cantidad = Convert.ToInt32(loSplitReseva[1].ToString())
-                    };
+                        //"La forma de entrega “Envío a Domicilio” requiere que el cliente complete los datos de la dirección."
+                        loResutado = false;
+                        break;
+                    }
 
-                    if (!string.IsNullOrEmpty(loSplitReseva[2].ToString()))
-                        loItemReserva.FechaInicioReserva = Convert.ToDateTime(loSplitReseva[2].ToString());
-                    else
-                        loItemReserva.FechaInicioReserva = null;
-
-                    if (!string.IsNullOrEmpty(loSplitReseva[3].ToString()))
-                        loItemReserva.FechaFinReserva = Convert.ToDateTime(loSplitReseva[3].ToString());
-                    else
-                        loItemReserva.FechaFinReserva = null;
-
-                    /*Aquí va el código que guarda la reserva en la base de datos.*/
-                    /*Por cada vuelva inserta un registro de la base.*/
+                    if (Convert.ToInt32(loSplitReseva[6].ToString()) == 1 || (Convert.ToInt32(loSplitReseva[6].ToString()) == 2 && String.IsNullOrEmpty(loSplitReseva[1].ToString())) || Convert.ToInt32(loSplitReseva[6].ToString()) == 5) // Diario, todas lasediciones de Revista o Suplemento 
+                    {
+                        // Entonces el TIPO DE RESERVA es PERIODICA
+                        if (!string.IsNullOrEmpty(loSplitReseva[5].ToString()) && Convert.ToDateTime(loSplitReseva[5].ToString()) < Convert.ToDateTime(loSplitReseva[4].ToString())) // valida si la fecha fin es menor que la fecha de inicio
+                        {
+                            //"La Fecha de fin debe ser mayor que la Fecha de inicio."
+                            loResutado = false;
+                            break;
+                        }
+                    }
                 }
 
-                return true;
+                if (!loResutado)
+                    return false;
+
+                // Procesamiento
+                loResutado = false;
+
+                foreach (var item in loListReservas)
+                {
+                    var loSplitReseva = item.Split(';');
+
+                    BLL.DAL.Reserva loReserva = new BLL.DAL.Reserva()
+                    {
+                        FECHA = DateTime.Now,
+                        COD_ESTADO = 16, //Registrada
+                        COD_CLIENTE = 1,
+                        COD_PRODUCTO = Convert.ToInt32(loSplitReseva[0].ToString()),
+                    };
+
+                    if (!string.IsNullOrEmpty(loSplitReseva[4].ToString()))
+                        loReserva.FECHA_INICIO = Convert.ToDateTime(loSplitReseva[4].ToString());
+                    else
+                        loReserva.FECHA_INICIO = null;
+
+                    if (!string.IsNullOrEmpty(loSplitReseva[5].ToString()))
+                        loReserva.FECHA_FIN = Convert.ToDateTime(loSplitReseva[5].ToString());
+                    else
+                        loReserva.FECHA_FIN = null;
+
+                    switch (Convert.ToInt32(loSplitReseva[6].ToString())) // Tipo de Producto
+                    {
+                        case 1: //Diario
+                            loReserva.COD_TIPO_RESERVA = 2; //Periódica
+                            break;
+                        case 2: //Revista
+                            if (loReserva.FECHA_INICIO == null && !String.IsNullOrEmpty(loSplitReseva[1].ToString()))
+                                loReserva.COD_TIPO_RESERVA = 1; //Única
+                            else
+                                loReserva.COD_TIPO_RESERVA = 2; //Periódica
+                            break;
+                        case 3: //Colección
+                            loReserva.COD_TIPO_RESERVA = 1; //Única
+                            break;
+                        case 4: //Libro
+                            loReserva.COD_TIPO_RESERVA = 1; //Única
+                            break;
+                        case 5: //Suplemento
+                            loReserva.COD_TIPO_RESERVA = 2; //Periódica
+                            break;
+                        case 6: //Película
+                            loReserva.COD_TIPO_RESERVA = 1; //Única
+                            break;
+                    }
+
+                    if (loSplitReseva[2].ToString() == "D")
+                        loReserva.ENVIO_DOMICILIO = "X"; // Se indica que la forma de entrega es “Envío a Domicilio”
+
+                    if (!String.IsNullOrEmpty(loSplitReseva[1].ToString())) // tiene código Producto Edición?
+                    {
+                        BLL.DAL.ReservaEdicion loReservaEdicion = new BLL.DAL.ReservaEdicion()
+                        {
+                            FECHA = DateTime.Now,
+                            COD_PROD_EDICION = Convert.ToInt32(loSplitReseva[1].ToString()),
+                            COD_ESTADO = 10 //Registrada
+                        };
+
+                        loReserva.ReservaEdicion.Add(loReservaEdicion);
+                    }
+
+                    loUnidadesReserva = Convert.ToInt32(loSplitReseva[3].ToString()); // Cantidad de unidades a reservar
+
+                    for (int i = 0; i < loUnidadesReserva; i++)
+                    {
+                        loResutado = new ReservaBLL().AltaReserva(loReserva);
+                        if (!loResutado)
+                            break;
+                    }
+
+                    if (!loResutado)
+                        break;
+                }
             }
             catch (Exception ex)
             {
@@ -276,21 +361,9 @@ namespace PL.CustomersWebSite
                 loLogger.Error(ex);
             }
 
-            return false;
+            return loResutado;
         }
 
         #endregion
     }
-
-    #region Clases
-
-    public class ItemReserva
-    {
-        public String FormaDeEntrega { get; set; }
-        public int Cantidad { get; set; }
-        public DateTime? FechaInicioReserva { get; set; }
-        public DateTime? FechaFinReserva { get; set; }
-    }
-
-    #endregion
 }

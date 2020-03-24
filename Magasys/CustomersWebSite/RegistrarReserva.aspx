@@ -35,12 +35,13 @@
                                                         <h3>
                                                             <a href="#" class="text-navy">
                                                                 <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE").ToString()%>'></asp:Label>
-                                                                <asp:Label ID="lblCodigoProducto" runat="server" Text='<%#(Eval("COD_PRODUCTO") != null) ? Eval("COD_PRODUCTO").ToString():null%>' Visible="False"></asp:Label>
-                                                                <asp:Label ID="lblCodigoProductoEdicion" runat="server" Text='<%#(Eval("COD_PRODUCTO_EDICION") != null) ? Eval("COD_PRODUCTO_EDICION").ToString():null%>' Visible="False"></asp:Label>
+                                                                <asp:Label ID="lblCodigoProducto" runat="server" Text='<%#(Eval("COD_PRODUCTO") != null) ? Eval("COD_PRODUCTO").ToString():null%>' style="display:none"></asp:Label>
+                                                                <asp:Label ID="lblCodigoProductoEdicion" runat="server" Text='<%#(Eval("COD_PRODUCTO_EDICION") != null) ? Eval("COD_PRODUCTO_EDICION").ToString():null%>' style="display:none"></asp:Label>
+                                                                <asp:Label ID="lblCodigoTipoProducto" runat="server" Text='<%#Eval("COD_TIPO_PRODUCTO").ToString()%>' style="display:none"></asp:Label>
                                                             </a>
                                                         </h3>
                                                         <p class="small">
-                                                            <asp:Label ID="lblDescripcion" runat="server" Text='<%#Eval("DESCRIPCION").ToString()%>'></asp:Label>
+                                                            <asp:Label ID="lblDescripcion" runat="server" Text='<%#(Eval("DESCRIPCION") != null) ? Eval("DESCRIPCION").ToString():null%>'></asp:Label>
                                                         </p>
                                                         <p class="small">
                                                             <asp:Label ID="lblFechaEdicion" runat="server" Text='<%#(Eval("FECHA_EDICION") != null) ? Eval("FECHA_EDICION").ToString():null%>'></asp:Label>
@@ -111,9 +112,10 @@
                             </asp:ListView>
                         </div>
                         <div class="ibox-content">
-                            <a class="btn btn-primary pull-right" onclick="ConfirmarReserva();">Confirmar Reservar&nbsp;<i class="fa fa fa-shopping-cart"></i>
+                            <a class="btn btn-primary pull-right" onclick="ConfirmarReserva();">Confirmar Reserva&nbsp;<i class="fa fa fa-shopping-cart"></i>
                             </a>
-                            <button class="btn btn-white"><i class="fa fa-arrow-left"></i>Continue shopping</button>
+                            <a class="btn btn-white" href="Reserva.aspx"><i class="fa fa-arrow-left"></i> Seguir reservando
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -227,7 +229,30 @@
                 if (this.cells[1].children[4].children[1].children[0].className == "iradio_square-green checked") {
                     loFormaDeEntrega = "L"
                 }
-                var loCantidad = this.cells[2].children[0].children[0].children[1].value.trim();
+
+                var loCodProducto = "";
+
+                if (this.cells[1].children[0].children[0].children[1].textContent.trim() != "") {
+                    loCodProducto = this.cells[1].children[0].children[0].children[1].textContent.trim();
+                }
+
+                var loCodProductoEdicion = "";
+
+                if (this.cells[1].children[0].children[0].children[2].textContent.trim() != "") {
+                    loCodProductoEdicion = this.cells[1].children[0].children[0].children[2].textContent.trim();
+                }
+
+                var loCodTipoProducto = "";
+
+                if (this.cells[1].children[0].children[0].children[3].textContent.trim() != "") {
+                    loCodTipoProducto = this.cells[1].children[0].children[0].children[3].textContent.trim();
+                }
+
+                var loCantidad = "";
+
+                if (this.cells[2].childElementCount > 0) {
+                    loCantidad = this.cells[2].children[0].children[0].children[1].value.trim();
+                }
 
                 var loFechaInicio = "";
                 var loFechaFin = "";
@@ -238,7 +263,7 @@
                     loFechaFin = this.cells[1].children[5].children[0].children[1].children[0].children[1].children[1].value.trim();
                 }
 
-                loReservas.push(loFormaDeEntrega + ";" + loCantidad + ";" + loFechaInicio + ";" + loFechaFin);
+                loReservas.push(loCodProducto + ";" + loCodProductoEdicion + ";" + loFormaDeEntrega + ";" + loCantidad + ";" + loFechaInicio + ";" + loFechaFin + ";" + loCodTipoProducto);
             });
 
             $.ajax({

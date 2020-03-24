@@ -154,14 +154,18 @@ namespace PL.CustomersWebSite
 
                     btnEdiciones.Attributes.Add("value", string.Format("{0},{1}", loCodTipoProducto, loCodigoProducto));
 
-                    if (loCodTipoProducto == 3) // Producto Colección: para botón "RESERVAR EDICIONES"
-                    {
-                        HiddenField hdIdProductoReservaEdicion = ((HiddenField)e.Item.FindControl("hdIdProductoReservaEdicion"));
-                        // Se concatena el IdProducto y el Nombre del Producto:
-                        hdIdProductoReservaEdicion.Value = string.Format("{0},{1}", loCodigoProducto, loNombreProducto); ;
-                    }
-                    else
-                        btnReservarEdiciones.Visible = false; // Producto Revista, no se disponibiliza el botón "RESERVAR EDICIONES"
+                    HiddenField hdIdProductoReservaEdicion = ((HiddenField)e.Item.FindControl("hdIdProductoReservaEdicion"));
+                    // Se concatena el IdProducto y el Nombre del Producto:
+                    hdIdProductoReservaEdicion.Value = string.Format("{0},{1}", loCodigoProducto, loNombreProducto);
+
+                    //if (loCodTipoProducto == 3) // Producto Colección: para botón "RESERVAR EDICIONES"
+                    //{
+                    //    HiddenField hdIdProductoReservaEdicion = ((HiddenField)e.Item.FindControl("hdIdProductoReservaEdicion"));
+                    //    // Se concatena el IdProducto y el Nombre del Producto:
+                    //    hdIdProductoReservaEdicion.Value = string.Format("{0},{1}", loCodigoProducto, loNombreProducto);
+                    //}
+                    //else
+                    //    btnReservarEdiciones.Visible = false; // Producto Revista, no se disponibiliza el botón "RESERVAR EDICIONES"
                 }
                 else
                 {
