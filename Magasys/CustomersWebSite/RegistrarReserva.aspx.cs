@@ -80,7 +80,7 @@ namespace PL.CustomersWebSite
                 Logger loLogger = LogManager.GetCurrentClassLogger();
                 loLogger.Error(ex);
             }
-        }        
+        }
 
         #endregion
 
@@ -252,7 +252,7 @@ namespace PL.CustomersWebSite
         [WebMethod]
         public static int ValidarReserva(string[] pReservas)
         {
-            int loResutado = 1;           
+            int loResutado = 1;
 
             try
             {
@@ -399,7 +399,21 @@ namespace PL.CustomersWebSite
                 loLogger.Error(ex);
             }
 
+            LimpiarSessiones();
+
             return loResutado;
+        }
+
+        private static void LimpiarSessiones()
+        {
+            if (System.Web.HttpContext.Current.Session[Enums.Session.ListadoReserva.ToString()] != null)
+                System.Web.HttpContext.Current.Session.Remove(Enums.Session.ListadoReserva.ToString());
+
+            if (System.Web.HttpContext.Current.Session[Enums.Session.ListadoReservaEdicion.ToString()] != null)
+                System.Web.HttpContext.Current.Session.Remove(Enums.Session.ListadoReservaEdicion.ToString());
+
+            if (System.Web.HttpContext.Current.Session[Enums.Session.ProductoReservaEdicionSeleccionados.ToString()] != null)
+                System.Web.HttpContext.Current.Session.Remove(Enums.Session.ProductoReservaEdicionSeleccionados.ToString());
         }
 
         #endregion
