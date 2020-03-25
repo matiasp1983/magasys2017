@@ -29,5 +29,14 @@ namespace PL.CustomersWebSite {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ListView lsvProductos;
+        
+        /// <summary>
+        /// Control hfIdUsuarioLogueado.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfIdUsuarioLogueado;
     }
 }

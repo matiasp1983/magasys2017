@@ -18,7 +18,10 @@ namespace PL.CustomersWebSite
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
+            {
                 ObtenerReservas();
+                CargarIdUsuarioLogueado();
+            }
         }
 
         protected void lsvProductos_ItemDataBound(object sender, ListViewItemEventArgs e)
@@ -77,7 +80,7 @@ namespace PL.CustomersWebSite
                 Logger loLogger = LogManager.GetCurrentClassLogger();
                 loLogger.Error(ex);
             }
-        }
+        }        
 
         #endregion
 
@@ -206,6 +209,12 @@ namespace PL.CustomersWebSite
             }
         }
 
+        private void CargarIdUsuarioLogueado()
+        {
+            if (Session[CustomersWebSiteSessionBLL.DefaultSessionsId.Usuario.ToString()] != null)
+                hfIdUsuarioLogueado.Value = ((BLL.DAL.Usuario)Session[CustomersWebSiteSessionBLL.DefaultSessionsId.Usuario.ToString()]).ID_USUARIO.ToString();
+        }
+
         //private List<ReservaCustomerWebSite> MapListViewToListObject(ListView pListView)
         //{
         //    List<ReservaCustomerWebSite> lstReservaCustomerWebSite = new List<ReservaCustomerWebSite>();
@@ -241,25 +250,34 @@ namespace PL.CustomersWebSite
         #region Métodos Públicos
 
         [WebMethod]
-        public static bool GuardarReserva(string[] pReservas)
+        public static int ValidarReserva(string[] pReservas)
         {
-            bool loResutado = true;
-            int loUnidadesReserva = 0;
+            int loResutado = 1;           
 
             try
             {
                 var loListReservas = pReservas.ToList();
+                BLL.DAL.Cliente oCliente = null;
 
                 // Validaciones
                 foreach (var item in loListReservas)
                 {
                     var loSplitReseva = item.Split(';');
 
-                    if (loSplitReseva[2].ToString() == "D") // se debe controlar que el campo DIRECCION_MAPS tenga la dirección
+                    if (loSplitReseva[0].ToString().Contains("IdUsuario:"))
                     {
-                        //"La forma de entrega “Envío a Domicilio” requiere que el cliente complete los datos de la dirección."
-                        loResutado = false;
-                        break;
+                        oCliente = new BLL.ClienteBLL().ObtenerClientePorUsuario(Convert.ToInt32(loSplitReseva[0].ToString().Replace("IdUsuario:", string.Empty).Trim()));
+                        continue;
+                    }
+
+                    if (oCliente != null)
+                    {
+                        if (loSplitReseva[2].ToString() == "D" && string.IsNullOrEmpty(oCliente.DIRECCION_MAPS)) // se debe controlar que el campo DIRECCION_MAPS tenga la dirección
+                        {
+                            //"La forma de entrega “Envío a Domicilio” requiere que el cliente complete los datos de la dirección."
+                            loResutado = 2;
+                            break;
+                        }
                     }
 
                     if (Convert.ToInt32(loSplitReseva[6].ToString()) == 1 || (Convert.ToInt32(loSplitReseva[6].ToString()) == 2 && String.IsNullOrEmpty(loSplitReseva[1].ToString())) || Convert.ToInt32(loSplitReseva[6].ToString()) == 5) // Diario, todas lasediciones de Revista o Suplemento 
@@ -268,27 +286,47 @@ namespace PL.CustomersWebSite
                         if (!string.IsNullOrEmpty(loSplitReseva[5].ToString()) && Convert.ToDateTime(loSplitReseva[5].ToString()) < Convert.ToDateTime(loSplitReseva[4].ToString())) // valida si la fecha fin es menor que la fecha de inicio
                         {
                             //"La Fecha de fin debe ser mayor que la Fecha de inicio."
-                            loResutado = false;
+                            loResutado = 3;
                             break;
                         }
                     }
                 }
+            }
+            catch (Exception ex)
+            {
+                Logger loLogger = LogManager.GetCurrentClassLogger();
+                loLogger.Error(ex);
+            }
 
-                if (!loResutado)
-                    return false;
+            return loResutado;
+        }
 
-                // Procesamiento
-                loResutado = false;
+        [WebMethod]
+        public static bool GuardarReserva(string[] pReservas)
+        {
+            bool loResutado = true;
+            int loUnidadesReserva = 0;
+
+            try
+            {
+                var loListReservas = pReservas.ToList();
+                BLL.DAL.Cliente oCliente = null;
 
                 foreach (var item in loListReservas)
                 {
                     var loSplitReseva = item.Split(';');
 
+                    if (loSplitReseva[0].ToString().Contains("IdUsuario:"))
+                    {
+                        oCliente = new BLL.ClienteBLL().ObtenerClientePorUsuario(Convert.ToInt32(loSplitReseva[0].ToString().Replace("IdUsuario:", string.Empty).Trim()));
+                        continue;
+                    }
+
                     BLL.DAL.Reserva loReserva = new BLL.DAL.Reserva()
                     {
                         FECHA = DateTime.Now,
                         COD_ESTADO = 16, //Registrada
-                        COD_CLIENTE = 1,
+                        COD_CLIENTE = oCliente.ID_CLIENTE,
                         COD_PRODUCTO = Convert.ToInt32(loSplitReseva[0].ToString()),
                     };
 

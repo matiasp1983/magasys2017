@@ -110,6 +110,7 @@
                                     </div>
                                 </ItemTemplate>
                             </asp:ListView>
+                            <asp:HiddenField ID="hfIdUsuarioLogueado" runat="server" />
                         </div>
                         <div class="ibox-content">
                             <a class="btn btn-primary pull-right" onclick="ConfirmarReserva();">Confirmar Reserva&nbsp;<i class="fa fa fa-shopping-cart"></i>
@@ -224,6 +225,10 @@
 
             var loReservas = [];
 
+            var loIdUsuarioLogueado = $('#<%=hfIdUsuarioLogueado.ClientID%>').val();
+
+            loReservas.push("IdUsuario:" + loIdUsuarioLogueado + ";");
+
             $('#divIboxContent > div > table > tbody > tr').each(function () {
                 var loFormaDeEntrega = "D";
                 if (this.cells[1].children[4].children[1].children[0].className == "iradio_square-green checked") {
@@ -264,8 +269,52 @@
                 }
 
                 loReservas.push(loCodProducto + ";" + loCodProductoEdicion + ";" + loFormaDeEntrega + ";" + loCantidad + ";" + loFechaInicio + ";" + loFechaFin + ";" + loCodTipoProducto);
-            });
+            });           
 
+            ValidarReserva(loReservas);
+        }
+
+        function ValidarReserva(loReservas) {
+            $.ajax({
+                type: "POST",
+                url: "RegistrarReserva.aspx/ValidarReserva",
+                data: JSON.stringify({ 'pReservas': loReservas }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    var msg = JSON.parse(data.d);
+                    if (msg == 1) {
+                        GuardarReserva(loReservas);
+                    }
+                    else if (msg == 2) {
+                        swal({
+                            title: "Confirmación Reserva",
+                            text: "La forma de entrega “Envío a Domicilio” requiere que el cliente complete los datos de la dirección.",
+                            type: "warning",
+                            confirmButtonText: 'Aceptar'
+                        });
+                    }
+                    else if (msg == 3) {
+                        swal({
+                            title: "Confirmación Reserva",
+                            text: "La Fecha de fin debe ser mayor que la Fecha de inicio.",
+                            type: "warning",
+                            confirmButtonText: 'Aceptar'
+                        });
+                    }
+                },
+                failure: function (data) {
+                    swal({
+                        title: "Confirmación Reserva",
+                        text: "La reserva no se pudo guardar.",
+                        type: "warning",
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+            });
+        }
+
+        function GuardarReserva(loReservas) {
             $.ajax({
                 type: "POST",
                 url: "RegistrarReserva.aspx/GuardarReserva",
