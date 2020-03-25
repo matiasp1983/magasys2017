@@ -155,7 +155,7 @@ namespace PL.CustomersWebSite
                 oCliente.COD_USUARIO = oClienteSession.COD_USUARIO;
             }
 
-            if (!string.IsNullOrEmpty(txtNombre.Text))            
+            if (!string.IsNullOrEmpty(txtNombre.Text))
                 oCliente.NOMBRE = txtNombre.Text;
 
             if (!string.IsNullOrEmpty(txtApellido.Text))
@@ -173,10 +173,14 @@ namespace PL.CustomersWebSite
             if (!string.IsNullOrEmpty(txtTelefonoFijo.Text))
                 oCliente.TELEFONO_FIJO = txtTelefonoFijo.Text;
 
-            if (!string.IsNullOrEmpty(hdCalle.Value))
+            if (!string.IsNullOrEmpty(txtCalle.Text))
+                oCliente.CALLE = txtCalle.Text;
+            else if (!string.IsNullOrEmpty(hdCalle.Value))
                 oCliente.CALLE = hdCalle.Value;
 
-            if (!string.IsNullOrEmpty(hdNumero.Value))
+            if (!string.IsNullOrEmpty(txtNumero.Text))
+                oCliente.NUMERO = Convert.ToInt32(txtNumero.Text);
+            else if (!string.IsNullOrEmpty(hdNumero.Value))
                 oCliente.NUMERO = Convert.ToInt32(hdNumero.Value);
 
             if (!string.IsNullOrEmpty(txtPiso.Text))
@@ -190,8 +194,8 @@ namespace PL.CustomersWebSite
             else if (!string.IsNullOrEmpty(hdLocalidad.Value))
                 oCliente.LOCALIDAD = hdLocalidad.Value;
 
-            if (!string.IsNullOrEmpty(txtLocalidad.Text))
-                oCliente.LOCALIDAD = txtLocalidad.Text;
+            if (!string.IsNullOrEmpty(txtProvincia.Text))
+                oCliente.PROVINCIA = txtProvincia.Text;
             else if (!string.IsNullOrEmpty(hdProvincia.Value))
                 oCliente.PROVINCIA = hdProvincia.Value;
 
@@ -200,7 +204,9 @@ namespace PL.CustomersWebSite
             else if (!string.IsNullOrEmpty(hdBarrio.Value))
                 oCliente.BARRIO = hdBarrio.Value;
 
-            if (!string.IsNullOrEmpty(hdCodigoPostal.Value))
+            if (!string.IsNullOrEmpty(txtCodigoPostal.Text))
+                oCliente.CODIGO_POSTAL = txtCodigoPostal.Text;
+            else if (!string.IsNullOrEmpty(hdCodigoPostal.Value))
                 oCliente.CODIGO_POSTAL = hdCodigoPostal.Value;
 
             return oCliente;

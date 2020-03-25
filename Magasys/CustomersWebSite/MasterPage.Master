@@ -37,44 +37,49 @@
                             <li class="dropdown">
                                 <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown">Reserva <span class="caret"></span></a>
                                 <ul role="menu" class="dropdown-menu">
-                                    <li><a href="Reserva.aspx">Nueva reserva</a></li>                                    
+                                    <li><a href="Reserva.aspx">Nueva reserva</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
                                 <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown">Cuenta Corriente <span class="caret"></span></a>
                                 <ul role="menu" class="dropdown-menu">
-                                    <li><a href="">Ver por fecha</a></li>
+                                    <li><a href="#">Ver por fecha</a></li>
                                 </ul>
                             </li>
                         </ul>
                         <ul class="nav navbar-top-links navbar-right">
-                            <li>
-                                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                                    <i class="fa fa-list-alt"></i>  <span class="label label-warning">16</span>
+                            <li class="dropdown">
+                                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" style="padding-top: 6px; padding-right: 17px">
+                                    <i class="fa fa-shopping-cart fa-2x"></i><span class="label label-warning">
+                                        <asp:Label ID="lblCantidadDePedidos" runat="server" Text="0"></asp:Label></span>                                 
                                 </a>
                             </li>
 
                             <li class="dropdown">
-                                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" style="padding-top: 10px; padding-bottom: 0px;">                                    
-                                    <asp:Image ID="imgPerfil1" runat="server" CssClass="img-circle img-sm" data-toggle="modal" style="width:33px; height:33px"/>
+                                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" style="padding-top: 10px; padding-bottom: 0px;">
+                                    <asp:Image ID="imgPerfil1" runat="server" CssClass="img-circle img-sm" data-toggle="modal" Style="width: 33px; height: 33px" ImageUrl="~/CustomersWebSite/img/perfil_default.png"/>
                                 </a>
                                 <ul class="dropdown-menu dropdown-messages">
                                     <li>
                                         <div class="dropdown-messages-box">
-                                            <div style="float:left">
-                                                <a href="InfomacionPersonal.aspx">                                                    
-                                                    <asp:Image ID="imgPerfil2" runat="server" CssClass="img-thumbnail" style="width:110px"/>
+                                            <div style="float: left">
+                                                <a href="InfomacionPersonal.aspx">
+                                                    <asp:Image ID="imgPerfil2" runat="server" CssClass="img-thumbnail" Style="width: 110px" ImageUrl="~/CustomersWebSite/img/perfil_default.png"/>
                                                 </a>
                                             </div>
-                                            <div style="font-size: 15px; padding-bottom:38px; padding-top:25px; padding-right:5px">
-                                                Bienvenido <br /><strong><asp:Label ID="lblUsuarioLogout" runat="server"></asp:Label></strong> <br />
-                                            </div>                                           
+                                            <div style="font-size: 15px; padding-bottom: 38px; padding-top: 25px; padding-right: 5px">
+                                                Bienvenido
+                                                <br />
+                                                <strong>
+                                                    <asp:Label ID="lblUsuarioLogout" runat="server"></asp:Label></strong>
+                                                <br />
+                                            </div>
                                         </div>
                                     </li>
                                     <li class="divider"></li>
                                     <li>
                                         <div class="text-center link-block">
-                                            <a href="InfomacionPersonal.aspx" style="font-size:15px">
+                                            <a href="InfomacionPersonal.aspx" style="font-size: 15px">
                                                 <strong>Mi Perfil</strong>
                                                 <i class="fa fa-angle-right"></i>
                                             </a>
@@ -90,10 +95,10 @@
                         </ul>
                     </div>
                 </nav>
-            </div>            
+            </div>
             <asp:ContentPlaceHolder ID="contentMaster" runat="server" />
             <div class="footer">
-                <div style="text-align:center">
+                <div style="text-align: center">
                     <strong>Copyright</strong> Magasys &copy; 2020           
                 </div>
             </div>
