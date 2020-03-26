@@ -19,6 +19,7 @@ namespace PL.CustomersWebSite
         {
             if (!Page.IsPostBack)
             {
+                CargarCantidadDePedidosDesdeSession();
                 ObtenerReservas();
                 CargarIdUsuarioLogueado();
             }
@@ -204,9 +205,8 @@ namespace PL.CustomersWebSite
             }
 
             if (lstReservaCustomerWebSite.Count > 0)
-            {
-                Master.CantidadDePedidos = lstReservaCustomerWebSite.Count;
-                lblCantidadItems.Text = Master.CantidadDePedidos.ToString();
+            {   
+                lblCantidadItems.Text = lstReservaCustomerWebSite.Count.ToString();
                 lsvProductos.DataSource = lstReservaCustomerWebSite;
                 lsvProductos.DataBind();
             }
@@ -216,6 +216,11 @@ namespace PL.CustomersWebSite
         {
             if (Session[CustomersWebSiteSessionBLL.DefaultSessionsId.Usuario.ToString()] != null)
                 hfIdUsuarioLogueado.Value = ((BLL.DAL.Usuario)Session[CustomersWebSiteSessionBLL.DefaultSessionsId.Usuario.ToString()]).ID_USUARIO.ToString();
+        }
+
+        private void CargarCantidadDePedidosDesdeSession()
+        {
+            Master.CantidadDePedidos = Convert.ToInt32(Session[Enums.Session.CantidadDePedidos.ToString()]);
         }
 
         private static void LimpiarSessiones()
@@ -228,7 +233,10 @@ namespace PL.CustomersWebSite
 
             if (System.Web.HttpContext.Current.Session[Enums.Session.ProductoReservaEdicionSeleccionados.ToString()] != null)
                 System.Web.HttpContext.Current.Session.Remove(Enums.Session.ProductoReservaEdicionSeleccionados.ToString());
-        }
+
+            if (System.Web.HttpContext.Current.Session[Enums.Session.CantidadDePedidos.ToString()] != null)
+                System.Web.HttpContext.Current.Session.Remove(Enums.Session.CantidadDePedidos.ToString());
+        }        
 
         //private List<ReservaCustomerWebSite> MapListViewToListObject(ListView pListView)
         //{

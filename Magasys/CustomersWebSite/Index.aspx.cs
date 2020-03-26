@@ -21,6 +21,7 @@ namespace PL.CustomersWebSite
 
             if (!Page.IsPostBack)
             {
+                CargarCantidadDePedidosDesdeSession();
                 ObtenerTotalAPagar();
                 ObtenerReservasConfirmadasMensuales();
                 CargarTipoReserva();
@@ -245,6 +246,11 @@ namespace PL.CustomersWebSite
         {
             FormIndex.Controls.OfType<DropDownList>().ToList().ForEach(x => x.SelectedIndex = -1);
             FormIndex.Controls.OfType<TextBox>().ToList().ForEach(x => x.Text = String.Empty);
+        }
+
+        private void CargarCantidadDePedidosDesdeSession()
+        {
+            Master.CantidadDePedidos = Convert.ToInt32(Session[Enums.Session.CantidadDePedidos.ToString()]);
         }
 
         #endregion

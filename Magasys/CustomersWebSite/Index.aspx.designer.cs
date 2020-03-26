@@ -155,5 +155,17 @@ namespace PL.CustomersWebSite {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hdIdReservaAnular;
+        
+        /// <summary>
+        /// Propiedad Master.
+        /// </summary>
+        /// <remarks>
+        /// Propiedad generada automáticamente.
+        /// </remarks>
+        public new PL.CustomersWebSite.MasterPage Master {
+            get {
+                return ((PL.CustomersWebSite.MasterPage)(base.Master));
+            }
+        }
     }
 }

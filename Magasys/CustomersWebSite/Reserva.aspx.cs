@@ -19,6 +19,7 @@ namespace PL.CustomersWebSite
         {
             if (!Page.IsPostBack)
             {
+                CargarCantidadDePedidosDesdeSession();
                 CargarTiposProducto();
                 CargarGeneros();
                 lblTotalAbonar.Text = "0,00";
@@ -71,7 +72,8 @@ namespace PL.CustomersWebSite
             if (lstProductoCustomersWebSite.Count > 0)
             {
                 Session.Add(Enums.Session.ListadoReserva.ToString(), lstProductoCustomersWebSite);
-                Master.CantidadDePedidos = lstProductoCustomersWebSite.Count;
+                Session[Enums.Session.CantidadDePedidos.ToString()] = lstProductoCustomersWebSite.Count;
+                Master.CantidadDePedidos = Convert.ToInt32(Session[Enums.Session.CantidadDePedidos.ToString()]);
             }
         }
 
@@ -301,6 +303,11 @@ namespace PL.CustomersWebSite
             FormReserva.Controls.OfType<DropDownList>().ToList().ForEach(x => x.SelectedIndex = -1);
             FormReserva.Controls.OfType<TextBox>().ToList().ForEach(x => x.Text = String.Empty);
             lsvProductos.Visible = false;
+        }
+
+        private void CargarCantidadDePedidosDesdeSession()
+        {
+            Master.CantidadDePedidos = Convert.ToInt32(Session[Enums.Session.CantidadDePedidos.ToString()]);
         }
 
         #endregion

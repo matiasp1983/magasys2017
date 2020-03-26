@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CustomersWebSite/MasterPage.Master" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="PL.CustomersWebSite.Index" %>
+<%@ MasterType VirtualPath="~/CustomersWebSite/MasterPage.Master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server" />
 <asp:Content ID="Content2" ContentPlaceHolderID="contentMaster" runat="server">

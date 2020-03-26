@@ -12,7 +12,10 @@ namespace PL.CustomersWebSite
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
+            {
+                CargarCantidadDePedidosDesdeSession();
                 CargarInformacionPersonalDesdeSession();
+            }
         }
 
         protected void BtnBorrarDireccion_Click(object sender, EventArgs e)
@@ -253,6 +256,11 @@ namespace PL.CustomersWebSite
             }
 
             return oUsuario;
+        }
+
+        private void CargarCantidadDePedidosDesdeSession()
+        {
+            Master.CantidadDePedidos = Convert.ToInt32(Session[Enums.Session.CantidadDePedidos.ToString()]);
         }
 
         #endregion
