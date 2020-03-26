@@ -72,8 +72,8 @@ namespace PL.CustomersWebSite
             if (lstProductoCustomersWebSite.Count > 0)
             {
                 Session.Add(Enums.Session.ListadoReserva.ToString(), lstProductoCustomersWebSite);
-                Session[Enums.Session.CantidadDePedidos.ToString()] = lstProductoCustomersWebSite.Count;
-                Master.CantidadDePedidos = Convert.ToInt32(Session[Enums.Session.CantidadDePedidos.ToString()]);
+                Session[Enums.Session.CantidadDePedidos.ToString()] = lstProductoCustomersWebSite.GroupBy(p=>p.COD_PRODUCTO).Count();
+                CargarCantidadDePedidosDesdeSession();
             }
         }
 
