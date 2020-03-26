@@ -205,7 +205,8 @@ namespace PL.CustomersWebSite
 
             if (lstReservaCustomerWebSite.Count > 0)
             {
-                lblCantidadItems.Text = lstReservaCustomerWebSite.Count.ToString();
+                Master.CantidadDePedidos = lstReservaCustomerWebSite.Count;
+                lblCantidadItems.Text = Master.CantidadDePedidos.ToString();
                 lsvProductos.DataSource = lstReservaCustomerWebSite;
                 lsvProductos.DataBind();
             }

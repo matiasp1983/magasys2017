@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CustomersWebSite/MasterPage.Master" AutoEventWireup="true" CodeBehind="RegistrarReserva.aspx.cs" Inherits="PL.CustomersWebSite.RegistrarReserva" %>
+<%@ MasterType VirtualPath="~/CustomersWebSite/MasterPage.Master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="css/plugins/touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet">

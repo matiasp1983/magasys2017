@@ -43,34 +43,33 @@ namespace PL.CustomersWebSite
             if (Session[Enums.Session.ListadoReserva.ToString()] != null)
                 lstProductoCustomersWebSite = (List<ProductoCustomersWebSite>)Session[Enums.Session.ListadoReserva.ToString()];
 
-            foreach (var loItem in lsvProductos.Items)
+            foreach (var loItem in lsvProductos.Items.Where(p => ((HtmlInputCheckBox)p.Controls[1]).Checked))
             {
-                if (((HtmlInputCheckBox)loItem.Controls[1]).Checked)
+                oProductoCustomersWebSite = new ProductoCustomersWebSite
                 {
-                    oProductoCustomersWebSite = new ProductoCustomersWebSite
-                    {
-                        COD_PRODUCTO = Convert.ToInt32(((HtmlInputCheckBox)loItem.Controls[1]).Attributes["title"].Split(';')[0]),
-                        COD_TIPO_PRODUCTO = Convert.ToInt32(ddlTipoProducto.SelectedValue),
-                        NOMBRE_PRODUCTO = ((Label)loItem.Controls[7]).Text,
-                        DESCRIPCION = ((Label)loItem.Controls[9]).Text,
-                        PRECIO = ((Label)loItem.Controls[5].Controls[1]).Text
-                    };
+                    COD_PRODUCTO = Convert.ToInt32(((HtmlInputCheckBox)loItem.Controls[1]).Attributes["title"].Split(';')[0]),
+                    COD_TIPO_PRODUCTO = Convert.ToInt32(ddlTipoProducto.SelectedValue),
+                    NOMBRE_PRODUCTO = ((Label)loItem.Controls[7]).Text,
+                    DESCRIPCION = ((Label)loItem.Controls[9]).Text,
+                    PRECIO = ((Label)loItem.Controls[5].Controls[1]).Text
+                };
 
-                    oProductoCustomersWebSite.IMAGEN = new Image();
+                oProductoCustomersWebSite.IMAGEN = new Image();
 
-                    if (!String.IsNullOrEmpty(((HtmlImage)loItem.Controls[3]).Src))
-                    {
-                        // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
-                        string loImagenDataURL64 = ((HtmlImage)loItem.Controls[3]).Src;
-                        oProductoCustomersWebSite.IMAGEN.ImageUrl = loImagenDataURL64;
-                    }
-
-                    lstProductoCustomersWebSite.Add(oProductoCustomersWebSite);
+                if (!String.IsNullOrEmpty(((HtmlImage)loItem.Controls[3]).Src))
+                {
+                    // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
+                    string loImagenDataURL64 = ((HtmlImage)loItem.Controls[3]).Src;
+                    oProductoCustomersWebSite.IMAGEN.ImageUrl = loImagenDataURL64;
                 }
+
+                lstProductoCustomersWebSite.Add(oProductoCustomersWebSite);
+
+                ((HtmlInputCheckBox)loItem.Controls[1]).Checked = false;
             }
 
             if (lstProductoCustomersWebSite.Count > 0)
-            { 
+            {
                 Session.Add(Enums.Session.ListadoReserva.ToString(), lstProductoCustomersWebSite);
                 Master.CantidadDePedidos = lstProductoCustomersWebSite.Count;
             }
