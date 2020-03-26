@@ -112,10 +112,10 @@
                             </asp:ListView>
                             <asp:HiddenField ID="hfIdUsuarioLogueado" runat="server" />
                         </div>
-                        <div class="ibox-content">
-                            <a class="btn btn-primary pull-right" onclick="ConfirmarReserva();">Confirmar Reserva&nbsp;<i class="fa fa fa-shopping-cart"></i>
-                            </a>
-                            <a class="btn btn-white" href="Reserva.aspx"><i class="fa fa-arrow-left"></i> Seguir reservando
+                        <div class="ibox-content">                            
+                            <a class="btn btn btn-warning pull-right" onclick="Cancelar();">Cancelar</a>
+                            <a class="btn btn-primary pull-right" onclick="ConfirmarReserva();" style="margin-right: 3px;">Confirmar Reserva&nbsp;<i class="fa fa fa-shopping-cart"></i></a>
+                            <a class="btn btn-white" href="Reserva.aspx"><i class="fa fa-arrow-left"></i>&nbsp;Seguir reservando
                             </a>
                         </div>
                     </div>
@@ -366,12 +366,30 @@
             });
         }
 
+        function Cancelar() {
+            $.ajax({
+                type: "POST",
+                url: "RegistrarReserva.aspx/Cancelar",                
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    var msg = JSON.parse(data.d);
+                    if (msg) {
+                        var loLocation = window.location;
+                        var loPathName = loLocation.pathname.substring(0, loLocation.pathname.lastIndexOf('/') + 1);
+                        var url = loLocation.href.substring(0, loLocation.href.length - ((loLocation.pathname + loLocation.search + loLocation.hash).length - loPathName.length));
+                        window.location.href = url + 'Reserva.aspx';
+                    }                    
+                }
+            });
+        }
+
         function DescontarCantidadDeItems() {
             var lblCantidad = $('#<%=lblCantidadItems.ClientID%>');
             var loCantidad = lblCantidad.text();
             var loOperacion = parseInt(loCantidad, 10) - 1;
             lblCantidad.text(loOperacion);
-        }
+        }       
 
     </script>
 </asp:Content>

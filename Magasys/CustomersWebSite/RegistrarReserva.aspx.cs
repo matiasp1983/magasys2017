@@ -416,7 +416,26 @@ namespace PL.CustomersWebSite
             LimpiarSessiones();
 
             return loResutado;
-        }        
+        }
+
+        [WebMethod]
+        public static bool Cancelar()
+        {
+            bool loResutado = false;            
+
+            try
+            {
+                LimpiarSessiones();
+                loResutado = true;
+            }
+            catch (Exception ex)
+            {
+                Logger loLogger = LogManager.GetCurrentClassLogger();
+                loLogger.Error(ex);
+            }
+
+            return loResutado;
+        }
 
         #endregion
     }
