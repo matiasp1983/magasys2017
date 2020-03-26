@@ -12,7 +12,7 @@
                 <div class="col-md-9">
                     <div class="ibox">
                         <div class="ibox-title">
-                            <span class="pull-right">(<strong>5</strong>) items</span>
+                            <span class="pull-right">(<strong><asp:Label ID="lblCantidadItems" runat="server" Text="0"></asp:Label></strong>) items</span>
                             <h5>Productos de tu reserva</h5>
                         </div>
                         <div id="divIboxContent" class="ibox-content">
@@ -28,7 +28,7 @@
                                                 <tr>
                                                     <td style="width: 90px">
                                                         <div class="cart-product-imitation" style="padding: 0px">
-                                                            <img id="imgProducto" runat="server" style="width: 90px" />
+                                                            <img src="#" id="imgProducto" runat="server" style="width: 90px" />
                                                         </div>
                                                     </td>
                                                     <td class="desc">
@@ -216,6 +216,7 @@
 
         function EliminarProducto(control) {
             if (window.jQuery) {
+                DescontarCantidadDeItems();
                 var loCodigo = control.lastElementChild.defaultValue;
                 $('#divTabla_' + loCodigo).remove();
             }
@@ -270,8 +271,17 @@
 
                 loReservas.push(loCodProducto + ";" + loCodProductoEdicion + ";" + loFormaDeEntrega + ";" + loCantidad + ";" + loFechaInicio + ";" + loFechaFin + ";" + loCodTipoProducto);
             });           
-
-            ValidarReserva(loReservas);
+            if (loReservas.length > 1) {
+                ValidarReserva(loReservas);
+            }
+            else {
+                swal({
+                    title: "Confirmación Reserva",
+                    text: "No se disponen de reservas para confirmar.",
+                    type: "warning",
+                    confirmButtonText: 'Aceptar'
+                });
+            }
         }
 
         function ValidarReserva(loReservas) {
@@ -354,6 +364,13 @@
                     });
                 }
             });
+        }
+
+        function DescontarCantidadDeItems() {
+            var lblCantidad = $('#<%=lblCantidadItems.ClientID%>');
+            var loCantidad = lblCantidad.text();
+            var loOperacion = parseInt(loCantidad, 10) - 1;
+            lblCantidad.text(loOperacion);
         }
 
     </script>

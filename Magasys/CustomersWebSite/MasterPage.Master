@@ -49,7 +49,7 @@
                         </ul>
                         <ul class="nav navbar-top-links navbar-right">
                             <li class="dropdown">
-                                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" style="padding-top: 6px; padding-right: 17px">
+                                <a class="dropdown-toggle count-info" href="RegistrarReserva.aspx" style="padding-top: 6px; padding-right: 17px">
                                     <i class="fa fa-shopping-cart fa-2x"></i><span class="label label-warning">
                                         <asp:Label ID="lblCantidadDePedidos" runat="server" Text="0"></asp:Label></span>                                 
                                 </a>

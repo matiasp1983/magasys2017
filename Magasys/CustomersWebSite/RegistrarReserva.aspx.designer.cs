@@ -22,6 +22,15 @@ namespace PL.CustomersWebSite {
         protected global::System.Web.UI.HtmlControls.HtmlForm FormRegistrarReserva;
         
         /// <summary>
+        /// Control lblCantidadItems.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCantidadItems;
+        
+        /// <summary>
         /// Control lsvProductos.
         /// </summary>
         /// <remarks>

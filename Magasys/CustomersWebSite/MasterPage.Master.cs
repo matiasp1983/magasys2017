@@ -12,6 +12,28 @@ namespace PL.CustomersWebSite
 {
     public partial class MasterPage : System.Web.UI.MasterPage
     {
+        #region Propiedades
+
+        public int CantidadDePedidos
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(lblCantidadDePedidos.Text))
+                    return Convert.ToInt32(lblCantidadDePedidos.Text);
+                else
+                    return 0;
+            }
+            set
+            {
+                if (!string.IsNullOrEmpty(value.ToString()))
+                    lblCantidadDePedidos.Text = value.ToString();
+                else
+                    lblCantidadDePedidos.Text = "0";
+            }
+        }
+
+        #endregion
+
         #region Eventos
 
         protected void Page_Load(object sender, EventArgs e)
@@ -59,6 +81,37 @@ namespace PL.CustomersWebSite
             }
         }
 
+        #endregion
+
+        #region Métodos Privados
+
+        private void CargarCantidadDePedidos()
+        {
+            var loCantidad = 0;
+
+            if (Session[Enums.Session.ListadoReserva.ToString()] != null)
+            {
+                var lstProductoCustomersWebSite = (List<BLL.ProductoCustomersWebSite>)Session[Enums.Session.ListadoReserva.ToString()];
+                loCantidad = lstProductoCustomersWebSite.Count;
+            }
+
+            if (Session[Enums.Session.ListadoReservaEdicion.ToString()] != null)
+            {
+                var lstProdEdicionCustomersWebSite = (List<BLL.ProdEdicionCustomersWebSite>)Session[Enums.Session.ListadoReservaEdicion.ToString()];
+                loCantidad += lstProdEdicionCustomersWebSite.Count;
+            }
+
+            if (Session[Enums.Session.ProductoReservaEdicionSeleccionados.ToString()] != null)
+            {
+                var loProductos = Session[Enums.Session.ProductoReservaEdicionSeleccionados.ToString()];
+                var lstProductos = loProductos.ToString().Split(';');
+                loCantidad += lstProductos.Length;
+            }
+
+            if (loCantidad > 0)
+                lblCantidadDePedidos.Text = loCantidad.ToString();
+        }
+        
         #endregion
     }
 }

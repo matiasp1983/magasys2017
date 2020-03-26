@@ -88,6 +88,7 @@ namespace PL.CustomersWebSite
 
         private void ObtenerReservas()
         {
+            lblCantidadItems.Text = "0";
             List<ReservaCustomerWebSite> lstReservaCustomerWebSite = new List<ReservaCustomerWebSite>();
             ReservaCustomerWebSite oReservaCustomerWebSite = null;
 
@@ -204,6 +205,7 @@ namespace PL.CustomersWebSite
 
             if (lstReservaCustomerWebSite.Count > 0)
             {
+                lblCantidadItems.Text = lstReservaCustomerWebSite.Count.ToString();
                 lsvProductos.DataSource = lstReservaCustomerWebSite;
                 lsvProductos.DataBind();
             }
@@ -213,6 +215,18 @@ namespace PL.CustomersWebSite
         {
             if (Session[CustomersWebSiteSessionBLL.DefaultSessionsId.Usuario.ToString()] != null)
                 hfIdUsuarioLogueado.Value = ((BLL.DAL.Usuario)Session[CustomersWebSiteSessionBLL.DefaultSessionsId.Usuario.ToString()]).ID_USUARIO.ToString();
+        }
+
+        private static void LimpiarSessiones()
+        {
+            if (System.Web.HttpContext.Current.Session[Enums.Session.ListadoReserva.ToString()] != null)
+                System.Web.HttpContext.Current.Session.Remove(Enums.Session.ListadoReserva.ToString());
+
+            if (System.Web.HttpContext.Current.Session[Enums.Session.ListadoReservaEdicion.ToString()] != null)
+                System.Web.HttpContext.Current.Session.Remove(Enums.Session.ListadoReservaEdicion.ToString());
+
+            if (System.Web.HttpContext.Current.Session[Enums.Session.ProductoReservaEdicionSeleccionados.ToString()] != null)
+                System.Web.HttpContext.Current.Session.Remove(Enums.Session.ProductoReservaEdicionSeleccionados.ToString());
         }
 
         //private List<ReservaCustomerWebSite> MapListViewToListObject(ListView pListView)
@@ -402,19 +416,7 @@ namespace PL.CustomersWebSite
             LimpiarSessiones();
 
             return loResutado;
-        }
-
-        private static void LimpiarSessiones()
-        {
-            if (System.Web.HttpContext.Current.Session[Enums.Session.ListadoReserva.ToString()] != null)
-                System.Web.HttpContext.Current.Session.Remove(Enums.Session.ListadoReserva.ToString());
-
-            if (System.Web.HttpContext.Current.Session[Enums.Session.ListadoReservaEdicion.ToString()] != null)
-                System.Web.HttpContext.Current.Session.Remove(Enums.Session.ListadoReservaEdicion.ToString());
-
-            if (System.Web.HttpContext.Current.Session[Enums.Session.ProductoReservaEdicionSeleccionados.ToString()] != null)
-                System.Web.HttpContext.Current.Session.Remove(Enums.Session.ProductoReservaEdicionSeleccionados.ToString());
-        }
+        }        
 
         #endregion
     }

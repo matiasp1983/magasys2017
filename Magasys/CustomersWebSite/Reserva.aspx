@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CustomersWebSite/MasterPage.Master" AutoEventWireup="true" CodeBehind="Reserva.aspx.cs" Inherits="PL.CustomersWebSite.Reserva" %>
+<%@ MasterType VirtualPath="~/CustomersWebSite/MasterPage.Master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link href="css/plugins/switchery/switchery.css" rel="stylesheet">

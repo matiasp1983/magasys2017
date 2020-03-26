@@ -69,8 +69,8 @@ namespace PL.CustomersWebSite
                 }
             }
 
-            if (lstProductoCustomersWebSite.Count > 0)
-                Session.Add(Enums.Session.ListadoReserva.ToString(), lstProductoCustomersWebSite);
+            if (lstProductoCustomersWebSite.Count > 0)             
+                Session.Add(Enums.Session.ListadoReserva.ToString(), lstProductoCustomersWebSite);                
         }
 
         protected void BtnSeleccionarTodo_Click(object sender, EventArgs e)
