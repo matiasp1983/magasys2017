@@ -84,7 +84,7 @@ namespace PL.CustomersWebSite
             foreach (var loItem in lsvProductos.Items)
             {
                 ((HtmlInputCheckBox)loItem.Controls[1]).Checked = true;
-                var loPrecio = ((Label)loItem.Controls[5].Controls[1]).Text.Remove(0, 2).Replace(",", ".");
+                var loPrecio = ((Label)loItem.Controls[5].Controls[1]).Text.Remove(0, 1).Replace(",", ".");
                 loMontoTotal = loMontoTotal + Convert.ToDouble(loPrecio);
             }
 
