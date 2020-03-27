@@ -50,7 +50,8 @@ namespace PL.CustomersWebSite
                     var loResutadoCliente = new BLL.ClienteBLL().ModificarCliente(oCliente);
 
                     if (loResutadoUsuario && loResutadoCliente)
-                    {                        
+                    {
+                        ActualizarSessionUsuario(oUsuario);
                         Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeInformacionPersonalSuccessModificacion, "Modificación Información Personal", "Index.aspx"));
                     }
                     else
@@ -221,15 +222,19 @@ namespace PL.CustomersWebSite
             var oUsuario = new BLL.DAL.Usuario
             {
                 ID_USUARIO = oUsuarioSession.ID_USUARIO,
-                NOMBRE_USUARIO = oUsuarioSession.NOMBRE_USUARIO,
-                NOMBRE = oUsuarioSession.NOMBRE,
-                APELLIDO = oUsuarioSession.APELLIDO,
                 FECHA_ALTA = oUsuarioSession.FECHA_ALTA,
-                ID_ROL = oUsuarioSession.ID_ROL,
                 COD_ESTADO = oUsuarioSession.COD_ESTADO,
+                NOMBRE_USUARIO = oUsuarioSession.NOMBRE_USUARIO,                
+                ID_ROL = oUsuarioSession.ID_ROL,                
                 RECUPERAR_CONTRASENIA = oUsuarioSession.RECUPERAR_CONTRASENIA,
                 CONTRASENIA = txtContrasenia.Attributes["value"]
             };
+
+            if (!string.IsNullOrEmpty(txtNombre.Text))
+                oUsuario.NOMBRE = txtNombre.Text;
+
+            if (!string.IsNullOrEmpty(txtApellido.Text))
+                oUsuario.APELLIDO = txtApellido.Text;
 
             imgPreview.ImageUrl = "img/perfil_default.png";
 
@@ -261,6 +266,11 @@ namespace PL.CustomersWebSite
         private void CargarCantidadDePedidosDesdeSession()
         {
             Master.CantidadDePedidos = Convert.ToInt32(Session[Enums.Session.CantidadDePedidos.ToString()]);
+        }
+
+        private void ActualizarSessionUsuario(BLL.DAL.Usuario oUsuario)
+        {
+            Session[CustomersWebSiteSessionBLL.DefaultSessionsId.Usuario.ToString()] = oUsuario;
         }
 
         #endregion

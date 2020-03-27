@@ -34,6 +34,7 @@ namespace PL
 
                     if (loResutado)
                     {
+                        ActualizarSessionUsuario(oUsuario);
                         Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeUsuarioSuccessModificacion, "Modificación Usuario","UsuarioListado.aspx"));                        
                     }
                     else
@@ -174,7 +175,12 @@ namespace PL
                 Logger loLogger = LogManager.GetCurrentClassLogger();
                 loLogger.Error(ex);
             }
-        }       
+        }
+
+        private void ActualizarSessionUsuario(BLL.DAL.Usuario oUsuario)
+        {
+            Session[AdminDashboardSessionBLL.DefaultSessionsId.Usuario.ToString()] = oUsuario;
+        }
 
         #endregion        
     }
