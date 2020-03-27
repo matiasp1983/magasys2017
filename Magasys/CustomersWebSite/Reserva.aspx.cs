@@ -40,6 +40,7 @@ namespace PL.CustomersWebSite
         {
             List<ProductoCustomersWebSite> lstProductoCustomersWebSite = new List<ProductoCustomersWebSite>();
             ProductoCustomersWebSite oProductoCustomersWebSite = null;
+            int loCantidadProductosSeleccionados = 0;
 
             if (Session[Enums.Session.ListadoReserva.ToString()] != null)
                 lstProductoCustomersWebSite = (List<ProductoCustomersWebSite>)Session[Enums.Session.ListadoReserva.ToString()];
@@ -64,6 +65,9 @@ namespace PL.CustomersWebSite
                     oProductoCustomersWebSite.IMAGEN.ImageUrl = loImagenDataURL64;
                 }
 
+                if (lstProductoCustomersWebSite.Where(p => p.COD_PRODUCTO == oProductoCustomersWebSite.COD_PRODUCTO).Count() == 0)
+                    loCantidadProductosSeleccionados += 1;
+
                 lstProductoCustomersWebSite.Add(oProductoCustomersWebSite);
 
                 ((HtmlInputCheckBox)loItem.Controls[1]).Checked = false;
@@ -72,7 +76,14 @@ namespace PL.CustomersWebSite
             if (lstProductoCustomersWebSite.Count > 0)
             {
                 Session.Add(Enums.Session.ListadoReserva.ToString(), lstProductoCustomersWebSite);
-                Session[Enums.Session.CantidadDePedidos.ToString()] = lstProductoCustomersWebSite.GroupBy(p=>p.COD_PRODUCTO).Count();
+
+                var loCantidadDePedidosSession = Session[Enums.Session.CantidadDePedidos.ToString()];
+
+                if (loCantidadDePedidosSession != null)
+                    Session[Enums.Session.CantidadDePedidos.ToString()] = Convert.ToInt32(loCantidadDePedidosSession) + loCantidadProductosSeleccionados;
+                else
+                    Session[Enums.Session.CantidadDePedidos.ToString()] = lstProductoCustomersWebSite.GroupBy(p => p.COD_PRODUCTO).Count();
+
                 CargarCantidadDePedidosDesdeSession();
             }
         }
@@ -201,6 +212,16 @@ namespace PL.CustomersWebSite
                         if (!string.IsNullOrEmpty(loProductosSeleccionados.ToString()) && !loProductosSeleccionados.ToString().Contains(loIdProductoReservaEdicionSeleccionado.ToString()))
                             Session[Enums.Session.ProductoReservaEdicionSeleccionados.ToString()] += String.Format(";{0}", loIdProductoReservaEdicionSeleccionado);
                     }
+
+                    if (Session[Enums.Session.CantidadDePedidos.ToString()] != null)
+                    {
+                        var loCantidadDePedidos = Convert.ToInt32(Session[Enums.Session.CantidadDePedidos.ToString()]);
+                        Session[Enums.Session.CantidadDePedidos.ToString()] = loCantidadDePedidos + 1;
+                    }
+                    else
+                        Session[Enums.Session.CantidadDePedidos.ToString()] = 1;
+
+                    CargarCantidadDePedidosDesdeSession();
                 }
             }
             catch (Exception ex)
