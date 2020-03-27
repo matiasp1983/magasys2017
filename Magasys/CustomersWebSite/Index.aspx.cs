@@ -190,25 +190,28 @@ namespace PL.CustomersWebSite
             var oUsuario = (BLL.DAL.Usuario)Session[CustomersWebSiteSessionBLL.DefaultSessionsId.Usuario.ToString()];
             var oClienteSession = new BLL.ClienteBLL().ObtenerClientePorUsuario(oUsuario.ID_USUARIO);
 
-            oReservaFiltro.COD_CLIENTE = oClienteSession.ID_CLIENTE;
+            if (oClienteSession != null)
+            {
+                oReservaFiltro.COD_CLIENTE = oClienteSession.ID_CLIENTE;
 
-            if (!String.IsNullOrEmpty(ddlEstado.SelectedValue))
-                oReservaFiltro.COD_ESTADO = Convert.ToInt32(ddlEstado.SelectedValue);
+                if (!String.IsNullOrEmpty(ddlEstado.SelectedValue))
+                    oReservaFiltro.COD_ESTADO = Convert.ToInt32(ddlEstado.SelectedValue);
 
-            if (!String.IsNullOrEmpty(ddlTipoReserva.SelectedValue))
-                oReservaFiltro.COD_TIPO_RESERVA = Convert.ToInt32(ddlTipoReserva.SelectedValue);
+                if (!String.IsNullOrEmpty(ddlTipoReserva.SelectedValue))
+                    oReservaFiltro.COD_TIPO_RESERVA = Convert.ToInt32(ddlTipoReserva.SelectedValue);
 
-            if (!String.IsNullOrEmpty(txtNombreProducto.Text))
-                oReservaFiltro.NOMBRE_PRODUCTO = txtNombreProducto.Text;
+                if (!String.IsNullOrEmpty(txtNombreProducto.Text))
+                    oReservaFiltro.NOMBRE_PRODUCTO = txtNombreProducto.Text;
 
-            if (!String.IsNullOrEmpty(txtFechaIniReserva.Text))
-                oReservaFiltro.FECHAINICIORESERVADESDE = Convert.ToDateTime(txtFechaIniReserva.Text);
+                if (!String.IsNullOrEmpty(txtFechaIniReserva.Text))
+                    oReservaFiltro.FECHAINICIORESERVADESDE = Convert.ToDateTime(txtFechaIniReserva.Text);
 
-            if (!String.IsNullOrEmpty(txtFechaFinReserva.Text))
-                oReservaFiltro.FECHAFINRESERVADESDE = Convert.ToDateTime(txtFechaFinReserva.Text);
+                if (!String.IsNullOrEmpty(txtFechaFinReserva.Text))
+                    oReservaFiltro.FECHAFINRESERVADESDE = Convert.ToDateTime(txtFechaFinReserva.Text);
 
-            if (!String.IsNullOrEmpty(ddlFormaEntrega.SelectedValue))
-                oReservaFiltro.COD_FORMA_ENTREGA = ddlFormaEntrega.SelectedValue;
+                if (!String.IsNullOrEmpty(ddlFormaEntrega.SelectedValue))
+                    oReservaFiltro.COD_FORMA_ENTREGA = ddlFormaEntrega.SelectedValue; 
+            }
 
             return oReservaFiltro;
         }
