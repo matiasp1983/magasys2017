@@ -187,7 +187,10 @@ namespace PL.CustomersWebSite
 
             oReservaFiltro = new ReservaFiltro();
 
-            oReservaFiltro.COD_CLIENTE = 56;
+            var oUsuario = (BLL.DAL.Usuario)Session[CustomersWebSiteSessionBLL.DefaultSessionsId.Usuario.ToString()];
+            var oClienteSession = new BLL.ClienteBLL().ObtenerClientePorUsuario(oUsuario.ID_USUARIO);
+
+            oReservaFiltro.COD_CLIENTE = oClienteSession.ID_CLIENTE;
 
             if (!String.IsNullOrEmpty(ddlEstado.SelectedValue))
                 oReservaFiltro.COD_ESTADO = Convert.ToInt32(ddlEstado.SelectedValue);
