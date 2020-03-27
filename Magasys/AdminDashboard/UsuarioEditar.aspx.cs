@@ -179,7 +179,9 @@ namespace PL
 
         private void ActualizarSessionUsuario(BLL.DAL.Usuario oUsuario)
         {
-            Session[AdminDashboardSessionBLL.DefaultSessionsId.Usuario.ToString()] = oUsuario;
+            var loUsuarioSession = (BLL.DAL.Usuario)Session[AdminDashboardSessionBLL.DefaultSessionsId.Usuario.ToString()];
+            if (loUsuarioSession.ID_USUARIO == oUsuario.ID_USUARIO)            
+                Session[AdminDashboardSessionBLL.DefaultSessionsId.Usuario.ToString()] = oUsuario;
         }
 
         #endregion        
