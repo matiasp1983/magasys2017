@@ -3,6 +3,7 @@ using BLL.Common;
 using NLog;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
@@ -26,40 +27,54 @@ namespace PL.CustomersWebSite
         {
             List<ProdEdicionCustomersWebSite> lstProdEdicionCustomersWebSite = new List<ProdEdicionCustomersWebSite>();
             ProdEdicionCustomersWebSite oProdEdicionCustomersWebSite = null;
+            int loCantidadProductosSeleccionados = 0;
 
             if (Session[Enums.Session.ListadoReservaEdicion.ToString()] != null)
                 lstProdEdicionCustomersWebSite = (List<ProdEdicionCustomersWebSite>)Session[Enums.Session.ListadoReservaEdicion.ToString()];
 
-            foreach (var loItem in lsvProductos.Items)
+            foreach (var loItem in lsvProductos.Items.Where(p => ((HtmlInputCheckBox)p.Controls[1]).Checked))
             {
-                if (((HtmlInputCheckBox)loItem.Controls[1]).Checked)
+                oProdEdicionCustomersWebSite = new ProdEdicionCustomersWebSite
                 {
-                    oProdEdicionCustomersWebSite = new ProdEdicionCustomersWebSite
-                    {
-                        COD_PRODUCTO_EDICION = Convert.ToInt32(((HtmlInputCheckBox)loItem.Controls[1]).Attributes["title"].Split(';')[0]),
-                        COD_TIPO_PRODUCTO = 2,
-                        EDICION = ((Label)loItem.Controls[7]).Text,
-                        DESCRIPCION = ((Label)loItem.Controls[9]).Text,
-                        PRECIO = ((Label)loItem.Controls[5]).Text,
-                        FECHA_EDICION = ((Label)loItem.Controls[11]).Text,
-                        COD_PRODUCTO = Convert.ToInt32(((Label)loItem.Controls[13]).Text)
-                    };
+                    COD_PRODUCTO_EDICION = Convert.ToInt32(((HtmlInputCheckBox)loItem.Controls[1]).Attributes["title"].Split(';')[0]),
+                    COD_TIPO_PRODUCTO = 2,
+                    EDICION = ((Label)loItem.Controls[7]).Text,
+                    DESCRIPCION = ((Label)loItem.Controls[9]).Text,
+                    PRECIO = ((Label)loItem.Controls[5]).Text,
+                    FECHA_EDICION = ((Label)loItem.Controls[11]).Text,
+                    COD_PRODUCTO = Convert.ToInt32(((Label)loItem.Controls[13]).Text)
+                };
 
-                    oProdEdicionCustomersWebSite.IMAGEN = new Image();
+                oProdEdicionCustomersWebSite.IMAGEN = new Image();
 
-                    if (!String.IsNullOrEmpty(((HtmlImage)loItem.Controls[3]).Src))
-                    {
-                        // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
-                        string loImagenDataURL64 = ((HtmlImage)loItem.Controls[3]).Src;
-                        oProdEdicionCustomersWebSite.IMAGEN.ImageUrl = loImagenDataURL64;
-                    }
-
-                    lstProdEdicionCustomersWebSite.Add(oProdEdicionCustomersWebSite);
+                if (!String.IsNullOrEmpty(((HtmlImage)loItem.Controls[3]).Src))
+                {
+                    // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
+                    string loImagenDataURL64 = ((HtmlImage)loItem.Controls[3]).Src;
+                    oProdEdicionCustomersWebSite.IMAGEN.ImageUrl = loImagenDataURL64;
                 }
+
+                if (lstProdEdicionCustomersWebSite.Where(p => p.COD_PRODUCTO_EDICION == oProdEdicionCustomersWebSite.COD_PRODUCTO_EDICION).Count() == 0)
+                    loCantidadProductosSeleccionados += 1;
+
+                lstProdEdicionCustomersWebSite.Add(oProdEdicionCustomersWebSite);
+
+                ((HtmlInputCheckBox)loItem.Controls[1]).Checked = false;
             }
 
             if (lstProdEdicionCustomersWebSite.Count > 0)
+            {
                 Session.Add(Enums.Session.ListadoReservaEdicion.ToString(), lstProdEdicionCustomersWebSite);
+
+                var loCantidadDePedidosSession = Session[Enums.Session.CantidadDePedidos.ToString()];
+
+                if (loCantidadDePedidosSession != null)
+                    Session[Enums.Session.CantidadDePedidos.ToString()] = Convert.ToInt32(loCantidadDePedidosSession) + loCantidadProductosSeleccionados;
+                else
+                    Session[Enums.Session.CantidadDePedidos.ToString()] = lstProdEdicionCustomersWebSite.GroupBy(p => p.COD_PRODUCTO_EDICION).Count();
+
+                CargarCantidadDePedidosDesdeSession();
+            }
         }
 
         protected void BtnSeleccionarTodo_Click(object sender, EventArgs e)
@@ -69,7 +84,7 @@ namespace PL.CustomersWebSite
             foreach (var loItem in lsvProductos.Items)
             {
                 ((HtmlInputCheckBox)loItem.Controls[1]).Checked = true;
-                var loPrevio = ((Label)loItem.Controls[5]).Text.Remove(0, 2).Replace(",", ".");
+                var loPrevio = ((Label)loItem.Controls[5]).Text.Remove(0, 1).Replace(",", ".");
                 loMontoTotal = loMontoTotal + Convert.ToDouble(loPrevio);
             }
 
@@ -78,7 +93,7 @@ namespace PL.CustomersWebSite
 
         protected void BtnDeseleccionarTodo_Click(object sender, EventArgs e)
         {
-            foreach (var loItem in lsvProductos.Items)
+            foreach (var loItem in lsvProductos.Items.Where(p => ((HtmlInputCheckBox)p.Controls[1]).Checked))
             {
                 ((HtmlInputCheckBox)loItem.Controls[1]).Checked = false;
             }
