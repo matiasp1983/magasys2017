@@ -205,7 +205,7 @@ namespace PL.CustomersWebSite
             }
 
             if (lstReservaCustomerWebSite.Count > 0)
-            {   
+            {
                 lblCantidadItems.Text = lstReservaCustomerWebSite.Count.ToString();
                 lsvProductos.DataSource = lstReservaCustomerWebSite;
                 lsvProductos.DataBind();
@@ -236,7 +236,7 @@ namespace PL.CustomersWebSite
 
             if (System.Web.HttpContext.Current.Session[Enums.Session.CantidadDePedidos.ToString()] != null)
                 System.Web.HttpContext.Current.Session.Remove(Enums.Session.CantidadDePedidos.ToString());
-        }        
+        }
 
         //private List<ReservaCustomerWebSite> MapListViewToListObject(ListView pListView)
         //{
@@ -302,6 +302,12 @@ namespace PL.CustomersWebSite
                             break;
                         }
                     }
+                    else
+                    {
+                        //"Se debe registrar como cliente para tomar la reserva."
+                        loResutado = 4;
+                        break;
+                    }
 
                     if (Convert.ToInt32(loSplitReseva[6].ToString()) == 1 || (Convert.ToInt32(loSplitReseva[6].ToString()) == 2 && String.IsNullOrEmpty(loSplitReseva[1].ToString())) || Convert.ToInt32(loSplitReseva[6].ToString()) == 5) // Diario, todas lasediciones de Revista o Suplemento 
                     {
@@ -341,7 +347,7 @@ namespace PL.CustomersWebSite
 
                     if (loSplitReseva[0].ToString().Contains("IdUsuario:"))
                     {
-                        oCliente = new BLL.ClienteBLL().ObtenerClientePorUsuario(Convert.ToInt32(loSplitReseva[0].ToString().Replace("IdUsuario:", string.Empty).Trim()));
+                        oCliente = new ClienteBLL().ObtenerClientePorUsuario(Convert.ToInt32(loSplitReseva[0].ToString().Replace("IdUsuario:", string.Empty).Trim()));
                         continue;
                     }
 
@@ -430,7 +436,7 @@ namespace PL.CustomersWebSite
         [WebMethod]
         public static bool Cancelar()
         {
-            bool loResutado = false;            
+            bool loResutado = false;
 
             try
             {

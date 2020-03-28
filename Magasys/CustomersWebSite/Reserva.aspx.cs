@@ -86,6 +86,8 @@ namespace PL.CustomersWebSite
 
                 CargarCantidadDePedidosDesdeSession();
             }
+
+            lblTotalAbonar.Text = "0,00";
         }
 
         protected void BtnSeleccionarTodo_Click(object sender, EventArgs e)

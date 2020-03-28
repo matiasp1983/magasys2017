@@ -313,6 +313,14 @@
                             confirmButtonText: 'Aceptar'
                         });
                     }
+                    else if (msg == 4) {
+                        swal({
+                            title: "Confirmación Reserva",
+                            text: "Se debe registrar como cliente para tomar la reserva.",
+                            type: "warning",
+                            confirmButtonText: 'Aceptar'
+                        });
+                    }
                 },
                 failure: function (data) {
                     swal({

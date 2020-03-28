@@ -32,7 +32,7 @@
                     <div class="navbar-collapse collapse" id="navbar">
                         <ul class="nav navbar-nav">
                             <li class="active">
-                                <a aria-expanded="false" role="button" href="layouts.html">Mi Reserva</a>
+                                <a aria-expanded="false" role="button" href="RegistrarReserva.aspx">Mi Reserva</a>
                             </li>
                             <li class="dropdown">
                                 <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown">Reserva <span class="caret"></span></a>
