@@ -16,7 +16,10 @@ namespace PL.CustomersWebSite
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
+            {
+                CargarCantidadDePedidosDesdeSession();
                 ObtenerEdiciones();
+            }
         }
 
         protected void BtnReservar_Click(object sender, EventArgs e)
@@ -134,6 +137,11 @@ namespace PL.CustomersWebSite
                 Logger loLogger = LogManager.GetCurrentClassLogger();
                 loLogger.Error(ex);
             }
+        }
+
+        private void CargarCantidadDePedidosDesdeSession()
+        {
+            Master.CantidadDePedidos = Convert.ToInt32(Session[Enums.Session.CantidadDePedidos.ToString()]);
         }
 
         #endregion

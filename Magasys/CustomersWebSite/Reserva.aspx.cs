@@ -104,7 +104,7 @@ namespace PL.CustomersWebSite
 
         protected void BtnDeseleccionarTodo_Click(object sender, EventArgs e)
         {
-            foreach (var loItem in lsvProductos.Items)
+            foreach (var loItem in lsvProductos.Items.Where(p => ((HtmlInputCheckBox)p.Controls[1]).Checked))
             {
                 ((HtmlInputCheckBox)loItem.Controls[1]).Checked = false;
             }
