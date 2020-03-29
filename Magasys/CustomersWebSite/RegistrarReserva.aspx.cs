@@ -312,6 +312,14 @@ namespace PL.CustomersWebSite
                     if (Convert.ToInt32(loSplitReseva[6].ToString()) == 1 || (Convert.ToInt32(loSplitReseva[6].ToString()) == 2 && String.IsNullOrEmpty(loSplitReseva[1].ToString())) || Convert.ToInt32(loSplitReseva[6].ToString()) == 5) // Diario, todas lasediciones de Revista o Suplemento 
                     {
                         // Entonces el TIPO DE RESERVA es PERIODICA
+
+                        if (String.IsNullOrEmpty(loSplitReseva[4].ToString()))
+                        {
+                            //"Se debe ingresar la Fecha Inicio de Reserva."
+                            loResutado = 5;
+                            break;
+                        }
+
                         if (!string.IsNullOrEmpty(loSplitReseva[5].ToString()) && Convert.ToDateTime(loSplitReseva[5].ToString()) < Convert.ToDateTime(loSplitReseva[4].ToString())) // valida si la fecha fin es menor que la fecha de inicio
                         {
                             //"La Fecha de fin debe ser mayor que la Fecha de inicio."

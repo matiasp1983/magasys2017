@@ -321,6 +321,14 @@
                             confirmButtonText: 'Aceptar'
                         });
                     }
+                    else if (msg == 5) {
+                        swal({
+                            title: "Confirmación Reserva",
+                            text: "Se debe ingresar la Fecha Inicio de Reserva.",
+                            type: "warning",
+                            confirmButtonText: 'Aceptar'
+                        });
+                    }
                 },
                 failure: function (data) {
                     swal({

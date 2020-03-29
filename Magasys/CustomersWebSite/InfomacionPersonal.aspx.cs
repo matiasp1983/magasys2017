@@ -56,7 +56,7 @@ namespace PL.CustomersWebSite
                     }
                     else
                         Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeInformacionPersonal));
-                }               
+                }
             }
             catch (Exception ex)
             {
@@ -68,8 +68,8 @@ namespace PL.CustomersWebSite
         }
 
         protected void BtnCancelar_Click(object sender, EventArgs e)
-        {            
-           Response.Redirect("Index.aspx", false);
+        {
+            Response.Redirect("Index.aspx", false);
         }
 
         protected void btnCambiarContrasenia_Click(object sender, EventArgs e)
@@ -177,15 +177,15 @@ namespace PL.CustomersWebSite
             if (!string.IsNullOrEmpty(txtTelefonoFijo.Text))
                 oCliente.TELEFONO_FIJO = txtTelefonoFijo.Text;
 
-            if (!string.IsNullOrEmpty(txtCalle.Text))
-                oCliente.CALLE = txtCalle.Text;
-            else if (!string.IsNullOrEmpty(hdCalle.Value))
+            if (!string.IsNullOrEmpty(hdCalle.Value))
                 oCliente.CALLE = hdCalle.Value;
+            else if (!string.IsNullOrEmpty(txtCalle.Text))
+                oCliente.CALLE = txtCalle.Text;
 
-            if (!string.IsNullOrEmpty(txtNumero.Text))
-                oCliente.NUMERO = Convert.ToInt32(txtNumero.Text);
-            else if (!string.IsNullOrEmpty(hdNumero.Value))
+            if (!string.IsNullOrEmpty(hdNumero.Value))
                 oCliente.NUMERO = Convert.ToInt32(hdNumero.Value);
+            else if (!string.IsNullOrEmpty(txtNumero.Text))
+                oCliente.NUMERO = Convert.ToInt32(txtNumero.Text);
 
             if (!string.IsNullOrEmpty(txtPiso.Text))
                 oCliente.PISO = txtPiso.Text;
@@ -193,25 +193,30 @@ namespace PL.CustomersWebSite
             if (!string.IsNullOrEmpty(txtDepartamento.Text))
                 oCliente.DEPARTAMENTO = txtDepartamento.Text;
 
-            if (!string.IsNullOrEmpty(txtLocalidad.Text))
-                oCliente.LOCALIDAD = txtLocalidad.Text;
-            else if (!string.IsNullOrEmpty(hdLocalidad.Value))
+            if (!string.IsNullOrEmpty(hdLocalidad.Value))
                 oCliente.LOCALIDAD = hdLocalidad.Value;
+            else if (!string.IsNullOrEmpty(txtLocalidad.Text))
+                oCliente.LOCALIDAD = txtLocalidad.Text;
 
-            if (!string.IsNullOrEmpty(txtProvincia.Text))
-                oCliente.PROVINCIA = txtProvincia.Text;
-            else if (!string.IsNullOrEmpty(hdProvincia.Value))
+            if (!string.IsNullOrEmpty(hdProvincia.Value))
                 oCliente.PROVINCIA = hdProvincia.Value;
+            else if (!string.IsNullOrEmpty(txtProvincia.Text))
+                oCliente.PROVINCIA = txtProvincia.Text;
 
-            if (!string.IsNullOrEmpty(txtBarrio.Text))
-                oCliente.BARRIO = txtBarrio.Text;
-            else if (!string.IsNullOrEmpty(hdBarrio.Value))
+            if (!string.IsNullOrEmpty(hdBarrio.Value))
                 oCliente.BARRIO = hdBarrio.Value;
+            else if (!string.IsNullOrEmpty(txtBarrio.Text))
+                oCliente.BARRIO = txtBarrio.Text;
 
-            if (!string.IsNullOrEmpty(txtCodigoPostal.Text))
-                oCliente.CODIGO_POSTAL = txtCodigoPostal.Text;
-            else if (!string.IsNullOrEmpty(hdCodigoPostal.Value))
+            if (!string.IsNullOrEmpty(hdCodigoPostal.Value))
                 oCliente.CODIGO_POSTAL = hdCodigoPostal.Value;
+            else if (!string.IsNullOrEmpty(txtCodigoPostal.Text))
+                oCliente.CODIGO_POSTAL = txtCodigoPostal.Text;
+
+            if (!String.IsNullOrEmpty(hdIdDireccionMaps.Value))
+                oCliente.DIRECCION_MAPS = hdIdDireccionMaps.Value;
+            else
+                oCliente.DIRECCION_MAPS = null;
 
             return oCliente;
         }
@@ -224,8 +229,8 @@ namespace PL.CustomersWebSite
                 ID_USUARIO = oUsuarioSession.ID_USUARIO,
                 FECHA_ALTA = oUsuarioSession.FECHA_ALTA,
                 COD_ESTADO = oUsuarioSession.COD_ESTADO,
-                NOMBRE_USUARIO = oUsuarioSession.NOMBRE_USUARIO,                
-                ID_ROL = oUsuarioSession.ID_ROL,                
+                NOMBRE_USUARIO = oUsuarioSession.NOMBRE_USUARIO,
+                ID_ROL = oUsuarioSession.ID_ROL,
                 RECUPERAR_CONTRASENIA = oUsuarioSession.RECUPERAR_CONTRASENIA,
                 CONTRASENIA = txtContrasenia.Attributes["value"]
             };
