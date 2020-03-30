@@ -418,6 +418,7 @@ namespace PL.CustomersWebSite
 
                         lstReservaEdicion = new List<ReservaEdicion>();
                         lstReservaEdicion.Add(loReservaEdicion);
+                        lstReservaEdicion.ForEach(x => loReserva.ReservaEdicion.Add(x));
                     }
 
                     if (!String.IsNullOrEmpty(loSplitReseva[3]))
@@ -427,7 +428,8 @@ namespace PL.CustomersWebSite
 
                     for (int i = 0; i < loUnidadesReserva; i++)
                     {
-                        loResutado = new ReservaBLL().AltaReservaEdicion(loReserva, lstReservaEdicion);
+                        loResutado = new ReservaBLL().AltaReserva(loReserva);
+                        //loResutado = new ReservaBLL().AltaReservaEdicion(loReserva, lstReservaEdicion);
                         if (!loResutado)
                             break;
                     }

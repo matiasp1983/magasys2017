@@ -78,25 +78,6 @@ namespace BLL
             return bRes;
         }
 
-        public bool AltaReservaEdicion(Reserva oReserva, List<ReservaEdicion> lstReservaEdicion)
-        {
-            var bRes = false;
-
-            try
-            {
-                lstReservaEdicion.ForEach(x => oReserva.ReservaEdicion.Add(x));
-
-                using (var loRepReserva = new Repository<Reserva>())
-                    bRes = loRepReserva.Create(oReserva) != null;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-            return bRes;
-        }
-
         public bool ModificarReserva(Reserva oReserva)
         {
             var bRes = false;

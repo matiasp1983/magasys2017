@@ -277,7 +277,7 @@
           <Key>
             <PropertyRef Name="ID_RESERVA_EDICION" />
           </Key>
-          <Property Name="ID_RESERVA_EDICION" Type="int" Nullable="false" />
+          <Property Name="ID_RESERVA_EDICION" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="FECHA" Type="datetime" Nullable="false" />
           <Property Name="COD_RESERVA" Type="int" Nullable="false" />
           <Property Name="COD_PROD_EDICION" Type="int" Nullable="false" />
