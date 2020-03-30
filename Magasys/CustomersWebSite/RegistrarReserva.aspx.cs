@@ -1,5 +1,6 @@
 ﻿using BLL;
 using BLL.Common;
+using BLL.DAL;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -280,7 +281,7 @@ namespace PL.CustomersWebSite
             try
             {
                 var loListReservas = pReservas.ToList();
-                BLL.DAL.Cliente oCliente = null;
+                Cliente oCliente = null;
 
                 // Validaciones
                 foreach (var item in loListReservas)
@@ -289,7 +290,7 @@ namespace PL.CustomersWebSite
 
                     if (loSplitReseva[0].ToString().Contains("IdUsuario:"))
                     {
-                        oCliente = new BLL.ClienteBLL().ObtenerClientePorUsuario(Convert.ToInt32(loSplitReseva[0].ToString().Replace("IdUsuario:", string.Empty).Trim()));
+                        oCliente = new ClienteBLL().ObtenerClientePorUsuario(Convert.ToInt32(loSplitReseva[0].ToString().Replace("IdUsuario:", string.Empty).Trim()));
                         continue;
                     }
 
@@ -343,11 +344,12 @@ namespace PL.CustomersWebSite
         {
             bool loResutado = true;
             int loUnidadesReserva = 0;
+            List<ReservaEdicion> lstReservaEdicion = null;
 
             try
             {
                 var loListReservas = pReservas.ToList();
-                BLL.DAL.Cliente oCliente = null;
+                Cliente oCliente = null;
 
                 foreach (var item in loListReservas)
                 {
@@ -407,21 +409,25 @@ namespace PL.CustomersWebSite
 
                     if (!String.IsNullOrEmpty(loSplitReseva[1].ToString())) // tiene código Producto Edición?
                     {
-                        BLL.DAL.ReservaEdicion loReservaEdicion = new BLL.DAL.ReservaEdicion()
+                        ReservaEdicion loReservaEdicion = new ReservaEdicion()
                         {
                             FECHA = DateTime.Now,
                             COD_PROD_EDICION = Convert.ToInt32(loSplitReseva[1].ToString()),
                             COD_ESTADO = 10 //Registrada
                         };
 
-                        loReserva.ReservaEdicion.Add(loReservaEdicion);
+                        lstReservaEdicion = new List<ReservaEdicion>();
+                        lstReservaEdicion.Add(loReservaEdicion);
                     }
 
-                    loUnidadesReserva = Convert.ToInt32(loSplitReseva[3].ToString()); // Cantidad de unidades a reservar
+                    if (!String.IsNullOrEmpty(loSplitReseva[3]))
+                        loUnidadesReserva = Convert.ToInt32(loSplitReseva[3].ToString()); // Cantidad de unidades a reservar
+                    else
+                        loUnidadesReserva = 1;
 
                     for (int i = 0; i < loUnidadesReserva; i++)
                     {
-                        loResutado = new ReservaBLL().AltaReserva(loReserva);
+                        loResutado = new ReservaBLL().AltaReservaEdicion(loReserva, lstReservaEdicion);
                         if (!loResutado)
                             break;
                     }
