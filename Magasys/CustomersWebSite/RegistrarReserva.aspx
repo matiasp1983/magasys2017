@@ -127,10 +127,10 @@
                             <h5>Cart Summary</h5>
                         </div>
                         <div class="ibox-content">
-                            <span>Total
+<%--                            <span>Total
                             </span>
                             <h2 class="font-bold">$390,00
-                            </h2>
+                            </h2>--%>
 
                             <hr />
                             <span class="text-muted small">*For United States, France and Germany applicable sales tax will be applied
