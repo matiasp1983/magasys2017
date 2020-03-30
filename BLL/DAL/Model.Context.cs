@@ -100,6 +100,8 @@ public partial class MAGASYSEntities : DbContext
 
     public virtual DbSet<Imagen> Imagen { get; set; }
 
+    public virtual DbSet<Mes> Mes { get; set; }
+
 }
 
 }

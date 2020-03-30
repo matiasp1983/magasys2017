@@ -162,6 +162,13 @@
           <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="ID_PROVINCIA" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Mes">
+          <Key>
+            <PropertyRef Name="ID_MES" />
+          </Key>
+          <Property Name="ID_MES" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE" Type="nvarchar" MaxLength="20" />
+        </EntityType>
         <EntityType Name="Pelicula">
           <Key>
             <PropertyRef Name="ID_PELICULA" />
@@ -988,6 +995,7 @@
           <EntitySet Name="Imagen" EntityType="Self.Imagen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Libro" EntityType="Self.Libro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Localidad" EntityType="Self.Localidad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mes" EntityType="Self.Mes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pelicula" EntityType="Self.Pelicula" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Periodicidad" EntityType="Self.Periodicidad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Producto" EntityType="Self.Producto" Schema="dbo" store:Type="Tables" />
@@ -1462,6 +1470,7 @@
             <End Role="Imagen" EntitySet="Imagen" />
             <End Role="ProductoEdicion" EntitySet="ProductoEdicion" />
           </AssociationSet>
+          <EntitySet Name="Mes" EntityType="MAGASYSModel.Mes" />
           </EntityContainer>
         <EntityType Name="Anio">
           <Key>
@@ -2559,6 +2568,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Mes">
+          <Key>
+            <PropertyRef Name="ID_MES" />
+          </Key>
+          <Property Name="ID_MES" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2950,6 +2966,14 @@
               <MappingFragment StoreEntitySet="Imagen">
                 <ScalarProperty Name="IMAGEN1" ColumnName="IMAGEN" />
                 <ScalarProperty Name="ID_IMAGEN" ColumnName="ID_IMAGEN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Mes">
+            <EntityTypeMapping TypeName="MAGASYSModel.Mes">
+              <MappingFragment StoreEntitySet="Mes">
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="ID_MES" ColumnName="ID_MES" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

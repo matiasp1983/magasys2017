@@ -131,6 +131,9 @@
     <Compile Include="DAL\Localidad.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\Mes.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\Model.Context.cs">
       <DependentUpon>Model.Context.tt</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -178,6 +181,7 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="ForgotPasswordBLL.cs" />
+    <Compile Include="MesBLL.cs" />
     <Compile Include="ReservaEdicionBLL.cs" />
     <Compile Include="DAL\Revista.cs">
       <DependentUpon>Model.tt</DependentUpon>

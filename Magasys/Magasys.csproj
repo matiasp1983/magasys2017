@@ -136,6 +136,7 @@
     <Content Include="AdminDashboard\GeneroListado.aspx" />
     <Content Include="AdminDashboard\img\perfil_default.png" />
     <Content Include="AdminDashboard\img\preview_icons.png" />
+    <Content Include="AdminDashboard\js\plugins\chartJs\Chart.min.js" />
     <Content Include="AdminDashboard\js\plugins\iCheck\icheck.min.js" />
     <Content Include="AdminDashboard\js\plugins\pwstrength\pwstrength-bootstrap.min.js" />
     <Content Include="AdminDashboard\js\plugins\pwstrength\zxcvbn.js" />
