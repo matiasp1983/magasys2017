@@ -78,6 +78,24 @@ namespace BLL
             return bRes;
         }
 
+        public bool ModificarReservaEdidion(ReservaEdicion oReservaEdicion)
+        {
+            var bRes = false;
+            try
+            {
+                using (var rep = new Repository<ReservaEdicion>())
+                {
+                    bRes = rep.Update(oReservaEdicion);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return bRes;
+        }
+
         #endregion
     }
 }

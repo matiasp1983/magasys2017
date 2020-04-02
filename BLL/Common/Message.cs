@@ -97,7 +97,8 @@
         public const string MsjeReservaUnicaFechafin = "Para la reserva Única, el campo Fecha de fin es requerido.";
         public const string MsjeReservaNoSePuedeAnular = "La reserva está Finalizada, no se puede Anular.";
         public const string MsjeReservaAnulada = "La reserva ya se encuentra Anulada.";
-        public const string MsjeReservaAnularOk = "La reserva se pudo anular.";
+        public const string MsjeReservaAnularReservaEntregada = "El producto fue entregado, no se puede anular.";
+        public const string MsjeReservaAnularOk = "La reserva fue anulada.";
         public const string MsjeReservaAnularFailure = "La reserva no se pudo anular.";
         public const string MsjeReservaFinalizadaNoEditar = "La reserva Finalizada no se puede modificar.";
         public const string MsjeReservaAnuladaNoEditar = "La reserva Anulada no se puede modificar.";

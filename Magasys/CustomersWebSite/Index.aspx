@@ -120,6 +120,7 @@
                                                         <th>C&oacute;digo</th>
                                                         <th>Fecha de solicitud</th>
                                                         <th data-hide="phone,tablet" >Producto</th>
+                                                        <th>Estado</th>
                                                         <th>Tipo de Reserva</th>
                                                         <th data-hide="phone">Forma de Entrega</th>
                                                         <th data-hide="phone,tablet" >Inicio de Reserva</th>
@@ -155,6 +156,9 @@
                                                 <td class="text-left">
                                                     <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE_PRODUCTO").ToString().Length > 23 ? String.Format("{0}...", Eval("NOMBRE_PRODUCTO").ToString().Remove(23).TrimEnd()):Eval("NOMBRE_PRODUCTO")%>'></asp:Label>
                                                 </td>  
+                                                <td class="text-left">
+                                                    <asp:Label ID="lblEstado" runat="server" Text='<%#Eval("ESTADO").ToString()%>'></asp:Label>
+                                                </td>
                                                 <td class="text-left">
                                                     <asp:Label ID="lblTipoReserva" runat="server" Text='<%#Eval("TIPO_RESERVA").ToString()%>'></asp:Label>
                                                 </td>  

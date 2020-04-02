@@ -391,7 +391,10 @@ namespace PL.CustomersWebSite
                                 loReserva.COD_TIPO_RESERVA = 2; //Periódica
                             break;
                         case 3: //Colección
-                            loReserva.COD_TIPO_RESERVA = 1; //Única
+                            if (loReserva.FECHA_INICIO == null && !String.IsNullOrEmpty(loSplitReseva[1].ToString()))
+                                loReserva.COD_TIPO_RESERVA = 1; //Única
+                            else
+                                loReserva.COD_TIPO_RESERVA = 2; //Periódica
                             break;
                         case 4: //Libro
                             loReserva.COD_TIPO_RESERVA = 1; //Única

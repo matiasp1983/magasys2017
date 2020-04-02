@@ -65,6 +65,7 @@ namespace PL.CustomersWebSite
         protected void BtnAnular_Click(object sender, EventArgs e)
         {
             bool loResultado = false;
+            int loEstadoReservaEdicion = 0;
             BLL.DAL.Reserva loReserva = new BLL.DAL.Reserva();
 
             try
@@ -76,22 +77,41 @@ namespace PL.CustomersWebSite
                     {
                         loReserva = loRepReserva.Find(p => p.ID_RESERVA == loIdReserva);
 
+                        if (loReserva.ReservaEdicion.Count > 0)
+                            loEstadoReservaEdicion = loReserva.ReservaEdicion.SingleOrDefault().Estado.ID_ESTADO;
+
                         if (loReserva.COD_ESTADO == 8)
                         {
                             Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.InfoModal(Message.MsjeReservaNoSePuedeAnular)); //"La reserva está Finalizada, no se puede Anular."
                             return;
                         }
-                        else if (loReserva.COD_ESTADO == 9)
+                        else if (loReserva.COD_ESTADO == 9 || loEstadoReservaEdicion == 12)
                         {
                             Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.InfoModal(Message.MsjeReservaAnulada)); //"La reserva ya se encuentra Anulada."
                             return;
                         }
+                        else if (loEstadoReservaEdicion == 11) // Resserva Edición Entregada
+                        {
+                            Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.InfoModal(Message.MsjeReservaAnularReservaEntregada)); //"El producto fue entregado, no se puede anular."
+                            return;
+                        }
 
                         loReserva.COD_ESTADO = 9; // Estado Anulada
+                        if (loEstadoReservaEdicion > 0)
+                        {
+                            var loReservaEdicion = new BLL.ReservaEdicionBLL().ObtenerReservaEdicion(loReserva.ReservaEdicion.SingleOrDefault().ID_RESERVA_EDICION);
+                            loReservaEdicion.COD_ESTADO = 12; // Estado Anulada para la reserva edición
+                            loResultado = new BLL.ReservaEdicionBLL().ModificarReservaEdidion(loReservaEdicion);
+                            if (loResultado)
+                                loResultado = new BLL.ReservaBLL().ModificarReserva(loReserva);
+                        }
                     }
 
-                    loResultado = new BLL.ReservaBLL().ModificarReserva(loReserva);
+                    if (loEstadoReservaEdicion == 0)
+                        loResultado = new BLL.ReservaBLL().ModificarReserva(loReserva);
+
                     // FALTA AGREGAR ACTUALIZAR STOCK
+
                 }
 
                 if (loResultado)
@@ -210,7 +230,7 @@ namespace PL.CustomersWebSite
                     oReservaFiltro.FECHAFINRESERVADESDE = Convert.ToDateTime(txtFechaFinReserva.Text);
 
                 if (!String.IsNullOrEmpty(ddlFormaEntrega.SelectedValue))
-                    oReservaFiltro.COD_FORMA_ENTREGA = ddlFormaEntrega.SelectedValue; 
+                    oReservaFiltro.COD_FORMA_ENTREGA = ddlFormaEntrega.SelectedValue;
             }
 
             return oReservaFiltro;

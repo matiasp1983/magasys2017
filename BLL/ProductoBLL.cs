@@ -190,7 +190,10 @@ namespace BLL
         public List<ProductoCustomersWebSite> ObtenerProductosSeleccionados(ProductoFiltro oProductoFiltro)
         {
             List<ProductoCustomersWebSite> lstProductoCustomersWebSite = null;
+            List<ProdEdicionCustomersWebSite> lstProductoEdicionLibro = null;
+            List<ProdEdicionCustomersWebSite> lstProductoEdicionPelicula = null;
             List<Producto> lstProducto = null;
+            bool loExisteProducto = false;
 
             try
             {
@@ -239,9 +242,14 @@ namespace BLL
                                 var oProductoDiario = new DiarioBLL().ObtenerDiario(loProduto.ID_PRODUCTO);
                                 if (oProductoDiario.PRECIO != null)
                                     oProductoCustomersWebSite.PRECIO = string.Format(System.Globalization.CultureInfo.GetCultureInfo("de-DE"), "{0:0.00}", oProductoDiario.PRECIO);
+                                loExisteProducto = true;
+
                                 break;
 
                             case 4:
+                                lstProductoEdicionLibro = new ProductoEdicionBLL().ObtenerEdiciones(4, loProduto.ID_PRODUCTO);
+                                if (lstProductoEdicionLibro.Count == 0)
+                                    break;
                                 var oProductoLibro = new LibroBLL().ObtenerLibro(loProduto.ID_PRODUCTO);
                                 if (!String.IsNullOrEmpty(oProductoLibro.EDITORIAL))
                                     oProductoCustomersWebSite.EDITORIAL = "Editorial: " + oProductoLibro.EDITORIAL;
@@ -255,10 +263,14 @@ namespace BLL
                             case 5:
                                 var oProductoSuplemento = new SuplementoBLL().ObtenerSuplemento(loProduto.ID_PRODUCTO);
                                 oProductoCustomersWebSite.NOMBRE_DIARIO = "Diario: " + oProductoSuplemento.NOMBRE_DIARIO;
+                                loExisteProducto = true;
 
                                 break;
 
                             case 6:
+                                lstProductoEdicionPelicula = new ProductoEdicionBLL().ObtenerEdiciones(6, loProduto.ID_PRODUCTO);
+                                if (lstProductoEdicionPelicula.Count == 0)
+                                    break;
                                 var oProductoPelicula = new PeliculaBLL().ObtenerPelicula(loProduto.ID_PRODUCTO);
                                 if (oProductoPelicula.ANIO > 0)
                                     oProductoCustomersWebSite.ANIO = "Año: " + oProductoPelicula.ANIO.ToString();
@@ -267,13 +279,33 @@ namespace BLL
                                 break;
 
                             default:
+
+                                loExisteProducto = true;
+
                                 break;
                         }
 
                         if (oProductoCustomersWebSite.PRECIO == null)
                             oProductoCustomersWebSite.PRECIO = "0,00";
 
-                        lstProductoCustomersWebSite.Add(oProductoCustomersWebSite);
+                        if (lstProductoEdicionLibro != null)
+                            foreach (var itemProductoEdicionLibro in lstProductoEdicionLibro.Where(x => x.CANTIDAD_DISPONIBLE > 0))
+                            {  // Hay stock del libro
+                                loExisteProducto = true;
+                                break;
+                            }
+
+                        if (lstProductoEdicionPelicula != null)
+                            foreach (var itemProductoEdicionPelicula in lstProductoEdicionPelicula.Where(x => x.CANTIDAD_DISPONIBLE > 0))
+                            {  // Hay stock de la película
+                                loExisteProducto = true;
+                                break;
+                            }
+
+                        if (loExisteProducto)
+                            lstProductoCustomersWebSite.Add(oProductoCustomersWebSite);
+
+                        loExisteProducto = false;
                     }
                 }
             }

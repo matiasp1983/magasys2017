@@ -172,7 +172,8 @@ namespace BLL
                             COD_PRODUCTO_EDICION = loProductoEdicion.ID_PRODUCTO_EDICION,
                             COD_PRODUCTO = Convert.ToInt32(codigo_producto),
                             PRECIO = string.Format(System.Globalization.CultureInfo.GetCultureInfo("de-DE"), "{0:0.00}", loProductoEdicion.PRECIO),
-                            EDICION = loProductoEdicion.EDICION
+                            EDICION = loProductoEdicion.EDICION,
+                            CANTIDAD_DISPONIBLE = loProductoEdicion.CANTIDAD_DISPONIBLE
                         };
 
                         if (loProductoEdicion.DESCRIPCION != null)
@@ -217,6 +218,7 @@ namespace BLL
         public string EDICION { get; set; }
         public string PRECIO { get; set; }
         public string FECHA_EDICION { get; set; }
+        public int CANTIDAD_DISPONIBLE { get; set; }
     }
 
     #endregion

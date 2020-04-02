@@ -275,6 +275,11 @@ namespace BLL
                             NOMBRE_PRODUCTO = loReserva.Producto.NOMBRE
                         };
 
+                        if (loReserva.ReservaEdicion.Count > 0)
+                            oReservaListado.ESTADO = loReserva.ReservaEdicion.SingleOrDefault().Estado.NOMBRE; // Estado de la reserva Edición
+                        else
+                            oReservaListado.ESTADO = loReserva.Estado.NOMBRE; // Estado de la reserva
+
                         if (loReserva.FECHA_INICIO != null)
                             oReservaListado.FECHA_INICIO = Convert.ToDateTime(loReserva.FECHA_INICIO);
 

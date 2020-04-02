@@ -129,6 +129,8 @@ namespace PL.CustomersWebSite
 
         private void ObtenerEdiciones()
         {
+            List<ProdEdicionCustomersWebSite> lstProdEdicion = new List<ProdEdicionCustomersWebSite>();
+
             try
             {
                 if (Session[Enums.Session.ProductoReserva.ToString()] != null)
@@ -140,10 +142,15 @@ namespace PL.CustomersWebSite
                     {
                         var lstProductos = new ProductoEdicionBLL().ObtenerEdiciones(Convert.ToInt32(loCodTipoProducto), Convert.ToInt32(loCodProducto));
                         if (lstProductos != null && lstProductos.Count > 0)
-                            lsvProductos.DataSource = lstProductos;
+                        {
+                            foreach (var item in lstProductos.Where(x => x.CANTIDAD_DISPONIBLE > 0))
+                                lstProdEdicion.Add(item);
+                        }
                     }
                 }
 
+                if (lstProdEdicion.Count > 0)
+                    lsvProductos.DataSource = lstProdEdicion;
                 lblTotalAbonar.Text = "0,00";
                 lsvProductos.DataBind();
                 lsvProductos.Visible = true;
