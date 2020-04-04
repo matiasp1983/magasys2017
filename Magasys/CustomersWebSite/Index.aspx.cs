@@ -3,9 +3,7 @@ using BLL.DAL;
 using BLL.Filters;
 using NLog;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -48,9 +46,6 @@ namespace PL.CustomersWebSite
                 if (e.Item.ItemType != ListViewItemType.DataItem) return;
 
                 var loIdReserva = ((BLL.ReservaListado)e.Item.DataItem).ID_RESERVA.ToString();
-
-                //HtmlButton btnModificar = ((HtmlButton)e.Item.FindControl("btnModificar"));
-                //btnModificar.Attributes.Add("value", loIdReserva);
 
                 HiddenField hdIdReserva = ((HiddenField)e.Item.FindControl("hdIdReserva"));
                 hdIdReserva.Value = loIdReserva.ToString();
