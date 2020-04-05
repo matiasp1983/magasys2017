@@ -1,13 +1,11 @@
 ﻿using BLL;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
 using BLL.Common;
-using BLL.DAL;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using NLog;
 
 namespace PL.AdminDashboard
 {
@@ -17,11 +15,8 @@ namespace PL.AdminDashboard
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
             if (!Page.IsPostBack)
-            {
                 CargarGrilla();
-            }
         }
 
         protected void BtnGuardar_Click(object sender, EventArgs e)
@@ -32,38 +27,40 @@ namespace PL.AdminDashboard
             {
                 foreach (var loItem in lsvReservaEdicion.Items)
                 {
-                    
-
                     if (((HtmlInputCheckBox)loItem.Controls[1]).Checked)
                     {
                         BLL.DAL.ReservaEdicion oReservaConfirmada = new BLL.DAL.ReservaEdicion()
                         {
-                            ID_RESERVA_EDICION = new BLL.ReservaEdicionBLL().ObtenerProximaReserva(),
+                            ID_RESERVA_EDICION = new ReservaEdicionBLL().ObtenerProximaReserva(),
                             COD_RESERVA = Convert.ToInt32(((Label)loItem.Controls[3]).Text),
                             COD_PROD_EDICION = Convert.ToInt32(((Label)loItem.Controls[9]).Text),
                             FECHA = DateTime.Now,
                             COD_ESTADO = 10
-
                         };
 
-                        loResutado = new BLL.ReservaEdicionBLL().AltaReservaEdicion(oReservaConfirmada);
-                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeProductoIngresoSuccessAlta, "Alta de Ingreso de productos"));
-                        Response.Redirect("Index.aspx", false);
-
+                        loResutado = new ReservaEdicionBLL().AltaReservaEdicion(oReservaConfirmada);
+                        if (!loResutado)
+                            break;
                     }
                 }
-            }
 
-            catch (Exception)
+                if (loResutado)
+                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeProductoIngresoSuccessAlta, "Alta de Ingreso de productos", "Index.aspx"));
+                else
+                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeReservaFailure));
+            }
+            catch (Exception ex)
             {
-                throw;
-            }
+                Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeReservaFailure));
 
+                Logger loLogger = LogManager.GetCurrentClassLogger();
+                loLogger.Error(ex);
+            }
         }
 
         protected void BtnCancelar_Click(object sender, EventArgs e)
         {
-
+            Response.Redirect("ProductoIngreso.aspx", false);
         }
 
         #endregion
@@ -82,12 +79,7 @@ namespace PL.AdminDashboard
 
         private List<ReservaClienteListado> MapListViewToListObject(ListView pListView)
         {
-            bool loResultado = false;
-
             List<ReservaClienteListado> lstReservas = (List<ReservaClienteListado>)pListView.DataSource;
-
-            if (loResultado)
-                lstReservas = null;
 
             return lstReservas;
         }
