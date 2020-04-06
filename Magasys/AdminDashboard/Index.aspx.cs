@@ -28,7 +28,7 @@ namespace PL.AdminDashboard
             {
                 ddlMes.DataSource = oMes.ObtenerMeses();
                 ddlMes.DataTextField = "NOMBRE";
-                ddlMes.DataValueField = "ID_MES";
+                ddlMes.DataValueField = "NOMBRE";
                 ddlMes.DataBind();                
             }
             catch (Exception ex)

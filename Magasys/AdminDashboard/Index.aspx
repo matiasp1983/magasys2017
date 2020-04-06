@@ -82,7 +82,7 @@
 
         function DibujarGrafico() {
             var barData = {
-                labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"],
+                labels:  $(".select2_mes").val(),
                 datasets: [
                     {
                         label: "Dato 1",
