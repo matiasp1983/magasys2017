@@ -62,107 +62,107 @@ namespace PL.AdminDashboard
 
         private void MenuPrincipal(BLL.DAL.Usuario pUsuario)
         {
-            String loActivePage = Request.RawUrl;
-            if (loActivePage.Contains("Index.aspx"))
+            String loActivePage = Request.Url.Segments[2];
+            if (loActivePage.Equals("Index.aspx"))
             {
                 liPrincipal.Attributes["class"] = "active";
             }
-            if (loActivePage.Contains("Proveedor.aspx"))
+            if (loActivePage.Equals("Proveedor.aspx"))
             {
                 liProveedores.Attributes["class"] = "active";
                 liAltaProveedor.Attributes["class"] = "active";
             }
-            if (loActivePage.Contains("ProveedorListado.aspx"))
+            if (loActivePage.Equals("ProveedorListado.aspx"))
             {
                 liProveedores.Attributes["class"] = "active";
                 liProveedorListado.Attributes["class"] = "active";
             }
-            if (loActivePage.Contains("Producto.aspx"))
+            if (loActivePage.Equals("Producto.aspx"))
             {
                 liProductos.Attributes["class"] = "active";
                 liAltaProducto.Attributes["class"] = "active";
             }
-            if (loActivePage.Contains("ProductoListado.aspx"))
+            if (loActivePage.Equals("ProductoListado.aspx"))
             {
                 liProductos.Attributes["class"] = "active";
                 liProductoListado.Attributes["class"] = "active";
             }
-            if (loActivePage.Contains("Genero.aspx"))
+            if (loActivePage.Equals("Genero.aspx"))
             {
                 liProductos.Attributes["class"] = "active";
                 liAltaGenero.Attributes["class"] = "active";
             }
-            if (loActivePage.Contains("GeneroListado.aspx"))
+            if (loActivePage.Equals("GeneroListado.aspx"))
             {
                 liProductos.Attributes["class"] = "active";
                 liGeneroListado.Attributes["class"] = "active";
             }
-            if (loActivePage.Contains("Cliente.aspx"))
+            if (loActivePage.Equals("Cliente.aspx"))
             {
                 liClientes.Attributes["class"] = "active";
                 liAltaCliente.Attributes["class"] = "active";
             }
-            if (loActivePage.Contains("ClienteListado.aspx"))
+            if (loActivePage.Equals("ClienteListado.aspx"))
             {
                 liClientes.Attributes["class"] = "active";
                 liClienteListado.Attributes["class"] = "active";
             }
-            if (loActivePage.Contains("VisualizarDeudas.aspx"))
+            if (loActivePage.Equals("VisualizarDeudas.aspx"))
             {
                 liClientes.Attributes["class"] = "active";
                 liVisualizarDeudas.Attributes["class"] = "active";
             }
-            if (loActivePage.Contains("Cobro.aspx"))
+            if (loActivePage.Equals("Cobro.aspx"))
             {
                 liClientes.Attributes["class"] = "active";
                 liRegistrarCobro.Attributes["class"] = "active";
             }
-            if (loActivePage.Contains("CobroListado.aspx"))
+            if (loActivePage.Equals("CobroListado.aspx"))
             {
                 liClientes.Attributes["class"] = "active";
                 liCobroListado.Attributes["class"] = "active";
             }
-            if (loActivePage.Contains("ProductoIngreso.aspx"))
+            if (loActivePage.Equals("ProductoIngreso.aspx"))
             {
                 liDeposito.Attributes["class"] = "active";
                 liProductoIngreso.Attributes["class"] = "active";
             }
-            if (loActivePage.Contains("ProductoIngresoListado.aspx"))
+            if (loActivePage.Equals("ProductoIngresoListado.aspx"))
             {
                 liDeposito.Attributes["class"] = "active";
                 liProductoIngresoListado.Attributes["class"] = "active";
             }
-            if (loActivePage.Contains("Venta.aspx"))
+            if (loActivePage.Equals("Venta.aspx"))
             {
                 liVenta.Attributes["class"] = "active";
                 liRegistrarVenta.Attributes["class"] = "active";
             }
-            if (loActivePage.Contains("VentaListado.aspx"))
+            if (loActivePage.Equals("VentaListado.aspx"))
             {
                 liVenta.Attributes["class"] = "active";
                 liVentaListado.Attributes["class"] = "active";
             }
-            if (loActivePage.Contains("ProductoDevolucion.aspx"))
+            if (loActivePage.Equals("ProductoDevolucion.aspx"))
             {
                 liDeposito.Attributes["class"] = "active";
                 liProductoDevolucion.Attributes["class"] = "active";
             }
-            if (loActivePage.Contains("ProductoDevolucionListado.aspx"))
+            if (loActivePage.Equals("ProductoDevolucionListado.aspx"))
             {
                 liDeposito.Attributes["class"] = "active";
                 liProductoDevolucionListado.Attributes["class"] = "active";
             }
-            if (loActivePage.Contains("Reserva.aspx"))
+            if (loActivePage.Equals("Reserva.aspx"))
             {
                 liReserva.Attributes["class"] = "active";
                 liRegistrarReserva.Attributes["class"] = "active";
             }
-            if (loActivePage.Contains("ReservaFinalizar.aspx"))
+            if (loActivePage.Equals("ReservaFinalizar.aspx"))
             {
                 liReserva.Attributes["class"] = "active";
                 liReservaFinalizar.Attributes["class"] = "active";
             }
-            if (loActivePage.Contains("ReservaListado.aspx"))
+            if (loActivePage.Equals("ReservaListado.aspx"))
             {
                 liReserva.Attributes["class"] = "active";
                 liReservaListado.Attributes["class"] = "active";
@@ -174,13 +174,13 @@ namespace PL.AdminDashboard
                 {
                     liUsuarios.Visible = true;
 
-                    if (loActivePage.Contains("Usuario.aspx"))
+                    if (loActivePage.Equals("Usuario.aspx"))
                     {
                         liUsuarios.Attributes["class"] = "active";
                         liAltaUsuario.Attributes["class"] = "active";
                     }
 
-                    if (loActivePage.Contains("UsuarioListado.aspx"))
+                    if (loActivePage.Equals("UsuarioListado.aspx"))
                     {
                         liUsuarios.Attributes["class"] = "active";
                         liUsuarioListado.Attributes["class"] = "active";

@@ -163,6 +163,7 @@
     <Content Include="AdminDashboard\ProductoSuplementoEditar.aspx" />
     <Content Include="AdminDashboard\ProductoSuplementoVisualizar.aspx" />
     <Content Include="AdminDashboard\ProveedorEditar.aspx" />
+    <Content Include="AdminDashboard\RegistrarEntregaProducto.aspx" />
     <Content Include="AdminDashboard\Reserva.aspx" />
     <Content Include="AdminDashboard\ReservaEdicion.aspx" />
     <Content Include="AdminDashboard\ReservaEditar.aspx" />
@@ -639,6 +640,13 @@
     </Compile>
     <Compile Include="AdminDashboard\ProveedorVisualizar.aspx.designer.cs">
       <DependentUpon>ProveedorVisualizar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\RegistrarEntregaProducto.aspx.cs">
+      <DependentUpon>RegistrarEntregaProducto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\RegistrarEntregaProducto.aspx.designer.cs">
+      <DependentUpon>RegistrarEntregaProducto.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminDashboard\Reserva.aspx.cs">
       <DependentUpon>Reserva.aspx</DependentUpon>
