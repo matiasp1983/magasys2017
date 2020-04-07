@@ -120,11 +120,11 @@
 
         #region Mensajes Genero
 
-        public const string MsjeGeneroSuccessAlta = "El Genero se guardó correctamente.";
-        public const string MsjeGeneroFailure = "El Genero no se pudo guardar.";
-        public const string MsjeNombreGeneroExist = "El Nombre de Genero ingresado ya existe.";
-        public const string MsjeListadoGenerosFiltrarTotalSinResultados = "No se encontraron Generos para la búsqueda seleccionada.";
-        public const string MsjeGeneroSuccessModificacion = "El Genero se modificó correctamente.";
+        public const string MsjeGeneroSuccessAlta = "El Género se guardó correctamente.";
+        public const string MsjeGeneroFailure = "El Género no se pudo guardar.";
+        public const string MsjeNombreGeneroExist = "El Nombre de Género ingresado ya existe.";
+        public const string MsjeListadoGenerosFiltrarTotalSinResultados = "No se encontraron Géneros para la búsqueda seleccionada.";
+        public const string MsjeGeneroSuccessModificacion = "El Género se modificó correctamente.";
 
         #endregion
 
