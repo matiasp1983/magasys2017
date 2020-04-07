@@ -88,7 +88,7 @@ namespace PL.AdminDashboard
                 {
                     oGenero = (BLL.DAL.Genero)Session[Enums.Session.Genero.ToString()];
                     if (oGenero.ID_GENERO > 0)
-                        txtID.Text = oGenero.ID_GENERO.ToString();
+                        txtCodigo.Text = oGenero.ID_GENERO.ToString();
                     txtNombre.Text = oGenero.NOMBRE.ToString();
                 }
             }

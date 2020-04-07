@@ -29,10 +29,10 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">ID</label>
+                                <label class="col-sm-2 control-label">Código</label>
 
                                 <div class="col-sm-10">
-                                    <asp:TextBox ID="txtID" runat="server" CssClass="form-control" MaxLength="11" autocomplete="off" ReadOnly="true"></asp:TextBox>
+                                    <asp:TextBox ID="txtCodigo" runat="server" CssClass="form-control" MaxLength="11" autocomplete="off" ReadOnly="true"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
