@@ -36,7 +36,7 @@ namespace PL.AdminDashboard
 
                     if (loResultado)
                     {
-                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeGeneroSuccessAlta, "Alta Genero", "Genero.aspx"));
+                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeGeneroSuccessAlta, "Alta Genero", "GeneroListado.aspx"));
                         LimpiarCampos();
                     }
                     else
@@ -60,7 +60,7 @@ namespace PL.AdminDashboard
 
         protected void BtnCancelar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Index.aspx", false);
+            Response.Redirect("GeneroListado.aspx", false);
         }
 
         #endregion

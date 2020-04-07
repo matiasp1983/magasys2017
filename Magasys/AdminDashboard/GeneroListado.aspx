@@ -5,7 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="contentMaster" runat="server">
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>Listado de Generos</h2>
+            <h2>Listado de Géneros</h2>
             <ol class="breadcrumb">
                 <li>
                     <a href="Index.aspx">Principal</a>
@@ -13,7 +13,7 @@
                 <li>Producto
                 </li>
                 <li class="active">
-                    <strong>Listado de Generos</strong>
+                    <strong>Listado de Géneros</strong>
                 </li>
             </ol>
         </div>
@@ -104,7 +104,6 @@
                                         <td>
                                             <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE").ToString().Length > 23 ? String.Format("{0}...", Eval("NOMBRE").ToString().Remove(23).TrimEnd()):Eval("NOMBRE")%>'></asp:Label>
                                         </td>
-                                        
                                         <td class="text-right">
                                             <div class="btn-group">
                                                 <button runat="server" id="btnModificar" class="btn btn-outline btn-info  btn-xl" title="Modificar" onserverclick="BtnModificar_Click"><i class="fa fa-pencil"></i></button>
@@ -125,11 +124,10 @@
                                                 <span style="position: absolute; width: 5px; height: 47px; left: 50%; top: 10px; -webkit-border-radius: 2px; border-radius: 2px; margin-left: -2px; background-color: #F8BB86;"></span>
                                                 <span style="position: absolute; width: 7px; height: 7px; -webkit-border-radius: 50%; border-radius: 50%; margin-left: -3px; left: 50%; bottom: 10px; background-color: #F8BB86;"></span>
                                             </div>
-                                            <h2 style="color: #575757; font-size: 30px; text-align: center; font-weight: 600; text-transform: none; position: relative; margin: 25px 0; padding: 0; line-height: 40px; display: block;">¿Está seguro que quiere dar de baja el Proveedor?</h2>
+                                            <h2 style="color: #575757; font-size: 30px; text-align: center; font-weight: 600; text-transform: none; position: relative; margin: 25px 0; padding: 0; line-height: 40px; display: block;">¿Está seguro que quiere dar de baja el Género?</h2>
                                             <p style="color: #797979; font-size: 16px; font-weight: 300; position: relative; text-align: center; float: none; margin: 0; padding: 0; line-height: normal;">
                                                 Se dará de baja el Genero con ID: <b>
-                                                    <asp:Label ID="lblIDGeneroBaja" runat="server"></asp:Label></b>.
-                                           
+                                                    <asp:Label ID="lblIDGeneroBaja" runat="server"></asp:Label></b>.                                           
                                             </p>
                                         </div>
                                         <div class="modal-footer" style="text-align: center; padding-top: 0px;">
@@ -149,13 +147,9 @@
             </div>
         </form>
     </div>
-
-
-
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="script" runat="server">
-
-        <script type="text/javascript">
+    <script type="text/javascript">
         var hdIdGeneroBaja = '#<%=hdIdGeneroBaja.ClientID%>';
         var lblIdGeneroBaja = '#<%=lblIDGeneroBaja.ClientID%>';
     </script>
