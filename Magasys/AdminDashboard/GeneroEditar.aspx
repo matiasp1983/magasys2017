@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminDashboard/MasterPage.Master" AutoEventWireup="true" CodeBehind="GeneroEditar.aspx.cs" Inherits="PL.AdminDashboard.GeneroEditar" %>
+﻿<%@ Page Title="Datos del GéneroEditar" Language="C#" MasterPageFile="~/AdminDashboard/MasterPage.Master" AutoEventWireup="true" CodeBehind="GeneroEditar.aspx.cs" Inherits="PL.AdminDashboard.GeneroEditar" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>

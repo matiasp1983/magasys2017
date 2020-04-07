@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminDashboard/MasterPage.Master" AutoEventWireup="true" CodeBehind="Genero.aspx.cs" Inherits="PL.AdminDashboard.Genero" %>
+﻿<%@ Page Title="Datos del Género" Language="C#" MasterPageFile="~/AdminDashboard/MasterPage.Master" AutoEventWireup="true" CodeBehind="Genero.aspx.cs" Inherits="PL.AdminDashboard.Genero" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>

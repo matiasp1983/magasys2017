@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminDashboard/MasterPage.Master" AutoEventWireup="true" CodeBehind="GeneroListado.aspx.cs" Inherits="PL.AdminDashboard.GeneroListado" %>
+﻿<%@ Page Title="Listado de Géneros" Language="C#" MasterPageFile="~/AdminDashboard/MasterPage.Master" AutoEventWireup="true" CodeBehind="GeneroListado.aspx.cs" Inherits="PL.AdminDashboard.GeneroListado" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -24,15 +24,15 @@
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>Buscar Genero</h5>
+                            <h5>Buscar Género</h5>
                         </div>
                         <div class="ibox-content">
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="col-sm-10 control-label">ID</label>
-                                            <asp:TextBox ID="txtID" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off"></asp:TextBox>
+                                            <label class="col-sm-10 control-label">Código</label>
+                                            <asp:TextBox ID="txtCodigo" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off"></asp:TextBox>
                                         </div>
                                     </div>
                                 </div>
@@ -79,7 +79,7 @@
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="5">
                                         <thead>
                                             <tr>
-                                                <th class="text-left">ID</th>
+                                                <th class="text-left">Código</th>
                                                 <th data-hide="phone,tablet">Nombre</th>
                                                 <th class="text-right" data-sort-ignore="true">Acci&oacute;n</th>
                                             </tr>

@@ -114,12 +114,12 @@ namespace PL.AdminDashboard
 
             oGeneroFiltro = new GeneroFiltro();
 
-            if (string.IsNullOrEmpty(txtID.Text))
+            if (string.IsNullOrEmpty(txtCodigo.Text))
                     oGeneroFiltro.Id_Genero = 0;
                 else
                 {
                     int loIdGenero;
-                    bool loResultado = int.TryParse(txtID.Text, out loIdGenero);
+                    bool loResultado = int.TryParse(txtCodigo.Text, out loIdGenero);
                     if (loResultado)
                         oGeneroFiltro.Id_Genero = loIdGenero;
                     else
