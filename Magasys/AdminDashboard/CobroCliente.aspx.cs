@@ -110,7 +110,7 @@ namespace PL.AdminDashboard
 
                         lstVentaListado.Add(oVentaListado);
                         var loTotal = oVentaListado.TOTAL.Replace('$', ' ').Trim();
-                        loMontoTotal += Convert.ToInt32(loTotal);
+                        loMontoTotal += Convert.ToDouble(loTotal);
                         break;
                     }
                 }

@@ -186,9 +186,9 @@ namespace PL.AdminDashboard
                 DetalleVenta oDetalleVenta = new DetalleVenta
                 {
                     COD_PRODUCTO_EDICION = Convert.ToInt32(((Label)loItem.Controls[17]).Text.ToString()),
-                    PRECIO_UNIDAD = Convert.ToInt32(((Label)loItem.Controls[9]).Text.Split('$').Last().ToString()),
+                    PRECIO_UNIDAD = Convert.ToDouble(((Label)loItem.Controls[9]).Text.ToString().Replace('$', ' ').Trim()),
                     CANTIDAD = Convert.ToInt32(((Label)loItem.Controls[11]).Text.ToString()),
-                    SUBTOTAL = Convert.ToInt32(((Label)loItem.Controls[13]).Text.Split('$').Last().ToString())
+                    SUBTOTAL = Convert.ToDouble(((Label)loItem.Controls[13]).Text.ToString().Replace('$', ' ').Trim())
                 };
 
                 lstDetalleVenta.Add(oDetalleVenta);
@@ -783,7 +783,7 @@ namespace PL.AdminDashboard
             && ((Label)x.Controls[7]).Text.ToString().Equals(loEdicion)).First();
             lsvVenta.Items.Remove(loItem);
 
-            var loMonto = ((Label)loItem.Controls[13]).Text.Split(' ').Last();
+            var loMonto = ((Label)loItem.Controls[13]).Text.ToString().Replace('$', ' ').Trim();
             loMontoTotal = loMontoTotal - Convert.ToDouble(loMonto);
             lblTotal.Text = loMontoTotal.ToString();
             lsvVenta.DataSource = MapListViewToListObject(lsvVenta);
