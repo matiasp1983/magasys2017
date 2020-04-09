@@ -36,7 +36,8 @@
             IdProductoEdicion,
             Usuario,            
             ProductoReservaEdicionSeleccionados,
-            CantidadDePedidos
+            CantidadDePedidos,
+            DetalleVenta
         }        
 
         #endregion
