@@ -229,6 +229,79 @@ namespace BLL
             return lstVentaListado;
         }
 
+        public List<VentaListado> ObtenerVentasPorCliente(VentaFiltro oVentaFiltro)
+        {
+            List<VentaListado> lstVentaListado = null;
+            List<Venta> lstVenta = null;
+
+            try
+            {
+                using (var loRepVenta = new Repository<Venta>())
+                {
+                    if (oVentaFiltro.TIPO_DOCUMENTO != 0 && oVentaFiltro.NRO_DOCUMENTO != 0 && oVentaFiltro.COD_ESTADO != 0)
+                    {   // Cuando filtramos por tipo y nro de documento y por estado
+                        lstVenta = loRepVenta.Search(p => p.COD_ESTADO == oVentaFiltro.COD_ESTADO && p.COD_CLIENTE != null && p.Cliente.TIPO_DOCUMENTO == oVentaFiltro.TIPO_DOCUMENTO && p.Cliente.NRO_DOCUMENTO == oVentaFiltro.NRO_DOCUMENTO).OrderByDescending(p => p.ID_VENTA).ToList();
+                    }
+                    else if (oVentaFiltro.TIPO_DOCUMENTO != 0 && oVentaFiltro.NRO_DOCUMENTO != 0 && oVentaFiltro.COD_ESTADO == 0)
+                    {   // Cuando filtramos por tipo y nro de documento
+                        lstVenta = loRepVenta.Search(p => p.COD_CLIENTE != null && p.Cliente.TIPO_DOCUMENTO == oVentaFiltro.TIPO_DOCUMENTO && p.Cliente.NRO_DOCUMENTO == oVentaFiltro.NRO_DOCUMENTO).OrderByDescending(p => p.ID_VENTA).ToList();
+                    }
+
+                    if (lstVenta.Count > 0)
+                    {
+                        if (oVentaFiltro.FECHAVENTADESDE != null && oVentaFiltro.FECHAVENTAHASTA != null)
+                            lstVenta = lstVenta.FindAll(p => p.FECHA.Date >= oVentaFiltro.FECHAVENTADESDE && p.FECHA.Date <= oVentaFiltro.FECHAVENTAHASTA);
+                        else if (oVentaFiltro.FECHAVENTADESDE != null && oVentaFiltro.FECHAVENTAHASTA == null)
+                            lstVenta = lstVenta.FindAll(p => p.FECHA.Date >= oVentaFiltro.FECHAVENTADESDE);
+                        else if (oVentaFiltro.FECHAVENTADESDE == null && oVentaFiltro.FECHAVENTAHASTA != null)
+                            lstVenta = lstVenta.FindAll(p => p.FECHA.Date <= oVentaFiltro.FECHAVENTAHASTA);
+
+                        if (lstVenta.Count > 0 && oVentaFiltro.ID_VENTA != 0)
+                            lstVenta = lstVenta.FindAll(p => p.ID_VENTA == oVentaFiltro.ID_VENTA);
+
+                        if (lstVenta.Count > 0 && oVentaFiltro.COD_FORMA_PAGO != 0)
+                            lstVenta = lstVenta.FindAll(p => p.COD_FORMA_PAGO == oVentaFiltro.COD_FORMA_PAGO);
+
+                        if (lstVenta.Count > 0 && !String.IsNullOrEmpty(oVentaFiltro.NOMBRE))
+                            lstVenta = lstVenta.FindAll(p => p.COD_CLIENTE != null && p.Cliente.NOMBRE.ToUpper().Contains(oVentaFiltro.NOMBRE.ToUpper()));
+
+                        if (lstVenta.Count > 0 && !String.IsNullOrEmpty(oVentaFiltro.APELLIDO))
+                            lstVenta = lstVenta.FindAll(p => p.COD_CLIENTE != null && p.Cliente.APELLIDO.ToUpper().Contains(oVentaFiltro.APELLIDO.ToUpper()));
+
+                        if (lstVenta.Count > 0 && !String.IsNullOrEmpty(oVentaFiltro.ALIAS))
+                            lstVenta = lstVenta.FindAll(p => p.COD_CLIENTE != null && p.Cliente.ALIAS.ToUpper().Contains(oVentaFiltro.ALIAS.ToUpper()));
+                    }
+
+                    VentaListado oVentaListado;
+                    lstVentaListado = new List<VentaListado>();
+
+                    foreach (var loVenta in lstVenta)
+                    {
+                        oVentaListado = new VentaListado
+                        {
+                            ID_VENTA = loVenta.ID_VENTA,
+                            FECHA = loVenta.FECHA,
+                            ESTADO = loVenta.Estado.NOMBRE,
+                            FORMA_PAGO = loVenta.FormaPago.DESCRIPCION,
+                            TOTAL = "$" + loVenta.TOTAL.ToString()
+                        };
+
+                        if (loVenta.COD_CLIENTE != null)
+                            oVentaListado.COD_CLIENTE = Convert.ToInt32(loVenta.COD_CLIENTE);
+
+                        lstVentaListado.Add(oVentaListado);
+                    }
+                }
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return lstVentaListado;
+        }
+
         public double ObtenerTotalAPagar(long codCliente)
         {
             double lTotal = 0;
@@ -268,6 +341,7 @@ namespace BLL
     public class VentaListado
     {
         public int ID_VENTA { get; set; }
+        public string ESTADO { get; set; }
         public int COD_EDICION { get; set; }
         public string EDICION { get; set; }
         public string TIPO_PRODUCTO { get; set; }
