@@ -43,7 +43,7 @@
                             <li class="dropdown">
                                 <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown">Consultas <span class="caret"></span></a>
                                 <ul role="menu" class="dropdown-menu">
-                                    <li><a href="#">Cuenta Corriente</a></li>
+                                    <li><a href="ConsultaEstadoDeCuenta.aspx">Estado de la Cuenta</a></li>
                                 </ul>
                             </li>
                         </ul>
