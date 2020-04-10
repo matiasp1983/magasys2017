@@ -17,6 +17,8 @@ namespace PL.CustomersWebSite
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            dvMensajeLsvReserva.Visible = false;
+
             if (!Page.IsPostBack)
             {
                 CargarCantidadDePedidosDesdeSession();
@@ -304,6 +306,11 @@ namespace PL.CustomersWebSite
                     divReserva.Visible = false;
                 else
                     divReserva.Visible = true;
+
+                if (ddlTipoProducto.SelectedValue == "5") // Se habilita mensaje para Suplemento
+                {
+                    dvMensajeLsvReserva.Visible = true;
+                }
 
                 var lstProductos = new BLL.ProductoBLL().ObtenerProductosSeleccionados(oProductoFiltro);
 

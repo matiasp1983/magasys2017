@@ -258,11 +258,14 @@ namespace BLL
                                 if (oProductoLibro.ANIO > 0)
                                     oProductoCustomersWebSite.ANIO = "Año: " + oProductoLibro.ANIO.ToString();
                                 oProductoCustomersWebSite.PRECIO = string.Format(System.Globalization.CultureInfo.GetCultureInfo("de-DE"), "{0:0.00}", oProductoLibro.PRECIO);
+
                                 break;
 
                             case 5:
-                                var oProductoSuplemento = new SuplementoBLL().ObtenerSuplemento(loProduto.ID_PRODUCTO);
-                                oProductoCustomersWebSite.NOMBRE_DIARIO = "Diario: " + oProductoSuplemento.NOMBRE_DIARIO;
+                                foreach (var item in loProduto.Suplemento)
+                                {
+                                    oProductoCustomersWebSite.NOMBRE_DIARIO = "Diario: " + item.DiarioDiaSemana.Producto.NOMBRE;
+                                }
                                 loExisteProducto = true;
 
                                 break;

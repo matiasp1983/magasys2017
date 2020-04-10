@@ -101,6 +101,11 @@
                                             <div class="form-group">
                                                 <asp:Button ID="btnReservar" runat="server" Text="RESERVAR" CssClass="btn btn-primary" OnClick="BtnReservar_Click" />
                                             </div>
+                                            <div id="dvMensajeLsvReserva" runat="server">
+                                                <div class="alert alert-success">
+                                                    <a class="alert-link" href="#">Cada suplemento se reserva con su correspondiente Diario.</a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
