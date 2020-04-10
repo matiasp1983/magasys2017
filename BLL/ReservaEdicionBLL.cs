@@ -75,8 +75,8 @@ namespace BLL
                     {
                         lstReserva = loRepReserva.Search(p => p.COD_CLIENTE == loCliente.ID_CLIENTE).OrderByDescending(p => p.ID_RESERVA).ToList();
                     }
-                        
 
+                    lstReservaListado = new List<ReservaEdicion>();
 
                     foreach (var loReserva in lstReserva)
                     {
@@ -91,7 +91,7 @@ namespace BLL
                                     foreach (var loReservaEdicion in lstReservaEdicion)
                                     {
                                         lstReservaListado.Add(loReservaEdicion);
-                                    }   
+                                    }
                                 }
                             }
 
@@ -99,7 +99,7 @@ namespace BLL
                         catch (Exception ex)
                         {
                             throw ex;
-                        }           
+                        }
                     }
                 }
             }
