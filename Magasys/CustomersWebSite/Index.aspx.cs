@@ -136,12 +136,16 @@ namespace PL.CustomersWebSite
 
         private void ObtenerTotalAPagar()
         {
-            lblTotalAPagar.Text = "$" + new BLL.VentaBLL().ObtenerTotalAPagar(56).ToString();
+            var oUsuario = (BLL.DAL.Usuario)Session[CustomersWebSiteSessionBLL.DefaultSessionsId.Usuario.ToString()];
+            var oClienteSession = new BLL.ClienteBLL().ObtenerClientePorUsuario(oUsuario.ID_USUARIO);
+            lblTotalAPagar.Text = "$" + new BLL.VentaBLL().ObtenerTotalAPagar(oClienteSession.ID_CLIENTE).ToString();
         }
 
         private void ObtenerReservasConfirmadasMensuales()
         {
-            lblReservasConfirmadas.Text = new BLL.ReservaBLL().ObtenerCantidadReservasConfirmadasMensuales(56).ToString();
+            var oUsuario = (BLL.DAL.Usuario)Session[CustomersWebSiteSessionBLL.DefaultSessionsId.Usuario.ToString()];
+            var oClienteSession = new BLL.ClienteBLL().ObtenerClientePorUsuario(oUsuario.ID_USUARIO);
+            lblReservasConfirmadas.Text = new BLL.ReservaBLL().ObtenerCantidadReservasConfirmadasMensuales(oClienteSession.ID_CLIENTE).ToString();
         }
 
         private void CargarTipoReserva()
