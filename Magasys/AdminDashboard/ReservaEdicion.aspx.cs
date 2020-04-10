@@ -35,7 +35,7 @@ namespace PL.AdminDashboard
                             COD_RESERVA = Convert.ToInt32(((Label)loItem.Controls[3]).Text),
                             COD_PROD_EDICION = Convert.ToInt32(((Label)loItem.Controls[9]).Text),
                             FECHA = DateTime.Now,
-                            COD_ESTADO = 10
+                            COD_ESTADO = 15
                         };
 
                         loResutado = new ReservaEdicionBLL().AltaReservaEdicion(oReservaConfirmada);

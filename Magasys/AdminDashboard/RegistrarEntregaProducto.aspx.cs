@@ -1,6 +1,7 @@
 ﻿using BLL.Filters;
 using NLog;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -16,7 +17,7 @@ namespace PL.AdminDashboard
             if (!Page.IsPostBack)
             {
                 CargarTiposDocumento();
-                CargarGrilla();
+                //CargarGrilla();
             }
         }
 
@@ -76,40 +77,43 @@ namespace PL.AdminDashboard
             }
         }
 
-        private ReservaFiltro CargarClienteReservaFiltro()
+        private ClienteFiltro CargarClienteReservaFiltro()
         {
-            ReservaFiltro oReservaFiltro = null;
+            ClienteFiltro oClienteFiltro = null;
 
-            oReservaFiltro = new ReservaFiltro();
+            oClienteFiltro = new ClienteFiltro();
 
             if (!String.IsNullOrEmpty(ddlTipoDocumento.SelectedValue) && !String.IsNullOrEmpty(txtNroDocumento.Text))
             {
-                oReservaFiltro.TIPO_DOCUMENTO = Convert.ToInt32(ddlTipoDocumento.SelectedValue);
-                oReservaFiltro.NRO_DOCUMENTO = Convert.ToInt32(txtNroDocumento.Text);
+
+                oClienteFiltro.Tipo_documento = Convert.ToInt32(ddlTipoDocumento.SelectedValue);
+                oClienteFiltro.Nro_documento = Convert.ToInt32(txtNroDocumento.Text);
             }
 
             if (!String.IsNullOrEmpty(txtNombre.Text))
-                oReservaFiltro.NOMBRE = txtNombre.Text;
+                oClienteFiltro.Nombre = txtNombre.Text;
 
             if (!String.IsNullOrEmpty(txtApellido.Text))
-                oReservaFiltro.APELLIDO = txtApellido.Text;
+                oClienteFiltro.Apellido = txtApellido.Text;
 
             if (!String.IsNullOrEmpty(txtAlias.Text))
-                oReservaFiltro.ALIAS = txtAlias.Text;
+                oClienteFiltro.Alias = txtAlias.Text;
 
-            return oReservaFiltro;
+            return oClienteFiltro;
         }
 
         private void CargarGrilla()
         {
             try
             {
-                var oReservaFiltro = CargarClienteReservaFiltro();
+                var oClienteFiltro = CargarClienteReservaFiltro();
+                List<BLL.DAL.ReservaEdicion> lstReservaEdicion = new BLL.ReservaEdicionBLL().ObtenerReservaEdicionPorCliente(oClienteFiltro);
 
-                if (oReservaFiltro != null)
+                if (oClienteFiltro != null)
                 {
-
+                    
                 }
+                lsvReservas.DataSource = lstReservaEdicion;
             }
             catch (Exception ex)
             {
@@ -117,7 +121,7 @@ namespace PL.AdminDashboard
                 Logger loLogger = LogManager.GetCurrentClassLogger();
                 loLogger.Error(ex);
             }
-
+            
             lsvReservas.DataBind();
         }
 
