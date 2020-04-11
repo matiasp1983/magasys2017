@@ -117,16 +117,16 @@
                                     <ItemTemplate>
                                         <tr>
                                             <td class="text-left">
-                                                <asp:Label ID="lblCodigoReserva" runat="server" Text=''></asp:Label>
+                                                <asp:Label ID="lblCodigoReserva" runat="server" Text='<%#Eval("ID_RESERVA_EDICION").ToString()%>'></asp:Label>
                                             </td>
                                             <td>
-                                                <asp:Label ID="lblNombreProducto" runat="server" Text=''></asp:Label>
+                                                <asp:Label ID="lblNombreProducto" runat="server" Text='<%#Eval("NOMBRE_PRODUCTO").ToString()%>'></asp:Label>
                                             </td>
                                             <td class="text-left">
-                                                <asp:Label ID="lblEdicion" runat="server" Text=''></asp:Label>
+                                                <asp:Label ID="lblEdicion" runat="server" Text='<%#Eval("DESC_EDICION").ToString()%>'></asp:Label>
                                             </td>
                                             <td class="text-left">
-                                                <asp:Label ID="lblPrecio" runat="server" Text=''></asp:Label>
+                                                <asp:Label ID="lblPrecio" runat="server" Text='<%#Eval("PRECIO_EDICION").ToString()%>'></asp:Label>
                                             </td>
                                         </tr>
                                     </ItemTemplate>
@@ -190,4 +190,6 @@
         }
 
     </script>
+    </form>
+    </form>
 </asp:Content>

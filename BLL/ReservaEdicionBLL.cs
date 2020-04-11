@@ -59,9 +59,9 @@ namespace BLL
             return oReservaEdicion;
         }
 
-        public List<ReservaEdicion> ObtenerReservaEdicionPorCliente(ClienteFiltro oClienteFiltro)
+        public List<ReservaEdicionListado> ObtenerReservaEdicionPorCliente(ClienteFiltro oClienteFiltro)
         {
-            List<ReservaEdicion> lstReservaListado = null;
+            List<ReservaEdicionListado> lstReservaListado = null;
             List<Reserva> lstReserva = null;
             List<ReservaEdicion> lstReservaEdicion = null;
             List<ClienteListado> lstClientes = null;
@@ -76,7 +76,7 @@ namespace BLL
                         lstReserva = loRepReserva.Search(p => p.COD_CLIENTE == loCliente.ID_CLIENTE).OrderByDescending(p => p.ID_RESERVA).ToList();
                     }
 
-                    lstReservaListado = new List<ReservaEdicion>();
+                    lstReservaListado = new List<ReservaEdicionListado>();
 
                     foreach (var loReserva in lstReserva)
                     {
@@ -90,7 +90,29 @@ namespace BLL
                                 {
                                     foreach (var loReservaEdicion in lstReservaEdicion)
                                     {
-                                        lstReservaListado.Add(loReservaEdicion);
+                                        ReservaEdicionListado oReservaListado = new ReservaEdicionListado
+                                        {
+                                            ID_RESERVA_EDICION = loReservaEdicion.ID_RESERVA_EDICION,
+                                            COD_RESERVA = loReservaEdicion.COD_RESERVA,
+                                            FECHA = loReservaEdicion.FECHA,
+                                            NOMBRE_CLIENTE = loReservaEdicion.Reserva.Cliente.APELLIDO + ", " + loReservaEdicion.Reserva.Cliente.NOMBRE,
+                                            COD_CLIENTE = loReservaEdicion.Reserva.COD_CLIENTE,
+                                            FECHA_INICIO = loReservaEdicion.Reserva.FECHA_INICIO,
+                                            FECHA_FIN = loReservaEdicion.Reserva.FECHA_FIN,
+                                            ESTADO = loReservaEdicion.Estado.NOMBRE,
+                                            COD_EDICION = loReservaEdicion.COD_PROD_EDICION.ToString(),
+                                            EDICION = loReservaEdicion.ProductoEdicion.EDICION,
+                                            NOMBRE_EDICION = loReservaEdicion.ProductoEdicion.NOMBRE,
+                                            DESC_EDICION = loReservaEdicion.ProductoEdicion.DESCRIPCION,
+                                            PRECIO_EDICION = loReservaEdicion.ProductoEdicion.PRECIO.ToString()
+                                        };
+                                        //ProductoEdicion oProductoEdicion = new BLL.ProductoEdicionBLL().ObtenerEdicion(Convert.ToInt32(oReservaListado.COD_EDICION));
+                                        oReservaListado.NOMBRE_PRODUCTO = loReservaEdicion.ProductoEdicion.Producto.NOMBRE;
+                                        if (loReservaEdicion.Reserva.ENVIO_DOMICILIO == null)
+                                            oReservaListado.FORMA_ENTREGA = "Retira en Local";
+                                        else
+                                            oReservaListado.FORMA_ENTREGA = "Envío a Domicilio";
+                                        lstReservaListado.Add(oReservaListado);
                                     }
                                 }
                             }

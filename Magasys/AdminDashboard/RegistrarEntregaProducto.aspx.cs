@@ -107,7 +107,7 @@ namespace PL.AdminDashboard
             try
             {
                 var oClienteFiltro = CargarClienteReservaFiltro();
-                List<BLL.DAL.ReservaEdicion> lstReservaEdicion = new BLL.ReservaEdicionBLL().ObtenerReservaEdicionPorCliente(oClienteFiltro);
+                List<BLL.ReservaEdicionListado> lstReservaEdicion = new BLL.ReservaEdicionBLL().ObtenerReservaEdicionPorCliente(oClienteFiltro);
 
                 if (oClienteFiltro != null)
                 {
