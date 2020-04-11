@@ -160,6 +160,27 @@ namespace BLL
             return lstSuplementoEdicion;
         }
 
+        public Suplemento ObtenerSuplementoDiario(ProductoFiltro oProductoFiltro)
+        {
+            Suplemento oSuplementoAux = null;
+            Suplemento oSuplemento = null;
+
+            try
+            {
+                using (var loRepSuplemento = new Repository<Suplemento>())
+                {
+                    oSuplementoAux = loRepSuplemento.Find(p => p.COD_PRODUCTO == oProductoFiltro.IdProducto);
+                    oSuplemento = oSuplementoAux;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return oSuplemento;
+        }
+
         public bool AltaSuplemento(Producto oProducto, Suplemento oSuplemento)
         {
             var bRes = false;

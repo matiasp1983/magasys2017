@@ -1,6 +1,7 @@
 ﻿using BLL;
 using BLL.Common;
 using BLL.DAL;
+using BLL.Filters;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -345,6 +346,7 @@ namespace PL.CustomersWebSite
             bool loResutado = true;
             int loUnidadesReserva = 0;
             List<ReservaEdicion> lstReservaEdicion = null;
+            BLL.DAL.Reserva loReservaDiario = null;
 
             try
             {
@@ -432,9 +434,24 @@ namespace PL.CustomersWebSite
                     for (int i = 0; i < loUnidadesReserva; i++)
                     {
                         loResutado = new ReservaBLL().AltaReserva(loReserva);
-                        //loResutado = new ReservaBLL().AltaReservaEdicion(loReserva, lstReservaEdicion);
                         if (!loResutado)
                             break;
+                    }
+
+                    if (!loResutado)
+                        break;
+
+                    if (Convert.ToInt32(loSplitReseva[6].ToString()) == 5) // Tipo de Producto Suplemento
+                    {
+                        ProductoFiltro oProductoFiltro = new ProductoFiltro();
+                        oProductoFiltro.IdProducto = loReserva.COD_PRODUCTO;
+
+                        var oSuplemento = new SuplementoBLL().ObtenerSuplementoDiario(oProductoFiltro);
+
+                        loReservaDiario = loReserva;
+                        loReservaDiario.COD_PRODUCTO = oSuplemento.DiarioDiaSemana.COD_DIARIO;
+                        // Cada suplemento se reserva con su correspondiente Diario.
+                        loResutado = new ReservaBLL().AltaReserva(loReservaDiario);
                     }
 
                     if (!loResutado)
