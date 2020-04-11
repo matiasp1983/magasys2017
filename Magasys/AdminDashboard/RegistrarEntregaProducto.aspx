@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="Registrar Entrega de Producto" Language="C#" MasterPageFile="~/AdminDashboard/MasterPage.Master" AutoEventWireup="true" CodeBehind="RegistrarEntregaProducto.aspx.cs" Inherits="PL.AdminDashboard.RegistrarEntregaProducto" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">    
+    <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="contentMaster" runat="server">
     <form id="FormRegistrarEntregaProducto" runat="server" class="form-horizontal">
@@ -96,6 +97,9 @@
                                         <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="5">
                                             <thead>
                                                 <tr>
+                                                    <td>                                                        
+                                                        <button id="check-all" class="btn btn-sm btn-primary pull-left m-t-n-xs">Seleccionar todo</button>
+                                                    </td>
                                                     <th class="text-left">Código de Reserva</th>
                                                     <th class="text-left">Producto</th>
                                                     <th data-hide="phone,tablet">Edición</th>
@@ -116,21 +120,25 @@
                                     </LayoutTemplate>
                                     <ItemTemplate>
                                         <tr>
+                                            <td>                                                
+                                                <input id="chkCodigoReserva" runat="server" class="i-checks" type="checkbox" />
+                                            </td>
                                             <td class="text-left">
                                                 <asp:Label ID="lblCodigoReserva" runat="server" Text='<%#Eval("ID_RESERVA_EDICION").ToString()%>'></asp:Label>
                                             </td>
                                             <td>
-                                                <asp:Label ID="lblNombreProducto" runat="server" Text='<%#Eval("NOMBRE_PRODUCTO").ToString()%>'></asp:Label>
+                                                <asp:Label ID="lblNombreProducto" runat="server" Text='<%#(Eval("NOMBRE_PRODUCTO") != null) ? Eval("NOMBRE_PRODUCTO"):null%>'></asp:Label>
                                             </td>
                                             <td class="text-left">
-                                                <asp:Label ID="lblEdicion" runat="server" Text='<%#Eval("DESC_EDICION").ToString()%>'></asp:Label>
+                                                <asp:Label ID="lblDescripcionEdicion" runat="server" Text='<%#(Eval("DESC_EDICION") != null) ? Eval("DESC_EDICION"):null%>'></asp:Label>
                                             </td>
                                             <td class="text-left">
                                                 <asp:Label ID="lblPrecio" runat="server" Text='<%#Eval("PRECIO_EDICION").ToString()%>'></asp:Label>
                                             </td>
                                         </tr>
                                     </ItemTemplate>
-                                </asp:ListView>                                
+                                </asp:ListView>    
+                                <asp:HiddenField ID="hfCodigoReserva" runat="server"/>
                             </div>
                         </div>
                     </div>
@@ -166,11 +174,60 @@
     </form>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="script" runat="server">
+    <!-- iCheck -->
+    <script src="js/plugins/iCheck/icheck.min.js"></script>
+
     <script type="text/javascript">
-        var FormRegistrarEntregaProducto = '#<%=FormRegistrarEntregaProducto.ClientID%>';
 
         if (window.jQuery) {
             $(document).ready(function () {
+                $('.i-checks').iCheck({
+                    checkboxClass: 'icheckbox_square-green'
+                }).on('ifChecked', function (e) {
+                    var isChecked = e.currentTarget.checked;
+                    var codigo = e.currentTarget.id.split('&')[1] + ";";
+
+                    if (isChecked == true) {
+                        if ($('#<%=hfCodigoReserva.ClientID%>').val() == "") {
+                            $('#<%=hfCodigoReserva.ClientID%>').val(codigo);
+                        } else {
+                            var codigoAnterior = $('#<%=hfCodigoReserva.ClientID%>').val();
+                            $('#<%=hfCodigoReserva.ClientID%>').val(codigoAnterior + codigo);
+                        }
+                    }
+                    });
+
+                $('.i-checks').on('ifUnchecked', function (e) {
+                    var isChecked = e.currentTarget.checked;
+                    var codigo = e.currentTarget.id.split('&')[1] + ";";
+
+                    if (isChecked == false) {
+                        if ($('#<%=hfCodigoReserva.ClientID%>').val() != "") {
+                            var mm = $('#<%=hfCodigoReserva.ClientID%>').val();
+                            $('#<%=hfCodigoReserva.ClientID%>').val(mm.replace(codigo, "").trim());
+                        }
+                    }
+                });
+
+                var checked = false;
+
+                $('#check-all').on('click', function () {
+                    if (checked == false) {
+                        $('.i-checks').prop('checked', true).iCheck('update');
+                        $('#<%=hfCodigoReserva.ClientID%>').val('');
+
+                        $('.i-checks').each(function () {
+                            $('#<%=hfCodigoReserva.ClientID%>').val($('#<%=hfCodigoReserva.ClientID%>').val() + (this.id.split('&')[1] + ";"));
+                        });
+
+                        checked = true;
+                    } else {
+                        $('.i-checks').prop('checked', false).iCheck('update');
+                        $('#<%=hfCodigoReserva.ClientID%>').val('');
+                        checked = false;
+                    }
+
+                });
                 LoadFootable();
                 Select2();
             });
@@ -190,6 +247,4 @@
         }
 
     </script>
-    </form>
-    </form>
 </asp:Content>
