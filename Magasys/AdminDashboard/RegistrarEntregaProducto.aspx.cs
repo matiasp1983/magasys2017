@@ -1,9 +1,11 @@
-﻿using BLL.Filters;
+﻿using BLL.DAL;
+using BLL.Filters;
 using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 namespace PL.AdminDashboard
@@ -46,6 +48,50 @@ namespace PL.AdminDashboard
 
         protected void BtnGuardarEntrega_Click(object sender, EventArgs e)
         {
+            bool loResutado = false;
+            List<DetalleVenta> lstDetalleVenta = new List<DetalleVenta>();
+            //List<BLL.ReservaEdicionListado> lstReservas = new List<BLL.ReservaEdicionListado>();
+            //lstReservas = (List <BLL.ReservaEdicionListado> )lsvReservas.DataSource;
+            BLL.DAL.Venta oVenta = new BLL.DAL.Venta()
+            {
+                FECHA = DateTime.Now,
+                //TOTAL = Convert.ToDouble(lblTotal.Text),
+                COD_FORMA_PAGO = 2,
+                COD_ESTADO = 4 // A Cuenta
+            };
+            foreach (var loItem in lsvReservas.Items)
+            {
+                if (((HtmlInputCheckBox)loItem.Controls[1]).Checked)
+                {
+                    try
+                    {
+                        BLL.DAL.ReservaEdicion oReservaEdicion = new BLL.ReservaEdicionBLL().ObtenerReservaEdicion(Convert.ToInt32(((Label)loItem.Controls[3]).Text));
+                        BLL.DAL.Reserva oReserva = new BLL.ReservaBLL().ObtenerReserva(oReservaEdicion.COD_RESERVA);
+                        // BLL.DAL.Cliente oCliente = new BLL.ClienteBLL().ObtenerCliente(oReserva.COD_CLIENTE);
+                        if (oVenta.COD_CLIENTE == null)
+                        {
+                            oVenta.COD_CLIENTE = oReserva.COD_CLIENTE;
+                        }
+
+                        DetalleVenta oDetalleVenta = new DetalleVenta
+                        {
+                             CANTIDAD = 1,
+                             COD_PRODUCTO_EDICION = oReservaEdicion.COD_PROD_EDICION,
+                             PRECIO_UNIDAD = Convert.ToInt32(((Label)loItem.Controls[9]).Text),
+                             SUBTOTAL = Convert.ToInt32(((Label)loItem.Controls[9]).Text)
+
+                        };
+                        lstDetalleVenta.Add(oDetalleVenta);
+
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+
+
+                }
+            }
 
         }
 
@@ -108,11 +154,6 @@ namespace PL.AdminDashboard
             {
                 var oClienteFiltro = CargarClienteReservaFiltro();
                 List<BLL.ReservaEdicionListado> lstReservaEdicion = new BLL.ReservaEdicionBLL().ObtenerReservaEdicionPorCliente(oClienteFiltro);
-
-                if (oClienteFiltro != null)
-                {
-                    
-                }
                 lsvReservas.DataSource = lstReservaEdicion;
             }
             catch (Exception ex)
