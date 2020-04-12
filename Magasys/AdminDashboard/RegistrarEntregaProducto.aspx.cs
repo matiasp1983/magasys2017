@@ -1,4 +1,6 @@
-﻿using BLL.DAL;
+﻿using BLL;
+using BLL.Common;
+using BLL.DAL;
 using BLL.Filters;
 using NLog;
 using System;
@@ -16,10 +18,13 @@ namespace PL.AdminDashboard
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            divMensajeEntregaProducto.Visible = false; // Oculto el mensaje
+
             if (!Page.IsPostBack)
             {
                 CargarTiposDocumento();
-                //CargarGrilla();
+                lblTotal.Text = "0";
+                divEntregaProducto.Visible = false;
             }
         }
 
@@ -75,10 +80,10 @@ namespace PL.AdminDashboard
 
                         DetalleVenta oDetalleVenta = new DetalleVenta
                         {
-                             CANTIDAD = 1,
-                             COD_PRODUCTO_EDICION = oReservaEdicion.COD_PROD_EDICION,
-                             PRECIO_UNIDAD = Convert.ToInt32(((Label)loItem.Controls[9]).Text),
-                             SUBTOTAL = Convert.ToInt32(((Label)loItem.Controls[9]).Text)
+                            CANTIDAD = 1,
+                            COD_PRODUCTO_EDICION = oReservaEdicion.COD_PROD_EDICION,
+                            PRECIO_UNIDAD = Convert.ToInt32(((Label)loItem.Controls[9]).Text),
+                            SUBTOTAL = Convert.ToInt32(((Label)loItem.Controls[9]).Text)
 
                         };
                         lstDetalleVenta.Add(oDetalleVenta);
@@ -114,7 +119,6 @@ namespace PL.AdminDashboard
                 ddlTipoDocumento.DataTextField = "DESCRIPCION";
                 ddlTipoDocumento.DataValueField = "ID_TIPO_DOCUMENTO";
                 ddlTipoDocumento.DataBind();
-                ddlTipoDocumento.Items.Insert(0, new ListItem(String.Empty, String.Empty));
             }
             catch (Exception ex)
             {
@@ -131,19 +135,9 @@ namespace PL.AdminDashboard
 
             if (!String.IsNullOrEmpty(ddlTipoDocumento.SelectedValue) && !String.IsNullOrEmpty(txtNroDocumento.Text))
             {
-
                 oClienteFiltro.Tipo_documento = Convert.ToInt32(ddlTipoDocumento.SelectedValue);
                 oClienteFiltro.Nro_documento = Convert.ToInt32(txtNroDocumento.Text);
             }
-
-            if (!String.IsNullOrEmpty(txtNombre.Text))
-                oClienteFiltro.Nombre = txtNombre.Text;
-
-            if (!String.IsNullOrEmpty(txtApellido.Text))
-                oClienteFiltro.Apellido = txtApellido.Text;
-
-            if (!String.IsNullOrEmpty(txtAlias.Text))
-                oClienteFiltro.Alias = txtAlias.Text;
 
             return oClienteFiltro;
         }
@@ -152,9 +146,37 @@ namespace PL.AdminDashboard
         {
             try
             {
-                var oClienteFiltro = CargarClienteReservaFiltro();
-                List<BLL.ReservaEdicionListado> lstReservaEdicion = new BLL.ReservaEdicionBLL().ObtenerReservaEdicionPorCliente(oClienteFiltro);
-                lsvReservas.DataSource = lstReservaEdicion;
+                var loCliente = new ClienteBLL().ObtenerCliente(Convert.ToInt32(ddlTipoDocumento.SelectedValue), Convert.ToInt32(txtNroDocumento.Text));
+
+                if (loCliente != null)
+                {
+                    txtNombre.Text = loCliente.NOMBRE;
+                    txtApellido.Text = loCliente.APELLIDO;
+
+                    ClienteFiltro oClienteFiltro = new ClienteFiltro();
+                    oClienteFiltro.Id_cliente = loCliente.ID_CLIENTE;
+
+                    List<ReservaEdicionListado> lstReservaEdicion = new ReservaEdicionBLL().ObtenerReservaEdicionPorCliente(oClienteFiltro);
+
+                    if (lstReservaEdicion != null && lstReservaEdicion.Count > 0)
+                    {
+                        lsvReservas.DataSource = lstReservaEdicion;
+                        divEntregaProducto.Visible = true;
+                        divMensajeEntregaProducto.Visible = false;
+                    }
+                    else
+                    {
+                        dvMensajeLsvEntregaProducto.InnerHtml = MessageManager.Info(dvMensajeLsvEntregaProducto, Message.MsjeEntregaProductoFiltroSinResultados, false);
+                        divMensajeEntregaProducto.Visible = true;
+                        divEntregaProducto.Visible = false;
+                    }
+                }
+                else
+                {
+                    dvMensajeLsvEntregaProducto.InnerHtml = MessageManager.Info(dvMensajeLsvEntregaProducto, Message.MsjeEntregaProductoFiltroSinResultados, false);
+                    divMensajeEntregaProducto.Visible = true;
+                    divEntregaProducto.Visible = false;
+                }
             }
             catch (Exception ex)
             {
@@ -162,7 +184,7 @@ namespace PL.AdminDashboard
                 Logger loLogger = LogManager.GetCurrentClassLogger();
                 loLogger.Error(ex);
             }
-            
+
             lsvReservas.DataBind();
         }
 
@@ -170,7 +192,7 @@ namespace PL.AdminDashboard
         {
             FormRegistrarEntregaProducto.Controls.OfType<DropDownList>().ToList().ForEach(x => x.SelectedIndex = -1);
             FormRegistrarEntregaProducto.Controls.OfType<TextBox>().ToList().ForEach(x => x.Text = String.Empty);
-            lsvReservas.Visible = false;
+            divEntregaProducto.Visible = false;
         }
 
         #endregion        

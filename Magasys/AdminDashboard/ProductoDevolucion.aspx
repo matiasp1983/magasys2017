@@ -144,6 +144,7 @@
                                                     <th data-hide="phone,tablet">Fecha Edici&oacute;n</th>
                                                     <th data-hide="phone,tablet">Fecha Devoluci&oacute;n</th>
                                                     <th data-hide="phone,tablet">Stock</th>
+                                                    <th data-hide="phone,tablet">Reservas Confirmadas</th>
                                                     <th data-hide="phone,tablet">Cantidad</th>
                                                     <th data-hide="phone,tablet">Acci&oacute;n</th>
                                                 </tr>

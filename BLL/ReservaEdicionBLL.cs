@@ -64,63 +64,60 @@ namespace BLL
             List<ReservaEdicionListado> lstReservaListado = null;
             List<Reserva> lstReserva = null;
             List<ReservaEdicion> lstReservaEdicion = null;
-            List<ClienteListado> lstClientes = null;
 
             try
             {
                 using (var loRepReserva = new Repository<Reserva>())
                 {
-                    lstClientes = new BLL.ClienteBLL().ObtenerClientes(oClienteFiltro);
-                    foreach (var loCliente in lstClientes)
-                    {
-                        lstReserva = loRepReserva.Search(p => p.COD_CLIENTE == loCliente.ID_CLIENTE).OrderByDescending(p => p.ID_RESERVA).ToList();
-                    }
-
+                    lstReserva = loRepReserva.Search(p => p.COD_CLIENTE == oClienteFiltro.Id_cliente).OrderByDescending(p => p.ID_RESERVA).ToList();
                     lstReservaListado = new List<ReservaEdicionListado>();
 
-                    foreach (var loReserva in lstReserva)
+                    if (lstReserva != null)
                     {
-                        try
+                        foreach (var loReserva in lstReserva)
                         {
-                            using (var loRepReservaEdicion = new Repository<ReservaEdicion>())
+                            try
                             {
-                                lstReservaEdicion = loRepReservaEdicion.Search(p => p.COD_ESTADO == 15 && p.COD_RESERVA == loReserva.ID_RESERVA);
-
-                                if (lstReservaEdicion.Count > 0)
+                                using (var loRepReservaEdicion = new Repository<ReservaEdicion>())
                                 {
-                                    foreach (var loReservaEdicion in lstReservaEdicion)
+                                    lstReservaEdicion = loRepReservaEdicion.Search(p => p.COD_ESTADO == 15 && p.COD_RESERVA == loReserva.ID_RESERVA);
+
+                                    if (lstReservaEdicion.Count > 0)
                                     {
-                                        ReservaEdicionListado oReservaListado = new ReservaEdicionListado
+                                        foreach (var loReservaEdicion in lstReservaEdicion)
                                         {
-                                            ID_RESERVA_EDICION = loReservaEdicion.ID_RESERVA_EDICION,
-                                            COD_RESERVA = loReservaEdicion.COD_RESERVA,
-                                            FECHA = loReservaEdicion.FECHA,
-                                            NOMBRE_CLIENTE = loReservaEdicion.Reserva.Cliente.APELLIDO + ", " + loReservaEdicion.Reserva.Cliente.NOMBRE,
-                                            COD_CLIENTE = loReservaEdicion.Reserva.COD_CLIENTE,
-                                            FECHA_INICIO = loReservaEdicion.Reserva.FECHA_INICIO,
-                                            FECHA_FIN = loReservaEdicion.Reserva.FECHA_FIN,
-                                            ESTADO = loReservaEdicion.Estado.NOMBRE,
-                                            COD_EDICION = loReservaEdicion.COD_PROD_EDICION.ToString(),
-                                            EDICION = loReservaEdicion.ProductoEdicion.EDICION,
-                                            NOMBRE_EDICION = loReservaEdicion.ProductoEdicion.NOMBRE,
-                                            DESC_EDICION = loReservaEdicion.ProductoEdicion.DESCRIPCION,
-                                            PRECIO_EDICION = loReservaEdicion.ProductoEdicion.PRECIO.ToString()
-                                        };
-                                        //ProductoEdicion oProductoEdicion = new BLL.ProductoEdicionBLL().ObtenerEdicion(Convert.ToInt32(oReservaListado.COD_EDICION));
-                                        oReservaListado.NOMBRE_PRODUCTO = loReservaEdicion.ProductoEdicion.Producto.NOMBRE;
-                                        if (loReservaEdicion.Reserva.ENVIO_DOMICILIO == null)
-                                            oReservaListado.FORMA_ENTREGA = "Retira en Local";
-                                        else
-                                            oReservaListado.FORMA_ENTREGA = "Envío a Domicilio";
-                                        lstReservaListado.Add(oReservaListado);
+                                            ReservaEdicionListado oReservaListado = new ReservaEdicionListado
+                                            {
+                                                ID_RESERVA_EDICION = loReservaEdicion.ID_RESERVA_EDICION,
+                                                COD_RESERVA = loReservaEdicion.COD_RESERVA,
+                                                FECHA = loReservaEdicion.FECHA,
+                                                NOMBRE_CLIENTE = loReservaEdicion.Reserva.Cliente.APELLIDO + ", " + loReservaEdicion.Reserva.Cliente.NOMBRE,
+                                                COD_CLIENTE = loReservaEdicion.Reserva.COD_CLIENTE,
+                                                FECHA_INICIO = loReservaEdicion.Reserva.FECHA_INICIO,
+                                                FECHA_FIN = loReservaEdicion.Reserva.FECHA_FIN,
+                                                ESTADO = loReservaEdicion.Estado.NOMBRE,
+                                                COD_EDICION = loReservaEdicion.COD_PROD_EDICION.ToString(),
+                                                EDICION = loReservaEdicion.ProductoEdicion.EDICION,
+                                                NOMBRE_EDICION = loReservaEdicion.ProductoEdicion.NOMBRE,
+                                                DESC_EDICION = loReservaEdicion.ProductoEdicion.DESCRIPCION,
+                                                PRECIO_EDICION = loReservaEdicion.ProductoEdicion.PRECIO.ToString()
+                                            };
+                                            //ProductoEdicion oProductoEdicion = new BLL.ProductoEdicionBLL().ObtenerEdicion(Convert.ToInt32(oReservaListado.COD_EDICION));
+                                            oReservaListado.NOMBRE_PRODUCTO = loReservaEdicion.ProductoEdicion.Producto.NOMBRE;
+                                            if (loReservaEdicion.Reserva.ENVIO_DOMICILIO == null)
+                                                oReservaListado.FORMA_ENTREGA = "Retira en Local";
+                                            else
+                                                oReservaListado.FORMA_ENTREGA = "Envío a Domicilio";
+                                            lstReservaListado.Add(oReservaListado);
+                                        }
                                     }
                                 }
-                            }
 
-                        }
-                        catch (Exception ex)
-                        {
-                            throw ex;
+                            }
+                            catch (Exception ex)
+                            {
+                                throw ex;
+                            }
                         }
                     }
                 }

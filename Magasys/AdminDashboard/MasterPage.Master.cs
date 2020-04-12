@@ -167,6 +167,11 @@ namespace PL.AdminDashboard
                 liReserva.Attributes["class"] = "active";
                 liReservaListado.Attributes["class"] = "active";
             }
+            if (loActivePage.Equals("RegistrarEntregaProducto.aspx"))
+            {
+                liEntregaReparto.Attributes["class"] = "active";
+                liRegistrarEntregaProducto.Attributes["class"] = "active";
+            }
 
             if (pUsuario != null)
             {

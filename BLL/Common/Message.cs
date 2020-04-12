@@ -144,6 +144,12 @@
 
         #endregion
 
+        #region Mensajes Entrega Producto
+
+        public const string MsjeEntregaProductoFiltroSinResultados = "No se encontraron Reservas confirmadas para la búsqueda seleccionada.";
+
+        #endregion
+
         #region Mensajes Login
 
         public const string MsjeLoginUsuarioYOContraseniaVacios = "Usuario y/o Contraseña no pueden estar vacíos.";

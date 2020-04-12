@@ -50,7 +50,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Nombre</label>
                                 <div class="col-sm-10">
-                                    <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
+                                    <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control" Enabled="false" autocomplete="off"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
@@ -58,17 +58,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Apellido</label>
                                 <div class="col-sm-10">
-                                    <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="col-sm-2 control-label">Alias</label>
-                                <div class="col-sm-10">
-                                    <asp:TextBox ID="txtAlias" runat="server" CssClass="form-control" autocomplete="off"></asp:TextBox>
+                                    <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control" Enabled="false" autocomplete="off"></asp:TextBox>
                                 </div>
                             </div>
                         </div>
@@ -87,7 +77,10 @@
                     </div>
                 </div>
             </div>
-            <div class="ibox float-e-margins">
+            <div id="divMensajeEntregaProducto" class="ibox float-e-margins" runat="server">
+                <div id="dvMensajeLsvEntregaProducto" runat="server" />  
+            </div>
+            <div id="divEntregaProducto" class="ibox float-e-margins" runat="server">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="ibox">
@@ -121,7 +114,7 @@
                                     <ItemTemplate>
                                         <tr>
                                             <td>                                                
-                                                <input id="chkCodigoReserva" runat="server" class="i-checks" type="checkbox" />
+                                                <input id="chkCodigoReserva" runat="server" class="i-checks" type="checkbox" title='<%#string.Format("{0}", Eval("PRECIO_EDICION").ToString())%>' />
                                             </td>
                                             <td class="text-left">
                                                 <asp:Label ID="lblCodigoReserva" runat="server" Text='<%#Eval("ID_RESERVA_EDICION").ToString()%>'></asp:Label>
@@ -138,34 +131,28 @@
                                         </tr>
                                     </ItemTemplate>
                                 </asp:ListView>    
-                                <asp:HiddenField ID="hfCodigoReserva" runat="server"/>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="divVentaTotales" class="ibox float-e-margins" runat="server">
-                <div class="ibox">
-                    <div class="ibox-content">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <h2 class="col-sm-4 control-label font-bold">Total $</h2>
-                                    <div class="col-sm-1 control-label font-bold">
-                                        <h2>
-                                            <asp:Label ID="lblTotal" runat="server" MaxLength="5" autocomplete="off"></asp:Label></h2>
+                                <asp:HiddenField ID="hfCodigoReserva" runat="server"/>                                
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <h2 class="col-sm-4 control-label font-bold">Total $</h2>
+                                            <div class="col-sm-1 control-label font-bold">
+                                                <h2>
+                                                    <asp:Label ID="lblTotal" runat="server" Text=''></asp:Label></h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <hr />
+                                <div class="form-group" style="margin-bottom: 10px">
+                                    <div class="col-xs-12 col-sm-6 col-md-8"></div>
+                                    <div class="col-xs-12 col-md-4" style="text-align: right">
+                                        <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-success" OnClick="BtnGuardarEntrega_Click" />
+                                        <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-primary" OnClick="BtnCancelarEntrega_Click" formnovalidate="" />
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <hr />
-                        <div class="form-group" style="margin-bottom: 10px">
-                            <div class="col-xs-12 col-sm-6 col-md-8"></div>
-                            <div class="col-xs-12 col-md-4" style="text-align: right">
-                                <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-success" OnClick="BtnGuardarEntrega_Click" />
-                                <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-primary" OnClick="BtnCancelarEntrega_Click" formnovalidate="" />
-                            </div>
-
                         </div>
                     </div>
                 </div>
@@ -178,6 +165,8 @@
     <script src="js/plugins/iCheck/icheck.min.js"></script>
 
     <script type="text/javascript">
+        var FormRegistrarEntregaProducto = '#<%=FormRegistrarEntregaProducto.ClientID%>';
+        var loTotal = parseFloat($('#<%=lblTotal.ClientID%>').text());
 
         if (window.jQuery) {
             $(document).ready(function () {
@@ -194,6 +183,10 @@
                             var codigoAnterior = $('#<%=hfCodigoReserva.ClientID%>').val();
                             $('#<%=hfCodigoReserva.ClientID%>').val(codigoAnterior + codigo);
                         }
+
+                        var loPrecio = e.currentTarget.title;
+                        loTotal += parseFloat(loPrecio);
+                        $('#<%=lblTotal.ClientID%>').text(loTotal);
                     }
                     });
 
@@ -206,6 +199,10 @@
                             var mm = $('#<%=hfCodigoReserva.ClientID%>').val();
                             $('#<%=hfCodigoReserva.ClientID%>').val(mm.replace(codigo, "").trim());
                         }
+
+                        var loPrecio = e.currentTarget.title;
+                        loTotal -= parseFloat(loPrecio);
+                        $('#<%=lblTotal.ClientID%>').text(loTotal);
                     }
                 });
 
@@ -229,12 +226,35 @@
 
                 });
                 LoadFootable();
+                ValidarForm();
                 Select2();
             });
         }
 
         function LoadFootable() {
             $('.footable').footable();
+        }
+
+        function ValidarForm() {
+
+            $(FormRegistrarEntregaProducto).validate({
+                rules: {
+                    <%=txtNroDocumento.UniqueID%>: {
+                    required: true,
+                    number: true,
+                    digits: true,
+                    minlength: 8
+                    }                  
+				},
+        messages: {
+                    <%=txtNroDocumento.UniqueID%>: {
+                    required: "Este campo es requerido.",
+                    number: "Ingrese un número válido.",
+                    digits: "Ingrese solo dígitos.",
+                    minlength: "Este campo debe ser de 8 dígitos."
+                    }
+                }
+            });
         }
 
         function Select2() {

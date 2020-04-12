@@ -91,6 +91,14 @@
                             <li id="liReservaListado" runat="server"><a href="ReservaListado.aspx">Listado de Reservas</a></li>
                         </ul>
                     </li>
+                    <li id="liEntregaReparto" runat="server">
+                        <a href="#"><i class="fa fa-list-alt"></i><span class="nav-label">Entrega / Reparto</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li id="liRegistrarEntregaProducto" runat="server"><a href="RegistrarEntregaProducto.aspx">Registrar entrega de Productos</a></li>
+                            <li id="li2" runat="server"><a href="">Generar listado de reparto</a></li>
+                            <li id="li3" runat="server"><a href="">Registrar entrega por reparto</a></li>
+                        </ul>
+                    </li>
                     <li id="liUsuarios" runat="server" visible="false">
                         <a href="#"><i class="fa fa-briefcase"></i><span class="nav-label">Usuarios</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">

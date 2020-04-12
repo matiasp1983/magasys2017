@@ -58,15 +58,6 @@ namespace PL.AdminDashboard {
         protected global::System.Web.UI.WebControls.TextBox txtApellido;
         
         /// <summary>
-        /// Control txtAlias.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtAlias;
-        
-        /// <summary>
         /// Control btnBuscarProducto.
         /// </summary>
         /// <remarks>
@@ -85,6 +76,33 @@ namespace PL.AdminDashboard {
         protected global::System.Web.UI.HtmlControls.HtmlButton btnLimpiar;
         
         /// <summary>
+        /// Control divMensajeEntregaProducto.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divMensajeEntregaProducto;
+        
+        /// <summary>
+        /// Control dvMensajeLsvEntregaProducto.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvMensajeLsvEntregaProducto;
+        
+        /// <summary>
+        /// Control divEntregaProducto.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divEntregaProducto;
+        
+        /// <summary>
         /// Control lsvReservas.
         /// </summary>
         /// <remarks>
@@ -101,15 +119,6 @@ namespace PL.AdminDashboard {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hfCodigoReserva;
-        
-        /// <summary>
-        /// Control divVentaTotales.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divVentaTotales;
         
         /// <summary>
         /// Control lblTotal.
