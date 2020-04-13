@@ -192,5 +192,14 @@
         public const string MsjeInformacionPersonal = "La información personal no se pudo guardar.";
 
         #endregion
+
+        #region Mensajes Entrega
+
+        public const string MsjeEntregalSuccess = "La Entrega se Registró correctamente.";
+        public const string MsjeEntregaFailure = "La Entrega  no se pudo guardar.";
+
+        #endregion
+
+
     }
 }

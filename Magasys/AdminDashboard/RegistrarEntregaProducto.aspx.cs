@@ -60,7 +60,7 @@ namespace PL.AdminDashboard
             BLL.DAL.Venta oVenta = new BLL.DAL.Venta()
             {
                 FECHA = DateTime.Now,
-                //TOTAL = Convert.ToDouble(lblTotal.Text),
+                TOTAL = Convert.ToDouble(lblTotal.Text),
                 COD_FORMA_PAGO = 2,
                 COD_ESTADO = 4 // A Cuenta
             };
@@ -87,6 +87,15 @@ namespace PL.AdminDashboard
 
                         };
                         lstDetalleVenta.Add(oDetalleVenta);
+                        oVenta.TOTAL += oDetalleVenta.SUBTOTAL;
+
+                        // Actualizar Stock
+                        loResutado = new ProductoEdicionBLL().ActualizarCantidadDisponible(oDetalleVenta.COD_PRODUCTO_EDICION, oDetalleVenta.CANTIDAD);
+
+                        // Actualizar Estado de Reserva Edicion
+
+                        oReservaEdicion.COD_ESTADO = 11;
+                        loResutado = new ReservaEdicionBLL().ModificarReservaEdidion(oReservaEdicion);
 
                     }
                     catch (Exception ex)
@@ -98,6 +107,18 @@ namespace PL.AdminDashboard
                 }
             }
 
+            // Registrar la Venta
+
+            if (loResutado)
+                loResutado = new VentaBLL().AltaVenta(oVenta, lstDetalleVenta);
+
+            if (loResutado)
+            {
+                LimpiarCampos();
+                Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeEntregalSuccess, "Entrega Registrada"));
+            }
+            else
+                Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeEntregaFailure));
         }
 
         protected void BtnCancelarEntrega_Click(object sender, EventArgs e)

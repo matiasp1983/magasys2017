@@ -138,7 +138,7 @@
                                             <h2 class="col-sm-4 control-label font-bold">Total $</h2>
                                             <div class="col-sm-1 control-label font-bold">
                                                 <h2>
-                                                    <asp:Label ID="lblTotal" runat="server" Text=''></asp:Label></h2>
+                                                    <asp:Label ID="lblTotal" runat="server" autocomplete="off"></asp:Label></h2>
                                             </div>
                                         </div>
                                     </div>
