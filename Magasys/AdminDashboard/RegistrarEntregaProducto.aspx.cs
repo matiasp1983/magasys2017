@@ -60,7 +60,7 @@ namespace PL.AdminDashboard
             BLL.DAL.Venta oVenta = new BLL.DAL.Venta()
             {
                 FECHA = DateTime.Now,
-                TOTAL = Convert.ToDouble(lblTotal.Text),
+                TOTAL = 0,
                 COD_FORMA_PAGO = 2,
                 COD_ESTADO = 4 // A Cuenta
             };
