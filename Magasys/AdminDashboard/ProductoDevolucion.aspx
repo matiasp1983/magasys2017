@@ -187,13 +187,16 @@
                                                 <asp:Label ID="lblCantidadDisponible" runat="server" Text='<%#Eval("CANTIDAD_DISPONIBLE").ToString()%>'></asp:Label>
                                             </td>
                                             <td>
+                                                <asp:Label ID="lblCantidadReservas" runat="server" Text='<%#Eval("CANTIDAD_RESERVAS").ToString()%>'></asp:Label>
+                                            </td>
+                                            <td>
                                                 <div id="dvCantidad" style="width: 100%">
                                                     <asp:TextBox ID="txtCantidad" runat="server" CssClass="form-control" MaxLength="5" autocomplete="off" Text='<%#Eval("CANTIDAD").ToString()%>'></asp:TextBox>
                                                 </div>
                                             </td>
                                             <td class="text-left">
                                                 <div class="btn-group">
-                                                    <button runat="server" id="btnAgregar" class="btn btn-outline btn-info  btn-xl" title="Añadir" onserverclick="BtnAgregarItem_Click"><i class="fa fa-plus"></i></button>
+                                                    <button runat="server" id="btnAgregar" class="btn-success btn btn-xs" title="Devolver Producto" onserverclick="BtnAgregarItem_Click">Devolver</button>
                                                 </div>
                                             </td>
                                             <td>
@@ -204,77 +207,6 @@
                                 </asp:ListView>
 
                                 <div id="dvMensajeLsvDevolucion" runat="server" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="divDevolucion" class="ibox float-e-margins" runat="server">
-                <div class="ibox">
-                    <div class="ibox-title">
-                        <h2>Items de la Devoluci&oacute;n</h2>
-                    </div>
-                    <div class="ibox-content">
-                        <asp:ListView ID="lsvDetalleDevolucion" runat="server" OnItemDataBound="LsvDetalleDevolucion_ItemDataBound">
-                            <LayoutTemplate>
-                                <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
-                                    <thead>
-                                        <tr>
-                                            <th class="text-left">C&oacute;digo</th>
-                                            <th>Nombre</th>
-                                            <th>Tipo de Producto</th>
-                                            <th data-hide="phone,tablet">Edici&oacute;n</th>
-                                            <th data-hide="phone,tablet">Cantidad</th>
-                                            <th data-hide="phone,tablet">Acci&oacute;n</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr id="itemPlaceholder" runat="server"></tr>
-                                    </tbody>
-                                    <tfoot>
-                                        <tr>
-                                            <td colspan="8">
-                                                <ul class="pagination pull-right"></ul>
-                                            </td>
-                                        </tr>
-                                    </tfoot>
-                                </table>
-                            </LayoutTemplate>
-                            <ItemTemplate>
-                                <tr>
-                                    <td class="text-left">
-                                        <asp:Label ID="lblCodigoProducto" runat="server" Text='<%#Eval("COD_PRODUCTO").ToString()%>'></asp:Label>
-                                    </td>
-                                    <td>
-                                        <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE").ToString().Length > 50 ? String.Format("{0}...", Eval("NOMBRE").ToString().Remove(50).TrimEnd()):Eval("NOMBRE")%>'></asp:Label>
-                                    </td>
-                                    <td>
-                                        <asp:Label ID="lblTipoProducto" runat="server" Text='<%#Eval("TIPO_PRODUCTO").ToString()%>'></asp:Label>
-                                    </td>
-                                    <td>
-                                        <asp:Label ID="lblEdicion" runat="server" Text='<%#Eval("EDICION").ToString().Length > 50 ? String.Format("{0}...", Eval("EDICION").ToString().Remove(50).TrimEnd()):Eval("EDICION")%>'></asp:Label>
-                                    </td>
-                                    <td>
-                                        <asp:Label ID="lblCantidad" runat="server" Text='<%#Eval("CANTIDAD").ToString()%>'></asp:Label>
-                                    </td>
-                                    <td class="text-left">
-                                        <div class="btn-group">
-                                            <button runat="server" id="btnEliminar" class="btn btn-outline btn-danger btn-xl" title="Eliminar" onserverclick="BtnEliminar_Click"><i class="fa fa-trash-o"></i></button>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <asp:Label ID="lblCodProductoEdicion" runat="server" Text='<%#Eval("COD_PRODUCTO_EDICION").ToString()%>' Visible="false"></asp:Label>
-                                    </td>
-                                </tr>
-                            </ItemTemplate>
-                        </asp:ListView>
-
-                        <hr />
-                        <div class="form-group" style="margin-bottom: 10px">
-                            <div class="col-xs-12 col-sm-6 col-md-8"></div>
-                            <div class="col-xs-12 col-md-4" style="text-align: right">
-                                <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-success" OnClick="BtnGuardar_Click" />
-                                <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-primary" OnClick="BtnCancelar_Click" formnovalidate="" />
                             </div>
                         </div>
                     </div>

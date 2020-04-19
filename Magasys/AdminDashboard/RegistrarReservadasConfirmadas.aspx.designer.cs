@@ -10,70 +10,34 @@
 namespace PL.AdminDashboard {
     
     
-    public partial class ProductoDevolucion {
+    public partial class RegistrarReservadasConfirmadas {
         
         /// <summary>
-        /// Control FormDevolucion.
+        /// Control FormRegistrarReservadasConfirmadas.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm FormDevolucion;
+        protected global::System.Web.UI.HtmlControls.HtmlForm FormRegistrarReservadasConfirmadas;
         
         /// <summary>
-        /// Control txtCodigoDevolucion.
+        /// Control txtNombre.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCodigoDevolucion;
+        protected global::System.Web.UI.WebControls.TextBox txtNombre;
         
         /// <summary>
-        /// Control txtFechaDevoluion.
+        /// Control txtTipoProducto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFechaDevoluion;
-        
-        /// <summary>
-        /// Control ddlProveedor.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlProveedor;
-        
-        /// <summary>
-        /// Control ddlTipoProducto.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlTipoProducto;
-        
-        /// <summary>
-        /// Control txtNombreProducto.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtNombreProducto;
-        
-        /// <summary>
-        /// Control txtDescripcionProducto.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDescripcionProducto;
+        protected global::System.Web.UI.WebControls.TextBox txtTipoProducto;
         
         /// <summary>
         /// Control txtEdicion.
@@ -85,57 +49,66 @@ namespace PL.AdminDashboard {
         protected global::System.Web.UI.WebControls.TextBox txtEdicion;
         
         /// <summary>
-        /// Control txtDescripcionEdicion.
+        /// Control txtStock.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtDescripcionEdicion;
+        protected global::System.Web.UI.WebControls.TextBox txtStock;
         
         /// <summary>
-        /// Control btnBuscarProducto.
+        /// Control lblCantidadProductosDevolver.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnBuscarProducto;
+        protected global::System.Web.UI.WebControls.Label lblCantidadProductosDevolver;
         
         /// <summary>
-        /// Control btnLimpiar.
+        /// Control lsvReservaEdicion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnLimpiar;
+        protected global::System.Web.UI.WebControls.ListView lsvReservaEdicion;
         
         /// <summary>
-        /// Control btnDevolucionDiarias.
+        /// Control dvMensajeLsvReservaEdicion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnDevolucionDiarias;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvMensajeLsvReservaEdicion;
         
         /// <summary>
-        /// Control lsvDevolucion.
+        /// Control hfCodigoReserva.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView lsvDevolucion;
+        protected global::System.Web.UI.WebControls.HiddenField hfCodigoReserva;
         
         /// <summary>
-        /// Control dvMensajeLsvDevolucion.
+        /// Control btnGuardar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvMensajeLsvDevolucion;
+        protected global::System.Web.UI.WebControls.Button btnGuardar;
+        
+        /// <summary>
+        /// Control btnCancelar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelar;
     }
 }

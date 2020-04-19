@@ -99,7 +99,7 @@
         public const string MsjeReservaDireccionRequerida = "La forma de entrega “Envío a Domicilio” requiere que el cliente complete los datos de la dirección.";
         public const string MsjeReservaSeleccionDeProducto = "Debe seleccionar un producto.";
         public const string MsjeReservaFechaInicioMayorQueFechaFin = "La Fecha de fin debe ser mayor que la Fecha de inicio.";
-        public const string MsjeListadoReservaFiltroSinResultados = "No se encontraron Reservas para la búsqueda seleccionada.";
+        public const string MsjeListadoReservaFiltroSinResultados = "No se encontraron reservas para la búsqueda seleccionada.";
         public const string MsjeReservaUnicaFechafin = "Para la reserva Única, el campo Fecha de fin es requerido.";
         public const string MsjeReservaNoSePuedeAnular = "La reserva está Finalizada, no se puede Anular.";
         public const string MsjeReservaAnulada = "La reserva ya se encuentra Anulada.";
@@ -146,7 +146,7 @@
 
         #region Mensajes Entrega Producto
 
-        public const string MsjeEntregaProductoFiltroSinResultados = "No se encontraron Reservas confirmadas para la búsqueda seleccionada.";
+        public const string MsjeEntregaProductoFiltroSinResultados = "No se encontraron reservas confirmadas para la búsqueda seleccionada.";
 
         #endregion
 

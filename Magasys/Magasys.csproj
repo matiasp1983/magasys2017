@@ -76,7 +76,6 @@
     <Content Include="AdminDashboard\Cobro.aspx" />
     <Content Include="AdminDashboard\CobroCliente.aspx" />
     <Content Include="AdminDashboard\CobroListado.aspx" />
-    <Content Include="AdminDashboard\ConfirmarReservas.aspx" />
     <Content Include="AdminDashboard\css\bootstrap.css.map" />
     <Content Include="AdminDashboard\css\bootstrap.min.css.map" />
     <Content Include="AdminDashboard\css\plugins\footable\fonts\footable.eot" />
@@ -165,6 +164,7 @@
     <Content Include="AdminDashboard\ProductoSuplementoVisualizar.aspx" />
     <Content Include="AdminDashboard\ProveedorEditar.aspx" />
     <Content Include="AdminDashboard\RegistrarEntregaProducto.aspx" />
+    <Content Include="AdminDashboard\RegistrarReservadasConfirmadas.aspx" />
     <Content Include="AdminDashboard\Reserva.aspx" />
     <Content Include="AdminDashboard\ReservaEdicion.aspx" />
     <Content Include="AdminDashboard\ReservaEditar.aspx" />
@@ -413,13 +413,6 @@
     <Compile Include="AdminDashboard\CobroListado.aspx.designer.cs">
       <DependentUpon>CobroListado.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AdminDashboard\ConfirmarReservas.aspx.cs">
-      <DependentUpon>ConfirmarReservas.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="AdminDashboard\ConfirmarReservas.aspx.designer.cs">
-      <DependentUpon>ConfirmarReservas.aspx</DependentUpon>
-    </Compile>
     <Compile Include="AdminDashboard\DetalleCobro.aspx.cs">
       <DependentUpon>DetalleCobro.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -657,6 +650,13 @@
     </Compile>
     <Compile Include="AdminDashboard\RegistrarEntregaProducto.aspx.designer.cs">
       <DependentUpon>RegistrarEntregaProducto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\RegistrarReservadasConfirmadas.aspx.cs">
+      <DependentUpon>RegistrarReservadasConfirmadas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\RegistrarReservadasConfirmadas.aspx.designer.cs">
+      <DependentUpon>RegistrarReservadasConfirmadas.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminDashboard\Reserva.aspx.cs">
       <DependentUpon>Reserva.aspx</DependentUpon>

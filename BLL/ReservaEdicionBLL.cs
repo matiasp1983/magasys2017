@@ -10,6 +10,43 @@ namespace BLL
     {
         #region Métodos Públicos
 
+        public bool AltaReservaEdicion(ReservaEdicion oReservaEdicion)
+        {
+            var bRes = false;
+
+            try
+            {
+                using (var rep = new Repository<ReservaEdicion>())
+                {
+                    bRes = rep.Create(oReservaEdicion) != null;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return bRes;
+        }
+
+        public bool ModificarReservaEdidion(ReservaEdicion oReservaEdicion)
+        {
+            var bRes = false;
+            try
+            {
+                using (var rep = new Repository<ReservaEdicion>())
+                {
+                    bRes = rep.Update(oReservaEdicion);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return bRes;
+        }
+
         public int ObtenerProximaReserva()
         {
             int loIdReserva = 0;
@@ -130,41 +167,25 @@ namespace BLL
             return lstReservaListado;
         }
 
-        public bool AltaReservaEdicion(ReservaEdicion oReservaEdicion)
+        public int CantidadReservaEdicionPorProductoEdicion(long codProductoEdicion)
         {
-            var bRes = false;
+            // Obtener cantidad de productos edición reservados, es decir, con Reserva Edición: Confirmada.
+
+            int loCantidadProductoEdicion = 0;
 
             try
             {
-                using (var rep = new Repository<ReservaEdicion>())
+                using (var loRepReservaEdicion = new Repository<ReservaEdicion>())
                 {
-                    bRes = rep.Create(oReservaEdicion) != null;
+                    loCantidadProductoEdicion = loRepReservaEdicion.Search(p => p.COD_PROD_EDICION == codProductoEdicion && p.COD_ESTADO == 15).Count();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
 
-            return bRes;
-        }
-
-        public bool ModificarReservaEdidion(ReservaEdicion oReservaEdicion)
-        {
-            var bRes = false;
-            try
-            {
-                using (var rep = new Repository<ReservaEdicion>())
-                {
-                    bRes = rep.Update(oReservaEdicion);
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-
-            return bRes;
+            return loCantidadProductoEdicion;
         }
 
         #endregion

@@ -86,6 +86,8 @@ namespace BLL
 
                         foreach (var loDetalleProductoIngreso in lstDetalleProductoIngreso)
                         {
+                            var loCantidadReservaEdicionPorProdEdicion = new ReservaEdicionBLL().CantidadReservaEdicionPorProductoEdicion(loDetalleProductoIngreso.COD_PRODUCTO_EDICION);
+
                             oDevolucion = new Devolucion
                             {
                                 COD_PRODUCTO = loDetalleProductoIngreso.ProductoEdicion.COD_PRODUCTO,
@@ -95,7 +97,8 @@ namespace BLL
                                 EDICION = loDetalleProductoIngreso.ProductoEdicion.EDICION,
                                 FECHA_EDICION = Convert.ToDateTime(loDetalleProductoIngreso.ProductoEdicion.FECHA_EDICION),
                                 FECHA_DEVOLUCION = Convert.ToDateTime(loDetalleProductoIngreso.FECHA_DEVOLUCION),
-                                CANTIDAD_DISPONIBLE = loDetalleProductoIngreso.ProductoEdicion.CANTIDAD_DISPONIBLE
+                                CANTIDAD_DISPONIBLE = loDetalleProductoIngreso.ProductoEdicion.CANTIDAD_DISPONIBLE,
+                                CANTIDAD_RESERVAS = loCantidadReservaEdicionPorProdEdicion
                             };
 
                             lstDevolucion.Add(oDevolucion);
@@ -263,6 +266,7 @@ namespace BLL
         public DateTime FECHA_EDICION { get; set; }
         public DateTime FECHA_DEVOLUCION { get; set; }
         public int CANTIDAD_DISPONIBLE { get; set; }
+        public int CANTIDAD_RESERVAS { get; set; }
         public int CANTIDAD { get; set; }
     }
 
@@ -273,7 +277,9 @@ namespace BLL
         public string NOMBRE { get; set; }
         public string TIPO_PRODUCTO { get; set; }
         public string EDICION { get; set; }
+        public int STOCK { get; set; }
         public int CANTIDAD { get; set; }
+        public int CANTIDAD_RESERVAS { get; set; }
     }
 
     public class ProductoDevolucionListado
