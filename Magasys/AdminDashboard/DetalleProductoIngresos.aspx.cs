@@ -16,6 +16,17 @@ namespace PL.AdminDashboard
                 CargarDetalleProductoIngreso();
         }
 
+        protected void BtnModificar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("DetalleProductoIngresosEditar.aspx", false);
+        }
+
+        protected void BtnCancelar_Click(object sender, EventArgs e)
+        {
+            Session.Remove(Enums.Session.IdIngresoProductos.ToString());
+            Response.Redirect("ProductoIngresoListado.aspx", false);
+        }
+
         #endregion
 
         #region Métodos Privados

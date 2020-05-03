@@ -457,11 +457,14 @@
                                 </ItemTemplate>
                             </asp:ListView>
 
-                            <div class="hr-line-dashed"></div>
-                            <div class="form-group" style="margin-bottom: 50px">
-                                <div class="col-xs-12 col-sm-6 col-md-8"></div>
-                                <div class="col-xs-12 col-md-4" style="text-align: right">
-                                    <a href="javascript:history.go(-1)" class="btn btn-primary">Volver</a>
+                            <div class="row">
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <div class="col-xs-12 col-sm-6 col-md-8"></div>
+                                    <div class="col-xs-12 col-md-4" style="text-align: right">
+                                        <asp:Button ID="btnModificar" runat="server" Text="Modificar" CssClass="btn btn-success" OnClick="BtnModificar_Click" />
+                                        <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-primary" OnClick="BtnCancelar_Click" />
+                                    </div>
                                 </div>
                             </div>
                         </div>
