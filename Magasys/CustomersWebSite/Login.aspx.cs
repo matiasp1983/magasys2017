@@ -12,7 +12,7 @@ namespace PL.CustomersWebSite
 
         protected void Page_Load(object sender, EventArgs e)
         {
-           
+
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)
@@ -60,10 +60,11 @@ namespace PL.CustomersWebSite
                 CONTRASENIA = txtContrasenia.Text
             };
 
-            loResultado = new LoginBLL().IniciarSessionCustomersWebSite(oUsuario) != null;
+            var oUsuarioLoguin = new LoginBLL().IniciarSessionCustomersWebSite(oUsuario);
+            loResultado = new ClienteBLL().ObtenerClientePorUsuario(oUsuarioLoguin.ID_USUARIO) != null;
 
             return loResultado;
-        } 
+        }
 
         #endregion
     }
