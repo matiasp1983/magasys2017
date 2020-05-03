@@ -48,6 +48,9 @@
                                             <asp:Button ID="btnReservar" runat="server" Text="RESERVAR" CssClass="btn btn-primary" OnClick="BtnReservar_Click" />
                                         </div>
                                     </div>
+                                    <div class="col-sm-4">
+                                        <a class="btn btn-white" href="Reserva.aspx"><i class="fa fa-arrow-left"></i>&nbsp;Seguir reservando</a>                                        
+                                    </div>
                                 </div>
                             </div>
                         </div>
