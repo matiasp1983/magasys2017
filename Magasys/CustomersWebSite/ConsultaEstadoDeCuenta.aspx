@@ -172,19 +172,26 @@
         }
 
         function Select2() {
-            $(".select2_estado").select2(
-                {
-                    placeholder: 'Seleccione un Estado',
-                    width: '100%',
-                    allowClear: true
-                });
-
             $(".select2_formapago").select2(
-                {
-                    placeholder: 'Seleccione una Forma de Pago',
-                    width: '100%',
-                    allowClear: true
-                });
+            {
+                placeholder: 'Seleccione una Forma de Pago',
+                width: '100%'
+            }).on('select2:select', function (e) {
+                var loData = e.params.data;
+                if (loData.id == 2) {
+                    $(".select2_estado").prop("disabled", false);
+                }
+                else {
+                    $(".select2_estado").val(5).trigger("change");
+                    $(".select2_estado").prop("disabled", true);
+                }
+            });
+
+            $(".select2_estado").select2(
+            {
+                placeholder: 'Seleccione un Estado',
+                width: '100%'                    
+            }).prop("disabled", true);
         }
     </script>
 </asp:Content>

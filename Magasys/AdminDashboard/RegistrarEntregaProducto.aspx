@@ -173,33 +173,19 @@
                 $('.i-checks').iCheck({
                     checkboxClass: 'icheckbox_square-green'
                 }).on('ifChecked', function (e) {
-                    var isChecked = e.currentTarget.checked;
-                    var codigo = e.currentTarget.id.split('&')[1] + ";";
+                    var isChecked = e.currentTarget.checked;                   
 
                     if (isChecked == true) {
-                        if ($('#<%=hfCodigoReserva.ClientID%>').val() == "") {
-                            $('#<%=hfCodigoReserva.ClientID%>').val(codigo);
-                        } else {
-                            var codigoAnterior = $('#<%=hfCodigoReserva.ClientID%>').val();
-                            $('#<%=hfCodigoReserva.ClientID%>').val(codigoAnterior + codigo);
+                            var loPrecio = e.currentTarget.title;
+                            loTotal += parseFloat(loPrecio);
+                            $('#<%=lblTotal.ClientID%>').text(loTotal);
                         }
-
-                        var loPrecio = e.currentTarget.title;
-                        loTotal += parseFloat(loPrecio);
-                        $('#<%=lblTotal.ClientID%>').text(loTotal);
-                    }
                     });
 
                 $('.i-checks').on('ifUnchecked', function (e) {
-                    var isChecked = e.currentTarget.checked;
-                    var codigo = e.currentTarget.id.split('&')[1] + ";";
+                    var isChecked = e.currentTarget.checked;                   
 
                     if (isChecked == false) {
-                        if ($('#<%=hfCodigoReserva.ClientID%>').val() != "") {
-                            var mm = $('#<%=hfCodigoReserva.ClientID%>').val();
-                            $('#<%=hfCodigoReserva.ClientID%>').val(mm.replace(codigo, "").trim());
-                        }
-
                         var loPrecio = e.currentTarget.title;
                         loTotal -= parseFloat(loPrecio);
                         $('#<%=lblTotal.ClientID%>').text(loTotal);
@@ -207,24 +193,16 @@
                 });
 
                 var checked = false;
-
                 $('#check-all').on('click', function () {
                     if (checked == false) {
-                        $('.i-checks').prop('checked', true).iCheck('update');
-                        $('#<%=hfCodigoReserva.ClientID%>').val('');
-
-                        $('.i-checks').each(function () {
-                            $('#<%=hfCodigoReserva.ClientID%>').val($('#<%=hfCodigoReserva.ClientID%>').val() + (this.id.split('&')[1] + ";"));
-                        });
-
+                        $('.i-checks').iCheck('check');
                         checked = true;
-                    } else {
-                        $('.i-checks').prop('checked', false).iCheck('update');
-                        $('#<%=hfCodigoReserva.ClientID%>').val('');
+                    } else {                                                                                                
+                        $('.i-checks').iCheck('uncheck');                        
                         checked = false;
                     }
-
                 });
+
                 LoadFootable();
                 ValidarForm();
                 Select2();

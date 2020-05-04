@@ -83,10 +83,9 @@ namespace PL.CustomersWebSite
             {
                 ddlEstado.DataTextField = "NOMBRE";
                 ddlEstado.DataValueField = "ID_ESTADO";
-                ddlEstado.DataBind();
-                ddlEstado.Items.Insert(0, new ListItem(String.Empty, String.Empty));
-                ddlEstado.Items.Insert(1, new ListItem("Pagada", "5"));
-                ddlEstado.Items.Insert(2, new ListItem("A Cuenta", "4"));
+                ddlEstado.DataBind();                
+                ddlEstado.Items.Insert(0, new ListItem("Pagada", "5"));
+                ddlEstado.Items.Insert(1, new ListItem("A Cuenta", "4"));
             }
             catch (Exception ex)
             {
@@ -104,8 +103,7 @@ namespace PL.CustomersWebSite
                 ddlFormaPago.DataSource = oFormaPagoBLL.ObtenerFormasPago();
                 ddlFormaPago.DataTextField = "DESCRIPCION";
                 ddlFormaPago.DataValueField = "ID_FORMA_PAGO";
-                ddlFormaPago.DataBind();
-                ddlFormaPago.Items.Insert(0, new ListItem(String.Empty, String.Empty));
+                ddlFormaPago.DataBind();                
             }
             catch (Exception ex)
             {
