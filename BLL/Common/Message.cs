@@ -195,11 +195,18 @@
 
         #region Mensajes Entrega
 
-        public const string MsjeEntregalSuccess = "La Entrega se Registró correctamente.";
+        public const string MsjeEntregalSuccess = "La Entrega se registró correctamente.";
         public const string MsjeEntregaFailure = "La Entrega  no se pudo guardar.";
 
         #endregion
 
+        #region Mensajes Negocio
 
+        public const string MsjeDatosDelNegocio = "La dirección se registró correctamente.";
+        public const string MsjeDatosDireccion = "Debe completar los datos de la dirección.";
+        public const string MsjeDatosDelNegocioError = "Ocurrió un error, los datos no se guardaron.";
+        public const string MsjeNegocioError = "Ocurrió un error, los datos no se pueden cargar.";
+
+        #endregion
     }
 }

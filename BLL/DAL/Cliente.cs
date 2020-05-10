@@ -79,6 +79,8 @@ public partial class Cliente
 
     public virtual TipoDocumento TipoDocumento { get; set; }
 
+    public virtual Usuario Usuario { get; set; }
+
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Cobro> Cobro { get; set; }
@@ -90,8 +92,6 @@ public partial class Cliente
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Venta> Venta { get; set; }
-
-    public virtual Usuario Usuario { get; set; }
 
 }
 

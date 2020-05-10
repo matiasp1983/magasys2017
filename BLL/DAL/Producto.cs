@@ -75,6 +75,8 @@ public partial class Producto
 
     public virtual Genero Genero { get; set; }
 
+    public virtual Imagen Imagen { get; set; }
+
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Libro> Libro { get; set; }
@@ -102,8 +104,6 @@ public partial class Producto
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Suplemento> Suplemento { get; set; }
-
-    public virtual Imagen Imagen { get; set; }
 
 }
 

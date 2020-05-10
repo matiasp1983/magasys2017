@@ -40,9 +40,9 @@ public partial class Estado
 
         this.ReservaEdicion = new HashSet<ReservaEdicion>();
 
-        this.Venta = new HashSet<Venta>();
-
         this.Usuario = new HashSet<Usuario>();
+
+        this.Venta = new HashSet<Venta>();
 
     }
 
@@ -93,11 +93,11 @@ public partial class Estado
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<Venta> Venta { get; set; }
+    public virtual ICollection<Usuario> Usuario { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<Usuario> Usuario { get; set; }
+    public virtual ICollection<Venta> Venta { get; set; }
 
 }
 

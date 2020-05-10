@@ -39,11 +39,11 @@ public partial class Usuario
 
     public byte[] AVATAR { get; set; }
 
+    public System.DateTime FECHA_ALTA { get; set; }
+
     public Nullable<System.DateTime> FECHA_BAJA { get; set; }
 
     public int ID_ROL { get; set; }
-
-    public System.DateTime FECHA_ALTA { get; set; }
 
     public int COD_ESTADO { get; set; }
 
@@ -51,13 +51,13 @@ public partial class Usuario
 
 
 
-    public virtual Rol Rol { get; set; }
-
-    public virtual Estado Estado { get; set; }
-
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Cliente> Cliente { get; set; }
+
+    public virtual Estado Estado { get; set; }
+
+    public virtual Rol Rol { get; set; }
 
 }
 

@@ -58,9 +58,15 @@ public partial class MAGASYSEntities : DbContext
 
     public virtual DbSet<Genero> Genero { get; set; }
 
+    public virtual DbSet<Imagen> Imagen { get; set; }
+
     public virtual DbSet<Libro> Libro { get; set; }
 
     public virtual DbSet<Localidad> Localidad { get; set; }
+
+    public virtual DbSet<Mes> Mes { get; set; }
+
+    public virtual DbSet<Negocio> Negocio { get; set; }
 
     public virtual DbSet<Pelicula> Pelicula { get; set; }
 
@@ -84,6 +90,8 @@ public partial class MAGASYSEntities : DbContext
 
     public virtual DbSet<Revista> Revista { get; set; }
 
+    public virtual DbSet<Rol> Rol { get; set; }
+
     public virtual DbSet<Suplemento> Suplemento { get; set; }
 
     public virtual DbSet<TipoDocumento> TipoDocumento { get; set; }
@@ -92,15 +100,9 @@ public partial class MAGASYSEntities : DbContext
 
     public virtual DbSet<TipoReserva> TipoReserva { get; set; }
 
-    public virtual DbSet<Venta> Venta { get; set; }
-
-    public virtual DbSet<Rol> Rol { get; set; }
-
     public virtual DbSet<Usuario> Usuario { get; set; }
 
-    public virtual DbSet<Imagen> Imagen { get; set; }
-
-    public virtual DbSet<Mes> Mes { get; set; }
+    public virtual DbSet<Venta> Venta { get; set; }
 
 }
 

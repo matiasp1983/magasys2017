@@ -178,6 +178,7 @@ namespace PL.AdminDashboard
                 if (pUsuario.ID_ROL.Equals(RolUsuario.Administrador))
                 {
                     liUsuarios.Visible = true;
+                    liNegocio.Visible = true;
 
                     if (loActivePage.Equals("Usuario.aspx"))
                     {
@@ -189,6 +190,12 @@ namespace PL.AdminDashboard
                     {
                         liUsuarios.Attributes["class"] = "active";
                         liUsuarioListado.Attributes["class"] = "active";
+                    }
+
+                    if (loActivePage.Equals("Negocio.aspx"))
+                    {
+                        liNegocio.Attributes["class"] = "active";
+                        liInfoNegocio.Attributes["class"] = "active";
                     }
                 }
             }

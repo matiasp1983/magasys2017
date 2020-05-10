@@ -346,6 +346,24 @@ namespace PL.AdminDashboard {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liUsuarioListado;
         
         /// <summary>
+        /// Control liNegocio.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liNegocio;
+        
+        /// <summary>
+        /// Control liInfoNegocio.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liInfoNegocio;
+        
+        /// <summary>
         /// Control contentMaster.
         /// </summary>
         /// <remarks>

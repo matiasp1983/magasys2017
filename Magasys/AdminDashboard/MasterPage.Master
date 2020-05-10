@@ -106,6 +106,12 @@
                             <li id="liUsuarioListado" runat="server"><a href="UsuarioListado.aspx">Listado de Usuarios</a></li>
                         </ul>
                     </li>
+                    <li id="liNegocio" runat="server" visible="false">
+                        <a href="#"><i class="fa fa-home"></i><span class="nav-label">Negocio</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li id="liInfoNegocio" runat="server"><a href="Negocio.aspx">Información</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </nav>
