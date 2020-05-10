@@ -66,7 +66,10 @@ namespace BLL
             {
                 using (var loRepDetalleProductoIngreso = new Repository<DetalleProductoIngreso>())
                 {
-                    lstDetalleProductoIngreso = loRepDetalleProductoIngreso.Search(p => p.FECHA_DEVOLUCION != null && p.ProductoEdicion.COD_ESTADO == 1 && p.ProductoEdicion.COD_TIPO_PRODUCTO == oProductoFiltro.CodTipoProducto && p.ProductoEdicion.Producto.COD_PROVEEDOR == oProductoFiltro.CodProveedor && p.ProductoEdicion.CANTIDAD_DISPONIBLE > 0).GroupBy(x => x.COD_PRODUCTO_EDICION).Select(m => m.First()).ToList();
+                    //lstDetalleProductoIngreso = loRepDetalleProductoIngreso.Search(p => p.FECHA_DEVOLUCION != null && p.ProductoEdicion.COD_ESTADO == 1 && p.ProductoEdicion.COD_TIPO_PRODUCTO == oProductoFiltro.CodTipoProducto && p.ProductoEdicion.Producto.COD_PROVEEDOR == oProductoFiltro.CodProveedor && p.ProductoEdicion.CANTIDAD_DISPONIBLE > 0).GroupBy(x => x.COD_PRODUCTO_EDICION).Select(m => m.First()).ToList();
+                    lstDetalleProductoIngreso = loRepDetalleProductoIngreso.Search(p => p.ProductoEdicion.COD_ESTADO == 1 && p.ProductoEdicion.COD_TIPO_PRODUCTO == oProductoFiltro.CodTipoProducto && p.ProductoEdicion.Producto.COD_PROVEEDOR == oProductoFiltro.CodProveedor && p.ProductoEdicion.CANTIDAD_DISPONIBLE > 0).GroupBy(x => x.COD_PRODUCTO_EDICION).Select(m => m.First()).ToList();
+                    //lstDetalleProductoIngreso = loRepDetalleProductoIngreso.Search(p => p.FECHA_DEVOLUCION != null && p.ProductoEdicion.COD_ESTADO == 1 && p.ProductoEdicion.COD_TIPO_PRODUCTO == oProductoFiltro.CodTipoProducto && p.ProductoEdicion.Producto.COD_PROVEEDOR == oProductoFiltro.CodProveedor && p.ProductoEdicion.CANTIDAD_DISPONIBLE > 0).ToList();
+
 
                     if (!String.IsNullOrEmpty(oProductoFiltro.NombreEdicion) && lstDetalleProductoIngreso.Count > 0)
                         lstDetalleProductoIngreso = lstDetalleProductoIngreso.FindAll(p => p.ProductoEdicion.EDICION.ToUpper().Contains(oProductoFiltro.NombreEdicion.ToUpper()));
@@ -79,6 +82,9 @@ namespace BLL
 
                     if (!String.IsNullOrEmpty(oProductoFiltro.DescripcionProducto) && lstDetalleProductoIngreso.Count > 0)
                         lstDetalleProductoIngreso = lstDetalleProductoIngreso.FindAll(p => !string.IsNullOrEmpty(p.ProductoEdicion.Producto.DESCRIPCION) && p.ProductoEdicion.Producto.DESCRIPCION.ToUpper().Contains(oProductoFiltro.DescripcionProducto.ToUpper()));
+
+                    if (lstDetalleProductoIngreso.Count > 0)
+                        lstDetalleProductoIngreso = lstDetalleProductoIngreso.FindAll(p => p.FECHA_DEVOLUCION == null);
 
                     if (lstDetalleProductoIngreso.Count > 0)
                     {

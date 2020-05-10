@@ -167,6 +167,59 @@ namespace BLL
             return lstReservaListado;
         }
 
+        public List<ReservaEdicionListado> ObtenerReservaEdicionPorProdEdicion(long codProductoEdicion)
+        {
+            List<ReservaEdicionListado> lstReservaListado = null;
+            List<ReservaEdicion> lstReservaEdicion = null;
+
+            lstReservaListado = new List<ReservaEdicionListado>();
+                 
+            try
+            {
+                using (var loRepReservaEdicion = new Repository<ReservaEdicion>())
+                {
+                    lstReservaEdicion = loRepReservaEdicion.Search(p => p.COD_PROD_EDICION == codProductoEdicion && p.COD_ESTADO == 15).ToList();
+
+                    if (lstReservaEdicion.Count > 0)
+                    {
+                        foreach (var loReservaEdicion in lstReservaEdicion)
+                        {
+                            ReservaEdicionListado oReservaListado = new ReservaEdicionListado
+                            {
+                                ID_RESERVA_EDICION = loReservaEdicion.ID_RESERVA_EDICION,
+                                COD_RESERVA = loReservaEdicion.COD_RESERVA,
+                                FECHA = loReservaEdicion.FECHA,
+                                NOMBRE_CLIENTE = loReservaEdicion.Reserva.Cliente.APELLIDO + ", " + loReservaEdicion.Reserva.Cliente.NOMBRE,
+                                COD_CLIENTE = loReservaEdicion.Reserva.COD_CLIENTE,
+                                FECHA_INICIO = loReservaEdicion.Reserva.FECHA_INICIO,
+                                FECHA_FIN = loReservaEdicion.Reserva.FECHA_FIN,
+                                ESTADO = loReservaEdicion.Estado.NOMBRE,
+                                COD_EDICION = loReservaEdicion.COD_PROD_EDICION.ToString(),
+                                EDICION = loReservaEdicion.ProductoEdicion.EDICION,
+                                NOMBRE_EDICION = loReservaEdicion.ProductoEdicion.NOMBRE,
+                                DESC_EDICION = loReservaEdicion.ProductoEdicion.DESCRIPCION,
+                                PRECIO_EDICION = loReservaEdicion.ProductoEdicion.PRECIO.ToString()
+                            };
+                            //ProductoEdicion oProductoEdicion = new BLL.ProductoEdicionBLL().ObtenerEdicion(Convert.ToInt32(oReservaListado.COD_EDICION));
+                            oReservaListado.NOMBRE_PRODUCTO = loReservaEdicion.ProductoEdicion.Producto.NOMBRE;
+                            if (loReservaEdicion.Reserva.ENVIO_DOMICILIO == null)
+                                oReservaListado.FORMA_ENTREGA = "Retira en Local";
+                            else
+                                oReservaListado.FORMA_ENTREGA = "Envío a Domicilio";
+                            lstReservaListado.Add(oReservaListado);
+                        }
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+           
+            return lstReservaListado;
+        }
+
         public int CantidadReservaEdicionPorProductoEdicion(long codProductoEdicion)
         {
             // Obtener cantidad de productos edición reservados, es decir, con Reserva Edición: Confirmada.

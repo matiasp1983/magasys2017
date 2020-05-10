@@ -79,7 +79,7 @@
                         <div class="ibox">
                             <div class="ibox-content">
                                 <br />
-                                <asp:ListView ID="lsvReservaEdicion" runat="server" Visible="true">
+                                <asp:ListView ID="lsvReservaEdicion" runat="server" Visible="true" OnSelectedIndexChanged="lsvReservaEdicion_SelectedIndexChanged">
                                     <LayoutTemplate>
                                         <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                             <thead>
@@ -111,16 +111,16 @@
                                                 <input id="chkCodigoReserva" runat="server" class="i-checks" type="checkbox" />
                                             </td>
                                             <td class="text-left">
-                                                <asp:Label ID="lblIdReserva" runat="server" Text='<%#Eval("ID_RESERVA").ToString()%>'></asp:Label>
+                                                <asp:Label ID="lblIdReserva" runat="server" Text='<%#Eval("ID_RESERVA_EDICION").ToString()%>'></asp:Label>
                                             </td>
                                             <td class="text-left">
-                                                <asp:Label ID="lblCliente" runat="server" Text='<%#Eval("CLIENTE").ToString()%>'></asp:Label>
+                                                <asp:Label ID="lblCliente" runat="server" Text='<%#Eval("NOMBRE_CLIENTE").ToString()%>'></asp:Label>
                                             </td>
                                             <td>
-                                                <asp:Label ID="lblPorducto" runat="server" Text='<%#Eval("PRODUCTO").ToString().Length > 50 ? String.Format("{0}...", Eval("PRODUCTO").ToString().Remove(50).TrimEnd()):Eval("PRODUCTO")%>'></asp:Label>
+                                                <asp:Label ID="lblPorducto" runat="server" Text='<%#Eval("NOMBRE_PRODUCTO").ToString().Length > 50 ? String.Format("{0}...", Eval("NOMBRE_PRODUCTO").ToString().Remove(50).TrimEnd()):Eval("NOMBRE_PRODUCTO")%>'></asp:Label>
                                             </td>
                                             <td>
-                                                <asp:Label ID="LblProdEdi" runat="server" Text='<%#Eval("CODPRODUCTOEDICION").ToString().Length > 50 ? String.Format("{0}...", Eval("CODPRODUCTOEDICION").ToString().Remove(50).TrimEnd()):Eval("CODPRODUCTOEDICION")%>'></asp:Label>
+                                                <asp:Label ID="LblProdEdi" runat="server" Text='<%#Eval("COD_EDICION").ToString().Length > 50 ? String.Format("{0}...", Eval("COD_EDICION").ToString().Remove(50).TrimEnd()):Eval("COD_EDICION")%>'></asp:Label>
                                             </td>
                                         </tr>
                                     </ItemTemplate>
