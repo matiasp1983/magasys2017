@@ -96,10 +96,17 @@ namespace BLL
 
                     oProductoEdicionAux.CANTIDAD_DISPONIBLE = oProductoEdicion.CANTIDAD_DISPONIBLE - cantidad;
 
-                    if (fechaDevolucionReal != null)
-                        oProductoEdicionAux.FECHA_DEVOLUCION_REAL = fechaDevolucionReal;
-                    else if (oProductoEdicion.FECHA_DEVOLUCION_REAL != null)
-                        oProductoEdicionAux.FECHA_DEVOLUCION_REAL = oProductoEdicion.FECHA_DEVOLUCION_REAL;
+
+
+                    if (oProductoEdicionAux.CANTIDAD_DISPONIBLE < 1)
+                    {
+                        oProductoEdicionAux.COD_ESTADO = 2;
+                        if (fechaDevolucionReal != null)
+                            oProductoEdicionAux.FECHA_DEVOLUCION_REAL = fechaDevolucionReal;
+                        else if (oProductoEdicion.FECHA_DEVOLUCION_REAL != null)
+                            oProductoEdicionAux.FECHA_DEVOLUCION_REAL = oProductoEdicion.FECHA_DEVOLUCION_REAL;
+                    }
+              
 
                     bRes = ModificarProductoEdicion(oProductoEdicionAux);
                 }
