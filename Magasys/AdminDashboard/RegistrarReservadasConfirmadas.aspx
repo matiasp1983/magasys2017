@@ -76,6 +76,17 @@
             <div class="ibox float-e-margins">
                 <div class="row">
                     <div class="col-lg-12">
+                        <div class="ibox-content">
+                            <div class="text-center">
+                                <div class="alert alert-success">
+                                    <a class="alert-link" href="#">Seleccione las reservas que desea cancelar.</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
                         <div class="ibox">
                             <div class="ibox-content">
                                 <br />
