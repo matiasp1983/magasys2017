@@ -54,7 +54,7 @@ namespace PL.AdminDashboard
                         loResutado = false;
                     }
                     else
-                    { 
+                    {
                         loResutado = new BLL.ProductoEdicionBLL().ActualizarCantidadDisponible(oDetalleProductoDevolucion.COD_PRODUCTO_EDICION, oDetalleProductoDevolucion.CANTIDAD, DateTime.Now);
 
                         foreach (var loItem in lsvReservaEdicion.Items)
@@ -87,11 +87,10 @@ namespace PL.AdminDashboard
                 loLogger.Error(ex);
             }
 
-            
+
         }
 
-
-            protected void BtnCancelar_Click(object sender, EventArgs e)
+        protected void BtnCancelar_Click(object sender, EventArgs e)
         {
             Response.Redirect("ProductoDevolucion.aspx", false);
         }
@@ -115,9 +114,9 @@ namespace PL.AdminDashboard
 
                     //Aquí se debe cagar la grilla con las reservas: lsvReservaEdicion
                     List<BLL.ReservaEdicionListado> lstReservaListado = new BLL.ReservaEdicionBLL().ObtenerReservaEdicionPorProdEdicion((long)loDevolucionProducto.COD_PRODUCTO_EDICION);
-                    
 
-                   
+
+
                     if (lstReservaListado.Any())
                     {
                         lsvReservaEdicion.DataSource = lstReservaListado;
