@@ -173,7 +173,7 @@ namespace BLL
             List<ReservaEdicion> lstReservaEdicion = null;
 
             lstReservaListado = new List<ReservaEdicionListado>();
-                 
+
             try
             {
                 using (var loRepReservaEdicion = new Repository<ReservaEdicion>())
@@ -216,8 +216,31 @@ namespace BLL
             {
                 throw ex;
             }
-           
+
             return lstReservaListado;
+        }
+
+        /// <summary>
+        /// Obtener Reservas Edicion confirmadas y con envío a domicilio
+        /// </summary>
+        /// <returns></returns>
+        public List<ReservaEdicion> ObtenerReservaEdicionConEnvioDomicilio()
+        {
+            List<ReservaEdicion> lstReservaEdicion = null;
+
+            try
+            {
+                using (var loRepReservaEdicion = new Repository<ReservaEdicion>())
+                {
+                    lstReservaEdicion = loRepReservaEdicion.Search(p => p.COD_ESTADO == 15 && p.Reserva.ENVIO_DOMICILIO == "X");
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return lstReservaEdicion;
         }
 
         public int CantidadReservaEdicionPorProductoEdicion(long codProductoEdicion)
