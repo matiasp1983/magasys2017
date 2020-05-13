@@ -24,6 +24,8 @@ public partial class TipoProducto
 
         this.Producto = new HashSet<Producto>();
 
+        this.ProductoIngreso = new HashSet<ProductoIngreso>();
+
     }
 
 
@@ -36,6 +38,10 @@ public partial class TipoProducto
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Producto> Producto { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<ProductoIngreso> ProductoIngreso { get; set; }
 
 }
 

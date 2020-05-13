@@ -35,6 +35,8 @@ public partial class ProductoIngreso
 
     public int COD_PROVEEDOR { get; set; }
 
+    public Nullable<int> COD_TIPO_PRODUCTO { get; set; }
+
 
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -44,6 +46,8 @@ public partial class ProductoIngreso
     public virtual Estado Estado { get; set; }
 
     public virtual Proveedor Proveedor { get; set; }
+
+    public virtual TipoProducto TipoProducto { get; set; }
 
 }
 

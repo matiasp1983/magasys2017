@@ -88,6 +88,7 @@
                                         <thead>
                                             <tr>
                                                 <th class="text-left">Proveedor</th>
+                                                <th class="text-left">Tipo Producto</th>  
                                                 <th class="text-left">Fecha de Ingreso</th>       
                                                 <th class="text-right" data-sort-ignore="true">Acci&oacute;n</th>
                                             </tr>
@@ -108,6 +109,9 @@
                                     <tr>
                                         <td class="text-left">
                                             <asp:Label ID="lblProveedor" runat="server" Text='<%#Eval("DESC_PROVEEDOR").ToString().Length > 13 ? String.Format("{0}...", Eval("DESC_PROVEEDOR").ToString().Remove(13).TrimEnd()):Eval("DESC_PROVEEDOR")%>'></asp:Label>
+                                        </td>
+                                        <td class="text-left">
+                                            <asp:Label ID="lblTipoProducto" runat="server" Text='<%#(Eval("TIPO_PRODUCTO") != null) ? Eval("TIPO_PRODUCTO"):null%>'></asp:Label>
                                         </td>
                                         <td>
                                             <asp:Label ID="lblFechaAlta" runat="server" Text='<%#Convert.ToDateTime(Eval("FECHA")).ToString("dd/MM/yyyy")%>'></asp:Label>

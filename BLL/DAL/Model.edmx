@@ -241,6 +241,7 @@
           <Property Name="FECHA" Type="datetime" Nullable="false" />
           <Property Name="COD_ESTADO" Type="int" Nullable="false" />
           <Property Name="COD_PROVEEDOR" Type="int" Nullable="false" />
+          <Property Name="COD_TIPO_PRODUCTO" Type="int" />
         </EntityType>
         <EntityType Name="Proveedor">
           <Key>
@@ -610,6 +611,18 @@
             </Principal>
             <Dependent Role="ProductoIngreso">
               <PropertyRef Name="COD_PROVEEDOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IngresoProducto_TipoProducto">
+          <End Role="TipoProducto" Type="Self.TipoProducto" Multiplicity="0..1" />
+          <End Role="ProductoIngreso" Type="Self.ProductoIngreso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoProducto">
+              <PropertyRef Name="ID_TIPO_PRODUCTO" />
+            </Principal>
+            <Dependent Role="ProductoIngreso">
+              <PropertyRef Name="COD_TIPO_PRODUCTO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1126,6 +1139,10 @@
             <End Role="Proveedor" EntitySet="Proveedor" />
             <End Role="ProductoIngreso" EntitySet="ProductoIngreso" />
           </AssociationSet>
+          <AssociationSet Name="FK_IngresoProducto_TipoProducto" Association="Self.FK_IngresoProducto_TipoProducto">
+            <End Role="TipoProducto" EntitySet="TipoProducto" />
+            <End Role="ProductoIngreso" EntitySet="ProductoIngreso" />
+          </AssociationSet>
           <AssociationSet Name="FK_Libro_Producto" Association="Self.FK_Libro_Producto">
             <End Role="Producto" EntitySet="Producto" />
             <End Role="Libro" EntitySet="Libro" />
@@ -1496,6 +1513,10 @@
             <End Role="Proveedor" EntitySet="Proveedor" />
             <End Role="ProductoIngreso" EntitySet="ProductoIngreso" />
           </AssociationSet>
+          <AssociationSet Name="FK_IngresoProducto_TipoProducto" Association="MAGASYSModel.FK_IngresoProducto_TipoProducto">
+            <End Role="TipoProducto" EntitySet="TipoProducto" />
+            <End Role="ProductoIngreso" EntitySet="ProductoIngreso" />
+          </AssociationSet>
           <AssociationSet Name="FK_Proveedor_Provincia" Association="MAGASYSModel.FK_Proveedor_Provincia">
             <End Role="Provincia" EntitySet="Provincia" />
             <End Role="Proveedor" EntitySet="Proveedor" />
@@ -1819,9 +1840,11 @@
           <Property Name="FECHA" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="COD_ESTADO" Type="Int32" Nullable="false" />
           <Property Name="COD_PROVEEDOR" Type="Int32" Nullable="false" />
+          <Property Name="COD_TIPO_PRODUCTO" Type="Int32" />
           <NavigationProperty Name="DetalleProductoIngreso" Relationship="MAGASYSModel.FK_DetalleIngresoProducto_IngresoProducto" FromRole="ProductoIngreso" ToRole="DetalleProductoIngreso" />
           <NavigationProperty Name="Estado" Relationship="MAGASYSModel.FK_IngresoProducto_Estado" FromRole="ProductoIngreso" ToRole="Estado" />
           <NavigationProperty Name="Proveedor" Relationship="MAGASYSModel.FK_IngresoProducto_Proveedor" FromRole="ProductoIngreso" ToRole="Proveedor" />
+          <NavigationProperty Name="TipoProducto" Relationship="MAGASYSModel.FK_IngresoProducto_TipoProducto" FromRole="ProductoIngreso" ToRole="TipoProducto" />
         </EntityType>
         <EntityType Name="Proveedor">
           <Key>
@@ -1943,6 +1966,7 @@
           <Property Name="ID_TIPO_PRODUCTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DESCRIPCION" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_Producto_TipoProducto" FromRole="TipoProducto" ToRole="Producto" />
+          <NavigationProperty Name="ProductoIngreso" Relationship="MAGASYSModel.FK_IngresoProducto_TipoProducto" FromRole="TipoProducto" ToRole="ProductoIngreso" />
         </EntityType>
         <EntityType Name="TipoReserva">
           <Key>
@@ -2575,6 +2599,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_IngresoProducto_TipoProducto">
+          <End Type="MAGASYSModel.TipoProducto" Role="TipoProducto" Multiplicity="0..1" />
+          <End Type="MAGASYSModel.ProductoIngreso" Role="ProductoIngreso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoProducto">
+              <PropertyRef Name="ID_TIPO_PRODUCTO" />
+            </Principal>
+            <Dependent Role="ProductoIngreso">
+              <PropertyRef Name="COD_TIPO_PRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Proveedor_Provincia">
           <End Type="MAGASYSModel.Provincia" Role="Provincia" Multiplicity="1" />
           <End Type="MAGASYSModel.Proveedor" Role="Proveedor" Multiplicity="*" />
@@ -2883,6 +2919,7 @@
           <EntitySetMapping Name="ProductoIngreso">
             <EntityTypeMapping TypeName="MAGASYSModel.ProductoIngreso">
               <MappingFragment StoreEntitySet="ProductoIngreso">
+                <ScalarProperty Name="COD_TIPO_PRODUCTO" ColumnName="COD_TIPO_PRODUCTO" />
                 <ScalarProperty Name="COD_PROVEEDOR" ColumnName="COD_PROVEEDOR" />
                 <ScalarProperty Name="COD_ESTADO" ColumnName="COD_ESTADO" />
                 <ScalarProperty Name="FECHA" ColumnName="FECHA" />

@@ -99,26 +99,27 @@ namespace BLL
                         else if (oIngresoProductoFiltro.FechaAltaDesde == null && oIngresoProductoFiltro.FechaAltaHasta != null)
                             lstProductoIngreso = rep.Search(p => p.COD_ESTADO == 1 && DbFunctions.TruncateTime(p.FECHA) <= DbFunctions.TruncateTime(oIngresoProductoFiltro.FechaAltaHasta));
                     }
-                }
 
-                ProductoIngresoListado oProductoIngresoListado;
-                lstProductoIngresoListado = new List<ProductoIngresoListado>();
+                    ProductoIngresoListado oProductoIngresoListado;
+                    lstProductoIngresoListado = new List<ProductoIngresoListado>();
 
-                if (lstProductoIngreso != null)
-                {
-                    foreach (var loProductoIngreso in lstProductoIngreso)
+                    if (lstProductoIngreso != null)
                     {
-                        oProductoIngresoListado = new ProductoIngresoListado
+                        foreach (var loProductoIngreso in lstProductoIngreso)
                         {
-                            ID_INGRESO_PRODUCTOS = loProductoIngreso.ID_INGRESO_PRODUCTOS,
-                            FECHA = loProductoIngreso.FECHA,
-                            COD_PROVEEDOR = loProductoIngreso.COD_PROVEEDOR,
-                        };
+                            oProductoIngresoListado = new ProductoIngresoListado
+                            {
+                                ID_INGRESO_PRODUCTOS = loProductoIngreso.ID_INGRESO_PRODUCTOS,
+                                FECHA = loProductoIngreso.FECHA,
+                                COD_PROVEEDOR = loProductoIngreso.COD_PROVEEDOR,
+                                DESC_PROVEEDOR = loProductoIngreso.Proveedor.RAZON_SOCIAL
+                            };
 
-                        using (var loRepProveedor = new Repository<Proveedor>())
-                            oProductoIngresoListado.DESC_PROVEEDOR = loRepProveedor.Find(p => p.ID_PROVEEDOR == loProductoIngreso.COD_PROVEEDOR).RAZON_SOCIAL;
+                            if (loProductoIngreso.COD_TIPO_PRODUCTO != null)
+                                oProductoIngresoListado.TIPO_PRODUCTO = loProductoIngreso.TipoProducto.DESCRIPCION;
 
-                        lstProductoIngresoListado.Add(oProductoIngresoListado);
+                            lstProductoIngresoListado.Add(oProductoIngresoListado);
+                        }
                     }
                 }
             }
@@ -141,6 +142,7 @@ namespace BLL
         public DateTime FECHA { get; set; }
         public int COD_PROVEEDOR { get; set; }
         public string DESC_PROVEEDOR { get; set; }
+        public string TIPO_PRODUCTO { get; set; }
     }
 
     #endregion

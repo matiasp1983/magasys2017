@@ -490,6 +490,7 @@ namespace PL.AdminDashboard
                     oProductoIngreso.FECHA = DateTime.Now;
                     oProductoIngreso.COD_ESTADO = 1;
                     oProductoIngreso.COD_PROVEEDOR = Convert.ToInt32(ddlProveedor.SelectedValue);
+                    oProductoIngreso.COD_TIPO_PRODUCTO = Convert.ToInt32(ddlTipoProducto.SelectedValue);
                     loResutado = new BLL.ProductoIngresoBLL().AltaIngreso(oProductoIngreso, lstDetalleProductoIngreso);
                 }
 
@@ -667,6 +668,7 @@ namespace PL.AdminDashboard
                     oProductoIngreso.FECHA = DateTime.Now;
                     oProductoIngreso.COD_ESTADO = 1;
                     oProductoIngreso.COD_PROVEEDOR = Convert.ToInt32(ddlProveedor.SelectedValue);
+                    oProductoIngreso.COD_TIPO_PRODUCTO = Convert.ToInt32(ddlTipoProducto.SelectedValue);
                     loResutado = new BLL.ProductoIngresoBLL().AltaIngreso(oProductoIngreso, lstDetalleProductoIngreso);
                 }
 
@@ -840,6 +842,7 @@ namespace PL.AdminDashboard
                     oProductoIngreso.FECHA = DateTime.Now;
                     oProductoIngreso.COD_ESTADO = 1;
                     oProductoIngreso.COD_PROVEEDOR = Convert.ToInt32(ddlProveedor.SelectedValue);
+                    oProductoIngreso.COD_TIPO_PRODUCTO = Convert.ToInt32(ddlTipoProducto.SelectedValue);
                     loResutado = new BLL.ProductoIngresoBLL().AltaIngreso(oProductoIngreso, lstDetalleProductoIngreso);
                 }
 
@@ -1012,6 +1015,7 @@ namespace PL.AdminDashboard
                     oProductoIngreso.FECHA = DateTime.Now;
                     oProductoIngreso.COD_ESTADO = 1;
                     oProductoIngreso.COD_PROVEEDOR = Convert.ToInt32(ddlProveedor.SelectedValue);
+                    oProductoIngreso.COD_TIPO_PRODUCTO = Convert.ToInt32(ddlTipoProducto.SelectedValue);
                     loResutado = new BLL.ProductoIngresoBLL().AltaIngreso(oProductoIngreso, lstDetalleProductoIngreso);
                 }
 
@@ -1186,6 +1190,7 @@ namespace PL.AdminDashboard
                     oProductoIngreso.FECHA = DateTime.Now;
                     oProductoIngreso.COD_ESTADO = 1;
                     oProductoIngreso.COD_PROVEEDOR = Convert.ToInt32(ddlProveedor.SelectedValue);
+                    oProductoIngreso.COD_TIPO_PRODUCTO = Convert.ToInt32(ddlTipoProducto.SelectedValue);
                     loResutado = new BLL.ProductoIngresoBLL().AltaIngreso(oProductoIngreso, lstDetalleProductoIngreso);
                 }
 
@@ -1361,6 +1366,7 @@ namespace PL.AdminDashboard
                     oProductoIngreso.FECHA = DateTime.Now;
                     oProductoIngreso.COD_ESTADO = 1;
                     oProductoIngreso.COD_PROVEEDOR = Convert.ToInt32(ddlProveedor.SelectedValue);
+                    oProductoIngreso.COD_TIPO_PRODUCTO = Convert.ToInt32(ddlTipoProducto.SelectedValue);
                     loResutado = new BLL.ProductoIngresoBLL().AltaIngreso(oProductoIngreso, lstDetalleProductoIngreso);
                 }
 
