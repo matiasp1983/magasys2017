@@ -33,12 +33,24 @@ namespace PL.AdminDashboard
                         BLL.DAL.Reserva oReservaConfirmada = new BLL.ReservaBLL().ObtenerReserva(Convert.ToInt32(((Label)loItem.Controls[3]).Text));
                         oReservaConfirmada.COD_ESTADO = 7;
 
-                        // loResutado = new BLL.ReservaBLL().ModificarReserva(oReservaConfirmada);
+                        
                         if (oReservaConfirmada.COD_TIPO_RESERVA == 1)
                         {
-                            BLL.DAL.ReservaEdicion oReservaEdicion = new BLL.ReservaEdicionBLL().ObtenerReservaEdicion(oReservaConfirmada.ID_RESERVA);
+                            BLL.DAL.ReservaEdicion oReservaEdicion = new BLL.ReservaEdicionBLL().ObtenerReservaEdicionDeReservaUnica(oReservaConfirmada.ID_RESERVA);
+                            if (oReservaEdicion != null)
+                            {
+                                oReservaEdicion.COD_ESTADO = 15;
+                                // loResutado = new BLL.ReservaEdicionBLL().ModificarReservaEdidion(oReservaEdicion);
+                                // loResutado = new BLL.ReservaBLL().ModificarReserva(oReservaConfirmada);
+                            }
+
                         }
-                        // loResutado = new ReservaEdicionBLL().AltaReservaEdicion(oReservaConfirmada);
+                        else
+                        {
+                            // loResutado = new BLL.ReservaBLL().ModificarReserva(oReservaConfirmada);
+                        }
+
+                        loResutado = true;
                         if (!loResutado)
                             break;
                     }
