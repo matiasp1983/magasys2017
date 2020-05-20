@@ -115,6 +115,8 @@
         public const string MsjeReservaProcesamientoFinalizado = "El procesamiento finalizó con éxito.";
         public const string MsjeReservaSinCaducar = "No hay reservas para procesar.";
         public const string MsjeReservaCargarCodigo = "Se debe completar el código de la reserva.";
+        public const string MsjeReservaConfirmacionOk = "Las Reservas han sido confirmadas.";
+        public const string MsjeReservaConfirmacionFailure = "No se confirmaron las Reservas marcadas";
 
         #endregion
 

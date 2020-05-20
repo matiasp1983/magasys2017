@@ -57,13 +57,13 @@ namespace PL.AdminDashboard
                 }
 
                 if (loResutado)
-                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeProductoIngresoSuccessAlta, "Alta de Ingreso de productos", "Index.aspx"));
+                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeReservaConfirmacionOk, "Confirmacion Reservas", "Index.aspx"));
                 else
-                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeReservaFailure));
+                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeReservaConfirmacionFailure));
             }
             catch (Exception ex)
             {
-                Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeReservaFailure));
+                Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeReservaConfirmacionFailure));
 
                 Logger loLogger = LogManager.GetCurrentClassLogger();
                 loLogger.Error(ex);

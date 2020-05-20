@@ -96,6 +96,25 @@ namespace BLL
             return oReservaEdicion;
         }
 
+        public ReservaEdicion ObtenerReservaEdicionDeReservaUnica(long idReserva)
+        {
+            ReservaEdicion oReservaEdicion = null;
+
+            try
+            {
+                using (var rep = new Repository<ReservaEdicion>())
+                {
+                    oReservaEdicion = rep.Find(p => p.COD_RESERVA == idReserva);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return oReservaEdicion;
+        }
+
         public List<ReservaEdicionListado> ObtenerReservaEdicionPorCliente(ClienteFiltro oClienteFiltro)
         {
             List<ReservaEdicionListado> lstReservaListado = null;
