@@ -27,19 +27,21 @@
             IdReserva,
             IdClienteCobro,
             CobroVisualizarIdVenta,
-            IdCobro,            
+            IdCobro,
             ProductoReserva,
             ListadoReserva,
             ListadoReservaEdicion,
             ListadoReservaConfirmar,
             ListadoReservaConfirmada,
             IdProductoEdicion,
-            Usuario,            
+            Usuario,
             ProductoReservaEdicionSeleccionados,
             CantidadDePedidos,
             DetalleVenta,
-            DevolucionProducto
-        }        
+            DevolucionProducto,
+            ReservasHojaDeRuta,
+            ClientesHojaDeRuta
+        }
 
         #endregion
     }

@@ -92,10 +92,10 @@
                         </ul>
                     </li>
                     <li id="liEntregaReparto" runat="server">
-                        <a href="#"><i class="fa fa-list-alt"></i><span class="nav-label">Entrega / Reparto</span><span class="fa arrow"></span></a>
+                        <a href="#"><i class="fas fa-walking"></i><span class="nav-label">Entrega / Reparto</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
                             <li id="liRegistrarEntregaProducto" runat="server"><a href="RegistrarEntregaProducto.aspx">Registrar entrega de Productos</a></li>
-                            <li id="li2" runat="server"><a href="">Generar listado de reparto</a></li>
+                            <li id="liListadoReparto" runat="server"><a href="Reparto.aspx">Generar listado de reparto</a></li>
                             <li id="li3" runat="server"><a href="">Registrar entrega por reparto</a></li>
                         </ul>
                     </li>
@@ -161,6 +161,8 @@
     <script src="js/plugins/validate/jquery.validate.js"></script>
     <!-- Select2 -->
     <script src="js/plugins/select2/select2.full.min.js"></script>
+
+    <script src="https://kit.fontawesome.com/f231da8ad4.js" crossorigin="anonymous"></script>
 
     <asp:ContentPlaceHolder ID="script" runat="server" />
 </body>

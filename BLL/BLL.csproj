@@ -190,6 +190,13 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="ForgotPasswordBLL.cs" />
+    <Compile Include="FuerzaBruta\Delivery.cs" />
+    <Compile Include="FuerzaBruta\EjecutarAlgoritmoPlanificacion.cs" />
+    <Compile Include="FuerzaBruta\EstrategiaFuerzaBruta.cs" />
+    <Compile Include="FuerzaBruta\FilaMatrizFB.cs" />
+    <Compile Include="FuerzaBruta\MatrizFB.cs" />
+    <Compile Include="FuerzaBruta\NodoDistanciaFB.cs" />
+    <Compile Include="FuerzaBruta\NodoFB.cs" />
     <Compile Include="MesBLL.cs" />
     <Compile Include="NegocioBLL.cs" />
     <Compile Include="ReservaEdicionBLL.cs" />

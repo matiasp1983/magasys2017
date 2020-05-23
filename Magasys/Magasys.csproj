@@ -141,6 +141,7 @@
     <Content Include="AdminDashboard\Genero.aspx" />
     <Content Include="AdminDashboard\GeneroEditar.aspx" />
     <Content Include="AdminDashboard\GeneroListado.aspx" />
+    <Content Include="AdminDashboard\HojaDeRuta.aspx" />
     <Content Include="AdminDashboard\img\perfil_default.png" />
     <Content Include="AdminDashboard\img\preview_icons.png" />
     <Content Include="AdminDashboard\js\plugins\chartJs\Chart.min.js" />
@@ -173,6 +174,7 @@
     <Content Include="AdminDashboard\ProveedorEditar.aspx" />
     <Content Include="AdminDashboard\RegistrarEntregaProducto.aspx" />
     <Content Include="AdminDashboard\RegistrarReservadasConfirmadas.aspx" />
+    <Content Include="AdminDashboard\Reparto.aspx" />
     <Content Include="AdminDashboard\Reserva.aspx" />
     <Content Include="AdminDashboard\ConfirmarReservas.aspx" />
     <Content Include="AdminDashboard\ReservaEdicion.aspx" />
@@ -480,6 +482,13 @@
     <Compile Include="AdminDashboard\GeneroListado.aspx.designer.cs">
       <DependentUpon>GeneroListado.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AdminDashboard\HojaDeRuta.aspx.cs">
+      <DependentUpon>HojaDeRuta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\HojaDeRuta.aspx.designer.cs">
+      <DependentUpon>HojaDeRuta.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AdminDashboard\Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -675,6 +684,13 @@
     </Compile>
     <Compile Include="AdminDashboard\RegistrarReservadasConfirmadas.aspx.designer.cs">
       <DependentUpon>RegistrarReservadasConfirmadas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\Reparto.aspx.cs">
+      <DependentUpon>Reparto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\Reparto.aspx.designer.cs">
+      <DependentUpon>Reparto.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminDashboard\Reserva.aspx.cs">
       <DependentUpon>Reserva.aspx</DependentUpon>

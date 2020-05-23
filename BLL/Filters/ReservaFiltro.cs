@@ -20,6 +20,9 @@ namespace BLL.Filters
         public string APELLIDO { get; set; }
         public string NOMBRE { get; set; }
         public string ALIAS { get; set; }
+        // Edición:
+        public string EDICION { get; set; }
+        public string NOMBRE_EDICION { get; set; }
 
         #endregion
     }

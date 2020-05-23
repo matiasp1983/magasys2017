@@ -172,6 +172,11 @@ namespace PL.AdminDashboard
                 liEntregaReparto.Attributes["class"] = "active";
                 liRegistrarEntregaProducto.Attributes["class"] = "active";
             }
+            if (loActivePage.Equals("Reparto.aspx"))
+            {
+                liEntregaReparto.Attributes["class"] = "active";
+                liListadoReparto.Attributes["class"] = "active";
+            }
 
             if (pUsuario != null)
             {

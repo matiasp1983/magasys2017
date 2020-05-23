@@ -243,15 +243,48 @@ namespace BLL
         /// Obtener Reservas Edicion confirmadas y con envío a domicilio
         /// </summary>
         /// <returns></returns>
-        public List<ReservaEdicion> ObtenerReservaEdicionConEnvioDomicilio()
+        public List<ReservaEdicionReparto> ObtenerReservaEdicionConEnvioDomicilio(ReservaFiltro oReservaFiltro)
         {
-            List<ReservaEdicion> lstReservaEdicion = null;
+            List<ReservaEdicionReparto> lstReservaEdicionReparto = null;
 
             try
             {
                 using (var loRepReservaEdicion = new Repository<ReservaEdicion>())
                 {
-                    lstReservaEdicion = loRepReservaEdicion.Search(p => p.COD_ESTADO == 15 && p.Reserva.ENVIO_DOMICILIO == "X");
+                    var lstReservaEdicion = loRepReservaEdicion.Search(p => p.COD_ESTADO == 15 && p.Reserva.ENVIO_DOMICILIO == "X");
+
+                    if (lstReservaEdicion.Count > 0 && !String.IsNullOrEmpty(oReservaFiltro.NOMBRE_PRODUCTO))
+                        lstReservaEdicion = lstReservaEdicion.FindAll(p => p.Reserva.Producto.NOMBRE.ToUpper().Contains(oReservaFiltro.NOMBRE_PRODUCTO.ToUpper()));
+
+                    if (lstReservaEdicion.Count > 0 && !String.IsNullOrEmpty(oReservaFiltro.EDICION))
+                        lstReservaEdicion = lstReservaEdicion.FindAll(p => p.ProductoEdicion.EDICION.ToUpper().Contains(oReservaFiltro.EDICION.ToUpper()));
+
+                    if (lstReservaEdicion.Count > 0 && !String.IsNullOrEmpty(oReservaFiltro.NOMBRE_EDICION))
+                        lstReservaEdicion = lstReservaEdicion.FindAll(p => p.ProductoEdicion.NOMBRE.ToUpper().Contains(oReservaFiltro.NOMBRE_EDICION.ToUpper()));
+
+                    if (lstReservaEdicion.Count > 0)
+                    {
+                        lstReservaEdicionReparto = new List<ReservaEdicionReparto>();
+
+                        foreach (var item in lstReservaEdicion)
+                        {
+                            ReservaEdicionReparto oReservaEdicionReparto = new ReservaEdicionReparto
+                            {
+                                ID_RESERVA_EDICION = item.ID_RESERVA_EDICION,
+                                CLIENTE = item.Reserva.Cliente.ID_CLIENTE.ToString() + " - " + item.Reserva.Cliente.NOMBRE + " " + item.Reserva.Cliente.APELLIDO,
+                                CODIGO_CLIENTE = item.Reserva.Cliente.ID_CLIENTE.ToString(),
+                                DIRECCION_MAPS = item.Reserva.Cliente.DIRECCION_MAPS,
+                                PRODUCTO = item.Reserva.Producto.NOMBRE
+                            };
+
+                            if (item.ProductoEdicion.NOMBRE == null)
+                                oReservaEdicionReparto.EDICION = item.ProductoEdicion.EDICION;
+                            else
+                                oReservaEdicionReparto.EDICION = item.ProductoEdicion.EDICION + " - " + item.ProductoEdicion.NOMBRE;
+
+                            lstReservaEdicionReparto.Add(oReservaEdicionReparto);
+                        }
+                    }
                 }
             }
             catch (Exception)
@@ -259,7 +292,7 @@ namespace BLL
                 throw;
             }
 
-            return lstReservaEdicion;
+            return lstReservaEdicionReparto;
         }
 
         public int CantidadReservaEdicionPorProductoEdicion(long codProductoEdicion)
@@ -308,7 +341,15 @@ namespace BLL
         public string PRECIO_EDICION { get; set; }
     }
 
-
+    public class ReservaEdicionReparto
+    {
+        public int ID_RESERVA_EDICION { get; set; }
+        public string CLIENTE { get; set; }
+        public string CODIGO_CLIENTE { get; set; }
+        public string DIRECCION_MAPS { get; set; }
+        public string PRODUCTO { get; set; }
+        public string EDICION { get; set; }
+    }
 
     #endregion
 }
