@@ -9,7 +9,6 @@ namespace BLL.FuerzaBruta
         public List<NodoFB> NODOS { get; set; }
         public List<NodoDistanciaFB> NODOS_DISTANCIA { get; set; }
         public float COSTO_TOTAL_DISTANCIA { get; set; }
-        //public float COSTO_TOTAL_TIEMPO { get; set; }
 
         #endregion
 
@@ -27,7 +26,6 @@ namespace BLL.FuerzaBruta
             foreach (var nodo in NODOS_DISTANCIA)
             {
                 COSTO_TOTAL_DISTANCIA += nodo.DISTANCIA;
-                //costoTotalTiempo += nodo.tiempo;
             }
         }
 

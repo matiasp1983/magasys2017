@@ -191,7 +191,6 @@
     </Compile>
     <Compile Include="ForgotPasswordBLL.cs" />
     <Compile Include="FuerzaBruta\Delivery.cs" />
-    <Compile Include="FuerzaBruta\EjecutarAlgoritmoPlanificacion.cs" />
     <Compile Include="FuerzaBruta\EstrategiaFuerzaBruta.cs" />
     <Compile Include="FuerzaBruta\FilaMatrizFB.cs" />
     <Compile Include="FuerzaBruta\MatrizFB.cs" />
