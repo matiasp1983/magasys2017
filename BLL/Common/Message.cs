@@ -214,6 +214,7 @@
         #region Mensajes Reparto
 
         public const string MsjeRepartoInfo = "Debe seleccionar al menos un registro.";
+        public const string MsjeRepartoDireccionNegocio = "Debe completar la dirección del negocio.";
 
         #endregion
     }

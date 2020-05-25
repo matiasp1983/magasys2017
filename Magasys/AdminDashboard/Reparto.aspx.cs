@@ -42,6 +42,14 @@ namespace PL.AdminDashboard
                 List<BLL.DAL.Cliente> lstCliente = new List<BLL.DAL.Cliente>();
                 List<ReservaEdicionReparto> lstReservaEdicionReparto = new List<ReservaEdicionReparto>();
 
+                var oNegocio = new NegocioBLL().ObtenerNegocio();
+
+                if (oNegocio == null || String.IsNullOrEmpty(oNegocio.DIRECCION_MAPS))
+                {
+                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.InfoModal(Message.MsjeRepartoDireccionNegocio));
+                    return;
+                }
+
                 foreach (var loItem in lsvReserva.Items)
                 {
                     if (((HtmlInputCheckBox)loItem.Controls[1]).Checked)
