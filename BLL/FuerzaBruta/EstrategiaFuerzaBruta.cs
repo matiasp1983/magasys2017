@@ -27,34 +27,17 @@ namespace BLL.FuerzaBruta
 
         #region Métodos Públicos
 
-        public void Ejecutar(List<DAL.Cliente> lstCliente)
+        public FilaMatrizFB Ejecutar(List<DAL.Cliente> lstCliente)
         {
             List<Delivery> lstDelivery = new List<Delivery>();
 
             foreach (var itemCliente in lstCliente)
             {
                 Delivery oDelivery = new Delivery();
-                oDelivery.CLIENTE = itemCliente;
+
+                oDelivery.CLIENTE = new ClienteBLL().ObtenerCliente(itemCliente.ID_CLIENTE);
                 lstDelivery.Add(oDelivery);
             }
-
-            //Delivery oDelivery1 = new Delivery();
-            //oDelivery1.CLIENTE.ID_CLIENTE = 10;
-            //oDelivery1.CLIENTE.DIRECCION_MAPS = "Río Negro 1200, Ciudad de Córdoba, Provincia de Córdoba, Argentina";
-            //oDelivery1.COD_EDICION = 20;
-            //lstDelivery.Add(oDelivery1);
-
-            //Delivery oDelivery2 = new Delivery();
-            //oDelivery2.CLIENTE.ID_CLIENTE = 20;
-            //oDelivery2.CLIENTE.DIRECCION_MAPS = "La Rioja 300, Ciudad de Córdoba, Provincia de Córdoba, Argentina";
-            //oDelivery2.COD_EDICION = 20;
-            //lstDelivery.Add(oDelivery2);
-
-            //Delivery oDelivery3 = new Delivery();
-            //oDelivery3.CLIENTE.ID_CLIENTE = 30;
-            //oDelivery3.CLIENTE.DIRECCION_MAPS = "Santiago del Estero 200, Ciudad de Córdoba, Provincia de Córdoba, Argentina";
-            //oDelivery3.COD_EDICION = 20;
-            //lstDelivery.Add(oDelivery3);
 
             List<NodoFB> nodosDelivery = obtenerNodosDelivery(lstDelivery);
             MatrizFB matrizFuerzaBruta = new MatrizFB();
@@ -63,6 +46,7 @@ namespace BLL.FuerzaBruta
             matrizFuerzaBruta = calcularCostosCombinaciones(matrizFuerzaBruta);
             FilaMatrizFB mejorCombinacion = buscarMejorCombinacion(matrizFuerzaBruta);
 
+            return mejorCombinacion;
         }
 
         #endregion

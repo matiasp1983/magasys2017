@@ -210,5 +210,11 @@
         public const string MsjeNegocioError = "Ocurrió un error, los datos no se pueden cargar.";
 
         #endregion
+
+        #region Mensajes Reparto
+
+        public const string MsjeRepartoInfo = "Debe seleccionar al menos un registro.";
+
+        #endregion
     }
 }

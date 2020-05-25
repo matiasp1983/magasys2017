@@ -94,6 +94,7 @@
     <Content Include="AdminDashboard\css\plugins\select2\select2.min.css" />
     <Content Include="AdminDashboard\css\plugins\sweetalert\sweetalert.css" />
     <Content Include="AdminDashboard\css\style.googlemap.css" />
+    <Content Include="AdminDashboard\css\style.timeline.css" />
     <Content Include="AdminDashboard\DetalleCobro.aspx" />
     <Content Include="AdminDashboard\DetalleProductoDevoluciones.aspx" />
     <Content Include="AdminDashboard\DetalleProductoIngresos.aspx" />
