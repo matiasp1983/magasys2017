@@ -1410,6 +1410,7 @@ namespace PL.AdminDashboard
               
             oReservaFiltro.NOMBRE_PRODUCTO = nombre;
             oReservaFiltro.COD_ESTADO = 7;
+            oReservaFiltro.COD_TIPO_RESERVA = 2;
 
             return oReservaFiltro;
         }
