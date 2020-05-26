@@ -35,6 +35,8 @@ namespace PL.CustomersWebSite
             txtCodigoPostal.Text = string.Empty;
             hdCodigoPostal.Value = string.Empty;
             hdIdDireccionMaps.Value = string.Empty;
+            hdLatitud.Value = String.Empty;
+            hdLongitud.Value = String.Empty;
         }
 
         protected void BtnGuardar_Click(object sender, EventArgs e)
@@ -213,10 +215,23 @@ namespace PL.CustomersWebSite
             else if (!string.IsNullOrEmpty(txtCodigoPostal.Text))
                 oCliente.CODIGO_POSTAL = txtCodigoPostal.Text;
 
+            // Dirección Maps
             if (!String.IsNullOrEmpty(hdIdDireccionMaps.Value))
                 oCliente.DIRECCION_MAPS = hdIdDireccionMaps.Value;
             else
                 oCliente.DIRECCION_MAPS = null;
+
+            // Latitud Maps
+            if (!String.IsNullOrEmpty(hdLatitud.Value))
+                oCliente.LATITUD = Convert.ToDouble(hdLatitud.Value);
+            else
+                oCliente.LATITUD = null;
+
+            // Longitud Maps
+            if (!String.IsNullOrEmpty(hdLongitud.Value))
+                oCliente.LONGITUD = Convert.ToDouble(hdLongitud.Value);
+            else
+                oCliente.LONGITUD = null;
 
             return oCliente;
         }
