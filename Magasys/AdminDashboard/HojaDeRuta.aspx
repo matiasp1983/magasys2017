@@ -35,6 +35,10 @@
                                                     <label class="control-label">Punto de partida</label>
                                                     <asp:TextBox ID="txtPutoDePartida" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off" Enabled="false"></asp:TextBox>
                                                 </div>
+                                                <div class="form-group">
+                                                    <label class="control-label">Distancia total</label>
+                                                    <asp:TextBox ID="txtDistanciaTotal" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off" Enabled="false"></asp:TextBox>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
