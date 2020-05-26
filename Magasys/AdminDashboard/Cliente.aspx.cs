@@ -174,6 +174,16 @@ namespace PL.AdminDashboard
             else
                 oCliente.DIRECCION_MAPS = null;
 
+            if (!String.IsNullOrEmpty(hdLatitud.Value))
+                oCliente.LATITUD = Convert.ToDouble(hdLatitud.Value);
+            else
+                oCliente.LATITUD = null;
+
+            if (!String.IsNullOrEmpty(hdLongitud.Value))
+                oCliente.LONGITUD = Convert.ToDouble(hdLongitud.Value);
+            else
+                oCliente.LONGITUD = null;
+
             return oCliente;
         }
 

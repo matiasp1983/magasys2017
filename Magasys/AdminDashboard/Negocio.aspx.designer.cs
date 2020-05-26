@@ -40,6 +40,24 @@ namespace PL.AdminDashboard {
         protected global::System.Web.UI.WebControls.HiddenField hdIdDireccionMaps;
         
         /// <summary>
+        /// Control hdLatitud.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdLatitud;
+        
+        /// <summary>
+        /// Control hdLongitud.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdLongitud;
+        
+        /// <summary>
         /// Control txtCalle.
         /// </summary>
         /// <remarks>

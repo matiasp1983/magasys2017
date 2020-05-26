@@ -162,6 +162,8 @@
                                 </div>
                             </div>
                     <asp:HiddenField ID="hdIdDireccionMaps" runat="server"/>
+                    <asp:HiddenField ID="hdLatitud" runat="server"/>
+                    <asp:HiddenField ID="hdLongitud" runat="server"/>
                     <div class="hr-line-dashed"></div>                     
                     <div class="row">
                         <div class="col-md-6">
@@ -473,6 +475,8 @@
             //Guardamos la dirección Maps en el control hidden que se envía al server en el postback
             var loDireccionMaps = document.getElementById("pacInput").value;
             document.getElementById("<%=hdIdDireccionMaps.ClientID%>").value = loDireccionMaps;
+            document.getElementById("<%=hdLatitud.ClientID%>").value = place.geometry.location.lat();
+            document.getElementById("<%=hdLongitud.ClientID%>").value = place.geometry.location.lng();
 
             // Limpiar caja de texto id: pacInput
             document.getElementById("pacInput").value = "";   

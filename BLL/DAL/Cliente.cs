@@ -75,6 +75,10 @@ public partial class Cliente
 
     public Nullable<int> COD_USUARIO { get; set; }
 
+    public Nullable<double> LATITUD { get; set; }
+
+    public Nullable<double> LONGITUD { get; set; }
+
 
 
     public virtual TipoDocumento TipoDocumento { get; set; }

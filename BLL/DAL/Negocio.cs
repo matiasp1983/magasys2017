@@ -22,6 +22,10 @@ public partial class Negocio
 
     public string DIRECCION_MAPS { get; set; }
 
+    public Nullable<double> LATITUD { get; set; }
+
+    public Nullable<double> LONGITUD { get; set; }
+
 }
 
 }

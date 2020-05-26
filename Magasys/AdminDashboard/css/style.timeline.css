@@ -24,7 +24,7 @@
     height: 70px;
     line-height: 70px;
     border-radius: 50%;
-    background: #837cb6;
+    background: #1ab394;
     box-sizing: border-box;
     border: 2px solid transparent;
     box-shadow: 0 0 0 2px transparent;
@@ -46,7 +46,7 @@
     top: 0;
     left: -36px;
     border: 2px solid #fff;
-    box-shadow: 0 0 0 2px #837cb6;
+    box-shadow: 0 0 0 2px #1ab394;
 }
 
 .main-timeline .timeline:last-child .timeline-icon {
@@ -74,7 +74,7 @@
 
 .main-timeline .title {
     font-size: 18px;
-    color: #837cb6;
+    color: #1ab394;
     margin-top: 0;
     text-transform: uppercase;
 }
@@ -88,9 +88,9 @@
 
 .main-timeline .border {
     width: 50%;
-    border-top: 2px solid #837cb6;
-    border-bottom: 2px solid #837cb6;
-    border-left: 2px solid #837cb6;
+    border-top: 2px solid #1ab394;
+    border-bottom: 2px solid #1ab394;
+    border-left: 2px solid #1ab394;
     border-radius: 6px 0 0 6px;
     position: absolute;
     top: 0;
@@ -101,7 +101,7 @@
 
 .main-timeline .timeline:nth-child(2n) .border {
     border-left: none;
-    border-right: 2px solid #837cb6;
+    border-right: 2px solid #1ab394;
     border-radius: 0 6px 6px 0;
     left: 50%;
 }

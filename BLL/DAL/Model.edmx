@@ -35,8 +35,10 @@
           <Property Name="PROVINCIA" Type="varchar" MaxLength="50" />
           <Property Name="LOCALIDAD" Type="varchar" MaxLength="50" />
           <Property Name="DIRECCION_MAPS" Type="varchar(max)" />
-          <Property Name="FECHA_BAJA" Type="datetime" />
+          <Property Name="LATITUD" Type="float" />
+          <Property Name="LONGITUD" Type="float" />
           <Property Name="COD_USUARIO" Type="int" />
+          <Property Name="FECHA_BAJA" Type="datetime" />
         </EntityType>
         <EntityType Name="Cobro">
           <Key>
@@ -175,6 +177,8 @@
           </Key>
           <Property Name="ID_NEGOCIO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DIRECCION_MAPS" Type="varchar(max)" Nullable="false" />
+          <Property Name="LATITUD" Type="float" />
+          <Property Name="LONGITUD" Type="float" />
         </EntityType>
         <EntityType Name="Pelicula">
           <Key>
@@ -1571,6 +1575,8 @@
           <NavigationProperty Name="Cobro" Relationship="MAGASYSModel.FK_Cobro_Cliente" FromRole="Cliente" ToRole="Cobro" />
           <NavigationProperty Name="Reserva" Relationship="MAGASYSModel.FK_Reserva_Cliente" FromRole="Cliente" ToRole="Reserva" />
           <NavigationProperty Name="Venta" Relationship="MAGASYSModel.FK_Venta_Cliente" FromRole="Cliente" ToRole="Venta" />
+          <Property Name="LATITUD" Type="Double" />
+          <Property Name="LONGITUD" Type="Double" />
         </EntityType>
         <EntityType Name="Cobro">
           <Key>
@@ -1749,6 +1755,8 @@
           </Key>
           <Property Name="ID_NEGOCIO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DIRECCION_MAPS" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="LATITUD" Type="Double" />
+          <Property Name="LONGITUD" Type="Double" />
         </EntityType>
         <EntityType Name="Pelicula">
           <Key>
@@ -2675,6 +2683,8 @@
           <EntitySetMapping Name="Cliente">
             <EntityTypeMapping TypeName="MAGASYSModel.Cliente">
               <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="LONGITUD" ColumnName="LONGITUD" />
+                <ScalarProperty Name="LATITUD" ColumnName="LATITUD" />
                 <ScalarProperty Name="COD_USUARIO" ColumnName="COD_USUARIO" />
                 <ScalarProperty Name="FECHA_BAJA" ColumnName="FECHA_BAJA" />
                 <ScalarProperty Name="DIRECCION_MAPS" ColumnName="DIRECCION_MAPS" />
@@ -2849,6 +2859,8 @@
           <EntitySetMapping Name="Negocio">
             <EntityTypeMapping TypeName="MAGASYSModel.Negocio">
               <MappingFragment StoreEntitySet="Negocio">
+                <ScalarProperty Name="LONGITUD" ColumnName="LONGITUD" />
+                <ScalarProperty Name="LATITUD" ColumnName="LATITUD" />
                 <ScalarProperty Name="DIRECCION_MAPS" ColumnName="DIRECCION_MAPS" />
                 <ScalarProperty Name="ID_NEGOCIO" ColumnName="ID_NEGOCIO" />
               </MappingFragment>

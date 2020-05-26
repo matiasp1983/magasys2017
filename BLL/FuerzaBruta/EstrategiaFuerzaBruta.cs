@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using GoogleMapsAPI.NET.API.Client;
-using GoogleMapsAPI.NET.API.Common.Components.Locations.Interfaces.Combined;
 using GoogleMapsAPI.NET.API.Common.Components.Locations;
 using GoogleMapsAPI.NET.API.Directions.Enums;
+using GoogleMapsAPI.NET.API.Common.Components.Locations.Interfaces;
 
 namespace BLL.FuerzaBruta
 {
@@ -20,8 +20,12 @@ namespace BLL.FuerzaBruta
             var oNegocio = new NegocioBLL().ObtenerNegocio();
             this.PRIMERNODO = new NodoFB();
             PRIMERNODO.CLIENTE.DIRECCION_MAPS = oNegocio.DIRECCION_MAPS;
+            PRIMERNODO.CLIENTE.LATITUD = oNegocio.LATITUD;
+            PRIMERNODO.CLIENTE.LONGITUD = oNegocio.LONGITUD;
             this.ULTIMONODO = new NodoFB();
             ULTIMONODO.CLIENTE.DIRECCION_MAPS = oNegocio.DIRECCION_MAPS;
+            ULTIMONODO.CLIENTE.LATITUD = oNegocio.LATITUD;
+            ULTIMONODO.CLIENTE.LONGITUD = oNegocio.LONGITUD;
             this.MODO_TRANSPORTE = modoTransporte;
         }
 
@@ -141,13 +145,13 @@ namespace BLL.FuerzaBruta
                         case "Driving":
 
                             matrix = client.DistanceMatrix.GetDistanceMatrix(
-                            new List<IAddressOrGeoCoordinatesLocation>
+                            new List<IGeoCoordinatesLocation>()
                             {
-                                                    new AddressLocation(unNodoDistancia.ORIGEN.CLIENTE.DIRECCION_MAPS)
+                                new GeoCoordinatesLocation(Convert.ToDouble(unNodoDistancia.ORIGEN.CLIENTE.LATITUD), Convert.ToDouble(unNodoDistancia.ORIGEN.CLIENTE.LONGITUD))
                             },
-                            new List<IAddressOrGeoCoordinatesLocation>
+                            new List<IGeoCoordinatesLocation>()
                             {
-                                                    new AddressLocation(unNodoDistancia.DESTINO.CLIENTE.DIRECCION_MAPS)
+                                new GeoCoordinatesLocation(Convert.ToDouble(unNodoDistancia.DESTINO.CLIENTE.LATITUD), Convert.ToDouble(unNodoDistancia.DESTINO.CLIENTE.LONGITUD))
                             },
                             TransportationModeEnum.Driving, // Driving: en coche - Walking: a pie -  Bicycling: en bicicleta
                             language: "es-ES");
@@ -157,13 +161,13 @@ namespace BLL.FuerzaBruta
                         case "Bicycling":
 
                             matrix = client.DistanceMatrix.GetDistanceMatrix(
-                            new List<IAddressOrGeoCoordinatesLocation>
+                            new List<IGeoCoordinatesLocation>()
                             {
-                                                    new AddressLocation(unNodoDistancia.ORIGEN.CLIENTE.DIRECCION_MAPS)
+                                new GeoCoordinatesLocation(Convert.ToDouble(unNodoDistancia.ORIGEN.CLIENTE.LATITUD), Convert.ToDouble(unNodoDistancia.ORIGEN.CLIENTE.LONGITUD))
                             },
-                            new List<IAddressOrGeoCoordinatesLocation>
+                            new List<IGeoCoordinatesLocation>()
                             {
-                                                    new AddressLocation(unNodoDistancia.DESTINO.CLIENTE.DIRECCION_MAPS)
+                                new GeoCoordinatesLocation(Convert.ToDouble(unNodoDistancia.DESTINO.CLIENTE.LATITUD), Convert.ToDouble(unNodoDistancia.DESTINO.CLIENTE.LONGITUD))
                             },
                             TransportationModeEnum.Bicycling, // Driving: en coche - Walking: a pie -  Bicycling: en bicicleta
                             language: "es-ES");
@@ -173,13 +177,13 @@ namespace BLL.FuerzaBruta
                         case "Walking":
 
                             matrix = client.DistanceMatrix.GetDistanceMatrix(
-                            new List<IAddressOrGeoCoordinatesLocation>
+                            new List<IGeoCoordinatesLocation>()
                             {
-                                                    new AddressLocation(unNodoDistancia.ORIGEN.CLIENTE.DIRECCION_MAPS)
+                                new GeoCoordinatesLocation(Convert.ToDouble(unNodoDistancia.ORIGEN.CLIENTE.LATITUD), Convert.ToDouble(unNodoDistancia.ORIGEN.CLIENTE.LONGITUD))
                             },
-                            new List<IAddressOrGeoCoordinatesLocation>
+                            new List<IGeoCoordinatesLocation>()
                             {
-                                                    new AddressLocation(unNodoDistancia.DESTINO.CLIENTE.DIRECCION_MAPS)
+                                new GeoCoordinatesLocation(Convert.ToDouble(unNodoDistancia.DESTINO.CLIENTE.LATITUD), Convert.ToDouble(unNodoDistancia.DESTINO.CLIENTE.LONGITUD))
                             },
                             TransportationModeEnum.Walking, // Driving: en coche - Walking: a pie -  Bicycling: en bicicleta
                             language: "es-ES");

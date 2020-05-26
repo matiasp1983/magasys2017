@@ -3,11 +3,8 @@ using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
-using System.Web.UI.WebControls;
 
 namespace PL.AdminDashboard
 {
@@ -19,12 +16,15 @@ namespace PL.AdminDashboard
         {
             if (!Page.IsPostBack)
             {
+                var oNegocio = new BLL.NegocioBLL().ObtenerNegocio();
+                if (oNegocio != null)
+                    txtPutoDePartida.Text = oNegocio.DIRECCION_MAPS;
                 EstrategiaFuerzaBruta("Driving");
             }
         }
 
         protected void btnDriving_ServerClick(object sender, EventArgs e)
-        {   
+        {
             if (!btnDriving.Attributes["class"].Contains("active"))
             {
                 btnDriving.Attributes.Add("class", "btn btn-outline btn-success dim active");
@@ -46,7 +46,7 @@ namespace PL.AdminDashboard
         }
 
         protected void btnBiking_ServerClick(object sender, EventArgs e)
-        {   
+        {
             if (!btnBiking.Attributes["class"].Contains("active"))
             {
                 btnBiking.Attributes.Add("class", "btn btn-outline btn-success dim active");
@@ -69,47 +69,51 @@ namespace PL.AdminDashboard
                 if (Session[Enums.Session.ClientesHojaDeRuta.ToString()] != null && Session[Enums.Session.ReservasHojaDeRuta.ToString()] != null)
                 {
                     List<RepartoListado> lstRepartoListado = new List<RepartoListado>();
-                    BLL.FuerzaBruta.EstrategiaFuerzaBruta oEstrategiaFuerzaBruta = new BLL.FuerzaBruta.EstrategiaFuerzaBruta(modoTransporte);
 
-                    switch (modoTransporte)
+                    if (((List<BLL.DAL.Cliente>)(Session[Enums.Session.ClientesHojaDeRuta.ToString()])).Count > 0)
                     {
-                        case "Driving":
-                            loIcono = new HtmlGenericControl().InnerHtml.Insert(0, "<i class='fas fa-car'></i>");
-                            break;
-                        case "Walking":
-                            loIcono = new HtmlGenericControl().InnerHtml.Insert(0, "<i class='fas fa-walking'></i>");
-                            break;
-                        case "Bicycling":
-                            loIcono = new HtmlGenericControl().InnerHtml.Insert(0, "<i class='fas fa-biking'></i>");
-                            break;
-                    }
+                        BLL.FuerzaBruta.EstrategiaFuerzaBruta oEstrategiaFuerzaBruta = new BLL.FuerzaBruta.EstrategiaFuerzaBruta(modoTransporte);
 
-                    var loFilaMatrizFB = oEstrategiaFuerzaBruta.Ejecutar((List<BLL.DAL.Cliente>)(Session[Enums.Session.ClientesHojaDeRuta.ToString()]));
-
-                    loFilaMatrizFB.NODOS_DISTANCIA.Remove(loFilaMatrizFB.NODOS_DISTANCIA.Last());
-
-                    foreach (var item in loFilaMatrizFB.NODOS_DISTANCIA)
-                    {
-                        RepartoListado oRepartoListado = new RepartoListado
+                        switch (modoTransporte)
                         {
-                            ICONO = loIcono,
-                            DIRECCION_ORIGEN = item.ORIGEN.CLIENTE.DIRECCION_MAPS,
-                            DIRECCION_DESTINO = item.DESTINO.CLIENTE.DIRECCION_MAPS,
-                            CLIENTE = item.DESTINO.CLIENTE.NOMBRE + " " + item.DESTINO.CLIENTE.APELLIDO,
-                            TELEFONO_MOVIL = item.DESTINO.CLIENTE.TELEFONO_MOVIL,
-                            NRO_DOCUMENTO = item.DESTINO.CLIENTE.NRO_DOCUMENTO.ToString(),
-                            TIPO_DOCUMENTO = new BLL.TipoDocumentoBLL().ObtenerTipoDocumento(item.DESTINO.CLIENTE.TIPO_DOCUMENTO).DESCRIPCION
-                    };
-                        lstRepartoListado.Add(oRepartoListado);
-                    }
+                            case "Driving":
+                                loIcono = new HtmlGenericControl().InnerHtml.Insert(0, "<i class='fas fa-car'></i>");
+                                break;
+                            case "Walking":
+                                loIcono = new HtmlGenericControl().InnerHtml.Insert(0, "<i class='fas fa-walking'></i>");
+                                break;
+                            case "Bicycling":
+                                loIcono = new HtmlGenericControl().InnerHtml.Insert(0, "<i class='fas fa-biking'></i>");
+                                break;
+                        }
 
-                    lstRepartoListado[0].ICONO = new HtmlGenericControl().InnerHtml.Insert(0, "<i class='fas fa-home'></i>");
-                    lstRepartoListado[lstRepartoListado.Count - 1].ICONO = new HtmlGenericControl().InnerHtml.Insert(0, "<i class='fas fa-home'></i>");
+                        var loFilaMatrizFB = oEstrategiaFuerzaBruta.Ejecutar((List<BLL.DAL.Cliente>)(Session[Enums.Session.ClientesHojaDeRuta.ToString()]));
+
+                        loFilaMatrizFB.NODOS_DISTANCIA.Remove(loFilaMatrizFB.NODOS_DISTANCIA.Last());
+
+                        double loDistanciaTotal = Convert.ToDouble(loFilaMatrizFB.COSTO_TOTAL_DISTANCIA.ToString()) / 1000;
+                        txtDistanciaTotal.Text = string.Format(System.Globalization.CultureInfo.GetCultureInfo("de-DE"), "{0:0.00} km", loDistanciaTotal);
+
+                        foreach (var item in loFilaMatrizFB.NODOS_DISTANCIA)
+                        {
+                            RepartoListado oRepartoListado = new RepartoListado
+                            {
+                                ICONO = loIcono,
+                                DIRECCION_ORIGEN = item.ORIGEN.CLIENTE.DIRECCION_MAPS,
+                                DIRECCION_DESTINO = item.DESTINO.CLIENTE.DIRECCION_MAPS,
+                                CLIENTE = item.DESTINO.CLIENTE.NOMBRE + " " + item.DESTINO.CLIENTE.APELLIDO,
+                                TELEFONO_MOVIL = item.DESTINO.CLIENTE.TELEFONO_MOVIL,
+                                NRO_DOCUMENTO = item.DESTINO.CLIENTE.NRO_DOCUMENTO.ToString(),
+                                TIPO_DOCUMENTO = new BLL.TipoDocumentoBLL().ObtenerTipoDocumento(item.DESTINO.CLIENTE.TIPO_DOCUMENTO).DESCRIPCION
+                            };
+                            lstRepartoListado.Add(oRepartoListado);
+                        }
+
+                        lstRepartoListado[0].ICONO = new HtmlGenericControl().InnerHtml.Insert(0, "<i class='fas fa-home'></i>");
+                        lstRepartoListado[lstRepartoListado.Count - 1].ICONO = new HtmlGenericControl().InnerHtml.Insert(0, "<i class='fas fa-home'></i>");
+                    }
 
                     lsvReparto.DataSource = lstRepartoListado;
-
-                    Session.Remove(Enums.Session.ClientesHojaDeRuta.ToString());
-                    Session.Remove(Enums.Session.ReservasHojaDeRuta.ToString());
                 }
             }
             catch (Exception ex)

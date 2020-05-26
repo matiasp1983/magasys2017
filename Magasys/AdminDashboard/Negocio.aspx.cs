@@ -24,6 +24,8 @@ namespace PL.AdminDashboard
                 if (!String.IsNullOrEmpty(hdIdDireccionMaps.Value))
                 {
                     oNegocio.DIRECCION_MAPS = hdIdDireccionMaps.Value;
+                    oNegocio.LATITUD = Convert.ToDouble(hdLatitud.Value);
+                    oNegocio.LONGITUD = Convert.ToDouble(hdLongitud.Value);
                     var loResultado = new BLL.NegocioBLL().ModificarNegocio(oNegocio);
 
                     if (!loResultado)
@@ -44,7 +46,7 @@ namespace PL.AdminDashboard
             }
             catch (Exception ex)
             {
-                Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeDatosDelNegocioError));                
+                Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeDatosDelNegocioError));
 
                 Logger loLogger = LogManager.GetCurrentClassLogger();
                 loLogger.Error(ex);

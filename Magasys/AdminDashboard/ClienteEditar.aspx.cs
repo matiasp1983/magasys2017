@@ -33,6 +33,8 @@ namespace PL.AdminDashboard
             txtCodigoPostal.Text = String.Empty;
             hdCodigoPostal.Value = String.Empty;
             hdIdDireccionMaps.Value = String.Empty;
+            hdLatitud.Value = String.Empty;
+            hdLongitud.Value = String.Empty;
         }
 
         protected void BtnGuardar_Click(object sender, EventArgs e)
@@ -337,6 +339,18 @@ namespace PL.AdminDashboard
                         loClienteAux.DIRECCION_MAPS = hdIdDireccionMaps.Value;
                     else if (loClienteAux.CALLE == null)
                         loClienteAux.DIRECCION_MAPS = null;
+
+                    // Latitud Maps
+                    if (!String.IsNullOrEmpty(hdLatitud.Value))
+                        loClienteAux.LATITUD = Convert.ToDouble(hdLatitud.Value);
+                    else if (loClienteAux.CALLE == null)
+                        loClienteAux.LATITUD = null;
+
+                    // Longitud Maps
+                    if (!String.IsNullOrEmpty(hdLongitud.Value))
+                        loClienteAux.LONGITUD = Convert.ToDouble(hdLongitud.Value);
+                    else if (loClienteAux.CALLE == null)
+                        loClienteAux.LONGITUD = null;
 
                     // Pregunta si el cliente ha sido modificado
                     if (bModificado)

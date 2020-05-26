@@ -42,6 +42,9 @@ namespace PL.AdminDashboard
                 List<BLL.DAL.Cliente> lstCliente = new List<BLL.DAL.Cliente>();
                 List<ReservaEdicionReparto> lstReservaEdicionReparto = new List<ReservaEdicionReparto>();
 
+                Session.Remove(Enums.Session.ClientesHojaDeRuta.ToString());
+                Session.Remove(Enums.Session.ReservasHojaDeRuta.ToString());
+
                 var oNegocio = new NegocioBLL().ObtenerNegocio();
 
                 if (oNegocio == null || String.IsNullOrEmpty(oNegocio.DIRECCION_MAPS))
