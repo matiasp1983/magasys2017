@@ -53,7 +53,7 @@ namespace PL.AdminDashboard
                             loResutado = new BLL.ReservaBLL().ModificarReserva(oReservaConfirmada);
                         }
 
-                        loResutado = true;
+                        // loResutado = true;
                         if (!loResutado)
                             break;
                     }

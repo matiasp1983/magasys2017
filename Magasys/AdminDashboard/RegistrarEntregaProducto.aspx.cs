@@ -97,6 +97,15 @@ namespace PL.AdminDashboard
                         oReservaEdicion.COD_ESTADO = 11;
                         loResutado = new ReservaEdicionBLL().ModificarReservaEdidion(oReservaEdicion);
 
+                        // Si es Reservar Unica hay que cambiar el estado a Finalizado
+
+                        if (oReserva.COD_TIPO_RESERVA == 1)
+                        {
+                            oReserva.COD_ESTADO = 8;
+                            loResutado = new ReservaBLL().ModificarReserva(oReserva);
+                        }
+
+
                     }
                     catch (Exception ex)
                     {
