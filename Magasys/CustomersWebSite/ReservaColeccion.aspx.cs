@@ -76,6 +76,7 @@ namespace PL.CustomersWebSite
             }
 
             lblTotalAbonar.Text = "0,00";
+            Response.Redirect("RegistrarReserva.aspx", false);
         }
 
         protected void BtnSeleccionarTodo_Click(object sender, EventArgs e)
