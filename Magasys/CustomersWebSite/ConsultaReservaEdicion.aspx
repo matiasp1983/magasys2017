@@ -108,7 +108,7 @@
                                     <ItemTemplate>
                                         <tr>
                                             <td class="text-left">
-                                                <asp:Label ID="lblCodEdicion" runat="server" Text='<%#(Eval("ID_RESERVA_EDICION") != null) ? Eval("ID_RESERVA_EDICION"):null%>'></asp:Label>
+                                                <asp:Label ID="lblCodEdicion" runat="server" Text='<%#(Eval("COD_EDICION") != null) ? Eval("COD_EDICION"):null%>'></asp:Label>
                                             </td>
                                             <td class="text-left">
                                                 <asp:Label ID="lblEdicion" runat="server" Text='<%#(Eval("EDICION") != null) ? Eval("EDICION"):null%>'></asp:Label>

@@ -151,6 +151,12 @@
                                                 <p class="text-muted">
                                                     <asp:Label ID="lblAnio" runat="server" Text='<%#(Eval("ANIO") != null) ? Eval("ANIO").ToString():null%>'></asp:Label>
                                                 </p>
+                                                <p class="text-muted">
+                                                    <asp:Label ID="lblCodEdicion" runat="server" Visible="false" Text='<%#(Eval("COD_EDICION") != null) ? Eval("COD_EDICION").ToString():null%>'></asp:Label>
+                                                </p>
+                                                <p class="text-muted">
+                                                    <asp:Label ID="lblEdicion" runat="server" Text='<%#(Eval("EDICION") != null) ? Eval("EDICION").ToString():null%>'></asp:Label>
+                                                </p>
                                                 <div class="m-t text-righ">
                                                     <button type="button" id="btnEdiciones" runat="server" onserverclick="BtnMostrarEdiciones_Click" class="btn btn-xs btn-outline btn-primary">
                                                         <a href="#">VER EDICIONES <i class="fa fa-long-arrow-right"></i></a>

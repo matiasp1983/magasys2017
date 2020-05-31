@@ -132,7 +132,7 @@ namespace BLL
                         {
                             oReservaEdicionListado = new ReservaEdicionListado()
                             {
-                                ID_RESERVA_EDICION = item.ID_RESERVA_EDICION,
+                                COD_EDICION = item.COD_PROD_EDICION.ToString(),
                                 EDICION = item.ProductoEdicion.EDICION,
                                 NOMBRE_EDICION = item.ProductoEdicion.NOMBRE,
                                 DESC_EDICION = item.ProductoEdicion.DESCRIPCION,

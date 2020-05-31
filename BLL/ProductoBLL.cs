@@ -294,15 +294,49 @@ namespace BLL
                         if (lstProductoEdicionLibro != null)
                             foreach (var itemProductoEdicionLibro in lstProductoEdicionLibro.Where(x => x.CANTIDAD_DISPONIBLE > 0))
                             {  // Hay stock del libro
-                                loExisteProducto = true;
-                                break;
+                                loExisteProducto = false;
+                                ProductoCustomersWebSite oProductoCustomersWebSite_aux = new ProductoCustomersWebSite();
+                                // Datos del Libro:
+                                oProductoCustomersWebSite_aux.ANIO = oProductoCustomersWebSite.ANIO;
+                                oProductoCustomersWebSite_aux.AUTOR = oProductoCustomersWebSite.AUTOR;
+                                oProductoCustomersWebSite_aux.COD_PRODUCTO = oProductoCustomersWebSite.COD_PRODUCTO;
+                                oProductoCustomersWebSite_aux.COD_TIPO_PRODUCTO = oProductoCustomersWebSite.COD_TIPO_PRODUCTO;
+                                oProductoCustomersWebSite_aux.DESCRIPCION = oProductoCustomersWebSite.DESCRIPCION;
+                                oProductoCustomersWebSite_aux.EDITORIAL = oProductoCustomersWebSite.EDITORIAL;
+                                oProductoCustomersWebSite_aux.IMAGEN = oProductoCustomersWebSite.IMAGEN;
+                                oProductoCustomersWebSite_aux.NOMBRE_PRODUCTO = oProductoCustomersWebSite.NOMBRE_PRODUCTO;
+                                oProductoCustomersWebSite_aux.TIPO_PRODUCTO = oProductoCustomersWebSite.TIPO_PRODUCTO;
+                                // Datos de la Edición:
+                                oProductoCustomersWebSite_aux.COD_EDICION = itemProductoEdicionLibro.COD_PRODUCTO_EDICION.ToString();
+                                oProductoCustomersWebSite_aux.EDICION = "Edición: " + itemProductoEdicionLibro.EDICION;
+                                oProductoCustomersWebSite_aux.PRECIO = itemProductoEdicionLibro.PRECIO;
+                                if (!String.IsNullOrEmpty(itemProductoEdicionLibro.IMAGEN.ImageUrl))
+                                    oProductoCustomersWebSite_aux.IMAGEN.ImageUrl = itemProductoEdicionLibro.IMAGEN.ImageUrl;
+                                lstProductoCustomersWebSite.Add(oProductoCustomersWebSite_aux);
                             }
 
                         if (lstProductoEdicionPelicula != null)
                             foreach (var itemProductoEdicionPelicula in lstProductoEdicionPelicula.Where(x => x.CANTIDAD_DISPONIBLE > 0))
-                            {  // Hay stock de la película
-                                loExisteProducto = true;
-                                break;
+                            {  // Hay stock del libro
+                                loExisteProducto = false;
+                                ProductoCustomersWebSite oProductoCustomersWebSite_aux = new ProductoCustomersWebSite();
+                                // Datos del Libro:
+                                oProductoCustomersWebSite_aux.ANIO = oProductoCustomersWebSite.ANIO;
+                                oProductoCustomersWebSite_aux.AUTOR = oProductoCustomersWebSite.AUTOR;
+                                oProductoCustomersWebSite_aux.COD_PRODUCTO = oProductoCustomersWebSite.COD_PRODUCTO;
+                                oProductoCustomersWebSite_aux.COD_TIPO_PRODUCTO = oProductoCustomersWebSite.COD_TIPO_PRODUCTO;
+                                oProductoCustomersWebSite_aux.DESCRIPCION = oProductoCustomersWebSite.DESCRIPCION;
+                                oProductoCustomersWebSite_aux.EDITORIAL = oProductoCustomersWebSite.EDITORIAL;
+                                oProductoCustomersWebSite_aux.IMAGEN = oProductoCustomersWebSite.IMAGEN;
+                                oProductoCustomersWebSite_aux.NOMBRE_PRODUCTO = oProductoCustomersWebSite.NOMBRE_PRODUCTO;
+                                oProductoCustomersWebSite_aux.TIPO_PRODUCTO = oProductoCustomersWebSite.TIPO_PRODUCTO;
+                                // Datos de la Edición:
+                                oProductoCustomersWebSite_aux.COD_EDICION = itemProductoEdicionPelicula.COD_PRODUCTO_EDICION.ToString();
+                                oProductoCustomersWebSite_aux.EDICION = "Edición: " + itemProductoEdicionPelicula.EDICION;
+                                oProductoCustomersWebSite_aux.PRECIO = itemProductoEdicionPelicula.PRECIO;
+                                if (!String.IsNullOrEmpty(itemProductoEdicionPelicula.IMAGEN.ImageUrl))
+                                    oProductoCustomersWebSite_aux.IMAGEN.ImageUrl = itemProductoEdicionPelicula.IMAGEN.ImageUrl;
+                                lstProductoCustomersWebSite.Add(oProductoCustomersWebSite_aux);
                             }
 
                         if (loExisteProducto)
@@ -349,6 +383,7 @@ namespace BLL
         public string DESCRIPCION { get; set; }
         public int COD_TIPO_PRODUCTO { get; set; }
         public string TIPO_PRODUCTO { get; set; }
+        public string COD_EDICION { get; set; }
         public string EDICION { get; set; }
         public int CANTIDAD_DISPONIBLE { get; set; }
         public string PRECIO { get; set; }

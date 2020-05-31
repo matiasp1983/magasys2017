@@ -28,6 +28,7 @@ namespace PL.CustomersWebSite
             List<ProdEdicionCustomersWebSite> lstProdEdicionCustomersWebSite = new List<ProdEdicionCustomersWebSite>();
             ProdEdicionCustomersWebSite oProdEdicionCustomersWebSite = null;
             int loCantidadProductosSeleccionados = 0;
+            bool loNuevaReserva = false;
 
             if (Session[Enums.Session.ListadoReservaEdicion.ToString()] != null)
                 lstProdEdicionCustomersWebSite = (List<ProdEdicionCustomersWebSite>)Session[Enums.Session.ListadoReservaEdicion.ToString()];
@@ -59,6 +60,7 @@ namespace PL.CustomersWebSite
                 lstProdEdicionCustomersWebSite.Add(oProdEdicionCustomersWebSite);
 
                 ((HtmlInputCheckBox)loItem.Controls[1]).Checked = false;
+                loNuevaReserva = true;
             }
 
             if (lstProdEdicionCustomersWebSite.Count > 0)
@@ -76,7 +78,8 @@ namespace PL.CustomersWebSite
             }
 
             lblTotalAbonar.Text = "0,00";
-            Response.Redirect("RegistrarReserva.aspx", false);
+            if (loNuevaReserva)
+                Response.Redirect("RegistrarReserva.aspx", false);
         }
 
         protected void BtnSeleccionarTodo_Click(object sender, EventArgs e)

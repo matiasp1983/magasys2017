@@ -101,7 +101,12 @@ namespace PL.CustomersWebSite
 
                 foreach (var oProductoCustomersWebSite in lstProductoCustomersWebSite)
                 {
-                    var oProductoMod = lstReservaCustomerWebSite.Find(p => p.COD_PRODUCTO == oProductoCustomersWebSite.COD_PRODUCTO.ToString());
+                    ReservaCustomerWebSite oProductoMod = null;
+
+                    if (oProductoCustomersWebSite.COD_TIPO_PRODUCTO == 4 || oProductoCustomersWebSite.COD_TIPO_PRODUCTO == 6)
+                        oProductoMod = lstReservaCustomerWebSite.Find(p => p.COD_PRODUCTO == oProductoCustomersWebSite.COD_PRODUCTO.ToString() && p.PRODUCTO_EDICION == oProductoCustomersWebSite.COD_EDICION);
+                    else
+                        oProductoMod = lstReservaCustomerWebSite.Find(p => p.COD_PRODUCTO == oProductoCustomersWebSite.COD_PRODUCTO.ToString());
 
                     if (oProductoMod != null)
                     {
@@ -116,15 +121,22 @@ namespace PL.CustomersWebSite
                         oReservaCustomerWebSite = new ReservaCustomerWebSite
                         {
                             COD_PRODUCTO = oProductoCustomersWebSite.COD_PRODUCTO.ToString(),
-                            PRODUCTO_EDICION = oProductoCustomersWebSite.COD_PRODUCTO.ToString(),
                             COD_TIPO_PRODUCTO = oProductoCustomersWebSite.COD_TIPO_PRODUCTO,
-                            NOMBRE = oProductoCustomersWebSite.NOMBRE_PRODUCTO,
+                            NOMBRE = oProductoCustomersWebSite.NOMBRE_PRODUCTO + " " + oProductoCustomersWebSite.EDICION,
                             DESCRIPCION = oProductoCustomersWebSite.DESCRIPCION,
                             PRECIO = oProductoCustomersWebSite.PRECIO,
                             CANTIDAD = 1,
                             SUBTOTAL = oProductoCustomersWebSite.PRECIO,
                             IMAGEN = oProductoCustomersWebSite.IMAGEN
                         };
+
+                        if (!String.IsNullOrEmpty(oProductoCustomersWebSite.COD_EDICION))
+                        {
+                            oReservaCustomerWebSite.COD_PRODUCTO_EDICION = oProductoCustomersWebSite.COD_EDICION;
+                            oReservaCustomerWebSite.PRODUCTO_EDICION = oProductoCustomersWebSite.COD_EDICION;
+                        }
+                        else
+                            oReservaCustomerWebSite.PRODUCTO_EDICION = oProductoCustomersWebSite.COD_PRODUCTO.ToString();
 
                         lstReservaCustomerWebSite.Add(oReservaCustomerWebSite);
                     }

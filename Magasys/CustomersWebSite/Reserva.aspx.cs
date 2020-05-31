@@ -43,6 +43,7 @@ namespace PL.CustomersWebSite
             List<ProductoCustomersWebSite> lstProductoCustomersWebSite = new List<ProductoCustomersWebSite>();
             ProductoCustomersWebSite oProductoCustomersWebSite = null;
             int loCantidadProductosSeleccionados = 0;
+            bool loNuevaReserva = false;
 
             if (Session[Enums.Session.ListadoReserva.ToString()] != null)
                 lstProductoCustomersWebSite = (List<ProductoCustomersWebSite>)Session[Enums.Session.ListadoReserva.ToString()];
@@ -67,12 +68,22 @@ namespace PL.CustomersWebSite
                     oProductoCustomersWebSite.IMAGEN.ImageUrl = loImagenDataURL64;
                 }
 
-                if (lstProductoCustomersWebSite.Where(p => p.COD_PRODUCTO == oProductoCustomersWebSite.COD_PRODUCTO).Count() == 0)
+                // Código Edición:
+                if (!String.IsNullOrEmpty(((Label)loItem.Controls[21]).Text))
+                    oProductoCustomersWebSite.EDICION = ((Label)loItem.Controls[21]).Text;
+                // Edición:
+                if (!String.IsNullOrEmpty(((Label)loItem.Controls[19]).Text))
+                    oProductoCustomersWebSite.COD_EDICION = ((Label)loItem.Controls[19]).Text;
+
+                if (String.IsNullOrEmpty(oProductoCustomersWebSite.COD_EDICION) && lstProductoCustomersWebSite.Where(p => p.COD_PRODUCTO == oProductoCustomersWebSite.COD_PRODUCTO).Count() == 0)
+                    loCantidadProductosSeleccionados += 1;
+                else if (!String.IsNullOrEmpty(oProductoCustomersWebSite.COD_EDICION) && lstProductoCustomersWebSite.Where(p => p.COD_PRODUCTO == oProductoCustomersWebSite.COD_PRODUCTO && p.COD_EDICION == oProductoCustomersWebSite.COD_EDICION).Count() == 0)
                     loCantidadProductosSeleccionados += 1;
 
                 lstProductoCustomersWebSite.Add(oProductoCustomersWebSite);
 
                 ((HtmlInputCheckBox)loItem.Controls[1]).Checked = false;
+                loNuevaReserva = true;
             }
 
             if (lstProductoCustomersWebSite.Count > 0)
@@ -90,7 +101,8 @@ namespace PL.CustomersWebSite
             }
 
             lblTotalAbonar.Text = "0,00";
-            Response.Redirect("RegistrarReserva.aspx", false);
+            if (loNuevaReserva)
+                Response.Redirect("RegistrarReserva.aspx", false);
         }
 
         protected void BtnSeleccionarTodo_Click(object sender, EventArgs e)
