@@ -189,6 +189,7 @@
     <Content Include="AdminDashboard\Venta.aspx" />
     <Content Include="AdminDashboard\VentaListado.aspx" />
     <Content Include="AdminDashboard\VisualizarDeudas.aspx" />
+    <Content Include="CustomersWebSite\ConsultaReservaEdicion.aspx" />
     <Content Include="CustomersWebSite\css\animate.css" />
     <Content Include="CustomersWebSite\css\bootstrap.css" />
     <Content Include="CustomersWebSite\css\bootstrap.min.css" />
@@ -790,6 +791,13 @@
     </Compile>
     <Compile Include="CustomersWebSite\ConsultaEstadoDeCuenta.aspx.designer.cs">
       <DependentUpon>ConsultaEstadoDeCuenta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomersWebSite\ConsultaReservaEdicion.aspx.cs">
+      <DependentUpon>ConsultaReservaEdicion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomersWebSite\ConsultaReservaEdicion.aspx.designer.cs">
+      <DependentUpon>ConsultaReservaEdicion.aspx</DependentUpon>
     </Compile>
     <Compile Include="CustomersWebSite\DetalleVentaProductos.aspx.cs">
       <DependentUpon>DetalleVentaProductos.aspx</DependentUpon>

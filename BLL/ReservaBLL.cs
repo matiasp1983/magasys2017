@@ -59,6 +59,48 @@ namespace BLL
             return oReserva;
         }
 
+        public ReservaListado ObtenerInfoReserva(long idReserva)
+        {
+            ReservaListado oReservaListado = null;
+
+            try
+            {
+                using (var rep = new Repository<Reserva>())
+                {
+                    var oReserva = rep.Find(p => p.ID_RESERVA == idReserva);
+                    oReservaListado = new ReservaListado
+                    {
+                        ID_RESERVA = oReserva.ID_RESERVA,
+                        ESTADO = oReserva.Estado.NOMBRE,
+                        TIPO_RESERVA = oReserva.TipoReserva.DESCRIPCION
+                    };
+
+                    if (oReserva.FECHA_INICIO != null)
+                        oReservaListado.FECHA_INICIO = oReserva.FECHA_INICIO;
+
+                    if (oReserva.FECHA_FIN != null)
+                        oReservaListado.FECHA_FIN = oReserva.FECHA_FIN;
+
+                    if (oReserva.Producto.NOMBRE != null)
+                        oReservaListado.NOMBRE_PRODUCTO = oReserva.Producto.NOMBRE;
+
+                    if (oReserva.Producto.DESCRIPCION != null)
+                        oReservaListado.DESCRIPCION_PRODUCTO = oReserva.Producto.DESCRIPCION;
+
+                    if (oReserva.ENVIO_DOMICILIO == null)
+                        oReservaListado.FORMA_ENTREGA = "Retira en Local";
+                    else
+                        oReservaListado.FORMA_ENTREGA = "Envío a Domicilio";
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return oReservaListado;
+        }
+
         public bool AltaReserva(Reserva oReserva)
         {
             var bRes = false;
@@ -234,8 +276,6 @@ namespace BLL
         {
             List<ReservaListado> lstReservaListado = null;
             List<Reserva> lstReserva = null;
-            ReservaEdicion oReservaEdicion = null;
-
 
             try
             {
@@ -276,37 +316,18 @@ namespace BLL
                             NOMBRE_PRODUCTO = loReserva.Producto.NOMBRE
                         };
 
-                        if (loReserva.ReservaEdicion.Count > 0)
-                            oReservaListado.ESTADO = loReserva.ReservaEdicion.SingleOrDefault().Estado.NOMBRE; // Estado de la reserva Edición
-                        else
-                            oReservaListado.ESTADO = loReserva.Estado.NOMBRE; // Estado de la reserva
+                        oReservaListado.ESTADO = loReserva.Estado.NOMBRE;
 
                         if (loReserva.FECHA_INICIO != null)
-                            oReservaListado.FECHA_INICIO = Convert.ToDateTime(loReserva.FECHA_INICIO);
+                            oReservaListado.FECHA_INICIO = loReserva.FECHA_INICIO;
 
                         if (loReserva.FECHA_FIN != null)
-                            oReservaListado.FECHA_FIN = Convert.ToDateTime(loReserva.FECHA_FIN);
+                            oReservaListado.FECHA_FIN = loReserva.FECHA_FIN;
 
                         if (loReserva.ENVIO_DOMICILIO == null)
                             oReservaListado.FORMA_ENTREGA = "Retira en Local";
                         else
                             oReservaListado.FORMA_ENTREGA = "Envío a Domicilio";
-
-                        using (var loRepReservaEdicion = new Repository<ReservaEdicion>())
-                        {
-                            oReservaEdicion = loRepReservaEdicion.Find(p => p.COD_RESERVA == loReserva.ID_RESERVA);
-
-                            if (oReservaEdicion != null)
-                            {
-                                oReservaListado.COD_EDICION = oReservaEdicion.COD_PROD_EDICION.ToString();
-                                oReservaListado.EDICION = oReservaEdicion.ProductoEdicion.EDICION;
-                                if (oReservaEdicion.ProductoEdicion.NOMBRE != null)
-                                    oReservaListado.NOMBRE_EDICION = oReservaEdicion.ProductoEdicion.NOMBRE;
-                                if (oReservaEdicion.ProductoEdicion.DESCRIPCION != null)
-                                    oReservaListado.DESC_EDICION = oReservaEdicion.ProductoEdicion.DESCRIPCION;
-                                oReservaListado.PRECIO_EDICION = oReservaEdicion.ProductoEdicion.PRECIO.ToString();
-                            }
-                        }
 
                         lstReservaListado.Add(oReservaListado);
                     }
@@ -350,6 +371,7 @@ namespace BLL
         public DateTime FECHA { get; set; }
         public String NOMBRE_CLIENTE { get; set; }
         public string NOMBRE_PRODUCTO { get; set; }
+        public string DESCRIPCION_PRODUCTO { get; set; }
         public int? COD_CLIENTE { get; set; }
         public string TIPO_RESERVA { get; set; }
         public string FORMA_ENTREGA { get; set; }

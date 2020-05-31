@@ -40,7 +40,8 @@
             DetalleVenta,
             DevolucionProducto,
             ReservasHojaDeRuta,
-            ClientesHojaDeRuta
+            ClientesHojaDeRuta,
+            CodigoReserva
         }
 
         #endregion

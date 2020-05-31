@@ -5,6 +5,7 @@ using NLog;
 using System;
 using System.Linq;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 namespace PL.CustomersWebSite
@@ -47,8 +48,25 @@ namespace PL.CustomersWebSite
 
                 var loIdReserva = ((BLL.ReservaListado)e.Item.DataItem).ID_RESERVA.ToString();
 
+                HtmlButton btnVisualizar = ((HtmlButton)e.Item.FindControl("btnVisualizar"));
+                btnVisualizar.Attributes.Add("value", loIdReserva);
+
                 HiddenField hdIdReserva = ((HiddenField)e.Item.FindControl("hdIdReserva"));
                 hdIdReserva.Value = loIdReserva.ToString();
+            }
+            catch (Exception ex)
+            {
+                Logger loLogger = LogManager.GetCurrentClassLogger();
+                loLogger.Error(ex);
+            }
+        }
+
+        protected void BtnVisualizar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Session.Add(Enums.Session.CodigoReserva.ToString(), Convert.ToInt64(((HtmlButton)sender).Attributes["value"]));
+                Response.Redirect("ConsultaReservaEdicion.aspx", false);
             }
             catch (Exception ex)
             {

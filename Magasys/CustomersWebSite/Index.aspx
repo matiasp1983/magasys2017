@@ -117,7 +117,7 @@
                                             <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                                 <thead>
                                                     <tr>
-                                                        <th>C&oacute;digo</th>
+                                                        <th>Código</th>
                                                         <th>Fecha de solicitud</th>
                                                         <th data-hide="phone,tablet" >Producto</th>
                                                         <th>Estado</th>
@@ -125,12 +125,7 @@
                                                         <th data-hide="phone">Forma de Entrega</th>
                                                         <th data-hide="phone,tablet" >Inicio de Reserva</th>
                                                         <th data-hide="phone,tablet" >Fin de Reserva</th>
-                                                        <th data-hide="all">Código Edici&oacute;n</th>
-                                                        <th data-hide="all">Edici&oacute;n</th>
-                                                        <th data-hide="all">Nombre</th>
-                                                        <th data-hide="all">Descripci&oacute;n</th>
-                                                        <th data-hide="all">Precio</th>
-                                                        <th class="text-right">Acci&oacute;n</th>
+                                                        <th class="text-right">Acción</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -171,23 +166,9 @@
                                                 <td class="text-left">
                                                     <asp:Label ID="lblFechaFin" runat="server" Text='<%#(Eval("FECHA_FIN") != null) ? Convert.ToDateTime(Eval("FECHA_FIN")).ToString("dd/MM/yyyy"):null%>'></asp:Label>
                                                 </td>
-                                                <td class="text-left">
-                                                    <asp:Label ID="lblCodEdicion" runat="server" Text='<%#(Eval("COD_EDICION") != null) ? Eval("COD_EDICION"):null%>'></asp:Label>
-                                                </td>
-                                                <td class="text-left">
-                                                    <asp:Label ID="lblEdicion" runat="server" Text='<%#(Eval("EDICION") != null) ? Eval("EDICION"):null%>'></asp:Label>
-                                                </td>
-                                                <td class="text-left">
-                                                    <asp:Label ID="lblNombreEdicion" runat="server" Text='<%#(Eval("NOMBRE_EDICION") != null) ? Eval("NOMBRE_EDICION"):null%>'></asp:Label>
-                                                </td>
-                                                <td class="text-left">
-                                                    <asp:Label ID="lblDescripcionEdicion" runat="server" Text='<%#(Eval("DESC_EDICION") != null) ? Eval("DESC_EDICION"):null%>'></asp:Label>
-                                                </td>
-                                                <td class="text-left">
-                                                    <asp:Label ID="lblPrecioEdicion" runat="server" Text='<%#(Eval("PRECIO_EDICION") != null) ? Eval("PRECIO_EDICION"):null%>'></asp:Label>
-                                                </td>
                                                 <td class="text-right">
                                                     <div class="btn-group">
+                                                        <button runat="server" id="btnVisualizar" class="btn btn-outline btn-success btn-xl" title="Visualizar" onserverclick="BtnVisualizar_Click"><i class="fa fa-search"></i></button>
                                                         <a class="btn btn-outline btn-danger btn-xl" data-toggle="modal" data-target="#ModalReservaAnular" title="Anular" onclick="CargarIdReservaAnular(this);"><i class="fa fa-trash-o"></i>
                                                             <asp:HiddenField ID="hdIdReserva" runat="server" />
                                                         </a>  

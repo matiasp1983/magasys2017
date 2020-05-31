@@ -115,6 +115,43 @@ namespace BLL
             return oReservaEdicion;
         }
 
+        public List<ReservaEdicionListado> ObtenerReservasEdicionPorReserva(long idReserva)
+        {
+            List<ReservaEdicionListado> lstReservaEdicionListado = new List<ReservaEdicionListado>();
+            ReservaEdicionListado oReservaEdicionListado = null;
+
+            try
+            {
+                using (var repReservaEdicion = new Repository<ReservaEdicion>())
+                {
+                    var lstReservaEdicion = repReservaEdicion.Search(p => p.COD_RESERVA == idReserva);
+
+                    if (lstReservaEdicion.Count > 0)
+                    {
+                        foreach (var item in lstReservaEdicion)
+                        {
+                            oReservaEdicionListado = new ReservaEdicionListado()
+                            {
+                                ID_RESERVA_EDICION = item.ID_RESERVA_EDICION,
+                                EDICION = item.ProductoEdicion.EDICION,
+                                NOMBRE_EDICION = item.ProductoEdicion.NOMBRE,
+                                DESC_EDICION = item.ProductoEdicion.DESCRIPCION,
+                                PRECIO_EDICION = "$ " + item.ProductoEdicion.PRECIO.ToString()
+                            };
+
+                            lstReservaEdicionListado.Add(oReservaEdicionListado);
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return lstReservaEdicionListado;
+        }
+
         public List<ReservaEdicionListado> ObtenerReservaEdicionPorCliente(ClienteFiltro oClienteFiltro)
         {
             List<ReservaEdicionListado> lstReservaListado = null;
