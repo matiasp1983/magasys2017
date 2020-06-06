@@ -42,9 +42,8 @@
                                                 <th data-hide="all">Fecha Devoluci&oacute;n</th>
                                                 <th data-hide="all">Imagen</th>
                                                 <th data-hide="all"></th>
-                                                <th data-hide="all"></th>  
-                                                <th data-hide="all"></th>                                                  
-                                                <th data-hide="all">Eliminar Imagen</th>  
+                                                <th data-hide="all"></th>                                             
+                                                <th data-hide="all">Eliminar Imagen</th>    
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -113,12 +112,7 @@
                                             <div style="width: 100%">
                                                 <asp:FileUpload ID="fuploadImagen" accept=".jpg" runat="server" CssClass="form-control" />
                                             </div>
-                                        </td>
-                                        <td>
-                                            <div style="width: 100%">                                                
-                                                <asp:TextBox ID="txtTitulo" runat="server" CssClass="form-control" autocomplete="off" placeholder="Título de la Imagen"></asp:TextBox>
-                                            </div>
-                                        </td>                                        
+                                        </td>                                       
                                         <td>                                            
                                             <div style="width: 100%">                                               
                                                 <asp:CheckBox ID="chkEliminar" runat="server" class="i-checks" />
@@ -144,8 +138,7 @@
                                                 <th data-hide="all">Fecha Devoluci&oacute;n</th>
                                                 <th data-hide="all">Imagen</th>
                                                 <th data-hide="all"></th>
-                                                <th data-hide="all"></th>  
-                                                <th data-hide="all"></th>                                                  
+                                                <th data-hide="all"></th>                                          
                                                 <th data-hide="all">Eliminar Imagen</th>                                       
                                             </tr>
                                         </thead>
@@ -220,12 +213,7 @@
                                             <div style="width: 100%">
                                                 <asp:FileUpload ID="fuploadImagen" accept=".jpg" runat="server" CssClass="form-control" />
                                             </div>
-                                        </td>
-                                        <td>
-                                            <div style="width: 100%">                                                
-                                                <asp:TextBox ID="txtTitulo" runat="server" CssClass="form-control" autocomplete="off" placeholder="Título de la Imagen"></asp:TextBox>
-                                            </div>
-                                        </td>                                        
+                                        </td>                                       
                                         <td>                                            
                                             <div style="width: 100%">                                               
                                                 <asp:CheckBox ID="chkEliminar" runat="server" class="i-checks" />
@@ -250,8 +238,7 @@
                                                 <th data-hide="all">Fecha Devoluci&oacute;n</th>
                                                 <th data-hide="all">Imagen</th>
                                                 <th data-hide="all"></th>
-                                                <th data-hide="all"></th>  
-                                                <th data-hide="all"></th>                                                  
+                                                <th data-hide="all"></th>                                        
                                                 <th data-hide="all">Eliminar Imagen</th>                                               
                                             </tr>
                                         </thead>
@@ -318,12 +305,7 @@
                                             <div style="width: 100%">
                                                 <asp:FileUpload ID="fuploadImagen" accept=".jpg" runat="server" CssClass="form-control" />
                                             </div>
-                                        </td>
-                                        <td>
-                                            <div style="width: 100%">                                                
-                                                <asp:TextBox ID="txtTitulo" runat="server" CssClass="form-control" autocomplete="off" placeholder="Título de la Imagen"></asp:TextBox>
-                                            </div>
-                                        </td>                                        
+                                        </td>                                     
                                         <td>                                            
                                             <div style="width: 100%">                                               
                                                 <asp:CheckBox ID="chkEliminar" runat="server" class="i-checks" />
@@ -349,8 +331,7 @@
                                                 <th data-hide="all">Fecha Devoluci&oacute;n</th>
                                                 <th data-hide="all">Imagen</th>
                                                 <th data-hide="all"></th>
-                                                <th data-hide="all"></th>  
-                                                <th data-hide="all"></th>                                                  
+                                                <th data-hide="all"></th>                                                
                                                 <th data-hide="all">Eliminar Imagen</th>                                
                                             </tr>
                                         </thead>
@@ -420,12 +401,7 @@
                                             <div style="width: 100%">
                                                 <asp:FileUpload ID="fuploadImagen" accept=".jpg" runat="server" CssClass="form-control" />
                                             </div>
-                                        </td>
-                                        <td>
-                                            <div style="width: 100%">                                                
-                                                <asp:TextBox ID="txtTitulo" runat="server" CssClass="form-control" autocomplete="off" placeholder="Título de la Imagen"></asp:TextBox>
-                                            </div>
-                                        </td>                                        
+                                        </td>                                   
                                         <td>                                            
                                             <div style="width: 100%">                                               
                                                 <asp:CheckBox ID="chkEliminar" runat="server" class="i-checks" />
@@ -451,7 +427,6 @@
                                                 <th data-hide="all">Fecha Devoluci&oacute;n</th>
                                                 <th data-hide="all">Imagen</th>
                                                 <th data-hide="all"></th>
-                                                <th data-hide="all"></th>  
                                                 <th data-hide="all"></th>                                                  
                                                 <th data-hide="all">Eliminar Imagen</th>                                                
                                             </tr>
@@ -527,12 +502,7 @@
                                             <div style="width: 100%">
                                                 <asp:FileUpload ID="fuploadImagen" accept=".jpg" runat="server" CssClass="form-control" />
                                             </div>
-                                        </td>
-                                        <td>
-                                            <div style="width: 100%">                                                
-                                                <asp:TextBox ID="txtTitulo" runat="server" CssClass="form-control" autocomplete="off" placeholder="Título de la Imagen"></asp:TextBox>
-                                            </div>
-                                        </td>                                        
+                                        </td>                                      
                                         <td>                                            
                                             <div style="width: 100%">                                               
                                                 <asp:CheckBox ID="chkEliminar" runat="server" class="i-checks" />
@@ -558,7 +528,6 @@
                                                 <th data-hide="all">Fecha Devoluci&oacute;n</th>
                                                 <th data-hide="all">Imagen</th>
                                                 <th data-hide="all"></th>
-                                                <th data-hide="all"></th>  
                                                 <th data-hide="all"></th>                                                  
                                                 <th data-hide="all">Eliminar Imagen</th>                                             
                                             </tr>
@@ -634,12 +603,7 @@
                                             <div style="width: 100%">
                                                 <asp:FileUpload ID="fuploadImagen" accept=".jpg" runat="server" CssClass="form-control" />
                                             </div>
-                                        </td>
-                                        <td>
-                                            <div style="width: 100%">                                                
-                                                <asp:TextBox ID="txtTitulo" runat="server" CssClass="form-control" autocomplete="off" placeholder="Título de la Imagen"></asp:TextBox>
-                                            </div>
-                                        </td>                                        
+                                        </td>                                   
                                         <td>                                            
                                             <div style="width: 100%">                                               
                                                 <asp:CheckBox ID="chkEliminar" runat="server" class="i-checks" />

@@ -35,12 +35,15 @@ namespace BLL
             var bRes = false;
             try
             {
-                if (oProductoEdicion.Imagen != null)
+                if (oProductoEdicion.COD_IMAGEN == null)
                 {
-                    using (var loRepImagen = new Repository<Imagen>())
+                    if (oProductoEdicion.Imagen != null)
                     {
-                        var loImangen = loRepImagen.Create(oProductoEdicion.Imagen);
-                        oProductoEdicion.COD_IMAGEN = loImangen.ID_IMAGEN;
+                        using (var loRepImagen = new Repository<Imagen>())
+                        {
+                            var loImangen = loRepImagen.Create(oProductoEdicion.Imagen);
+                            oProductoEdicion.COD_IMAGEN = loImangen.ID_IMAGEN;
+                        }
                     }
                 }
 
@@ -106,7 +109,7 @@ namespace BLL
                         else if (oProductoEdicion.FECHA_DEVOLUCION_REAL != null)
                             oProductoEdicionAux.FECHA_DEVOLUCION_REAL = oProductoEdicion.FECHA_DEVOLUCION_REAL;
                     }
-              
+
 
                     bRes = ModificarProductoEdicion(oProductoEdicionAux);
                 }

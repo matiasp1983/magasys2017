@@ -136,7 +136,7 @@ namespace PL.AdminDashboard
 
                                         // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
                                         string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProductoEdicion.Imagen.IMAGEN1);
-                                        oDiarioEdicion.IMAGEN.ImageUrl = loImagenDataURL64;                                        
+                                        oDiarioEdicion.IMAGEN.ImageUrl = loImagenDataURL64;
                                     }
 
                                     break;
@@ -163,7 +163,7 @@ namespace PL.AdminDashboard
 
                                         // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
                                         string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProductoEdicion.Imagen.IMAGEN1);
-                                        oRevistaEdicion.IMAGEN.ImageUrl = loImagenDataURL64;                                        
+                                        oRevistaEdicion.IMAGEN.ImageUrl = loImagenDataURL64;
                                     }
 
                                     break;
@@ -190,7 +190,7 @@ namespace PL.AdminDashboard
 
                                         // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
                                         string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProductoEdicion.Imagen.IMAGEN1);
-                                        oColeccionEdicion.IMAGEN.ImageUrl = loImagenDataURL64;                                        
+                                        oColeccionEdicion.IMAGEN.ImageUrl = loImagenDataURL64;
                                     }
 
                                     break;
@@ -220,7 +220,7 @@ namespace PL.AdminDashboard
 
                                         // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
                                         string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProductoEdicion.Imagen.IMAGEN1);
-                                        oLibroEdicion.IMAGEN.ImageUrl = loImagenDataURL64;                                        
+                                        oLibroEdicion.IMAGEN.ImageUrl = loImagenDataURL64;
                                     }
 
                                     break;
@@ -249,7 +249,7 @@ namespace PL.AdminDashboard
 
                                         // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
                                         string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProductoEdicion.Imagen.IMAGEN1);
-                                        oSuplementoEdicion.IMAGEN.ImageUrl = loImagenDataURL64;                                        
+                                        oSuplementoEdicion.IMAGEN.ImageUrl = loImagenDataURL64;
                                     }
 
                                     break;
@@ -279,7 +279,7 @@ namespace PL.AdminDashboard
 
                                         // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
                                         string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProductoEdicion.Imagen.IMAGEN1);
-                                        oPeliculaEdicion.IMAGEN.ImageUrl = loImagenDataURL64;                                        
+                                        oPeliculaEdicion.IMAGEN.ImageUrl = loImagenDataURL64;
                                     }
 
                                     break;
@@ -474,8 +474,8 @@ namespace PL.AdminDashboard
 
                     // Obtener tamaño de la IMAGEN seleccionada
                     int loTamanioImagen = ((FileUpload)loItem.Controls[19]).PostedFile.ContentLength;
-                    // Para grabar la IMAGEN se debe ingresar el Título
-                    if (loTamanioImagen > 0 && !String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[21]).Text)))
+                    // Para grabar la IMAGEN se verifica que esté seleccionada
+                    if (loTamanioImagen > 0)
                     {
                         // Obtener tamaño de la IMAGEN en byte
                         byte[] loImagenOriginal = new byte[loTamanioImagen];
@@ -484,11 +484,11 @@ namespace PL.AdminDashboard
                         ((FileUpload)loItem.Controls[19]).PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
 
                         oImagen = new Imagen();
-                        oImagen.IMAGEN1 = loImagenOriginal;                        
+                        oImagen.IMAGEN1 = loImagenOriginal;
                         oProductoEdicion.Imagen = oImagen;
                         loProductoEdicionModificado = loModificado = true;
                     }
-                    else if (((CheckBox)loItem.Controls[23]).Checked && oProductoEdicion.COD_IMAGEN != null)
+                    else if (((CheckBox)loItem.Controls[21]).Checked && oProductoEdicion.COD_IMAGEN != null)
                     {
                         oProductoEdicion.COD_IMAGEN = null;
                         loProductoEdicionModificado = loModificado = true;
@@ -625,8 +625,8 @@ namespace PL.AdminDashboard
 
                     // Obtener tamaño de la IMAGEN seleccionada
                     int loTamanioImagen = ((FileUpload)loItem.Controls[21]).PostedFile.ContentLength;
-                    // Para grabar la IMAGEN se debe ingresar el Título
-                    if (loTamanioImagen > 0 && !String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[23]).Text)))
+                    // Para grabar la IMAGEN se verifica que esté seleccionada
+                    if (loTamanioImagen > 0)
                     {
                         // Obtener tamaño de la IMAGEN en byte
                         byte[] loImagenOriginal = new byte[loTamanioImagen];
@@ -635,11 +635,11 @@ namespace PL.AdminDashboard
                         ((FileUpload)loItem.Controls[21]).PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
 
                         oImagen = new Imagen();
-                        oImagen.IMAGEN1 = loImagenOriginal;                        
+                        oImagen.IMAGEN1 = loImagenOriginal;
                         oProductoEdicion.Imagen = oImagen;
                         loProductoEdicionModificado = loModificado = true;
                     }
-                    else if (((CheckBox)loItem.Controls[25]).Checked && oProductoEdicion.COD_IMAGEN != null)
+                    else if (((CheckBox)loItem.Controls[23]).Checked && oProductoEdicion.COD_IMAGEN != null)
                     {
                         oProductoEdicion.COD_IMAGEN = null;
                         loProductoEdicionModificado = loModificado = true;
@@ -750,8 +750,8 @@ namespace PL.AdminDashboard
 
                     // Obtener tamaño de la IMAGEN seleccionada
                     int loTamanioImagen = ((FileUpload)loItem.Controls[19]).PostedFile.ContentLength;
-                    // Para grabar la IMAGEN se debe ingresar el Título
-                    if (loTamanioImagen > 0 && !String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[21]).Text)))
+                    // Para grabar la IMAGEN se verifica que esté seleccionada
+                    if (loTamanioImagen > 0)
                     {
                         // Obtener tamaño de la IMAGEN en byte
                         byte[] loImagenOriginal = new byte[loTamanioImagen];
@@ -760,11 +760,11 @@ namespace PL.AdminDashboard
                         ((FileUpload)loItem.Controls[19]).PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
 
                         oImagen = new Imagen();
-                        oImagen.IMAGEN1 = loImagenOriginal;                        
+                        oImagen.IMAGEN1 = loImagenOriginal;
                         oProductoEdicion.Imagen = oImagen;
                         loProductoEdicionModificado = loModificado = true;
                     }
-                    else if (((CheckBox)loItem.Controls[23]).Checked && oProductoEdicion.COD_IMAGEN != null)
+                    else if (((CheckBox)loItem.Controls[21]).Checked && oProductoEdicion.COD_IMAGEN != null)
                     {
                         oProductoEdicion.COD_IMAGEN = null;
                         loProductoEdicionModificado = loModificado = true;
@@ -884,8 +884,8 @@ namespace PL.AdminDashboard
 
                     // Obtener tamaño de la IMAGEN seleccionada
                     int loTamanioImagen = ((FileUpload)loItem.Controls[21]).PostedFile.ContentLength;
-                    // Para grabar la IMAGEN se debe ingresar el Título
-                    if (loTamanioImagen > 0 && !String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[23]).Text)))
+                    // Para grabar la IMAGEN se verifica que esté seleccionada
+                    if (loTamanioImagen > 0)
                     {
                         // Obtener tamaño de la IMAGEN en byte
                         byte[] loImagenOriginal = new byte[loTamanioImagen];
@@ -894,11 +894,11 @@ namespace PL.AdminDashboard
                         ((FileUpload)loItem.Controls[21]).PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
 
                         oImagen = new Imagen();
-                        oImagen.IMAGEN1 = loImagenOriginal;                        
+                        oImagen.IMAGEN1 = loImagenOriginal;
                         oProductoEdicion.Imagen = oImagen;
                         loProductoEdicionModificado = loModificado = true;
                     }
-                    else if (((CheckBox)loItem.Controls[25]).Checked && oProductoEdicion.COD_IMAGEN != null)
+                    else if (((CheckBox)loItem.Controls[23]).Checked && oProductoEdicion.COD_IMAGEN != null)
                     {
                         oProductoEdicion.COD_IMAGEN = null;
                         loProductoEdicionModificado = loModificado = true;
@@ -1029,8 +1029,8 @@ namespace PL.AdminDashboard
 
                     // Obtener tamaño de la IMAGEN seleccionada
                     int loTamanioImagen = ((FileUpload)loItem.Controls[21]).PostedFile.ContentLength;
-                    // Para grabar la IMAGEN se debe ingresar el Título
-                    if (loTamanioImagen > 0 && !String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[23]).Text)))
+                    // Para grabar la IMAGEN se verifica que esté seleccionada
+                    if (loTamanioImagen > 0)
                     {
                         // Obtener tamaño de la IMAGEN en byte
                         byte[] loImagenOriginal = new byte[loTamanioImagen];
@@ -1039,11 +1039,11 @@ namespace PL.AdminDashboard
                         ((FileUpload)loItem.Controls[21]).PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
 
                         oImagen = new Imagen();
-                        oImagen.IMAGEN1 = loImagenOriginal;                        
+                        oImagen.IMAGEN1 = loImagenOriginal;
                         oProductoEdicion.Imagen = oImagen;
                         loProductoEdicionModificado = loModificado = true;
                     }
-                    else if (((CheckBox)loItem.Controls[25]).Checked && oProductoEdicion.COD_IMAGEN != null)
+                    else if (((CheckBox)loItem.Controls[23]).Checked && oProductoEdicion.COD_IMAGEN != null)
                     {
                         oProductoEdicion.COD_IMAGEN = null;
                         loProductoEdicionModificado = loModificado = true;
@@ -1174,8 +1174,8 @@ namespace PL.AdminDashboard
 
                     // Obtener tamaño de la IMAGEN seleccionada
                     int loTamanioImagen = ((FileUpload)loItem.Controls[21]).PostedFile.ContentLength;
-                    // Para grabar la IMAGEN se debe ingresar el Título
-                    if (loTamanioImagen > 0 && !String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[23]).Text)))
+                    // Para grabar la IMAGEN se verifica que esté seleccionada
+                    if (loTamanioImagen > 0)
                     {
                         // Obtener tamaño de la IMAGEN en byte
                         byte[] loImagenOriginal = new byte[loTamanioImagen];
@@ -1184,11 +1184,11 @@ namespace PL.AdminDashboard
                         ((FileUpload)loItem.Controls[21]).PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
 
                         oImagen = new Imagen();
-                        oImagen.IMAGEN1 = loImagenOriginal;                        
+                        oImagen.IMAGEN1 = loImagenOriginal;
                         oProductoEdicion.Imagen = oImagen;
                         loProductoEdicionModificado = loModificado = true;
                     }
-                    else if (((CheckBox)loItem.Controls[25]).Checked && oProductoEdicion.COD_IMAGEN != null)
+                    else if (((CheckBox)loItem.Controls[23]).Checked && oProductoEdicion.COD_IMAGEN != null)
                     {
                         oProductoEdicion.COD_IMAGEN = null;
                         loProductoEdicionModificado = loModificado = true;
