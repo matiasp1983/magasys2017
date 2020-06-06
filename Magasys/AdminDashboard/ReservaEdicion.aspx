@@ -14,6 +14,15 @@
             <div class="ibox float-e-margins">
                 <div class="row">
                     <div class="col-lg-12">
+                        <div class="ibox-content m-b-sm border-bottom">
+                            <div class="p-xs">
+                                <div class="pull-left m-r-md">
+                                    <i class="fa fa-newspaper-o text-navy mid-icon"></i>
+                                </div>
+                                <h2>Completar el mensaje</h2>
+                                <span>Completar el mensaje.</span>
+                            </div>
+                        </div>
                         <div class="ibox">
                             <div class="ibox-content">
                                 <br />

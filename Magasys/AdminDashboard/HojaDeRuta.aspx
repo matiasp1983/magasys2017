@@ -40,7 +40,7 @@
                                                     <asp:TextBox ID="txtDistanciaTotal" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off" Enabled="false"></asp:TextBox>
                                                 </div>
                                                 <div style="text-align: right;">
-                                                    <a class="btn btn-info" data-toggle="modal" data-target="#ModalConfirmarRuta"><i class="fa fa-thumbs-up"></i>&nbsp;&nbsp;Confirmar Ruta</a>
+                                                    <a class="btn btn-info" data-toggle="modal" data-target="#ModalConfirmarRuta"><i class="fa fa-map-o"></i>&nbsp;&nbsp;Confirmar Ruta</a>
                                                 </div>
                                             </div>
                                         </div>
