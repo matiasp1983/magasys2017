@@ -1,4 +1,5 @@
-﻿using BLL.Common;
+﻿using BLL;
+using BLL.Common;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace PL.AdminDashboard
         {
             if (!Page.IsPostBack)
             {
-                var oNegocio = new BLL.NegocioBLL().ObtenerNegocio();
+                var oNegocio = new NegocioBLL().ObtenerNegocio();
                 if (oNegocio != null)
                     txtPutoDePartida.Text = oNegocio.DIRECCION_MAPS;
                 EstrategiaFuerzaBruta("Driving");
@@ -54,6 +55,26 @@ namespace PL.AdminDashboard
                 btnWalking.Attributes.Add("class", "btn btn-outline btn-success dim");
                 EstrategiaFuerzaBruta("Bicycling");
             }
+        }
+
+        protected void BtnConfirmarRuta_Click(object sender, EventArgs e)
+        {
+            bool loModificarReservaEdidion = false;
+            var lstReservaEdicionReparto = (List<ReservaEdicionReparto>)(Session[Enums.Session.ReservasHojaDeRuta.ToString()]);
+
+            foreach (var item in lstReservaEdicionReparto)
+            {
+                var loReservaEdicion = new ReservaEdicionBLL().ObtenerReservaEdicion(item.ID_RESERVA_EDICION);
+                loReservaEdicion.COD_ESTADO = 17; // Estado: En reparto
+                loModificarReservaEdidion = new ReservaEdicionBLL().ModificarReservaEdidion(loReservaEdicion);
+                if (!loModificarReservaEdidion)
+                    break;
+            }
+
+            if (loModificarReservaEdidion)
+                Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeRepartoConfirmacion, "Hoja de ruta"));
+            else
+                Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeHojaRutaFailure));
         }
 
         #endregion

@@ -215,6 +215,8 @@
 
         public const string MsjeRepartoInfo = "Debe seleccionar al menos un registro.";
         public const string MsjeRepartoDireccionNegocio = "Debe completar la dirección del negocio.";
+        public const string MsjeRepartoConfirmacion = "Se confirmó el reparto.";
+        public const string MsjeHojaRutaFailure = "Ocurrió un error al guardar la hoja de ruta.";
 
         #endregion
     }
