@@ -248,7 +248,7 @@
                         <div class="col-xs-12 col-sm-6 col-md-8"></div>
                         <div class="col-xs-12 col-md-4" style="text-align: right">
                             <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-success" OnClick="BtnGuardar_Click" />
-                            <asp:Button ID="btnVolver" runat="server" Text="Cancelar" CssClass="btn btn-primary" OnClick="BtnVolver_Click" formnovalidate="formnovalidate" />
+                            <asp:Button ID="btnVolver" runat="server" Text="Volver" CssClass="btn btn-primary" OnClick="BtnVolver_Click" formnovalidate="formnovalidate" />
                         </div>
                     </div>
                 </div>
