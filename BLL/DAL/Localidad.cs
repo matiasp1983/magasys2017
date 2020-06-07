@@ -18,15 +18,6 @@ using System;
 public partial class Localidad
 {
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public Localidad()
-    {
-
-        this.Proveedor = new HashSet<Proveedor>();
-
-    }
-
-
     public int ID_LOCALIDAD { get; set; }
 
     public string NOMBRE { get; set; }
@@ -36,10 +27,6 @@ public partial class Localidad
 
 
     public virtual Provincia Provincia { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<Proveedor> Proveedor { get; set; }
 
 }
 
