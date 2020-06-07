@@ -129,6 +129,12 @@
                                         <td>
                                             <asp:Label ID="lblDireccionMaps" runat="server" Text='<%#Eval("DIRECCION_MAPS")%>' Visible="false"></asp:Label>
                                         </td>
+                                        <td>
+                                            <asp:Label ID="lblClienteNombre" runat="server" Text='<%#Eval("CLIENTE_NOMBRE")%>' Visible="false"></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label ID="lblCodigoProductoEdicion" runat="server" Text='<%#Eval("CODIGO_EDICION")%>' Visible="false"></asp:Label>
+                                        </td>
                                     </tr>
                                 </ItemTemplate>
                             </asp:ListView>

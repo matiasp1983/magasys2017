@@ -77,6 +77,11 @@ namespace PL.AdminDashboard
                 Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeHojaRutaFailure));
         }
 
+        protected void BtnExportarExcel_Click(object sender, EventArgs e)
+        {
+            ExportarExcel();
+        }
+
         #endregion
 
         #region Métodos Privados
@@ -125,7 +130,8 @@ namespace PL.AdminDashboard
                                 CLIENTE = item.DESTINO.CLIENTE.NOMBRE + " " + item.DESTINO.CLIENTE.APELLIDO,
                                 TELEFONO_MOVIL = item.DESTINO.CLIENTE.TELEFONO_MOVIL,
                                 NRO_DOCUMENTO = item.DESTINO.CLIENTE.NRO_DOCUMENTO.ToString(),
-                                TIPO_DOCUMENTO = new BLL.TipoDocumentoBLL().ObtenerTipoDocumento(item.DESTINO.CLIENTE.TIPO_DOCUMENTO).DESCRIPCION
+                                TIPO_DOCUMENTO = new BLL.TipoDocumentoBLL().ObtenerTipoDocumento(item.DESTINO.CLIENTE.TIPO_DOCUMENTO).DESCRIPCION,
+                                CODIGO_CLIENTE = item.DESTINO.CLIENTE.ID_CLIENTE.ToString()
                             };
                             lstRepartoListado.Add(oRepartoListado);
                         }
@@ -147,6 +153,44 @@ namespace PL.AdminDashboard
             lsvReparto.DataBind();
         }
 
+        private void ExportarExcel()
+        {
+            List<ReservaEdicionReparto> lstReservaEdicionReparto = new List<ReservaEdicionReparto>();
+            List<ReservaEdicionReparto> lstReservaEdicionRepartoAux = new List<ReservaEdicionReparto>();
+
+            if (Session[Enums.Session.ReservasHojaDeRuta.ToString()] != null)
+            {
+                lstReservaEdicionReparto = (List<ReservaEdicionReparto>)Session[Enums.Session.ReservasHojaDeRuta.ToString()];
+                lstReservaEdicionReparto.OrderBy(p => p.CODIGO_CLIENTE).ThenBy(x => x.CODIGO_EDICION);
+                List<RepartoListado> lstRepartoListado = (List<RepartoListado>)lsvReparto.DataSource;
+
+                foreach (var itemHojaDeRuta in lstRepartoListado)
+                {
+                    foreach (var item in lstReservaEdicionReparto.Where(p => p.CODIGO_CLIENTE == itemHojaDeRuta.CODIGO_CLIENTE))
+                    {
+                        ReservaEdicionReparto oReservaEdicionReparto = new ReservaEdicionReparto();
+
+                        var loExiste = lstReservaEdicionRepartoAux.Exists(p => p.CODIGO_CLIENTE == item.CODIGO_CLIENTE && p.CODIGO_EDICION == item.CODIGO_EDICION);
+
+                        if (loExiste)
+                        {
+                            var loIndex = lstReservaEdicionRepartoAux.FindIndex(p => p.CODIGO_CLIENTE == item.CODIGO_CLIENTE && p.CODIGO_EDICION == item.CODIGO_EDICION);
+                            var loReserva = lstReservaEdicionRepartoAux.Find(p => p.CODIGO_CLIENTE == item.CODIGO_CLIENTE && p.CODIGO_EDICION == item.CODIGO_EDICION);
+                            loReserva.CANTIDAD = loReserva.CANTIDAD + 1;
+                            lstReservaEdicionRepartoAux[loIndex] = loReserva;
+                        }
+                        else
+                        {
+                            oReservaEdicionReparto = item;
+                            oReservaEdicionReparto.DIRECCION_MAPS_ORIGEN = itemHojaDeRuta.DIRECCION_ORIGEN;
+                            oReservaEdicionReparto.CANTIDAD = 1;
+                            lstReservaEdicionRepartoAux.Add(oReservaEdicionReparto); // Listado para Exportar a Excel
+                        }
+                    }
+                }
+            }
+        }
+
         #endregion
     }
 
@@ -157,6 +201,7 @@ namespace PL.AdminDashboard
         public string ICONO { get; set; }
         public string DIRECCION_ORIGEN { get; set; }
         public string DIRECCION_DESTINO { get; set; }
+        public string CODIGO_CLIENTE { get; set; }
         public string CLIENTE { get; set; }
         public string TIPO_DOCUMENTO { get; set; }
         public string NRO_DOCUMENTO { get; set; }

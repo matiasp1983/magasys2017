@@ -310,8 +310,10 @@ namespace BLL
                                 ID_RESERVA_EDICION = item.ID_RESERVA_EDICION,
                                 CLIENTE = item.Reserva.Cliente.ID_CLIENTE.ToString() + " - " + item.Reserva.Cliente.NOMBRE + " " + item.Reserva.Cliente.APELLIDO,
                                 CODIGO_CLIENTE = item.Reserva.Cliente.ID_CLIENTE.ToString(),
+                                CLIENTE_NOMBRE = item.Reserva.Cliente.NOMBRE + " " + item.Reserva.Cliente.APELLIDO,
                                 DIRECCION_MAPS = item.Reserva.Cliente.DIRECCION_MAPS,
-                                PRODUCTO = item.Reserva.Producto.NOMBRE
+                                PRODUCTO = item.Reserva.Producto.NOMBRE,
+                                CODIGO_EDICION = item.COD_PROD_EDICION
                             };
 
                             if (item.ProductoEdicion.NOMBRE == null)
@@ -380,12 +382,16 @@ namespace BLL
 
     public class ReservaEdicionReparto
     {
-        public int ID_RESERVA_EDICION { get; set; }
-        public string CLIENTE { get; set; }
         public string CODIGO_CLIENTE { get; set; }
-        public string DIRECCION_MAPS { get; set; }
-        public string PRODUCTO { get; set; }
+        public string CLIENTE { get; set; } // Código + Nombre 
+        public string CLIENTE_NOMBRE { get; set; } // Solo Nombre
+        public string DIRECCION_MAPS { get; set; } // Dirección del Cliente
+        public string DIRECCION_MAPS_ORIGEN { get; set; }
+        public int ID_RESERVA_EDICION { get; set; }
+        public int CODIGO_EDICION { get; set; }
         public string EDICION { get; set; }
+        public string PRODUCTO { get; set; }
+        public int CANTIDAD { get; set; }
     }
 
     #endregion

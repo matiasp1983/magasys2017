@@ -62,8 +62,10 @@ namespace PL.AdminDashboard
                             CLIENTE = ((Label)loItem.Controls[3]).Text,
                             PRODUCTO = ((Label)loItem.Controls[5]).Text,
                             EDICION = ((Label)loItem.Controls[7]).Text,
-                            ID_RESERVA_EDICION = Convert.ToInt32(((Label)loItem.Controls[9]).Text),
-                            CODIGO_CLIENTE = ((Label)loItem.Controls[11]).Text
+                            CODIGO_EDICION = Convert.ToInt32(((Label)loItem.Controls[17]).Text),
+                            CODIGO_CLIENTE = ((Label)loItem.Controls[11]).Text,
+                            DIRECCION_MAPS = ((Label)loItem.Controls[13]).Text,
+                            CLIENTE_NOMBRE = ((Label)loItem.Controls[15]).Text
                         };
 
                         lstReservaEdicionReparto.Add(oReservaEdicionReparto);
