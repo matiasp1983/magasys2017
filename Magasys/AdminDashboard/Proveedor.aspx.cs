@@ -16,8 +16,6 @@ namespace PL.AdminDashboard
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-                CargarProvincias();
         }
 
         protected void BtnGuardar_Click(object sender, EventArgs e)
@@ -34,11 +32,11 @@ namespace PL.AdminDashboard
             {
                 if (oProveedor != null)
                 {
-                    var loResultado = new BLL.ProveedorBLL().AltaProveedor(oProveedor);       
+                    var loResultado = new BLL.ProveedorBLL().AltaProveedor(oProveedor);
 
                     if (loResultado)
                     {
-                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeProveedorSuccessAlta, "Alta Proveedor","Proveedor.aspx"));
+                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeProveedorSuccessAlta, "Alta Proveedor", "Proveedor.aspx"));
                         LimpiarCampos();
                     }
                     else
@@ -61,7 +59,7 @@ namespace PL.AdminDashboard
         protected void BtnCancelar_Click(object sender, EventArgs e)
         {
             Response.Redirect("ProveedorListado.aspx", false);
-        }        
+        }
 
         #endregion
 
@@ -87,12 +85,16 @@ namespace PL.AdminDashboard
                 oProveedor.TELEFONO_FIJO = null;
 
             oProveedor.EMAIL = txtEmail.Text;
-            oProveedor.CALLE = txtCalle.Text;
 
-            if (!String.IsNullOrEmpty(txtNumero.Text))
-                oProveedor.NUMERO = Convert.ToInt32(txtNumero.Text);
+            if (!String.IsNullOrEmpty(hdCalle.Value))
+                oProveedor.CALLE = hdCalle.Value;
             else
-                oProveedor.NUMERO = 0;
+                oProveedor.CALLE = null;
+
+            if (!String.IsNullOrEmpty(hdNumero.Value))
+                oProveedor.NUMERO = Convert.ToInt32(hdNumero.Value);
+            else
+                oProveedor.NUMERO = null;
 
             if (!String.IsNullOrEmpty(txtPiso.Text))
                 oProveedor.PISO = txtPiso.Text;
@@ -104,45 +106,35 @@ namespace PL.AdminDashboard
             else
                 oProveedor.DEPARTAMENTO = null;
 
-            if (!String.IsNullOrEmpty(txtBarrio.Text))
-                oProveedor.BARRIO = txtBarrio.Text;
+            if (!String.IsNullOrEmpty(hdLocalidad.Value))
+                oProveedor.LOCALIDAD = hdLocalidad.Value;
             else
+                oProveedor.LOCALIDAD = null;
+
+            if (!String.IsNullOrEmpty(hdProvincia.Value))
+                oProveedor.PROVINCIA = hdProvincia.Value;
+            else
+                oProveedor.PROVINCIA = null;
+
+            if (!String.IsNullOrEmpty(hdCalle.Value) && !String.IsNullOrEmpty(hdBarrio.Value))
+                oProveedor.BARRIO = hdBarrio.Value;
+            else if (!String.IsNullOrEmpty(hdCalle.Value) && !String.IsNullOrEmpty(txtBarrio.Text))
+                oProveedor.BARRIO = txtBarrio.Text;
+            else if (String.IsNullOrEmpty(txtBarrio.Text))
                 oProveedor.BARRIO = null;
 
-            oProveedor.CODIGO_POSTAL = txtCodigoPostal.Text;
+            if (!String.IsNullOrEmpty(hdCodigoPostal.Value))
+                oProveedor.CODIGO_POSTAL = hdCodigoPostal.Value;
+            else
+                oProveedor.CODIGO_POSTAL = null;
 
-            if (!String.IsNullOrEmpty(ddlProvincia.SelectedValue))            
-                oProveedor.ID_PROVINCIA = Convert.ToInt32(ddlProvincia.SelectedValue);            
-            else            
-                oProveedor.ID_PROVINCIA = 0;
-
-            if (!String.IsNullOrEmpty(hfdidLocalidad.Value))                            
-                oProveedor.ID_LOCALIDAD = Convert.ToInt32(hfdidLocalidad.Value);                        
-            else             
-                oProveedor.ID_LOCALIDAD = 0;
+            if (!String.IsNullOrEmpty(hdIdDireccionMaps.Value))
+                oProveedor.DIRECCION_MAPS = hdIdDireccionMaps.Value;
+            else
+                oProveedor.DIRECCION_MAPS = null;
 
             return oProveedor;
         }
-
-        private void CargarProvincias()
-        {
-            var oProvincia = new BLL.ProvinciaBLL();
-
-            try
-            {
-                ddlProvincia.DataSource = oProvincia.ObtenerProvincias();
-                ddlProvincia.DataTextField = "NOMBRE";
-                ddlProvincia.DataValueField = "ID_PROVINCIA";
-                ddlProvincia.DataBind();
-                ddlProvincia.Items.Insert(0, new ListItem(String.Empty, String.Empty));
-                ddlProvincia.SelectedIndex = 0;
-            }
-            catch (Exception ex)
-            {
-                Logger loLogger = LogManager.GetCurrentClassLogger();
-                loLogger.Error(ex);
-            }
-        }        
 
         private static bool ValidaCuit(string cuit)
         {
