@@ -17,6 +17,27 @@ namespace PL.AdminDashboard
                 CargarProveedorDesdeSession();
         }
 
+        protected void BtnBorrarDireccion_Click(object sender, EventArgs e)
+        {
+            txtCalle.Text = String.Empty;
+            hdCalle.Value = String.Empty;
+            txtNumero.Text = String.Empty;
+            hdNumero.Value = String.Empty;
+            txtPiso.Text = String.Empty;
+            txtDepartamento.Text = String.Empty;
+            txtLocalidad.Text = String.Empty;
+            hdLocalidad.Value = String.Empty;
+            txtProvincia.Text = String.Empty;
+            hdProvincia.Value = String.Empty;
+            txtBarrio.Text = String.Empty;
+            hdBarrio.Value = String.Empty;
+            txtCodigoPostal.Text = String.Empty;
+            hdCodigoPostal.Value = String.Empty;
+            hdIdDireccionMaps.Value = String.Empty;
+            hdLatitud.Value = String.Empty;
+            hdLongitud.Value = String.Empty;
+        }
+
         protected void BtnGuardar_Click(object sender, EventArgs e)
         {
             var oProveedor = CargarProveedorDesdeControles();
@@ -56,19 +77,6 @@ namespace PL.AdminDashboard
             Response.Redirect("ProveedorListado.aspx", false);
         }
 
-        protected void DdlProvincia_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (ddlProvincia.SelectedValue != String.Empty)
-            {
-                var idProvincia = Convert.ToInt64(ddlProvincia.SelectedValue);
-                CargarLocalidades(idProvincia);
-            }
-            else
-            {
-                ddlLocalidad.Items.Clear();
-            }
-        }
-
         #endregion
 
         #region Métodos Privados
@@ -97,14 +105,22 @@ namespace PL.AdminDashboard
                     txtTelefonoMovil.Text = oProveedor.TELEFONO_MOVIL;
                     txtTelefonoFijo.Text = oProveedor.TELEFONO_FIJO;
                     txtEmail.Text = oProveedor.EMAIL;
-                    txtCalle.Text = oProveedor.CALLE;
-                    if (!String.IsNullOrEmpty(oProveedor.NUMERO.ToString()))
+                    if (oProveedor.CALLE != null)
+                        txtCalle.Text = oProveedor.CALLE;
+                    if (oProveedor.NUMERO != null)
                         txtNumero.Text = oProveedor.NUMERO.ToString();
-                    txtPiso.Text = oProveedor.PISO;
-                    txtDepartamento.Text = oProveedor.DEPARTAMENTO;
-                    txtBarrio.Text = oProveedor.BARRIO;
-                    txtCodigoPostal.Text = oProveedor.CODIGO_POSTAL;
-                    CargarProvincias(oProveedor.ID_PROVINCIA, oProveedor.ID_LOCALIDAD);
+                    if (oProveedor.PISO != null)
+                        txtPiso.Text = oProveedor.PISO;
+                    if (oProveedor.DEPARTAMENTO != null)
+                        txtDepartamento.Text = oProveedor.DEPARTAMENTO;
+                    if (oProveedor.LOCALIDAD != null)
+                        txtLocalidad.Text = oProveedor.LOCALIDAD;
+                    if (oProveedor.PROVINCIA != null)
+                        txtProvincia.Text = oProveedor.PROVINCIA;
+                    if (oProveedor.BARRIO != null)
+                        txtBarrio.Text = oProveedor.BARRIO;
+                    if (oProveedor.CODIGO_POSTAL != null)
+                        txtCodigoPostal.Text = oProveedor.CODIGO_POSTAL;
                 }
             }
             catch (Exception ex)
@@ -137,70 +153,118 @@ namespace PL.AdminDashboard
                 oProveedor.TELEFONO_FIJO = null;
 
             oProveedor.EMAIL = txtEmail.Text;
-            oProveedor.CALLE = txtCalle.Text;
-            oProveedor.NUMERO = Convert.ToInt32(txtNumero.Text);
 
-            if (!String.IsNullOrEmpty(txtPiso.Text))
+            // Calle
+            if (!String.IsNullOrEmpty(hdCalle.Value) && oProveedor.CALLE != hdCalle.Value)
+            {
+                oProveedor.CALLE = hdCalle.Value;
+            }
+            else if (!String.IsNullOrEmpty(txtCalle.Text) && oProveedor.CALLE != txtCalle.Text)
+            {
+                oProveedor.CALLE = txtCalle.Text;
+            }
+            else if (String.IsNullOrEmpty(txtCalle.Text) && oProveedor.CALLE != null)
+            {
+                oProveedor.CALLE = null;
+            }
+
+            // Número
+            if (!String.IsNullOrEmpty(hdNumero.Value) && oProveedor.NUMERO != Convert.ToInt32(hdNumero.Value))
+            {
+                oProveedor.NUMERO = Convert.ToInt32(hdNumero.Value);
+            }
+            else if (!String.IsNullOrEmpty(txtNumero.Text) && oProveedor.NUMERO != Convert.ToInt32(txtNumero.Text))
+            {
+                oProveedor.NUMERO = Convert.ToInt32(txtNumero.Text);
+            }
+            else if (String.IsNullOrEmpty(txtNumero.Text) && oProveedor.NUMERO != null)
+            {
+                oProveedor.NUMERO = null;
+            }
+
+            // Localidad
+            if (!String.IsNullOrEmpty(hdLocalidad.Value) && oProveedor.LOCALIDAD != hdLocalidad.Value)
+            {
+                oProveedor.LOCALIDAD = hdLocalidad.Value;
+            }
+            else if (!String.IsNullOrEmpty(txtLocalidad.Text) && oProveedor.LOCALIDAD != txtLocalidad.Text)
+            {
+                oProveedor.LOCALIDAD = txtLocalidad.Text;
+            }
+            else if (String.IsNullOrEmpty(txtLocalidad.Text) && oProveedor.LOCALIDAD != null)
+            {
+                oProveedor.LOCALIDAD = null;
+            }
+
+            // Provincia
+            if (!String.IsNullOrEmpty(hdProvincia.Value) && oProveedor.PROVINCIA != hdProvincia.Value)
+            {
+                oProveedor.PROVINCIA = hdProvincia.Value;
+            }
+            else if (!String.IsNullOrEmpty(txtProvincia.Text) && oProveedor.PROVINCIA != txtProvincia.Text)
+            {
+                oProveedor.PROVINCIA = txtProvincia.Text;
+            }
+            else if (String.IsNullOrEmpty(txtProvincia.Text) && oProveedor.PROVINCIA != null)
+            {
+                oProveedor.PROVINCIA = null;
+            }
+
+            // Piso
+            if ((!String.IsNullOrEmpty(hdCalle.Value) || !String.IsNullOrEmpty(txtCalle.Text)) && !String.IsNullOrEmpty(txtPiso.Text) && oProveedor.PISO != txtPiso.Text)
+            {
                 oProveedor.PISO = txtPiso.Text;
-            else
+            }
+            else if (String.IsNullOrEmpty(txtPiso.Text) && oProveedor.PISO != null)
+            {
                 oProveedor.PISO = null;
+            }
 
-            if (!String.IsNullOrEmpty(txtDepartamento.Text))
+            // Departamento
+            if ((!String.IsNullOrEmpty(hdCalle.Value) || !String.IsNullOrEmpty(txtCalle.Text)) && !String.IsNullOrEmpty(txtDepartamento.Text) && oProveedor.DEPARTAMENTO != txtDepartamento.Text)
+            {
                 oProveedor.DEPARTAMENTO = txtDepartamento.Text;
-            else
+            }
+            else if (String.IsNullOrEmpty(txtDepartamento.Text) && oProveedor.DEPARTAMENTO != null)
+            {
                 oProveedor.DEPARTAMENTO = null;
+            }
 
-            if (!String.IsNullOrEmpty(txtBarrio.Text))
+            // Barrio
+            if ((!String.IsNullOrEmpty(hdCalle.Value) || !String.IsNullOrEmpty(txtCalle.Text)) && !String.IsNullOrEmpty(hdBarrio.Value) && oProveedor.BARRIO != hdBarrio.Value)
+            {
+                oProveedor.BARRIO = hdBarrio.Value;
+            }
+            else if ((!String.IsNullOrEmpty(hdCalle.Value) || !String.IsNullOrEmpty(txtCalle.Text)) && !String.IsNullOrEmpty(txtBarrio.Text) && oProveedor.BARRIO != txtBarrio.Text)
+            {
                 oProveedor.BARRIO = txtBarrio.Text;
-            else
+            }
+            else if (String.IsNullOrEmpty(txtCalle.Text) && String.IsNullOrEmpty(txtBarrio.Text) && oProveedor.BARRIO != null)
+            {
                 oProveedor.BARRIO = null;
+            }
 
-            oProveedor.CODIGO_POSTAL = txtCodigoPostal.Text;
-            oProveedor.ID_PROVINCIA = Convert.ToInt32(ddlProvincia.SelectedValue);
-            oProveedor.ID_LOCALIDAD = Convert.ToInt32(ddlLocalidad.SelectedValue);
+            // Código Postal
+            if (!String.IsNullOrEmpty(hdCodigoPostal.Value) && oProveedor.CODIGO_POSTAL != hdCodigoPostal.Value)
+            {
+                oProveedor.CODIGO_POSTAL = hdCodigoPostal.Value;
+            }
+            else if (!String.IsNullOrEmpty(txtCodigoPostal.Text) && oProveedor.CODIGO_POSTAL != txtCodigoPostal.Text)
+            {
+                oProveedor.CODIGO_POSTAL = txtCodigoPostal.Text;
+            }
+            else if (String.IsNullOrEmpty(txtCodigoPostal.Text) && oProveedor.CODIGO_POSTAL != null)
+            {
+                oProveedor.CODIGO_POSTAL = null;
+            }
+
+            // Dirección Maps
+            if (!String.IsNullOrEmpty(hdIdDireccionMaps.Value))
+                oProveedor.DIRECCION_MAPS = hdIdDireccionMaps.Value;
+            else if (oProveedor.CALLE == null)
+                oProveedor.DIRECCION_MAPS = null;
 
             return oProveedor;
-        }
-
-        private void CargarProvincias(long idProvincia, long idLocalidad)
-        {
-            var oProvincia = new BLL.ProvinciaBLL();
-
-            try
-            {
-                ddlProvincia.DataSource = oProvincia.ObtenerProvincias();
-                ddlProvincia.DataTextField = "NOMBRE";
-                ddlProvincia.DataValueField = "ID_PROVINCIA";
-                ddlProvincia.DataBind();
-                ddlProvincia.Items.Insert(0, new ListItem(String.Empty, String.Empty));
-                ddlProvincia.SelectedValue = idProvincia.ToString();
-                CargarLocalidades(idProvincia, idLocalidad);
-            }
-            catch (Exception ex)
-            {
-                Logger loLogger = LogManager.GetCurrentClassLogger();
-                loLogger.Error(ex);
-            }
-        }
-
-        private void CargarLocalidades(long idProvincia, long idLocalidad = 0)
-        {
-            var oLocalidad = new BLL.LocalidadBLL();
-
-            try
-            {
-                ddlLocalidad.DataSource = oLocalidad.ObtenerLocalidades(idProvincia);
-                ddlLocalidad.DataTextField = "NOMBRE";
-                ddlLocalidad.DataValueField = "ID_LOCALIDAD";
-                ddlLocalidad.DataBind();
-                ddlLocalidad.Items.Insert(0, new ListItem(String.Empty, String.Empty));
-                ddlLocalidad.SelectedValue = idLocalidad.ToString();
-            }
-            catch (Exception ex)
-            {
-                Logger loLogger = LogManager.GetCurrentClassLogger();
-                loLogger.Error(ex);
-            }
         }
 
         private void LimpiarCampos()
