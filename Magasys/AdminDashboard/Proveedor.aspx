@@ -264,16 +264,7 @@
             $(document).ready(function () {                
                 ValidarForm();
             });
-        }        
-
-        //function CargarDatosAlControl(lista, combo) {
-        //    combo.val(null).html(null).trigger('change');
-        //    if (lista != null && lista.length > 0) {                
-        //        $.each(lista, function () {                    
-        //            combo.append($("<option></option>").val(this['Value']).html(this['Text']));                    
-        //        });
-        //    }
-        //}
+        }
 
         function ValidarForm() {
 
