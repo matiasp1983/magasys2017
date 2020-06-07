@@ -261,21 +261,22 @@
           <Property Name="TELEFONO_MOVIL" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="TELEFONO_FIJO" Type="varchar" MaxLength="50" />
           <Property Name="EMAIL" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="CALLE" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="NUMERO" Type="int" Nullable="false" />
+          <Property Name="CALLE" Type="varchar" MaxLength="50" />
+          <Property Name="NUMERO" Type="int" />
           <Property Name="PISO" Type="varchar" MaxLength="2" />
           <Property Name="DEPARTAMENTO" Type="varchar" MaxLength="2" />
           <Property Name="BARRIO" Type="varchar" MaxLength="50" />
-          <Property Name="CODIGO_POSTAL" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="ID_PROVINCIA" Type="int" Nullable="false" />
-          <Property Name="ID_LOCALIDAD" Type="int" Nullable="false" />
+          <Property Name="CODIGO_POSTAL" Type="varchar" MaxLength="10" />
+          <Property Name="PROVINCIA" Type="varchar" MaxLength="50" />
+          <Property Name="LOCALIDAD" Type="varchar" MaxLength="50" />
+          <Property Name="DIRECCION_MAPS" Type="varchar(max)" />
           <Property Name="FECHA_BAJA" Type="datetime" />
         </EntityType>
         <EntityType Name="Provincia">
           <Key>
             <PropertyRef Name="ID_PROVINCIA" />
           </Key>
-          <Property Name="ID_PROVINCIA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_PROVINCIA" Type="int" Nullable="false" />
           <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Reserva">
@@ -786,30 +787,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Proveedor_Localidad">
-          <End Role="Localidad" Type="Self.Localidad" Multiplicity="1" />
-          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Localidad">
-              <PropertyRef Name="ID_LOCALIDAD" />
-            </Principal>
-            <Dependent Role="Proveedor">
-              <PropertyRef Name="ID_LOCALIDAD" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Proveedor_Provincia">
-          <End Role="Provincia" Type="Self.Provincia" Multiplicity="1" />
-          <End Role="Proveedor" Type="Self.Proveedor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Provincia">
-              <PropertyRef Name="ID_PROVINCIA" />
-            </Principal>
-            <Dependent Role="Proveedor">
-              <PropertyRef Name="ID_PROVINCIA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Reserva_Cliente">
           <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
           <End Role="Reserva" Type="Self.Reserva" Multiplicity="*" />
@@ -1199,14 +1176,6 @@
             <End Role="Estado" EntitySet="Estado" />
             <End Role="Proveedor" EntitySet="Proveedor" />
           </AssociationSet>
-          <AssociationSet Name="FK_Proveedor_Localidad" Association="Self.FK_Proveedor_Localidad">
-            <End Role="Localidad" EntitySet="Localidad" />
-            <End Role="Proveedor" EntitySet="Proveedor" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Proveedor_Provincia" Association="Self.FK_Proveedor_Provincia">
-            <End Role="Provincia" EntitySet="Provincia" />
-            <End Role="Proveedor" EntitySet="Proveedor" />
-          </AssociationSet>
           <AssociationSet Name="FK_Reserva_Cliente" Association="Self.FK_Reserva_Cliente">
             <End Role="Cliente" EntitySet="Cliente" />
             <End Role="Reserva" EntitySet="Reserva" />
@@ -1473,10 +1442,6 @@
             <End Role="Provincia" EntitySet="Provincia" />
             <End Role="Localidad" EntitySet="Localidad" />
           </AssociationSet>
-          <AssociationSet Name="FK_Proveedor_Localidad" Association="MAGASYSModel.FK_Proveedor_Localidad">
-            <End Role="Localidad" EntitySet="Localidad" />
-            <End Role="Proveedor" EntitySet="Proveedor" />
-          </AssociationSet>
           <AssociationSet Name="FK_Pelicula_Producto" Association="MAGASYSModel.FK_Pelicula_Producto">
             <End Role="Producto" EntitySet="Producto" />
             <End Role="Pelicula" EntitySet="Pelicula" />
@@ -1521,10 +1486,6 @@
             <End Role="TipoProducto" EntitySet="TipoProducto" />
             <End Role="ProductoIngreso" EntitySet="ProductoIngreso" />
           </AssociationSet>
-          <AssociationSet Name="FK_Proveedor_Provincia" Association="MAGASYSModel.FK_Proveedor_Provincia">
-            <End Role="Provincia" EntitySet="Provincia" />
-            <End Role="Proveedor" EntitySet="Proveedor" />
-          </AssociationSet>
           <AssociationSet Name="FK_Reserva_TipoReserva" Association="MAGASYSModel.FK_Reserva_TipoReserva">
             <End Role="TipoReserva" EntitySet="TipoReserva" />
             <End Role="Reserva" EntitySet="Reserva" />
@@ -1568,15 +1529,15 @@
           <Property Name="PROVINCIA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="LOCALIDAD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DIRECCION_MAPS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="FECHA_BAJA" Type="DateTime" Precision="3" />
+          <Property Name="LATITUD" Type="Double" />
+          <Property Name="LONGITUD" Type="Double" />
           <Property Name="COD_USUARIO" Type="Int32" />
+          <Property Name="FECHA_BAJA" Type="DateTime" Precision="3" />
           <NavigationProperty Name="TipoDocumento" Relationship="MAGASYSModel.FK_Cliente_TipoDocumento" FromRole="Cliente" ToRole="TipoDocumento" />
           <NavigationProperty Name="Usuario" Relationship="MAGASYSModel.FK_Cliente_Usuario" FromRole="Cliente" ToRole="Usuario" />
           <NavigationProperty Name="Cobro" Relationship="MAGASYSModel.FK_Cobro_Cliente" FromRole="Cliente" ToRole="Cobro" />
           <NavigationProperty Name="Reserva" Relationship="MAGASYSModel.FK_Reserva_Cliente" FromRole="Cliente" ToRole="Reserva" />
           <NavigationProperty Name="Venta" Relationship="MAGASYSModel.FK_Venta_Cliente" FromRole="Cliente" ToRole="Venta" />
-          <Property Name="LATITUD" Type="Double" />
-          <Property Name="LONGITUD" Type="Double" />
         </EntityType>
         <EntityType Name="Cobro">
           <Key>
@@ -1740,7 +1701,6 @@
           <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="ID_PROVINCIA" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Provincia" Relationship="MAGASYSModel.FK_Localidad_Provincia" FromRole="Localidad" ToRole="Provincia" />
-          <NavigationProperty Name="Proveedor" Relationship="MAGASYSModel.FK_Proveedor_Localidad" FromRole="Localidad" ToRole="Proveedor" />
         </EntityType>
         <EntityType Name="Mes">
           <Key>
@@ -1868,29 +1828,27 @@
           <Property Name="TELEFONO_MOVIL" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="TELEFONO_FIJO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EMAIL" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CALLE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="NUMERO" Type="Int32" Nullable="false" />
+          <Property Name="CALLE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NUMERO" Type="Int32" />
           <Property Name="PISO" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="DEPARTAMENTO" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="BARRIO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="CODIGO_POSTAL" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="ID_PROVINCIA" Type="Int32" Nullable="false" />
-          <Property Name="ID_LOCALIDAD" Type="Int32" Nullable="false" />
+          <Property Name="CODIGO_POSTAL" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="PROVINCIA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LOCALIDAD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DIRECCION_MAPS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="FECHA_BAJA" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Estado" Relationship="MAGASYSModel.FK_Proveedor_Estado" FromRole="Proveedor" ToRole="Estado" />
-          <NavigationProperty Name="Localidad" Relationship="MAGASYSModel.FK_Proveedor_Localidad" FromRole="Proveedor" ToRole="Localidad" />
           <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_Producto_Proveedor" FromRole="Proveedor" ToRole="Producto" />
           <NavigationProperty Name="ProductoIngreso" Relationship="MAGASYSModel.FK_IngresoProducto_Proveedor" FromRole="Proveedor" ToRole="ProductoIngreso" />
-          <NavigationProperty Name="Provincia" Relationship="MAGASYSModel.FK_Proveedor_Provincia" FromRole="Proveedor" ToRole="Provincia" />
         </EntityType>
         <EntityType Name="Provincia">
           <Key>
             <PropertyRef Name="ID_PROVINCIA" />
           </Key>
-          <Property Name="ID_PROVINCIA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PROVINCIA" Type="Int32" Nullable="false" />
           <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Localidad" Relationship="MAGASYSModel.FK_Localidad_Provincia" FromRole="Provincia" ToRole="Localidad" />
-          <NavigationProperty Name="Proveedor" Relationship="MAGASYSModel.FK_Proveedor_Provincia" FromRole="Provincia" ToRole="Proveedor" />
         </EntityType>
         <EntityType Name="Reserva">
           <Key>
@@ -2475,18 +2433,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Proveedor_Localidad">
-          <End Type="MAGASYSModel.Localidad" Role="Localidad" Multiplicity="1" />
-          <End Type="MAGASYSModel.Proveedor" Role="Proveedor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Localidad">
-              <PropertyRef Name="ID_LOCALIDAD" />
-            </Principal>
-            <Dependent Role="Proveedor">
-              <PropertyRef Name="ID_LOCALIDAD" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Pelicula_Producto">
           <End Type="MAGASYSModel.Producto" Role="Producto" Multiplicity="1" />
           <End Type="MAGASYSModel.Pelicula" Role="Pelicula" Multiplicity="*" />
@@ -2619,18 +2565,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Proveedor_Provincia">
-          <End Type="MAGASYSModel.Provincia" Role="Provincia" Multiplicity="1" />
-          <End Type="MAGASYSModel.Proveedor" Role="Proveedor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Provincia">
-              <PropertyRef Name="ID_PROVINCIA" />
-            </Principal>
-            <Dependent Role="Proveedor">
-              <PropertyRef Name="ID_PROVINCIA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Reserva_TipoReserva">
           <End Type="MAGASYSModel.TipoReserva" Role="TipoReserva" Multiplicity="1" />
           <End Type="MAGASYSModel.Reserva" Role="Reserva" Multiplicity="*" />
@@ -2683,10 +2617,10 @@
           <EntitySetMapping Name="Cliente">
             <EntityTypeMapping TypeName="MAGASYSModel.Cliente">
               <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="FECHA_BAJA" ColumnName="FECHA_BAJA" />
+                <ScalarProperty Name="COD_USUARIO" ColumnName="COD_USUARIO" />
                 <ScalarProperty Name="LONGITUD" ColumnName="LONGITUD" />
                 <ScalarProperty Name="LATITUD" ColumnName="LATITUD" />
-                <ScalarProperty Name="COD_USUARIO" ColumnName="COD_USUARIO" />
-                <ScalarProperty Name="FECHA_BAJA" ColumnName="FECHA_BAJA" />
                 <ScalarProperty Name="DIRECCION_MAPS" ColumnName="DIRECCION_MAPS" />
                 <ScalarProperty Name="LOCALIDAD" ColumnName="LOCALIDAD" />
                 <ScalarProperty Name="PROVINCIA" ColumnName="PROVINCIA" />
@@ -2943,8 +2877,9 @@
             <EntityTypeMapping TypeName="MAGASYSModel.Proveedor">
               <MappingFragment StoreEntitySet="Proveedor">
                 <ScalarProperty Name="FECHA_BAJA" ColumnName="FECHA_BAJA" />
-                <ScalarProperty Name="ID_LOCALIDAD" ColumnName="ID_LOCALIDAD" />
-                <ScalarProperty Name="ID_PROVINCIA" ColumnName="ID_PROVINCIA" />
+                <ScalarProperty Name="DIRECCION_MAPS" ColumnName="DIRECCION_MAPS" />
+                <ScalarProperty Name="LOCALIDAD" ColumnName="LOCALIDAD" />
+                <ScalarProperty Name="PROVINCIA" ColumnName="PROVINCIA" />
                 <ScalarProperty Name="CODIGO_POSTAL" ColumnName="CODIGO_POSTAL" />
                 <ScalarProperty Name="BARRIO" ColumnName="BARRIO" />
                 <ScalarProperty Name="DEPARTAMENTO" ColumnName="DEPARTAMENTO" />

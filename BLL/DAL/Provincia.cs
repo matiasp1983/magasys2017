@@ -24,8 +24,6 @@ public partial class Provincia
 
         this.Localidad = new HashSet<Localidad>();
 
-        this.Proveedor = new HashSet<Proveedor>();
-
     }
 
 
@@ -38,10 +36,6 @@ public partial class Provincia
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Localidad> Localidad { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<Proveedor> Proveedor { get; set; }
 
 }
 

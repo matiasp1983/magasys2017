@@ -71,13 +71,13 @@ public partial class Cliente
 
     public string DIRECCION_MAPS { get; set; }
 
-    public Nullable<System.DateTime> FECHA_BAJA { get; set; }
-
-    public Nullable<int> COD_USUARIO { get; set; }
-
     public Nullable<double> LATITUD { get; set; }
 
     public Nullable<double> LONGITUD { get; set; }
+
+    public Nullable<int> COD_USUARIO { get; set; }
+
+    public Nullable<System.DateTime> FECHA_BAJA { get; set; }
 
 
 

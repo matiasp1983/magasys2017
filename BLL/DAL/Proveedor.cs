@@ -51,7 +51,7 @@ public partial class Proveedor
 
     public string CALLE { get; set; }
 
-    public int NUMERO { get; set; }
+    public Nullable<int> NUMERO { get; set; }
 
     public string PISO { get; set; }
 
@@ -61,17 +61,17 @@ public partial class Proveedor
 
     public string CODIGO_POSTAL { get; set; }
 
-    public int ID_PROVINCIA { get; set; }
+    public string PROVINCIA { get; set; }
 
-    public int ID_LOCALIDAD { get; set; }
+    public string LOCALIDAD { get; set; }
+
+    public string DIRECCION_MAPS { get; set; }
 
     public Nullable<System.DateTime> FECHA_BAJA { get; set; }
 
 
 
     public virtual Estado Estado { get; set; }
-
-    public virtual Localidad Localidad { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
@@ -80,8 +80,6 @@ public partial class Proveedor
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<ProductoIngreso> ProductoIngreso { get; set; }
-
-    public virtual Provincia Provincia { get; set; }
 
 }
 
