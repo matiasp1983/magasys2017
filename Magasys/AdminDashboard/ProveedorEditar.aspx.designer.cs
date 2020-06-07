@@ -112,6 +112,42 @@ namespace PL.AdminDashboard {
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
         
         /// <summary>
+        /// Control btnBorrarDireccion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnBorrarDireccion;
+        
+        /// <summary>
+        /// Control hdIdDireccionMaps.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdIdDireccionMaps;
+        
+        /// <summary>
+        /// Control hdLatitud.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdLatitud;
+        
+        /// <summary>
+        /// Control hdLongitud.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdLongitud;
+        
+        /// <summary>
         /// Control txtCalle.
         /// </summary>
         /// <remarks>
@@ -121,6 +157,15 @@ namespace PL.AdminDashboard {
         protected global::System.Web.UI.WebControls.TextBox txtCalle;
         
         /// <summary>
+        /// Control hdCalle.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdCalle;
+        
+        /// <summary>
         /// Control txtNumero.
         /// </summary>
         /// <remarks>
@@ -128,6 +173,15 @@ namespace PL.AdminDashboard {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNumero;
+        
+        /// <summary>
+        /// Control hdNumero.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdNumero;
         
         /// <summary>
         /// Control txtPiso.
@@ -148,22 +202,40 @@ namespace PL.AdminDashboard {
         protected global::System.Web.UI.WebControls.TextBox txtDepartamento;
         
         /// <summary>
-        /// Control ddlProvincia.
+        /// Control txtLocalidad.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlProvincia;
+        protected global::System.Web.UI.WebControls.TextBox txtLocalidad;
         
         /// <summary>
-        /// Control ddlLocalidad.
+        /// Control hdLocalidad.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlLocalidad;
+        protected global::System.Web.UI.WebControls.HiddenField hdLocalidad;
+        
+        /// <summary>
+        /// Control txtProvincia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtProvincia;
+        
+        /// <summary>
+        /// Control hdProvincia.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdProvincia;
         
         /// <summary>
         /// Control txtBarrio.
@@ -175,6 +247,15 @@ namespace PL.AdminDashboard {
         protected global::System.Web.UI.WebControls.TextBox txtBarrio;
         
         /// <summary>
+        /// Control hdBarrio.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdBarrio;
+        
+        /// <summary>
         /// Control txtCodigoPostal.
         /// </summary>
         /// <remarks>
@@ -182,6 +263,15 @@ namespace PL.AdminDashboard {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtCodigoPostal;
+        
+        /// <summary>
+        /// Control hdCodigoPostal.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdCodigoPostal;
         
         /// <summary>
         /// Control btnGuardar.

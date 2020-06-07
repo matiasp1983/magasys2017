@@ -164,38 +164,6 @@ namespace PL.AdminDashboard
         #region Métodos Públicos
 
         [WebMethod]
-        public static ArrayList CargarLocalidades(string idProvincia)
-        {
-            var oLocalidad = new BLL.LocalidadBLL();
-            ArrayList lstLocalidadesResultado = null;
-            List<Localidad> lstLocalides;
-
-            try
-            {
-                if (!String.IsNullOrEmpty(idProvincia))
-                {
-                    lstLocalides = oLocalidad.ObtenerLocalidades(Convert.ToInt64(idProvincia));
-                    lstLocalidadesResultado = new ArrayList
-                    {
-                        new ItemOptionLocalidad() { Value = string.Empty, Text = string.Empty }
-                    };
-
-                    foreach (var item in lstLocalides)
-                    {
-                        lstLocalidadesResultado.Add(new ItemOptionLocalidad() { Value = item.ID_LOCALIDAD.ToString(), Text = item.NOMBRE });
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Logger loLogger = LogManager.GetCurrentClassLogger();
-                loLogger.Error(ex);
-            }
-
-            return lstLocalidadesResultado;
-        }
-
-        [WebMethod]
         public static bool ValidarCuitProveedor(string pCuit)
         {
             if (ValidaCuit(pCuit))
