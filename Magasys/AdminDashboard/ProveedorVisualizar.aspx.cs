@@ -48,18 +48,22 @@ namespace PL.AdminDashboard
                     txtTelefonoMovil.Text = oProveedor.TELEFONO_MOVIL;
                     txtTelefonoFijo.Text = oProveedor.TELEFONO_FIJO;
                     txtEmail.Text = oProveedor.EMAIL;
-                    txtCalle.Text = oProveedor.CALLE;
-                    txtNumero.Text = oProveedor.NUMERO.ToString();
-                    txtPiso.Text = oProveedor.PISO;
-                    txtDepartamento.Text = oProveedor.DEPARTAMENTO;
-                    var loProvincia = new BLL.ProvinciaBLL().ObtenerProvincia(oProveedor.ID_PROVINCIA);
-                    if (loProvincia != null)
-                        txtProvincia.Text = loProvincia.NOMBRE;
-                    var loLocalidad = new BLL.LocalidadBLL().ObtenerLocalidad(oProveedor.ID_LOCALIDAD);
-                    if (loLocalidad != null)
-                        txtLocalidad.Text = loLocalidad.NOMBRE;
-                    txtBarrio.Text = oProveedor.BARRIO;
-                    txtCodigoPostal.Text = oProveedor.CODIGO_POSTAL;
+                    if (oProveedor.CALLE != null)
+                        txtCalle.Text = oProveedor.CALLE;
+                    if (oProveedor.NUMERO != null)
+                        txtNumero.Text = oProveedor.NUMERO.ToString();
+                    if (oProveedor.PISO != null)
+                        txtPiso.Text = oProveedor.PISO;
+                    if (oProveedor.DEPARTAMENTO != null)
+                        txtDepartamento.Text = oProveedor.DEPARTAMENTO;
+                    if (oProveedor.LOCALIDAD != null)
+                        txtLocalidad.Text = oProveedor.LOCALIDAD;
+                    if (oProveedor.PROVINCIA != null)
+                        txtProvincia.Text = oProveedor.PROVINCIA;
+                    if (oProveedor.BARRIO != null)
+                        txtBarrio.Text = oProveedor.BARRIO;
+                    if (oProveedor.CODIGO_POSTAL != null)
+                        txtCodigoPostal.Text = oProveedor.CODIGO_POSTAL;
                 }
                 else
                     Response.Redirect("ProveedorListado.aspx", false);
