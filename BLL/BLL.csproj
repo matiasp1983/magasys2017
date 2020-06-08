@@ -119,6 +119,9 @@
     <Compile Include="DAL\DiaSemana.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\Empleado.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\Estado.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -189,6 +192,7 @@
     <Compile Include="DAL\ReservaEdicion.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="EmpleadoBLL.cs" />
     <Compile Include="ForgotPasswordBLL.cs" />
     <Compile Include="FuerzaBruta\Delivery.cs" />
     <Compile Include="FuerzaBruta\EstrategiaFuerzaBruta.cs" />

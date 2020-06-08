@@ -52,6 +52,8 @@ public partial class MAGASYSEntities : DbContext
 
     public virtual DbSet<DiaSemana> DiaSemana { get; set; }
 
+    public virtual DbSet<Empleado> Empleado { get; set; }
+
     public virtual DbSet<Estado> Estado { get; set; }
 
     public virtual DbSet<FormaPago> FormaPago { get; set; }

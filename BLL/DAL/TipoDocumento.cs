@@ -24,6 +24,8 @@ public partial class TipoDocumento
 
         this.Cliente = new HashSet<Cliente>();
 
+        this.Empleado = new HashSet<Empleado>();
+
     }
 
 
@@ -36,6 +38,10 @@ public partial class TipoDocumento
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Cliente> Cliente { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<Empleado> Empleado { get; set; }
 
 }
 

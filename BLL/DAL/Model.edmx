@@ -116,6 +116,33 @@
           <Property Name="ID_DIA_SEMANA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NOMBRE" Type="nvarchar" MaxLength="10" />
         </EntityType>
+        <EntityType Name="Empleado">
+          <Key>
+            <PropertyRef Name="ID_EMPLEADO" />
+          </Key>
+          <Property Name="ID_EMPLEADO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FECHA_ALTA" Type="datetime" Nullable="false" />
+          <Property Name="COD_ESTADO" Type="int" Nullable="false" />
+          <Property Name="CUIT" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TIPO_DOCUMENTO" Type="int" Nullable="false" />
+          <Property Name="NRO_DOCUMENTO" Type="int" Nullable="false" />
+          <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="APELLIDO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TELEFONO_MOVIL" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TELEFONO_FIJO" Type="varchar" MaxLength="50" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CALLE" Type="varchar" MaxLength="50" />
+          <Property Name="NUMERO" Type="int" />
+          <Property Name="PISO" Type="varchar" MaxLength="2" />
+          <Property Name="DEPARTAMENTO" Type="varchar" MaxLength="2" />
+          <Property Name="BARRIO" Type="varchar" MaxLength="50" />
+          <Property Name="CODIGO_POSTAL" Type="varchar" MaxLength="10" />
+          <Property Name="PROVINCIA" Type="varchar" MaxLength="50" />
+          <Property Name="LOCALIDAD" Type="varchar" MaxLength="50" />
+          <Property Name="DIRECCION_MAPS" Type="varchar(max)" />
+          <Property Name="COD_USUARIO" Type="int" />
+          <Property Name="FECHA_BAJA" Type="datetime" />
+        </EntityType>
         <EntityType Name="Estado">
           <Key>
             <PropertyRef Name="ID_ESTADO" />
@@ -595,6 +622,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Empleado_Estado">
+          <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="ID_ESTADO" />
+            </Principal>
+            <Dependent Role="Empleado">
+              <PropertyRef Name="COD_ESTADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleado_TipoDocumento">
+          <End Role="TipoDocumento" Type="Self.TipoDocumento" Multiplicity="1" />
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDocumento">
+              <PropertyRef Name="ID_TIPO_DOCUMENTO" />
+            </Principal>
+            <Dependent Role="Empleado">
+              <PropertyRef Name="TIPO_DOCUMENTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleado_Usuario">
+          <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+          <End Role="Empleado" Type="Self.Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="ID_USUARIO" />
+            </Principal>
+            <Dependent Role="Empleado">
+              <PropertyRef Name="COD_USUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_IngresoProducto_Estado">
           <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
           <End Role="ProductoIngreso" Type="Self.ProductoIngreso" Multiplicity="*" />
@@ -1014,6 +1077,7 @@
           <EntitySet Name="DetalleVenta" EntityType="Self.DetalleVenta" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DiarioDiaSemana" EntityType="Self.DiarioDiaSemana" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DiaSemana" EntityType="Self.DiaSemana" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empleado" EntityType="Self.Empleado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Estado" EntityType="Self.Estado" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FormaPago" EntityType="Self.FormaPago" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Genero" EntityType="Self.Genero" Schema="dbo" store:Type="Tables" />
@@ -1111,6 +1175,18 @@
           <AssociationSet Name="FK_DiarioDiaSemana_Producto" Association="Self.FK_DiarioDiaSemana_Producto">
             <End Role="Producto" EntitySet="Producto" />
             <End Role="DiarioDiaSemana" EntitySet="DiarioDiaSemana" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleado_Estado" Association="Self.FK_Empleado_Estado">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Empleado" EntitySet="Empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleado_TipoDocumento" Association="Self.FK_Empleado_TipoDocumento">
+            <End Role="TipoDocumento" EntitySet="TipoDocumento" />
+            <End Role="Empleado" EntitySet="Empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleado_Usuario" Association="Self.FK_Empleado_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Empleado" EntitySet="Empleado" />
           </AssociationSet>
           <AssociationSet Name="FK_IngresoProducto_Estado" Association="Self.FK_IngresoProducto_Estado">
             <End Role="Estado" EntitySet="Estado" />
@@ -1264,6 +1340,7 @@
           <EntitySet Name="DetalleVenta" EntityType="MAGASYSModel.DetalleVenta" />
           <EntitySet Name="DiarioDiaSemana" EntityType="MAGASYSModel.DiarioDiaSemana" />
           <EntitySet Name="DiaSemana" EntityType="MAGASYSModel.DiaSemana" />
+          <EntitySet Name="Empleado" EntityType="MAGASYSModel.Empleado" />
           <EntitySet Name="Estado" EntityType="MAGASYSModel.Estado" />
           <EntitySet Name="FormaPago" EntityType="MAGASYSModel.FormaPago" />
           <EntitySet Name="Genero" EntityType="MAGASYSModel.Genero" />
@@ -1381,6 +1458,18 @@
           <AssociationSet Name="FK_Suplemento_DiaSemana" Association="MAGASYSModel.FK_Suplemento_DiaSemana">
             <End Role="DiaSemana" EntitySet="DiaSemana" />
             <End Role="Suplemento" EntitySet="Suplemento" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleado_Estado" Association="MAGASYSModel.FK_Empleado_Estado">
+            <End Role="Estado" EntitySet="Estado" />
+            <End Role="Empleado" EntitySet="Empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleado_TipoDocumento" Association="MAGASYSModel.FK_Empleado_TipoDocumento">
+            <End Role="TipoDocumento" EntitySet="TipoDocumento" />
+            <End Role="Empleado" EntitySet="Empleado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Empleado_Usuario" Association="MAGASYSModel.FK_Empleado_Usuario">
+            <End Role="Usuario" EntitySet="Usuario" />
+            <End Role="Empleado" EntitySet="Empleado" />
           </AssociationSet>
           <AssociationSet Name="FK_IngresoProducto_Estado" Association="MAGASYSModel.FK_IngresoProducto_Estado">
             <End Role="Estado" EntitySet="Estado" />
@@ -1637,6 +1726,36 @@
           <NavigationProperty Name="Revista" Relationship="MAGASYSModel.FK_Revista_DiaSemana" FromRole="DiaSemana" ToRole="Revista" />
           <NavigationProperty Name="Suplemento" Relationship="MAGASYSModel.FK_Suplemento_DiaSemana" FromRole="DiaSemana" ToRole="Suplemento" />
         </EntityType>
+        <EntityType Name="Empleado">
+          <Key>
+            <PropertyRef Name="ID_EMPLEADO" />
+          </Key>
+          <Property Name="ID_EMPLEADO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FECHA_ALTA" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="COD_ESTADO" Type="Int32" Nullable="false" />
+          <Property Name="CUIT" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TIPO_DOCUMENTO" Type="Int32" Nullable="false" />
+          <Property Name="NRO_DOCUMENTO" Type="Int32" Nullable="false" />
+          <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="APELLIDO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TELEFONO_MOVIL" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TELEFONO_FIJO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EMAIL" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CALLE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NUMERO" Type="Int32" />
+          <Property Name="PISO" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="DEPARTAMENTO" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="BARRIO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CODIGO_POSTAL" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="PROVINCIA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LOCALIDAD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DIRECCION_MAPS" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="COD_USUARIO" Type="Int32" />
+          <Property Name="FECHA_BAJA" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Estado" Relationship="MAGASYSModel.FK_Empleado_Estado" FromRole="Empleado" ToRole="Estado" />
+          <NavigationProperty Name="TipoDocumento" Relationship="MAGASYSModel.FK_Empleado_TipoDocumento" FromRole="Empleado" ToRole="TipoDocumento" />
+          <NavigationProperty Name="Usuario" Relationship="MAGASYSModel.FK_Empleado_Usuario" FromRole="Empleado" ToRole="Usuario" />
+        </EntityType>
         <EntityType Name="Estado">
           <Key>
             <PropertyRef Name="ID_ESTADO" />
@@ -1646,6 +1765,7 @@
           <Property Name="AMBITO" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Cobro" Relationship="MAGASYSModel.FK_Cobro_Estado" FromRole="Estado" ToRole="Cobro" />
           <NavigationProperty Name="DetalleProductoIngreso" Relationship="MAGASYSModel.FK_DetalleIngresoProducto_Estado" FromRole="Estado" ToRole="DetalleProductoIngreso" />
+          <NavigationProperty Name="Empleado" Relationship="MAGASYSModel.FK_Empleado_Estado" FromRole="Estado" ToRole="Empleado" />
           <NavigationProperty Name="ProductoIngreso" Relationship="MAGASYSModel.FK_IngresoProducto_Estado" FromRole="Estado" ToRole="ProductoIngreso" />
           <NavigationProperty Name="ProductoEdicion" Relationship="MAGASYSModel.FK_Producto_Edicion_Estado" FromRole="Estado" ToRole="ProductoEdicion" />
           <NavigationProperty Name="Producto" Relationship="MAGASYSModel.FK_Producto_Estado1" FromRole="Estado" ToRole="Producto" />
@@ -1924,6 +2044,7 @@
           <Property Name="ID_TIPO_DOCUMENTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DESCRIPCION" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Cliente" Relationship="MAGASYSModel.FK_Cliente_TipoDocumento" FromRole="TipoDocumento" ToRole="Cliente" />
+          <NavigationProperty Name="Empleado" Relationship="MAGASYSModel.FK_Empleado_TipoDocumento" FromRole="TipoDocumento" ToRole="Empleado" />
         </EntityType>
         <EntityType Name="TipoProducto">
           <Key>
@@ -1958,6 +2079,7 @@
           <Property Name="COD_ESTADO" Type="Int32" Nullable="false" />
           <Property Name="RECUPERAR_CONTRASENIA" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Cliente" Relationship="MAGASYSModel.FK_Cliente_Usuario" FromRole="Usuario" ToRole="Cliente" />
+          <NavigationProperty Name="Empleado" Relationship="MAGASYSModel.FK_Empleado_Usuario" FromRole="Usuario" ToRole="Empleado" />
           <NavigationProperty Name="Estado" Relationship="MAGASYSModel.FK_Usuario_Estado" FromRole="Usuario" ToRole="Estado" />
           <NavigationProperty Name="Rol" Relationship="MAGASYSModel.FK_Usuario_Rol" FromRole="Usuario" ToRole="Rol" />
         </EntityType>
@@ -2250,6 +2372,42 @@
             </Principal>
             <Dependent Role="Suplemento">
               <PropertyRef Name="ID_DIA_SEMANA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleado_Estado">
+          <End Type="MAGASYSModel.Estado" Role="Estado" Multiplicity="1" />
+          <End Type="MAGASYSModel.Empleado" Role="Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado">
+              <PropertyRef Name="ID_ESTADO" />
+            </Principal>
+            <Dependent Role="Empleado">
+              <PropertyRef Name="COD_ESTADO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleado_TipoDocumento">
+          <End Type="MAGASYSModel.TipoDocumento" Role="TipoDocumento" Multiplicity="1" />
+          <End Type="MAGASYSModel.Empleado" Role="Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoDocumento">
+              <PropertyRef Name="ID_TIPO_DOCUMENTO" />
+            </Principal>
+            <Dependent Role="Empleado">
+              <PropertyRef Name="TIPO_DOCUMENTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Empleado_Usuario">
+          <End Type="MAGASYSModel.Usuario" Role="Usuario" Multiplicity="0..1" />
+          <End Type="MAGASYSModel.Empleado" Role="Empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuario">
+              <PropertyRef Name="ID_USUARIO" />
+            </Principal>
+            <Dependent Role="Empleado">
+              <PropertyRef Name="COD_USUARIO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2725,6 +2883,34 @@
               <MappingFragment StoreEntitySet="DiaSemana">
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
                 <ScalarProperty Name="ID_DIA_SEMANA" ColumnName="ID_DIA_SEMANA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empleado">
+            <EntityTypeMapping TypeName="MAGASYSModel.Empleado">
+              <MappingFragment StoreEntitySet="Empleado">
+                <ScalarProperty Name="FECHA_BAJA" ColumnName="FECHA_BAJA" />
+                <ScalarProperty Name="COD_USUARIO" ColumnName="COD_USUARIO" />
+                <ScalarProperty Name="DIRECCION_MAPS" ColumnName="DIRECCION_MAPS" />
+                <ScalarProperty Name="LOCALIDAD" ColumnName="LOCALIDAD" />
+                <ScalarProperty Name="PROVINCIA" ColumnName="PROVINCIA" />
+                <ScalarProperty Name="CODIGO_POSTAL" ColumnName="CODIGO_POSTAL" />
+                <ScalarProperty Name="BARRIO" ColumnName="BARRIO" />
+                <ScalarProperty Name="DEPARTAMENTO" ColumnName="DEPARTAMENTO" />
+                <ScalarProperty Name="PISO" ColumnName="PISO" />
+                <ScalarProperty Name="NUMERO" ColumnName="NUMERO" />
+                <ScalarProperty Name="CALLE" ColumnName="CALLE" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="TELEFONO_FIJO" ColumnName="TELEFONO_FIJO" />
+                <ScalarProperty Name="TELEFONO_MOVIL" ColumnName="TELEFONO_MOVIL" />
+                <ScalarProperty Name="APELLIDO" ColumnName="APELLIDO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="NRO_DOCUMENTO" ColumnName="NRO_DOCUMENTO" />
+                <ScalarProperty Name="TIPO_DOCUMENTO" ColumnName="TIPO_DOCUMENTO" />
+                <ScalarProperty Name="CUIT" ColumnName="CUIT" />
+                <ScalarProperty Name="COD_ESTADO" ColumnName="COD_ESTADO" />
+                <ScalarProperty Name="FECHA_ALTA" ColumnName="FECHA_ALTA" />
+                <ScalarProperty Name="ID_EMPLEADO" ColumnName="ID_EMPLEADO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

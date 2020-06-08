@@ -23,7 +23,7 @@
         public const string MsjeCuitProveedorFailure = "El CUIT ingresado no es válido.";
         public const string MsjeCuitProveedorExist = "El CUIT ingresado ya existe.";
         public const string MsjeRazonSocialProveedorExist = "La razón social ingresada ya existe.";
-        public const string MsjeListadoProveedorFiltrarTotalSinResultados = "No se encontraron Proveedores para la búsqueda seleccionada.";
+        public const string MsjeListadoProveedorFiltrarTotalSinResultados = "No se encontraron proveedores para la búsqueda seleccionada.";
         public const string MsjeListadoProveedorFechaDesdeMayorQueFechaHasta = "La Fecha Hasta debe ser mayor que la Fecha Desde.";
 
         #endregion
@@ -52,15 +52,15 @@
 
         #region Mensajes Cliente
 
-        public const string MsjeClienteBuscarClienteSinResultados = "No se encontró el Cliente para la búsqueda seleccionada.";
+        public const string MsjeClienteBuscarClienteSinResultados = "No se encontró el cliente para la búsqueda seleccionada.";
         public const string MsjeClienteBuscarClienteSinNroDocumento = "Debe completar el Nro. de Documento.";
-        public const string MsjeClienterExiste = "El Cliente ya existe.";
+        public const string MsjeClienterExiste = "El cliente ya existe.";
         public const string MsjeClienteSuccessAlta = "El cliente se registró correctamente.";
         public const string MsjeClienteFailure = "El cliente no se pudo guardar.";
-        public const string MsjeListadoClienteFiltrarTotalSinResultados = "No se encontraron Clientes para la búsqueda seleccionada.";
+        public const string MsjeListadoClienteFiltrarTotalSinResultados = "No se encontraron clientes para la búsqueda seleccionada.";
         public const string MsjeClienteSuccessModificacion = "El cliente se modificó correctamente.";
-        public const string MsjeClienteSinModificaciones = "No se realizaron modificaciones en el Cliente.";
-        public const string MsjeClienteObligatorio = "Debe completar el Cliente.";
+        public const string MsjeClienteSinModificaciones = "No se realizaron modificaciones en el cliente.";
+        public const string MsjeClienteObligatorio = "Debe completar el cliente.";
 
         #endregion
 
@@ -217,6 +217,14 @@
         public const string MsjeRepartoDireccionNegocio = "Debe completar la dirección del negocio.";
         public const string MsjeRepartoConfirmacion = "Se confirmó el reparto.";
         public const string MsjeHojaRutaFailure = "Ocurrió un error al guardar la hoja de ruta.";
+
+        #endregion
+
+        #region Mensajes Empleado
+
+        public const string MsjeEmpleadoSuccessAlta = "El empleado se guardó correctamente.";
+        public const string MsjeEmpleadoExiste = "El empleado ya existe.";
+        public const string MsjeEmpleadoFailure = "El empleado no se pudo guardar.";
 
         #endregion
     }
