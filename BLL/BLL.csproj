@@ -193,6 +193,7 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="EmpleadoBLL.cs" />
+    <Compile Include="Filters\EmpleadoFiltro.cs" />
     <Compile Include="ForgotPasswordBLL.cs" />
     <Compile Include="FuerzaBruta\Delivery.cs" />
     <Compile Include="FuerzaBruta\EstrategiaFuerzaBruta.cs" />

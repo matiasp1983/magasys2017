@@ -41,7 +41,8 @@
             DevolucionProducto,
             ReservasHojaDeRuta,
             ClientesHojaDeRuta,
-            CodigoReserva
+            CodigoReserva,
+            IdEmpleado
         }
 
         #endregion

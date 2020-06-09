@@ -225,6 +225,7 @@
         public const string MsjeEmpleadoSuccessAlta = "El empleado se guardó correctamente.";
         public const string MsjeEmpleadoExiste = "El empleado ya existe.";
         public const string MsjeEmpleadoFailure = "El empleado no se pudo guardar.";
+        public const string MsjeListadoEmpleadoFiltrarTotalSinResultados = "No se encontraron empleados para la búsqueda seleccionada.";
 
         #endregion
     }

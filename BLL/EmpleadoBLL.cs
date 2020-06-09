@@ -1,5 +1,8 @@
 ﻿using BLL.DAL;
+using BLL.Filters;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BLL
 {
@@ -66,6 +69,72 @@ namespace BLL
             return bEsNuevoCuit;
         }
 
+        public List<EmpleadoListado> ObtenerEmpleados(EmpleadoFiltro oClienteFiltro)
+        {
+            List<EmpleadoListado> lstEmpleadoListado = null;
+            List<Empleado> lstEmpleado = null;
+
+            try
+            {
+                using (var rep = new Repository<Empleado>())
+                {
+                    lstEmpleado = rep.Search(p => p.FECHA_BAJA == null && p.COD_ESTADO == 1).OrderByDescending(p => p.ID_EMPLEADO).ToList();
+
+                    if (lstEmpleado.Count > 0)
+                    {
+                        if (oClienteFiltro.Tipo_documento > 0 && oClienteFiltro.Nro_documento > 0 && lstEmpleado.Count > 0)
+                            lstEmpleado = lstEmpleado.FindAll(p => p.TIPO_DOCUMENTO == oClienteFiltro.Tipo_documento && p.NRO_DOCUMENTO == oClienteFiltro.Nro_documento);
+
+                        if (!String.IsNullOrEmpty(oClienteFiltro.Apellido) && lstEmpleado.Count > 0)
+                            lstEmpleado = lstEmpleado.FindAll(p => p.APELLIDO.ToUpper().Contains(oClienteFiltro.Apellido.ToUpper()));
+
+                        if (!String.IsNullOrEmpty(oClienteFiltro.Nombre) && lstEmpleado.Count > 0)
+                            lstEmpleado = lstEmpleado.FindAll(p => p.NOMBRE.ToUpper().Contains(oClienteFiltro.Nombre.ToUpper()));
+                    }
+
+                    EmpleadoListado oEmpleadoListado;
+                    lstEmpleadoListado = new List<EmpleadoListado>();
+
+                    if (lstEmpleado != null)
+                    {
+                        foreach (var loEmpleado in lstEmpleado)
+                        {
+                            oEmpleadoListado = new EmpleadoListado
+                            {
+                                ID_EMPLEADO = loEmpleado.ID_EMPLEADO,
+                                TIPO_DOCUMENTO = loEmpleado.TipoDocumento.DESCRIPCION,
+                                NRO_DOCUMENTO = loEmpleado.NRO_DOCUMENTO,
+                                NOMBRE = loEmpleado.NOMBRE,
+                                APELLIDO = loEmpleado.APELLIDO
+                            };
+
+                            lstEmpleadoListado.Add(oEmpleadoListado);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return lstEmpleadoListado;
+        }
+
         #endregion
     }
+
+    #region Clases
+
+    public class EmpleadoListado
+    {
+        public int ID_EMPLEADO { get; set; }
+        public string TIPO_DOCUMENTO { get; set; }
+        public int NRO_DOCUMENTO { get; set; }
+        public string NOMBRE { get; set; }
+        public string APELLIDO { get; set; }
+    }
+
+    #endregion
+
 }

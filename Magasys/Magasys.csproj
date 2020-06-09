@@ -101,7 +101,9 @@
     <Content Include="AdminDashboard\DetalleProductoIngresosEditar.aspx" />
     <Content Include="AdminDashboard\DetalleVentaProductos.aspx" />
     <Content Include="AdminDashboard\Empleado.aspx" />
+    <Content Include="AdminDashboard\EmpleadoEditar.aspx" />
     <Content Include="AdminDashboard\EmpleadoListado.aspx" />
+    <Content Include="AdminDashboard\EmpleadoVisualizar.aspx" />
     <Content Include="AdminDashboard\font-awesome\fonts\fontawesome-webfont.eot" />
     <Content Include="AdminDashboard\font-awesome\fonts\fontawesome-webfont.ttf" />
     <Content Include="AdminDashboard\font-awesome\fonts\fontawesome-webfont.woff" />
@@ -472,12 +474,26 @@
     <Compile Include="AdminDashboard\Empleado.aspx.designer.cs">
       <DependentUpon>Empleado.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AdminDashboard\EmpleadoEditar.aspx.cs">
+      <DependentUpon>EmpleadoEditar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\EmpleadoEditar.aspx.designer.cs">
+      <DependentUpon>EmpleadoEditar.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AdminDashboard\EmpleadoListado.aspx.cs">
       <DependentUpon>EmpleadoListado.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="AdminDashboard\EmpleadoListado.aspx.designer.cs">
       <DependentUpon>EmpleadoListado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\EmpleadoVisualizar.aspx.cs">
+      <DependentUpon>EmpleadoVisualizar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\EmpleadoVisualizar.aspx.designer.cs">
+      <DependentUpon>EmpleadoVisualizar.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminDashboard\Genero.aspx.cs">
       <DependentUpon>Genero.aspx</DependentUpon>
