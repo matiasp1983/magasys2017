@@ -192,9 +192,6 @@
     <Compile Include="DAL\ReservaEdicion.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\sysdiagrams.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="EmpleadoBLL.cs" />
     <Compile Include="Filters\EmpleadoFiltro.cs" />
     <Compile Include="ForgotPasswordBLL.cs" />

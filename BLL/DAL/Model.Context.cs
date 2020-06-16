@@ -52,6 +52,8 @@ public partial class MAGASYSEntities : DbContext
 
     public virtual DbSet<DiaSemana> DiaSemana { get; set; }
 
+    public virtual DbSet<Empleado> Empleado { get; set; }
+
     public virtual DbSet<Estado> Estado { get; set; }
 
     public virtual DbSet<FormaPago> FormaPago { get; set; }
@@ -103,10 +105,6 @@ public partial class MAGASYSEntities : DbContext
     public virtual DbSet<Usuario> Usuario { get; set; }
 
     public virtual DbSet<Venta> Venta { get; set; }
-
-    public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-
-    public virtual DbSet<Empleado> Empleado { get; set; }
 
 }
 
