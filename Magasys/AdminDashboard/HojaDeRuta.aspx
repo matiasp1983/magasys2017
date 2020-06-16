@@ -39,7 +39,8 @@
                                                     <label class="control-label">Distancia total</label>
                                                     <asp:TextBox ID="txtDistanciaTotal" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off" Enabled="false"></asp:TextBox>
                                                 </div>
-                                                <div style="text-align: right;">
+                                                <div style="text-align: right;">                                                    
+                                                     <button id="btnExportarExcel" runat="server" class="btn btn-info" type="button" onserverclick="BtnExportarExcel_Click"><i class="fa fa-map-o"></i>&nbsp;&nbsp;Exportar Ruta</button>
                                                     <a class="btn btn-info" data-toggle="modal" data-target="#ModalConfirmarRuta"><i class="fa fa-map-o"></i>&nbsp;&nbsp;Confirmar Ruta</a>
                                                 </div>
                                             </div>

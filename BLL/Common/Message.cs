@@ -230,5 +230,11 @@
         public const string MsjeEmpleadoSinModificaciones = "No se realizaron modificaciones en el empleado.";
 
         #endregion
+
+        #region Mensajes ExportarHojaDeRuta
+
+        public const string MsjeExportarHoraDeRura = "No se encontraron resultados para exportar.";
+
+        #endregion
     }
 }

@@ -188,6 +188,25 @@ namespace PL.AdminDashboard
                         }
                     }
                 }
+
+                #region [IMPORTAR A EXCEL]
+
+                if (lstReservaEdicionRepartoAux.Count > 0)
+                {
+                    Response.ClearContent();
+                    Response.AddHeader("content-disposition", "attachment;filename=Reporte_Usuarios.xls");
+                    Response.AddHeader("Content-Type", "application/vnd.ms-excel");
+                    Response.ContentEncoding = System.Text.Encoding.Unicode;
+                    Response.BinaryWrite(System.Text.Encoding.Unicode.GetPreamble());
+                    GenericListOutput.WriteTsv(lstReservaEdicionRepartoAux, Response.Output);
+                    Response.End();
+                }
+                else
+                {
+                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.InfoModal(Message.MsjeExportarHoraDeRura, "Exportar Hoja de ruta"));
+                }
+
+                #endregion
             }
         }
 
