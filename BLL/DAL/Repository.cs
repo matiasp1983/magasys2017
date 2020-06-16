@@ -102,9 +102,9 @@ namespace BLL.DAL
             {
                 loResult = EntitySet.FirstOrDefault(expr);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
 
             return loResult;

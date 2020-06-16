@@ -29,6 +29,24 @@ namespace BLL
             return bRes;
         }
 
+        public bool ModificarEmpleado(Empleado oEmpleado)
+        {
+            var bRes = false;
+            try
+            {
+                using (var rep = new Repository<Empleado>())
+                {
+                    bRes = rep.Update(oEmpleado);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return bRes;
+        }
+
         public bool ConsultarExistenciaEmpleado(int tipoDocumento, int nroDocumento)
         {
             bool bEsNuevoEmpleado = false;
@@ -49,16 +67,16 @@ namespace BLL
             return bEsNuevoEmpleado;
         }
 
-        public bool ConsultarExistenciaCuit(string cuit)
+        public bool ConsultarExistenciaCuil(string cuil)
         {
-            bool bEsNuevoCuit = false;
+            bool bEsNuevoCuil = false;
 
             try
             {
                 using (var resEmpleado = new Repository<Empleado>())
                 {
-                    var oEmpleado = resEmpleado.Find(p => p.CUIT == cuit && p.FECHA_BAJA == null && p.COD_ESTADO == 1);
-                    bEsNuevoCuit = oEmpleado == null;
+                    var oEmpleado = resEmpleado.Find(p => p.CUIL == cuil && p.FECHA_BAJA == null && p.COD_ESTADO == 1);
+                    bEsNuevoCuil = oEmpleado == null;
                 }
             }
             catch (Exception)
@@ -66,7 +84,7 @@ namespace BLL
                 throw;
             }
 
-            return bEsNuevoCuit;
+            return bEsNuevoCuil;
         }
 
         public List<EmpleadoListado> ObtenerEmpleados(EmpleadoFiltro oClienteFiltro)

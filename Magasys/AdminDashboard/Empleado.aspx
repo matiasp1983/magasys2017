@@ -66,10 +66,10 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">CUIT</label>
+                                <label class="col-sm-2 control-label">CUIL</label>
 
                                 <div class="col-sm-10">
-                                    <asp:TextBox ID="txtCuit" runat="server" CssClass="form-control" MaxLength="11" autocomplete="off"></asp:TextBox>                                    
+                                    <asp:TextBox ID="txtCuil" runat="server" CssClass="form-control" MaxLength="11" autocomplete="off"></asp:TextBox>                                    
                                 </div>
                             </div>
                         </div>
@@ -278,7 +278,7 @@
 
             $(FormEmpleado).validate({
                 rules: {
-                     <%=txtCuit.UniqueID%>: {
+                     <%=txtCuil.UniqueID%>: {
                         required: true,
                         number: true,
                         digits: true,
@@ -286,8 +286,8 @@
                         remote: function () {
                             return {
                                 type: "POST",
-                                url: "Empleado.aspx/ValidarCuitProveedor",
-                                data: JSON.stringify({ 'pCuit': $("#<%=txtCuit.ClientID%>").val() }),
+                                url: "Empleado.aspx/ValidarCuilEmpleado",
+                                data: JSON.stringify({ 'pCuil': $("#<%=txtCuil.ClientID%>").val() }),
                                 contentType: "application/json; charset=utf-8",
                                 dataType: "json",
                                 dataFilter: function (data, type) {
@@ -342,12 +342,12 @@
                     }                    
 				},
             messages: {
-                    <%=txtCuit.UniqueID%>: {
+                    <%=txtCuil.UniqueID%>: {
                         required: "Este campo es requerido.",
                         number: "Ingrese un número válido.",
                         digits: "Ingrese solo dígitos.",
                         minlength: "Este campo debe ser de 11 dígitos.",
-                        remote: "El número de Cuit es incorrecto o ya se encuentra cargado."
+                        remote: "El número de Cuil es incorrecto o ya se encuentra cargado."
                     },
                     <%=txtNroDocumento.UniqueID%>: {
                         required: "Este campo es requerido.",

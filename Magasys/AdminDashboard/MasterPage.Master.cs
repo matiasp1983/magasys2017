@@ -184,6 +184,7 @@ namespace PL.AdminDashboard
                 {
                     liUsuarios.Visible = true;
                     liNegocio.Visible = true;
+                    liEmpleado.Visible = true;
 
                     if (loActivePage.Equals("Usuario.aspx"))
                     {
@@ -195,6 +196,18 @@ namespace PL.AdminDashboard
                     {
                         liUsuarios.Attributes["class"] = "active";
                         liUsuarioListado.Attributes["class"] = "active";
+                    }
+
+                    if (loActivePage.Equals("Empleado.aspx"))
+                    {
+                        liEmpleado.Attributes["class"] = "active";
+                        liAltaEmpleado.Attributes["class"] = "active";
+                    }
+
+                    if (loActivePage.Equals("EmpleadoListado.aspx"))
+                    {
+                        liEmpleado.Attributes["class"] = "active";
+                        liEmpleadoListado.Attributes["class"] = "active";
                     }
 
                     if (loActivePage.Equals("Negocio.aspx"))

@@ -24,7 +24,7 @@ public partial class Empleado
 
     public int COD_ESTADO { get; set; }
 
-    public string CUIT { get; set; }
+    public string CUIL { get; set; }
 
     public int TIPO_DOCUMENTO { get; set; }
 

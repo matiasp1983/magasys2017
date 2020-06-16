@@ -65,20 +65,20 @@ namespace PL.AdminDashboard
 
         #region Métodos Privados
 
-        private static bool ValidaCuit(string cuit)
+        private static bool ValidaCuil(string cuil)
         {
-            //Validar que el CUIT sea numérico
-            Int64 locuit = 0;
-            if (!Int64.TryParse(cuit, out locuit)) return false;
+            //Validar que el CUIL sea numérico
+            Int64 locuil = 0;
+            if (!Int64.TryParse(cuil, out locuil)) return false;
 
-            //Validar que el CUIT sea positivo
-            if (long.Parse(cuit) <= 0) return false;
+            //Validar que el CUIL sea positivo
+            if (long.Parse(cuil) <= 0) return false;
 
-            //Validar que el CUIT conste de 11 cifras
-            if (cuit.Length != 11) return false;
+            //Validar que el CUIL conste de 11 cifras
+            if (cuil.Length != 11) return false;
 
-            var loDigitoCalcu = Utilities.CalcularDigitoCuit(cuit);
-            var loParseSubStr = int.Parse(cuit.Substring(10));
+            var loDigitoCalcu = Utilities.CalcularDigitoCuit(cuil);
+            var loParseSubStr = int.Parse(cuil.Substring(10));
             return loDigitoCalcu == loParseSubStr;
         }
 
@@ -106,7 +106,7 @@ namespace PL.AdminDashboard
             {
                 FECHA_ALTA = DateTime.Now,
                 COD_ESTADO = 1,
-                CUIT = txtCuit.Text,
+                CUIL = txtCuil.Text,
                 TIPO_DOCUMENTO = Convert.ToInt32(ddlTipoDocumento.SelectedValue),
                 NRO_DOCUMENTO = Convert.ToInt32(txtNroDocumento.Text),
                 NOMBRE = txtNombre.Text,
@@ -181,11 +181,11 @@ namespace PL.AdminDashboard
         #region Métodos Públicos
 
         [WebMethod]
-        public static bool ValidarCuitProveedor(string pCuit)
+        public static bool ValidarCuilEmpleado(string pCuil)
         {
-            if (ValidaCuit(pCuit))
+            if (ValidaCuil(pCuil))
             {
-                return new BLL.EmpleadoBLL().ConsultarExistenciaCuit(pCuit);
+                return new BLL.EmpleadoBLL().ConsultarExistenciaCuil(pCuil);
             }
 
             return false;
