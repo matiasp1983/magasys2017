@@ -334,6 +334,64 @@ namespace BLL
             return lstReservaEdicionReparto;
         }
 
+        /// <summary>
+        /// Obtener Reservas Edicion En Reparto
+        /// </summary>
+        /// <returns></returns>
+        public List<ReservaEdicionReparto> ObtenerReservaEdicionEnReparto(ReservaFiltro oReservaFiltro)
+        {
+            List<ReservaEdicionReparto> lstReservaEdicionReparto = null;
+
+            try
+            {
+                using (var loRepReservaEdicion = new Repository<ReservaEdicion>())
+                {
+                    var lstReservaEdicion = loRepReservaEdicion.Search(p => p.COD_ESTADO == 17);
+
+                    if (lstReservaEdicion.Count > 0 && !String.IsNullOrEmpty(oReservaFiltro.NOMBRE_PRODUCTO))
+                        lstReservaEdicion = lstReservaEdicion.FindAll(p => p.Reserva.Producto.NOMBRE.ToUpper().Contains(oReservaFiltro.NOMBRE_PRODUCTO.ToUpper()));
+
+                    if (lstReservaEdicion.Count > 0 && !String.IsNullOrEmpty(oReservaFiltro.EDICION))
+                        lstReservaEdicion = lstReservaEdicion.FindAll(p => p.ProductoEdicion.EDICION.ToUpper().Contains(oReservaFiltro.EDICION.ToUpper()));
+
+                    if (lstReservaEdicion.Count > 0 && !String.IsNullOrEmpty(oReservaFiltro.NOMBRE_EDICION))
+                        lstReservaEdicion = lstReservaEdicion.FindAll(p => p.ProductoEdicion.NOMBRE.ToUpper().Contains(oReservaFiltro.NOMBRE_EDICION.ToUpper()));
+
+                    if (lstReservaEdicion.Count > 0)
+                    {
+                        lstReservaEdicionReparto = new List<ReservaEdicionReparto>();
+
+                        foreach (var item in lstReservaEdicion)
+                        {
+                            ReservaEdicionReparto oReservaEdicionReparto = new ReservaEdicionReparto
+                            {
+                                ID_RESERVA_EDICION = item.ID_RESERVA_EDICION,
+                                CLIENTE = item.Reserva.Cliente.ID_CLIENTE.ToString() + " - " + item.Reserva.Cliente.NOMBRE + " " + item.Reserva.Cliente.APELLIDO,
+                                CODIGO_CLIENTE = item.Reserva.Cliente.ID_CLIENTE.ToString(),
+                                CLIENTE_NOMBRE = item.Reserva.Cliente.NOMBRE + " " + item.Reserva.Cliente.APELLIDO,
+                                DIRECCION_MAPS = item.Reserva.Cliente.DIRECCION_MAPS,
+                                PRODUCTO = item.Reserva.Producto.NOMBRE,
+                                CODIGO_EDICION = item.COD_PROD_EDICION
+                            };
+
+                            if (item.ProductoEdicion.NOMBRE == null)
+                                oReservaEdicionReparto.EDICION = item.ProductoEdicion.EDICION;
+                            else
+                                oReservaEdicionReparto.EDICION = item.ProductoEdicion.EDICION + " - " + item.ProductoEdicion.NOMBRE;
+
+                            lstReservaEdicionReparto.Add(oReservaEdicionReparto);
+                        }
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return lstReservaEdicionReparto;
+        }
+
         public int CantidadReservaEdicionPorProductoEdicion(long codProductoEdicion)
         {
             // Obtener cantidad de productos edición reservados, es decir, con Reserva Edición: Confirmada.

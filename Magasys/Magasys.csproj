@@ -83,6 +83,7 @@
     <Content Include="AdminDashboard\Cobro.aspx" />
     <Content Include="AdminDashboard\CobroCliente.aspx" />
     <Content Include="AdminDashboard\CobroListado.aspx" />
+    <Content Include="AdminDashboard\ConsultarRepartos.aspx" />
     <Content Include="AdminDashboard\css\bootstrap.css.map" />
     <Content Include="AdminDashboard\css\bootstrap.min.css.map" />
     <Content Include="AdminDashboard\css\plugins\footable\fonts\footable.eot" />
@@ -146,6 +147,7 @@
     <Content Include="AdminDashboard\Genero.aspx" />
     <Content Include="AdminDashboard\GeneroEditar.aspx" />
     <Content Include="AdminDashboard\GeneroListado.aspx" />
+    <Content Include="AdminDashboard\GestionReparto.aspx" />
     <Content Include="AdminDashboard\HojaDeRuta.aspx" />
     <Content Include="AdminDashboard\img\perfil_default.png" />
     <Content Include="AdminDashboard\img\preview_icons.png" />
@@ -432,6 +434,13 @@
     <Compile Include="AdminDashboard\CobroListado.aspx.designer.cs">
       <DependentUpon>CobroListado.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AdminDashboard\ConsultarRepartos.aspx.cs">
+      <DependentUpon>ConsultarRepartos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\ConsultarRepartos.aspx.designer.cs">
+      <DependentUpon>ConsultarRepartos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AdminDashboard\DetalleCobro.aspx.cs">
       <DependentUpon>DetalleCobro.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -515,6 +524,13 @@
     </Compile>
     <Compile Include="AdminDashboard\GeneroListado.aspx.designer.cs">
       <DependentUpon>GeneroListado.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\GestionReparto.aspx.cs">
+      <DependentUpon>GestionReparto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\GestionReparto.aspx.designer.cs">
+      <DependentUpon>GestionReparto.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminDashboard\HojaDeRuta.aspx.cs">
       <DependentUpon>HojaDeRuta.aspx</DependentUpon>

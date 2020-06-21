@@ -217,6 +217,8 @@
         public const string MsjeRepartoDireccionNegocio = "Debe completar la dirección del negocio.";
         public const string MsjeRepartoConfirmacion = "Se confirmó el reparto.";
         public const string MsjeHojaRutaFailure = "Ocurrió un error al guardar la hoja de ruta.";
+        public const string MsjeRepartoCancelacion = "Se cancela el Reparto a domicilio con éxito";
+        public const string MsjeRepartoCancelacionError = "Ocurrió un error en la cancelación del Reparto a domicilio";
 
         #endregion
 

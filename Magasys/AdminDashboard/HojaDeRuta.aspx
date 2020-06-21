@@ -10,7 +10,7 @@
         </div>
     </div>
     <div class="wrapper wrapper-content animated fadeInRight">
-        <form id="FormHojaDeRuta" runat="server">
+        <form id="FormHojaDeRuta" runat="server">            
             <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
             <asp:UpdatePanel ID="UpdatePanel1" runat="server">
                 <ContentTemplate>
@@ -25,9 +25,9 @@
                                         <div class="col-sm-12">
                                             <div class="col-md-3">
                                                 <div class="form-group space-15">
-                                                    <button id="btnDriving" runat="server" class="btn btn-outline btn-success dim  active" type="button" onserverclick="btnDriving_ServerClick"><i class="fas fa-car"></i></button>
-                                                    <button id="btnWalking" runat="server" class="btn btn-outline btn-success dim" type="button" onserverclick="btnWalking_ServerClick"><i class="fas fa-walking"></i></button>
-                                                    <button id="btnBiking" runat="server" class="btn btn-outline btn-success dim" type="button" onserverclick="btnBiking_ServerClick"><i class="fas fa-biking"></i></button>
+                                                    <button id="btnDriving" runat="server" class="btn btn-outline btn-success dim  active" type="button" title="En auto" onserverclick="btnDriving_ServerClick"><i class="fas fa-car"></i></button>
+                                                    <button id="btnWalking" runat="server" class="btn btn-outline btn-success dim" type="button" title="A pie" onserverclick="btnWalking_ServerClick"><i class="fas fa-walking"></i></button>
+                                                    <button id="btnBiking" runat="server" class="btn btn-outline btn-success dim" type="button" title="En bicicleta" onserverclick="btnBiking_ServerClick"><i class="fas fa-biking"></i></button>
                                                 </div>
                                             </div>
                                             <div class="col-md-9">
@@ -40,8 +40,8 @@
                                                     <asp:TextBox ID="txtDistanciaTotal" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off" Enabled="false"></asp:TextBox>
                                                 </div>
                                                 <div style="text-align: right;">                                                    
-                                                     <button id="btnExportarExcel" runat="server" class="btn btn-info" type="button" onserverclick="BtnExportarExcel_Click"><i class="fa fa-map-o"></i>&nbsp;&nbsp;Exportar Ruta</button>
                                                     <a class="btn btn-info" data-toggle="modal" data-target="#ModalConfirmarRuta"><i class="fa fa-map-o"></i>&nbsp;&nbsp;Confirmar Ruta</a>
+                                                    <button id="btnExportarExcel" runat="server" class="btn btn-info" type="button" onserverclick="BtnExportarExcel_Click"><i class="fas fa-file-download"></i>&nbsp;&nbsp;Exportar Ruta</button>                                                    
                                                 </div>
                                             </div>
                                         </div>
@@ -96,6 +96,9 @@
                         </div>
                     </div>
                 </ContentTemplate>
+                <Triggers>
+                    <asp:PostBackTrigger ControlID="btnExportarExcel" />
+                </Triggers>
             </asp:UpdatePanel>
             <div id="ModalConfirmarRuta" class="modal" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
                 <div class="modal-dialog">

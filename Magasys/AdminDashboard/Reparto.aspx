@@ -77,7 +77,7 @@
                         <div class="ibox-content">
                             <div style="text-align: right;">
                                 <button type="button" id="btnNuevo" runat="server" class="ladda-button btn btn-info" onserverclick="BtnGenerarHojaRuta_Click">
-                                    <i class="fa fa-map-marker"></i>&nbsp;&nbsp;<span>Generar hoja de ruta</span>
+                                    <i class="fa fa-map-o"></i>&nbsp;&nbsp;<span>Generar hoja de ruta</span>
                                 </button>
                             </div>
                             <br />

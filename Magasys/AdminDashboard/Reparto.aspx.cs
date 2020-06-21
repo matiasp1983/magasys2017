@@ -37,6 +37,13 @@ namespace PL.AdminDashboard
 
         protected void BtnGenerarHojaRuta_Click(object sender, EventArgs e)
         {
+            if (lsvReserva.Controls.Count == 0)
+            {
+                dvMensajelsvReserva.InnerHtml = MessageManager.Info(dvMensajelsvReserva, Message.MsjeListadoReservaFiltroSinResultados, false);
+                dvMensajelsvReserva.Visible = true;
+                return;
+            }
+
             try
             {
                 List<BLL.DAL.Cliente> lstCliente = new List<BLL.DAL.Cliente>();
@@ -65,7 +72,8 @@ namespace PL.AdminDashboard
                             CODIGO_EDICION = Convert.ToInt32(((Label)loItem.Controls[17]).Text),
                             CODIGO_CLIENTE = ((Label)loItem.Controls[11]).Text,
                             DIRECCION_MAPS = ((Label)loItem.Controls[13]).Text,
-                            CLIENTE_NOMBRE = ((Label)loItem.Controls[15]).Text
+                            CLIENTE_NOMBRE = ((Label)loItem.Controls[15]).Text,
+                            ID_RESERVA_EDICION = Convert.ToInt32(((Label)loItem.Controls[9]).Text)
                         };
 
                         lstReservaEdicionReparto.Add(oReservaEdicionReparto);

@@ -21,6 +21,7 @@ namespace PL.AdminDashboard
                 if (oNegocio != null)
                     txtPutoDePartida.Text = oNegocio.DIRECCION_MAPS;
                 EstrategiaFuerzaBruta("Driving");
+                //Session.Remove(Enums.Session.HojaDeRuta.ToString());
             }
         }
 
@@ -141,6 +142,7 @@ namespace PL.AdminDashboard
                     }
 
                     lsvReparto.DataSource = lstRepartoListado;
+                    Session.Add(Enums.Session.HojaDeRuta.ToString(), lstRepartoListado);
                 }
             }
             catch (Exception ex)
@@ -157,12 +159,14 @@ namespace PL.AdminDashboard
         {
             List<ReservaEdicionReparto> lstReservaEdicionReparto = new List<ReservaEdicionReparto>();
             List<ReservaEdicionReparto> lstReservaEdicionRepartoAux = new List<ReservaEdicionReparto>();
+            List<RepartoExcel> lstRepartoExcel = new List<RepartoExcel>();
+            string loNombreArchivo = "attachment;filename=Reporte_Reparto_" + DateTime.Now.Date.Day + "." + DateTime.Now.Date.Month + "." + DateTime.Now.Date.Year + ".xls";
 
             if (Session[Enums.Session.ReservasHojaDeRuta.ToString()] != null)
             {
                 lstReservaEdicionReparto = (List<ReservaEdicionReparto>)Session[Enums.Session.ReservasHojaDeRuta.ToString()];
                 lstReservaEdicionReparto.OrderBy(p => p.CODIGO_CLIENTE).ThenBy(x => x.CODIGO_EDICION);
-                List<RepartoListado> lstRepartoListado = (List<RepartoListado>)lsvReparto.DataSource;
+                List<RepartoListado> lstRepartoListado = (List<RepartoListado>)Session[Enums.Session.HojaDeRuta.ToString()];
 
                 foreach (var itemHojaDeRuta in lstRepartoListado)
                 {
@@ -193,12 +197,27 @@ namespace PL.AdminDashboard
 
                 if (lstReservaEdicionRepartoAux.Count > 0)
                 {
+                    foreach (var item in lstReservaEdicionRepartoAux)
+                    {
+                        RepartoExcel oRepartoExcel = new RepartoExcel()
+                        {
+                            CLIENTE = item.CLIENTE,
+                            ORIGEN = item.DIRECCION_MAPS_ORIGEN,
+                            DESTINO = item.DIRECCION_MAPS,
+                            EDICION = item.EDICION,
+                            PRODUCTO = item.PRODUCTO,
+                            CANTIDAD = item.CANTIDAD
+                        };
+
+                        lstRepartoExcel.Add(oRepartoExcel);
+                    }
+
                     Response.ClearContent();
-                    Response.AddHeader("content-disposition", "attachment;filename=Reporte_Usuarios.xls");
+                    Response.AddHeader("content-disposition", loNombreArchivo);
                     Response.AddHeader("Content-Type", "application/vnd.ms-excel");
                     Response.ContentEncoding = System.Text.Encoding.Unicode;
                     Response.BinaryWrite(System.Text.Encoding.Unicode.GetPreamble());
-                    GenericListOutput.WriteTsv(lstReservaEdicionRepartoAux, Response.Output);
+                    GenericListOutput.WriteTsv(lstRepartoExcel, Response.Output);
                     Response.End();
                 }
                 else
@@ -225,6 +244,16 @@ namespace PL.AdminDashboard
         public string TIPO_DOCUMENTO { get; set; }
         public string NRO_DOCUMENTO { get; set; }
         public string TELEFONO_MOVIL { get; set; }
+    }
+
+    public class RepartoExcel
+    {
+        public string CLIENTE { get; set; } // Código + Nombre 
+        public string ORIGEN { get; set; }
+        public string DESTINO { get; set; } // Dirección del Cliente
+        public string EDICION { get; set; }
+        public string PRODUCTO { get; set; }
+        public int CANTIDAD { get; set; }
     }
 
     #endregion
