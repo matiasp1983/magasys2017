@@ -313,7 +313,8 @@ namespace BLL
                                 CLIENTE_NOMBRE = item.Reserva.Cliente.NOMBRE + " " + item.Reserva.Cliente.APELLIDO,
                                 DIRECCION_MAPS = item.Reserva.Cliente.DIRECCION_MAPS,
                                 PRODUCTO = item.Reserva.Producto.NOMBRE,
-                                CODIGO_EDICION = item.COD_PROD_EDICION
+                                CODIGO_EDICION = item.COD_PROD_EDICION,
+                                TIPO_PRODUCTO = item.ProductoEdicion.Producto.TipoProducto.DESCRIPCION
                             };
 
                             if (item.ProductoEdicion.NOMBRE == null)
@@ -371,7 +372,8 @@ namespace BLL
                                 CLIENTE_NOMBRE = item.Reserva.Cliente.NOMBRE + " " + item.Reserva.Cliente.APELLIDO,
                                 DIRECCION_MAPS = item.Reserva.Cliente.DIRECCION_MAPS,
                                 PRODUCTO = item.Reserva.Producto.NOMBRE,
-                                CODIGO_EDICION = item.COD_PROD_EDICION
+                                CODIGO_EDICION = item.COD_PROD_EDICION,
+                                TIPO_PRODUCTO = item.ProductoEdicion.Producto.TipoProducto.DESCRIPCION
                             };
 
                             if (item.ProductoEdicion.NOMBRE == null)
@@ -449,6 +451,7 @@ namespace BLL
         public int CODIGO_EDICION { get; set; }
         public string EDICION { get; set; }
         public string PRODUCTO { get; set; }
+        public string TIPO_PRODUCTO { get; set; }
         public int CANTIDAD { get; set; }
     }
 

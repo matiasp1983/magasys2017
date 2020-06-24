@@ -67,20 +67,20 @@ namespace PL.AdminDashboard
                         ReservaEdicionReparto oReservaEdicionReparto = new ReservaEdicionReparto
                         {
                             CLIENTE = ((Label)loItem.Controls[3]).Text,
-                            PRODUCTO = ((Label)loItem.Controls[5]).Text,
-                            EDICION = ((Label)loItem.Controls[7]).Text,
-                            CODIGO_EDICION = Convert.ToInt32(((Label)loItem.Controls[17]).Text),
-                            CODIGO_CLIENTE = ((Label)loItem.Controls[11]).Text,
-                            DIRECCION_MAPS = ((Label)loItem.Controls[13]).Text,
-                            CLIENTE_NOMBRE = ((Label)loItem.Controls[15]).Text,
-                            ID_RESERVA_EDICION = Convert.ToInt32(((Label)loItem.Controls[9]).Text)
+                            PRODUCTO = ((Label)loItem.Controls[7]).Text,
+                            EDICION = ((Label)loItem.Controls[9]).Text,
+                            CODIGO_EDICION = Convert.ToInt32(((Label)loItem.Controls[19]).Text),
+                            CODIGO_CLIENTE = ((Label)loItem.Controls[13]).Text,
+                            DIRECCION_MAPS = ((Label)loItem.Controls[15]).Text,
+                            CLIENTE_NOMBRE = ((Label)loItem.Controls[17]).Text,
+                            ID_RESERVA_EDICION = Convert.ToInt32(((Label)loItem.Controls[11]).Text)
                         };
 
                         lstReservaEdicionReparto.Add(oReservaEdicionReparto);
 
                         BLL.DAL.Cliente oCliente = new BLL.DAL.Cliente();
-                        oCliente.ID_CLIENTE = Convert.ToInt32(((Label)loItem.Controls[11]).Text);
-                        oCliente.DIRECCION_MAPS = ((Label)loItem.Controls[13]).Text;
+                        oCliente.ID_CLIENTE = Convert.ToInt32(((Label)loItem.Controls[13]).Text);
+                        oCliente.DIRECCION_MAPS = ((Label)loItem.Controls[15]).Text;
                         var loExiste = lstCliente.Where(p => p.ID_CLIENTE == oCliente.ID_CLIENTE).ToList().Count == 1;
                         if (!loExiste)
                             lstCliente.Add(oCliente);

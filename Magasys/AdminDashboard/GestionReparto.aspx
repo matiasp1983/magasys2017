@@ -1,31 +1,31 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminDashboard/MasterPage.Master" AutoEventWireup="true" CodeBehind="Reparto.aspx.cs" Inherits="PL.AdminDashboard.Reparto" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminDashboard/MasterPage.Master" AutoEventWireup="true" CodeBehind="GestionReparto.aspx.cs" Inherits="PL.AdminDashboard.GestionReparto" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">    
     <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="contentMaster" runat="server">
-    <div class="row wrapper border-bottom white-bg page-heading">
-        <div class="col-lg-10">
-            <h2>Listado de Reparto</h2>
-            <ol class="breadcrumb">
-                <li>
-                    <a href="Index.aspx">Principal</a>
-                </li>
-                <li>Entrega / Reparto
-                </li>
-                <li class="active">
-                    <strong>Generar listado de reparto</strong>
-                </li>
-            </ol>
+    <form id="FormGestionReparto" runat="server">
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h2>Repartos</h2>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="Index.aspx">Principal</a>
+                    </li>
+                    <li>Entrega / Reparto
+                    </li>
+                    <li class="active">
+                        <strong>Gestión de reparto</strong>
+                    </li>
+                </ol>
+            </div>
         </div>
-    </div>
-    <div class="wrapper wrapper-content animated fadeInRight">
-        <form id="FormReparto" runat="server">
+        <div class="wrapper wrapper-content animated fadeInRight">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>Buscar reservas</h5>
+                            <h5>Buscar Reservas</h5>
                         </div>
                         <div class="ibox-content">
                             <div class="row">
@@ -52,6 +52,14 @@
                                             <asp:TextBox ID="txtNombreEdicion" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off"></asp:TextBox>
                                         </div>
                                     </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-10 control-label">Tipo de operación</label>   
+                                            <div id="divTipoOperacion">
+                                                <asp:DropDownList ID="ddlTipOperacion" runat="server" CssClass="select2_tipoperacion form-control"></asp:DropDownList>                                            
+                                            </div>   
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -76,8 +84,8 @@
                     <div class="ibox">
                         <div class="ibox-content">
                             <div style="text-align: right;">
-                                <button type="button" id="btnNuevo" runat="server" class="ladda-button btn btn-info" onserverclick="BtnGenerarHojaRuta_Click">
-                                    <i class="fa fa-map-o"></i>&nbsp;&nbsp;<span>Generar hoja de ruta</span>
+                                <button type="button" id="btnEjecutar" runat="server" class="ladda-button btn btn-info" onserverclick="BtnGuardar_Click">
+                                    <i class="fas fa-clock"></i>&nbsp;&nbsp;<span>Ejecutar</span>
                                 </button>
                             </div>
                             <br />
@@ -90,7 +98,7 @@
                                                     <button id="check-all" class="btn btn-sm btn-primary pull-left m-t-n-xs">Seleccionar todo</button>
                                                 </td>                                                
                                                 <th class="text-left">Cliente</th>
-                                                 <th data-hide="phone,tablet">Tipo Producto</th>
+                                                <th data-hide="phone,tablet">Tipo Producto</th>
                                                 <th data-hide="phone,tablet">Producto</th>
                                                 <th data-hide="phone,tablet">Edición</th>
                                             </tr>
@@ -146,9 +154,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </form>
-    </div>
+            </div>   
+        </div>
+    </form>    
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="script" runat="server">
     <!-- iCheck -->
@@ -174,11 +182,21 @@
                     }
                 });
                 LoadFootable();
+                Select2();
             });
         }        
 
         function LoadFootable() {
             $('.footable').footable();
+        }
+
+        function Select2() {
+            $(".select2_tipoperacion").select2(
+                {
+                    placeholder: 'Seleccione una operación',
+                    width: '100%',
+                    allowClear: true
+                });
         }
 
     </script>
