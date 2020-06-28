@@ -47,3 +47,4 @@ namespace PL.AdminDashboard
         #endregion
     }
 }
+// cuando selecciona el botón "Confirmar Ruta" de la pág. HojaDeRuta.aspx, se graba la info en la tabla Reparto para verla en Consultar Reparto
