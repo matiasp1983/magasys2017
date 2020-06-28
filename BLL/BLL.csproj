@@ -186,6 +186,9 @@
     <Compile Include="DAL\Provincia.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\Reparto.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\Repository.cs" />
     <Compile Include="DAL\Reserva.cs">
       <DependentUpon>Model.tt</DependentUpon>
@@ -204,6 +207,7 @@
     <Compile Include="FuerzaBruta\NodoFB.cs" />
     <Compile Include="MesBLL.cs" />
     <Compile Include="NegocioBLL.cs" />
+    <Compile Include="RepartoBLL.cs" />
     <Compile Include="ReservaEdicionBLL.cs" />
     <Compile Include="DAL\Revista.cs">
       <DependentUpon>Model.tt</DependentUpon>

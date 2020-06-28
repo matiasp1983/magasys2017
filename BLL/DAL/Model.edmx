@@ -306,6 +306,20 @@
           <Property Name="ID_PROVINCIA" Type="int" Nullable="false" />
           <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Reparto">
+          <Key>
+            <PropertyRef Name="ID_REPARTO" />
+          </Key>
+          <Property Name="ID_REPARTO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="COD_CLIENTE" Type="int" Nullable="false" />
+          <Property Name="COD_EDICION" Type="int" Nullable="false" />
+          <Property Name="CLIENTE" Type="varchar(max)" Nullable="false" />
+          <Property Name="ORIGEN" Type="varchar(max)" Nullable="false" />
+          <Property Name="DESTINO" Type="varchar(max)" Nullable="false" />
+          <Property Name="EDICION" Type="varchar(max)" />
+          <Property Name="PRODUCTO" Type="varchar(max)" />
+          <Property Name="CANTIDAD" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Reserva">
           <Key>
             <PropertyRef Name="ID_RESERVA" />
@@ -1094,6 +1108,7 @@
           <EntitySet Name="ProductoIngreso" EntityType="Self.ProductoIngreso" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Proveedor" EntityType="Self.Proveedor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Provincia" EntityType="Self.Provincia" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reparto" EntityType="Self.Reparto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reserva" EntityType="Self.Reserva" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReservaEdicion" EntityType="Self.ReservaEdicion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Revista" EntityType="Self.Revista" Schema="dbo" store:Type="Tables" />
@@ -1357,6 +1372,7 @@
           <EntitySet Name="ProductoIngreso" EntityType="MAGASYSModel.ProductoIngreso" />
           <EntitySet Name="Proveedor" EntityType="MAGASYSModel.Proveedor" />
           <EntitySet Name="Provincia" EntityType="MAGASYSModel.Provincia" />
+          <EntitySet Name="Reparto" EntityType="MAGASYSModel.Reparto" />
           <EntitySet Name="Reserva" EntityType="MAGASYSModel.Reserva" />
           <EntitySet Name="ReservaEdicion" EntityType="MAGASYSModel.ReservaEdicion" />
           <EntitySet Name="Revista" EntityType="MAGASYSModel.Revista" />
@@ -1969,6 +1985,20 @@
           <Property Name="ID_PROVINCIA" Type="Int32" Nullable="false" />
           <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Localidad" Relationship="MAGASYSModel.FK_Localidad_Provincia" FromRole="Provincia" ToRole="Localidad" />
+        </EntityType>
+        <EntityType Name="Reparto">
+          <Key>
+            <PropertyRef Name="ID_REPARTO" />
+          </Key>
+          <Property Name="ID_REPARTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CLIENTE" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ORIGEN" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="DESTINO" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EDICION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="PRODUCTO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CANTIDAD" Type="Int32" Nullable="false" />
+          <Property Name="COD_CLIENTE" Type="Int32" Nullable="false" />
+          <Property Name="COD_EDICION" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Reserva">
           <Key>
@@ -3090,6 +3120,21 @@
               <MappingFragment StoreEntitySet="Provincia">
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
                 <ScalarProperty Name="ID_PROVINCIA" ColumnName="ID_PROVINCIA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reparto">
+            <EntityTypeMapping TypeName="MAGASYSModel.Reparto">
+              <MappingFragment StoreEntitySet="Reparto">
+                <ScalarProperty Name="COD_EDICION" ColumnName="COD_EDICION" />
+                <ScalarProperty Name="COD_CLIENTE" ColumnName="COD_CLIENTE" />
+                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+                <ScalarProperty Name="PRODUCTO" ColumnName="PRODUCTO" />
+                <ScalarProperty Name="EDICION" ColumnName="EDICION" />
+                <ScalarProperty Name="DESTINO" ColumnName="DESTINO" />
+                <ScalarProperty Name="ORIGEN" ColumnName="ORIGEN" />
+                <ScalarProperty Name="CLIENTE" ColumnName="CLIENTE" />
+                <ScalarProperty Name="ID_REPARTO" ColumnName="ID_REPARTO" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

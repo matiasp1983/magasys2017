@@ -61,7 +61,9 @@ namespace PL.AdminDashboard
         protected void BtnConfirmarRuta_Click(object sender, EventArgs e)
         {
             bool loModificarReservaEdidion = false;
+            List<BLL.DAL.Reparto> lstReparto = new List<BLL.DAL.Reparto>();
             var lstReservaEdicionReparto = (List<ReservaEdicionReparto>)(Session[Enums.Session.ReservasHojaDeRuta.ToString()]);
+            List<RepartoListado> lstRepartoListado = (List<RepartoListado>)Session[Enums.Session.HojaDeRuta.ToString()];
 
             foreach (var item in lstReservaEdicionReparto)
             {
@@ -70,6 +72,46 @@ namespace PL.AdminDashboard
                 loModificarReservaEdidion = new ReservaEdicionBLL().ModificarReservaEdidion(loReservaEdicion);
                 if (!loModificarReservaEdidion)
                     break;
+            }
+
+            if (loModificarReservaEdidion)
+            {
+                foreach (var itemHojaDeRuta in lstRepartoListado)
+                {
+                    foreach (var item in lstReservaEdicionReparto.Where(p => p.CODIGO_CLIENTE == itemHojaDeRuta.CODIGO_CLIENTE))
+                    {
+                        BLL.DAL.Reparto oReparto = new BLL.DAL.Reparto();
+
+                        var loExiste = lstReparto.Exists(p => p.COD_CLIENTE == Convert.ToInt32(item.CODIGO_CLIENTE) && p.COD_EDICION == Convert.ToInt32(item.CODIGO_EDICION));
+
+                        if (loExiste)
+                        {
+                            var loIndex = lstReparto.FindIndex(p => p.COD_CLIENTE == Convert.ToInt32(item.CODIGO_CLIENTE) && p.COD_EDICION == Convert.ToInt32(item.CODIGO_EDICION));
+                            var loReserva = lstReparto.Find(p => p.COD_CLIENTE == Convert.ToInt32(item.CODIGO_CLIENTE) && p.COD_EDICION == Convert.ToInt32(item.CODIGO_EDICION));
+                            loReserva.CANTIDAD = loReserva.CANTIDAD + 1;
+                            lstReparto[loIndex] = loReserva;
+                        }
+                        else
+                        {
+                            oReparto.COD_CLIENTE = Convert.ToInt32(item.CODIGO_CLIENTE);
+                            oReparto.COD_EDICION = Convert.ToInt32(item.CODIGO_EDICION);
+                            oReparto.CLIENTE = item.CLIENTE;
+                            oReparto.ORIGEN = itemHojaDeRuta.DIRECCION_ORIGEN;
+                            oReparto.DESTINO = itemHojaDeRuta.DIRECCION_DESTINO;
+                            oReparto.EDICION = item.EDICION;
+                            oReparto.PRODUCTO = item.PRODUCTO;
+                            oReparto.CANTIDAD = 1;
+                            lstReparto.Add(oReparto);
+                        }
+                    }
+                }
+                //Eliminar Reparto:
+                var oEliminarReparto = new RepartoBLL().BorrarReparto();
+                foreach (var item in lstReparto)
+                {
+                    loModificarReservaEdidion = new RepartoBLL().AltaReparto(item);
+                    if (!loModificarReservaEdidion) break;
+                }
             }
 
             if (loModificarReservaEdidion)

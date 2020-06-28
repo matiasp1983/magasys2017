@@ -86,6 +86,8 @@ public partial class MAGASYSEntities : DbContext
 
     public virtual DbSet<Provincia> Provincia { get; set; }
 
+    public virtual DbSet<Reparto> Reparto { get; set; }
+
     public virtual DbSet<Reserva> Reserva { get; set; }
 
     public virtual DbSet<ReservaEdicion> ReservaEdicion { get; set; }
