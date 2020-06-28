@@ -219,6 +219,7 @@
         public const string MsjeHojaRutaFailure = "Ocurrió un error al guardar la hoja de ruta.";
         public const string MsjeRepartoCancelacion = "Se cancela el Reparto a domicilio con éxito";
         public const string MsjeRepartoCancelacionError = "Ocurrió un error en la cancelación del Reparto a domicilio";
+        public const string MsjeListadoRepartoSinResultados = "No se encuentra información del reparto.";
 
         #endregion
 
