@@ -183,9 +183,10 @@
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="5">
                                         <thead>
                                             <tr>
+                                                <th class="text-left">Código de Cliente</th>
                                                 <th class="text-left">Nombre del Cliente</th>
-                                                <th class="text-left">Nombre del Producto</th>
-                                                <th data-hide="phone,tablet">Código de Cliente</th>
+                                                <th class="text-left">Producto</th>
+                                                <th data-hide="phone,tablet">Tipo de Producto</th>
                                                 <th data-hide="phone,tablet">Tipo de Reserva</th>
                                                  <th data-hide="phone,tablet">Forma de Entrega</th>
                                                 <th class="text-right" data-sort-ignore="true">Acci&oacute;n</th>
@@ -206,14 +207,17 @@
                                 <ItemTemplate>
                                     <tr>
                                         <td class="text-left">
+                                            <asp:Label ID="lblCodigoCliente" runat="server" Text='<%#(Eval("COD_CLIENTE") != null) ? Eval("COD_CLIENTE").ToString():null%>'></asp:Label>
+                                        </td> 
+                                        <td class="text-left">
                                             <asp:Label ID="lblNombreCliente" runat="server" Text='<%#Eval("NOMBRE_CLIENTE").ToString()%>'></asp:Label>
                                         </td>
                                         <td>
                                             <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE_PRODUCTO").ToString().Length > 23 ? String.Format("{0}...", Eval("NOMBRE_PRODUCTO").ToString().Remove(23).TrimEnd()):Eval("NOMBRE_PRODUCTO")%>'></asp:Label>
-                                        </td>    
-                                        <td class="text-left">
-                                            <asp:Label ID="lblCodigoCliente" runat="server" Text='<%#(Eval("COD_CLIENTE") != null) ? Eval("COD_CLIENTE").ToString():null%>'></asp:Label>
                                         </td>     
+                                        <td class="text-left">
+                                            <asp:Label ID="lblTipoProducto" runat="server" Text='<%#Eval("TIPO_PRODUCTO").ToString()%>'></asp:Label>
+                                        </td>                                           
                                         <td class="text-left">
                                             <asp:Label ID="lblTipoReserva" runat="server" Text='<%#Eval("TIPO_RESERVA").ToString()%>'></asp:Label>
                                         </td>     

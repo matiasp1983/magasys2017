@@ -249,6 +249,7 @@ namespace BLL
                             ID_RESERVA = loReserva.ID_RESERVA,
                             NOMBRE_CLIENTE = loReserva.Cliente.APELLIDO + " " + loReserva.Cliente.NOMBRE,
                             NOMBRE_PRODUCTO = loReserva.Producto.NOMBRE,
+                            TIPO_PRODUCTO = loReserva.Producto.TipoProducto.DESCRIPCION,
                             COD_CLIENTE = loReserva.COD_CLIENTE,
                             TIPO_RESERVA = loReserva.TipoReserva.DESCRIPCION,
                             FECHA = loReserva.FECHA
@@ -372,6 +373,7 @@ namespace BLL
         public String NOMBRE_CLIENTE { get; set; }
         public string NOMBRE_PRODUCTO { get; set; }
         public string DESCRIPCION_PRODUCTO { get; set; }
+        public string TIPO_PRODUCTO { get; set; }
         public int? COD_CLIENTE { get; set; }
         public string TIPO_RESERVA { get; set; }
         public string FORMA_ENTREGA { get; set; }
