@@ -84,6 +84,7 @@
     <Content Include="AdminDashboard\CobroCliente.aspx" />
     <Content Include="AdminDashboard\CobroListado.aspx" />
     <Content Include="AdminDashboard\ConsultarRepartos.aspx" />
+    <Content Include="AdminDashboard\ConsultarStock.aspx" />
     <Content Include="AdminDashboard\css\bootstrap.css.map" />
     <Content Include="AdminDashboard\css\bootstrap.min.css.map" />
     <Content Include="AdminDashboard\css\plugins\footable\fonts\footable.eot" />
@@ -440,6 +441,13 @@
     </Compile>
     <Compile Include="AdminDashboard\ConsultarRepartos.aspx.designer.cs">
       <DependentUpon>ConsultarRepartos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\ConsultarStock.aspx.cs">
+      <DependentUpon>ConsultarStock.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\ConsultarStock.aspx.designer.cs">
+      <DependentUpon>ConsultarStock.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminDashboard\DetalleCobro.aspx.cs">
       <DependentUpon>DetalleCobro.aspx</DependentUpon>

@@ -354,6 +354,61 @@ namespace BLL
             return lstProductoCustomersWebSite;
         }
 
+        public List<ProductoCustomersWebSite> ObtenerProductosEdiciones(ProductoFiltro oProductoFiltro)
+        {
+            List<ProductoCustomersWebSite> lstProductoCustomersWebSite = new List<ProductoCustomersWebSite>();
+            List<Producto> lstProducto = null;
+
+            try
+            {
+                using (var loRepProducto = new Repository<Producto>())
+                {
+                    lstProducto = loRepProducto.Search(p => p.COD_ESTADO == 1 && p.ProductoEdicion.Count > 0);
+
+                    if (oProductoFiltro.IdProducto > 0 && lstProducto.Count > 0)
+                        lstProducto = lstProducto.FindAll(p => p.ID_PRODUCTO == oProductoFiltro.IdProducto);
+
+                    if (oProductoFiltro.CodTipoProducto > 0 && lstProducto.Count > 0)
+                        lstProducto = lstProducto.FindAll(p => p.COD_TIPO_PRODUCTO == oProductoFiltro.CodTipoProducto);
+
+                    if (!String.IsNullOrEmpty(oProductoFiltro.NombreProducto) && lstProducto.Count > 0)
+                        lstProducto = lstProducto.FindAll(p => p.NOMBRE.ToUpper().Contains(oProductoFiltro.NombreProducto.ToUpper()));
+
+                    if (!String.IsNullOrEmpty(oProductoFiltro.DescripcionProducto) && lstProducto.Count > 0)
+                        lstProducto = lstProducto.FindAll(p => (!string.IsNullOrEmpty(p.DESCRIPCION) && p.DESCRIPCION.ToUpper().Contains(oProductoFiltro.DescripcionProducto.ToUpper())));
+
+                    foreach (var loProducto in lstProducto)
+                    {
+                        foreach (var loProductoEdicion in loProducto.ProductoEdicion)
+                        {
+                            if (!String.IsNullOrEmpty(oProductoFiltro.NombreEdicion) && (!(!string.IsNullOrEmpty(loProductoEdicion.EDICION) && loProductoEdicion.EDICION.ToUpper().Contains(oProductoFiltro.NombreEdicion.ToUpper()))))
+                                continue;
+                            if (!String.IsNullOrEmpty(oProductoFiltro.DescripcionEdicion) && (!(!string.IsNullOrEmpty(loProductoEdicion.DESCRIPCION) && loProductoEdicion.DESCRIPCION.ToUpper().Contains(oProductoFiltro.DescripcionEdicion.ToUpper()))))
+                                continue;
+
+                            ProductoCustomersWebSite oProductoCustomersWebSite = new ProductoCustomersWebSite()
+                            {
+                                COD_PRODUCTO = loProducto.ID_PRODUCTO,
+                                TIPO_PRODUCTO = loProducto.TipoProducto.DESCRIPCION,
+                                NOMBRE_PRODUCTO = loProducto.NOMBRE,
+                                DESCRIPCION = loProducto.DESCRIPCION,
+                                EDICION = loProductoEdicion.EDICION,
+                                CANTIDAD_DISPONIBLE = loProductoEdicion.CANTIDAD_DISPONIBLE
+                            };
+
+                            lstProductoCustomersWebSite.Add(oProductoCustomersWebSite);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return lstProductoCustomersWebSite;
+        }
+
         #endregion
     }
 

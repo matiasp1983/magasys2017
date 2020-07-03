@@ -53,8 +53,9 @@
                         <ul class="nav nav-second-level collapse">
                             <li id="liAltaProducto" runat="server"><a href="Producto.aspx">Nuevo Producto</a></li>
                             <li id="liProductoListado" runat="server"><a href="ProductoListado.aspx">Listado de Productos</a></li>
+                            <li id="liConsultarStock" runat="server"><a href="ConsultarStock.aspx">Consultar Stock</a></li>
                             <li id="liAltaGenero" runat="server"><a href="Genero.aspx">Nuevo Género</a></li>
-                            <li id="liGeneroListado" runat="server"><a href="GeneroListado.aspx">Listado de Géneros</a></li>
+                            <li id="liGeneroListado" runat="server"><a href="GeneroListado.aspx">Listado de Géneros</a></li>                            
                         </ul>
                     </li>
                     <li id="liClientes" runat="server">
