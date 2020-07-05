@@ -162,7 +162,7 @@ namespace BLL
             }
             catch (Exception)
             {
-                 throw;
+                throw;
             }
 
             return bEsNuevoCuit;

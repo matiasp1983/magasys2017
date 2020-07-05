@@ -95,15 +95,28 @@ namespace PL.AdminDashboard
 
         protected void BtnBaja_Click(object sender, EventArgs e)
         {
+            var bRes = false;
+
             try
             {
                 if (!String.IsNullOrEmpty(hdIdProveedorBaja.Value))
                 {
                     var loIdProveedor = Convert.ToInt64(hdIdProveedorBaja.Value);
-                    var oProveedor = new BLL.ProveedorBLL();
-                    if (oProveedor.BajaProveedor(loIdProveedor))
+
+                    bRes = new BLL.ProductoBLL().ExisteProductoActivoPorProveedor(loIdProveedor);
+
+                    if (!bRes)
+                        bRes = new BLL.ProductoIngresoBLL().ExisteProductoIngresoActivoPorProveedor(loIdProveedor);
+
+                    if (!bRes)
                     {
-                        CargarGrillaProveedores();
+                        var oProveedor = new BLL.ProveedorBLL();
+                        if (oProveedor.BajaProveedor(loIdProveedor))
+                            CargarGrillaProveedores();
+                    }
+                    else
+                    {
+                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.InfoModal(Message.MsjeProveedorEnUso));
                     }
                 }
             }

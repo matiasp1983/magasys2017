@@ -131,6 +131,25 @@ namespace BLL
             return lstProductoIngresoListado;
         }
 
+        public bool ExisteProductoIngresoActivoPorProveedor(long codProveedor)
+        {
+            var bRes = false;
+
+            try
+            {
+                using (var repProductoIngreso = new Repository<ProductoIngreso>())
+                {
+                    bRes = repProductoIngreso.Search(p => p.COD_PROVEEDOR == codProveedor && p.COD_ESTADO == 1).Count > 0;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return bRes;
+        }
+
         #endregion
     }
 

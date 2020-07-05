@@ -25,6 +25,7 @@
         public const string MsjeRazonSocialProveedorExist = "La razón social ingresada ya existe.";
         public const string MsjeListadoProveedorFiltrarTotalSinResultados = "No se encontraron proveedores para la búsqueda seleccionada.";
         public const string MsjeListadoProveedorFechaDesdeMayorQueFechaHasta = "La Fecha Hasta debe ser mayor que la Fecha Desde.";
+        public const string MsjeProveedorEnUso = "El proveedor no se puede eliminar porque se encuentra asociado a productos.";
 
         #endregion
 
