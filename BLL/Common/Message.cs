@@ -232,6 +232,7 @@
         public const string MsjeListadoEmpleadoFiltrarTotalSinResultados = "No se encontraron empleados para la búsqueda seleccionada.";
         public const string MsjeEmpleadoSuccessModificacion = "El empleado se modificó correctamente.";
         public const string MsjeEmpleadoSinModificaciones = "No se realizaron modificaciones en el empleado.";
+        public const string MsjeEmpleadoEliminarError = "Ocurrió un error, los datos no se guardaron.";
 
         #endregion
 

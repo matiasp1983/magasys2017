@@ -47,6 +47,27 @@ namespace BLL
             return bRes;
         }
 
+        public bool BajaEmpleado(long idEmpleado)
+        {
+            var bRes = false;
+            try
+            {
+                using (var rep = new Repository<Empleado>())
+                {
+                    Empleado oEmpleado = rep.Find(p => p.ID_EMPLEADO == idEmpleado);
+                    oEmpleado.FECHA_BAJA = DateTime.Now;
+                    oEmpleado.COD_ESTADO = 2;
+                    bRes = rep.Update(oEmpleado);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return bRes;
+        }
+
         public bool ConsultarExistenciaEmpleado(int tipoDocumento, int nroDocumento)
         {
             bool bEsNuevoEmpleado = false;
@@ -123,7 +144,8 @@ namespace BLL
                                 TIPO_DOCUMENTO = loEmpleado.TipoDocumento.DESCRIPCION,
                                 NRO_DOCUMENTO = loEmpleado.NRO_DOCUMENTO,
                                 NOMBRE = loEmpleado.NOMBRE,
-                                APELLIDO = loEmpleado.APELLIDO
+                                APELLIDO = loEmpleado.APELLIDO,
+                                CUIL = loEmpleado.CUIL
                             };
 
                             lstEmpleadoListado.Add(oEmpleadoListado);
@@ -147,6 +169,7 @@ namespace BLL
     public class EmpleadoListado
     {
         public int ID_EMPLEADO { get; set; }
+        public string CUIL { get; set; }
         public string TIPO_DOCUMENTO { get; set; }
         public int NRO_DOCUMENTO { get; set; }
         public string NOMBRE { get; set; }

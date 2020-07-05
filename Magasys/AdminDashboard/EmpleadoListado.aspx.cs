@@ -47,12 +47,17 @@ namespace PL.AdminDashboard
                 if (e.Item.ItemType != ListViewItemType.DataItem) return;
 
                 var loIdEmpleado = ((BLL.EmpleadoListado)e.Item.DataItem).ID_EMPLEADO.ToString();
+                var loCuilEmpleado = ((BLL.EmpleadoListado)e.Item.DataItem).CUIL.ToString();
 
                 HtmlButton btnVisualizar = ((HtmlButton)e.Item.FindControl("btnVisualizar"));
                 btnVisualizar.Attributes.Add("value", loIdEmpleado);
 
                 HtmlButton btnModificar = ((HtmlButton)e.Item.FindControl("btnModificar"));
                 btnModificar.Attributes.Add("value", loIdEmpleado);
+
+                HiddenField hdIdCuilEmpleadoBaja = ((HiddenField)e.Item.FindControl("hdIdCuilEmpleadoBaja"));
+                // Se concatena el loIdEmpleado y el CUIL:
+                hdIdCuilEmpleadoBaja.Value = string.Format("{0},{1}", loIdEmpleado, loCuilEmpleado);
             }
             catch (Exception ex)
             {
@@ -83,6 +88,28 @@ namespace PL.AdminDashboard
                 var oEmpleado = Convert.ToInt32(((HtmlButton)sender).Attributes["value"]);
                 Session.Add(Enums.Session.IdEmpleado.ToString(), oEmpleado);
                 Response.Redirect("EmpleadoEditar.aspx", false);
+            }
+            catch (Exception ex)
+            {
+                Logger loLogger = LogManager.GetCurrentClassLogger();
+                loLogger.Error(ex);
+            }
+        }
+
+        protected void BtnBaja_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!String.IsNullOrEmpty(hdIdEmpleadoBaja.Value))
+                {
+                    var loIdEmpleado = Convert.ToInt64(hdIdEmpleadoBaja.Value);
+
+                    var bRes = new BLL.EmpleadoBLL().BajaEmpleado(loIdEmpleado);
+                    if (bRes)
+                        CargarGrillaEmpleados();
+                    else
+                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeEmpleadoEliminarError));
+                }
             }
             catch (Exception ex)
             {
