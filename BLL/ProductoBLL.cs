@@ -428,6 +428,58 @@ namespace BLL
             return bRes;
         }
 
+        /// <summary>
+        /// Validamos que el producto se encuentre Activo.
+        /// Un producto está activo cuando se asoció a un Producto Edición o se encuentra en alguna Reserva.
+        /// </summary>
+        /// <param name="codProducto"></param>
+        /// <returns></returns>
+        public bool ProductoActivo(long codProducto)
+        {
+            var bRes = false;
+
+            try
+            {
+                using (var repProductoEdicion = new Repository<ProductoEdicion>())
+                {
+                    bRes = repProductoEdicion.Search(p => p.COD_PRODUCTO == codProducto && p.COD_ESTADO == 1).Count > 0;
+                }
+
+                if (!bRes)
+                    using (var repReserva = new Repository<Reserva>())
+                    {
+                        bRes = repReserva.Search(p => p.COD_PRODUCTO == codProducto).Count > 0;
+                    }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return bRes;
+        }
+
+        public bool BajaProducto(long codProducto)
+        {
+            var bRes = false;
+            try
+            {
+                using (var rep = new Repository<Producto>())
+                {
+                    Producto oProducto = rep.Find(p => p.ID_PRODUCTO == codProducto);
+                    oProducto.FECHA_BAJA = DateTime.Now;
+                    oProducto.COD_ESTADO = 2;
+                    bRes = rep.Update(oProducto);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return bRes;
+        }
+
         #endregion
     }
 

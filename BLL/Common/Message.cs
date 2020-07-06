@@ -35,6 +35,8 @@
         public const string MsjeProductoSuccessModificacion = "El producto se modificó correctamente.";
         public const string MsjeProductoFailure = "El producto no se pudo guardar.";
         public const string MsjeListadoProductoFiltrarTotalSinResultados = "No se encontraron Productos para la búsqueda seleccionada.";
+        public const string MsjeProductoEnUso = "El producto no se puede eliminar porque se encuentra activo.";
+        public const string MsjeProductoNoActivo = "El producto no se puede eliminar porque se encuentra Bloqueado o Anulado.";
 
         #endregion
 

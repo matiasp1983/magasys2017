@@ -101,7 +101,8 @@
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="5">
                                         <thead>
                                             <tr>
-                                                <th class="text-left">Tipo de Producto</th>
+                                                <th class="text-left">Código</th>
+                                                <th data-hide="phone,tablet">Tipo de Producto</th>
                                                 <th data-hide="phone,tablet">Nombre</th>
                                                 <th data-hide="phone,tablet">Estado</th>
                                                 <th data-hide="phone,tablet">G&eacute;nero</th>
@@ -124,6 +125,9 @@
                                 <ItemTemplate>
                                     <tr>
                                         <td class="text-left">
+                                            <asp:Label ID="lblCodigo" runat="server" Text='<%#Eval("ID_PRODUCTO").ToString()%>'></asp:Label>
+                                        </td>
+                                        <td>
                                             <asp:Label ID="lblTipoProducto" runat="server" Text='<%#Eval("DESC_TIPO_PRODUCTO").ToString()%>'></asp:Label>
                                         </td>
                                         <td>
@@ -142,8 +146,8 @@
                                             <div class="btn-group">
                                                 <button runat="server" id="btnVisualizar" class="btn btn-outline btn-success btn-xl" title="Visualizar" onserverclick="BtnVisualizar_Click"><i class="fa fa-search"></i></button>
                                                 <button runat="server" id="btnModificar" class="btn btn-outline btn-info  btn-xl" title="Modificar" onserverclick="BtnModificar_Click"><i class="fa fa-pencil"></i></button>
-                                                <a class="btn btn-outline btn-danger btn-xl" data-toggle="modal" data-target="#ModalProductoBaja" title="Eliminar" onclick="CargarIdProductoModalProductoBaja(this);"><i class="fa fa-trash-o"></i>
-                                                    <%--<asp:HiddenField ID="hdIdProductoBaja" runat="server" />--%>
+                                                <a class="btn btn-outline btn-danger btn-xl" data-toggle="modal" data-target="#ModalProductoBaja" title="Eliminar" onclick="CargarIdModalProductoBaja(this);"><i class="fa fa-trash-o"></i>
+                                                    <asp:HiddenField ID="hdProductoBaja" runat="server" />
                                                 </a>
                                             </div>
                                         </td>
@@ -161,7 +165,7 @@
                                             </div>
                                             <h2 style="color: #575757; font-size: 30px; text-align: center; font-weight: 600; text-transform: none; position: relative; margin: 25px 0; padding: 0; line-height: 40px; display: block;">¿Está seguro que quiere dar de baja el Producto?</h2>
                                             <p style="color: #797979; font-size: 16px; font-weight: 300; position: relative; text-align: center; float: none; margin: 0; padding: 0; line-height: normal;">
-                                                Se dará de baja el producto con Código: SE ESPERAN DEFINICIONES DE LA FUNCIONALIDAD<b>
+                                                Se dará de baja el producto con Código: <b>
                                                     <asp:Label ID="lblProductoBaja" runat="server"></asp:Label></b>.
                                            
                                             </p>
@@ -174,7 +178,7 @@
                                                 OnClick="BtnBaja_Click" />
                                         </div>
                                     </div>
-                                    <%--<asp:HiddenField ID="hdIdProductoBaja" runat="server" Value="" />--%>
+                                    <asp:HiddenField ID="hdIdProductoBaja" runat="server" Value="" />
                                 </div>
                             </div>
                         </div>
@@ -185,9 +189,10 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="script" runat="server">
-<%--    <script type="text/javascript">
+    <script type="text/javascript">
         var hdIdProductoBaja = '#<%=hdIdProductoBaja.ClientID%>';
-    </script>--%>
+        var lblProductoBaja = '#<%=lblProductoBaja.ClientID%>';
+    </script>
     <script type="text/javascript">
         if (window.jQuery) {
             $(document).ready(function () {                
@@ -233,5 +238,12 @@
                 });
         }
 
+        function CargarIdModalProductoBaja(control) {
+            if (window.jQuery) {
+                var loId = control.lastElementChild.defaultValue;
+                $(hdIdProductoBaja).val(loId);
+                $(lblProductoBaja).text(loId);
+            }
+        }
     </script>
 </asp:Content>

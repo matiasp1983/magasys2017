@@ -17,7 +17,7 @@ namespace PL.AdminDashboard
             OcultarDivsMensajes();
 
             if (!Page.IsPostBack)
-            {                
+            {
                 CargarTiposProducto();
                 CargarEstados();
                 CargarProveedores();
@@ -50,8 +50,8 @@ namespace PL.AdminDashboard
                 HtmlButton btnModificar = ((HtmlButton)e.Item.FindControl("btnModificar"));
                 btnModificar.Attributes.Add("value", string.Format("{0},{1}", loIdProducto, loDescTipoProducto));
 
-                //HiddenField hdIdCuitProveedorBaja = ((HiddenField)e.Item.FindControl("hdIdCuitProveedorBaja"));
-                //hdIdCuitProveedorBaja.Value = loIdProducto.ToString();
+                HiddenField hdProductoBaja = ((HiddenField)e.Item.FindControl("hdProductoBaja"));
+                hdProductoBaja.Value = loIdProducto.ToString();
             }
             catch (Exception ex)
             {
@@ -151,7 +151,36 @@ namespace PL.AdminDashboard
 
         protected void BtnBaja_Click(object sender, EventArgs e)
         {
-            // SE ESPERAN DEFINICIONES DE LA FUNCIONALIDAD.
+            var bRes = false;
+
+            try
+            {
+                if (!String.IsNullOrEmpty(hdIdProductoBaja.Value))
+                {
+                    var loIdProducto = Convert.ToInt64(hdIdProductoBaja.Value);
+
+                    if (ddlEstado.SelectedValue == "1")
+                    {
+                        bRes = new BLL.ProductoBLL().ProductoActivo(loIdProducto);
+
+                        if (!bRes)
+                        {
+                            var oProducto = new BLL.ProductoBLL();
+                            if (oProducto.BajaProducto(loIdProducto))
+                                CargarGrillaProductos();
+                        }
+                        else
+                            Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.InfoModal(Message.MsjeProductoEnUso));
+                    }
+                    else
+                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.InfoModal(Message.MsjeProductoNoActivo));
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger loLogger = LogManager.GetCurrentClassLogger();
+                loLogger.Error(ex);
+            }
         }
 
         #endregion
