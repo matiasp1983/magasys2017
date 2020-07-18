@@ -20,6 +20,10 @@ public partial class Reparto
 
     public int ID_REPARTO { get; set; }
 
+    public int COD_CLIENTE { get; set; }
+
+    public int COD_EDICION { get; set; }
+
     public string CLIENTE { get; set; }
 
     public string ORIGEN { get; set; }
@@ -31,10 +35,6 @@ public partial class Reparto
     public string PRODUCTO { get; set; }
 
     public int CANTIDAD { get; set; }
-
-    public int COD_CLIENTE { get; set; }
-
-    public int COD_EDICION { get; set; }
 
 }
 

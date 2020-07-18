@@ -86,7 +86,6 @@
           <Property Name="COD_INGRESO_PRODUCTO" Type="int" Nullable="false" />
           <Property Name="CANTIDAD_UNIDADES" Type="int" Nullable="false" />
           <Property Name="FECHA_DEVOLUCION" Type="datetime" />
-          <Property Name="COD_ESTADO" Type="int" Nullable="false" />
           <Property Name="COD_PRODUCTO_EDICION" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="DetalleVenta">
@@ -525,18 +524,6 @@
             </Principal>
             <Dependent Role="DetalleCobro">
               <PropertyRef Name="COD_VENTA" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DetalleIngresoProducto_Estado">
-          <End Role="Estado" Type="Self.Estado" Multiplicity="1" />
-          <End Role="DetalleProductoIngreso" Type="Self.DetalleProductoIngreso" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Estado">
-              <PropertyRef Name="ID_ESTADO" />
-            </Principal>
-            <Dependent Role="DetalleProductoIngreso">
-              <PropertyRef Name="COD_ESTADO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1155,10 +1142,6 @@
             <End Role="Venta" EntitySet="Venta" />
             <End Role="DetalleCobro" EntitySet="DetalleCobro" />
           </AssociationSet>
-          <AssociationSet Name="FK_DetalleIngresoProducto_Estado" Association="Self.FK_DetalleIngresoProducto_Estado">
-            <End Role="Estado" EntitySet="Estado" />
-            <End Role="DetalleProductoIngreso" EntitySet="DetalleProductoIngreso" />
-          </AssociationSet>
           <AssociationSet Name="FK_DetalleIngresoProducto_IngresoProducto" Association="Self.FK_DetalleIngresoProducto_IngresoProducto">
             <End Role="ProductoIngreso" EntitySet="ProductoIngreso" />
             <End Role="DetalleProductoIngreso" EntitySet="DetalleProductoIngreso" />
@@ -1435,10 +1418,6 @@
             <End Role="ProductoEdicion" EntitySet="ProductoEdicion" />
             <End Role="DetalleProductoDevolucion" EntitySet="DetalleProductoDevolucion" />
           </AssociationSet>
-          <AssociationSet Name="FK_DetalleIngresoProducto_Estado" Association="MAGASYSModel.FK_DetalleIngresoProducto_Estado">
-            <End Role="Estado" EntitySet="Estado" />
-            <End Role="DetalleProductoIngreso" EntitySet="DetalleProductoIngreso" />
-          </AssociationSet>
           <AssociationSet Name="FK_DetalleIngresoProducto_IngresoProducto" Association="MAGASYSModel.FK_DetalleIngresoProducto_IngresoProducto">
             <End Role="ProductoIngreso" EntitySet="ProductoIngreso" />
             <End Role="DetalleProductoIngreso" EntitySet="DetalleProductoIngreso" />
@@ -1700,9 +1679,7 @@
           <Property Name="COD_INGRESO_PRODUCTO" Type="Int32" Nullable="false" />
           <Property Name="CANTIDAD_UNIDADES" Type="Int32" Nullable="false" />
           <Property Name="FECHA_DEVOLUCION" Type="DateTime" Precision="3" />
-          <Property Name="COD_ESTADO" Type="Int32" Nullable="false" />
           <Property Name="COD_PRODUCTO_EDICION" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Estado" Relationship="MAGASYSModel.FK_DetalleIngresoProducto_Estado" FromRole="DetalleProductoIngreso" ToRole="Estado" />
           <NavigationProperty Name="ProductoIngreso" Relationship="MAGASYSModel.FK_DetalleIngresoProducto_IngresoProducto" FromRole="DetalleProductoIngreso" ToRole="ProductoIngreso" />
           <NavigationProperty Name="ProductoEdicion" Relationship="MAGASYSModel.FK_DetalleIngresoProducto_Producto_Edicion" FromRole="DetalleProductoIngreso" ToRole="ProductoEdicion" />
         </EntityType>
@@ -1780,7 +1757,6 @@
           <Property Name="NOMBRE" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="AMBITO" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Cobro" Relationship="MAGASYSModel.FK_Cobro_Estado" FromRole="Estado" ToRole="Cobro" />
-          <NavigationProperty Name="DetalleProductoIngreso" Relationship="MAGASYSModel.FK_DetalleIngresoProducto_Estado" FromRole="Estado" ToRole="DetalleProductoIngreso" />
           <NavigationProperty Name="Empleado" Relationship="MAGASYSModel.FK_Empleado_Estado" FromRole="Estado" ToRole="Empleado" />
           <NavigationProperty Name="ProductoIngreso" Relationship="MAGASYSModel.FK_IngresoProducto_Estado" FromRole="Estado" ToRole="ProductoIngreso" />
           <NavigationProperty Name="ProductoEdicion" Relationship="MAGASYSModel.FK_Producto_Edicion_Estado" FromRole="Estado" ToRole="ProductoEdicion" />
@@ -1991,14 +1967,14 @@
             <PropertyRef Name="ID_REPARTO" />
           </Key>
           <Property Name="ID_REPARTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="COD_CLIENTE" Type="Int32" Nullable="false" />
+          <Property Name="COD_EDICION" Type="Int32" Nullable="false" />
           <Property Name="CLIENTE" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="ORIGEN" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="DESTINO" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="EDICION" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="PRODUCTO" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="CANTIDAD" Type="Int32" Nullable="false" />
-          <Property Name="COD_CLIENTE" Type="Int32" Nullable="false" />
-          <Property Name="COD_EDICION" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Reserva">
           <Key>
@@ -2282,18 +2258,6 @@
             </Principal>
             <Dependent Role="DetalleProductoDevolucion">
               <PropertyRef Name="COD_PRODUCTO_EDICION" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_DetalleIngresoProducto_Estado">
-          <End Type="MAGASYSModel.Estado" Role="Estado" Multiplicity="1" />
-          <End Type="MAGASYSModel.DetalleProductoIngreso" Role="DetalleProductoIngreso" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Estado">
-              <PropertyRef Name="ID_ESTADO" />
-            </Principal>
-            <Dependent Role="DetalleProductoIngreso">
-              <PropertyRef Name="COD_ESTADO" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2878,7 +2842,6 @@
             <EntityTypeMapping TypeName="MAGASYSModel.DetalleProductoIngreso">
               <MappingFragment StoreEntitySet="DetalleProductoIngreso">
                 <ScalarProperty Name="COD_PRODUCTO_EDICION" ColumnName="COD_PRODUCTO_EDICION" />
-                <ScalarProperty Name="COD_ESTADO" ColumnName="COD_ESTADO" />
                 <ScalarProperty Name="FECHA_DEVOLUCION" ColumnName="FECHA_DEVOLUCION" />
                 <ScalarProperty Name="CANTIDAD_UNIDADES" ColumnName="CANTIDAD_UNIDADES" />
                 <ScalarProperty Name="COD_INGRESO_PRODUCTO" ColumnName="COD_INGRESO_PRODUCTO" />
@@ -3126,14 +3089,14 @@
           <EntitySetMapping Name="Reparto">
             <EntityTypeMapping TypeName="MAGASYSModel.Reparto">
               <MappingFragment StoreEntitySet="Reparto">
-                <ScalarProperty Name="COD_EDICION" ColumnName="COD_EDICION" />
-                <ScalarProperty Name="COD_CLIENTE" ColumnName="COD_CLIENTE" />
                 <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
                 <ScalarProperty Name="PRODUCTO" ColumnName="PRODUCTO" />
                 <ScalarProperty Name="EDICION" ColumnName="EDICION" />
                 <ScalarProperty Name="DESTINO" ColumnName="DESTINO" />
                 <ScalarProperty Name="ORIGEN" ColumnName="ORIGEN" />
                 <ScalarProperty Name="CLIENTE" ColumnName="CLIENTE" />
+                <ScalarProperty Name="COD_EDICION" ColumnName="COD_EDICION" />
+                <ScalarProperty Name="COD_CLIENTE" ColumnName="COD_CLIENTE" />
                 <ScalarProperty Name="ID_REPARTO" ColumnName="ID_REPARTO" />
               </MappingFragment>
             </EntityTypeMapping>

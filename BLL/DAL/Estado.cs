@@ -24,8 +24,6 @@ public partial class Estado
 
         this.Cobro = new HashSet<Cobro>();
 
-        this.DetalleProductoIngreso = new HashSet<DetalleProductoIngreso>();
-
         this.Empleado = new HashSet<Empleado>();
 
         this.ProductoIngreso = new HashSet<ProductoIngreso>();
@@ -60,10 +58,6 @@ public partial class Estado
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Cobro> Cobro { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<DetalleProductoIngreso> DetalleProductoIngreso { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 

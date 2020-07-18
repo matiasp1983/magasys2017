@@ -26,13 +26,9 @@ public partial class DetalleProductoIngreso
 
     public Nullable<System.DateTime> FECHA_DEVOLUCION { get; set; }
 
-    public int COD_ESTADO { get; set; }
-
     public int COD_PRODUCTO_EDICION { get; set; }
 
 
-
-    public virtual Estado Estado { get; set; }
 
     public virtual ProductoIngreso ProductoIngreso { get; set; }
 
