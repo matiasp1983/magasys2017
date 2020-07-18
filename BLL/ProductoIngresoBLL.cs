@@ -78,10 +78,18 @@ namespace BLL
             {
                 using (var rep = new Repository<ProductoIngreso>())
                 {
-                    if (oIngresoProductoFiltro.IdProveedor > 0)
-                        lstProductoIngreso = rep.Search(p => p.COD_ESTADO == 1 && p.COD_PROVEEDOR == oIngresoProductoFiltro.IdProveedor);
+                    lstProductoIngreso = rep.Search(p => p.COD_ESTADO == 1);
 
-                    if (lstProductoIngreso != null)
+                    if (oIngresoProductoFiltro.CodTipoProducto > 0 && lstProductoIngreso.Count > 0)
+                        lstProductoIngreso = lstProductoIngreso.FindAll(p => p.COD_TIPO_PRODUCTO == oIngresoProductoFiltro.CodTipoProducto);
+
+                    if (oIngresoProductoFiltro.CodEstado > 0 && lstProductoIngreso.Count > 0)
+                        lstProductoIngreso = lstProductoIngreso.FindAll(p => p.COD_ESTADO == oIngresoProductoFiltro.CodEstado);
+
+                    if (oIngresoProductoFiltro.IdProveedor > 0 && lstProductoIngreso.Count > 0)
+                        lstProductoIngreso = lstProductoIngreso.FindAll(p => p.COD_PROVEEDOR == oIngresoProductoFiltro.IdProveedor);
+
+                    if (lstProductoIngreso.Count > 0)
                     {
                         if (oIngresoProductoFiltro.FechaAltaDesde != null && oIngresoProductoFiltro.FechaAltaHasta != null)
                             lstProductoIngreso = lstProductoIngreso.FindAll(p => p.FECHA.Date >= oIngresoProductoFiltro.FechaAltaDesde && p.FECHA.Date <= oIngresoProductoFiltro.FechaAltaHasta);
@@ -89,15 +97,6 @@ namespace BLL
                             lstProductoIngreso = lstProductoIngreso.FindAll(p => p.FECHA.Date >= oIngresoProductoFiltro.FechaAltaDesde);
                         else if (oIngresoProductoFiltro.FechaAltaDesde == null && oIngresoProductoFiltro.FechaAltaHasta != null)
                             lstProductoIngreso = lstProductoIngreso.FindAll(p => p.FECHA.Date <= oIngresoProductoFiltro.FechaAltaHasta);
-                    }
-                    else
-                    {
-                        if (oIngresoProductoFiltro.FechaAltaDesde != null && oIngresoProductoFiltro.FechaAltaHasta != null)
-                            lstProductoIngreso = rep.Search(p => p.COD_ESTADO == 1 && DbFunctions.TruncateTime(p.FECHA) >= DbFunctions.TruncateTime(oIngresoProductoFiltro.FechaAltaDesde) && DbFunctions.TruncateTime(p.FECHA) <= DbFunctions.TruncateTime(oIngresoProductoFiltro.FechaAltaHasta));
-                        else if (oIngresoProductoFiltro.FechaAltaDesde != null && oIngresoProductoFiltro.FechaAltaHasta == null)
-                            lstProductoIngreso = rep.Search(p => p.COD_ESTADO == 1 && DbFunctions.TruncateTime(p.FECHA) >= DbFunctions.TruncateTime(oIngresoProductoFiltro.FechaAltaDesde));
-                        else if (oIngresoProductoFiltro.FechaAltaDesde == null && oIngresoProductoFiltro.FechaAltaHasta != null)
-                            lstProductoIngreso = rep.Search(p => p.COD_ESTADO == 1 && DbFunctions.TruncateTime(p.FECHA) <= DbFunctions.TruncateTime(oIngresoProductoFiltro.FechaAltaHasta));
                     }
 
                     ProductoIngresoListado oProductoIngresoListado;
