@@ -33,20 +33,6 @@ namespace PL.AdminDashboard
         {
             try
             {
-                var loIdIngresoProductos = Convert.ToInt32(Session[Enums.Session.IdIngresoProductos.ToString()]);
-
-                using (var loRepProductoIngreso = new Repository<BLL.DAL.ProductoIngreso>())
-                {
-                    var oProductoIngreso = loRepProductoIngreso.Find(p => p.ID_INGRESO_PRODUCTOS == loIdIngresoProductos);
-
-                    // Producto Ingreso esá Anulado cuando Estado = 3.
-                    if (oProductoIngreso.COD_ESTADO == 3)
-                    {
-                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.InfoModal(Message.MsjeListadoProductoIngresoAnulado));
-                        return;
-                    }
-                }
-
                 if (GuardarEdicion())
                 {
                     Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeProductoIngresoSuccessModificacion, "Modificación de Ingreso de productos", "ProductoIngresoListado.aspx"));
@@ -105,19 +91,10 @@ namespace PL.AdminDashboard
 
             if (Convert.ToInt32(Session[Enums.Session.IdIngresoProductos.ToString()]) > 0)
             {
-                var loIdIngresoProductos = Convert.ToInt32(Session[Enums.Session.IdIngresoProductos.ToString()]);
-
-                using (var loRepProductoIngreso = new Repository<BLL.DAL.ProductoIngreso>())
-                {
-                    var oProductoIngreso = loRepProductoIngreso.Find(p => p.ID_INGRESO_PRODUCTOS == loIdIngresoProductos);
-
-                    // Producto Ingreso esá Anulado cuando Estado = 3.
-                    if (oProductoIngreso.COD_ESTADO == 3)
-                        chkAular.Visible = false;
-                }
-
                 using (var loRepDetalleProductoIngreso = new Repository<DetalleProductoIngreso>())
                 {
+                    var loIdIngresoProductos = Convert.ToInt32(Session[Enums.Session.IdIngresoProductos.ToString()]);
+
                     var lstDetalleProductoIngreso = loRepDetalleProductoIngreso.Search(p => p.COD_INGRESO_PRODUCTO == loIdIngresoProductos);
 
                     if (lstDetalleProductoIngreso.Count > 0)
@@ -397,11 +374,6 @@ namespace PL.AdminDashboard
             else if (lsvPeliculas.Items.Count > 0)
             {
                 loResutado = ModificarIngresoPeliculas();
-            }
-
-            if (chkAular.Checked == true)
-            {
-                loResutado = new ProductoIngresoBLL().ActualizarEstadoProductoIngreso(Convert.ToInt32(Session[Enums.Session.IdIngresoProductos.ToString()]), 3);
             }
 
             return loResutado;

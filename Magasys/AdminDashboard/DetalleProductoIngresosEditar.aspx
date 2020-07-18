@@ -25,10 +25,6 @@
                 <div class="col-lg-12">
                     <div class="ibox">
                         <div class="ibox-content">
-                            <div style="text-align: right;">
-                                <%--<div class="i-checks"><label> <input type="checkbox" value="" checked=""> <i></i> Anular ingreso </label></div>--%>
-                                <asp:CheckBox ID="chkAular" runat="server" class="i-checks" Text="Anular ingreso" />
-                            </div>
                             <br />
                             <asp:ListView ID="lsvDiarios" runat="server" Visible="false">
                                 <LayoutTemplate>
