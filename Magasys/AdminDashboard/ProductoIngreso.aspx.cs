@@ -478,7 +478,6 @@ namespace PL.AdminDashboard
                     }
 
                     oDetalleProductoIngreso.CANTIDAD_UNIDADES = Convert.ToInt32(((TextBox)loItem.Controls[13]).Text);
-                    oDetalleProductoIngreso.COD_ESTADO = 1;
                     if (!String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[15]).Text)))
                         oDetalleProductoIngreso.FECHA_DEVOLUCION = Convert.ToDateTime(((TextBox)loItem.Controls[15]).Text);
                     lstDetalleProductoIngreso.Add(oDetalleProductoIngreso);
@@ -656,7 +655,6 @@ namespace PL.AdminDashboard
                     }
 
                     oDetalleProductoIngreso.CANTIDAD_UNIDADES = Convert.ToInt32(((TextBox)loItem.Controls[13]).Text);
-                    oDetalleProductoIngreso.COD_ESTADO = 1;
                     if (!String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[15]).Text)))
                         oDetalleProductoIngreso.FECHA_DEVOLUCION = Convert.ToDateTime(((TextBox)loItem.Controls[15]).Text);
                     lstDetalleProductoIngreso.Add(oDetalleProductoIngreso);
@@ -830,7 +828,6 @@ namespace PL.AdminDashboard
                     }
 
                     oDetalleProductoIngreso.CANTIDAD_UNIDADES = Convert.ToInt32(((TextBox)loItem.Controls[11]).Text);
-                    oDetalleProductoIngreso.COD_ESTADO = 1;
                     if (!String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[13]).Text)))
                         oDetalleProductoIngreso.FECHA_DEVOLUCION = Convert.ToDateTime(((TextBox)loItem.Controls[13]).Text);
                     lstDetalleProductoIngreso.Add(oDetalleProductoIngreso);
@@ -1003,7 +1000,6 @@ namespace PL.AdminDashboard
                     }
 
                     oDetalleProductoIngreso.CANTIDAD_UNIDADES = Convert.ToInt32(((TextBox)loItem.Controls[13]).Text);
-                    oDetalleProductoIngreso.COD_ESTADO = 1;
                     if (!String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[15]).Text)))
                         oDetalleProductoIngreso.FECHA_DEVOLUCION = Convert.ToDateTime(((TextBox)loItem.Controls[15]).Text);
                     lstDetalleProductoIngreso.Add(oDetalleProductoIngreso);
@@ -1178,7 +1174,6 @@ namespace PL.AdminDashboard
                     }
 
                     oDetalleProductoIngreso.CANTIDAD_UNIDADES = Convert.ToInt32(((TextBox)loItem.Controls[13]).Text);
-                    oDetalleProductoIngreso.COD_ESTADO = 1;
                     if (!String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[15]).Text)))
                         oDetalleProductoIngreso.FECHA_DEVOLUCION = Convert.ToDateTime(((TextBox)loItem.Controls[15]).Text);
                     lstDetalleProductoIngreso.Add(oDetalleProductoIngreso);
@@ -1354,7 +1349,6 @@ namespace PL.AdminDashboard
                     }
 
                     oDetalleProductoIngreso.CANTIDAD_UNIDADES = Convert.ToInt32(((TextBox)loItem.Controls[13]).Text);
-                    oDetalleProductoIngreso.COD_ESTADO = 1;
                     if (!String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[15]).Text)))
                         oDetalleProductoIngreso.FECHA_DEVOLUCION = Convert.ToDateTime(((TextBox)loItem.Controls[15]).Text);
                     lstDetalleProductoIngreso.Add(oDetalleProductoIngreso);
