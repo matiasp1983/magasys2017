@@ -6,6 +6,8 @@ namespace BLL.Filters
     {
         #region Propiedades
 
+        public long CodTipoProducto { get; set; }
+        public long CodEstado { get; set; }
         public long IdProveedor { get; set; }
         public DateTime? FechaAltaDesde { get; set; }
         public DateTime? FechaAltaHasta { get; set; }
