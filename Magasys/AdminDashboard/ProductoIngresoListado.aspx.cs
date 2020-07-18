@@ -21,6 +21,8 @@ namespace PL.AdminDashboard
             {
                 txtFechaAltaDesde.Text = DateTime.Now.ToString("dd/MM/yyyy");
                 txtFechaAltaHasta.Text = DateTime.Now.ToString("dd/MM/yyyy");
+                CargarTiposProducto();
+                CargarEstados();
                 CargarProveedores();
                 CargarGrillaIngresos();
             }
@@ -98,6 +100,44 @@ namespace PL.AdminDashboard
 
         }
 
+        private void CargarTiposProducto()
+        {
+            var oTipoProducto = new BLL.TipoProductoBLL();
+
+            try
+            {
+                ddlTipoProducto.DataSource = oTipoProducto.ObtenerTiposProducto();
+                ddlTipoProducto.DataTextField = "DESCRIPCION";
+                ddlTipoProducto.DataValueField = "ID_TIPO_PRODUCTO";
+                ddlTipoProducto.DataBind();
+                ddlTipoProducto.Items.Insert(0, new ListItem(String.Empty, String.Empty));
+            }
+            catch (Exception ex)
+            {
+                Logger loLogger = LogManager.GetCurrentClassLogger();
+                loLogger.Error(ex);
+            }
+        }
+
+        private void CargarEstados()
+        {
+            var oEstado = new BLL.EstadoBLL();
+
+            try
+            {
+                ddlEstado.DataSource = oEstado.ObtenerEstados("GLOBAL");
+                ddlEstado.DataTextField = "NOMBRE";
+                ddlEstado.DataValueField = "ID_ESTADO";
+                ddlEstado.DataBind();
+                ddlEstado.Items.Insert(0, new ListItem(String.Empty, String.Empty));
+            }
+            catch (Exception ex)
+            {
+                Logger loLogger = LogManager.GetCurrentClassLogger();
+                loLogger.Error(ex);
+            }
+        }
+
         private void CargarProveedores()
         {
             var oProveedor = new BLL.ProveedorBLL();
@@ -124,6 +164,12 @@ namespace PL.AdminDashboard
             if (!(!String.IsNullOrEmpty(txtFechaAltaDesde.Text) && !String.IsNullOrEmpty(txtFechaAltaHasta.Text) && (Convert.ToDateTime(txtFechaAltaDesde.Text) > Convert.ToDateTime(txtFechaAltaHasta.Text))))
             {
                 oIngresoProductoFiltro = new IngresoProductoFiltro();
+
+                if (!String.IsNullOrEmpty(ddlTipoProducto.SelectedValue))
+                    oIngresoProductoFiltro.CodTipoProducto = Convert.ToInt32(ddlTipoProducto.SelectedValue);
+
+                if (!String.IsNullOrEmpty(ddlEstado.SelectedValue))
+                    oIngresoProductoFiltro.CodEstado = Convert.ToInt32(ddlEstado.SelectedValue);
 
                 if (!String.IsNullOrEmpty(ddlProveedor.SelectedValue))
                     oIngresoProductoFiltro.IdProveedor = Convert.ToInt32(ddlProveedor.SelectedValue);
@@ -176,7 +222,6 @@ namespace PL.AdminDashboard
         {
             FormProductoIngresoListado.Controls.OfType<DropDownList>().ToList().ForEach(x => x.SelectedIndex = -1);
             FormProductoIngresoListado.Controls.OfType<TextBox>().ToList().ForEach(x => x.Text = String.Empty);
-            lsvIngresos.Visible = false;
             CargarGrillaIngresos();
         }
 
