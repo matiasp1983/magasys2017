@@ -87,6 +87,10 @@
     <Content Include="AdminDashboard\ConsultarStock.aspx" />
     <Content Include="AdminDashboard\css\bootstrap.css.map" />
     <Content Include="AdminDashboard\css\bootstrap.min.css.map" />
+    <Content Include="AdminDashboard\css\plugins\chosen\bootstrap-chosen.css" />
+    <Content Include="AdminDashboard\css\plugins\chosen\chosen-sprite%402x.png" />
+    <Content Include="AdminDashboard\css\plugins\chosen\chosen-sprite.png" />
+    <Content Include="AdminDashboard\css\plugins\chosen\chosen.css" />
     <Content Include="AdminDashboard\css\plugins\footable\fonts\footable.eot" />
     <Content Include="AdminDashboard\css\plugins\footable\fonts\footable.ttf" />
     <Content Include="AdminDashboard\css\plugins\footable\fonts\footable.woff" />
@@ -152,7 +156,9 @@
     <Content Include="AdminDashboard\HojaDeRuta.aspx" />
     <Content Include="AdminDashboard\img\perfil_default.png" />
     <Content Include="AdminDashboard\img\preview_icons.png" />
+    <Content Include="AdminDashboard\Index.aspx" />
     <Content Include="AdminDashboard\js\plugins\chartJs\Chart.min.js" />
+    <Content Include="AdminDashboard\js\plugins\chosen\chosen.jquery.js" />
     <Content Include="AdminDashboard\js\plugins\iCheck\icheck.min.js" />
     <Content Include="AdminDashboard\js\plugins\pwstrength\pwstrength-bootstrap.min.js" />
     <Content Include="AdminDashboard\js\plugins\pwstrength\zxcvbn.js" />
@@ -364,7 +370,6 @@
     <Content Include="AdminDashboard\font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="AdminDashboard\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="AdminDashboard\img\profile_small.jpg" />
-    <Content Include="AdminDashboard\Index.aspx" />
     <Content Include="AdminDashboard\js\bootstrap.min.js" />
     <Content Include="AdminDashboard\js\inspinia.js" />
     <Content Include="AdminDashboard\js\jquery-3.1.1.min.js" />

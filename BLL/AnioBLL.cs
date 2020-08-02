@@ -28,6 +28,26 @@ namespace BLL
             return lstAnios;
         }
 
+        public List<Anio> ObtenerAnios(int pFiltro)
+        {
+            List<Anio> lstAnios = null;
+
+            try
+            {
+                using (var rep = new Repository<Anio>())
+                {
+                    lstAnios = rep.Search(a=> a.DESCRIPCION >= pFiltro);
+                    lstAnios.Sort((x, y) => y.DESCRIPCION.CompareTo(x.DESCRIPCION));
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return lstAnios;
+        }
+
         #endregion
     }    
 }

@@ -480,6 +480,19 @@ namespace BLL
             return bRes;
         }
 
+        public List<ProductoMasVendido_Result> ProductosMasVendidos(string pAnno, string pCodTipoProducto)
+        {
+            try
+            {
+                MAGASYSEntities loContext = new MAGASYSEntities();
+                return loContext.ProductoMasVendido(pAnno, pCodTipoProducto).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }           
+        }
+
         #endregion
     }
 

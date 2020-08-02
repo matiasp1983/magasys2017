@@ -126,6 +126,9 @@
     <Compile Include="DAL\Estado.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\fn_Split_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\FormaPago.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -180,6 +183,9 @@
     <Compile Include="DAL\ProductoIngreso.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\ProductoMasVendido_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\Proveedor.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -196,19 +202,6 @@
     <Compile Include="DAL\ReservaEdicion.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="EmpleadoBLL.cs" />
-    <Compile Include="Filters\EmpleadoFiltro.cs" />
-    <Compile Include="ForgotPasswordBLL.cs" />
-    <Compile Include="FuerzaBruta\Delivery.cs" />
-    <Compile Include="FuerzaBruta\EstrategiaFuerzaBruta.cs" />
-    <Compile Include="FuerzaBruta\FilaMatrizFB.cs" />
-    <Compile Include="FuerzaBruta\MatrizFB.cs" />
-    <Compile Include="FuerzaBruta\NodoDistanciaFB.cs" />
-    <Compile Include="FuerzaBruta\NodoFB.cs" />
-    <Compile Include="MesBLL.cs" />
-    <Compile Include="NegocioBLL.cs" />
-    <Compile Include="RepartoBLL.cs" />
-    <Compile Include="ReservaEdicionBLL.cs" />
     <Compile Include="DAL\Revista.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -233,6 +226,19 @@
     <Compile Include="DAL\Venta.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="EmpleadoBLL.cs" />
+    <Compile Include="Filters\EmpleadoFiltro.cs" />
+    <Compile Include="ForgotPasswordBLL.cs" />
+    <Compile Include="FuerzaBruta\Delivery.cs" />
+    <Compile Include="FuerzaBruta\EstrategiaFuerzaBruta.cs" />
+    <Compile Include="FuerzaBruta\FilaMatrizFB.cs" />
+    <Compile Include="FuerzaBruta\MatrizFB.cs" />
+    <Compile Include="FuerzaBruta\NodoDistanciaFB.cs" />
+    <Compile Include="FuerzaBruta\NodoFB.cs" />
+    <Compile Include="MesBLL.cs" />
+    <Compile Include="NegocioBLL.cs" />
+    <Compile Include="RepartoBLL.cs" />
+    <Compile Include="ReservaEdicionBLL.cs" />
     <Compile Include="DiarioBLL.cs" />
     <Compile Include="DiaSemanaBLL.cs" />
     <Compile Include="EstadoBLL.cs" />

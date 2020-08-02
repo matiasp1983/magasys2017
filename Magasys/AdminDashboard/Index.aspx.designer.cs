@@ -22,30 +22,21 @@ namespace PL.AdminDashboard {
         protected global::System.Web.UI.HtmlControls.HtmlForm FormIndex;
         
         /// <summary>
-        /// Control ddlMes.
+        /// Control ddlTipoProducto.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlMes;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTipoProducto;
         
         /// <summary>
-        /// Control btnBuscar.
+        /// Control ddlAnio.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnBuscar;
-        
-        /// <summary>
-        /// Control btnLimpiar.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlButton btnLimpiar;
+        protected global::System.Web.UI.WebControls.DropDownList ddlAnio;
     }
 }

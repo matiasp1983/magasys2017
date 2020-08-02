@@ -1,114 +1,144 @@
-﻿<%@ Page Title="Inicio" Language="C#" MasterPageFile="~/AdminDashboard/MasterPage.Master" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="PL.AdminDashboard.Index" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminDashboard/MasterPage.Master" AutoEventWireup="true" CodeBehind="Index.aspx.cs" Inherits="PL.AdminDashboard.Index" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <link href="css/plugins/select2/select2.min.css" rel="stylesheet" />    
+    <link href="css/plugins/chosen/bootstrap-chosen.css" rel="stylesheet">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="contentMaster" runat="server">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>Reportes</h2>
+<%--            <ol class="breadcrumb">
+                <li>
+                    <a href="Index.aspx">Principal</a>
+                </li>
+                <li>Productos
+                </li>
+                <li class="active">
+                    <strong>Lista de Productos</strong>
+                </li>
+            </ol>--%>
+        </div>
+    </div>
     <div class="wrapper wrapper-content animated fadeInRight">
         <form id="FormIndex" runat="server">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>Filtros de Gráficos</h5>
+                            <h5>Reporte</h5>
                         </div>
                         <div class="ibox-content">
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="col-sm-10 control-label">Seleccione los Meses del filtro</label>
-                                            <asp:DropDownList ID="ddlMes" runat="server" class="select2_mes form-control" multiple="multiple"/>                                                                                        
+                                            <label class="col-sm-10 control-label">Tipo de Producto</label>
+                                            <asp:DropDownList ID="ddlTipoProducto" runat="server" CssClass="select2_tipoproducto form-control"></asp:DropDownList>
                                         </div>
-                                    </div>                                    
-                                </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-10 control-label">Selección múltiple</label>
+                                            <div>
+                                                 <asp:DropDownList ID="ddlAnio" runat="server"  data-placeholder="Seleccionar un Año..." CssClass="chosen-select" multiple=""></asp:DropDownList>
+                                            </div>                                           
+                                        </div>
+                                    </div>
+                                </div>                            
                             </div>
                             <div class="row">
-                                <div class="hr-line-dashed"></div>
                                 <div class="form-group">
-                                    <div style="text-align: right; padding-right: 15px;">
-                                        <button type="button" id="btnBuscar" runat="server" class="btn btn-success">
-                                            <i class="fa fa-filter"></i>&nbsp;&nbsp;<span>Filtrar</span>
-                                        </button>
-                                        <button type="reset" id="btnLimpiar" runat="server" class="btn btn-warning">
-                                            <i class="fa fa-trash-o"></i>&nbsp;&nbsp;<span>Limpiar</span>
-                                        </button>
+                                    <div class="col-sm-10">
+                                        <input id="btnFiltrar" type="button" value="Filtrar" class="btn btn-success" />
                                     </div>
                                 </div>
+                            </div>
+                            <div class="row">    
+                                <div class="col-sm-12">
+                                    <div class="hr-line-dashed"></div>
+                                    <div id="columnchart" style="width: 1000px; height: 500px"></div>
+                                </div>                                
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </form>
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Título del Gráfico</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <div>
-                            <canvas id="barChart" height="140"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="script" runat="server">
-    <script src="js/plugins/select2/select2.full.min.js"></script>    
-    <script src="js/plugins/chartJs/Chart.min.js"></script>
-    <script type="text/javascript">
+     <!-- Chosen -->
+    <script src="js/plugins/chosen/chosen.jquery.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
+    <script type="text/javascript">
         if (window.jQuery) {
-            $(document).ready(function () {                                
-                Select2();                
-                DibujarGrafico();
+            $(document).ready(function () {                
+                Select2();
+                Chosen();
             });
-        }        
+        }      
 
         function Select2() {
-            $(".select2_mes").select2(
-            {                
+            $(".select2_tipoproducto").select2(
+            {
+                placeholder: 'Seleccione un Tipo de Producto',
                 width: '100%',
                 allowClear: true
-            });
-
-            $('#<%=ddlMes.ClientID%> > option').prop("selected", "selected");
-            $('#<%=ddlMes.ClientID%>').trigger("change");
-        }               
-
-        function DibujarGrafico() {
-            var barData = {
-                labels:  $(".select2_mes").val(),
-                datasets: [
-                    {
-                        label: "Dato 1",
-                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                        pointBorderColor: "#fff",
-                        data: [65, 59, 80, 81, 56, 55, 40]
-                    },
-                    {
-                        label: "Dato 2",
-                        backgroundColor: 'rgba(54, 162, 235, 1)',
-                        borderColor: "rgba(26,179,148,0.7)",
-                        pointBackgroundColor: "rgba(26,179,148,1)",
-                        pointBorderColor: "#fff",
-                        data: [28, 48, 40, 19, 86, 27, 90]
-                    }
-                ]
-            };
-
-            var barOptions = {
-                responsive: true
-            };
-
-
-            var ctx2 = document.getElementById("barChart").getContext("2d");
-            new Chart(ctx2, { type: 'bar', data: barData, options: barOptions });
+            });            
         }
 
+        function Chosen() {
+            $('.chosen-select').chosen({ width: "100%" });
+        }
+
+        $('#btnFiltrar').click(function () {
+
+            var loTipoProducto = $(".select2_tipoproducto").val();
+            var loAnio = $('.chosen-select').val();
+
+            $.ajax({
+                type: "POST",
+                url: "Index.aspx/ObtenerVentasPorProducto",
+                data: JSON.stringify({ 'pAnios': loAnio, 'pTipoProducto':loTipoProducto}),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {                   
+                    if (data.d != "") {
+                        drawChart(data.d);
+                    }
+                },
+                failure: function (data) {
+                    swal({
+                        title: "Generación de Gráfico",
+                        text: "El gráfico no se puedo generar.",
+                        type: "warning",
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+            });
+        });      
+
     </script>
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['bar'] });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart(pData) {
+
+            var loData = pData;
+            var data = new google.visualization.arrayToDataTable(loData);
+
+            var options = {
+                title: "Ventas por año y tipo de producto",
+                vAxis: { // Valores verticales
+                    title:"Cantidad"
+                }
+            };
+
+            var chart = new google.charts.Bar(document.getElementById('columnchart'));
+            chart.draw(data, google.charts.Bar.convertOptions(options));
+        };
+    </script>
+   
 </asp:Content>

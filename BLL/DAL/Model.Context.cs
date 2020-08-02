@@ -17,6 +17,9 @@ using System;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 
+using System.Data.Entity.Core.Objects;
+using System.Linq;
+
 
 public partial class MAGASYSEntities : DbContext
 {
@@ -107,6 +110,41 @@ public partial class MAGASYSEntities : DbContext
     public virtual DbSet<Usuario> Usuario { get; set; }
 
     public virtual DbSet<Venta> Venta { get; set; }
+
+
+    [DbFunction("MAGASYSEntities", "fn_Split")]
+    public virtual IQueryable<fn_Split_Result> fn_Split(string text, string delimiter)
+    {
+
+        var textParameter = text != null ?
+            new ObjectParameter("text", text) :
+            new ObjectParameter("text", typeof(string));
+
+
+        var delimiterParameter = delimiter != null ?
+            new ObjectParameter("delimiter", delimiter) :
+            new ObjectParameter("delimiter", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<fn_Split_Result>("[MAGASYSEntities].[fn_Split](@text, @delimiter)", textParameter, delimiterParameter);
+    }
+
+
+    public virtual ObjectResult<ProductoMasVendido_Result> ProductoMasVendido(string anio, string codTipoProducto)
+    {
+
+        var anioParameter = anio != null ?
+            new ObjectParameter("anio", anio) :
+            new ObjectParameter("anio", typeof(string));
+
+
+        var codTipoProductoParameter = codTipoProducto != null ?
+            new ObjectParameter("CodTipoProducto", codTipoProducto) :
+            new ObjectParameter("CodTipoProducto", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ProductoMasVendido_Result>("ProductoMasVendido", anioParameter, codTipoProductoParameter);
+    }
 
 }
 

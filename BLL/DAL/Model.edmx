@@ -1067,6 +1067,22 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="fn_Split" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="text" Type="varchar" Mode="In" />
+          <Parameter Name="delimiter" Type="varchar" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="position" Type="int" Nullable="false" />
+                <Property Name="value" Type="varchar" MaxLength="8000" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="ProductoMasVendido" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="anio" Type="nvarchar" Mode="In" />
+          <Parameter Name="CodTipoProducto" Type="nvarchar" Mode="In" />
+        </Function>
         <EntityContainer Name="MAGASYSModelStoreContainer">
           <EntitySet Name="Anio" EntityType="Self.Anio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
@@ -1582,6 +1598,14 @@
             <End Role="Rol" EntitySet="Rol" />
             <End Role="Usuario" EntitySet="Usuario" />
           </AssociationSet>
+          <FunctionImport Name="fn_Split" IsComposable="true" ReturnType="Collection(MAGASYSModel.fn_Split_Result)">
+            <Parameter Name="text" Mode="In" Type="String" />
+            <Parameter Name="delimiter" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ProductoMasVendido" ReturnType="Collection(MAGASYSModel.ProductoMasVendido_Result)">
+            <Parameter Name="anio" Mode="In" Type="String" />
+            <Parameter Name="CodTipoProducto" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Anio">
           <Key>
@@ -2753,6 +2777,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="fn_Split_Result">
+          <Property Type="Int32" Name="position" Nullable="false" />
+          <Property Type="String" Name="value" Nullable="true" MaxLength="8000" />
+        </ComplexType>
+        <ComplexType Name="ProductoMasVendido_Result">
+          <Property Type="Int32" Name="MES" Nullable="true" />
+          <Property Type="Int32" Name="ANIO" Nullable="true" />
+          <Property Type="String" Name="DESCRIPCION" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="CANTIDAD" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3211,6 +3245,24 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="fn_Split" FunctionName="MAGASYSModel.Store.fn_Split">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MAGASYSModel.fn_Split_Result">
+                <ScalarProperty Name="position" ColumnName="position" />
+                <ScalarProperty Name="value" ColumnName="value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ProductoMasVendido" FunctionName="MAGASYSModel.Store.ProductoMasVendido">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MAGASYSModel.ProductoMasVendido_Result">
+                <ScalarProperty Name="MES" ColumnName="MES" />
+                <ScalarProperty Name="ANIO" ColumnName="ANIO" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
