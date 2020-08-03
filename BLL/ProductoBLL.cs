@@ -480,17 +480,30 @@ namespace BLL
             return bRes;
         }
 
-        public List<ProductoMasVendido_Result> ProductosMasVendidos(string pAnno, string pCodTipoProducto)
+        public List<ProductoMasVendido_Result> ProductosMasVendidos(string pAnio, string pCodTipoProducto)
         {
             try
             {
                 MAGASYSEntities loContext = new MAGASYSEntities();
-                return loContext.ProductoMasVendido(pAnno, pCodTipoProducto).ToList();
+                return loContext.ProductoMasVendido(pAnio, pCodTipoProducto).ToList();
             }
             catch (Exception ex)
             {
                 throw ex;
-            }           
+            }
+        }
+
+        public List<VentaAnualXTipoProducto_Result> VentaAnualPorTipoProducto(string pAnio, string pCodTipoProducto)
+        {
+            try
+            {
+                MAGASYSEntities loContext = new MAGASYSEntities();
+                return loContext.VentaAnualXTipoProducto(pAnio, pCodTipoProducto).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         #endregion

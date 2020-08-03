@@ -1083,6 +1083,13 @@
           <Parameter Name="anio" Type="nvarchar" Mode="In" />
           <Parameter Name="CodTipoProducto" Type="nvarchar" Mode="In" />
         </Function>
+        <Function Name="ProductosDevueltosXAnio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="anio" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="VentaAnualXTipoProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="anio" Type="nvarchar" Mode="In" />
+          <Parameter Name="CodTipoProducto" Type="nvarchar" Mode="In" />
+        </Function>
         <EntityContainer Name="MAGASYSModelStoreContainer">
           <EntitySet Name="Anio" EntityType="Self.Anio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
@@ -1603,6 +1610,13 @@
             <Parameter Name="delimiter" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="ProductoMasVendido" ReturnType="Collection(MAGASYSModel.ProductoMasVendido_Result)">
+            <Parameter Name="anio" Mode="In" Type="String" />
+            <Parameter Name="CodTipoProducto" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ProductosDevueltosXAnio" ReturnType="Collection(MAGASYSModel.ProductosDevueltosXAnio_Result)">
+            <Parameter Name="anio" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="VentaAnualXTipoProducto" ReturnType="Collection(MAGASYSModel.VentaAnualXTipoProducto_Result)">
             <Parameter Name="anio" Mode="In" Type="String" />
             <Parameter Name="CodTipoProducto" Mode="In" Type="String" />
           </FunctionImport>
@@ -2787,6 +2801,17 @@
           <Property Type="String" Name="DESCRIPCION" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="CANTIDAD" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="ProductosDevueltosXAnio_Result">
+          <Property Type="Int32" Name="MES" Nullable="true" />
+          <Property Type="Int32" Name="ANIO" Nullable="true" />
+          <Property Type="String" Name="NOMBRE" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="CANTIDAD" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="VentaAnualXTipoProducto_Result">
+          <Property Type="Int32" Name="MES" Nullable="true" />
+          <Property Type="String" Name="NOMBRE" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="CANTIDAD" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3259,6 +3284,25 @@
                 <ScalarProperty Name="MES" ColumnName="MES" />
                 <ScalarProperty Name="ANIO" ColumnName="ANIO" />
                 <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ProductosDevueltosXAnio" FunctionName="MAGASYSModel.Store.ProductosDevueltosXAnio">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MAGASYSModel.ProductosDevueltosXAnio_Result">
+                <ScalarProperty Name="MES" ColumnName="MES" />
+                <ScalarProperty Name="ANIO" ColumnName="ANIO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="VentaAnualXTipoProducto" FunctionName="MAGASYSModel.Store.VentaAnualXTipoProducto">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MAGASYSModel.VentaAnualXTipoProducto_Result">
+                <ScalarProperty Name="MES" ColumnName="MES" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
                 <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
               </ComplexTypeMapping>
             </ResultMapping>

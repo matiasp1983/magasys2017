@@ -146,6 +146,35 @@ public partial class MAGASYSEntities : DbContext
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ProductoMasVendido_Result>("ProductoMasVendido", anioParameter, codTipoProductoParameter);
     }
 
+
+    public virtual ObjectResult<ProductosDevueltosXAnio_Result> ProductosDevueltosXAnio(string anio)
+    {
+
+        var anioParameter = anio != null ?
+            new ObjectParameter("anio", anio) :
+            new ObjectParameter("anio", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ProductosDevueltosXAnio_Result>("ProductosDevueltosXAnio", anioParameter);
+    }
+
+
+    public virtual ObjectResult<VentaAnualXTipoProducto_Result> VentaAnualXTipoProducto(string anio, string codTipoProducto)
+    {
+
+        var anioParameter = anio != null ?
+            new ObjectParameter("anio", anio) :
+            new ObjectParameter("anio", typeof(string));
+
+
+        var codTipoProductoParameter = codTipoProducto != null ?
+            new ObjectParameter("CodTipoProducto", codTipoProducto) :
+            new ObjectParameter("CodTipoProducto", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<VentaAnualXTipoProducto_Result>("VentaAnualXTipoProducto", anioParameter, codTipoProductoParameter);
+    }
+
 }
 
 }

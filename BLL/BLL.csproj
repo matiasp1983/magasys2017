@@ -186,6 +186,9 @@
     <Compile Include="DAL\ProductoMasVendido_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\ProductosDevueltosXAnio_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\Proveedor.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -224,6 +227,9 @@
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="DAL\Venta.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\VentaAnualXTipoProducto_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
     <Compile Include="EmpleadoBLL.cs" />

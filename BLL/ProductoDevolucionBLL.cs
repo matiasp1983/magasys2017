@@ -257,6 +257,19 @@ namespace BLL
             return bRes;
         }
 
+        public List<ProductosDevueltosXAnio_Result> ProductosDevueltosPorAnio(string pAnio)
+        {
+            try
+            {
+                MAGASYSEntities loContext = new MAGASYSEntities();
+                return loContext.ProductosDevueltosXAnio(pAnio).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         #endregion
     }
 
