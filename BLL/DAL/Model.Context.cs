@@ -147,7 +147,7 @@ public partial class MAGASYSEntities : DbContext
     }
 
 
-    public virtual ObjectResult<ProductosDevueltosXAnio_Result> ProductosDevueltosXAnio(string anio)
+    public virtual ObjectResult<ProductosDevueltosXAnio_Result> ProductosDevueltosXAnio(string anio, string codTipoProducto)
     {
 
         var anioParameter = anio != null ?
@@ -155,7 +155,12 @@ public partial class MAGASYSEntities : DbContext
             new ObjectParameter("anio", typeof(string));
 
 
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ProductosDevueltosXAnio_Result>("ProductosDevueltosXAnio", anioParameter);
+        var codTipoProductoParameter = codTipoProducto != null ?
+            new ObjectParameter("CodTipoProducto", codTipoProducto) :
+            new ObjectParameter("CodTipoProducto", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ProductosDevueltosXAnio_Result>("ProductosDevueltosXAnio", anioParameter, codTipoProductoParameter);
     }
 
 

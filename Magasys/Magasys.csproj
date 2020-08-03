@@ -189,6 +189,7 @@
     <Content Include="AdminDashboard\RegistrarEntregaProducto.aspx" />
     <Content Include="AdminDashboard\RegistrarReservadasConfirmadas.aspx" />
     <Content Include="AdminDashboard\Reparto.aspx" />
+    <Content Include="AdminDashboard\ReporteProductoDevolucion.aspx" />
     <Content Include="AdminDashboard\ReporteVentaAnualTipoProducto.aspx" />
     <Content Include="AdminDashboard\Reserva.aspx" />
     <Content Include="AdminDashboard\ConfirmarReservas.aspx" />
@@ -755,6 +756,13 @@
     </Compile>
     <Compile Include="AdminDashboard\Reparto.aspx.designer.cs">
       <DependentUpon>Reparto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\ReporteProductoDevolucion.aspx.cs">
+      <DependentUpon>ReporteProductoDevolucion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\ReporteProductoDevolucion.aspx.designer.cs">
+      <DependentUpon>ReporteProductoDevolucion.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminDashboard\ReporteVentaAnualTipoProducto.aspx.cs">
       <DependentUpon>ReporteVentaAnualTipoProducto.aspx</DependentUpon>

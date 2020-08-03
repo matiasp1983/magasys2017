@@ -1085,6 +1085,7 @@
         </Function>
         <Function Name="ProductosDevueltosXAnio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="anio" Type="nvarchar" Mode="In" />
+          <Parameter Name="CodTipoProducto" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="VentaAnualXTipoProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="anio" Type="nvarchar" Mode="In" />
@@ -1614,7 +1615,8 @@
             <Parameter Name="CodTipoProducto" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="ProductosDevueltosXAnio" ReturnType="Collection(MAGASYSModel.ProductosDevueltosXAnio_Result)">
-            <Parameter Name="anio" Mode="In" Type="String" />
+          <Parameter Name="anio" Mode="In" Type="String" />
+            <Parameter Name="CodTipoProducto" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="VentaAnualXTipoProducto" ReturnType="Collection(MAGASYSModel.VentaAnualXTipoProducto_Result)">
             <Parameter Name="anio" Mode="In" Type="String" />

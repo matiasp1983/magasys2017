@@ -45,6 +45,7 @@
                         <a href="#"><i class="fa fa-line-chart"></i><span class="nav-label">Reportes</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
                             <li id="liReporteVentaAnualTipoProducto" runat="server"><a href="ReporteVentaAnualTipoProducto.aspx">Venta anual por tipo de producto</a></li>
+                            <li id="liDevolucionProductos" runat="server"><a href="ReporteProductoDevolucion.aspx">Devolución de productos</a></li>
                         </ul>
                     </li>
                     <li id="liProveedores" runat="server">

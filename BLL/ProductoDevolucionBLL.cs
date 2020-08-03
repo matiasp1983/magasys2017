@@ -257,12 +257,19 @@ namespace BLL
             return bRes;
         }
 
-        public List<ProductosDevueltosXAnio_Result> ProductosDevueltosPorAnio(string pAnio)
+        public List<ProductosDevueltosXAnio_Result> ProductosDevueltosPorAnio(string pAnio, string pTipoProductos = "")
         {
             try
             {
                 MAGASYSEntities loContext = new MAGASYSEntities();
-                return loContext.ProductosDevueltosXAnio(pAnio).ToList();
+                if (String.IsNullOrEmpty(pTipoProductos))
+                {
+                    return loContext.ProductosDevueltosXAnio(pAnio, null).ToList();
+                }
+                else
+                {
+                    return loContext.ProductosDevueltosXAnio(pAnio, pTipoProductos).ToList();
+                }
             }
             catch (Exception ex)
             {
