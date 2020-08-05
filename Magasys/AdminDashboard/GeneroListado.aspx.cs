@@ -78,27 +78,6 @@ namespace PL.AdminDashboard
             }
         }
 
-        protected void BtnBaja_Click(object sender, EventArgs e)
-        {
-            //try
-            //{
-            //    if (!String.IsNullOrEmpty(hdIdProveedorBaja.Value))
-            //    {
-            //        var loIdProveedor = Convert.ToInt64(hdIdProveedorBaja.Value);
-            //        var oProveedor = new BLL.ProveedorBLL();
-            //        if (oProveedor.BajaProveedor(loIdProveedor))
-            //        {
-            //            CargarGrillaProveedores();
-            //        }
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    Logger loLogger = LogManager.GetCurrentClassLogger();
-            //    loLogger.Error(ex);
-            //}
-        }
-
         #endregion
 
         #region Metodos Privados
@@ -115,20 +94,20 @@ namespace PL.AdminDashboard
             oGeneroFiltro = new GeneroFiltro();
 
             if (string.IsNullOrEmpty(txtCodigo.Text))
-                    oGeneroFiltro.Id_Genero = 0;
+                oGeneroFiltro.Id_Genero = 0;
+            else
+            {
+                int loIdGenero;
+                bool loResultado = int.TryParse(txtCodigo.Text, out loIdGenero);
+                if (loResultado)
+                    oGeneroFiltro.Id_Genero = loIdGenero;
                 else
-                {
-                    int loIdGenero;
-                    bool loResultado = int.TryParse(txtCodigo.Text, out loIdGenero);
-                    if (loResultado)
-                        oGeneroFiltro.Id_Genero = loIdGenero;
-                    else
-                        oGeneroFiltro.Id_Genero = -1;
-                }
+                    oGeneroFiltro.Id_Genero = -1;
+            }
 
             if (!String.IsNullOrEmpty(txtNombre.Text))
                 oGeneroFiltro.Nombre = txtNombre.Text;
-            
+
 
             return oGeneroFiltro;
         }

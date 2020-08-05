@@ -19,8 +19,8 @@
                                 <div class="pull-left m-r-md">
                                     <i class="fa fa-newspaper-o text-navy mid-icon"></i>
                                 </div>
-                                <h2>Completar el mensaje</h2>
-                                <span>Completar el mensaje.</span>
+                                <h2>Confirmar reservas</h2>
+                                <span>Los siguientes clientes tiene reservas del producto ingresado, seleccione las reservas que desea confirmar.</span>
                             </div>
                         </div>
                         <div class="ibox">
