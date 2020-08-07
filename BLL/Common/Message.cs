@@ -120,6 +120,7 @@
         public const string MsjeReservaCargarCodigo = "Se debe completar el código de la reserva.";
         public const string MsjeReservaConfirmacionOk = "Las Reservas han sido confirmadas.";
         public const string MsjeReservaConfirmacionFailure = "No se confirmaron las Reservas marcadas";
+        public const string MsjeReservaSinConfirmar = "No hay reservas para confirmar.";
 
         #endregion
 

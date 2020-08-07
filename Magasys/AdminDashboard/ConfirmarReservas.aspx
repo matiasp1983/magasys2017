@@ -67,6 +67,7 @@
                                         </tr>
                                     </ItemTemplate>
                                 </asp:ListView>
+                                <div id="dvMensajeLsvReservas" runat="server" />
                                 <asp:HiddenField ID="hfCodigoReserva" runat="server"/>
                                 <div class="form-group" style="margin-bottom: 10px">
                                     <div class="col-xs-12 col-sm-6 col-md-8"></div>

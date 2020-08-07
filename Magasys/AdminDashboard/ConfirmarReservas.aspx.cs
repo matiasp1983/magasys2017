@@ -10,12 +10,14 @@ using BLL.Filters;
 
 namespace PL.AdminDashboard
 {
-	public partial class ConfirmarReservas : System.Web.UI.Page
-	{
+    public partial class ConfirmarReservas : System.Web.UI.Page
+    {
         #region Eventos
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            dvMensajeLsvReservas.Visible = false;
+
             if (!Page.IsPostBack)
                 CargarGrilla();
         }
@@ -23,7 +25,16 @@ namespace PL.AdminDashboard
         protected void BtnGuardar_Click(object sender, EventArgs e)
         {
             bool loResutado = false;
+
+            if (lsvReservaEdicion.Controls.Count == 0)
+            {
+                dvMensajeLsvReservas.InnerHtml = MessageManager.Info(dvMensajeLsvReservas, Message.MsjeReservaSinConfirmar, false);
+                dvMensajeLsvReservas.Visible = true;
+                return;
+            }
+
             List<ReservaClienteListado> lstReservasConfirmar = (List<ReservaClienteListado>)lsvReservaEdicion.DataSource;
+
             try
             {
                 foreach (var loItem in lsvReservaEdicion.Items)
@@ -92,7 +103,12 @@ namespace PL.AdminDashboard
 
             lsvReservaEdicion.DataSource = lstReservasConfirmar;
             lsvReservaEdicion.DataBind();
-            //Session.Remove(Enums.Session.ListadoReservaConfirmar.ToString());
+
+            if (lstReservasConfirmar.Count == 0)
+            {
+                dvMensajeLsvReservas.InnerHtml = MessageManager.Info(dvMensajeLsvReservas, Message.MsjeReservaSinConfirmar, false);
+                dvMensajeLsvReservas.Visible = true;
+            }
         }
 
         private List<ReservaClienteListado> MapListViewToListObject(ListView pListView)

@@ -31,6 +31,15 @@ namespace PL.AdminDashboard {
         protected global::System.Web.UI.WebControls.ListView lsvReservaEdicion;
         
         /// <summary>
+        /// Control dvMensajeLsvReservas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvMensajeLsvReservas;
+        
+        /// <summary>
         /// Control hfCodigoReserva.
         /// </summary>
         /// <remarks>
