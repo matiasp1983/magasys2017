@@ -65,12 +65,12 @@
         </div>
         <hr />
         <div class="row">
-            <div class="col-md-6">
-                All Rights Reserved. Magasys
+            <div class="col-md-6">                
+                ©2020 Magasys - Todos los derechos reservados.
             </div>
-            <div class="col-md-6 text-right">
+<%--            <div class="col-md-6 text-right">
                 <small>©2020</small>
-            </div>
+            </div>--%>
         </div>
     </div>
 

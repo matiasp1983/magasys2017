@@ -122,15 +122,15 @@
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="ibox">
+<%--                    <div class="ibox">
                         <div class="ibox-title">
                             <h5>Cart Summary</h5>
                         </div>
                         <div class="ibox-content">
-<%--                            <span>Total
+                            <span>Total
                             </span>
                             <h2 class="font-bold">$390,00
-                            </h2>--%>
+                            </h2>
 
                             <hr />
                             <span class="text-muted small">*For United States, France and Germany applicable sales tax will be applied
@@ -142,15 +142,15 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>--%>
 
                     <div class="ibox">
                         <div class="ibox-title">
-                            <h5>Support</h5>
+                            <h5>Soporte</h5>
                         </div>
                         <div class="ibox-content text-center">
-                            <h3><i class="fa fa-phone"></i>+43 100 783 001</h3>
-                            <span class="small">Please contact with us if you have any questions. We are avalible 24h.
+                            <h3><i class="fa fa-phone"></i>+54 9 351 611-3752</h3>
+                            <span class="small">Póngase en contacto con nosotros si tiene alguna pregunta. Estamos disponibles las 24h.
                             </span>
                         </div>
                     </div>
