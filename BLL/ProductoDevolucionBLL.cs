@@ -102,10 +102,14 @@ namespace BLL
                                 TIPO_PRODUCTO = loDetalleProductoIngreso.ProductoEdicion.Producto.TipoProducto.DESCRIPCION,
                                 EDICION = loDetalleProductoIngreso.ProductoEdicion.EDICION,
                                 FECHA_EDICION = Convert.ToDateTime(loDetalleProductoIngreso.ProductoEdicion.FECHA_EDICION),
-                                FECHA_DEVOLUCION = Convert.ToDateTime(loDetalleProductoIngreso.FECHA_DEVOLUCION),
                                 CANTIDAD_DISPONIBLE = loDetalleProductoIngreso.ProductoEdicion.CANTIDAD_DISPONIBLE,
                                 CANTIDAD_RESERVAS = loCantidadReservaEdicionPorProdEdicion
                             };
+
+                            if (loDetalleProductoIngreso.FECHA_DEVOLUCION != null)
+                            {
+                                oDevolucion.FECHA_DEVOLUCION = loDetalleProductoIngreso.FECHA_DEVOLUCION.ToString();
+                            }
 
                             lstDevolucion.Add(oDevolucion);
                         }
@@ -146,9 +150,13 @@ namespace BLL
                                 TIPO_PRODUCTO = loDetalleProductoIngreso.ProductoEdicion.Producto.TipoProducto.DESCRIPCION,
                                 EDICION = loDetalleProductoIngreso.ProductoEdicion.EDICION,
                                 FECHA_EDICION = Convert.ToDateTime(loDetalleProductoIngreso.ProductoEdicion.FECHA_EDICION),
-                                FECHA_DEVOLUCION = Convert.ToDateTime(loDetalleProductoIngreso.FECHA_DEVOLUCION),
                                 CANTIDAD_DISPONIBLE = loDetalleProductoIngreso.ProductoEdicion.CANTIDAD_DISPONIBLE
                             };
+
+                            if (loDetalleProductoIngreso.FECHA_DEVOLUCION != null)
+                            {
+                                oDevolucion.FECHA_DEVOLUCION = loDetalleProductoIngreso.FECHA_DEVOLUCION.ToString();
+                            }
 
                             lstDevolucion.Add(oDevolucion);
                         }
@@ -290,7 +298,7 @@ namespace BLL
         public string TIPO_PRODUCTO { get; set; }
         public string EDICION { get; set; }
         public DateTime FECHA_EDICION { get; set; }
-        public DateTime FECHA_DEVOLUCION { get; set; }
+        public string FECHA_DEVOLUCION { get; set; }
         public int CANTIDAD_DISPONIBLE { get; set; }
         public int CANTIDAD_RESERVAS { get; set; }
         public int CANTIDAD { get; set; }

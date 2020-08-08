@@ -24,20 +24,20 @@
                 <h2 class="font-bold">Bienvenido a M+</h2>
 
                 <p>
-                    Perfectly designed and precisely prepared admin theme with over 50 pages with extra new web app views.
+                    Ahora ya podés obtener los mejores productos de Magasys sin moverte de tu casa.
                 </p>
 
                 <p>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+                    Hazte cliente en nuestra plataforma web y aprovecha para reservar todos los productos que quieras que te los llevamos a tu casa!
                 </p>
 
-                <p>
+<%--                <p>
                     When an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                </p>
+                </p>--%>
 
-                <p>
+<%--                <p>
                     <small>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</small>
-                </p>
+                </p>--%>
 
             </div>
             <div class="col-md-6">

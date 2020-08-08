@@ -228,7 +228,7 @@
                                             <div class="btn-group">
                                                 <button runat="server" id="btnVisualizar" class="btn btn-outline btn-success btn-xl" title="Visualizar" onserverclick="BtnVisualizar_Click"><i class="fa fa-search"></i></button>
                                                 <button runat="server" id="btnModificar" class="btn btn-outline btn-info  btn-xl" title="Modificar" onserverclick="BtnModificar_Click"><i class="fa fa-pencil"></i></button>
-                                                <a class="btn btn-outline btn-danger btn-xl" data-toggle="modal" data-target="#ModalReservaAnular" title="Anular" onclick="CargarIdReservaAnular(this);"><i class="fa fa-trash-o"></i>
+                                                <a class="btn btn-outline btn-danger btn-xl" data-toggle="modal" data-target="#ModalReservaAnular" title="Eliminar" onclick="CargarIdReservaAnular(this);"><i class="fa fa-trash-o"></i>
                                                     <asp:HiddenField ID="hdIdReserva" runat="server" />
                                                 </a>                                                
                                             </div>

@@ -85,7 +85,7 @@ namespace PL.AdminDashboard
                 txtFechaDevolucion.Enabled = false;
 
                 // Cuando la fecha propuesta sea menor a la fecha del día, se debe resaltar el campo en rojo.
-                if (((Devolucion)e.Item.DataItem).FECHA_DEVOLUCION < loFechaDia)
+                if (Convert.ToDateTime(((Devolucion)e.Item.DataItem).FECHA_DEVOLUCION) < loFechaDia)
                 {
                     // Borde rojo para el campo FECHA_DEVOLUCION                    
                     txtFechaDevolucion.BorderColor = System.Drawing.ColorTranslator.FromHtml("#cc5965");

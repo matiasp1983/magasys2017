@@ -2,6 +2,7 @@
 using BLL.Filters;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Transactions;
 
 namespace BLL
@@ -187,7 +188,7 @@ namespace BLL
             {
                 using (var loRepProductoEdicion = new Repository<ProductoEdicion>())
                 {
-                    lstProductoEdicion = loRepProductoEdicion.Search(p => p.COD_ESTADO == 1 && p.COD_TIPO_PRODUCTO == oProductoFiltro.CodTipoProducto && p.Producto.COD_PROVEEDOR == oProductoFiltro.CodProveedor && p.CANTIDAD_DISPONIBLE > 0);
+                    lstProductoEdicion = loRepProductoEdicion.Search(p => p.COD_ESTADO == 1 && p.COD_TIPO_PRODUCTO == oProductoFiltro.CodTipoProducto && p.Producto.COD_PROVEEDOR == oProductoFiltro.CodProveedor && p.CANTIDAD_DISPONIBLE > 0).OrderByDescending(p => p.FECHA_EDICION).ToList();
 
                     if (!String.IsNullOrEmpty(oProductoFiltro.NombreEdicion) && lstProductoEdicion.Count > 0)
                         lstProductoEdicion = lstProductoEdicion.FindAll(p => p.EDICION.ToUpper().Contains(oProductoFiltro.NombreEdicion.ToUpper()));

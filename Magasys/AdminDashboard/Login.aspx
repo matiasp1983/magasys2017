@@ -32,7 +32,7 @@
                 </div>
                 <asp:Button ID="btnLogin" runat="server" Text="Login" CssClass="btn btn-primary block full-width m-b" OnClick="btnLogin_Click" />
             </form>
-            <p class="m-t"><small>©2020 All Rights Reserved. Magasys</small> </p>
+            <p class="m-t"><small>©2020 Magasys - Todos los derechos reservados.</small> </p>
         </div>
     </div>
 
