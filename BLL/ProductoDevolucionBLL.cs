@@ -67,7 +67,7 @@ namespace BLL
                 using (var loRepDetalleProductoIngreso = new Repository<DetalleProductoIngreso>())
                 {
                     //lstDetalleProductoIngreso = loRepDetalleProductoIngreso.Search(p => p.FECHA_DEVOLUCION != null && p.ProductoEdicion.COD_ESTADO == 1 && p.ProductoEdicion.COD_TIPO_PRODUCTO == oProductoFiltro.CodTipoProducto && p.ProductoEdicion.Producto.COD_PROVEEDOR == oProductoFiltro.CodProveedor && p.ProductoEdicion.CANTIDAD_DISPONIBLE > 0).GroupBy(x => x.COD_PRODUCTO_EDICION).Select(m => m.First()).ToList();
-                    lstDetalleProductoIngreso = loRepDetalleProductoIngreso.Search(p => p.ProductoEdicion.COD_ESTADO == 1 && p.ProductoEdicion.COD_TIPO_PRODUCTO == oProductoFiltro.CodTipoProducto && p.ProductoEdicion.Producto.COD_PROVEEDOR == oProductoFiltro.CodProveedor && p.ProductoEdicion.CANTIDAD_DISPONIBLE > 0).GroupBy(x => x.COD_PRODUCTO_EDICION).Select(m => m.First()).ToList();
+                    lstDetalleProductoIngreso = loRepDetalleProductoIngreso.Search(p => p.ProductoEdicion.COD_ESTADO == 1 && p.ProductoEdicion.COD_TIPO_PRODUCTO == oProductoFiltro.CodTipoProducto && p.ProductoEdicion.Producto.COD_PROVEEDOR == oProductoFiltro.CodProveedor && p.ProductoEdicion.CANTIDAD_DISPONIBLE > 0).GroupBy(x => x.COD_PRODUCTO_EDICION).Select(m => m.First()).OrderByDescending(p => p.ProductoEdicion.FECHA_EDICION).ToList();
                     //lstDetalleProductoIngreso = loRepDetalleProductoIngreso.Search(p => p.FECHA_DEVOLUCION != null && p.ProductoEdicion.COD_ESTADO == 1 && p.ProductoEdicion.COD_TIPO_PRODUCTO == oProductoFiltro.CodTipoProducto && p.ProductoEdicion.Producto.COD_PROVEEDOR == oProductoFiltro.CodProveedor && p.ProductoEdicion.CANTIDAD_DISPONIBLE > 0).ToList();
 
 
@@ -134,7 +134,7 @@ namespace BLL
             {
                 using (var loRepDetalleProductoIngreso = new Repository<DetalleProductoIngreso>())
                 {
-                    lstDetalleProductoIngreso = loRepDetalleProductoIngreso.Search(p => p.FECHA_DEVOLUCION != null && p.FECHA_DEVOLUCION == loFechaDia && p.ProductoEdicion.COD_ESTADO == 1 && p.ProductoEdicion.CANTIDAD_DISPONIBLE > 0).GroupBy(x => x.COD_PRODUCTO_EDICION).Select(m => m.First()).ToList();
+                    lstDetalleProductoIngreso = loRepDetalleProductoIngreso.Search(p => p.FECHA_DEVOLUCION != null && p.FECHA_DEVOLUCION == loFechaDia && p.ProductoEdicion.COD_ESTADO == 1 && p.ProductoEdicion.CANTIDAD_DISPONIBLE > 0).GroupBy(x => x.COD_PRODUCTO_EDICION).Select(m => m.First()).OrderByDescending(p => p.ProductoEdicion.FECHA_EDICION).ToList();
 
                     if (lstDetalleProductoIngreso.Count > 0)
                     {

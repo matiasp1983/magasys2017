@@ -91,6 +91,7 @@
         public const string MsjeListadoDevolucionListadoSinResultados = "No se encontraron Devoluciones de productos para la búsqueda seleccionada.";
         public const string MsjeDevolucionAnularOk = "La devolución se pudo anular.";
         public const string MsjeDevolucionAnularFailure = "La devolución no se pudo anular.";
+        public const string MsjeDevolucionStockInsuficiente = "Se conservan las unidades para las reservas confirmadas, indique otra cantidad para devolver";
 
         #endregion
 

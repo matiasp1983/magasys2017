@@ -179,9 +179,7 @@
                                                 <asp:Label ID="lblFechaEdicion" runat="server" Text='<%#Convert.ToDateTime(Eval("FECHA_EDICION")).ToString("dd/MM/yyyy")%>'></asp:Label>
                                             </td>
                                             <td>
-                                                <div id="dvFechaDevolucion" style="width: 100%">
-                                                    <asp:TextBox ID="txtFechaDevolucion" runat="server" CssClass="form-control" MaxLength="5" autocomplete="off" Text='<%#Convert.ToDateTime(Eval("FECHA_DEVOLUCION")).ToString("dd/MM/yyyy")%>'></asp:TextBox>
-                                                </div
+                                                <asp:Label ID="lblFechaDevolucion" runat="server" Text='<%#(Eval("FECHA_DEVOLUCION") != null) ? Convert.ToDateTime(Eval("FECHA_DEVOLUCION")).ToString("dd/MM/yyyy"):null%>'></asp:Label>
                                             </td>
                                             <td>
                                                 <asp:Label ID="lblCantidadDisponible" runat="server" Text='<%#Eval("CANTIDAD_DISPONIBLE").ToString()%>'></asp:Label>

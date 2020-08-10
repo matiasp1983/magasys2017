@@ -84,7 +84,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="col-sm-10 control-label">Nombre del Producto</label>
-                                            <asp:TextBox ID="txtNombreProducto" runat="server" CssClass="form-control" MaxLength="12" autocomplete="off"></asp:TextBox>
+                                            <asp:TextBox ID="txtNombreProducto" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off"></asp:TextBox>
                                         </div>
                                     </div>
                                 </div>

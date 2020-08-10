@@ -79,7 +79,7 @@
                         <div class="ibox-content">
                             <div class="text-center">
                                 <div class="alert alert-success">
-                                    <a class="alert-link" href="#">Seleccione las reservas que desea cancelar.</a>
+                                    <a class="alert-link" href="#">Seleccione las reservas que desea anular.</a>
                                 </div>
                             </div>
                         </div>
@@ -90,7 +90,7 @@
                         <div class="ibox">
                             <div class="ibox-content">
                                 <br />
-                                <asp:ListView ID="lsvReservaEdicion" runat="server" Visible="true" OnSelectedIndexChanged="lsvReservaEdicion_SelectedIndexChanged">
+                                <asp:ListView ID="lsvReservaEdicion" runat="server" Visible="true">
                                     <LayoutTemplate>
                                         <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                             <thead>
@@ -101,7 +101,7 @@
                                                     <th>Reserva</th>
                                                     <th>Nombre del Cliente</th>
                                                     <th>Producto</th>
-                                                    <th>Cod Producto</th>
+                                                    <th>Edición</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -122,7 +122,7 @@
                                                 <input id="chkCodigoReserva" runat="server" class="i-checks" type="checkbox" />
                                             </td>
                                             <td class="text-left">
-                                                <asp:Label ID="lblIdReserva" runat="server" Text='<%#Eval("ID_RESERVA_EDICION").ToString()%>'></asp:Label>
+                                                <asp:Label ID="lblIdReserva" runat="server" Text='<%#Eval("COD_RESERVA").ToString()%>'></asp:Label>
                                             </td>
                                             <td class="text-left">
                                                 <asp:Label ID="lblCliente" runat="server" Text='<%#Eval("NOMBRE_CLIENTE").ToString()%>'></asp:Label>
@@ -131,7 +131,10 @@
                                                 <asp:Label ID="lblPorducto" runat="server" Text='<%#Eval("NOMBRE_PRODUCTO").ToString().Length > 50 ? String.Format("{0}...", Eval("NOMBRE_PRODUCTO").ToString().Remove(50).TrimEnd()):Eval("NOMBRE_PRODUCTO")%>'></asp:Label>
                                             </td>
                                             <td>
-                                                <asp:Label ID="LblProdEdi" runat="server" Text='<%#Eval("COD_EDICION").ToString().Length > 50 ? String.Format("{0}...", Eval("COD_EDICION").ToString().Remove(50).TrimEnd()):Eval("COD_EDICION")%>'></asp:Label>
+                                                <asp:Label ID="lblEdicion" runat="server" Text='<%#Eval("EDICION").ToString().Length > 50 ? String.Format("{0}...", Eval("EDICION").ToString().Remove(50).TrimEnd()):Eval("EDICION")%>'></asp:Label>
+                                            </td>
+                                            <td class="text-left">
+                                                <asp:Label ID="Label1" runat="server" Text='<%#Eval("ID_RESERVA_EDICION").ToString()%>' Visible="false"></asp:Label>
                                             </td>
                                         </tr>
                                     </ItemTemplate>
@@ -141,7 +144,6 @@
                                 <div class="form-group" style="margin-bottom: 10px">
                                     <div class="col-xs-12 col-sm-6 col-md-8"></div>
                                     <div class="col-xs-12 col-md-4" style="text-align: right">
-                                        <%--<asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-success" OnClick="BtnGuardar_Click" />--%>
                                         <a class="btn btn-success" data-toggle="modal" data-target="#ModalGuardar">Guardar
                                             <asp:HiddenField ID="hdIdReserva" runat="server" />
                                         </a>  

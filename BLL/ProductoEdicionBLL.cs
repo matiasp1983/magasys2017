@@ -1,8 +1,6 @@
 ﻿using BLL.DAL;
-using BLL.Filters;
 using System;
 using System.Collections.Generic;
-using System.Transactions;
 
 namespace BLL
 {
@@ -99,8 +97,6 @@ namespace BLL
 
                     oProductoEdicionAux.CANTIDAD_DISPONIBLE = oProductoEdicion.CANTIDAD_DISPONIBLE - cantidad;
 
-
-
                     if (oProductoEdicionAux.CANTIDAD_DISPONIBLE < 1)
                     {
                         oProductoEdicionAux.COD_ESTADO = 2;
@@ -109,7 +105,6 @@ namespace BLL
                         else if (oProductoEdicion.FECHA_DEVOLUCION_REAL != null)
                             oProductoEdicionAux.FECHA_DEVOLUCION_REAL = oProductoEdicion.FECHA_DEVOLUCION_REAL;
                     }
-
 
                     bRes = ModificarProductoEdicion(oProductoEdicionAux);
                 }
