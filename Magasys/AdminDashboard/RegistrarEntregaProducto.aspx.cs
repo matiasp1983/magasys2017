@@ -55,8 +55,6 @@ namespace PL.AdminDashboard
         {
             bool loResutado = false;
             List<DetalleVenta> lstDetalleVenta = new List<DetalleVenta>();
-            //List<BLL.ReservaEdicionListado> lstReservas = new List<BLL.ReservaEdicionListado>();
-            //lstReservas = (List <BLL.ReservaEdicionListado> )lsvReservas.DataSource;
             BLL.DAL.Venta oVenta = new BLL.DAL.Venta()
             {
                 FECHA = DateTime.Now,
@@ -70,9 +68,8 @@ namespace PL.AdminDashboard
                 {
                     try
                     {
-                        BLL.DAL.ReservaEdicion oReservaEdicion = new BLL.ReservaEdicionBLL().ObtenerReservaEdicion(Convert.ToInt32(((Label)loItem.Controls[3]).Text));
+                        BLL.DAL.ReservaEdicion oReservaEdicion = new BLL.ReservaEdicionBLL().ObtenerReservaEdicion(Convert.ToInt32(((Label)loItem.Controls[13]).Text));
                         BLL.DAL.Reserva oReserva = new BLL.ReservaBLL().ObtenerReserva(oReservaEdicion.COD_RESERVA);
-                        // BLL.DAL.Cliente oCliente = new BLL.ClienteBLL().ObtenerCliente(oReserva.COD_CLIENTE);
                         if (oVenta.COD_CLIENTE == null)
                         {
                             oVenta.COD_CLIENTE = oReserva.COD_CLIENTE;
@@ -82,10 +79,10 @@ namespace PL.AdminDashboard
                         {
                             CANTIDAD = 1,
                             COD_PRODUCTO_EDICION = oReservaEdicion.COD_PROD_EDICION,
-                            PRECIO_UNIDAD = Convert.ToInt32(((Label)loItem.Controls[9]).Text),
-                            SUBTOTAL = Convert.ToInt32(((Label)loItem.Controls[9]).Text)
-
+                            PRECIO_UNIDAD = Convert.ToInt32(((Label)loItem.Controls[11]).Text),
+                            SUBTOTAL = Convert.ToInt32(((Label)loItem.Controls[11]).Text)
                         };
+
                         lstDetalleVenta.Add(oDetalleVenta);
                         oVenta.TOTAL += oDetalleVenta.SUBTOTAL;
 
@@ -93,26 +90,20 @@ namespace PL.AdminDashboard
                         loResutado = new ProductoEdicionBLL().ActualizarCantidadDisponible(oDetalleVenta.COD_PRODUCTO_EDICION, oDetalleVenta.CANTIDAD);
 
                         // Actualizar Estado de Reserva Edicion
-
-                        oReservaEdicion.COD_ESTADO = 11;
+                        oReservaEdicion.COD_ESTADO = 11; //Entregada 
                         loResutado = new ReservaEdicionBLL().ModificarReservaEdidion(oReservaEdicion);
 
                         // Si es Reservar Unica hay que cambiar el estado a Finalizado
-
                         if (oReserva.COD_TIPO_RESERVA == 1)
                         {
-                            oReserva.COD_ESTADO = 8;
+                            oReserva.COD_ESTADO = 8; //Finalizada
                             loResutado = new ReservaBLL().ModificarReserva(oReserva);
                         }
-
-
                     }
                     catch (Exception ex)
                     {
 
                     }
-
-
                 }
             }
 

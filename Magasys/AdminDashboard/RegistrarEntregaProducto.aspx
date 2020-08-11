@@ -96,6 +96,7 @@
                                                     <th class="text-left">Código de Reserva</th>
                                                     <th class="text-left">Producto</th>
                                                     <th data-hide="phone,tablet">Edición</th>
+                                                    <th data-hide="phone,tablet">Forma de Entrega</th>
                                                     <th data-hide="phone,tablet">Precio</th>
                                                 </tr>
                                             </thead>
@@ -117,16 +118,22 @@
                                                 <input id="chkCodigoReserva" runat="server" class="i-checks" type="checkbox" title='<%#string.Format("{0}", Eval("PRECIO_EDICION").ToString())%>' />
                                             </td>
                                             <td class="text-left">
-                                                <asp:Label ID="lblCodigoReserva" runat="server" Text='<%#Eval("ID_RESERVA_EDICION").ToString()%>'></asp:Label>
+                                                <asp:Label ID="lblCodigoReserva" runat="server" Text='<%#Eval("COD_RESERVA").ToString()%>'></asp:Label>
                                             </td>
                                             <td>
                                                 <asp:Label ID="lblNombreProducto" runat="server" Text='<%#(Eval("NOMBRE_PRODUCTO") != null) ? Eval("NOMBRE_PRODUCTO"):null%>'></asp:Label>
                                             </td>
                                             <td class="text-left">
-                                                <asp:Label ID="lblDescripcionEdicion" runat="server" Text='<%#(Eval("DESC_EDICION") != null) ? Eval("DESC_EDICION"):null%>'></asp:Label>
+                                                <asp:Label ID="lblDescripcionEdicion" runat="server" Text='<%#(Eval("EDICION") != null) ? Eval("EDICION"):null%>'></asp:Label>
+                                            </td>
+                                            <td class="text-left">
+                                                <asp:Label ID="Label1" runat="server" Text='<%#Eval("FORMA_ENTREGA").ToString()%>'></asp:Label>
                                             </td>
                                             <td class="text-left">
                                                 <asp:Label ID="lblPrecio" runat="server" Text='<%#Eval("PRECIO_EDICION").ToString()%>'></asp:Label>
+                                            </td>
+                                            <td class="text-left">
+                                                <asp:Label ID="Label2" runat="server" Text='<%#Eval("ID_RESERVA_EDICION").ToString()%>' Visible ="false"></asp:Label>
                                             </td>
                                         </tr>
                                     </ItemTemplate>
