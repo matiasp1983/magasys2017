@@ -39,7 +39,8 @@ namespace BLL
             {
                 using (var rep = new Repository<Usuario>())
                 {
-                    lstUsuarios = rep.Search(p => p.FECHA_BAJA == null && p.COD_ESTADO == 1 && !p.NOMBRE_USUARIO.ToUpper().Equals("ADMIN") && p.ID_ROL != 3);
+                    //lstUsuarios = rep.Search(p => p.FECHA_BAJA == null && p.COD_ESTADO == 1 && !p.NOMBRE_USUARIO.ToUpper().Equals("ADMIN") && p.ID_ROL != 3);
+                    lstUsuarios = rep.Search(p => p.FECHA_BAJA == null && p.COD_ESTADO == 1 && p.ID_ROL != 3);
 
                     lstUsuarios.Sort((x, y) => y.FECHA_ALTA.CompareTo(x.FECHA_ALTA));
 

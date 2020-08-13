@@ -159,7 +159,7 @@ namespace PL.AdminDashboard
                 {
                     var loIdProducto = Convert.ToInt64(hdIdProductoBaja.Value);
 
-                    if (ddlEstado.SelectedValue == "1")
+                    if (ddlEstado.SelectedValue == "1" || ddlEstado.SelectedValue == string.Empty)
                     {
                         bRes = new BLL.ProductoBLL().ProductoActivo(loIdProducto);
 
