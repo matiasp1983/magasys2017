@@ -56,10 +56,13 @@ namespace PL.AdminDashboard
                 Logger loLogger = LogManager.GetCurrentClassLogger();
                 loLogger.Error(ex);
             }
+
+            Session.Remove(Enums.Session.ListadoReservaConfirmar.ToString());
         }
 
         protected void BtnCancelar_Click(object sender, EventArgs e)
         {
+            Session.Remove(Enums.Session.ListadoReservaConfirmar.ToString());
             Response.Redirect("ProductoIngreso.aspx", false);
         }
 
@@ -69,12 +72,16 @@ namespace PL.AdminDashboard
 
         private void CargarGrilla() // EL SIGUIENTE CÓDIGO ES DE EJEMPLO PARA PODER VISUALIZAR LA GRILLA!!
         {
-            ListView lsvReservas = (ListView)Session[Enums.Session.ListadoReservaConfirmar.ToString()];
-            List<ReservaClienteListado> lstReservasConfirmar = MapListViewToListObject(lsvReservas);
-
-            lsvReservaEdicion.DataSource = lstReservasConfirmar;
-            lsvReservaEdicion.DataBind();
-            Session.Remove(Enums.Session.ListadoReservaConfirmar.ToString());
+            if (Session[Enums.Session.ListadoReservaConfirmar.ToString()] != null)
+            {
+                ListView lsvReservas = (ListView)Session[Enums.Session.ListadoReservaConfirmar.ToString()];
+                List<ReservaClienteListado> lstReservasConfirmar = MapListViewToListObject(lsvReservas);
+                lblCantidadIngresada.Text = "40";
+                lblReservasSeleccionadas.Text = "10";
+                lblReservasTotales.Text = "120";
+                lsvReservaEdicion.DataSource = lstReservasConfirmar;
+                lsvReservaEdicion.DataBind();
+            }
         }
 
         private List<ReservaClienteListado> MapListViewToListObject(ListView pListView)

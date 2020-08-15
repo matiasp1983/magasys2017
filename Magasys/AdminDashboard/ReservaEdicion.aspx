@@ -23,6 +23,43 @@
                                 <span>Los siguientes clientes tiene reservas del producto ingresado, seleccione las reservas que desea confirmar.</span>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox-title">                                       
+                                        <h5>Ingreso</h5>
+                                    </div>
+                                    <div class="ibox-content">
+                                        <h1 class="no-margins"><asp:Label ID="lblCantidadIngresada" runat="server" Text=''></asp:Label></h1>
+                                        <small>Ingresos totales</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox-title">
+                                        <span class="label label-info pull-right">Confirmadas</span>
+                                        <h5>Reservas</h5>
+                                    </div>
+                                    <div class="ibox-content">
+                                        <h1 class="no-margins"><asp:Label ID="lblReservasSeleccionadas" runat="server" Text=''></asp:Label></h1>
+                                        <small>Reservas seleccionadas</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox-title">
+                                        <span class="label label-primary pull-right">Total</span>
+                                        <h5>Reservas</h5>
+                                    </div>
+                                    <div class="ibox-content">
+                                        <h1 class="no-margins"><asp:Label ID="lblReservasTotales" runat="server" Text=''></asp:Label></h1>
+                                        <small>Reservas totales</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         <div class="ibox">
                             <div class="ibox-content">
                                 <br />
