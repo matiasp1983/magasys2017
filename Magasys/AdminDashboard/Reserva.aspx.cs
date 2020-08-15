@@ -81,6 +81,12 @@ namespace PL.AdminDashboard
             var lCodigoProducto = hfCodigoProducto.Value;
             hfCodigoProducto.Value = String.Empty;
 
+            if (Convert.ToDateTime(txtFechaInicio.Text) < DateTime.Now.Date)
+            {
+                Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.InfoModal(Message.MsjeReservaFechaInicioMenorQueFechaActual)); //"La Fecha de inicio debe ser mayor o igual que la fecha actual."
+                return;
+            }
+
             if (!String.IsNullOrEmpty(txtFechaFin.Text) && Convert.ToDateTime(txtFechaFin.Text) < Convert.ToDateTime(txtFechaInicio.Text))
             {
                 Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.InfoModal(Message.MsjeReservaFechaInicioMayorQueFechaFin)); //"La Fecha de fin debe ser mayor que la Fecha de inicio."
