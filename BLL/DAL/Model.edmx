@@ -407,6 +407,7 @@
           <Property Name="ID_ROL" Type="int" Nullable="false" />
           <Property Name="COD_ESTADO" Type="int" Nullable="false" />
           <Property Name="RECUPERAR_CONTRASENIA" Type="nvarchar" MaxLength="100" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Venta">
           <Key>
@@ -1615,7 +1616,7 @@
             <Parameter Name="CodTipoProducto" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="ProductosDevueltosXAnio" ReturnType="Collection(MAGASYSModel.ProductosDevueltosXAnio_Result)">
-          <Parameter Name="anio" Mode="In" Type="String" />
+            <Parameter Name="anio" Mode="In" Type="String" />
             <Parameter Name="CodTipoProducto" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="VentaAnualXTipoProducto" ReturnType="Collection(MAGASYSModel.VentaAnualXTipoProducto_Result)">
@@ -2128,6 +2129,7 @@
           <NavigationProperty Name="Empleado" Relationship="MAGASYSModel.FK_Empleado_Usuario" FromRole="Usuario" ToRole="Empleado" />
           <NavigationProperty Name="Estado" Relationship="MAGASYSModel.FK_Usuario_Estado" FromRole="Usuario" ToRole="Estado" />
           <NavigationProperty Name="Rol" Relationship="MAGASYSModel.FK_Usuario_Rol" FromRole="Usuario" ToRole="Rol" />
+          <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Venta">
           <Key>
@@ -3246,6 +3248,7 @@
           <EntitySetMapping Name="Usuario">
             <EntityTypeMapping TypeName="MAGASYSModel.Usuario">
               <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
                 <ScalarProperty Name="RECUPERAR_CONTRASENIA" ColumnName="RECUPERAR_CONTRASENIA" />
                 <ScalarProperty Name="COD_ESTADO" ColumnName="COD_ESTADO" />
                 <ScalarProperty Name="ID_ROL" ColumnName="ID_ROL" />

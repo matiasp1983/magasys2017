@@ -17,7 +17,7 @@ namespace PL
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-            {                
+            {
                 CargarUsuarioDesdeSession();
             }
         }
@@ -25,13 +25,13 @@ namespace PL
         protected void BtnModificar_Click(object sender, EventArgs e)
         {
             Response.Redirect("UsuarioEditar.aspx", false);
-        }               
+        }
 
         protected void BtnCancelar_Click(object sender, EventArgs e)
         {
             Session.Remove(Enums.Session.Usuario.ToString());
             Response.Redirect("UsuarioListado.aspx", false);
-        }      
+        }
 
         #endregion
 
@@ -49,13 +49,14 @@ namespace PL
                     if (oUsuario.ID_USUARIO > 0)
                         txtCodigo.Text = oUsuario.ID_USUARIO.ToString();
                     if (!String.IsNullOrEmpty(oUsuario.FECHA_ALTA.ToString()))
-                        txtFechaAlta.Text = oUsuario.FECHA_ALTA.ToString("dd/MM/yyyy");                    
-                    
+                        txtFechaAlta.Text = oUsuario.FECHA_ALTA.ToString("dd/MM/yyyy");
+
                     txtNombre.Text = oUsuario.NOMBRE.ToString();
                     txtApellido.Text = oUsuario.APELLIDO.ToString();
+                    txtEmail.Text = oUsuario.EMAIL;
                     txtNombreUsuario.Text = oUsuario.NOMBRE_USUARIO;
 
-                    txtContrasenia.Attributes["value"] = oUsuario.CONTRASENIA;                                        
+                    txtContrasenia.Attributes["value"] = oUsuario.CONTRASENIA;
 
                     var loRol = new BLL.RolBLL().ObtenerRol(oUsuario.ID_ROL);
                     if (loRol != null)
@@ -75,8 +76,8 @@ namespace PL
                 Logger loLogger = LogManager.GetCurrentClassLogger();
                 loLogger.Error(ex);
             }
-        }        
+        }
 
-        #endregion       
+        #endregion
     }
 }

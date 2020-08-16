@@ -65,6 +65,18 @@
                         </div>
                         <div class="row">
                             <div class="form-group">
+                                <label class="col-sm-2 control-label">Email</label>
+
+                                <div class="col-sm-10">
+                                    <div class="input-group m-b" id="divEmail">
+                                        <span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
+                                        <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off"></asp:TextBox>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
                                 <label class="col-sm-2 control-label">Nombre de Usuario</label>
 
                                 <div class="col-sm-10">
@@ -198,12 +210,16 @@
             $(FormUsuarioEditar).validate({
                 rules: {
                     <%=txtNombre.UniqueID%>: {
-                required: true,
-                lettersonly: true
-            },
+                    required: true,
+                    lettersonly: true
+                },
                     <%=txtApellido.UniqueID%>: {
                     required: true,
                     lettersonly: true
+                },
+                    <%=txtEmail.UniqueID%>: {
+                    required: true,
+                    email: true
                 },
                     <%=ddlRol.UniqueID%>: {
                     required: true
@@ -224,6 +240,10 @@
             },
                     <%=txtApellido.UniqueID%>: {
                 required: "Este campo es requerido."
+            },
+                    <%=txtEmail.UniqueID%>: {
+                required: "Este campo es requerido.",
+                    email: "Formato de email incorrecto."
             },
                     <%=ddlRol.UniqueID%>: {
                 required: "Este campo es requerido."

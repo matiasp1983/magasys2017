@@ -51,6 +51,8 @@ public partial class Usuario
 
     public string RECUPERAR_CONTRASENIA { get; set; }
 
+    public string EMAIL { get; set; }
+
 
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

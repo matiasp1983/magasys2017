@@ -149,6 +149,7 @@
     <Content Include="AdminDashboard\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="AdminDashboard\fonts\opensans.css" />
     <Content Include="AdminDashboard\fonts\roboto.css" />
+    <Content Include="AdminDashboard\ForgotPassword.aspx" />
     <Content Include="AdminDashboard\Genero.aspx" />
     <Content Include="AdminDashboard\GeneroEditar.aspx" />
     <Content Include="AdminDashboard\GeneroListado.aspx" />
@@ -518,6 +519,13 @@
     </Compile>
     <Compile Include="AdminDashboard\EmpleadoVisualizar.aspx.designer.cs">
       <DependentUpon>EmpleadoVisualizar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\ForgotPassword.aspx.cs">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\ForgotPassword.aspx.designer.cs">
+      <DependentUpon>ForgotPassword.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminDashboard\Genero.aspx.cs">
       <DependentUpon>Genero.aspx</DependentUpon>

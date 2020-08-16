@@ -17,7 +17,7 @@ namespace PL
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
-            {                
+            {
                 CargarUsuarioDesdeSession();
             }
         }
@@ -35,7 +35,7 @@ namespace PL
                     if (loResutado)
                     {
                         ActualizarSessionUsuario(oUsuario);
-                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeUsuarioSuccessModificacion, "Modificación Usuario","UsuarioListado.aspx"));                        
+                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeUsuarioSuccessModificacion, "Modificación Usuario", "UsuarioListado.aspx"));
                     }
                     else
                         Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeUsuarioFailure));
@@ -45,7 +45,7 @@ namespace PL
                     Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeUsuarioFailure));
                 }
 
-                Session.Remove(Enums.Session.Usuario.ToString());                               
+                Session.Remove(Enums.Session.Usuario.ToString());
             }
             catch (Exception ex)
             {
@@ -54,13 +54,13 @@ namespace PL
                 Logger loLogger = LogManager.GetCurrentClassLogger();
                 loLogger.Error(ex);
             }
-        }        
+        }
 
         protected void BtnCancelar_Click(object sender, EventArgs e)
         {
             Session.Remove(Enums.Session.Usuario.ToString());
             Response.Redirect("UsuarioListado.aspx", false);
-        }                
+        }
 
         protected void btnCambiarContrasenia_Click(object sender, EventArgs e)
         {
@@ -78,7 +78,8 @@ namespace PL
             {
                 NOMBRE = txtNombre.Text,
                 APELLIDO = txtApellido.Text,
-                CONTRASENIA = txtContrasenia.Attributes["value"]
+                CONTRASENIA = txtContrasenia.Attributes["value"],
+                EMAIL = txtEmail.Text
             };
 
             if (Session[Enums.Session.Usuario.ToString()] != null)
@@ -95,7 +96,7 @@ namespace PL
             imgPreview.ImageUrl = "img/perfil_default.png";
 
             if (fuploadImagen.PostedFile.ContentLength != 0)
-            {                
+            {
                 int loTamanioImagen = fuploadImagen.PostedFile.ContentLength;
                 byte[] loImagenOriginal = new byte[loTamanioImagen];
                 fuploadImagen.PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
@@ -131,13 +132,14 @@ namespace PL
                     if (oUsuario.ID_USUARIO > 0)
                         txtCodigo.Text = oUsuario.ID_USUARIO.ToString();
                     if (!String.IsNullOrEmpty(oUsuario.FECHA_ALTA.ToString()))
-                        txtFechaAlta.Text = oUsuario.FECHA_ALTA.ToString("dd/MM/yyyy");                    
-                    
+                        txtFechaAlta.Text = oUsuario.FECHA_ALTA.ToString("dd/MM/yyyy");
+
                     txtNombre.Text = oUsuario.NOMBRE.ToString();
                     txtApellido.Text = oUsuario.APELLIDO.ToString();
+                    txtEmail.Text = oUsuario.EMAIL;
                     txtNombreUsuario.Text = oUsuario.NOMBRE_USUARIO;
 
-                    txtContrasenia.Attributes["value"] = oUsuario.CONTRASENIA;                    
+                    txtContrasenia.Attributes["value"] = oUsuario.CONTRASENIA;
 
                     CargarRoles(oUsuario.ID_ROL);
 
@@ -180,7 +182,7 @@ namespace PL
         private void ActualizarSessionUsuario(BLL.DAL.Usuario oUsuario)
         {
             var loUsuarioSession = (BLL.DAL.Usuario)Session[AdminDashboardSessionBLL.DefaultSessionsId.Usuario.ToString()];
-            if (loUsuarioSession.ID_USUARIO == oUsuario.ID_USUARIO)            
+            if (loUsuarioSession.ID_USUARIO == oUsuario.ID_USUARIO)
                 Session[AdminDashboardSessionBLL.DefaultSessionsId.Usuario.ToString()] = oUsuario;
         }
 

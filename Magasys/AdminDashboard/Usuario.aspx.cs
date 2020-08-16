@@ -83,7 +83,8 @@ namespace PL
                 NOMBRE_USUARIO = txtNombreUsuario.Text,
                 CONTRASENIA = txtContraseniaConfirmacion.Text,
                 FECHA_ALTA = DateTime.Now,
-                COD_ESTADO = 1
+                COD_ESTADO = 1,
+                EMAIL = txtEmail.Text
             };
 
             if (!String.IsNullOrEmpty(ddlRol.SelectedValue))

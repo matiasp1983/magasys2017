@@ -65,6 +65,18 @@
                         </div>
                         <div class="row">
                             <div class="form-group">
+                                <label class="col-sm-2 control-label">Email</label>
+
+                                <div class="col-sm-10">
+                                    <div class="input-group m-b">
+                                        <span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
+                                        <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" disabled="" autocomplete="off"></asp:TextBox>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group">
                                 <label class="col-sm-2 control-label">Nombre de Usuario</label>
 
                                 <div class="col-sm-10">
@@ -87,7 +99,6 @@
 
                                 <div class="col-sm-10">
                                     <div id="divRol">
-                                        <%--<asp:DropDownList ID="ddlRol" runat="server" CssClass="select2_rol form-control" disabled=""></asp:DropDownList>--%>
                                         <asp:TextBox ID="txtRol" runat="server" CssClass="form-control" disabled="" autocomplete="off"></asp:TextBox>
                                     </div>
                                 </div>
