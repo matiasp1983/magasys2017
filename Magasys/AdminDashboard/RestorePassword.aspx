@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RestorePassword.aspx.cs" Inherits="PL.CustomersWebSite.RestorePassword" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RestorePassword.aspx.cs" Inherits="PL.AdminDashboard.RestorePassword" %>
 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">

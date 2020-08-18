@@ -88,6 +88,7 @@ namespace PL
                 oUsuario.FECHA_ALTA = ((BLL.DAL.Usuario)base.Session[Enums.Session.Usuario.ToString()]).FECHA_ALTA;
                 oUsuario.NOMBRE_USUARIO = ((BLL.DAL.Usuario)base.Session[Enums.Session.Usuario.ToString()]).NOMBRE_USUARIO;
                 oUsuario.COD_ESTADO = ((BLL.DAL.Usuario)base.Session[Enums.Session.Usuario.ToString()]).COD_ESTADO;
+                oUsuario.RECUPERAR_CONTRASENIA = ((BLL.DAL.Usuario)base.Session[Enums.Session.Usuario.ToString()]).RECUPERAR_CONTRASENIA;
             }
 
             if (!String.IsNullOrEmpty(ddlRol.SelectedValue))

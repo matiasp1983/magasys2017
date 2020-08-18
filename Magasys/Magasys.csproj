@@ -199,6 +199,7 @@
     <Content Include="AdminDashboard\ReservaFinalizar.aspx" />
     <Content Include="AdminDashboard\ReservaListado.aspx" />
     <Content Include="AdminDashboard\ReservaVisualizar.aspx" />
+    <Content Include="AdminDashboard\RestorePassword.aspx" />
     <Content Include="AdminDashboard\UsuarioEditar.aspx" />
     <Content Include="AdminDashboard\UsuarioListado.aspx" />
     <Content Include="AdminDashboard\UsuarioVisualizar.aspx" />
@@ -827,6 +828,13 @@
     </Compile>
     <Compile Include="AdminDashboard\ReservaVisualizar.aspx.designer.cs">
       <DependentUpon>ReservaVisualizar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\RestorePassword.aspx.cs">
+      <DependentUpon>RestorePassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\RestorePassword.aspx.designer.cs">
+      <DependentUpon>RestorePassword.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminDashboard\UsuarioEditar.aspx.cs">
       <DependentUpon>UsuarioEditar.aspx</DependentUpon>

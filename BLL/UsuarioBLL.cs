@@ -19,7 +19,7 @@ namespace BLL
             {
                 using (var rep = new Repository<Usuario>())
                 {
-                    oUsuario = rep.Find(p => p.ID_USUARIO == idUsuario);                    
+                    oUsuario = rep.Find(p => p.ID_USUARIO == idUsuario);
                 }
             }
             catch (Exception)
@@ -112,6 +112,25 @@ namespace BLL
             return oUsuario;
         }
 
+        public Usuario ObtenerUsuarioKiosco(string pUsarioHash)
+        {
+            Usuario oUsuario = null;
+
+            try
+            {
+                using (var rep = new Repository<Usuario>())
+                {
+                    oUsuario = rep.Find(p => p.RECUPERAR_CONTRASENIA == pUsarioHash && p.ID_ROL != RolUsuario.Cliente);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return oUsuario;
+        }
+
         public List<UsuarioListado> ObtenerUsuarios()
         {
             List<UsuarioListado> lstUsuarioListado = null;
@@ -161,12 +180,16 @@ namespace BLL
             {
                 using (var rep = new Repository<Usuario>())
                 {
-                    if (!string.IsNullOrEmpty(oUsuario.RECUPERAR_CONTRASENIA))
-                        oUsuario.RECUPERAR_CONTRASENIA = BCrypt.Net.BCrypt.HashPassword(oUsuario.RECUPERAR_CONTRASENIA);
-
                     oUsuario.CONTRASENIA = BCrypt.Net.BCrypt.HashPassword(oUsuario.CONTRASENIA);
 
                     bRes = rep.Create(oUsuario) != null;
+
+                    if (bRes)
+                    {
+                        if (oUsuario.ID_USUARIO > 0)
+                            oUsuario.RECUPERAR_CONTRASENIA = BCrypt.Net.BCrypt.HashPassword(oUsuario.ID_USUARIO.ToString());
+                        bRes = rep.Update(oUsuario);
+                    }
                 }
             }
             catch (Exception)
@@ -222,6 +245,28 @@ namespace BLL
             return bRes;
         }
 
+        public bool ModificarUsuarioCambioContrasenia(Usuario oUsuario)
+        {
+            var bRes = false;
+            try
+            {
+                using (var rep = new Repository<Usuario>())
+                {
+                    if (!ConsultarEsIgualContraseniaCambioContrasenia(oUsuario))
+                    {
+                        oUsuario.CONTRASENIA = BCrypt.Net.BCrypt.HashPassword(oUsuario.CONTRASENIA);
+                        bRes = rep.Update(oUsuario);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return bRes;
+        }
+
         public bool ModificarUsuario(Usuario oUsuario)
         {
             var bRes = false;
@@ -229,7 +274,7 @@ namespace BLL
             {
                 using (var rep = new Repository<Usuario>())
                 {
-                    if (!ConsultarEsIgualContrasenia(oUsuario.CONTRASENIA))                    
+                    if (!ConsultarEsIgualContrasenia(oUsuario.CONTRASENIA))
                         oUsuario.CONTRASENIA = BCrypt.Net.BCrypt.HashPassword(oUsuario.CONTRASENIA);
                     bRes = rep.Update(oUsuario);
                 }
@@ -280,6 +325,69 @@ namespace BLL
             }
 
             return bEsIgual;
+        }
+
+        public bool ConsultarEsIgualContraseniaCambioContrasenia(Usuario pUsuario)
+        {
+            bool bEsIgual = false;
+
+            try
+            {
+                using (var rep = new Repository<Usuario>())
+                {
+                    var oUsuario = rep.Find(p => p.ID_USUARIO == pUsuario.ID_USUARIO && p.COD_ESTADO == 1 && p.FECHA_BAJA == null);
+
+                    bEsIgual = (BCrypt.Net.BCrypt.Verify(pUsuario.CONTRASENIA, oUsuario.CONTRASENIA));
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return bEsIgual;
+        }
+
+        public bool ConsultarExistenciaCliente(int tipoDocumento, int nroDocumento)
+        {
+            bool bEsNuevoCliente = false;
+
+            try
+            {
+                using (var rep = new Repository<Cliente>())
+                {
+                    var oCliente = rep.Find(p => p.TIPO_DOCUMENTO == tipoDocumento && p.NRO_DOCUMENTO == nroDocumento && p.FECHA_BAJA == null && p.COD_ESTADO == 1);
+                    bEsNuevoCliente = oCliente == null;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return bEsNuevoCliente;
+        }
+
+        public string ConsultarExistenciaUsuarioDeKiosco(string email)
+        {
+            string bExiste = string.Empty;
+
+            try
+            {
+                using (var rep = new Repository<Usuario>())
+                {
+                    var oUsuario = rep.Find(p => p.EMAIL.Equals(email) && p.FECHA_BAJA == null && p.COD_ESTADO == 1 && p.ID_ROL != 3);
+
+                    if (oUsuario != null)
+                        bExiste = rep.Find(x => x.ID_USUARIO == oUsuario.ID_USUARIO).RECUPERAR_CONTRASENIA;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return bExiste;
         }
 
         #endregion

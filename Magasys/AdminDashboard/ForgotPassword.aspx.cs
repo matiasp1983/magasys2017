@@ -21,21 +21,21 @@ namespace PL.AdminDashboard
                 if (ValidarCamposObligatorios())
                 {
                     var loForgotPassword = new BLL.ForgotPasswordBLL();
-                    var loCliente = new BLL.ClienteBLL();
+                    var loUsuario= new BLL.UsuarioBLL();
 
                     if (loForgotPassword.ValidarEmail(txtEmail.Text))
                     {
-                        var loUsuarioHash = loCliente.ConsultarExistenciaCliente(txtEmail.Text);
+                        var loUsuarioHash = loUsuario.ConsultarExistenciaUsuarioDeKiosco(txtEmail.Text);
 
                         if (!string.IsNullOrEmpty(loUsuarioHash))
                         {
-                            if (loForgotPassword.EnviarEmail(txtEmail.Text, loUsuarioHash))
+                            if (loForgotPassword.EnviarEmailKiosco(txtEmail.Text, loUsuarioHash))
                                 Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeForgotPasswordSuccess, "Recupero de contraseña", "Login.aspx"));
                             else
                                 Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeForgotPasswordFailure));
                         }
                         else
-                            Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeForgotPasswordFailureNoCliente));
+                            Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeForgotPasswordFailureNoUsuarioKiosco));
                     }
                     else
                         Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeForgotPasswordIncorrecto));

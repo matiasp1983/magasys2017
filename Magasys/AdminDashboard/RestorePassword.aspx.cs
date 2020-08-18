@@ -1,13 +1,9 @@
 ﻿using BLL.Common;
-using NLog;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using NLog;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
-namespace PL.CustomersWebSite
+namespace PL.AdminDashboard
 {
     public partial class RestorePassword : System.Web.UI.Page
     {
@@ -31,7 +27,7 @@ namespace PL.CustomersWebSite
                         {
                             if (ValidarCoincidencia())
                             {
-                                var oUsuario = new BLL.UsuarioBLL().ObtenerUsuario(loUsuarioHash);
+                                var oUsuario = new BLL.UsuarioBLL().ObtenerUsuarioKiosco(loUsuarioHash);
 
                                 oUsuario.CONTRASENIA = txtContraseniaNueva.Text;
 
@@ -39,7 +35,7 @@ namespace PL.CustomersWebSite
 
                                 if (loResutado)
                                 {
-                                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeMsjeRestorePasswordSuccessAlta, "Restaurar Contraseña","Login.aspx"));
+                                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeMsjeRestorePasswordSuccessAlta, "Restaurar Contraseña", "Login.aspx"));
                                 }
                                 else
                                     Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeMsjeRestorePasswordFailure));

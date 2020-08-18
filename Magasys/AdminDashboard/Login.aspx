@@ -31,6 +31,9 @@
                     <asp:TextBox ID="txtContrasenia" runat="server" class="form-control" placeholder="Contraseña" TextMode="Password"></asp:TextBox>
                 </div>
                 <asp:Button ID="btnLogin" runat="server" Text="Login" CssClass="btn btn-primary block full-width m-b" OnClick="btnLogin_Click" />
+                <a href="ForgotPassword.aspx">
+                    <small>¿Se te olvid&oacute; tu contrase&ntilde;a?</small>
+                </a>
             </form>
             <p class="m-t"><small>©2020 Magasys - Todos los derechos reservados.</small> </p>
         </div>
