@@ -46,7 +46,8 @@ namespace PL.AdminDashboard
 
                         txtCodigo.Text = oReserva.ID_RESERVA.ToString();
                         txtFechaAlta.Text = oReserva.FECHA.ToString("dd/MM/yyyy");
-                        txtFechaIni.Text = Convert.ToDateTime(oReserva.FECHA_INICIO).ToString("dd/MM/yyyy");
+                        if (!String.IsNullOrEmpty(oReserva.FECHA_INICIO.ToString()))
+                            txtFechaIni.Text = Convert.ToDateTime(oReserva.FECHA_INICIO).ToString("dd/MM/yyyy");
                         if (!String.IsNullOrEmpty(oReserva.FECHA_FIN.ToString()))
                             txtFechaFin.Text = Convert.ToDateTime(oReserva.FECHA_FIN).ToString("dd/MM/yyyy");
                         txtTipoReserva.Text = oReserva.TipoReserva.DESCRIPCION;

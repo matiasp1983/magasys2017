@@ -64,26 +64,34 @@ namespace PL.AdminDashboard
                 {
                     if (((HtmlInputCheckBox)loItem.Controls[1]).Checked)
                     {
-                        ReservaEdicionReparto oReservaEdicionReparto = new ReservaEdicionReparto
+                        if (!String.IsNullOrEmpty(((Label)loItem.Controls[15]).Text))
                         {
-                            CLIENTE = ((Label)loItem.Controls[3]).Text,
-                            PRODUCTO = ((Label)loItem.Controls[7]).Text,
-                            EDICION = ((Label)loItem.Controls[9]).Text,
-                            CODIGO_EDICION = Convert.ToInt32(((Label)loItem.Controls[19]).Text),
-                            CODIGO_CLIENTE = ((Label)loItem.Controls[13]).Text,
-                            DIRECCION_MAPS = ((Label)loItem.Controls[15]).Text,
-                            CLIENTE_NOMBRE = ((Label)loItem.Controls[17]).Text,
-                            ID_RESERVA_EDICION = Convert.ToInt32(((Label)loItem.Controls[11]).Text)
-                        };
+                            ReservaEdicionReparto oReservaEdicionReparto = new ReservaEdicionReparto
+                            {
+                                CLIENTE = ((Label)loItem.Controls[3]).Text,
+                                PRODUCTO = ((Label)loItem.Controls[7]).Text,
+                                EDICION = ((Label)loItem.Controls[9]).Text,
+                                CODIGO_EDICION = Convert.ToInt32(((Label)loItem.Controls[19]).Text),
+                                CODIGO_CLIENTE = ((Label)loItem.Controls[13]).Text,
+                                DIRECCION_MAPS = ((Label)loItem.Controls[15]).Text,
+                                CLIENTE_NOMBRE = ((Label)loItem.Controls[17]).Text,
+                                ID_RESERVA_EDICION = Convert.ToInt32(((Label)loItem.Controls[11]).Text)
+                            };
 
-                        lstReservaEdicionReparto.Add(oReservaEdicionReparto);
+                            lstReservaEdicionReparto.Add(oReservaEdicionReparto);
 
-                        BLL.DAL.Cliente oCliente = new BLL.DAL.Cliente();
-                        oCliente.ID_CLIENTE = Convert.ToInt32(((Label)loItem.Controls[13]).Text);
-                        oCliente.DIRECCION_MAPS = ((Label)loItem.Controls[15]).Text;
-                        var loExiste = lstCliente.Where(p => p.ID_CLIENTE == oCliente.ID_CLIENTE).ToList().Count == 1;
-                        if (!loExiste)
-                            lstCliente.Add(oCliente);
+                            BLL.DAL.Cliente oCliente = new BLL.DAL.Cliente();
+                            oCliente.ID_CLIENTE = Convert.ToInt32(((Label)loItem.Controls[13]).Text);
+                            oCliente.DIRECCION_MAPS = ((Label)loItem.Controls[15]).Text;
+                            var loExiste = lstCliente.Where(p => p.ID_CLIENTE == oCliente.ID_CLIENTE).ToList().Count == 1;
+                            if (!loExiste)
+                                lstCliente.Add(oCliente);
+                        }
+                        else
+                        {
+                            Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.InfoModal(Message.MsjeRepartoClienteSinDireccion + ((Label)loItem.Controls[17]).Text));
+                            return;
+                        }
                     }
                 }
 
