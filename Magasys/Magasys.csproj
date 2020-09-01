@@ -155,6 +155,7 @@
     <Content Include="AdminDashboard\GeneroListado.aspx" />
     <Content Include="AdminDashboard\GestionReparto.aspx" />
     <Content Include="AdminDashboard\HojaDeRuta.aspx" />
+    <Content Include="AdminDashboard\HojaDeRutaMaps.aspx" />
     <Content Include="AdminDashboard\img\perfil_default.png" />
     <Content Include="AdminDashboard\img\preview_icons.png" />
     <Content Include="AdminDashboard\Index.aspx" />
@@ -562,6 +563,13 @@
     </Compile>
     <Compile Include="AdminDashboard\HojaDeRuta.aspx.designer.cs">
       <DependentUpon>HojaDeRuta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\HojaDeRutaMaps.aspx.cs">
+      <DependentUpon>HojaDeRutaMaps.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\HojaDeRutaMaps.aspx.designer.cs">
+      <DependentUpon>HojaDeRutaMaps.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminDashboard\Index.aspx.cs">
       <DependentUpon>Index.aspx</DependentUpon>

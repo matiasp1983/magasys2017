@@ -99,7 +99,7 @@ namespace PL.AdminDashboard
                 {
                     Session.Add(Enums.Session.ClientesHojaDeRuta.ToString(), lstCliente);
                     Session.Add(Enums.Session.ReservasHojaDeRuta.ToString(), lstReservaEdicionReparto);
-                    Response.Redirect("HojaDeRuta.aspx", false);
+                    Response.Redirect("HojaDeRutaMaps.aspx", false);
                 }
                 else
                     Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.InfoModal(Message.MsjeRepartoInfo));

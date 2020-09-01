@@ -26,7 +26,7 @@ namespace BLL.FuerzaBruta
             ULTIMONODO.CLIENTE.DIRECCION_MAPS = oNegocio.DIRECCION_MAPS;
             ULTIMONODO.CLIENTE.LATITUD = oNegocio.LATITUD;
             ULTIMONODO.CLIENTE.LONGITUD = oNegocio.LONGITUD;
-            this.MODO_TRANSPORTE = modoTransporte;
+            this.MODO_TRANSPORTE = modoTransporte.ToUpper();
         }
 
         #region Métodos Públicos
@@ -142,7 +142,7 @@ namespace BLL.FuerzaBruta
                 {
                     switch (MODO_TRANSPORTE)
                     {
-                        case "Driving":
+                        case "DRIVING":
 
                             matrix = client.DistanceMatrix.GetDistanceMatrix(
                             new List<IGeoCoordinatesLocation>()
@@ -158,7 +158,7 @@ namespace BLL.FuerzaBruta
 
                             break;
 
-                        case "Bicycling":
+                        case "BICYCLING":
 
                             matrix = client.DistanceMatrix.GetDistanceMatrix(
                             new List<IGeoCoordinatesLocation>()
@@ -174,7 +174,7 @@ namespace BLL.FuerzaBruta
 
                             break;
 
-                        case "Walking":
+                        case "WALKING":
 
                             matrix = client.DistanceMatrix.GetDistanceMatrix(
                             new List<IGeoCoordinatesLocation>()
