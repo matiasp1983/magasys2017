@@ -179,6 +179,7 @@ namespace BLL
                                     {
                                         foreach (var loReservaEdicion in lstReservaEdicion)
                                         {
+                                            String dia = loReservaEdicion.FECHA.DayOfWeek.ToString();
                                             ReservaEdicionListado oReservaListado = new ReservaEdicionListado
                                             {
                                                 ID_RESERVA_EDICION = loReservaEdicion.ID_RESERVA_EDICION,

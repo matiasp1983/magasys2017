@@ -167,7 +167,23 @@ namespace BLL
                         using (var loRepDiaSemana = new Repository<DiaSemana>())
                             oDiarioEdicion.DIA_SEMANA = loRepDiaSemana.Find(p => p.ID_DIA_SEMANA == loDiasSemana.ID_DIA_SEMANA).NOMBRE;
 
-                        lstDiarioEdicion.Add(oDiarioEdicion);
+                        // Validar dia de la fecha para diario
+
+                        if (Common.Utilities.EsDiaCorrecto(oDiarioEdicion.DIA_SEMANA))
+                        {
+                            lstDiarioEdicion.Add(oDiarioEdicion);
+                        }
+
+                        // Si esta puesto el check de permitir cualquier dia
+
+                        //if (checked))
+                        //{
+                        //    lstDiarioEdicion.Add(oDiarioEdicion);
+                        //}
+
+
+
+
                     }
                 }
             }
