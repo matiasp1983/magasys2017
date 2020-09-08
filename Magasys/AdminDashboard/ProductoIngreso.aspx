@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="Ingreso de Productos" Language="C#" MasterPageFile="~/AdminDashboard/MasterPage.Master" AutoEventWireup="true" CodeBehind="ProductoIngreso.aspx.cs" Inherits="PL.AdminDashboard.ProductoIngreso" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="contentMaster" runat="server">
     <style type="text/css">
@@ -66,8 +67,18 @@
                             </div>
                             <div class="row">
                                 <div class="hr-line-dashed"></div>
-                                <div class="form-group">
-                                    <div style="text-align: right; padding-right: 15px;">
+                                <div class="col-sm-12">
+                                    <div class="col-md-9 text-right p-h-xs">
+                                        <div id="divChkIngresoDiario" runat="server" class="form-group" style="display:none">
+                                            <div class="i-checks">
+                                                <label>
+                                                    <input runat="server" type="checkbox" id="chkIngresoDiario">
+                                                    <i></i>Ingresar producto del día
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 text-right">
                                         <a id="btnBuscarSuccess" class="ladda-button btn btn-success" style="background-color: #1c84c6; color: #FFFFFF; border-color: #1c84c6; border-radius: 3px; height: 33px; width: 100px; padding-left: 10px; padding-top: 0px;">
                                             <i class="fa fa-search"></i>
                                             <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="ladda-button btn btn-success" OnClick="BtnBuscar_Click" Style="padding: 4px 5px" />
@@ -585,11 +596,17 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="script" runat="server">
+    <!-- iCheck -->
+    <script src="js/plugins/iCheck/icheck.min.js"></script>
+
     <script type="text/javascript">
         var FormProductoIngreso = '#<%=FormProductoIngreso.ClientID%>';
 
         if (window.jQuery) {
             $(document).ready(function () {
+                $('.i-checks').iCheck({
+                    checkboxClass: 'icheckbox_square-green'
+                });
                 KeypressEnterDisabled();
                 LoadDatePicker();
                 LoadFootable();
@@ -666,7 +683,17 @@
                     placeholder: 'Seleccione un Tipo de Producto',
                     width: '100%',
                     allowClear: true
+                }).on('select2:select', function (e) {
+                    var loData = e.params.data;
+                    MostrarDivCheckboxIngresoDelDia(loData.id);
                 });
+        }
+
+        function MostrarDivCheckboxIngresoDelDia(idTipoProducto) {
+            $('#<%=divChkIngresoDiario.ClientID%>').css('display', 'none');
+            if (idTipoProducto == 1 || idTipoProducto == 5) {
+                $('#<%=divChkIngresoDiario.ClientID%>').removeAttr("style");                              
+            } 
         }
 
     </script>
