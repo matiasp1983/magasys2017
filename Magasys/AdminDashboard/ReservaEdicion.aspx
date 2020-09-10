@@ -109,7 +109,7 @@
                                         </tr>
                                     </ItemTemplate>
                                 </asp:ListView>
-                                <asp:HiddenField ID="hfCodigoReserva" runat="server"/>
+                                <%--<asp:HiddenField ID="hfCodigoReserva" runat="server"/>--%>
                                 <div class="form-group" style="margin-bottom: 10px">
                                     <div class="col-xs-12 col-sm-6 col-md-8"></div>
                                     <div class="col-xs-12 col-md-4" style="text-align: right">
@@ -130,34 +130,46 @@
     <script src="js/plugins/iCheck/icheck.min.js"></script>
 
     <script type="text/javascript">
+        var loContReservasSeleccionadas = 0;
 
         if (window.jQuery) {
-            $(document).ready(function () {                
+            $(document).ready(function () {    
+                
                 $('.i-checks').iCheck({
                     checkboxClass: 'icheckbox_square-green'
                 }).on('ifChecked', function (e) {
                     var isChecked = e.currentTarget.checked;
-                    var codigo = e.currentTarget.id.split('&')[1] + ";";
+                    //var codigo = e.currentTarget.id.split('&')[1] + ";";
 
                     if (isChecked == true) {
-                        if ($('#<%=hfCodigoReserva.ClientID%>').val() == "") {
+<%--                        if ($('#<%=hfCodigoReserva.ClientID%>').val() == "") {
                             $('#<%=hfCodigoReserva.ClientID%>').val(codigo);
                         } else {
                             var codigoAnterior = $('#<%=hfCodigoReserva.ClientID%>').val();
                             $('#<%=hfCodigoReserva.ClientID%>').val(codigoAnterior + codigo);
-                        }
+                        }--%>
+
+                        if ($('#<%=lblReservasSeleccionadas.ClientID%>').text() != "") {
+                            loContReservasSeleccionadas = parseInt($('#<%=lblReservasSeleccionadas.ClientID%>').text());
+                        }                        
+                        loContReservasSeleccionadas++;
+                        $('#<%=lblReservasSeleccionadas.ClientID%>').text(loContReservasSeleccionadas);
                     }
                 });
 
                 $('.i-checks').on('ifUnchecked', function (e) {
                     var isChecked = e.currentTarget.checked;
-                    var codigo = e.currentTarget.id.split('&')[1] + ";";                   
+                    //var codigo = e.currentTarget.id.split('&')[1] + ";";                   
 
                     if (isChecked == false) {
-                        if ($('#<%=hfCodigoReserva.ClientID%>').val() != "") {
+<%--                        if ($('#<%=hfCodigoReserva.ClientID%>').val() != "") {
                             var mm = $('#<%=hfCodigoReserva.ClientID%>').val();
                             $('#<%=hfCodigoReserva.ClientID%>').val(mm.replace(codigo,"").trim());
-                        }
+                        }--%>
+
+                        loContReservasSeleccionadas = parseInt($('#<%=lblReservasSeleccionadas.ClientID%>').text());
+                        loContReservasSeleccionadas--;
+                        $('#<%=lblReservasSeleccionadas.ClientID%>').text(loContReservasSeleccionadas);
                     }                    
                 });                
 
@@ -165,17 +177,18 @@
 
                 $('#check-all').on('click', function () {
                     if (checked == false) {
-                        $('.i-checks').prop('checked', true).iCheck('update');
-                        $('#<%=hfCodigoReserva.ClientID%>').val('');
-
-                        $('.i-checks').each(function () {                            
+                        //$('.i-checks').prop('checked', true).iCheck('update');
+                       <%-- $('#<%=hfCodigoReserva.ClientID%>').val('');--%>
+<%--                        $('.i-checks').each(function () {                            
                             $('#<%=hfCodigoReserva.ClientID%>').val($('#<%=hfCodigoReserva.ClientID%>').val()+(this.id.split('&')[1] + ";"));
-                        });                        
-
+                        });   --%>                     
+                        $('.i-checks').iCheck('check');
                         checked = true;
                     } else {
-                        $('.i-checks').prop('checked', false).iCheck('update');
-                        $('#<%=hfCodigoReserva.ClientID%>').val('');
+                        //$('.i-checks').prop('checked', false).iCheck('update');
+                        <%--$('#<%=hfCodigoReserva.ClientID%>').val('');--%>
+
+                        $('.i-checks').iCheck('uncheck');
                         checked = false;
                     }
 

@@ -16,7 +16,10 @@ namespace PL.AdminDashboard
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
+            {
+                lblReservasSeleccionadas.Text = "0";
                 CargarGrilla();
+            }
         }
 
         protected void BtnGuardar_Click(object sender, EventArgs e)
@@ -77,7 +80,6 @@ namespace PL.AdminDashboard
                 ListView lsvReservas = (ListView)Session[Enums.Session.ListadoReservaConfirmar.ToString()];
                 List<ReservaClienteListado> lstReservasConfirmar = MapListViewToListObject(lsvReservas);
                 lblCantidadIngresada.Text = "40";
-                lblReservasSeleccionadas.Text = "10";
                 lblReservasTotales.Text = "120";
                 lsvReservaEdicion.DataSource = lstReservasConfirmar;
                 lsvReservaEdicion.DataBind();
