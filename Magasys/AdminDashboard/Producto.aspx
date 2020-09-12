@@ -533,7 +533,6 @@
                          min: 1
                      },
                      <%=txtCantidadDeEntregaSuplemento.UniqueID%>: {
-                         required: true,
                          number: true,
                          digits: true,
                          min: 1
@@ -628,7 +627,6 @@
                          min: "Ingrese un valor mayor a 0."
                      },
                      <%=txtCantidadDeEntregaSuplemento.UniqueID%>: {
-                         required: "Este campo es requerido.",
                          number: "Ingrese un número válido.",
                          digits: "Ingrese solo dígitos.",
                          min: "Ingrese un valor mayor a 0."
