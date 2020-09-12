@@ -20,6 +20,7 @@ namespace PL.AdminDashboard
                 CargarTiposProducto();
                 CargarDiasDeSemana();
                 CargarPeriodicidades();
+                CargarDiarios();
                 CargarAnios();
             }
         }

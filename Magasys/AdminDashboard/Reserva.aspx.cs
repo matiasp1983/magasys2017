@@ -1,5 +1,6 @@
 ﻿using BLL;
 using BLL.Common;
+using BLL.DAL;
 using BLL.Filters;
 using NLog;
 using System;
@@ -80,6 +81,7 @@ namespace PL.AdminDashboard
             bool loResutado = false;
             var lCodigoProducto = hfCodigoProducto.Value;
             hfCodigoProducto.Value = String.Empty;
+            BLL.DAL.Reserva loReservaDiario = null;
 
             if (Convert.ToDateTime(txtFechaInicio.Text) < DateTime.Now.Date)
             {
@@ -146,6 +148,18 @@ namespace PL.AdminDashboard
                 loReserva.ENVIO_DOMICILIO = "X"; // Se indica que la forma de entrega es “Envío a Domicilio”
 
             loResutado = new BLL.ReservaBLL().AltaReserva(loReserva);
+
+            if (ddlTipoProducto.SelectedValue == "5")
+            {
+                using (var loRepSuplemento = new Repository<Suplemento>())
+                {
+                    var oSuplemento = loRepSuplemento.Find(p => p.COD_PRODUCTO == loReserva.COD_PRODUCTO);
+                    loReservaDiario = loReserva;
+                    loReservaDiario.COD_PRODUCTO = oSuplemento.DiarioDiaSemana.COD_DIARIO;
+                    // Cada suplemento se reserva con su correspondiente Diario.
+                    loResutado = new ReservaBLL().AltaReserva(loReservaDiario);
+                }
+            }
 
             if (loResutado)
             {

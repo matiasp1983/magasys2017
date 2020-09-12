@@ -461,15 +461,14 @@ namespace PL.CustomersWebSite
 
                     if (Convert.ToInt32(loSplitReseva[6].ToString()) == 5) // Tipo de Producto Suplemento
                     {
-                        ProductoFiltro oProductoFiltro = new ProductoFiltro();
-                        oProductoFiltro.IdProducto = loReserva.COD_PRODUCTO;
-
-                        var oSuplemento = new SuplementoBLL().ObtenerSuplementoDiario(oProductoFiltro);
-
-                        loReservaDiario = loReserva;
-                        loReservaDiario.COD_PRODUCTO = oSuplemento.DiarioDiaSemana.COD_DIARIO;
-                        // Cada suplemento se reserva con su correspondiente Diario.
-                        loResutado = new ReservaBLL().AltaReserva(loReservaDiario);
+                        using (var loRepSuplemento = new Repository<Suplemento>())
+                        {
+                            var oSuplemento = loRepSuplemento.Find(p => p.COD_PRODUCTO == loReserva.COD_PRODUCTO);
+                            loReservaDiario = loReserva;
+                            loReservaDiario.COD_PRODUCTO = oSuplemento.DiarioDiaSemana.COD_DIARIO;
+                            // Cada suplemento se reserva con su correspondiente Diario.
+                            loResutado = new ReservaBLL().AltaReserva(loReservaDiario);
+                        }
                     }
 
                     if (!loResutado)
