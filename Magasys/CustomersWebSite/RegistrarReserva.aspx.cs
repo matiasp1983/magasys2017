@@ -340,6 +340,12 @@ namespace PL.CustomersWebSite
                             loResutado = 3;
                             break;
                         }
+                        if (Convert.ToDateTime(loSplitReseva[4].ToString()) < DateTime.Now.Date)
+                        {
+                            //"La Fecha de inicio debe ser mayor o igual que la fecha actual."
+                            loResutado = 6;
+                            break;
+                        }
                     }
                 }
             }

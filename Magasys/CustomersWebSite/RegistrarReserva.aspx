@@ -329,6 +329,14 @@
                             confirmButtonText: 'Aceptar'
                         });
                     }
+                    else if (msg == 6) {
+                        swal({
+                            title: "Confirmación Reserva",
+                            text: "La Fecha de inicio debe ser mayor o igual que la fecha actual.",
+                            type: "warning",
+                            confirmButtonText: 'Aceptar'
+                        });
+                    }
                 },
                 failure: function (data) {
                     swal({
