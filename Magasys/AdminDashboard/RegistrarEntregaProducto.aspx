@@ -87,7 +87,7 @@
                             <div class="ibox-content">                                
                                 <asp:ListView ID="lsvReservas" runat="server" OnItemDataBound="LsvReservas_ItemDataBound">
                                     <LayoutTemplate>
-                                        <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="5">
+                                        <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                             <thead>
                                                 <tr>
                                                     <td>                                                        

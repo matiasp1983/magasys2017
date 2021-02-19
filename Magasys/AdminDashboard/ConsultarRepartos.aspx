@@ -26,7 +26,7 @@
                         <div class="ibox-content">
                             <asp:ListView ID="lsvReparto" runat="server">
                                 <LayoutTemplate>
-                                    <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="5">
+                                    <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                         <thead>
                                             <tr>
                                                 <th class="text-left">Cliente</th>

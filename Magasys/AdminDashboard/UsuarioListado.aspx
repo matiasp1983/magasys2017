@@ -100,7 +100,7 @@
                             <br />
                             <asp:ListView ID="lsvUsuarios" runat="server" OnItemDataBound="LsvUsuarios_ItemDataBound">
                                 <LayoutTemplate>
-                                    <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="5">
+                                    <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                         <thead>
                                             <tr>
                                                 <th class="text-left">C&oacute;digo</th>

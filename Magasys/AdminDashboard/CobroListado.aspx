@@ -138,7 +138,7 @@
                         <div class="ibox-content">
                             <asp:ListView ID="lsvCobros" runat="server" OnItemDataBound="LsvCobros_ItemDataBound">
                                 <LayoutTemplate>
-                                    <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="5">
+                                    <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                         <thead>
                                             <tr>
                                                 <th class="text-left">Código</th>
