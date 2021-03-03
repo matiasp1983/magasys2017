@@ -13,8 +13,9 @@ namespace BLL.FuerzaBruta
         private NodoFB PRIMERNODO;
         private NodoFB ULTIMONODO;
         private string MODO_TRANSPORTE;
+        private bool REGRESA_AL_KIOSCO;
 
-        public EstrategiaFuerzaBruta(string modoTransporte)
+        public EstrategiaFuerzaBruta(string modoTransporte, bool regresaAlKiosco)
         {
             // Aquí obtenemos la dirección del Kiosco
             var oNegocio = new NegocioBLL().ObtenerNegocio();
@@ -27,6 +28,7 @@ namespace BLL.FuerzaBruta
             ULTIMONODO.CLIENTE.LATITUD = oNegocio.LATITUD;
             ULTIMONODO.CLIENTE.LONGITUD = oNegocio.LONGITUD;
             this.MODO_TRANSPORTE = modoTransporte.ToUpper();
+            this.REGRESA_AL_KIOSCO = regresaAlKiosco;
         }
 
         #region Métodos Públicos
@@ -97,7 +99,8 @@ namespace BLL.FuerzaBruta
                 List<NodoFB> nodosConInicioYFin = new List<NodoFB>();
                 nodosConInicioYFin.Add(PRIMERNODO);
                 nodosConInicioYFin.AddRange(unaCombinacion.NODOS);
-                nodosConInicioYFin.Add(ULTIMONODO);
+                if (REGRESA_AL_KIOSCO)
+                    nodosConInicioYFin.Add(ULTIMONODO);
 
                 unaCombinacion.NODOS = nodosConInicioYFin;
             }

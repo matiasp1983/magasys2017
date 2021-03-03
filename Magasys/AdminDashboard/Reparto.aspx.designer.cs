@@ -67,6 +67,15 @@ namespace PL.AdminDashboard {
         protected global::System.Web.UI.HtmlControls.HtmlButton btnLimpiar;
         
         /// <summary>
+        /// Control chkRegresarAlKiosco.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkRegresarAlKiosco;
+        
+        /// <summary>
         /// Control btnNuevo.
         /// </summary>
         /// <remarks>

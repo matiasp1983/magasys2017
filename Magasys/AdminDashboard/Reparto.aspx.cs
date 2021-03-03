@@ -51,6 +51,7 @@ namespace PL.AdminDashboard
 
                 Session.Remove(Enums.Session.ClientesHojaDeRuta.ToString());
                 Session.Remove(Enums.Session.ReservasHojaDeRuta.ToString());
+                Session.Remove(Enums.Session.RegresarAlKiosco.ToString());
 
                 var oNegocio = new NegocioBLL().ObtenerNegocio();
 
@@ -97,6 +98,10 @@ namespace PL.AdminDashboard
 
                 if (lstCliente.Count > 0 && lstReservaEdicionReparto.Count > 0)
                 {
+                    if (chkRegresarAlKiosco.Checked)
+                        Session.Add(Enums.Session.RegresarAlKiosco.ToString(), true);
+                    else
+                        Session.Add(Enums.Session.RegresarAlKiosco.ToString(), false);
                     Session.Add(Enums.Session.ClientesHojaDeRuta.ToString(), lstCliente);
                     Session.Add(Enums.Session.ReservasHojaDeRuta.ToString(), lstReservaEdicionReparto);
                     Response.Redirect("HojaDeRutaMaps.aspx", false);

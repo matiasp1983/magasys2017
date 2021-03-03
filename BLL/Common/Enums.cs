@@ -43,7 +43,8 @@
             ClientesHojaDeRuta,
             CodigoReserva,
             IdEmpleado,
-            HojaDeRuta
+            HojaDeRuta,
+            RegresarAlKiosco
         }
 
         #endregion

@@ -141,7 +141,7 @@ namespace PL.AdminDashboard
 
                     if (((List<BLL.DAL.Cliente>)(Session[Enums.Session.ClientesHojaDeRuta.ToString()])).Count > 0)
                     {
-                        BLL.FuerzaBruta.EstrategiaFuerzaBruta oEstrategiaFuerzaBruta = new BLL.FuerzaBruta.EstrategiaFuerzaBruta(modoTransporte);
+                        BLL.FuerzaBruta.EstrategiaFuerzaBruta oEstrategiaFuerzaBruta = new BLL.FuerzaBruta.EstrategiaFuerzaBruta(modoTransporte, true);
 
                         switch (modoTransporte)
                         {

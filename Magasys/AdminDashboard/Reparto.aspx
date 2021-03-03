@@ -2,6 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">    
     <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="css/plugins/switchery/switchery.css" rel="stylesheet">  
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="contentMaster" runat="server">
     <div class="row wrapper border-bottom white-bg page-heading">
@@ -75,10 +76,11 @@
                 <div class="col-lg-12">
                     <div class="ibox">
                         <div class="ibox-content">
-                            <div style="text-align: right;">
+                            <div style="text-align: right;">                                
+                                <label class="m-r"><input id="chkRegresarAlKiosco" runat="server" type="checkbox" class="js-switch" checked />&nbsp;&nbsp;&nbsp;Regresar al Kiosco</label>&nbsp;
                                 <button type="button" id="btnNuevo" runat="server" class="ladda-button btn btn-info" onserverclick="BtnGenerarHojaRuta_Click">
                                     <i class="fa fa-map-o"></i>&nbsp;&nbsp;<span>Generar hoja de ruta</span>
-                                </button>
+                                </button>                                
                             </div>
                             <br />
                             <asp:ListView ID="lsvReserva" runat="server">
@@ -153,32 +155,44 @@
 <asp:Content ID="Content3" ContentPlaceHolderID="script" runat="server">
     <!-- iCheck -->
     <script src="js/plugins/iCheck/icheck.min.js"></script>
+    <!-- Switchery -->
+   <script src="js/plugins/switchery/switchery.js"></script>
 
     <script type="text/javascript">
 
         if (window.jQuery) {
-            $(document).ready(function () {                
-                $('.i-checks').iCheck({
-                    checkboxClass: 'icheckbox_square-green'
-                });                        
-
-                var checked = false;
-
-                $('#check-all').on('click', function () {
-                    if (checked == false) {
-                        $('.i-checks').prop('checked', true).iCheck('update');
-                        checked = true;
-                    } else {
-                        $('.i-checks').prop('checked', false).iCheck('update');
-                        checked = false;
-                    }
-                });
+            $(document).ready(function () {
+                LoadJsSwitch();
+                LoadIchecks();
                 LoadFootable();
             });
         }        
 
         function LoadFootable() {
             $('.footable').footable();
+        }
+
+        function LoadJsSwitch() {
+            var elem = document.querySelector('.js-switch');
+            var switchery = new Switchery(elem);
+        }
+
+        function LoadIchecks() {
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green'
+            });
+            
+            var checked = false;
+
+            $('#check-all').on('click', function () {
+                if (checked == false) {
+                    $('.i-checks').prop('checked', true).iCheck('update');
+                    checked = true;
+                } else {
+                    $('.i-checks').prop('checked', false).iCheck('update');
+                    checked = false;
+                }
+            });
         }
 
     </script>

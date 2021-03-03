@@ -170,6 +170,11 @@ namespace PL.AdminDashboard
             }
         }
 
+        protected void BtnVolver_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Reparto.aspx", false);
+        }
+
         #endregion
 
         [WebMethod]
@@ -180,12 +185,12 @@ namespace PL.AdminDashboard
 
             try
             {
-                if (HttpContext.Current.Session[Enums.Session.ClientesHojaDeRuta.ToString()] != null && HttpContext.Current.Session[Enums.Session.ReservasHojaDeRuta.ToString()] != null)
+                if (HttpContext.Current.Session[Enums.Session.ClientesHojaDeRuta.ToString()] != null && HttpContext.Current.Session[Enums.Session.ReservasHojaDeRuta.ToString()] != null && HttpContext.Current.Session[Enums.Session.RegresarAlKiosco.ToString()] != null)
                 {
                     if (((List<BLL.DAL.Cliente>)(HttpContext.Current.Session[Enums.Session.ClientesHojaDeRuta.ToString()])).Count > 0)
                     {
                         List<RepartoListado> lstRepartoListado = new List<RepartoListado>();
-                        BLL.FuerzaBruta.EstrategiaFuerzaBruta oEstrategiaFuerzaBruta = new BLL.FuerzaBruta.EstrategiaFuerzaBruta(pModoTransporte);
+                        BLL.FuerzaBruta.EstrategiaFuerzaBruta oEstrategiaFuerzaBruta = new BLL.FuerzaBruta.EstrategiaFuerzaBruta(pModoTransporte, (bool)HttpContext.Current.Session[Enums.Session.RegresarAlKiosco.ToString()]);
 
                         switch (pModoTransporte)
                         {
@@ -204,10 +209,12 @@ namespace PL.AdminDashboard
 
                         double loDistanciaTotal = Convert.ToDouble(loFilaMatrizFB.COSTO_TOTAL_DISTANCIA.ToString()) / 1000;
                         int lowaypoint = 0;
+                        double? loLatDestino = 0;
+                        double? loLongDestino = 0;
 
                         foreach (var item in loFilaMatrizFB.NODOS_DISTANCIA)
                         {
-                            if (lowaypoint + 1 != loFilaMatrizFB.NODOS_DISTANCIA.Count)
+                            if (lowaypoint + 1 != loFilaMatrizFB.NODOS_DISTANCIA.Count || !(bool)HttpContext.Current.Session[Enums.Session.RegresarAlKiosco.ToString()])
                             {
                                 RepartoListado oRepartoListado = new RepartoListado
                                 {
@@ -227,6 +234,28 @@ namespace PL.AdminDashboard
                             ((object[])loLatLng[lowaypoint])[0] = item.ORIGEN.CLIENTE.LATITUD; // latitud
                             ((object[])loLatLng[lowaypoint])[1] = item.ORIGEN.CLIENTE.LONGITUD; // longitud
 
+                            if (lowaypoint == 0 && (bool)HttpContext.Current.Session[Enums.Session.RegresarAlKiosco.ToString()]) // Cuando es True debe regresar al kiosco, se guardar la latitud y la longitud de la dire del Kiosco
+                            {
+                                loLatDestino = item.ORIGEN.CLIENTE.LATITUD; // latitud
+                                loLongDestino = item.ORIGEN.CLIENTE.LONGITUD; // longitud
+                            }
+
+                            if (lowaypoint + 1 == loFilaMatrizFB.NODOS_DISTANCIA.Count && !(bool)HttpContext.Current.Session[Enums.Session.RegresarAlKiosco.ToString()])
+                            {
+                                lowaypoint++;
+                                loLatLng.Add(new object[2]);
+                                ((object[])loLatLng[lowaypoint])[0] = item.DESTINO.CLIENTE.LATITUD; // latitud
+                                ((object[])loLatLng[lowaypoint])[1] = item.DESTINO.CLIENTE.LONGITUD; // longitudkd
+                            }
+
+                            lowaypoint++;
+                        }
+
+                        if ((bool)HttpContext.Current.Session[Enums.Session.RegresarAlKiosco.ToString()]) // Cuando es True debe regresar al kiosco
+                        {
+                            loLatLng.Add(new object[2]);
+                            ((object[])loLatLng[lowaypoint])[0] = loLatDestino; // latitud
+                            ((object[])loLatLng[lowaypoint])[1] = loLongDestino; // longitud
                             lowaypoint++;
                         }
 

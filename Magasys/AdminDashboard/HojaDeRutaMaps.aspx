@@ -19,13 +19,16 @@
                             <div class="ibox float-e-margins">
                                 <div class="ibox-title">
                                     <h5>Modo de viaje</h5>
+                                     <div style="text-align: right;">
+                                                    <asp:Button ID="btnVolver" runat="server" Text="Volver" CssClass="btn btn-success" OnClick="BtnVolver_Click" formnovalidate="formnovalidate" />
+                                                </div>
                                 </div>
                                 <div class="ibox-content">
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="col-md-3">
                                                 <div class="form-group space-15" id="mode">
-                                                    <button id="btnDriving" class="btn btn-outline btn-success dim  active" type="button" title="En auto" onclick="initMap('DRIVING')"><i class="fas fa-car"></i></button>
+                                                    <button id="btnDriving" class="btn btn-outline btn-success dim active" type="button" title="En auto" onclick="initMap('DRIVING')"><i class="fas fa-car"></i></button>
                                                     <button id="btnWalking" class="btn btn-outline btn-success dim" type="button" title="A pie" onclick="initMap('WALKING')"><i class="fas fa-walking"></i></button>
                                                     <button id="btnBiking" class="btn btn-outline btn-success dim" type="button" title="En bicicleta" onclick="initMap('BICYCLING')"><i class="fas fa-biking"></i></button>
                                                 </div>
@@ -42,7 +45,8 @@
                                                 <div style="text-align: right;">                                                    
                                                     <a class="btn btn-info" data-toggle="modal" data-target="#ModalConfirmarRuta"><i class="fa fa-map-o"></i>&nbsp;&nbsp;Confirmar Ruta</a>
                                                     <button id="btnExportarExcel" runat="server" class="btn btn-info" type="button" onserverclick="BtnExportarExcel_Click"><i class="fas fa-file-download"></i>&nbsp;&nbsp;Exportar Ruta</button>                                                    
-                                                </div>
+                                                </div>                                                                
+                                               
                                             </div>
                                         </div>
                                     </div>
@@ -105,6 +109,8 @@
 
         function initMap(pModoTransporte) {
 
+            BotonSeleccionado(pModoTransporte);
+
             if (pModoTransporte == undefined)
                 pModoTransporte = "DRIVING";
 
@@ -144,9 +150,11 @@
         function calculateAndDisplayRoute(directionsService, directionsRenderer, waypointLatLng) {
             const waypts = [];
             var selectedMode = "";
+            var loLatDestino;
+            var loLongDestino;
 
             for (let i = 1; i < waypointLatLng.length; i++) {
-                if (waypointLatLng[i][0] != "ModoTransporte" && waypointLatLng[i][0] != "DistanciaTotal") {
+                if (waypointLatLng[i][0] != "ModoTransporte" && waypointLatLng[i][0] != "DistanciaTotal" && waypointLatLng[i + 1][0] != "ModoTransporte" && waypointLatLng[i + 1][0] != "DistanciaTotal") {
                     waypts.push({
                         location: new google.maps.LatLng(waypointLatLng[i][0], waypointLatLng[i][1]),
                         stopover: true
@@ -155,6 +163,8 @@
                 else {
                     if (waypointLatLng[i][0] == "ModoTransporte") {
                         selectedMode = waypointLatLng[i][1];
+                        loLatDestino = waypointLatLng[i - 1][0];
+                        loLongDestino = waypointLatLng[i - 1][1];
                     }
                     if (waypointLatLng[i][0] == "DistanciaTotal") {
                         $("#<%=txtDistanciaTotal.ClientID%>").val(waypointLatLng[i][1]);
@@ -169,8 +179,8 @@
                         lng: waypointLatLng[0][1]
                     },
                     destination: {             
-                        lat: waypointLatLng[0][0],
-                        lng: waypointLatLng[0][1]
+                        lat: loLatDestino,
+                        lng: loLongDestino
                     },
                     waypoints: waypts,
                     //waypoints: [{ location: first, stopover: true },  // marga       --> stopover True para que marque en el mapa el globito rojo
@@ -188,6 +198,28 @@
                     }
                 }
             );
+        }
+
+        function BotonSeleccionado(pModoTransporte) {
+            if (pModoTransporte == undefined) {                
+                return;
+            }
+            if (pModoTransporte == "DRIVING") {
+                $('#btnDriving').attr('class', 'btn btn-outline btn-success dim active');
+                $('#btnWalking').attr('class', 'btn btn-outline btn-success dim');
+                $('#btnBiking').attr('class', 'btn btn-outline btn-success dim');
+            } else {
+                if (pModoTransporte == "WALKING") {
+                    $('#btnDriving').attr('class', 'btn btn-outline btn-success dim');
+                    $('#btnWalking').attr('class', 'btn btn-outline btn-success dim active');
+                    $('#btnBiking').attr('class', 'btn btn-outline btn-success dim');
+                }
+                else {                    
+                    $('#btnDriving').attr('class', 'btn btn-outline btn-success dim');
+                    $('#btnWalking').attr('class', 'btn btn-outline btn-success dim');
+                    $('#btnBiking').attr('class', 'btn btn-outline btn-success dim active');
+                }
+            }
         }
     </script>
 </asp:Content>
