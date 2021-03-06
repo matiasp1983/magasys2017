@@ -45,16 +45,17 @@ namespace BLL.Common
             else
             { return false; }
         }
+
         public static String DiaSemanaHoy()
         {
             String dia = DateTime.Now.DayOfWeek.ToString();
             switch (dia)
             {
                 case "Monday":
-                {
+                    {
                         dia = "Lunes";
                         break;
-                }
+                    }
                 case "Tuesday":
                     {
                         dia = "Martes";
@@ -62,7 +63,7 @@ namespace BLL.Common
                     }
                 case "Wednesday":
                     {
-                        dia = "Miercoles";
+                        dia = "Miércoles";
                         break;
                     }
                 case "Thursday":
@@ -77,7 +78,7 @@ namespace BLL.Common
                     }
                 case "Saturday":
                     {
-                        dia = "Sabado";
+                        dia = "Sábado";
                         break;
                     }
                 case "Sunday":
@@ -88,6 +89,7 @@ namespace BLL.Common
             }
             return dia;
         }
+
         #endregion
     }
 }

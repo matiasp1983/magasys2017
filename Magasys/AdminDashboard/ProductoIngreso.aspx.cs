@@ -157,7 +157,10 @@ namespace PL.AdminDashboard
                         lsvSuplementos.Visible = false;
                         lsvPeliculas.Visible = false;
 
-                        var lstDiarios = new BLL.DiarioBLL().ObtenerDiariosParaEdicion(oProductoFiltro);
+                        bool bIngresoDiario = false;
+                        if (chkIngresoProductoDeOtroDia.Checked) bIngresoDiario = true;
+                        var lstDiarios = new BLL.DiarioBLL().ObtenerDiariosParaEdicion(oProductoFiltro, bIngresoDiario);
+
                         if (lstDiarios != null && lstDiarios.Count > 0)
                         {
                             lsvDiarios.DataSource = lstDiarios;
@@ -253,7 +256,9 @@ namespace PL.AdminDashboard
                         lsvSuplementos.Visible = true;
                         lsvPeliculas.Visible = false;
 
-                        var lstSuplementos = new BLL.SuplementoBLL().ObtenerSuplementosParaEdicion(oProductoFiltro);
+                        bool bIngresoSuplemento = false;
+                        if (chkIngresoProductoDeOtroDia.Checked) bIngresoSuplemento = true;
+                        var lstSuplementos = new BLL.SuplementoBLL().ObtenerSuplementosParaEdicion(oProductoFiltro, bIngresoSuplemento);
                         if (lstSuplementos != null && lstSuplementos.Count > 0)
                         {
                             lsvSuplementos.DataSource = lstSuplementos;
@@ -408,7 +413,7 @@ namespace PL.AdminDashboard
 
                     // Obtener tamaño de la IMAGEN seleccionada
                     int loTamanioImagen = ((FileUpload)loItem.Controls[17]).PostedFile.ContentLength;
-                    
+
                     if (loTamanioImagen > 0)
                     {
                         // Obtener tamaño de la IMAGEN en byte
@@ -418,7 +423,7 @@ namespace PL.AdminDashboard
                         ((FileUpload)loItem.Controls[17]).PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
 
                         oImagen = new Imagen();
-                        oImagen.IMAGEN1 = loImagenOriginal;                        
+                        oImagen.IMAGEN1 = loImagenOriginal;
                     }
 
                     if (oProductoEdicion == null)
@@ -580,7 +585,7 @@ namespace PL.AdminDashboard
 
                     // Obtener tamaño de la IMAGEN seleccionada
                     int loTamanioImagen = ((FileUpload)loItem.Controls[17]).PostedFile.ContentLength;
-                    
+
                     if (loTamanioImagen > 0)
                     {
                         // Obtener tamaño de la IMAGEN en byte
@@ -590,7 +595,7 @@ namespace PL.AdminDashboard
                         ((FileUpload)loItem.Controls[17]).PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
 
                         oImagen = new Imagen();
-                        oImagen.IMAGEN1 = loImagenOriginal;                        
+                        oImagen.IMAGEN1 = loImagenOriginal;
                     }
 
                     if (oProductoEdicion == null)
@@ -676,7 +681,7 @@ namespace PL.AdminDashboard
 
                 if (lstReservasConfirmar.Any())
                 {
-                    
+
                     lsvReservas.DataSource = lstReservasConfirmar;
                     Session.Add(Enums.Session.ListadoReservaConfirmar.ToString(), lsvReservas);
 
@@ -756,7 +761,7 @@ namespace PL.AdminDashboard
 
                     // Obtener tamaño de la IMAGEN seleccionada
                     int loTamanioImagen = ((FileUpload)loItem.Controls[15]).PostedFile.ContentLength;
-                    
+
                     if (loTamanioImagen > 0)
                     {
                         // Obtener tamaño de la IMAGEN en byte
@@ -766,7 +771,7 @@ namespace PL.AdminDashboard
                         ((FileUpload)loItem.Controls[15]).PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
 
                         oImagen = new Imagen();
-                        oImagen.IMAGEN1 = loImagenOriginal;                        
+                        oImagen.IMAGEN1 = loImagenOriginal;
                     }
 
                     if (oProductoEdicion == null)
@@ -848,13 +853,13 @@ namespace PL.AdminDashboard
                 ListView lsvReservas = new ListView();
                 if (lstReservasConfirmar.Any())
                 {
-                    
+
                     lsvReservas.DataSource = lstReservasConfirmar;
                     Session.Add(Enums.Session.ListadoReservaConfirmar.ToString(), lsvReservas);
                     Response.Redirect("ReservaEdicion.aspx", false);
                 }
 
- 
+
             }
             catch (Exception)
             {
@@ -928,7 +933,7 @@ namespace PL.AdminDashboard
 
                     // Obtener tamaño de la IMAGEN seleccionada
                     int loTamanioImagen = ((FileUpload)loItem.Controls[17]).PostedFile.ContentLength;
-                    
+
                     if (loTamanioImagen > 0)
                     {
                         // Obtener tamaño de la IMAGEN en byte
@@ -938,7 +943,7 @@ namespace PL.AdminDashboard
                         ((FileUpload)loItem.Controls[17]).PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
 
                         oImagen = new Imagen();
-                        oImagen.IMAGEN1 = loImagenOriginal;                        
+                        oImagen.IMAGEN1 = loImagenOriginal;
                     }
 
                     if (oProductoEdicion == null)
@@ -1020,12 +1025,12 @@ namespace PL.AdminDashboard
                 ListView lsvReservas = new ListView();
                 if (lstReservasConfirmar.Any())
                 {
-                    
+
                     lsvReservas.DataSource = lstReservasConfirmar;
                     Session.Add(Enums.Session.ListadoReservaConfirmar.ToString(), lsvReservas);
                     Response.Redirect("ReservaEdicion.aspx", false);
                 }
-                            }
+            }
             catch (Exception)
             {
                 throw;
@@ -1098,7 +1103,7 @@ namespace PL.AdminDashboard
 
                     // Obtener tamaño de la IMAGEN seleccionada
                     int loTamanioImagen = ((FileUpload)loItem.Controls[17]).PostedFile.ContentLength;
-                    
+
                     if (loTamanioImagen > 0)
                     {
                         // Obtener tamaño de la IMAGEN en byte
@@ -1108,7 +1113,7 @@ namespace PL.AdminDashboard
                         ((FileUpload)loItem.Controls[17]).PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
 
                         oImagen = new Imagen();
-                        oImagen.IMAGEN1 = loImagenOriginal;                        
+                        oImagen.IMAGEN1 = loImagenOriginal;
                     }
 
                     if (oProductoEdicion == null)
@@ -1273,7 +1278,7 @@ namespace PL.AdminDashboard
 
                     // Obtener tamaño de la IMAGEN seleccionada
                     int loTamanioImagen = ((FileUpload)loItem.Controls[17]).PostedFile.ContentLength;
-                    
+
                     if (loTamanioImagen > 0)
                     {
                         // Obtener tamaño de la IMAGEN en byte
@@ -1283,7 +1288,7 @@ namespace PL.AdminDashboard
                         ((FileUpload)loItem.Controls[17]).PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
 
                         oImagen = new Imagen();
-                        oImagen.IMAGEN1 = loImagenOriginal;                        
+                        oImagen.IMAGEN1 = loImagenOriginal;
                     }
 
                     if (oProductoEdicion == null)
@@ -1396,12 +1401,13 @@ namespace PL.AdminDashboard
             lsvPeliculas.Visible = false;
             btnGuardar.Visible = false;
             btnCancelar.Visible = false;
+            chkIngresoProductoDeOtroDia.Checked = false;
         }
 
         private ReservaFiltro CargarReservaFiltro(String nombre)
         {
             ReservaFiltro oReservaFiltro = new ReservaFiltro();
-              
+
             oReservaFiltro.NOMBRE_PRODUCTO = nombre;
             oReservaFiltro.COD_ESTADO = 7;
             oReservaFiltro.COD_TIPO_RESERVA = 2;
@@ -1422,5 +1428,5 @@ namespace PL.AdminDashboard
         }
 
         #endregion        
-    }    
+    }
 }

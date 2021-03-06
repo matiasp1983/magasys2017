@@ -57,7 +57,7 @@ namespace BLL
             return oProductoSuplemento;
         }
 
-        public List<SuplementoEdicion> ObtenerSuplementosParaEdicion(ProductoFiltro oProductoFiltro)
+        public List<SuplementoEdicion> ObtenerSuplementosParaEdicion(ProductoFiltro oProductoFiltro, bool bIngresoSuplemento)
         {
             List<Producto> lstProductos = null;
             List<SuplementoEdicion> lstSuplementoEdicion = null;
@@ -66,13 +66,7 @@ namespace BLL
             {
                 using (var loRepProducto = new Repository<Producto>())
                 {
-                    lstProductos = loRepProducto.Search(p => p.FECHA_BAJA == null && p.COD_ESTADO == 1);
-
-                    if (oProductoFiltro.CodProveedor > 0 && lstProductos.Count > 0)
-                        lstProductos = lstProductos.FindAll(p => p.COD_PROVEEDOR == oProductoFiltro.CodProveedor);
-
-                    if (oProductoFiltro.CodTipoProducto > 0 && lstProductos.Count > 0)
-                        lstProductos = lstProductos.FindAll(p => p.COD_TIPO_PRODUCTO == oProductoFiltro.CodTipoProducto);
+                    lstProductos = loRepProducto.Search(p => p.FECHA_BAJA == null && p.COD_ESTADO == 1 && p.COD_PROVEEDOR == oProductoFiltro.CodProveedor && p.COD_TIPO_PRODUCTO == oProductoFiltro.CodTipoProducto);
 
                     if (!String.IsNullOrEmpty(oProductoFiltro.NombreProducto) && lstProductos.Count > 0)
                         lstProductos = lstProductos.FindAll(p => p.NOMBRE.ToUpper().Contains(oProductoFiltro.NombreProducto.ToUpper()));
@@ -89,7 +83,26 @@ namespace BLL
                         NOMBRE = loProducto.NOMBRE,
                     };
 
-                    lstSuplementoEdicion.Add(oSuplementoEdicion);
+                    // Si esta puesto el check mostrar los Suplementos de todos los días
+                    if (bIngresoSuplemento)
+                    {
+                        using (var loRepSuplemento = new Repository<Suplemento>())
+                        {
+                            Suplemento oSuplemento = loRepSuplemento.Find(p => p.COD_PRODUCTO == loProducto.ID_PRODUCTO);
+                            if (oSuplemento == null) continue;
+                            using (var loRepDiarioDiaSemana = new Repository<DiarioDiaSemana>())
+                            {
+                                DiarioDiaSemana oDiarioDiaSemana = loRepDiarioDiaSemana.Find(p => p.ID_DIARIO_DIA_SEMANA == oSuplemento.COD_DIARIO);
+                                if (oDiarioDiaSemana == null) continue;
+                                if (Common.Utilities.EsDiaCorrecto(oDiarioDiaSemana.DiaSemana.NOMBRE))
+                                {
+                                    lstSuplementoEdicion.Add(oSuplementoEdicion);
+                                }
+                            }
+                        }
+                    }
+                    else
+                        lstSuplementoEdicion.Add(oSuplementoEdicion);
                 }
             }
             catch (Exception)

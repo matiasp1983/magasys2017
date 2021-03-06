@@ -66,19 +66,20 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="hr-line-dashed"></div>
                                 <div class="col-sm-12">
-                                    <div class="col-md-9 text-right p-h-xs">
-                                        <div id="divChkIngresoDiario" runat="server" class="form-group" style="display:none">
-                                            <div class="i-checks">
-                                                <label>
-                                                    <input runat="server" type="checkbox" id="chkIngresoDiario">
-                                                    <i></i>Ingresar producto del día
-                                                </label>
-                                            </div>
-                                        </div>
+                                    <div class="hr-line-dashed"></div>
+                                    <div class="col-sm-6"><h4 class="m-t-none m-b">Indique si desea cargar productos de un día diferente al de la fecha</h4>
+                                        <p>Esta opción es válida solo para Diarios y Suplementos.</p>                                
+                                        <div>                                           
+                                            <label> <input runat="server" id="chkIngresoProductoDeOtroDia" type="checkbox" class="i-checks"> Ingresar producto de otro día </label>
+                                        </div>                                
                                     </div>
-                                    <div class="col-md-3 text-right">
+                                </div>                                                       
+                            </div>
+                            <div class="row">
+                                <div class="hr-line-dashed"></div>
+                                <div class="form-group">
+                                    <div style="text-align: right; padding-right: 15px;">
                                         <a id="btnBuscarSuccess" class="ladda-button btn btn-success" style="background-color: #1c84c6; color: #FFFFFF; border-color: #1c84c6; border-radius: 3px; height: 33px; width: 100px; padding-left: 10px; padding-top: 0px;">
                                             <i class="fa fa-search"></i>
                                             <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="ladda-button btn btn-success" OnClick="BtnBuscar_Click" Style="padding: 4px 5px" />
@@ -683,18 +684,7 @@
                     placeholder: 'Seleccione un Tipo de Producto',
                     width: '100%',
                     allowClear: true
-                }).on('select2:select', function (e) {
-                    var loData = e.params.data;
-                    MostrarDivCheckboxIngresoDelDia(loData.id);
                 });
         }
-
-        function MostrarDivCheckboxIngresoDelDia(idTipoProducto) {
-            $('#<%=divChkIngresoDiario.ClientID%>').css('display', 'none');
-            if (idTipoProducto == 1 || idTipoProducto == 5) {
-                $('#<%=divChkIngresoDiario.ClientID%>').removeAttr("style");                              
-            } 
-        }
-
     </script>
 </asp:Content>

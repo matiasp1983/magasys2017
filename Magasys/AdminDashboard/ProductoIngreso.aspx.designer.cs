@@ -49,22 +49,13 @@ namespace PL.AdminDashboard {
         protected global::System.Web.UI.WebControls.TextBox txtNombre;
         
         /// <summary>
-        /// Control divChkIngresoDiario.
+        /// Control chkIngresoProductoDeOtroDia.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divChkIngresoDiario;
-        
-        /// <summary>
-        /// Control chkIngresoDiario.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkIngresoDiario;
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkIngresoProductoDeOtroDia;
         
         /// <summary>
         /// Control btnBuscar.

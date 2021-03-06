@@ -120,7 +120,7 @@ namespace BLL
             return lstDiariosProducto;
         }
 
-        public List<DiarioEdicion> ObtenerDiariosParaEdicion(ProductoFiltro oProductoFiltro)
+        public List<DiarioEdicion> ObtenerDiariosParaEdicion(ProductoFiltro oProductoFiltro, bool bIngresoDiario)
         {
             List<Producto> lstProductos = null;
             List<DiarioEdicion> lstDiarioEdicion = null;
@@ -130,13 +130,7 @@ namespace BLL
             {
                 using (var loRepProducto = new Repository<Producto>())
                 {
-                    lstProductos = loRepProducto.Search(p => p.FECHA_BAJA == null && p.COD_ESTADO == 1);
-
-                    if (oProductoFiltro.CodProveedor > 0 && lstProductos.Count > 0)
-                        lstProductos = lstProductos.FindAll(p => p.COD_PROVEEDOR == oProductoFiltro.CodProveedor);
-
-                    if (oProductoFiltro.CodTipoProducto > 0 && lstProductos.Count > 0)
-                        lstProductos = lstProductos.FindAll(p => p.COD_TIPO_PRODUCTO == oProductoFiltro.CodTipoProducto);
+                    lstProductos = loRepProducto.Search(p => p.FECHA_BAJA == null && p.COD_ESTADO == 1 && p.COD_PROVEEDOR == oProductoFiltro.CodProveedor && p.COD_TIPO_PRODUCTO == oProductoFiltro.CodTipoProducto);
 
                     if (!String.IsNullOrEmpty(oProductoFiltro.NombreProducto) && lstProductos.Count > 0)
                         lstProductos = lstProductos.FindAll(p => p.NOMBRE.ToUpper().Contains(oProductoFiltro.NombreProducto.ToUpper()));
@@ -167,23 +161,12 @@ namespace BLL
                         using (var loRepDiaSemana = new Repository<DiaSemana>())
                             oDiarioEdicion.DIA_SEMANA = loRepDiaSemana.Find(p => p.ID_DIA_SEMANA == loDiasSemana.ID_DIA_SEMANA).NOMBRE;
 
-                        // Validar dia de la fecha para diario
-
-                        if (Common.Utilities.EsDiaCorrecto(oDiarioEdicion.DIA_SEMANA))
-                        {
+                        // Validar día de la fecha para diario
+                        if (bIngresoDiario == false && Common.Utilities.EsDiaCorrecto(oDiarioEdicion.DIA_SEMANA))
                             lstDiarioEdicion.Add(oDiarioEdicion);
-                        }
-
-                        // Si esta puesto el check de permitir cualquier dia
-
-                        //if (checked))
-                        //{
-                        //    lstDiarioEdicion.Add(oDiarioEdicion);
-                        //}
-
-
-
-
+                        // Si esta puesto el check mostrar los Diarios de todos los días
+                        else if (bIngresoDiario)
+                            lstDiarioEdicion.Add(oDiarioEdicion);
                     }
                 }
             }
