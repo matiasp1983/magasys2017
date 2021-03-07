@@ -21,7 +21,7 @@ namespace PL.AdminDashboard
                     {
                         TextInfo loText = new CultureInfo("es-AR", false).TextInfo;
                         loUsuario = (BLL.DAL.Usuario)Session[AdminDashboardSessionBLL.DefaultSessionsId.Usuario.ToString()];
-                        lblUsuarioLogout.Text = loText.ToUpper(loUsuario.NOMBRE + " " + loUsuario.APELLIDO).ToString();
+                        lblUsuarioLogout.Text = loUsuario.NOMBRE + " " + loUsuario.APELLIDO;
 
                         if (loUsuario.AVATAR != null)
                         {

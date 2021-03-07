@@ -48,12 +48,12 @@ namespace PL.CustomersWebSite
                     {
                         TextInfo loText = new CultureInfo("es-AR", false).TextInfo;
                         loUsuario = (BLL.DAL.Usuario)Session[CustomersWebSiteSessionBLL.DefaultSessionsId.Usuario.ToString()];
-                        lblUsuarioLogout.Text = loText.ToUpper(loUsuario.APELLIDO + " " + loUsuario.NOMBRE).ToString();
+                        lblUsuarioLogout.Text = loUsuario.NOMBRE + " " + loUsuario.APELLIDO;
 
                         if (loUsuario.AVATAR != null)
                         {
                             string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(loUsuario.AVATAR);
-                            imgPerfil1.ImageUrl = imgPerfil2.ImageUrl = loImagenDataURL64;                            
+                            imgPerfil1.ImageUrl = imgPerfil2.ImageUrl = loImagenDataURL64;
                         }
 
                         Response.ClearHeaders();
@@ -64,7 +64,7 @@ namespace PL.CustomersWebSite
                     {
                         Response.Redirect("Login.aspx", true);
                     }
-                }                
+                }
             }
             catch (Exception ex)
             {
@@ -111,7 +111,7 @@ namespace PL.CustomersWebSite
             if (loCantidad > 0)
                 lblCantidadDePedidos.Text = loCantidad.ToString();
         }
-        
+
         #endregion
     }
 }

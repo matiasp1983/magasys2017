@@ -99,7 +99,7 @@ namespace BLL
                 using (var loClienteSmtp = new SmtpClient())
                 {
                     loClienteSmtp.Connect("smtp.gmail.com", 465, SecureSocketOptions.SslOnConnect);
-                    loClienteSmtp.Authenticate("magasys2020@gmail.com", "Mg2y22020");
+                    loClienteSmtp.Authenticate("magasys2020@gmail.com", "TESIS2021");
                     var options = FormatOptions.Default.Clone();
                     if (loClienteSmtp.Capabilities.HasFlag(SmtpCapabilities.UTF8))
                         options.International = true;
@@ -189,7 +189,7 @@ namespace BLL
                 using (var loClienteSmtp = new SmtpClient())
                 {
                     loClienteSmtp.Connect("smtp.gmail.com", 465, SecureSocketOptions.SslOnConnect);
-                    loClienteSmtp.Authenticate("magasys2020@gmail.com", "Mg2y22020");
+                    loClienteSmtp.Authenticate("magasys2020@gmail.com", "TESIS2021");
                     var options = FormatOptions.Default.Clone();
                     if (loClienteSmtp.Capabilities.HasFlag(SmtpCapabilities.UTF8))
                         options.International = true;
