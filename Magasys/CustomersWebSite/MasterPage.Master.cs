@@ -48,7 +48,8 @@ namespace PL.CustomersWebSite
                     {
                         TextInfo loText = new CultureInfo("es-AR", false).TextInfo;
                         loUsuario = (BLL.DAL.Usuario)Session[CustomersWebSiteSessionBLL.DefaultSessionsId.Usuario.ToString()];
-                        lblUsuarioLogout.Text = loUsuario.NOMBRE + " " + loUsuario.APELLIDO;
+                        lblUsuarioLogout2.Text = lblUsuarioLogout.Text = loUsuario.NOMBRE + " " + loUsuario.APELLIDO;
+                        ObtenerNotificaciones(loUsuario);
 
                         if (loUsuario.AVATAR != null)
                         {
@@ -110,6 +111,12 @@ namespace PL.CustomersWebSite
 
             if (loCantidad > 0)
                 lblCantidadDePedidos.Text = loCantidad.ToString();
+        }
+
+        private void ObtenerNotificaciones(BLL.DAL.Usuario oUsuario)
+        {
+            var oClienteSession = new BLL.ClienteBLL().ObtenerClientePorUsuario(oUsuario.ID_USUARIO);
+            lblCantidadDeNotificaciones.Text = new BLL.MensajeBLL().ObtenerMensajes(oClienteSession.ID_CLIENTE).Count.ToString();
         }
 
         #endregion

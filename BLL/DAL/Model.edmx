@@ -190,6 +190,18 @@
           <Property Name="NOMBRE" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="ID_PROVINCIA" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Mensaje">
+          <Key>
+            <PropertyRef Name="ID_MENSAJE" />
+          </Key>
+          <Property Name="ID_MENSAJE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="COD_CLIENTE" Type="int" />
+          <Property Name="DESCRIPCION" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TIPO_MENSAJE" Type="nvarchar" MaxLength="50" />
+          <Property Name="MENSAJE_VISTO" Type="bit" />
+          <Property Name="FECHA_REGISTRO_MENSAJE" Type="datetime" Nullable="false" />
+          <Property Name="FECHA_MODIFICACION_MENSAJE" Type="datetime" />
+        </EntityType>
         <EntityType Name="Mes">
           <Key>
             <PropertyRef Name="ID_MES" />
@@ -367,7 +379,7 @@
           <Property Name="ID_SUPLEMENTO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="COD_PRODUCTO" Type="int" Nullable="false" />
           <Property Name="ID_DIA_SEMANA" Type="int" />
-          <Property Name="CANTIDAD_ENTREGAS" Type="int" Nullable="false" />
+          <Property Name="CANTIDAD_ENTREGAS" Type="int" />
           <Property Name="PRECIO" Type="float" Nullable="false" />
           <Property Name="COD_DIARIO" Type="int" Nullable="false" />
         </EntityType>
@@ -717,6 +729,18 @@
             </Principal>
             <Dependent Role="Localidad">
               <PropertyRef Name="ID_PROVINCIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Mensaje_Cliente">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Mensaje" Type="Self.Mensaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Principal>
+            <Dependent Role="Mensaje">
+              <PropertyRef Name="COD_CLIENTE" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1110,6 +1134,7 @@
           <EntitySet Name="Imagen" EntityType="Self.Imagen" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Libro" EntityType="Self.Libro" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Localidad" EntityType="Self.Localidad" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mensaje" EntityType="Self.Mensaje" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Mes" EntityType="Self.Mes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Negocio" EntityType="Self.Negocio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pelicula" EntityType="Self.Pelicula" Schema="dbo" store:Type="Tables" />
@@ -1230,6 +1255,10 @@
           <AssociationSet Name="FK_Localidad_Provincia" Association="Self.FK_Localidad_Provincia">
             <End Role="Provincia" EntitySet="Provincia" />
             <End Role="Localidad" EntitySet="Localidad" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Mensaje_Cliente" Association="Self.FK_Mensaje_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Mensaje" EntitySet="Mensaje" />
           </AssociationSet>
           <AssociationSet Name="FK_Pelicula_Producto" Association="Self.FK_Pelicula_Producto">
             <End Role="Producto" EntitySet="Producto" />
@@ -1623,6 +1652,11 @@
             <Parameter Name="anio" Mode="In" Type="String" />
             <Parameter Name="CodTipoProducto" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="Mensaje" EntityType="MAGASYSModel.Mensaje" />
+          <AssociationSet Name="FK_Mensaje_Cliente" Association="MAGASYSModel.FK_Mensaje_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Mensaje" EntitySet="Mensaje" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Anio">
           <Key>
@@ -1663,6 +1697,7 @@
           <NavigationProperty Name="Cobro" Relationship="MAGASYSModel.FK_Cobro_Cliente" FromRole="Cliente" ToRole="Cobro" />
           <NavigationProperty Name="Reserva" Relationship="MAGASYSModel.FK_Reserva_Cliente" FromRole="Cliente" ToRole="Reserva" />
           <NavigationProperty Name="Venta" Relationship="MAGASYSModel.FK_Venta_Cliente" FromRole="Cliente" ToRole="Venta" />
+          <NavigationProperty Name="Mensaje" Relationship="MAGASYSModel.FK_Mensaje_Cliente" FromRole="Cliente" ToRole="Mensaje" />
         </EntityType>
         <EntityType Name="Cobro">
           <Key>
@@ -2077,7 +2112,7 @@
           <Property Name="ID_SUPLEMENTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="COD_PRODUCTO" Type="Int32" Nullable="false" />
           <Property Name="ID_DIA_SEMANA" Type="Int32" />
-          <Property Name="CANTIDAD_ENTREGAS" Type="Int32" Nullable="false" />
+          <Property Name="CANTIDAD_ENTREGAS" Type="Int32" />
           <Property Name="PRECIO" Type="Double" Nullable="false" />
           <Property Name="COD_DIARIO" Type="Int32" Nullable="false" />
           <NavigationProperty Name="DiarioDiaSemana" Relationship="MAGASYSModel.FK_Suplemento_DiarioDiaSemana" FromRole="Suplemento" ToRole="DiarioDiaSemana" />
@@ -2816,6 +2851,31 @@
           <Property Type="String" Name="NOMBRE" Nullable="false" MaxLength="50" />
           <Property Type="Int32" Name="CANTIDAD" Nullable="true" />
         </ComplexType>
+        <EntityType Name="Mensaje">
+          <Key>
+            <PropertyRef Name="ID_MENSAJE" />
+          </Key>
+          <Property Name="ID_MENSAJE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="COD_CLIENTE" Type="Int32" />
+          <Property Name="DESCRIPCION" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TIPO_MENSAJE" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MENSAJE_VISTO" Type="Boolean" />
+          <Property Name="FECHA_REGISTRO_MENSAJE" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FECHA_MODIFICACION_MENSAJE" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Cliente" Relationship="MAGASYSModel.FK_Mensaje_Cliente" FromRole="Mensaje" ToRole="Cliente" />
+        </EntityType>
+        <Association Name="FK_Mensaje_Cliente">
+          <End Type="MAGASYSModel.Cliente" Role="Cliente" Multiplicity="0..1" />
+          <End Type="MAGASYSModel.Mensaje" Role="Mensaje" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Principal>
+            <Dependent Role="Mensaje">
+              <PropertyRef Name="COD_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3312,6 +3372,19 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="Mensaje">
+            <EntityTypeMapping TypeName="MAGASYSModel.Mensaje">
+              <MappingFragment StoreEntitySet="Mensaje">
+                <ScalarProperty Name="FECHA_MODIFICACION_MENSAJE" ColumnName="FECHA_MODIFICACION_MENSAJE" />
+                <ScalarProperty Name="FECHA_REGISTRO_MENSAJE" ColumnName="FECHA_REGISTRO_MENSAJE" />
+                <ScalarProperty Name="MENSAJE_VISTO" ColumnName="MENSAJE_VISTO" />
+                <ScalarProperty Name="TIPO_MENSAJE" ColumnName="TIPO_MENSAJE" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="COD_CLIENTE" ColumnName="COD_CLIENTE" />
+                <ScalarProperty Name="ID_MENSAJE" ColumnName="ID_MENSAJE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -111,6 +111,8 @@ public partial class MAGASYSEntities : DbContext
 
     public virtual DbSet<Venta> Venta { get; set; }
 
+    public virtual DbSet<Mensaje> Mensaje { get; set; }
+
 
     [DbFunction("MAGASYSEntities", "fn_Split")]
     public virtual IQueryable<fn_Split_Result> fn_Split(string text, string delimiter)

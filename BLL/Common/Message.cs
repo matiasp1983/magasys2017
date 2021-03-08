@@ -248,5 +248,11 @@
         public const string MsjeExportarHoraDeRura = "No se encontraron resultados para exportar.";
 
         #endregion
+
+        #region Mensajes NotificacionesCliente
+
+        public const string MsjeListadoNotificacionSinResultados = "No posee notificaciones.";
+
+        #endregion
     }
 }

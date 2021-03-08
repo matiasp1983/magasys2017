@@ -28,6 +28,8 @@ public partial class Cliente
 
         this.Venta = new HashSet<Venta>();
 
+        this.Mensaje = new HashSet<Mensaje>();
+
     }
 
 
@@ -96,6 +98,10 @@ public partial class Cliente
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Venta> Venta { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<Mensaje> Mensaje { get; set; }
 
 }
 

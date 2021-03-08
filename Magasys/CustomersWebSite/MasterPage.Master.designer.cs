@@ -22,6 +22,15 @@ namespace PL.CustomersWebSite {
         protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
         
         /// <summary>
+        /// Control lblUsuarioLogout2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblUsuarioLogout2;
+        
+        /// <summary>
         /// Control lblCantidadDePedidos.
         /// </summary>
         /// <remarks>
@@ -29,6 +38,15 @@ namespace PL.CustomersWebSite {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblCantidadDePedidos;
+        
+        /// <summary>
+        /// Control lblCantidadDeNotificaciones.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblCantidadDeNotificaciones;
         
         /// <summary>
         /// Control imgPerfil1.

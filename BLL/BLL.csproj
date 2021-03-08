@@ -144,6 +144,9 @@
     <Compile Include="DAL\Localidad.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\Mensaje.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\Mes.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
@@ -241,6 +244,7 @@
     <Compile Include="FuerzaBruta\MatrizFB.cs" />
     <Compile Include="FuerzaBruta\NodoDistanciaFB.cs" />
     <Compile Include="FuerzaBruta\NodoFB.cs" />
+    <Compile Include="MensajeBLL.cs" />
     <Compile Include="MesBLL.cs" />
     <Compile Include="NegocioBLL.cs" />
     <Compile Include="RepartoBLL.cs" />

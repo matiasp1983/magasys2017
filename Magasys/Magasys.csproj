@@ -276,6 +276,7 @@
     <Content Include="CustomersWebSite\js\plugins\validate\jquery.validate.js" />
     <Content Include="CustomersWebSite\Login.aspx" />
     <Content Include="CustomersWebSite\Logout.aspx" />
+    <Content Include="CustomersWebSite\Notificaciones.aspx" />
     <Content Include="CustomersWebSite\RegistrarReserva.aspx" />
     <Content Include="CustomersWebSite\RegistrarUsuario.aspx" />
     <Content Include="CustomersWebSite\Reserva.aspx" />
@@ -957,6 +958,13 @@
     </Compile>
     <Compile Include="AdminDashboard\Logout.aspx.designer.cs">
       <DependentUpon>Logout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CustomersWebSite\Notificaciones.aspx.cs">
+      <DependentUpon>Notificaciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CustomersWebSite\Notificaciones.aspx.designer.cs">
+      <DependentUpon>Notificaciones.aspx</DependentUpon>
     </Compile>
     <Compile Include="CustomersWebSite\RegistrarReserva.aspx.cs">
       <DependentUpon>RegistrarReserva.aspx</DependentUpon>

@@ -97,6 +97,8 @@
         <AssociationConnector Association="MAGASYSModel.FK_Reserva_TipoReserva" />
         <AssociationConnector Association="MAGASYSModel.FK_ReservaEdicion_Reserva" />
         <AssociationConnector Association="MAGASYSModel.FK_Usuario_Rol" />
+        <EntityTypeShape EntityType="MAGASYSModel.Mensaje" Width="1.5" PointX="7.5" PointY="57" />
+        <AssociationConnector Association="MAGASYSModel.FK_Mensaje_Cliente" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

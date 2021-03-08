@@ -48,13 +48,20 @@
                             </li>
                         </ul>
                         <ul class="nav navbar-top-links navbar-right">
+                            <li>
+                                <span class="m-r-sm text-muted welcome-message">Bienvenido a MAGASYS <asp:Label ID="lblUsuarioLogout2" runat="server"></asp:Label>.</span>
+                            </li>
                             <li class="dropdown">
-                                <a class="dropdown-toggle count-info" href="RegistrarReserva.aspx" style="padding-top: 6px; padding-right: 17px">
-                                    <i class="fa fa-shopping-cart fa-2x"></i><span class="label label-warning">
+                                <a class="dropdown-toggle count-info" href="RegistrarReserva.aspx">
+                                    <i class="fa fa-shopping-cart"></i><span class="label label-warning">
                                         <asp:Label ID="lblCantidadDePedidos" runat="server" Text="0"></asp:Label></span>                                 
                                 </a>
                             </li>
-
+                            <li class="dropdown">
+                                <a class="dropdown-toggle count-info" href="Notificaciones.aspx">
+                                    <i class="fa fa-bell"></i><span class="label label-primary"><asp:Label ID="lblCantidadDeNotificaciones" runat="server" Text="0"></asp:Label></span>
+                                </a>
+                            </li>
                             <li class="dropdown">
                                 <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" style="padding-top: 10px; padding-bottom: 0px;">
                                     <asp:Image ID="imgPerfil1" runat="server" CssClass="img-circle img-sm" data-toggle="modal" Style="width: 33px; height: 33px" ImageUrl="~/CustomersWebSite/img/perfil_default.png"/>
