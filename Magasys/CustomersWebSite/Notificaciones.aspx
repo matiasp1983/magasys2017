@@ -21,16 +21,14 @@
                             </div>
                             <ul class="sortable-list connectList agile-list ui-sortable" id="todo">
                                 <asp:ListView ID="lsvNotificaciones" runat="server">
-                                    <ItemTemplate>
-                                        <div class="ibox">
-                                            <li class="<%#Eval("TIPO_MENSAJE").ToString()%>" id="task1">                                                   
-                                                <asp:Label ID="lblDescripcion" runat="server" Text='<%#Eval("DESCRIPCION").ToString()%>'></asp:Label>
-                                                <div class="agile-detail">
-                                                    <a href="#" class="pull-right btn btn-xs btn-white">Visto</a>
-                                                    <i class="fa fa-clock-o"></i> <asp:Label ID="lblFechaRegistroMensaje" runat="server" Text='<%#Convert.ToDateTime(Eval("FECHA_REGISTRO_MENSAJE")).ToString("dd/MM/yyyy")%>'></asp:Label>
-                                                </div>
-                                            </li>
-                                        </div>
+                                    <ItemTemplate>                                        
+                                        <li class="<%#Eval("TIPO_MENSAJE").ToString()%>" id="task1">                                                   
+                                            <asp:Label ID="lblDescripcion" runat="server" Text='<%#Eval("DESCRIPCION").ToString()%>'></asp:Label>
+                                            <div class="agile-detail">
+                                                <a class="pull-right btn btn-xs btn-white" onclick="MarcarNotificacionComoVisto(<%#Eval("ID_MENSAJE") %>);">Visto</a>
+                                                <i class="fa fa-clock-o"></i> <asp:Label ID="lblFechaRegistroMensaje" runat="server" Text='<%#Convert.ToDateTime(Eval("FECHA_REGISTRO_MENSAJE")).ToString("dd/MM/yyyy")%>'></asp:Label>
+                                            </div>
+                                        </li>                                        
                                     </ItemTemplate>
                                 </asp:ListView>
                                 <div id="dvMensajeLsvNotificaciones" runat="server" />
@@ -43,4 +41,30 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="script" runat="server">
+    <script type="text/javascript">
+        function MarcarNotificacionComoVisto(idMensaje) {
+            $.ajax({
+                type: "POST",
+                url: "Notificaciones.aspx/MarcarNotificacionComoVisto",
+                data: JSON.stringify({ 'pIdMensaje': idMensaje }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {                   
+                    if (data.d != "") {
+                        if (data.d == true) {
+                            location.reload();
+                        }
+                    }
+                },
+                failure: function (data) {
+                    swal({
+                        title: "Notificación",
+                        text: "Ocurrio un error, no se puedo marcar el mensaje como visto.",
+                        type: "warning",
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+            });
+        }
+    </script>
 </asp:Content>

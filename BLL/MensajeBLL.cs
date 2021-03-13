@@ -10,6 +10,19 @@ namespace BLL
     public class MensajeBLL
     {
         #region Métodos Públicos
+
+        public Mensaje ObtenerMensaje(long idMensaje)
+        {
+            Mensaje oMensaje = null;
+
+            using (var loRepMensaje = new Repository<Mensaje>())
+            {
+                oMensaje = loRepMensaje.Find(p => p.ID_MENSAJE == idMensaje);
+            }
+
+            return oMensaje;
+        }
+
         /// <summary>
         /// Obtener las notificaciones que no fueron vistas por el cliente.
         /// </summary>
@@ -25,6 +38,24 @@ namespace BLL
             }
 
                 return lstMensaje;
+        }
+
+        public bool ModificarMensaje(Mensaje oMensaje)
+        {
+            var bRes = false;
+            try
+            {
+                using (var rep = new Repository<Mensaje>())
+                {
+                    bRes = rep.Update(oMensaje);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return bRes;
         }
 
         #endregion
