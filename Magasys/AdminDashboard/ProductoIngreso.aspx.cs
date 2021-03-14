@@ -462,9 +462,9 @@ namespace PL.AdminDashboard
 
                     // Consultar si existen reservas para ese producto
 
-                    var oReservaFiltro = CargarReservaFiltro(Convert.ToString(((Label)loItem.Controls[3]).Text));
-                    var lstReserva = new BLL.ReservaBLL().ObtenerReservas(oReservaFiltro);
-                    if (lstReserva.Any())
+                    var oReservaFiltro = CargarReservaFiltro(Convert.ToString(((Label)loItem.Controls[3]).Text), Convert.ToString(((TextBox)loItem.Controls[7]).Text));
+                    var lstReserva = new BLL.ReservaBLL().ObtenerReservaEdicionPorProducto(oReservaFiltro);
+                    if (lstReserva != null)
                     {
                         // Agregar los resultados en una lista con TODAS las reservas porque asi como está borra los anteriores
 
@@ -639,8 +639,8 @@ namespace PL.AdminDashboard
 
                     // Consultar si existen reservas para ese producto
 
-                    var oReservaFiltro = CargarReservaFiltro(Convert.ToString(((Label)loItem.Controls[3]).Text));
-                    var lstReserva = new BLL.ReservaBLL().ObtenerReservas(oReservaFiltro);
+                    var oReservaFiltro = CargarReservaFiltro(Convert.ToString(((Label)loItem.Controls[3]).Text), Convert.ToString(((TextBox)loItem.Controls[7]).Text));
+                    var lstReserva = new BLL.ReservaBLL().ObtenerReservaEdicionPorProducto(oReservaFiltro);
                     if (lstReserva.Any())
                     {
                         // Agregar los resultados en una lista con TODAS las reservas porque asi como está borra los anteriores
@@ -812,8 +812,8 @@ namespace PL.AdminDashboard
 
                     // Consultar si existen reservas para ese producto
 
-                    var oReservaFiltro = CargarReservaFiltro(Convert.ToString(((Label)loItem.Controls[3]).Text));
-                    var lstReserva = new BLL.ReservaBLL().ObtenerReservas(oReservaFiltro);
+                    var oReservaFiltro = CargarReservaFiltro(Convert.ToString(((Label)loItem.Controls[3]).Text), Convert.ToString(((TextBox)loItem.Controls[7]).Text));
+                    var lstReserva = new BLL.ReservaBLL().ObtenerReservaEdicionPorProducto(oReservaFiltro);
                     if (lstReserva.Any())
                     {
                         // Agregar los resultados en una lista con TODAS las reservas porque asi como está borra los anteriores
@@ -984,8 +984,8 @@ namespace PL.AdminDashboard
 
                     // Consultar si existen reservas para ese producto
 
-                    var oReservaFiltro = CargarReservaFiltro(Convert.ToString(((Label)loItem.Controls[3]).Text));
-                    var lstReserva = new BLL.ReservaBLL().ObtenerReservas(oReservaFiltro);
+                    var oReservaFiltro = CargarReservaFiltro(Convert.ToString(((Label)loItem.Controls[3]).Text), Convert.ToString(((TextBox)loItem.Controls[7]).Text));
+                    var lstReserva = new BLL.ReservaBLL().ObtenerReservaEdicionPorProducto(oReservaFiltro);
                     if (lstReserva.Any())
                     {
                         // Agregar los resultados en una lista con TODAS las reservas porque asi como está borra los anteriores
@@ -1158,8 +1158,8 @@ namespace PL.AdminDashboard
 
                     // Consultar si existen reservas para ese producto
 
-                    var oReservaFiltro = CargarReservaFiltro(Convert.ToString(((Label)loItem.Controls[3]).Text));
-                    var lstReserva = new BLL.ReservaBLL().ObtenerReservas(oReservaFiltro);
+                    var oReservaFiltro = CargarReservaFiltro(Convert.ToString(((Label)loItem.Controls[3]).Text), Convert.ToString(((TextBox)loItem.Controls[7]).Text));
+                    var lstReserva = new BLL.ReservaBLL().ObtenerReservaEdicionPorProducto(oReservaFiltro);
                     if (lstReserva.Any())
                     {
                         // Agregar los resultados en una lista con TODAS las reservas porque asi como está borra los anteriores
@@ -1333,8 +1333,8 @@ namespace PL.AdminDashboard
 
                     // Consultar si existen reservas para ese producto
 
-                    var oReservaFiltro = CargarReservaFiltro(Convert.ToString(((Label)loItem.Controls[3]).Text));
-                    var lstReserva = new BLL.ReservaBLL().ObtenerReservas(oReservaFiltro);
+                    var oReservaFiltro = CargarReservaFiltro(Convert.ToString(((Label)loItem.Controls[3]).Text), Convert.ToString(((TextBox)loItem.Controls[7]).Text));
+                    var lstReserva = new BLL.ReservaBLL().ObtenerReservaEdicionPorProducto(oReservaFiltro);
                     if (lstReserva.Any())
                     {
                         // Agregar los resultados en una lista con TODAS las reservas porque asi como está borra los anteriores
@@ -1404,13 +1404,16 @@ namespace PL.AdminDashboard
             chkIngresoProductoDeOtroDia.Checked = false;
         }
 
-        private ReservaFiltro CargarReservaFiltro(String nombre)
+        private ReservaFiltro CargarReservaFiltro(String nombre, String edicion)
         {
             ReservaFiltro oReservaFiltro = new ReservaFiltro();
 
             oReservaFiltro.NOMBRE_PRODUCTO = nombre;
             oReservaFiltro.COD_ESTADO = 7;
             oReservaFiltro.COD_TIPO_RESERVA = 2;
+            oReservaFiltro.COD_PROVEEDOR = Convert.ToInt32(ddlProveedor.SelectedValue);
+            oReservaFiltro.COD_TIPO_PRODUCTO = Convert.ToInt32(ddlTipoProducto.SelectedValue);
+            oReservaFiltro.EDICION = edicion;
 
             return oReservaFiltro;
         }

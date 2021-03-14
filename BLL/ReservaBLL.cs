@@ -342,6 +342,51 @@ namespace BLL
             return lstReservaListado;
         }
 
+        public List<ReservaListado> ObtenerReservaEdicionPorProducto(ReservaFiltro oReservaFiltro)
+        {
+            List<ReservaListado> lstReservaListado = null;
+            List<Reserva> lstReserva = null;
+
+            try
+            {
+                using (var loRepRReserva = new Repository<Reserva>())
+                {
+                    lstReserva = loRepRReserva.Search(p => p.Producto.COD_PROVEEDOR == oReservaFiltro.COD_PROVEEDOR && p.Producto.COD_TIPO_PRODUCTO == oReservaFiltro.COD_TIPO_PRODUCTO && p.Producto.NOMBRE.ToUpper().Contains(oReservaFiltro.NOMBRE_PRODUCTO.ToUpper()) && p.COD_ESTADO == oReservaFiltro.COD_ESTADO && p.COD_TIPO_RESERVA == oReservaFiltro.COD_TIPO_RESERVA).ToList();
+
+                    if (lstReserva.Count > 0)
+                    {
+                        lstReservaListado = new List<ReservaListado>();
+
+                        foreach (var loReserva in lstReserva)
+                        {
+                            using (var loRepReservaEdicion = new Repository<ReservaEdicion>())
+                            {
+                                // En el Ingreso de Productos, cuando se cargue la edición de un producto, se debe consultar si existe una ReservaEdicion para dicho ingreso. Si lo encuentra y el estado de la ReservaEdicion es 18,
+                                // se debe permitir realizar la ReservaEdicion, en el caso que exista la ReservaEdicion con otros estado se debe desestimar.
+                                if (loRepReservaEdicion.Find(p => p.COD_RESERVA == loReserva.ID_RESERVA && p.ProductoEdicion.COD_PRODUCTO == loReserva.COD_PRODUCTO && p.ProductoEdicion.EDICION == oReservaFiltro.EDICION && p.COD_ESTADO != 18) != null)
+                                    continue;
+                            }
+
+                            ReservaListado oReservaListado = new ReservaListado
+                            {
+                                ID_RESERVA = loReserva.ID_RESERVA,
+                                NOMBRE_CLIENTE = loReserva.Cliente.APELLIDO + ", " + loReserva.Cliente.NOMBRE,
+                                NOMBRE_PRODUCTO = loReserva.Producto.NOMBRE
+                            };
+
+                            lstReservaListado.Add(oReservaListado);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return lstReservaListado;
+        }
+
         public int ObtenerCantidadReservasConfirmadasMensuales(long codCliente)
         {
             int lCantidadReservas = 0;

@@ -12,6 +12,8 @@ namespace BLL.Filters
         public DateTime? FECHAFINRESERVAHASTA { get; set; }
         public int COD_TIPO_RESERVA { get; set; }
         public string NOMBRE_PRODUCTO { get; set; }
+        public int COD_TIPO_PRODUCTO { get; set; }
+        public int COD_PROVEEDOR { get; set; }
         public int COD_ESTADO { get; set; }
         public String COD_FORMA_ENTREGA { get; set; }
         public int COD_CLIENTE { get; set; }
