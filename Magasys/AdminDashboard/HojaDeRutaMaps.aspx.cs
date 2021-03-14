@@ -39,6 +39,19 @@ namespace PL.AdminDashboard
                 loModificarReservaEdidion = new ReservaEdicionBLL().ModificarReservaEdidion(loReservaEdicion);
                 if (!loModificarReservaEdidion)
                     break;
+
+                // Informar al Cliente que la edición se encuentra en reparto
+                BLL.DAL.Mensaje oMensaje = new BLL.DAL.Mensaje()
+                {
+                    COD_CLIENTE = Convert.ToInt32(item.CODIGO_CLIENTE),
+                    DESCRIPCION = "La edición " + item.EDICION + " del producto '" + item.PRODUCTO + "' se encuentra en reparto.",
+                    TIPO_MENSAJE = "success-element",
+                    FECHA_REGISTRO_MENSAJE = DateTime.Now
+                };
+
+                loModificarReservaEdidion = new MensajeBLL().AltaMensaje(oMensaje);
+                if (!loModificarReservaEdidion)
+                    break;
             }
 
             if (loModificarReservaEdidion)
