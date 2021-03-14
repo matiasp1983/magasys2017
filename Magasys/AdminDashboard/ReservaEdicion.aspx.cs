@@ -30,25 +30,83 @@ namespace PL.AdminDashboard
             {
                 foreach (var loItem in lsvReservaEdicion.Items)
                 {
+                    // Consultar si existe una ReservaEdicion para la Reserva y el PorductoEdicion con estado 18 (sin Stock).
+                    var oReservaEdicionSinStock = new ReservaEdicionBLL().ObtenerReservaEdicionEstadoSinStock(Convert.ToInt32(((Label)loItem.Controls[3]).Text), Convert.ToInt32(((Label)loItem.Controls[11]).Text));
+
                     if (((HtmlInputCheckBox)loItem.Controls[1]).Checked)
                     {
-                        BLL.DAL.ReservaEdicion oReservaConfirmada = new BLL.DAL.ReservaEdicion()
+                        if (oReservaEdicionSinStock != null)
                         {
-                            ID_RESERVA_EDICION = new ReservaEdicionBLL().ObtenerProximaReserva(),
-                            COD_RESERVA = Convert.ToInt32(((Label)loItem.Controls[3]).Text),
-                            COD_PROD_EDICION = Convert.ToInt32(((Label)loItem.Controls[9]).Text),
-                            FECHA = DateTime.Now,
-                            COD_ESTADO = 15
+                            // Actualizar ReservaEdicion
+                            oReservaEdicionSinStock.FECHA = DateTime.Now;
+                            oReservaEdicionSinStock.COD_ESTADO = 15;
+                            loResutado = new ReservaEdicionBLL().ModificarReservaEdidion(oReservaEdicionSinStock);
+                            if (!loResutado)
+                                break;
+                        }
+                        else
+                        {
+                            // Alta de ReservaEdicion
+                            BLL.DAL.ReservaEdicion oReservaConfirmada = new BLL.DAL.ReservaEdicion()
+                            {
+                                //ID_RESERVA_EDICION = new ReservaEdicionBLL().ObtenerProximaReserva(),   // probar si funciona sin esto!!!
+                                FECHA = DateTime.Now,
+                                COD_RESERVA = Convert.ToInt32(((Label)loItem.Controls[3]).Text),
+                                COD_PROD_EDICION = Convert.ToInt32(((Label)loItem.Controls[11]).Text),
+                                COD_ESTADO = 15
+                            };
+
+                            loResutado = new ReservaEdicionBLL().AltaReservaEdicion(oReservaConfirmada);
+                            if (!loResutado)
+                                break;
+                        }
+
+                        // Informar al Cliente que la edición fue reservada
+                        BLL.DAL.Mensaje oMensaje = new BLL.DAL.Mensaje()
+                        {
+                            COD_CLIENTE = Convert.ToInt32(((Label)loItem.Controls[5]).Text),
+                            DESCRIPCION = "La edición " + ((Label)loItem.Controls[13]).Text + " del producto '" + ((Label)loItem.Controls[9]).Text + "' se encuentra reservada.",
+                            TIPO_MENSAJE = "success-element",
+                            FECHA_REGISTRO_MENSAJE = DateTime.Now
                         };
 
-                        loResutado = new ReservaEdicionBLL().AltaReservaEdicion(oReservaConfirmada);
+                        loResutado = new MensajeBLL().AltaMensaje(oMensaje);
                         if (!loResutado)
                             break;
+                    }
+                    else
+                    {
+                        // Informar al Cliente que la edicón no será reservada (por falta de stock u otro motivo)
+                        if (oReservaEdicionSinStock == null)
+                        {
+                            // Alta de ReservaEdicion
+                            BLL.DAL.ReservaEdicion oReservaConfirmada = new BLL.DAL.ReservaEdicion()
+                            {
+                                FECHA = DateTime.Now,
+                                COD_RESERVA = Convert.ToInt32(((Label)loItem.Controls[3]).Text),
+                                COD_PROD_EDICION = Convert.ToInt32(((Label)loItem.Controls[11]).Text),
+                                COD_ESTADO = 18
+                            };
+
+                            loResutado = new ReservaEdicionBLL().AltaReservaEdicion(oReservaConfirmada);
+                            if (!loResutado)
+                                break;
+
+                            BLL.DAL.Mensaje oMensaje = new BLL.DAL.Mensaje()
+                            {
+                                COD_CLIENTE = Convert.ToInt32(((Label)loItem.Controls[5]).Text),
+                                DESCRIPCION = "La edición " + ((Label)loItem.Controls[13]).Text + " del producto '" + ((Label)loItem.Controls[9]).Text + "' no fue reservada.",
+                                TIPO_MENSAJE = "warning-element",
+                                FECHA_REGISTRO_MENSAJE = DateTime.Now
+                            };
+
+                            var loResultadoMensaje = new MensajeBLL().AltaMensaje(oMensaje);
+                        }
                     }
                 }
 
                 if (loResutado)
-                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeProductoIngresoSuccessAlta, "Alta de Ingreso de productos", "Index.aspx"));
+                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeProductoIngresoSuccessAlta, "Alta de Ingreso de productos", "ProductoIngreso.aspx"));
                 else
                     Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeReservaFailure));
             }

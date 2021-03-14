@@ -72,9 +72,10 @@
                                                         <button id="check-all" class="btn btn-sm btn-primary pull-left m-t-n-xs">Seleccionar todo</button>
                                                     </td>
                                                     <th>Reserva</th>
+                                                    <th>Código cliente</th>
                                                     <th>Nombre del Cliente</th>
                                                     <th>Producto</th>
-                                                    <th>Cod Producto</th>
+                                                    <th>Código Producto</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -98,6 +99,9 @@
                                                 <asp:Label ID="lblIdReserva" runat="server" Text='<%#Eval("ID_RESERVA").ToString()%>'></asp:Label>
                                             </td>
                                             <td class="text-left">
+                                                <asp:Label ID="lblCodCliente" runat="server" Text='<%#Eval("COD_CLIENTE").ToString()%>'></asp:Label>
+                                            </td>
+                                            <td class="text-left">
                                                 <asp:Label ID="lblCliente" runat="server" Text='<%#Eval("CLIENTE").ToString()%>'></asp:Label>
                                             </td>
                                             <td>
@@ -106,10 +110,12 @@
                                             <td>
                                                 <asp:Label ID="LblProdEdi" runat="server" Text='<%#Eval("CODPRODUCTOEDICION").ToString().Length > 50 ? String.Format("{0}...", Eval("CODPRODUCTOEDICION").ToString().Remove(50).TrimEnd()):Eval("CODPRODUCTOEDICION")%>'></asp:Label>
                                             </td>
+                                            <td class="text-left">
+                                                <asp:Label ID="lblEdicion" runat="server" Text='<%#Eval("EDICION").ToString()%>' Visible="false"></asp:Label>
+                                            </td>
                                         </tr>
                                     </ItemTemplate>
                                 </asp:ListView>
-                                <%--<asp:HiddenField ID="hfCodigoReserva" runat="server"/>--%>
                                 <div class="form-group" style="margin-bottom: 10px">
                                     <div class="col-xs-12 col-sm-6 col-md-8"></div>
                                     <div class="col-xs-12 col-md-4" style="text-align: right">

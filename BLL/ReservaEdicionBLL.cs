@@ -416,6 +416,25 @@ namespace BLL
             return loCantidadProductoEdicion;
         }
 
+        public ReservaEdicion ObtenerReservaEdicionEstadoSinStock(long codreserva, long codProductoEdicion)
+        {
+            ReservaEdicion oReservaEdicion = new ReservaEdicion();
+
+            try
+            {
+                using (var loRepReservaEdicion = new Repository<ReservaEdicion>())
+                {
+                    oReservaEdicion = loRepReservaEdicion.Find(p => p.COD_RESERVA == codreserva && p.COD_PROD_EDICION == codProductoEdicion && p.COD_ESTADO == 18);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return oReservaEdicion;
+        }
+
         #endregion
     }
 

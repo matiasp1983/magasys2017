@@ -37,7 +37,26 @@ namespace BLL
                 lstMensaje = loRepMensaje.Search(p => p.COD_CLIENTE == codCliente && p.MENSAJE_VISTO == null);
             }
 
-                return lstMensaje;
+            return lstMensaje;
+        }
+
+        public bool AltaMensaje(Mensaje oMensaje)
+        {
+            var bRes = false;
+
+            try
+            {
+                using (var rep = new Repository<Mensaje>())
+                {
+                    bRes = rep.Create(oMensaje) != null;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return bRes;
         }
 
         public bool ModificarMensaje(Mensaje oMensaje)

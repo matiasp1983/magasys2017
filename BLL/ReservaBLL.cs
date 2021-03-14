@@ -363,15 +363,18 @@ namespace BLL
                             {
                                 // En el Ingreso de Productos, cuando se cargue la edición de un producto, se debe consultar si existe una ReservaEdicion para dicho ingreso. Si lo encuentra y el estado de la ReservaEdicion es 18,
                                 // se debe permitir realizar la ReservaEdicion, en el caso que exista la ReservaEdicion con otros estado se debe desestimar.
-                                if (loRepReservaEdicion.Find(p => p.COD_RESERVA == loReserva.ID_RESERVA && p.ProductoEdicion.COD_PRODUCTO == loReserva.COD_PRODUCTO && p.ProductoEdicion.EDICION == oReservaFiltro.EDICION && p.COD_ESTADO != 18) != null)
+                                var oReservaEdicion = loRepReservaEdicion.Find(p => p.COD_RESERVA == loReserva.ID_RESERVA && p.ProductoEdicion.COD_PRODUCTO == loReserva.COD_PRODUCTO && p.ProductoEdicion.EDICION == oReservaFiltro.EDICION);
+                                if (oReservaEdicion != null && oReservaEdicion.COD_ESTADO != 18)
                                     continue;
                             }
 
                             ReservaListado oReservaListado = new ReservaListado
                             {
                                 ID_RESERVA = loReserva.ID_RESERVA,
+                                COD_CLIENTE = loReserva.COD_CLIENTE,
                                 NOMBRE_CLIENTE = loReserva.Cliente.APELLIDO + ", " + loReserva.Cliente.NOMBRE,
-                                NOMBRE_PRODUCTO = loReserva.Producto.NOMBRE
+                                NOMBRE_PRODUCTO = loReserva.Producto.NOMBRE,
+                                EDICION = oReservaFiltro.EDICION
                             };
 
                             lstReservaListado.Add(oReservaListado);
@@ -435,9 +438,11 @@ namespace BLL
     public class ReservaClienteListado
     {
         public int ID_RESERVA { get; set; }
+        public int COD_CLIENTE { get; set; }
         public string CLIENTE { get; set; }
         public string PRODUCTO { get; set; }
         public int CODPRODUCTOEDICION { get; set; }
+        public string EDICION { get; set; }
     }
 
     public class ReservaCustomerWebSite

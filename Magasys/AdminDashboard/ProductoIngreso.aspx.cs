@@ -464,7 +464,7 @@ namespace PL.AdminDashboard
 
                     var oReservaFiltro = CargarReservaFiltro(Convert.ToString(((Label)loItem.Controls[3]).Text), Convert.ToString(((TextBox)loItem.Controls[7]).Text));
                     var lstReserva = new BLL.ReservaBLL().ObtenerReservaEdicionPorProducto(oReservaFiltro);
-                    if (lstReserva != null)
+                    if (lstReserva.Count > 0)
                     {
                         // Agregar los resultados en una lista con TODAS las reservas porque asi como está borra los anteriores
 
@@ -473,9 +473,11 @@ namespace PL.AdminDashboard
                             BLL.ReservaClienteListado oReservaEdicion = new BLL.ReservaClienteListado
                             {
                                 ID_RESERVA = loReserva.ID_RESERVA,
+                                COD_CLIENTE = Convert.ToInt32(loReserva.COD_CLIENTE),
                                 PRODUCTO = loReserva.NOMBRE_PRODUCTO,
                                 CLIENTE = loReserva.NOMBRE_CLIENTE,
-                                CODPRODUCTOEDICION = oProductoEdicion.ID_PRODUCTO_EDICION
+                                CODPRODUCTOEDICION = oProductoEdicion.ID_PRODUCTO_EDICION,
+                                EDICION = loReserva.EDICION
                             };
 
                             lstReservasConfirmar.Add(oReservaEdicion);
@@ -507,7 +509,6 @@ namespace PL.AdminDashboard
                     Session.Add(Enums.Session.ListadoReservaConfirmar.ToString(), lsvReservas);
                     Response.Redirect("ReservaEdicion.aspx", false);
                 }
-
             }
             catch (Exception)
             {
@@ -650,9 +651,11 @@ namespace PL.AdminDashboard
                             BLL.ReservaClienteListado oReservaEdicion = new BLL.ReservaClienteListado
                             {
                                 ID_RESERVA = loReserva.ID_RESERVA,
+                                COD_CLIENTE = Convert.ToInt32(loReserva.COD_CLIENTE),
                                 PRODUCTO = loReserva.NOMBRE_PRODUCTO,
                                 CLIENTE = loReserva.NOMBRE_CLIENTE,
-                                CODPRODUCTOEDICION = oProductoEdicion.ID_PRODUCTO_EDICION
+                                CODPRODUCTOEDICION = oProductoEdicion.ID_PRODUCTO_EDICION,
+                                EDICION = loReserva.EDICION
                             };
 
                             lstReservasConfirmar.Add(oReservaEdicion);
@@ -823,9 +826,11 @@ namespace PL.AdminDashboard
                             BLL.ReservaClienteListado oReservaEdicion = new BLL.ReservaClienteListado
                             {
                                 ID_RESERVA = loReserva.ID_RESERVA,
+                                COD_CLIENTE = Convert.ToInt32(loReserva.COD_CLIENTE),
                                 PRODUCTO = loReserva.NOMBRE_PRODUCTO,
                                 CLIENTE = loReserva.NOMBRE_CLIENTE,
-                                CODPRODUCTOEDICION = oProductoEdicion.ID_PRODUCTO_EDICION
+                                CODPRODUCTOEDICION = oProductoEdicion.ID_PRODUCTO_EDICION,
+                                EDICION = loReserva.EDICION
                             };
 
                             lstReservasConfirmar.Add(oReservaEdicion);
@@ -995,9 +1000,11 @@ namespace PL.AdminDashboard
                             BLL.ReservaClienteListado oReservaEdicion = new BLL.ReservaClienteListado
                             {
                                 ID_RESERVA = loReserva.ID_RESERVA,
+                                COD_CLIENTE = Convert.ToInt32(loReserva.COD_CLIENTE),
                                 PRODUCTO = loReserva.NOMBRE_PRODUCTO,
                                 CLIENTE = loReserva.NOMBRE_CLIENTE,
-                                CODPRODUCTOEDICION = oProductoEdicion.ID_PRODUCTO_EDICION
+                                CODPRODUCTOEDICION = oProductoEdicion.ID_PRODUCTO_EDICION,
+                                EDICION = loReserva.EDICION
                             };
 
                             lstReservasConfirmar.Add(oReservaEdicion);
@@ -1169,9 +1176,11 @@ namespace PL.AdminDashboard
                             BLL.ReservaClienteListado oReservaEdicion = new BLL.ReservaClienteListado
                             {
                                 ID_RESERVA = loReserva.ID_RESERVA,
+                                COD_CLIENTE = Convert.ToInt32(loReserva.COD_CLIENTE),
                                 PRODUCTO = loReserva.NOMBRE_PRODUCTO,
                                 CLIENTE = loReserva.NOMBRE_CLIENTE,
-                                CODPRODUCTOEDICION = oProductoEdicion.ID_PRODUCTO_EDICION
+                                CODPRODUCTOEDICION = oProductoEdicion.ID_PRODUCTO_EDICION,
+                                EDICION = loReserva.EDICION
                             };
 
                             lstReservasConfirmar.Add(oReservaEdicion);
@@ -1344,9 +1353,11 @@ namespace PL.AdminDashboard
                             BLL.ReservaClienteListado oReservaEdicion = new BLL.ReservaClienteListado
                             {
                                 ID_RESERVA = loReserva.ID_RESERVA,
+                                COD_CLIENTE = Convert.ToInt32(loReserva.COD_CLIENTE),
                                 PRODUCTO = loReserva.NOMBRE_PRODUCTO,
                                 CLIENTE = loReserva.NOMBRE_CLIENTE,
-                                CODPRODUCTOEDICION = oProductoEdicion.ID_PRODUCTO_EDICION
+                                CODPRODUCTOEDICION = oProductoEdicion.ID_PRODUCTO_EDICION,
+                                EDICION = loReserva.EDICION
                             };
 
                             lstReservasConfirmar.Add(oReservaEdicion);
