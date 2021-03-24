@@ -323,7 +323,7 @@ namespace PL.CustomersWebSite
                         break;
                     }
 
-                    if (Convert.ToInt32(loSplitReseva[6].ToString()) == 1 || (Convert.ToInt32(loSplitReseva[6].ToString()) == 2 && String.IsNullOrEmpty(loSplitReseva[1].ToString())) || Convert.ToInt32(loSplitReseva[6].ToString()) == 5) // Diario, todas lasediciones de Revista o Suplemento 
+                    if (Convert.ToInt32(loSplitReseva[6].ToString()) == 1 || (Convert.ToInt32(loSplitReseva[6].ToString()) == 2 && String.IsNullOrEmpty(loSplitReseva[1].ToString())) || Convert.ToInt32(loSplitReseva[6].ToString()) == 5) // Diario, todas las ediciones de Revista o Suplemento 
                     {
                         // Entonces el TIPO DE RESERVA es PERIODICA
 
@@ -344,6 +344,16 @@ namespace PL.CustomersWebSite
                         {
                             //"La Fecha de inicio debe ser mayor o igual que la fecha actual."
                             loResutado = 6;
+                            break;
+                        }
+                    }
+
+                    if ((Convert.ToInt32(loSplitReseva[6].ToString()) == 1 || Convert.ToInt32(loSplitReseva[6].ToString()) == 5) || ((Convert.ToInt32(loSplitReseva[6].ToString()) == 2 || Convert.ToInt32(loSplitReseva[6].ToString()) == 3) && (!(Convert.ToDateTime(loSplitReseva[4].ToString()) == null && !String.IsNullOrEmpty(loSplitReseva[1].ToString()))))) // Diario, Suplemento, Revista, Colección --> Control solo para las Revervas PERIODICAS!!  -- las reservas Periódicas solo se pueden hacer una sola vez por producto, no puede haber más de una reserva periódica con estado 16 y 7 (Registrada y Confirmada respectivamente).
+                    {
+                        if (new ReservaBLL().ExisteReservaPeriodicaPorClienteProducto(oCliente.ID_CLIENTE, Convert.ToInt32(loSplitReseva[0].ToString())))
+                        {
+                            //"Ya posee un producto reservado, verifique sus reservas."
+                            loResutado = 7;
                             break;
                         }
                     }

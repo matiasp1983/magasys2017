@@ -301,6 +301,15 @@ namespace PL.AdminDashboard {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liRegistrarReserva;
         
         /// <summary>
+        /// Control liConfirmarReservas.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liConfirmarReservas;
+        
+        /// <summary>
         /// Control liReservaFinalizar.
         /// </summary>
         /// <remarks>
@@ -317,15 +326,6 @@ namespace PL.AdminDashboard {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liReservaListado;
-        
-        /// <summary>
-        /// Control liConfirmarReservas.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liConfirmarReservas;
         
         /// <summary>
         /// Control liEntregaReparto.

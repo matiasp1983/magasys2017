@@ -409,6 +409,11 @@ namespace BLL
             return lCantidadReservas;
         }
 
+        public bool ExisteReservaPeriodicaPorClienteProducto(long codCliente, long codProducto)
+        {
+            return new Repository<Reserva>().Find(p => p.COD_CLIENTE == codCliente && p.COD_PRODUCTO == codProducto && p.COD_TIPO_RESERVA == 2 && (p.COD_ESTADO == 16 || p.COD_ESTADO == 7)) != null;
+        }
+
         #endregion
     }
 

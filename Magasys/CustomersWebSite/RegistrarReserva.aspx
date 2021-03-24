@@ -337,6 +337,14 @@
                             confirmButtonText: 'Aceptar'
                         });
                     }
+                    else if (msg == 7) {
+                        swal({
+                            title: "Confirmación Reserva",
+                            text: "Ya posee un producto reservado, verifique sus reservas.",
+                            type: "warning",
+                            confirmButtonText: 'Aceptar'
+                        });
+                    }
                 },
                 failure: function (data) {
                     swal({
