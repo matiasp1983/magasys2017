@@ -84,7 +84,13 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="ibox">
-                            <div class="ibox-content">                                
+                            <div class="ibox-content">    
+                            <div style="text-align: right;">
+                                <button type="button" id="btnEjecutar" runat="server" class="ladda-button btn btn-info" onserverclick="BtnGuardarEntrega_Click">
+                                    <i class="fas fa-clock"></i>&nbsp;&nbsp;<span>Ejecutar</span>
+                                </button>
+                            </div>
+                            <br />                                
                                 <asp:ListView ID="lsvReservas" runat="server" OnItemDataBound="LsvReservas_ItemDataBound">
                                     <LayoutTemplate>
                                         <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
@@ -152,13 +158,6 @@
                                 </div>
 
                                 <hr />
-                                <div class="form-group" style="margin-bottom: 10px">
-                                    <div class="col-xs-12 col-sm-6 col-md-8"></div>
-                                    <div class="col-xs-12 col-md-4" style="text-align: right">
-                                        <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-success" OnClick="BtnGuardarEntrega_Click" />
-                                        <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-primary" OnClick="BtnCancelarEntrega_Click" formnovalidate="" />
-                                    </div>
-                                </div>
                             </div>
                         </div>
                     </div>

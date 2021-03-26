@@ -133,8 +133,11 @@
                                             <td>
                                                 <asp:Label ID="lblEdicion" runat="server" Text='<%#Eval("EDICION").ToString().Length > 50 ? String.Format("{0}...", Eval("EDICION").ToString().Remove(50).TrimEnd()):Eval("EDICION")%>'></asp:Label>
                                             </td>
-                                            <td class="text-left">
-                                                <asp:Label ID="Label1" runat="server" Text='<%#Eval("ID_RESERVA_EDICION").ToString()%>' Visible="false"></asp:Label>
+                                            <td>
+                                                <asp:Label ID="lblReservaEdicion" runat="server" Text='<%#Eval("ID_RESERVA_EDICION").ToString()%>' Visible="false"></asp:Label>
+                                            </td>
+                                            <td>
+                                                <asp:Label ID="lblCodigoCliente" runat="server" Text='<%#Eval("COD_CLIENTE").ToString()%>' Visible="false"></asp:Label>
                                             </td>
                                         </tr>
                                     </ItemTemplate>

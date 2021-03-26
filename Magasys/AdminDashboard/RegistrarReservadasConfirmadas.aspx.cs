@@ -68,10 +68,27 @@ namespace PL.AdminDashboard
                                 oReserva.COD_ESTADO = 9; // Reserva Anulada   
                                 loResutado = new BLL.ReservaBLL().ModificarReserva(oReserva);
                             }
+
+                            if (!loResutado)
+                                break;
+
+                            // Informar al Cliente que la entrega a domicilio de la edición fue cancelada
+                            BLL.DAL.Mensaje oMensaje = new BLL.DAL.Mensaje()
+                            {
+                                COD_CLIENTE = Convert.ToInt32(((Label)loItem.Controls[13]).Text),
+                                DESCRIPCION = "Se anuló la reserva de la edición " + ((Label)loItem.Controls[9]).Text + " del producto '" + ((Label)loItem.Controls[7]).Text + "'.",
+                                TIPO_MENSAJE = "warning-element",
+                                FECHA_REGISTRO_MENSAJE = DateTime.Now
+                            };
+
+                            loResutado = new BLL.MensajeBLL().AltaMensaje(oMensaje);
+                            if (!loResutado)
+                                break;
                         }
                     }
 
-                    loResutado = new BLL.ProductoDevolucionBLL().AltaDevolucion(oProductoDevolucion, lstDetalleProductoDevolucion);
+                    if (loResutado)
+                        loResutado = new BLL.ProductoDevolucionBLL().AltaDevolucion(oProductoDevolucion, lstDetalleProductoDevolucion);
 
                     if (loResutado)
                     {

@@ -52,6 +52,19 @@ namespace PL.AdminDashboard
                         loModificarReservaEdidion = new ReservaEdicionBLL().ModificarReservaEdidion(loReservaEdicion);
                         if (!loModificarReservaEdidion)
                             break;
+
+                        // Informar al Cliente que la entrega a domicilio de la edición fue cancelada
+                        Mensaje oMensaje = new Mensaje()
+                        {
+                            COD_CLIENTE = Convert.ToInt32(((Label)loItem.Controls[13]).Text),
+                            DESCRIPCION = "Se canceló la entrega a domicilio de la edición " + ((Label)loItem.Controls[9]).Text + " del producto '" + ((Label)loItem.Controls[7]).Text + "'.",
+                            TIPO_MENSAJE = "warning-element",
+                            FECHA_REGISTRO_MENSAJE = DateTime.Now
+                        };
+
+                        loModificarReservaEdidion = new MensajeBLL().AltaMensaje(oMensaje);
+                        if (!loModificarReservaEdidion)
+                            break;
                     }
                 }
 
@@ -81,6 +94,19 @@ namespace PL.AdminDashboard
                         var oProductoEdicion = new ProductoEdicionBLL().ObtenerEdicion(oReservaEdicion.COD_PROD_EDICION);
                         oReservaEdicion.COD_ESTADO = 11;
                         loModificarReservaEdidion = new ReservaEdicionBLL().ModificarReservaEdidion(oReservaEdicion);
+                        if (!loModificarReservaEdidion)
+                            break;
+
+                        // Informar al Cliente que la edición ya fue entregada.
+                        Mensaje oMensaje = new Mensaje()
+                        {
+                            COD_CLIENTE = Convert.ToInt32(((Label)loItem.Controls[13]).Text),
+                            DESCRIPCION = "La edición " + ((Label)loItem.Controls[9]).Text + " del producto '" + ((Label)loItem.Controls[7]).Text + "' ya fue entregada.",
+                            TIPO_MENSAJE = "success-element",
+                            FECHA_REGISTRO_MENSAJE = DateTime.Now
+                        };
+
+                        loModificarReservaEdidion = new MensajeBLL().AltaMensaje(oMensaje);
                         if (!loModificarReservaEdidion)
                             break;
 

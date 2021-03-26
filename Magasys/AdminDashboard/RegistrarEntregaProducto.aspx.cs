@@ -55,21 +55,23 @@ namespace PL.AdminDashboard
         {
             bool loResutado = false;
             List<DetalleVenta> lstDetalleVenta = new List<DetalleVenta>();
-            BLL.DAL.Venta oVenta = new BLL.DAL.Venta()
+
+            try
             {
-                FECHA = DateTime.Now,
-                TOTAL = 0,
-                COD_FORMA_PAGO = 2,
-                COD_ESTADO = 4 // A Cuenta
-            };
-            foreach (var loItem in lsvReservas.Items)
-            {
-                if (((HtmlInputCheckBox)loItem.Controls[1]).Checked)
+                BLL.DAL.Venta oVenta = new BLL.DAL.Venta()
                 {
-                    try
+                    FECHA = DateTime.Now,
+                    TOTAL = 0,
+                    COD_FORMA_PAGO = 2,
+                    COD_ESTADO = 4 // A Cuenta
+                };
+
+                foreach (var loItem in lsvReservas.Items)
+                {
+                    if (((HtmlInputCheckBox)loItem.Controls[1]).Checked)
                     {
-                        BLL.DAL.ReservaEdicion oReservaEdicion = new BLL.ReservaEdicionBLL().ObtenerReservaEdicion(Convert.ToInt32(((Label)loItem.Controls[13]).Text));
-                        BLL.DAL.Reserva oReserva = new BLL.ReservaBLL().ObtenerReserva(oReservaEdicion.COD_RESERVA);
+                        BLL.DAL.ReservaEdicion oReservaEdicion = new ReservaEdicionBLL().ObtenerReservaEdicion(Convert.ToInt32(((Label)loItem.Controls[13]).Text));
+                        BLL.DAL.Reserva oReserva = new ReservaBLL().ObtenerReserva(oReservaEdicion.COD_RESERVA);
                         if (oVenta.COD_CLIENTE == null)
                         {
                             oVenta.COD_CLIENTE = oReserva.COD_CLIENTE;
@@ -88,37 +90,57 @@ namespace PL.AdminDashboard
 
                         // Actualizar Stock
                         loResutado = new ProductoEdicionBLL().ActualizarCantidadDisponible(oDetalleVenta.COD_PRODUCTO_EDICION, oDetalleVenta.CANTIDAD);
+                        if (!loResutado)
+                            break;
 
                         // Actualizar Estado de Reserva Edicion
                         oReservaEdicion.COD_ESTADO = 11; //Entregada 
                         loResutado = new ReservaEdicionBLL().ModificarReservaEdidion(oReservaEdicion);
+                        if (!loResutado)
+                            break;
 
                         // Si es Reservar Unica hay que cambiar el estado a Finalizado
                         if (oReserva.COD_TIPO_RESERVA == 1)
                         {
                             oReserva.COD_ESTADO = 8; //Finalizada
                             loResutado = new ReservaBLL().ModificarReserva(oReserva);
+                            if (!loResutado)
+                                break;
                         }
-                    }
-                    catch (Exception ex)
-                    {
 
+                        // Informar al Cliente que la edición ya fue entregada.
+                        Mensaje oMensaje = new Mensaje()
+                        {
+                            COD_CLIENTE = oVenta.COD_CLIENTE,
+                            DESCRIPCION = "La edición " + ((Label)loItem.Controls[13]).Text + " del producto '" + ((Label)loItem.Controls[5]).Text + "' ya fue entregada.",
+                            TIPO_MENSAJE = "success-element",
+                            FECHA_REGISTRO_MENSAJE = DateTime.Now
+                        };
+
+                        loResutado = new MensajeBLL().AltaMensaje(oMensaje);
                     }
                 }
+
+                // Registrar la Venta
+                if (loResutado)
+                    loResutado = new VentaBLL().AltaVenta(oVenta, lstDetalleVenta);
+
+                if (loResutado)
+                {
+                    LimpiarCampos();
+                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeEntregalSuccess, "Entrega Registrada"));
+                }
+                else
+                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeEntregaFailure));
+
             }
-
-            // Registrar la Venta
-
-            if (loResutado)
-                loResutado = new VentaBLL().AltaVenta(oVenta, lstDetalleVenta);
-
-            if (loResutado)
+            catch (Exception ex)
             {
-                LimpiarCampos();
-                Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeEntregalSuccess, "Entrega Registrada"));
-            }
-            else
                 Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeEntregaFailure));
+
+                Logger loLogger = LogManager.GetCurrentClassLogger();
+                loLogger.Error(ex);
+            }
         }
 
         protected void BtnCancelarEntrega_Click(object sender, EventArgs e)

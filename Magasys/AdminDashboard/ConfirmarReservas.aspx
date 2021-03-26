@@ -27,9 +27,9 @@
                                                     </td>
                                                     <th>Reserva</th>
                                                     <th>Fecha</th>
-                                                    <th>Nombre del Cliente</th>
+                                                    <th>Cliente</th>
                                                     <th>Producto</th>
-                                                    <th>Tipo Reserva</th>
+                                                    <th>Tipo de Reserva</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -53,7 +53,7 @@
                                                 <asp:Label ID="lblIdReserva" runat="server" Text='<%#Eval("ID_RESERVA").ToString()%>'></asp:Label>
                                             </td>
                                             <td class="text-left">
-                                                <asp:Label ID="lblFecha" runat="server" Text='<%#Eval("FECHA").ToString()%>'></asp:Label>
+                                                <asp:Label ID="lblFecha" runat="server" Text='<%#Convert.ToDateTime(Eval("FECHA")).ToString("dd/MM/yyyy")%>'></asp:Label>
                                             </td>
                                             <td class="text-left">
                                                 <asp:Label ID="lblCliente" runat="server" Text='<%#Eval("NOMBRE_CLIENTE").ToString()%>'></asp:Label>
@@ -62,7 +62,10 @@
                                                 <asp:Label ID="lblPorducto" runat="server" Text='<%#Eval("NOMBRE_PRODUCTO").ToString().Length > 50 ? String.Format("{0}...", Eval("NOMBRE_PRODUCTO").ToString().Remove(50).TrimEnd()):Eval("NOMBRE_PRODUCTO")%>'></asp:Label>
                                             </td>
                                             <td>
-                                                <asp:Label ID="LblProdEdi" runat="server" Text='<%#Eval("TIPO_RESERVA").ToString()%>'></asp:Label>
+                                                <asp:Label ID="lblProdEdi" runat="server" Text='<%#Eval("TIPO_RESERVA").ToString()%>'></asp:Label>
+                                            </td>
+                                            <td>
+                                                <asp:Label ID="lblCodCliente" runat="server" Text='<%#Eval("COD_CLIENTE").ToString()%>' Visible="false"></asp:Label>
                                             </td>
                                         </tr>
                                     </ItemTemplate>
