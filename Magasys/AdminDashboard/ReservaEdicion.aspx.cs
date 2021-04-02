@@ -30,7 +30,7 @@ namespace PL.AdminDashboard
             {
                 foreach (var loItem in lsvReservaEdicion.Items)
                 {
-                    // Consultar si existe una ReservaEdicion para la Reserva y el PorductoEdicion con estado 18 (sin Stock).
+                    // Consultar si existe una ReservaEdicion con estado 18 (sin Stock) para la Reserva y el PorductoEdicion del registro procesado.
                     var oReservaEdicionSinStock = new ReservaEdicionBLL().ObtenerReservaEdicionEstadoSinStock(Convert.ToInt32(((Label)loItem.Controls[3]).Text), Convert.ToInt32(((Label)loItem.Controls[11]).Text));
 
                     if (((HtmlInputCheckBox)loItem.Controls[1]).Checked)
@@ -49,7 +49,6 @@ namespace PL.AdminDashboard
                             // Alta de ReservaEdicion
                             BLL.DAL.ReservaEdicion oReservaConfirmada = new BLL.DAL.ReservaEdicion()
                             {
-                                //ID_RESERVA_EDICION = new ReservaEdicionBLL().ObtenerProximaReserva(),   // probar si funciona sin esto!!!
                                 FECHA = DateTime.Now,
                                 COD_RESERVA = Convert.ToInt32(((Label)loItem.Controls[3]).Text),
                                 COD_PROD_EDICION = Convert.ToInt32(((Label)loItem.Controls[11]).Text),
@@ -60,6 +59,11 @@ namespace PL.AdminDashboard
                             if (!loResutado)
                                 break;
                         }
+
+                        // Actualizar stock (se reserva stock)
+                        loResutado = new ProductoEdicionBLL().ActualizarCantidadDisponible(Convert.ToInt32(((Label)loItem.Controls[11]).Text), 1);
+                        if (!loResutado)
+                            break;
 
                         // Informar al Cliente que la edición fue reservada
                         BLL.DAL.Mensaje oMensaje = new BLL.DAL.Mensaje()

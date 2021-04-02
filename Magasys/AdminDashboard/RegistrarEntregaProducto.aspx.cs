@@ -88,11 +88,6 @@ namespace PL.AdminDashboard
                         lstDetalleVenta.Add(oDetalleVenta);
                         oVenta.TOTAL += oDetalleVenta.SUBTOTAL;
 
-                        // Actualizar Stock
-                        loResutado = new ProductoEdicionBLL().ActualizarCantidadDisponible(oDetalleVenta.COD_PRODUCTO_EDICION, oDetalleVenta.CANTIDAD);
-                        if (!loResutado)
-                            break;
-
                         // Actualizar Estado de Reserva Edicion
                         oReservaEdicion.COD_ESTADO = 11; //Entregada 
                         loResutado = new ReservaEdicionBLL().ModificarReservaEdidion(oReservaEdicion);

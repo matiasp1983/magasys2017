@@ -53,6 +53,13 @@ namespace PL.AdminDashboard
                         if (!loModificarReservaEdidion)
                             break;
 
+                        // Actualizar stock (sumar 1 a la cantidad)
+                        var oProductoEdicion = new ProductoEdicionBLL().ObtenerEdicion(loReservaEdicion.COD_PROD_EDICION);
+                        oProductoEdicion.CANTIDAD_DISPONIBLE = oProductoEdicion.CANTIDAD_DISPONIBLE + 1;
+                        loModificarReservaEdidion = new ProductoEdicionBLL().ModificarProductoEdicion(oProductoEdicion);
+                        if (!loModificarReservaEdidion)
+                            break;
+
                         // Informar al Cliente que la entrega a domicilio de la edición fue cancelada
                         Mensaje oMensaje = new Mensaje()
                         {

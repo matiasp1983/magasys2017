@@ -56,11 +56,18 @@ namespace PL.AdminDashboard
                     {
                         if (((HtmlInputCheckBox)loItem.Controls[1]).Checked)
                         {
-                            // Se anulan las reservas marcadas
+                            // Se Anulan las reservasEdicion marcadas
                             int codReserva = Convert.ToInt32(((Label)loItem.Controls[11]).Text);
                             BLL.DAL.ReservaEdicion oReservaEdicion = new BLL.ReservaEdicionBLL().ObtenerReservaEdicion(codReserva);
                             oReservaEdicion.COD_ESTADO = 12;
                             new BLL.ReservaEdicionBLL().ModificarReservaEdidion(oReservaEdicion);
+
+                            // Actualizar stock (sumar 1 a la cantidad)
+                            var oProductoEdicion = new BLL.ProductoEdicionBLL().ObtenerEdicion(oReservaEdicion.COD_PROD_EDICION);
+                            oProductoEdicion.CANTIDAD_DISPONIBLE = oProductoEdicion.CANTIDAD_DISPONIBLE + 1;
+                            loResutado = new BLL.ProductoEdicionBLL().ModificarProductoEdicion(oProductoEdicion);
+                            if (!loResutado)
+                                break;
 
                             BLL.DAL.Reserva oReserva = new BLL.ReservaBLL().ObtenerReserva(Convert.ToInt32(((Label)loItem.Controls[3]).Text));
                             if (oReserva.COD_TIPO_RESERVA == 1) // Se actualiza el estado cuando se trata de una reserva Única
