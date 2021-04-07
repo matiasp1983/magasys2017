@@ -23,34 +23,26 @@ namespace PL.AdminDashboard
         protected void BtnGuardar_Click(object sender, EventArgs e)
         {
             bool loResutado = false;
+            int lvMarcados = 0;
+
             try
             {
                 if (Session[Enums.Session.DevolucionProducto.ToString()] != null)
                 {
-                    if (!ActualizarCantidad())
+                    if (!SePuedeDevolver())
                     {
                         Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.InfoModal(Message.MsjeDevolucionStockInsuficiente));
                         return;
                     }
 
                     var loDevolucionProducto = (BLL.DetalleDevolucion)Session[Enums.Session.DevolucionProducto.ToString()];
-                    BLL.DAL.ProductoDevolucion oProductoDevolucion = new BLL.DAL.ProductoDevolucion()
+
+                    if (loDevolucionProducto.CANTIDAD > 0) // Se actualizan las cantidades y estado del producto.
                     {
-                        FECHA = DateTime.Now,
-                        COD_ESTADO = 1,
-                    };
-                    List<BLL.DAL.DetalleProductoDevolucion> lstDetalleProductoDevolucion = new List<BLL.DAL.DetalleProductoDevolucion>();
-
-                    BLL.DAL.DetalleProductoDevolucion oDetalleProductoDevolucion = new BLL.DAL.DetalleProductoDevolucion
-                    {
-                        COD_PRODUCTO_EDICION = loDevolucionProducto.COD_PRODUCTO_EDICION
-                    };
-
-                    oDetalleProductoDevolucion.CANTIDAD = loDevolucionProducto.CANTIDAD;
-                    lstDetalleProductoDevolucion.Add(oDetalleProductoDevolucion);
-
-                    // Se actualizan las cantidades y estado del producto
-                    loResutado = new BLL.ProductoEdicionBLL().ActualizarCantidadDisponible(oDetalleProductoDevolucion.COD_PRODUCTO_EDICION, loDevolucionProducto.CANTIDAD, DateTime.Now);
+                        loResutado = new BLL.ProductoEdicionBLL().ActualizarCantidadDisponible(loDevolucionProducto.COD_PRODUCTO_EDICION, loDevolucionProducto.CANTIDAD, DateTime.Now);
+                        if (!loResutado)
+                            return;
+                    }
 
                     foreach (var loItem in lsvReservaEdicion.Items)
                     {
@@ -62,22 +54,16 @@ namespace PL.AdminDashboard
                             oReservaEdicion.COD_ESTADO = 12;
                             new BLL.ReservaEdicionBLL().ModificarReservaEdidion(oReservaEdicion);
 
-                            // Actualizar stock (sumar 1 a la cantidad)
-                            var oProductoEdicion = new BLL.ProductoEdicionBLL().ObtenerEdicion(oReservaEdicion.COD_PROD_EDICION);
-                            oProductoEdicion.CANTIDAD_DISPONIBLE = oProductoEdicion.CANTIDAD_DISPONIBLE + 1;
-                            loResutado = new BLL.ProductoEdicionBLL().ModificarProductoEdicion(oProductoEdicion);
-                            if (!loResutado)
-                                break;
-
                             BLL.DAL.Reserva oReserva = new BLL.ReservaBLL().ObtenerReserva(Convert.ToInt32(((Label)loItem.Controls[3]).Text));
                             if (oReserva.COD_TIPO_RESERVA == 1) // Se actualiza el estado cuando se trata de una reserva Única
                             {
                                 oReserva.COD_ESTADO = 9; // Reserva Anulada   
                                 loResutado = new BLL.ReservaBLL().ModificarReserva(oReserva);
+                                if (!loResutado)
+                                    break;
                             }
 
-                            if (!loResutado)
-                                break;
+                            lvMarcados++;
 
                             // Informar al Cliente que la entrega a domicilio de la edición fue cancelada
                             BLL.DAL.Mensaje oMensaje = new BLL.DAL.Mensaje()
@@ -94,8 +80,22 @@ namespace PL.AdminDashboard
                         }
                     }
 
-                    if (loResutado)
-                        loResutado = new BLL.ProductoDevolucionBLL().AltaDevolucion(oProductoDevolucion, lstDetalleProductoDevolucion);
+                    BLL.DAL.ProductoDevolucion oProductoDevolucion = new BLL.DAL.ProductoDevolucion()
+                    {
+                        FECHA = DateTime.Now,
+                        COD_ESTADO = 1,
+                    };
+
+                    List<BLL.DAL.DetalleProductoDevolucion> lstDetalleProductoDevolucion = new List<BLL.DAL.DetalleProductoDevolucion>();
+
+                    BLL.DAL.DetalleProductoDevolucion oDetalleProductoDevolucion = new BLL.DAL.DetalleProductoDevolucion
+                    {
+                        COD_PRODUCTO_EDICION = loDevolucionProducto.COD_PRODUCTO_EDICION,
+                        CANTIDAD = loDevolucionProducto.CANTIDAD + lvMarcados
+                    };
+
+                    lstDetalleProductoDevolucion.Add(oDetalleProductoDevolucion);
+                    loResutado = new BLL.ProductoDevolucionBLL().AltaDevolucion(oProductoDevolucion, lstDetalleProductoDevolucion);
 
                     if (loResutado)
                     {
@@ -161,21 +161,50 @@ namespace PL.AdminDashboard
             }
         }
 
-        private bool ActualizarCantidad()
+        private bool SePuedeDevolver()
         {
             bool lvSePuedeDevolver = false;
-            int lvMarcados = 0; // Acumula la cantidad de stock que se necesita para las reservas confirmadas
+            int lvMarcados = 0;
+            int lvNoMarcados = 0;
+
             foreach (var loItem in lsvReservaEdicion.Items)
             {
-                if (!((HtmlInputCheckBox)loItem.Controls[1]).Checked) // Las reservas seleccionadas se van a anular, por lo tanto no se les guarda stock
+                if (((HtmlInputCheckBox)loItem.Controls[1]).Checked) // Las reservas seleccionadas se van a anular, por lo tanto no se les guarda stock
                     lvMarcados = lvMarcados + 1;
             }
+
+            lvNoMarcados = lsvReservaEdicion.Items.Count - lvMarcados; // Contar Reservas no seleccionadas.
+
             var loDevolucionProducto = (BLL.DetalleDevolucion)Session[Enums.Session.DevolucionProducto.ToString()];
             // loDevolucionProducto.CANTIDAD --> es la cantidad que se quiere devolver
-            if ((loDevolucionProducto.STOCK - loDevolucionProducto.CANTIDAD) >= lvMarcados)
+
+            // Solo se puede devolver la cantidad indicada en loDevolucionProducto.CANTIDAD, no puede ser ni más ni menos.
+            if (lvMarcados > loDevolucionProducto.CANTIDAD)
             {
+                return lvSePuedeDevolver;
+            }
+
+            if (loDevolucionProducto.STOCK >= loDevolucionProducto.CANTIDAD)
                 lvSePuedeDevolver = true;
-                //loDevolucionProducto.CANTIDAD = loDevolucionProducto.CANTIDAD - lvMarcados;
+
+            else
+            if (((loDevolucionProducto.STOCK + loDevolucionProducto.CANTIDAD_RESERVAS) == loDevolucionProducto.CANTIDAD) && (lvMarcados == lsvReservaEdicion.Items.Count))
+            {   // Cuando la suma del Stock y las cantidades reservadas sea igual a la Cantidad que se desea devolver.
+                // Se puede continuar cuando todas las reservas se encuentren seleccionadas para anular.               
+                lvSePuedeDevolver = true;
+            }
+            else
+            if (loDevolucionProducto.CANTIDAD > loDevolucionProducto.STOCK)
+            {   // Cuando la Cantidad a devolver es mayor al Stock.
+                var lvCantidadMaximaQueSePuedeReservar = loDevolucionProducto.STOCK + loDevolucionProducto.CANTIDAD_RESERVAS - loDevolucionProducto.CANTIDAD;
+                if (lvNoMarcados <= lvCantidadMaximaQueSePuedeReservar)
+                    lvSePuedeDevolver = true;
+            }
+
+            if (lvSePuedeDevolver == true)
+            {
+                loDevolucionProducto.CANTIDAD = loDevolucionProducto.CANTIDAD - lvMarcados;
+                Session[Enums.Session.DevolucionProducto.ToString()] = loDevolucionProducto;
             }
 
             return lvSePuedeDevolver;

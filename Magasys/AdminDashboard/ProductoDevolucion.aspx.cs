@@ -114,7 +114,7 @@ namespace PL.AdminDashboard
                     {
                         if (!String.IsNullOrEmpty(((TextBox)loItem.Controls[17]).Text.ToString()))
                         {
-                            if (Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString()) > 0 && Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString()) <= Convert.ToInt32(((Label)loItem.Controls[13]).Text.ToString())) //CANTIDAD_DISPONIBLE debe ser mayor a 0 y, menor o igual al Sotck.
+                            if (Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString()) > 0 && Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString()) <= Convert.ToInt32(((Label)loItem.Controls[13]).Text.ToString()) + Convert.ToInt32(((Label)loItem.Controls[15]).Text.ToString())) //"Cantidad" debe ser mayor a 0 y, menor o igual al "Sotck + Reservas Confirmadas".
                             {
                                 DetalleDevolucion oDetalleDevolucion = new DetalleDevolucion
                                 {
