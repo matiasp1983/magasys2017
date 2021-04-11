@@ -25,9 +25,44 @@ namespace PL.AdminDashboard
         protected void BtnGuardar_Click(object sender, EventArgs e)
         {
             bool loResutado = false;
+            int lvCantidadReservasPorProductoEdicion = 0;
+            string lvNombreProducto = String.Empty;
             List<ReservaClienteListado> lstReservasConfirmar = (List<ReservaClienteListado>)lsvReservaEdicion.DataSource;
+            List<BLL.DAL.ProductoEdicion> lstProductoEdicion = new List<BLL.DAL.ProductoEdicion>();
+
             try
             {
+                // Controlar si hay suficiente stock para las reservas
+                foreach (var loItem in lsvReservaEdicion.Items)
+                {
+                    // Obtener stock de los ProductoEdicion
+                    // hacer un listado de ProductoEdicion con su respectivo stock
+                    var oProductoEdicion = new ProductoEdicionBLL().ObtenerProductoEdicionPorId(Convert.ToInt32(((Label)loItem.Controls[11]).Text));
+                    if (oProductoEdicion != null && !(lstProductoEdicion.Exists(x => x.ID_PRODUCTO_EDICION == oProductoEdicion.ID_PRODUCTO_EDICION)))
+                        lstProductoEdicion.Add(oProductoEdicion);
+                }
+
+                // Recorrer nuevo listado y contar cuantas reservas hay y si alcanza el stock.
+                foreach (var item in lstProductoEdicion)
+                {
+                    lvCantidadReservasPorProductoEdicion = 0;
+
+                    foreach (var loItem in lsvReservaEdicion.Items)
+                    {
+                        if (((HtmlInputCheckBox)loItem.Controls[1]).Checked && (Convert.ToInt32(((Label)loItem.Controls[11]).Text) == item.ID_PRODUCTO_EDICION))
+                        {
+                            lvCantidadReservasPorProductoEdicion++;
+                            lvNombreProducto = ((Label)loItem.Controls[9]).Text;
+                        }                            
+                    }
+
+                    if (lvCantidadReservasPorProductoEdicion > item.CANTIDAD_DISPONIBLE)
+                    {
+                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.InfoModal($"{Message.MsjeNoHaySuficienteStockParaReservar} {lvNombreProducto}"));
+                        return;
+                    }
+                }
+
                 foreach (var loItem in lsvReservaEdicion.Items)
                 {
                     // Consultar si existe una ReservaEdicion con estado 18 (sin Stock) para la Reserva y el PorductoEdicion del registro procesado.

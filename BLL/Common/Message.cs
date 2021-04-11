@@ -123,6 +123,7 @@
         public const string MsjeReservaConfirmacionOk = "Las Reservas han sido confirmadas.";
         public const string MsjeReservaConfirmacionFailure = "No se confirmaron las Reservas marcadas";
         public const string MsjeReservaSinConfirmar = "No hay reservas para confirmar.";
+        public const string MsjeNoHaySuficienteStockParaReservar = "No hay suficiente stock para las reservas seleccionadas del producto ";
 
         #endregion
 
