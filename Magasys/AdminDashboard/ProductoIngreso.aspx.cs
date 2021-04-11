@@ -355,6 +355,7 @@ namespace PL.AdminDashboard
             ProductoEdicion oProductoEdicion = null;
             BLL.DAL.ProductoIngreso oProductoIngreso = null;
             BLL.DAL.Imagen oImagen = null;
+            int lvCantidadProductoIngresado = 0;
 
             try
             {
@@ -464,7 +465,7 @@ namespace PL.AdminDashboard
 
                     var oReservaFiltro = CargarReservaFiltro(Convert.ToString(((Label)loItem.Controls[3]).Text), Convert.ToString(((TextBox)loItem.Controls[7]).Text));
                     var lstReserva = new BLL.ReservaBLL().ObtenerReservaEdicionPorProducto(oReservaFiltro);
-                    if (lstReserva.Count > 0)
+                    if (lstReserva != null)
                     {
                         // Agregar los resultados en una lista con TODAS las reservas porque asi como está borra los anteriores
 
@@ -485,6 +486,7 @@ namespace PL.AdminDashboard
                     }
 
                     oDetalleProductoIngreso.CANTIDAD_UNIDADES = Convert.ToInt32(((TextBox)loItem.Controls[13]).Text);
+                    lvCantidadProductoIngresado = lvCantidadProductoIngresado + Convert.ToInt32(((TextBox)loItem.Controls[13]).Text);
                     if (!String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[15]).Text)))
                         oDetalleProductoIngreso.FECHA_DEVOLUCION = Convert.ToDateTime(((TextBox)loItem.Controls[15]).Text);
                     lstDetalleProductoIngreso.Add(oDetalleProductoIngreso);
@@ -498,6 +500,7 @@ namespace PL.AdminDashboard
                     oProductoIngreso.COD_PROVEEDOR = Convert.ToInt32(ddlProveedor.SelectedValue);
                     oProductoIngreso.COD_TIPO_PRODUCTO = Convert.ToInt32(ddlTipoProducto.SelectedValue);
                     loResutado = new BLL.ProductoIngresoBLL().AltaIngreso(oProductoIngreso, lstDetalleProductoIngreso);
+                    Session.Add(Enums.Session.CantidadProductoIngresado.ToString(), lvCantidadProductoIngresado);
                 }
 
                 // Llamar pantalla para Confirmar las reservas
@@ -527,6 +530,7 @@ namespace PL.AdminDashboard
             ProductoEdicion oProductoEdicion = null;
             BLL.DAL.ProductoIngreso oProductoIngreso = null;
             BLL.DAL.Imagen oImagen = null;
+            int lvCantidadProductoIngresado = 0;
 
             try
             {
@@ -642,7 +646,7 @@ namespace PL.AdminDashboard
 
                     var oReservaFiltro = CargarReservaFiltro(Convert.ToString(((Label)loItem.Controls[3]).Text), Convert.ToString(((TextBox)loItem.Controls[7]).Text));
                     var lstReserva = new BLL.ReservaBLL().ObtenerReservaEdicionPorProducto(oReservaFiltro);
-                    if (lstReserva.Any())
+                    if (lstReserva != null)
                     {
                         // Agregar los resultados en una lista con TODAS las reservas porque asi como está borra los anteriores
 
@@ -663,6 +667,7 @@ namespace PL.AdminDashboard
                     }
 
                     oDetalleProductoIngreso.CANTIDAD_UNIDADES = Convert.ToInt32(((TextBox)loItem.Controls[13]).Text);
+                    lvCantidadProductoIngresado = lvCantidadProductoIngresado + Convert.ToInt32(((TextBox)loItem.Controls[13]).Text);
                     if (!String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[15]).Text)))
                         oDetalleProductoIngreso.FECHA_DEVOLUCION = Convert.ToDateTime(((TextBox)loItem.Controls[15]).Text);
                     lstDetalleProductoIngreso.Add(oDetalleProductoIngreso);
@@ -676,6 +681,7 @@ namespace PL.AdminDashboard
                     oProductoIngreso.COD_PROVEEDOR = Convert.ToInt32(ddlProveedor.SelectedValue);
                     oProductoIngreso.COD_TIPO_PRODUCTO = Convert.ToInt32(ddlTipoProducto.SelectedValue);
                     loResutado = new BLL.ProductoIngresoBLL().AltaIngreso(oProductoIngreso, lstDetalleProductoIngreso);
+                    Session.Add(Enums.Session.CantidadProductoIngresado.ToString(), lvCantidadProductoIngresado);
                 }
 
                 // Llamar pantalla para Confirmar las reservas
@@ -709,6 +715,7 @@ namespace PL.AdminDashboard
             ProductoEdicion oProductoEdicion = null;
             BLL.DAL.ProductoIngreso oProductoIngreso = null;
             BLL.DAL.Imagen oImagen = null;
+            int lvCantidadProductoIngresado = 0;
 
             try
             {
@@ -817,7 +824,7 @@ namespace PL.AdminDashboard
 
                     var oReservaFiltro = CargarReservaFiltro(Convert.ToString(((Label)loItem.Controls[3]).Text), Convert.ToString(((TextBox)loItem.Controls[7]).Text));
                     var lstReserva = new BLL.ReservaBLL().ObtenerReservaEdicionPorProducto(oReservaFiltro);
-                    if (lstReserva.Any())
+                    if (lstReserva != null)
                     {
                         // Agregar los resultados en una lista con TODAS las reservas porque asi como está borra los anteriores
 
@@ -838,6 +845,7 @@ namespace PL.AdminDashboard
                     }
 
                     oDetalleProductoIngreso.CANTIDAD_UNIDADES = Convert.ToInt32(((TextBox)loItem.Controls[11]).Text);
+                    lvCantidadProductoIngresado = lvCantidadProductoIngresado + Convert.ToInt32(((TextBox)loItem.Controls[13]).Text);
                     if (!String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[13]).Text)))
                         oDetalleProductoIngreso.FECHA_DEVOLUCION = Convert.ToDateTime(((TextBox)loItem.Controls[13]).Text);
                     lstDetalleProductoIngreso.Add(oDetalleProductoIngreso);
@@ -851,6 +859,7 @@ namespace PL.AdminDashboard
                     oProductoIngreso.COD_PROVEEDOR = Convert.ToInt32(ddlProveedor.SelectedValue);
                     oProductoIngreso.COD_TIPO_PRODUCTO = Convert.ToInt32(ddlTipoProducto.SelectedValue);
                     loResutado = new BLL.ProductoIngresoBLL().AltaIngreso(oProductoIngreso, lstDetalleProductoIngreso);
+                    Session.Add(Enums.Session.CantidadProductoIngresado.ToString(), lvCantidadProductoIngresado);
                 }
 
                 // Llamar pantalla para Confirmar las reservas
@@ -883,6 +892,7 @@ namespace PL.AdminDashboard
             ProductoEdicion oProductoEdicion = null;
             BLL.DAL.ProductoIngreso oProductoIngreso = null;
             BLL.DAL.Imagen oImagen = null;
+            int lvCantidadProductoIngresado = 0;
 
             try
             {
@@ -991,7 +1001,7 @@ namespace PL.AdminDashboard
 
                     var oReservaFiltro = CargarReservaFiltro(Convert.ToString(((Label)loItem.Controls[3]).Text), Convert.ToString(((TextBox)loItem.Controls[7]).Text));
                     var lstReserva = new BLL.ReservaBLL().ObtenerReservaEdicionPorProducto(oReservaFiltro);
-                    if (lstReserva.Any())
+                    if (lstReserva != null)
                     {
                         // Agregar los resultados en una lista con TODAS las reservas porque asi como está borra los anteriores
 
@@ -1012,6 +1022,7 @@ namespace PL.AdminDashboard
                     }
 
                     oDetalleProductoIngreso.CANTIDAD_UNIDADES = Convert.ToInt32(((TextBox)loItem.Controls[13]).Text);
+                    lvCantidadProductoIngresado = lvCantidadProductoIngresado + Convert.ToInt32(((TextBox)loItem.Controls[13]).Text);
                     if (!String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[15]).Text)))
                         oDetalleProductoIngreso.FECHA_DEVOLUCION = Convert.ToDateTime(((TextBox)loItem.Controls[15]).Text);
                     lstDetalleProductoIngreso.Add(oDetalleProductoIngreso);
@@ -1025,6 +1036,7 @@ namespace PL.AdminDashboard
                     oProductoIngreso.COD_PROVEEDOR = Convert.ToInt32(ddlProveedor.SelectedValue);
                     oProductoIngreso.COD_TIPO_PRODUCTO = Convert.ToInt32(ddlTipoProducto.SelectedValue);
                     loResutado = new BLL.ProductoIngresoBLL().AltaIngreso(oProductoIngreso, lstDetalleProductoIngreso);
+                    Session.Add(Enums.Session.CantidadProductoIngresado.ToString(), lvCantidadProductoIngresado);
                 }
 
                 // Llamar pantalla para Confirmar las reservas
@@ -1055,6 +1067,7 @@ namespace PL.AdminDashboard
             ProductoEdicion oProductoEdicion = null;
             BLL.DAL.ProductoIngreso oProductoIngreso = null;
             BLL.DAL.Imagen oImagen = null;
+            int lvCantidadProductoIngresado = 0;
 
             try
             {
@@ -1167,7 +1180,7 @@ namespace PL.AdminDashboard
 
                     var oReservaFiltro = CargarReservaFiltro(Convert.ToString(((Label)loItem.Controls[3]).Text), Convert.ToString(((TextBox)loItem.Controls[7]).Text));
                     var lstReserva = new BLL.ReservaBLL().ObtenerReservaEdicionPorProducto(oReservaFiltro);
-                    if (lstReserva.Any())
+                    if (lstReserva != null)
                     {
                         // Agregar los resultados en una lista con TODAS las reservas porque asi como está borra los anteriores
 
@@ -1188,6 +1201,7 @@ namespace PL.AdminDashboard
                     }
 
                     oDetalleProductoIngreso.CANTIDAD_UNIDADES = Convert.ToInt32(((TextBox)loItem.Controls[13]).Text);
+                    lvCantidadProductoIngresado = lvCantidadProductoIngresado + Convert.ToInt32(((TextBox)loItem.Controls[13]).Text);
                     if (!String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[15]).Text)))
                         oDetalleProductoIngreso.FECHA_DEVOLUCION = Convert.ToDateTime(((TextBox)loItem.Controls[15]).Text);
                     lstDetalleProductoIngreso.Add(oDetalleProductoIngreso);
@@ -1201,6 +1215,7 @@ namespace PL.AdminDashboard
                     oProductoIngreso.COD_PROVEEDOR = Convert.ToInt32(ddlProveedor.SelectedValue);
                     oProductoIngreso.COD_TIPO_PRODUCTO = Convert.ToInt32(ddlTipoProducto.SelectedValue);
                     loResutado = new BLL.ProductoIngresoBLL().AltaIngreso(oProductoIngreso, lstDetalleProductoIngreso);
+                    Session.Add(Enums.Session.CantidadProductoIngresado.ToString(), lvCantidadProductoIngresado);
                 }
 
                 // Llamar pantalla para Confirmar las reservas
@@ -1232,6 +1247,7 @@ namespace PL.AdminDashboard
             ProductoEdicion oProductoEdicion = null;
             BLL.DAL.ProductoIngreso oProductoIngreso = null;
             BLL.DAL.Imagen oImagen = null;
+            int lvCantidadProductoIngresado = 0;
 
             try
             {
@@ -1344,7 +1360,7 @@ namespace PL.AdminDashboard
 
                     var oReservaFiltro = CargarReservaFiltro(Convert.ToString(((Label)loItem.Controls[3]).Text), Convert.ToString(((TextBox)loItem.Controls[7]).Text));
                     var lstReserva = new BLL.ReservaBLL().ObtenerReservaEdicionPorProducto(oReservaFiltro);
-                    if (lstReserva.Any())
+                    if (lstReserva != null)
                     {
                         // Agregar los resultados en una lista con TODAS las reservas porque asi como está borra los anteriores
 
@@ -1365,6 +1381,7 @@ namespace PL.AdminDashboard
                     }
 
                     oDetalleProductoIngreso.CANTIDAD_UNIDADES = Convert.ToInt32(((TextBox)loItem.Controls[13]).Text);
+                    lvCantidadProductoIngresado = lvCantidadProductoIngresado + Convert.ToInt32(((TextBox)loItem.Controls[13]).Text);
                     if (!String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[15]).Text)))
                         oDetalleProductoIngreso.FECHA_DEVOLUCION = Convert.ToDateTime(((TextBox)loItem.Controls[15]).Text);
                     lstDetalleProductoIngreso.Add(oDetalleProductoIngreso);
@@ -1378,6 +1395,7 @@ namespace PL.AdminDashboard
                     oProductoIngreso.COD_PROVEEDOR = Convert.ToInt32(ddlProveedor.SelectedValue);
                     oProductoIngreso.COD_TIPO_PRODUCTO = Convert.ToInt32(ddlTipoProducto.SelectedValue);
                     loResutado = new BLL.ProductoIngresoBLL().AltaIngreso(oProductoIngreso, lstDetalleProductoIngreso);
+                    Session.Add(Enums.Session.CantidadProductoIngresado.ToString(), lvCantidadProductoIngresado);
                 }
 
                 // Llamar pantalla para Confirmar las reservas

@@ -123,11 +123,13 @@ namespace PL.AdminDashboard
             }
 
             Session.Remove(Enums.Session.ListadoReservaConfirmar.ToString());
+            Session.Remove(Enums.Session.CantidadProductoIngresado.ToString());
         }
 
         protected void BtnCancelar_Click(object sender, EventArgs e)
         {
             Session.Remove(Enums.Session.ListadoReservaConfirmar.ToString());
+            Session.Remove(Enums.Session.CantidadProductoIngresado.ToString());
             Response.Redirect("ProductoIngreso.aspx", false);
         }
 
@@ -141,8 +143,8 @@ namespace PL.AdminDashboard
             {
                 ListView lsvReservas = (ListView)Session[Enums.Session.ListadoReservaConfirmar.ToString()];
                 List<ReservaClienteListado> lstReservasConfirmar = MapListViewToListObject(lsvReservas);
-                lblCantidadIngresada.Text = "40";
-                lblReservasTotales.Text = "120";
+                lblCantidadIngresada.Text = Session[Enums.Session.CantidadProductoIngresado.ToString()].ToString(); // Indica la catidad total de productos ingresados.
+                lblReservasTotales.Text = lstReservasConfirmar.Count.ToString();
                 lsvReservaEdicion.DataSource = lstReservasConfirmar;
                 lsvReservaEdicion.DataBind();
             }

@@ -44,7 +44,8 @@
             CodigoReserva,
             IdEmpleado,
             HojaDeRuta,
-            RegresarAlKiosco
+            RegresarAlKiosco,
+            CantidadProductoIngresado
         }
 
         #endregion
