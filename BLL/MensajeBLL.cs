@@ -28,13 +28,30 @@ namespace BLL
         /// </summary>
         /// <param name="codCliente"></param>
         /// <returns></returns>
+        public List<Mensaje> ObtenerMensajesNuevos(long codCliente)
+        {
+            List<Mensaje> lstMensaje = null;
+
+            using (var loRepMensaje = new Repository<Mensaje>())
+            {
+                lstMensaje = loRepMensaje.Search(p => p.COD_CLIENTE == codCliente && p.MENSAJE_VISTO == null && p.FECHA_MODIFICACION_MENSAJE == null).OrderByDescending(p => p.ID_MENSAJE).ToList();
+            }
+
+            return lstMensaje;
+        }
+
+        /// <summary>
+        /// Obtener las notificaciones del cliente que no fueron borrasas/eliminadas.
+        /// </summary>
+        /// <param name="codCliente"></param>
+        /// <returns></returns>
         public List<Mensaje> ObtenerMensajes(long codCliente)
         {
             List<Mensaje> lstMensaje = null;
 
             using (var loRepMensaje = new Repository<Mensaje>())
             {
-                lstMensaje = loRepMensaje.Search(p => p.COD_CLIENTE == codCliente && p.MENSAJE_VISTO == null);
+                lstMensaje = loRepMensaje.Search(p => p.COD_CLIENTE == codCliente && p.FECHA_MODIFICACION_MENSAJE == null).OrderByDescending(p => p.ID_MENSAJE).ToList();
             }
 
             return lstMensaje;

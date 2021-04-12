@@ -116,7 +116,7 @@ namespace PL.CustomersWebSite
         private void ObtenerNotificaciones(BLL.DAL.Usuario oUsuario)
         {
             var oClienteSession = new BLL.ClienteBLL().ObtenerClientePorUsuario(oUsuario.ID_USUARIO);
-            lblCantidadDeNotificaciones.Text = new BLL.MensajeBLL().ObtenerMensajes(oClienteSession.ID_CLIENTE).Count.ToString();
+            lblCantidadDeNotificaciones.Text = new BLL.MensajeBLL().ObtenerMensajesNuevos(oClienteSession.ID_CLIENTE).Count.ToString();
         }
 
         #endregion

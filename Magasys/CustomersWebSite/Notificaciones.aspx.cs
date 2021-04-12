@@ -13,6 +13,9 @@ namespace PL.CustomersWebSite
         {
             if (!Page.IsPostBack)
             {
+                var oUsuario = (BLL.DAL.Usuario)Session[CustomersWebSiteSessionBLL.DefaultSessionsId.Usuario.ToString()];
+                var oClienteSession = new BLL.ClienteBLL().ObtenerClientePorUsuario(oUsuario.ID_USUARIO);
+                MarcarNotificacionComoVisto(oClienteSession.ID_CLIENTE);
                 CargarNotificaciones();
             }
         }
@@ -23,7 +26,9 @@ namespace PL.CustomersWebSite
 
         private void CargarNotificaciones()
         {
-            var lstNotificaciones = new BLL.MensajeBLL().ObtenerMensajes(30);
+            var oUsuario = (BLL.DAL.Usuario)Session[CustomersWebSiteSessionBLL.DefaultSessionsId.Usuario.ToString()];
+            var oClienteSession = new BLL.ClienteBLL().ObtenerClientePorUsuario(oUsuario.ID_USUARIO);
+            var lstNotificaciones = new BLL.MensajeBLL().ObtenerMensajes(oClienteSession.ID_CLIENTE);
             if (lstNotificaciones != null && lstNotificaciones.Count > 0)
             {
                 lsvNotificaciones.DataSource = lstNotificaciones;
@@ -39,10 +44,28 @@ namespace PL.CustomersWebSite
             lsvNotificaciones.Visible = true;
         }
 
+        private void MarcarNotificacionComoVisto(long codCliente)
+        {
+            if (codCliente > 0)
+            {
+                var oMensajeBLL = new BLL.MensajeBLL();
+                var lstMensaje = oMensajeBLL.ObtenerMensajesNuevos(codCliente);
+
+                if (lstMensaje != null)
+                {
+                    foreach (var item in lstMensaje)
+                    {
+                        item.MENSAJE_VISTO = true;
+                        var loResultado = oMensajeBLL.ModificarMensaje(item);
+                    }
+                }
+            }
+        }
+
         #endregion
 
         [WebMethod]
-        public static bool MarcarNotificacionComoVisto(string pIdMensaje)
+        public static bool MarcarNotificacionComoEliminada(string pIdMensaje)
         {
             bool loResultado = false;
 
@@ -53,10 +76,9 @@ namespace PL.CustomersWebSite
 
                 if (oMensaje != null)
                 {
-                    oMensaje.MENSAJE_VISTO = true;
                     oMensaje.FECHA_MODIFICACION_MENSAJE = DateTime.Now;
                     loResultado = oMensajeBLL.ModificarMensaje(oMensaje);
-                }                
+                }
             }
 
             return loResultado;

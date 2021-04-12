@@ -25,7 +25,7 @@
                                         <li class="<%#Eval("TIPO_MENSAJE").ToString()%>" id="task1">                                                   
                                             <asp:Label ID="lblDescripcion" runat="server" Text='<%#Eval("DESCRIPCION").ToString()%>'></asp:Label>
                                             <div class="agile-detail">
-                                                <a class="pull-right btn btn-xs btn-white" onclick="MarcarNotificacionComoVisto(<%#Eval("ID_MENSAJE") %>);">Visto</a>
+                                                <a class="pull-right btn btn-xs btn-white" onclick="MarcarNotificacionComoEliminada(<%#Eval("ID_MENSAJE") %>);">Eliminar notificación</a>
                                                 <i class="fa fa-clock-o"></i> <asp:Label ID="lblFechaRegistroMensaje" runat="server" Text='<%#Convert.ToDateTime(Eval("FECHA_REGISTRO_MENSAJE")).ToString("dd/MM/yyyy")%>'></asp:Label>
                                             </div>
                                         </li>                                        
@@ -42,10 +42,10 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="script" runat="server">
     <script type="text/javascript">
-        function MarcarNotificacionComoVisto(idMensaje) {
+        function MarcarNotificacionComoEliminada(idMensaje) {
             $.ajax({
                 type: "POST",
-                url: "Notificaciones.aspx/MarcarNotificacionComoVisto",
+                url: "Notificaciones.aspx/MarcarNotificacionComoEliminada",
                 data: JSON.stringify({ 'pIdMensaje': idMensaje }),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
