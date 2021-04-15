@@ -115,16 +115,16 @@
                                         <td class="text-right">
                                             <div class="btn-group">
                                                 <button runat="server" id="btnVisualizar" class="btn btn-outline btn-success btn-xl" title="Visualizar" onserverclick="BtnVisualizar_Click"><i class="fa fa-search"></i></button>
-                                                <a class="btn btn-outline btn-danger btn-xl" data-toggle="modal" data-target="#ModalDevolucionAnular" title="Eliminar" onclick="CargarIdDevolucionAnular(this);"><i class="fa fa-trash-o"></i>
+<%--                                                <a class="btn btn-outline btn-danger btn-xl" data-toggle="modal" data-target="#ModalDevolucionAnular" title="Eliminar" onclick="CargarIdDevolucionAnular(this);"><i class="fa fa-trash-o"></i>
                                                     <asp:HiddenField ID="hdIdDevolucion" runat="server" />
-                                                </a>  
+                                                </a>  --%>
                                             </div>
                                         </td>
                                     </tr>
                                 </ItemTemplate>
                             </asp:ListView>
                             <div id="dvMensajeLsvDevoluciones" runat="server" />                           
-                            <div id="ModalDevolucionAnular" class="modal" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+<%--                            <div id="ModalDevolucionAnular" class="modal" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
                                 <div class="modal-dialog">
                                     <div class="modal-content animated bounce">
                                         <div class="modal-body">
@@ -147,7 +147,7 @@
                                     </div>
                                     <asp:HiddenField ID="hdIdDevolucionAnular" runat="server" Value="" />
                                 </div>
-                            </div>    
+                            </div> --%>   
                         </div>
                     </div>
                 </div>
@@ -157,7 +157,7 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="script" runat="server">
     <script type="text/javascript">
-        var hdIdDevolucionAnular = '#<%=hdIdDevolucionAnular.ClientID%>';
+        <%--var hdIdDevolucionAnular = '#<%=hdIdDevolucionAnular.ClientID%>';--%>
     </script>
     <script type="text/javascript">
         var FormProductoDevolucionListado = '#<%=FormProductoDevolucionListado.ClientID%>';
@@ -205,11 +205,11 @@
             });
         }
 
-        function CargarIdDevolucionAnular(control) {
-            if (window.jQuery) {
-                var loIdDevolucion = control.lastElementChild.defaultValue;
-                $(hdIdDevolucionAnular).val(loIdDevolucion);
-            }
-        }
+        //function CargarIdDevolucionAnular(control) {
+        //    if (window.jQuery) {
+        //        var loIdDevolucion = control.lastElementChild.defaultValue;
+        //        $(hdIdDevolucionAnular).val(loIdDevolucion);
+        //    }
+        //}
     </script>
 </asp:Content>

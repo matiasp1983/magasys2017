@@ -72,32 +72,32 @@ namespace PL.AdminDashboard
             }
         }
 
-        protected void BtnAnular_Click(object sender, EventArgs e)
-        {
-            bool loResultado = false;
+        //protected void BtnAnular_Click(object sender, EventArgs e)
+        //{
+        //    bool loResultado = false;
 
-            try
-            {
-                if (!String.IsNullOrEmpty(hdIdDevolucionAnular.Value))
-                {
-                    var loIdProductoDevolucion = Convert.ToInt32(hdIdDevolucionAnular.Value);
-                    loResultado = new BLL.ProductoDevolucionBLL().AnularDevolucion(loIdProductoDevolucion);
-                }
+        //    try
+        //    {
+        //        if (!String.IsNullOrEmpty(hdIdDevolucionAnular.Value))
+        //        {
+        //            var loIdProductoDevolucion = Convert.ToInt32(hdIdDevolucionAnular.Value);
+        //            loResultado = new BLL.ProductoDevolucionBLL().AnularDevolucion(loIdProductoDevolucion);
+        //        }
 
-                if (loResultado)
-                {
-                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeDevolucionAnularOk));
-                    CargarGrillaDevoluciones();
-                }
-                else
-                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeDevolucionAnularFailure));
-            }
-            catch (Exception ex)
-            {
-                Logger loLogger = LogManager.GetCurrentClassLogger();
-                loLogger.Error(ex);
-            }
-        }
+        //        if (loResultado)
+        //        {
+        //            Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeDevolucionAnularOk));
+        //            CargarGrillaDevoluciones();
+        //        }
+        //        else
+        //            Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeDevolucionAnularFailure));
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Logger loLogger = LogManager.GetCurrentClassLogger();
+        //        loLogger.Error(ex);
+        //    }
+        //}
 
         #endregion
 

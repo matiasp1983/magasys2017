@@ -124,7 +124,7 @@ namespace BLL
             {
                 using (var repReservaEdicion = new Repository<ReservaEdicion>())
                 {
-                    var lstReservaEdicion = repReservaEdicion.Search(p => p.COD_RESERVA == idReserva);
+                    var lstReservaEdicion = repReservaEdicion.Search(p => p.COD_RESERVA == idReserva).OrderByDescending(p => p.ID_RESERVA_EDICION).ToList();
 
                     if (lstReservaEdicion.Count > 0)
                     {
@@ -132,9 +132,10 @@ namespace BLL
                         {
                             oReservaEdicionListado = new ReservaEdicionListado()
                             {
-                                COD_EDICION = item.COD_PROD_EDICION.ToString(),
+                                ID_RESERVA_EDICION = item.ID_RESERVA_EDICION,
                                 EDICION = item.ProductoEdicion.EDICION,
                                 NOMBRE_EDICION = item.ProductoEdicion.NOMBRE,
+                                ESTADO = item.Estado.NOMBRE,
                                 DESC_EDICION = item.ProductoEdicion.DESCRIPCION,
                                 PRECIO_EDICION = "$ " + item.ProductoEdicion.PRECIO.ToString()
                             };

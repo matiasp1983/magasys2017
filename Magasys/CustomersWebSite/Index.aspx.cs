@@ -78,53 +78,93 @@ namespace PL.CustomersWebSite
         protected void BtnAnular_Click(object sender, EventArgs e)
         {
             bool loResultado = false;
-            int loEstadoReservaEdicion = 0;
-            BLL.DAL.Reserva loReserva = new BLL.DAL.Reserva();
+            ReservaEdicion loReservaEdicion = null;
 
             try
             {
                 if (!String.IsNullOrEmpty(hdIdReservaAnular.Value))
                 {
                     var loIdReserva = Convert.ToInt32(hdIdReservaAnular.Value);
-                    using (var loRepReserva = new Repository<BLL.DAL.Reserva>())
+                    var loReserva = new BLL.ReservaBLL().ObtenerReserva(loIdReserva);
+
+                    if (loReserva.COD_ESTADO == 8)
                     {
-                        loReserva = loRepReserva.Find(p => p.ID_RESERVA == loIdReserva);
+                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.InfoModal(Message.MsjeReservaNoSePuedeAnular)); //"La reserva está Finalizada, no se puede Anular."
+                        return;
+                    }
+                    else if (loReserva.COD_ESTADO == 9)
+                    {
+                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.InfoModal(Message.MsjeReservaAnulada)); //"La reserva ya se encuentra Anulada."
+                        return;
+                    }
 
-                        if (loReserva.ReservaEdicion.Count > 0)
-                            loEstadoReservaEdicion = loReserva.ReservaEdicion.SingleOrDefault().Estado.ID_ESTADO;
+                    if (loReserva.COD_TIPO_RESERVA == 1) // Reserva Única
+                    {
+                        // Controlar el estado de la reservasEdicion
 
-                        if (loReserva.COD_ESTADO == 8)
-                        {
-                            Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.InfoModal(Message.MsjeReservaNoSePuedeAnular)); //"La reserva está Finalizada, no se puede Anular."
-                            return;
-                        }
-                        else if (loReserva.COD_ESTADO == 9 || loEstadoReservaEdicion == 12)
-                        {
-                            Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.InfoModal(Message.MsjeReservaAnulada)); //"La reserva ya se encuentra Anulada."
-                            return;
-                        }
-                        else if (loEstadoReservaEdicion == 11) // Resserva Edición Entregada
+                        loReservaEdicion = new BLL.ReservaEdicionBLL().ObtenerReservaEdicionDeReservaUnica(loReserva.ID_RESERVA);
+
+                        if (loReservaEdicion.COD_ESTADO == 11) // Reserva Edición se encuentra Entregada               
                         {
                             Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.InfoModal(Message.MsjeReservaAnularReservaEntregada)); //"El producto fue entregado, no se puede anular."
                             return;
                         }
-
-                        loReserva.COD_ESTADO = 9; // Estado Anulada
-                        if (loEstadoReservaEdicion > 0)
+                        else if (loReservaEdicion.COD_ESTADO == 17) // Reserva Edición se encuentra En reparto
                         {
-                            var loReservaEdicion = new BLL.ReservaEdicionBLL().ObtenerReservaEdicion(loReserva.ReservaEdicion.SingleOrDefault().ID_RESERVA_EDICION);
-                            loReservaEdicion.COD_ESTADO = 12; // Estado Anulada para la reserva edición
-                            loResultado = new BLL.ReservaEdicionBLL().ModificarReservaEdidion(loReservaEdicion);
-                            if (loResultado)
-                                loResultado = new BLL.ReservaBLL().ModificarReserva(loReserva);
+                            Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.InfoModal(Message.MsjeReservaAnularReservaEnReparto)); //"El producto se encuentra en reparto, no se puede anular."
+                            return;
                         }
+                        else if (loReservaEdicion.COD_ESTADO == 12)
+                        {
+                            Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.InfoModal(Message.MsjeReservaAnulada)); //"La reserva ya se encuentra Anulada."
+                            return;
+                        }
+                        else if (loReservaEdicion.COD_ESTADO == 15) // Reserva Edición Confirmada, se debe devolver el producto por lo tanto sumar 1 al stock
+                        {
+                            loReservaEdicion.ProductoEdicion.CANTIDAD_DISPONIBLE++;
+                            loResultado = new BLL.ProductoEdicionBLL().ModificarProductoEdicion(loReservaEdicion.ProductoEdicion);
+                        }
+
+                        loReservaEdicion.COD_ESTADO = 12; // Estado Anulada para la reserva edición
+                        if (loResultado)
+                            loResultado = new BLL.ReservaEdicionBLL().ModificarReservaEdidion(loReservaEdicion);
+                        else if (loReservaEdicion.COD_ESTADO != 15)
+                            loResultado = new BLL.ReservaEdicionBLL().ModificarReservaEdidion(loReservaEdicion);
                     }
 
-                    if (loEstadoReservaEdicion == 0)
+                    // La reserva Periódica se anula directamente sin controlar las resevasEdicion. Si hay resevasEdicion deberán continuar su curso hasta finalizar.
+                    loReserva.COD_ESTADO = 9; // Estado Anulada
+                    if (loResultado)
+                        loResultado = new BLL.ReservaBLL().ModificarReserva(loReserva);
+                    else if (loReserva.COD_TIPO_RESERVA == 2)
                         loResultado = new BLL.ReservaBLL().ModificarReserva(loReserva);
 
-                    // FALTA AGREGAR ACTUALIZAR STOCK
+                    if (loResultado)
+                    {
+                        var oUsuario = (BLL.DAL.Usuario)Session[CustomersWebSiteSessionBLL.DefaultSessionsId.Usuario.ToString()];
+                        var oClienteSession = new BLL.ClienteBLL().ObtenerClientePorUsuario(oUsuario.ID_USUARIO);
 
+                        // Informar al Cliente que la entrega a domicilio de la edición fue cancelada
+                        Mensaje oMensaje = new Mensaje()
+                        {
+                            COD_CLIENTE = oClienteSession.ID_CLIENTE,
+
+                            TIPO_MENSAJE = "warning-element",
+                            FECHA_REGISTRO_MENSAJE = DateTime.Now
+                        };
+
+                        var oProducto = new BLL.ProductoBLL().ObtenerProductoPorCodigo(loReserva.COD_PRODUCTO);
+
+                        if (loReserva.COD_TIPO_RESERVA == 1)
+                        {
+                            var oProductoEdicion = new BLL.ProductoEdicionBLL().ObtenerEdicion(loReservaEdicion.COD_PROD_EDICION);
+                            oMensaje.DESCRIPCION = "Se anuló la reserva de la edición " + oProductoEdicion.EDICION + " del producto '" + oProducto.NOMBRE + "'.";
+                        }
+                        else
+                            oMensaje.DESCRIPCION = "Se anuló la reserva del producto '" + oProducto.NOMBRE + "'.";
+
+                        loResultado = new BLL.MensajeBLL().AltaMensaje(oMensaje);
+                    }
                 }
 
                 if (loResultado)

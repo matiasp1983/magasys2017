@@ -86,10 +86,11 @@
                                         <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                             <thead>
                                                 <tr>
-                                                    <th>Código Edición</th>
+                                                    <th>Código reserva edición</th>
                                                     <th>Edición</th>
                                                     <th data-hide="phone,tablet" >Nombre</th>
                                                     <th>Descripción</th>
+                                                    <th>Estado</th>   
                                                     <th>Precio</th>                                                                                                  
                                                 </tr>
                                             </thead>
@@ -108,7 +109,7 @@
                                     <ItemTemplate>
                                         <tr>
                                             <td class="text-left">
-                                                <asp:Label ID="lblCodEdicion" runat="server" Text='<%#(Eval("COD_EDICION") != null) ? Eval("COD_EDICION"):null%>'></asp:Label>
+                                                <asp:Label ID="lblCodEdicion" runat="server" Text='<%#(Eval("ID_RESERVA_EDICION") != null) ? Eval("ID_RESERVA_EDICION"):null%>'></asp:Label>
                                             </td>
                                             <td class="text-left">
                                                 <asp:Label ID="lblEdicion" runat="server" Text='<%#(Eval("EDICION") != null) ? Eval("EDICION"):null%>'></asp:Label>
@@ -118,6 +119,9 @@
                                             </td>
                                             <td class="text-left">
                                                 <asp:Label ID="lblDescripcionEdicion" runat="server" Text='<%#(Eval("DESC_EDICION") != null) ? Eval("DESC_EDICION"):null%>'></asp:Label>
+                                            </td>
+                                            <td class="text-left">
+                                                <asp:Label ID="lblEstado" runat="server" Text='<%#(Eval("ESTADO") != null) ? Eval("ESTADO"):null%>'></asp:Label>
                                             </td>
                                             <td class="text-left">
                                                 <asp:Label ID="lblPrecioEdicion" runat="server" Text='<%#(Eval("PRECIO_EDICION") != null) ? Eval("PRECIO_EDICION"):null%>'></asp:Label>
