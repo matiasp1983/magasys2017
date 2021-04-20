@@ -28,7 +28,7 @@
                 </p>
 
                 <p>
-                    Hazte cliente en nuestra plataforma web y aprovecha para reservar todos los productos que quieras que te los llevamos a tu casa!
+                    Hacete cliente en nuestra plataforma web y ahorrá tiempo desde la comodidad de tu casa. Aprovechá para reservar todos los productos que quieras que te los llevamos a domicilio!
                 </p>
 
 <%--                <p>
