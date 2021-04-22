@@ -29,15 +29,6 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Código</label>
-
-                                <div class="col-sm-10">
-                                    <asp:TextBox ID="txtCodigo" runat="server" CssClass="form-control" MaxLength="11" autocomplete="off" ReadOnly="true"></asp:TextBox>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
                                 <label class="col-sm-2 control-label">Nombre</label>
 
                                 <div class="col-sm-10">
@@ -45,18 +36,11 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="ibox float-e-margins">
-                <div class="ibox-content">
-                    <div class="hr-line-dashed"></div>
-                    <div class="form-group">
-                        <div class="col-xs-12 col-sm-6 col-md-8"></div>
-                        <div class="col-xs-12 col-md-4" style="text-align: right">
-                            <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-success" OnClick="BtnGuardar_Click" />
-                            <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-primary" OnClick="BtnCancelar_Click" formnovalidate="" />
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                    <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-success" OnClick="BtnGuardar_Click" />
+                                    <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-primary" OnClick="BtnCancelar_Click" formnovalidate="" />
+                            </div>
                         </div>
                     </div>
                 </div>

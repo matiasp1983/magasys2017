@@ -108,7 +108,7 @@
                                         <thead>
                                             <tr>
                                                 <th class="text-left">CUIT</th>
-                                                <th data-hide="phone,tablet">Raz&oacute;n Social</th>
+                                                <th class="text-left">Raz&oacute;n Social</th>
                                                 <th data-hide="phone,tablet">Fecha Alta</th>
                                                 <th data-hide="phone,tablet">Nombre</th>
                                                 <th data-hide="phone,tablet">Apellido</th>

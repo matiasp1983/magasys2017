@@ -102,7 +102,7 @@
                                             <asp:Label ID="lblID" runat="server" Text='<%#Eval("ID_GENERO").ToString()%>'></asp:Label>
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE").ToString().Length > 23 ? String.Format("{0}...", Eval("NOMBRE").ToString().Remove(23).TrimEnd()):Eval("NOMBRE")%>'></asp:Label>
+                                            <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE").ToString()%>'></asp:Label>
                                         </td>
                                         <td class="text-right">
                                             <div class="btn-group">

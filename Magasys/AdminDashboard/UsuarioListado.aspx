@@ -37,7 +37,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="col-sm-10 control-label">Nombre de Usuario</label>
+                                            <label class="col-sm-10 control-label">Usuario</label>
                                             <asp:TextBox ID="txtNombreUsuario" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off"></asp:TextBox>
                                         </div>
                                     </div>
@@ -104,7 +104,7 @@
                                         <thead>
                                             <tr>
                                                 <th class="text-left">C&oacute;digo</th>
-                                                <th data-hide="phone,tablet">Nombre de Usuario</th>
+                                                <th class="text-left">Usuario</th>
                                                 <th data-hide="phone,tablet">Nombre</th>
                                                 <th data-hide="phone,tablet">Apellido</th>                                                
                                                 <th data-hide="phone,tablet">Rol</th>

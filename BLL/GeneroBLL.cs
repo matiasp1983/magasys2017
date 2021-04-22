@@ -38,8 +38,6 @@ namespace BLL
                 {
                     lstGeneros = rep.FindAll();
 
-                    //lstGeneros.Sort((x, y) => y.FECHA_ALTA.CompareTo(x.FECHA_ALTA));
-
                     if (lstGeneros.Count > 0)
                     {
                         if (oGeneroFiltro.Id_Genero == -1)

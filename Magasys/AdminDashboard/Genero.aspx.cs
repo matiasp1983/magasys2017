@@ -24,7 +24,7 @@ namespace PL.AdminDashboard
             var bEsNuevoNombre = new BLL.GeneroBLL().ConsultarExistenciaGenero(oGenero.NOMBRE);
             if (!bEsNuevoNombre)
             {
-                Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeNombreGeneroExist));
+                Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.InfoModal(Message.MsjeNombreGeneroExist));
                 return;
             }
 
@@ -35,17 +35,12 @@ namespace PL.AdminDashboard
                     var loResultado = new BLL.GeneroBLL().AltaGenero(oGenero);
 
                     if (loResultado)
-                    {
                         Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.SuccessModal(Message.MsjeGeneroSuccessAlta, "Alta Genero", "GeneroListado.aspx"));
-                        LimpiarCampos();
-                    }
                     else
                         Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeGeneroFailure));
                 }
                 else
-                {
                     Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.WarningModal(Message.MsjeGeneroFailure));
-                }
             }
             catch (Exception ex)
             {
@@ -54,8 +49,6 @@ namespace PL.AdminDashboard
                 Logger loLogger = LogManager.GetCurrentClassLogger();
                 loLogger.Error(ex);
             }
-
-
         }
 
         protected void BtnCancelar_Click(object sender, EventArgs e)
@@ -77,11 +70,6 @@ namespace PL.AdminDashboard
             };
 
             return oGenero;
-        }
-
-        private void LimpiarCampos()
-        {
-            FormGenero.Controls.OfType<TextBox>().ToList().ForEach(x => x.Text = String.Empty);
         }
 
         #endregion
