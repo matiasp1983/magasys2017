@@ -61,6 +61,7 @@ namespace BLL
             List<Devolucion> lstDevolucion = null;
             Devolucion oDevolucion = null;
             List<DetalleProductoIngreso> lstDetalleProductoIngreso = null;
+            DateTime loFechaDia = Convert.ToDateTime(DateTime.Now.ToString("dd/MM/yyyy"));
 
             try
             {
@@ -84,7 +85,7 @@ namespace BLL
                         lstDetalleProductoIngreso = lstDetalleProductoIngreso.FindAll(p => !string.IsNullOrEmpty(p.ProductoEdicion.Producto.DESCRIPCION) && p.ProductoEdicion.Producto.DESCRIPCION.ToUpper().Contains(oProductoFiltro.DescripcionProducto.ToUpper()));
 
                     if (lstDetalleProductoIngreso.Count > 0)
-                        lstDetalleProductoIngreso = lstDetalleProductoIngreso.FindAll(p => p.FECHA_DEVOLUCION == null);
+                        lstDetalleProductoIngreso = lstDetalleProductoIngreso.FindAll(p => p.FECHA_DEVOLUCION == null || p.FECHA_DEVOLUCION <= loFechaDia);
 
                     if (lstDetalleProductoIngreso.Count > 0)
                     {

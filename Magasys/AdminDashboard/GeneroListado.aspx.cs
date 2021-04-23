@@ -123,7 +123,7 @@ namespace PL.AdminDashboard
                     var lstGeneros = new BLL.GeneroBLL().ObtenerGeneros(oGeneroFiltro);
 
                     if (lstGeneros != null && lstGeneros.Count > 0)
-                        lsvGeneros.DataSource = lstGeneros;
+                        lsvGeneros.DataSource = lstGeneros.OrderBy(x=>x.NOMBRE);
                     else
                     {
                         dvMensajeLsvGeneros.InnerHtml = MessageManager.Info(dvMensajeLsvGeneros, Message.MsjeListadoGenerosFiltrarTotalSinResultados, false);
