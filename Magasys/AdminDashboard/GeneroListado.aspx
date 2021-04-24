@@ -70,7 +70,7 @@
                         <div class="ibox-content">
                             <div style="text-align: right;">
                                 <button type="button" id="btnNuevo" runat="server" class="ladda-button btn btn-info" onserverclick="BtnNuevo_Click">
-                                    <i class="fa fa-plus"></i>&nbsp;&nbsp;<span>Nuevo Genero</span>
+                                    <i class="fa fa-plus"></i>&nbsp;&nbsp;<span>Nuevo Género</span>
                                 </button>
                             </div>
                             <br />
@@ -80,7 +80,6 @@
                                         <thead>
                                             <tr>
                                                 <th class="text-left">Código</th>
-                                                <th data-hide="phone,tablet">Nombre</th>
                                                 <th class="text-right" data-sort-ignore="true">Acci&oacute;n</th>
                                             </tr>
                                         </thead>
@@ -98,9 +97,6 @@
                                 </LayoutTemplate>
                                 <ItemTemplate>
                                     <tr>
-                                        <td class="text-left">
-                                            <asp:Label ID="lblID" runat="server" Text='<%#Eval("ID_GENERO").ToString()%>'></asp:Label>
-                                        </td>
                                         <td>
                                             <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE").ToString()%>'></asp:Label>
                                         </td>
