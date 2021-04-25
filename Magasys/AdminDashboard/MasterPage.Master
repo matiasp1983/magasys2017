@@ -106,7 +106,7 @@
                             <li id="liRegistrarEntregaProducto" runat="server"><a href="RegistrarEntregaProducto.aspx">Registrar entrega de Productos</a></li>
                             <li id="liListadoReparto" runat="server"><a href="Reparto.aspx">Generar listado de reparto</a></li>
                             <li id="liGestionReparto" runat="server"><a href="GestionReparto.aspx">Gestión de reparto</a></li>
-                            <li id="liConsultarRepartos" runat="server"><a href="ConsultarRepartos.aspx">Consultar repartos</a></li>
+                            <li id="liConsultarRepartos" runat="server"><a href="ConsultarRepartos.aspx">Consultar repartos en curso</a></li>
                         </ul>
                     </li>
                     <li id="liUsuarios" runat="server" visible="false">

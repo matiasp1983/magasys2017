@@ -13,7 +13,7 @@
                 <li>Entrega / Reparto
                 </li>
                 <li class="active">
-                    <strong>Consultar repartos</strong>
+                    <strong>Consultar repartos en curso</strong>
                 </li>
             </ol>
         </div>
@@ -23,6 +23,11 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="ibox">
+                        <div class="ibox-content">
+                            <p>
+                                Consulta los productos que se encuentran en reparto en este momento.
+                            </p>
+                        </div>
                         <div class="ibox-content">
                             <asp:ListView ID="lsvReparto" runat="server">
                                 <LayoutTemplate>
