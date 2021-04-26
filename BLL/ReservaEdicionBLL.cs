@@ -436,6 +436,51 @@ namespace BLL
             return oReservaEdicion;
         }
 
+        public List<ReservaEdicionListado> ObtenerReservaEdicionParaAnular()
+        {
+            List<ReservaEdicionListado> lstReservaListado = null;
+            List<ReservaEdicion> lstReservaEdicion = null;
+
+            try
+            {
+                using (var loRepReservaEdicion = new Repository<ReservaEdicion>())
+                {
+                    lstReservaEdicion = loRepReservaEdicion.Search(p => p.COD_ESTADO == 10 || p.COD_ESTADO == 15 || p.COD_ESTADO == 18).ToList();
+
+                    if (lstReservaEdicion.Count > 0)
+                    {
+                        foreach (var loReservaEdicion in lstReservaEdicion)
+                        {
+                            ReservaEdicionListado oReservaListado = new ReservaEdicionListado
+                            {
+                                ID_RESERVA_EDICION = loReservaEdicion.ID_RESERVA_EDICION,
+                                COD_RESERVA = loReservaEdicion.COD_RESERVA,
+                                //FECHA = loReservaEdicion.FECHA,
+                                NOMBRE_CLIENTE = loReservaEdicion.Reserva.COD_CLIENTE + " - " + loReservaEdicion.Reserva.Cliente.APELLIDO + ", " + loReservaEdicion.Reserva.Cliente.NOMBRE,
+                                //COD_CLIENTE = loReservaEdicion.Reserva.COD_CLIENTE,
+                                //FECHA_INICIO = loReservaEdicion.Reserva.FECHA_INICIO,
+                                //FECHA_FIN = loReservaEdicion.Reserva.FECHA_FIN,
+                                ESTADO = loReservaEdicion.Estado.NOMBRE,
+                                COD_EDICION = loReservaEdicion.COD_PROD_EDICION.ToString(),
+                                EDICION = loReservaEdicion.ProductoEdicion.EDICION,
+                                //NOMBRE_EDICION = loReservaEdicion.ProductoEdicion.NOMBRE,
+                                //DESC_EDICION = loReservaEdicion.ProductoEdicion.DESCRIPCION
+                            };
+                            
+                            oReservaListado.NOMBRE_PRODUCTO = loReservaEdicion.ProductoEdicion.Producto.NOMBRE;
+                            lstReservaListado.Add(oReservaListado);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return lstReservaListado;
+        }
+
         #endregion
     }
 

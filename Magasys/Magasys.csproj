@@ -197,6 +197,7 @@
     <Content Include="AdminDashboard\ReporteVentaAnualTipoProducto.aspx" />
     <Content Include="AdminDashboard\Reserva.aspx" />
     <Content Include="AdminDashboard\ConfirmarReservas.aspx" />
+    <Content Include="AdminDashboard\ReservaAnular.aspx" />
     <Content Include="AdminDashboard\ReservaEdicion.aspx" />
     <Content Include="AdminDashboard\ReservaEditar.aspx" />
     <Content Include="AdminDashboard\ReservaFinalizar.aspx" />
@@ -804,6 +805,13 @@
     </Compile>
     <Compile Include="AdminDashboard\ConfirmarReservas.aspx.designer.cs">
       <DependentUpon>ConfirmarReservas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\ReservaAnular.aspx.cs">
+      <DependentUpon>ReservaAnular.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\ReservaAnular.aspx.designer.cs">
+      <DependentUpon>ReservaAnular.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminDashboard\ReservaEdicion.aspx.cs">
       <DependentUpon>ReservaEdicion.aspx</DependentUpon>
