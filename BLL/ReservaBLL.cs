@@ -252,7 +252,8 @@ namespace BLL
                             TIPO_PRODUCTO = loReserva.Producto.TipoProducto.DESCRIPCION,
                             COD_CLIENTE = loReserva.COD_CLIENTE,
                             TIPO_RESERVA = loReserva.TipoReserva.DESCRIPCION,
-                            FECHA = loReserva.FECHA
+                            FECHA = loReserva.FECHA,
+                            ESTADO = loReserva.Estado.NOMBRE
                         };
 
                         if (loReserva.ENVIO_DOMICILIO == null)

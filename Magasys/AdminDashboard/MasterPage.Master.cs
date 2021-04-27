@@ -177,6 +177,11 @@ namespace PL.AdminDashboard
                 liReserva.Attributes["class"] = "active";
                 liReservaFinalizar.Attributes["class"] = "active";
             }
+            if (loActivePage.Equals("ReservaAnular.aspx"))
+            {
+                liReserva.Attributes["class"] = "active";
+                liReservaAnular.Attributes["class"] = "active";
+            }
             if (loActivePage.Equals("ReservaListado.aspx"))
             {
                 liReserva.Attributes["class"] = "active";

@@ -1,6 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/AdminDashboard/MasterPage.Master" AutoEventWireup="true" CodeBehind="ReservaAnular.aspx.cs" Inherits="PL.AdminDashboard.ReservaAnular" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">    
+    <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="contentMaster" runat="server">
     <div class="row wrapper border-bottom white-bg page-heading">
@@ -109,12 +110,12 @@
                                 <div class="hr-line-dashed"></div>
                                 <div class="form-group">
                                     <div style="text-align: right; padding-right: 15px;">
-<%--                                        <button type="button" id="btnBuscar" runat="server" class="ladda-button btn btn-success" onserverclick="BtnBuscar_Click">
+                                        <button type="button" id="btnBuscar" runat="server" class="ladda-button btn btn-success" onserverclick="BtnBuscar_Click">
                                             <i class="fa fa-search"></i>&nbsp;&nbsp;<span>Buscar</span>
                                         </button>
                                         <button type="reset" id="btnLimpiar" runat="server" class="btn btn-warning" onserverclick="BtnLimpiar_Click">
                                             <i class="fa fa-trash-o"></i>&nbsp;&nbsp;<span>Limpiar</span>
-                                        </button>--%>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -126,15 +127,19 @@
                 <div class="col-lg-12">
                     <div class="ibox">
                         <div class="ibox-content">
-                            <asp:ListView ID="lsvReservas" runat="server">
+                            <asp:ListView ID="lsvReservas" runat="server" Visible="true">
                                 <LayoutTemplate>
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                         <thead>
-                                            <tr>                                                
-                                                <th class="text-left">Nombre del Cliente</th>
+                                            <tr>                                                    
+                                                <td>                                                        
+                                                    <button id="check-all" class="btn btn-sm btn-primary pull-left m-t-n-xs">Seleccionar todo</button>
+                                                </td>
+                                                <th class="text-left">Reserva</th>    
+                                                <th data-hide="phone,tablet">Cliente</th>
                                                 <th class="text-left">Producto</th>
-                                                <th data-hide="phone,tablet">Tipo de Producto</th>
-                                                <th data-hide="phone,tablet">Tipo de Reserva</th>                                               
+                                                <th data-hide="phone,tablet">Tipo de Reserva</th>
+                                                <th data-hide="phone,tablet">Estado</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -142,7 +147,7 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <td colspan="8">
+                                                <td colspan="30">
                                                     <ul class="pagination pull-right"></ul>
                                                 </td>
                                             </tr>
@@ -150,26 +155,40 @@
                                     </table>
                                 </LayoutTemplate>
                                 <ItemTemplate>
-                                    <tr> 
+                                    <tr>
+                                        <td>                                                
+                                            <input id="chkCodigoReserva" runat="server" class="i-checks" type="checkbox" Visible="true"/>
+                                        </td>
                                         <td class="text-left">
-                                            <asp:Label ID="lblNombreCliente" runat="server" Text='<%#Eval("NOMBRE_CLIENTE").ToString()%>'></asp:Label>
+                                            <asp:Label ID="lblIdReserva" runat="server" Text='<%#Eval("ID_RESERVA").ToString()%>'></asp:Label>
+                                        </td>
+                                        <td class="text-left">
+                                            <asp:Label ID="lblCliente" runat="server" Text='<%#Eval("NOMBRE_CLIENTE").ToString()%>'></asp:Label>
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE_PRODUCTO").ToString().Length > 23 ? String.Format("{0}...", Eval("NOMBRE_PRODUCTO").ToString().Remove(23).TrimEnd()):Eval("NOMBRE_PRODUCTO")%>'></asp:Label>
-                                        </td>     
-                                        <td class="text-left">
-                                            <asp:Label ID="lblTipoProducto" runat="server" Text='<%#Eval("TIPO_PRODUCTO").ToString()%>'></asp:Label>
-                                        </td>                                           
-                                        <td class="text-left">
-                                            <asp:Label ID="lblTipoReserva" runat="server" Text='<%#Eval("TIPO_RESERVA").ToString()%>'></asp:Label>
-                                        </td>                                             
+                                            <asp:Label ID="lblPorducto" runat="server" Text='<%#Eval("NOMBRE_PRODUCTO").ToString().Length > 50 ? String.Format("{0}...", Eval("NOMBRE_PRODUCTO").ToString().Remove(50).TrimEnd()):Eval("NOMBRE_PRODUCTO")%>'></asp:Label>
+                                        </td>
                                         <td>
-                                            <asp:Label ID="lblCodigoReserva" runat="server" Text='<%#Eval("ID_RESERVA").ToString()%>' Visible="false"></asp:Label>
+                                            <asp:Label ID="lblTipoReserva" runat="server" Text='<%#Eval("TIPO_RESERVA").ToString()%>'></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label ID="lblEstado" runat="server" Text='<%#Eval("ESTADO").ToString()%>'></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label ID="lblCodCliente" runat="server" Text='<%#Eval("COD_CLIENTE").ToString()%>' Visible="false"></asp:Label>
                                         </td>
                                     </tr>
                                 </ItemTemplate>
                             </asp:ListView>
-                            <div id="dvMensajeLsvReservas" runat="server" />                              
+                            <div id="dvMensajeLsvReservas" runat="server" />
+                            <asp:HiddenField ID="hfCodigoReserva" runat="server"/>
+                            <div class="form-group" style="margin-bottom: 10px">
+                                <div class="col-xs-12 col-sm-6 col-md-8"></div>
+                                <div class="col-xs-12 col-md-4" style="text-align: right">
+                                    <asp:Button ID="btnGuardar" runat="server" Text="Confirmar" CssClass="btn btn-success" OnClick="BtnGuardar_Click" />
+                                    <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" CssClass="btn btn-primary" OnClick="BtnCancelar_Click" formnovalidate="" />
+                                </div>
+                            </div>                            
                         </div>
                     </div>
                 </div>
@@ -178,10 +197,60 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="script" runat="server">
+    <!-- iCheck -->
+    <script src="js/plugins/iCheck/icheck.min.js"></script>
+
     <script type="text/javascript">
 
         if (window.jQuery) {
-            $(document).ready(function () {                
+            $(document).ready(function () {
+                $('.i-checks').iCheck({
+                    checkboxClass: 'icheckbox_square-green'
+                }).on('ifChecked', function (e) {
+                    var isChecked = e.currentTarget.checked;
+                    var codigo = e.currentTarget.id.split('&')[1] + ";";
+
+                    if (isChecked == true) {
+                        if ($('#<%=hfCodigoReserva.ClientID%>').val() == "") {
+                            $('#<%=hfCodigoReserva.ClientID%>').val(codigo);
+                        } else {
+                            var codigoAnterior = $('#<%=hfCodigoReserva.ClientID%>').val();
+                            $('#<%=hfCodigoReserva.ClientID%>').val(codigoAnterior + codigo);
+                        }
+                    }
+                    });
+
+                $('.i-checks').on('ifUnchecked', function (e) {
+                    var isChecked = e.currentTarget.checked;
+                    var codigo = e.currentTarget.id.split('&')[1] + ";";
+
+                    if (isChecked == false) {
+                        if ($('#<%=hfCodigoReserva.ClientID%>').val() != "") {
+                            var mm = $('#<%=hfCodigoReserva.ClientID%>').val();
+                            $('#<%=hfCodigoReserva.ClientID%>').val(mm.replace(codigo, "").trim());
+                        }
+                    }
+                });
+
+                var checked = false;
+
+                $('#check-all').on('click', function () {
+                    if (checked == false) {
+                        $('.i-checks').prop('checked', true).iCheck('update');
+                        $('#<%=hfCodigoReserva.ClientID%>').val('');
+
+                        $('.i-checks').each(function () {
+                            $('#<%=hfCodigoReserva.ClientID%>').val($('#<%=hfCodigoReserva.ClientID%>').val() + (this.id.split('&')[1] + ";"));
+                        });
+
+                        checked = true;
+                    } else {
+                        $('.i-checks').prop('checked', false).iCheck('update');
+                        $('#<%=hfCodigoReserva.ClientID%>').val('');
+                        checked = false;
+                    }
+
+                });
                 LoadFootable();
                 Select2();
             });
