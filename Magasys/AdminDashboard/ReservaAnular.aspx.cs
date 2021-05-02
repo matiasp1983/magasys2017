@@ -277,12 +277,25 @@ namespace PL.AdminDashboard
 
                 if (oReservaFiltro != null)
                 {
-                    var lstReserva = new BLL.ReservaBLL().ObtenerReservas(oReservaFiltro);
+                    var lstReserva = new ReservaBLL().ObtenerReservas(oReservaFiltro);
 
                     if (lstReserva != null && lstReserva.Count > 0)
                     {
-                        lsvReservas.DataSource = lstReserva;
-                        lsvReservas.Visible = true;
+                        if (String.IsNullOrEmpty(txtReserva.Text))
+                        {
+                            lsvReservas.DataSource = lstReserva;
+                            lsvReservas.Visible = true;
+                        }
+                        else if (lstReserva.Where(x => x.ID_RESERVA == Convert.ToInt32(txtReserva.Text)).Count() > 0)
+                        {
+                            lsvReservas.DataSource = lstReserva.Where(x => x.ID_RESERVA == Convert.ToInt32(txtReserva.Text));
+                            lsvReservas.Visible = true;
+                        }
+                        else
+                        {
+                            dvMensajeLsvReservas.InnerHtml = MessageManager.Info(dvMensajeLsvReservas, Message.MsjeListadoReservaFiltroSinResultados, false);
+                            dvMensajeLsvReservas.Visible = true;
+                        }
                     }
                     else
                     {
