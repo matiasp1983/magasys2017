@@ -183,7 +183,8 @@
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                         <thead>
                                             <tr>
-                                                <th class="text-left">Código de Cliente</th>
+                                                <th class="text-left">Reserva</th>
+                                                <th data-hide="phone,tablet">Código de Cliente</th>
                                                 <th class="text-left">Nombre del Cliente</th>
                                                 <th class="text-left">Producto</th>
                                                 <th data-hide="phone,tablet">Tipo de Producto</th>
@@ -206,6 +207,9 @@
                                 </LayoutTemplate>
                                 <ItemTemplate>
                                     <tr>
+                                        <td class="text-left">
+                                            <asp:Label ID="lblReserva" runat="server" Text='<%#Eval("ID_RESERVA").ToString()%>'></asp:Label>
+                                        </td>
                                         <td class="text-left">
                                             <asp:Label ID="lblCodigoCliente" runat="server" Text='<%#(Eval("COD_CLIENTE") != null) ? Eval("COD_CLIENTE").ToString():null%>'></asp:Label>
                                         </td> 

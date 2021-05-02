@@ -417,7 +417,7 @@ namespace BLL
             return loCantidadProductoEdicion;
         }
 
-        public ReservaEdicion ObtenerReservaEdicionEstadoSinStock(long codreserva, long codProductoEdicion)
+        public ReservaEdicion ObtenerReservaEdicionEstadoSinStockORegistrada(long codreserva, long codProductoEdicion)
         {
             ReservaEdicion oReservaEdicion = new ReservaEdicion();
 
@@ -425,7 +425,7 @@ namespace BLL
             {
                 using (var loRepReservaEdicion = new Repository<ReservaEdicion>())
                 {
-                    oReservaEdicion = loRepReservaEdicion.Find(p => p.COD_RESERVA == codreserva && p.COD_PROD_EDICION == codProductoEdicion && p.COD_ESTADO == 18);
+                    oReservaEdicion = loRepReservaEdicion.Find(p => p.COD_RESERVA == codreserva && p.COD_PROD_EDICION == codProductoEdicion && (p.COD_ESTADO == 18 || p.COD_ESTADO == 10));
                 }
             }
             catch (Exception ex)
@@ -466,7 +466,7 @@ namespace BLL
                                 //NOMBRE_EDICION = loReservaEdicion.ProductoEdicion.NOMBRE,
                                 //DESC_EDICION = loReservaEdicion.ProductoEdicion.DESCRIPCION
                             };
-                            
+
                             oReservaListado.NOMBRE_PRODUCTO = loReservaEdicion.ProductoEdicion.Producto.NOMBRE;
                             lstReservaListado.Add(oReservaListado);
                         }

@@ -37,7 +37,7 @@ namespace PL.AdminDashboard
                 {
                     // Obtener stock de los ProductoEdicion
                     // hacer un listado de ProductoEdicion con su respectivo stock
-                    var oProductoEdicion = new ProductoEdicionBLL().ObtenerProductoEdicionPorId(Convert.ToInt32(((Label)loItem.Controls[11]).Text));
+                    var oProductoEdicion = new ProductoEdicionBLL().ObtenerProductoEdicionPorId(Convert.ToInt32(((Label)loItem.Controls[13]).Text));
                     if (oProductoEdicion != null && !(lstProductoEdicion.Exists(x => x.ID_PRODUCTO_EDICION == oProductoEdicion.ID_PRODUCTO_EDICION)))
                         lstProductoEdicion.Add(oProductoEdicion);
                 }
@@ -49,11 +49,11 @@ namespace PL.AdminDashboard
 
                     foreach (var loItem in lsvReservaEdicion.Items)
                     {
-                        if (((HtmlInputCheckBox)loItem.Controls[1]).Checked && (Convert.ToInt32(((Label)loItem.Controls[11]).Text) == item.ID_PRODUCTO_EDICION))
+                        if (((HtmlInputCheckBox)loItem.Controls[1]).Checked && (Convert.ToInt32(((Label)loItem.Controls[13]).Text) == item.ID_PRODUCTO_EDICION))
                         {
                             lvCantidadReservasPorProductoEdicion++;
                             lvNombreProducto = ((Label)loItem.Controls[9]).Text;
-                        }                            
+                        }
                     }
 
                     if (lvCantidadReservasPorProductoEdicion > item.CANTIDAD_DISPONIBLE)
@@ -66,16 +66,16 @@ namespace PL.AdminDashboard
                 foreach (var loItem in lsvReservaEdicion.Items)
                 {
                     // Consultar si existe una ReservaEdicion con estado 18 (sin Stock) para la Reserva y el PorductoEdicion del registro procesado.
-                    var oReservaEdicionSinStock = new ReservaEdicionBLL().ObtenerReservaEdicionEstadoSinStock(Convert.ToInt32(((Label)loItem.Controls[3]).Text), Convert.ToInt32(((Label)loItem.Controls[11]).Text));
+                    var oReservaEdicionSinStockORegistrada = new ReservaEdicionBLL().ObtenerReservaEdicionEstadoSinStockORegistrada(Convert.ToInt32(((Label)loItem.Controls[3]).Text), Convert.ToInt32(((Label)loItem.Controls[13]).Text));
 
                     if (((HtmlInputCheckBox)loItem.Controls[1]).Checked)
                     {
-                        if (oReservaEdicionSinStock != null)
+                        if (oReservaEdicionSinStockORegistrada != null)
                         {
                             // Actualizar ReservaEdicion
-                            oReservaEdicionSinStock.FECHA = DateTime.Now;
-                            oReservaEdicionSinStock.COD_ESTADO = 15;
-                            loResutado = new ReservaEdicionBLL().ModificarReservaEdidion(oReservaEdicionSinStock);
+                            oReservaEdicionSinStockORegistrada.FECHA = DateTime.Now;
+                            oReservaEdicionSinStockORegistrada.COD_ESTADO = 15;
+                            loResutado = new ReservaEdicionBLL().ModificarReservaEdidion(oReservaEdicionSinStockORegistrada);
                             if (!loResutado)
                                 break;
                         }
@@ -86,7 +86,7 @@ namespace PL.AdminDashboard
                             {
                                 FECHA = DateTime.Now,
                                 COD_RESERVA = Convert.ToInt32(((Label)loItem.Controls[3]).Text),
-                                COD_PROD_EDICION = Convert.ToInt32(((Label)loItem.Controls[11]).Text),
+                                COD_PROD_EDICION = Convert.ToInt32(((Label)loItem.Controls[13]).Text),
                                 COD_ESTADO = 15
                             };
 
@@ -96,7 +96,7 @@ namespace PL.AdminDashboard
                         }
 
                         // Actualizar stock (se reserva stock)
-                        loResutado = new ProductoEdicionBLL().ActualizarCantidadDisponible(Convert.ToInt32(((Label)loItem.Controls[11]).Text), 1);
+                        loResutado = new ProductoEdicionBLL().ActualizarCantidadDisponible(Convert.ToInt32(((Label)loItem.Controls[13]).Text), 1);
                         if (!loResutado)
                             break;
 
@@ -104,7 +104,7 @@ namespace PL.AdminDashboard
                         BLL.DAL.Mensaje oMensaje = new BLL.DAL.Mensaje()
                         {
                             COD_CLIENTE = Convert.ToInt32(((Label)loItem.Controls[5]).Text),
-                            DESCRIPCION = "La edición " + ((Label)loItem.Controls[13]).Text + " del producto '" + ((Label)loItem.Controls[9]).Text + "' se encuentra reservada.",
+                            DESCRIPCION = "La edición " + ((Label)loItem.Controls[11]).Text + " del producto '" + ((Label)loItem.Controls[9]).Text + "' se encuentra reservada.",
                             TIPO_MENSAJE = "success-element",
                             FECHA_REGISTRO_MENSAJE = DateTime.Now
                         };
@@ -116,25 +116,35 @@ namespace PL.AdminDashboard
                     else
                     {
                         // Informar al Cliente que la edicón no será reservada (por falta de stock u otro motivo)
-                        if (oReservaEdicionSinStock == null)
+                        if (oReservaEdicionSinStockORegistrada == null || (oReservaEdicionSinStockORegistrada != null && oReservaEdicionSinStockORegistrada.COD_ESTADO == 10))
                         {
-                            // Alta de ReservaEdicion
-                            BLL.DAL.ReservaEdicion oReservaConfirmada = new BLL.DAL.ReservaEdicion()
+                            if (oReservaEdicionSinStockORegistrada == null)
                             {
-                                FECHA = DateTime.Now,
-                                COD_RESERVA = Convert.ToInt32(((Label)loItem.Controls[3]).Text),
-                                COD_PROD_EDICION = Convert.ToInt32(((Label)loItem.Controls[11]).Text),
-                                COD_ESTADO = 18
-                            };
+                                // Alta de ReservaEdicion
+                                BLL.DAL.ReservaEdicion oReservaConfirmada = new BLL.DAL.ReservaEdicion()
+                                {
+                                    FECHA = DateTime.Now,
+                                    COD_RESERVA = Convert.ToInt32(((Label)loItem.Controls[3]).Text),
+                                    COD_PROD_EDICION = Convert.ToInt32(((Label)loItem.Controls[13]).Text),
+                                    COD_ESTADO = 18
+                                };
 
-                            loResutado = new ReservaEdicionBLL().AltaReservaEdicion(oReservaConfirmada);
+                                loResutado = new ReservaEdicionBLL().AltaReservaEdicion(oReservaConfirmada);
+                            }
+                            else
+                            {
+                                oReservaEdicionSinStockORegistrada.FECHA = DateTime.Now;
+                                oReservaEdicionSinStockORegistrada.COD_ESTADO = 18;
+                                loResutado = new ReservaEdicionBLL().ModificarReservaEdidion(oReservaEdicionSinStockORegistrada);
+                            }
+
                             if (!loResutado)
                                 break;
 
                             BLL.DAL.Mensaje oMensaje = new BLL.DAL.Mensaje()
                             {
                                 COD_CLIENTE = Convert.ToInt32(((Label)loItem.Controls[5]).Text),
-                                DESCRIPCION = "La edición " + ((Label)loItem.Controls[13]).Text + " del producto '" + ((Label)loItem.Controls[9]).Text + "' no fue reservada.",
+                                DESCRIPCION = "La edición " + ((Label)loItem.Controls[11]).Text + " del producto '" + ((Label)loItem.Controls[9]).Text + "' no fue reservada.",
                                 TIPO_MENSAJE = "warning-element",
                                 FECHA_REGISTRO_MENSAJE = DateTime.Now
                             };

@@ -1439,7 +1439,6 @@ namespace PL.AdminDashboard
 
             oReservaFiltro.NOMBRE_PRODUCTO = nombre;
             oReservaFiltro.COD_ESTADO = 7;
-            oReservaFiltro.COD_TIPO_RESERVA = 2;
             oReservaFiltro.COD_PROVEEDOR = Convert.ToInt32(ddlProveedor.SelectedValue);
             oReservaFiltro.COD_TIPO_PRODUCTO = Convert.ToInt32(ddlTipoProducto.SelectedValue);
             oReservaFiltro.EDICION = edicion;
