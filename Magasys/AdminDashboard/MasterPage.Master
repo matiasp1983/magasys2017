@@ -155,7 +155,7 @@
             <asp:ContentPlaceHolder ID="contentMaster" runat="server" />
             <div class="footer">
                 <div class="text-center">
-                    <strong>Copyright</strong> Magasys &copy; 2020
+                    <strong>Copyright</strong> Magasys &copy; 2021
                
                 </div>
             </div>

@@ -81,7 +81,7 @@
                                 <h5>Ediciones</h5>
                             </div>
                             <div class="ibox-content">
-                                <asp:ListView ID="lsvReservaEdicion" runat="server">
+                                <asp:ListView ID="lsvReservaEdicion" runat="server" OnItemDataBound="LsvReservas_ItemDataBound">
                                     <LayoutTemplate>
                                         <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                             <thead>
@@ -89,7 +89,7 @@
                                                     <th>Código reserva edición</th>
                                                     <th>Edición</th>
                                                     <th data-hide="phone,tablet" >Nombre</th>
-                                                    <th>Descripción</th>
+                                                    <th data-hide="phone,tablet" >Descripción</th>
                                                     <th>Estado</th>   
                                                     <th>Precio</th>                                                                                                  
                                                 </tr>
@@ -126,9 +126,37 @@
                                             <td class="text-left">
                                                 <asp:Label ID="lblPrecioEdicion" runat="server" Text='<%#(Eval("PRECIO_EDICION") != null) ? Eval("PRECIO_EDICION"):null%>'></asp:Label>
                                             </td>
+                                            <td class="text-right">
+                                                <a class="btn btn-white btn-xs" data-toggle="modal" data-target="#ModalReservaAnular" title="Eliminar" onclick="CargarIdReservaAnular(this);">
+                                                    <asp:HiddenField ID="hdIdReservaEdicion" runat="server" />Anular
+                                                </a>  
+                                            </td>
                                         </tr>
                                     </ItemTemplate>                       
                                 </asp:ListView>
+                                <div id="ModalReservaAnular" class="modal" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content animated bounce">
+                                            <div class="modal-body">
+                                                <div style="display: block; width: 80px; height: 80px; border: 4px solid gray; border-radius: 50%; margin: 20px auto; padding: 0; position: relative; box-sizing: content-box; border-color: #86caf8;">
+                                                    <span style="position: absolute; width: 5px; height: 47px; left: 50%; top: 10px; -webkit-border-radius: 2px; border-radius: 2px; margin-left: -2px; background-color: #86caf8;"></span>
+                                                    <span style="position: absolute; width: 7px; height: 7px; -webkit-border-radius: 50%; border-radius: 50%; margin-left: -3px; left: 50%; bottom: 10px; background-color: #86caf8;"></span>
+                                                </div>
+                                                <h2 style="color: #575757; font-size: 30px; text-align: center; font-weight: 600; text-transform: none; position: relative; margin: 25px 0; padding: 0; line-height: 40px; display: block;">¿Está seguro que desea anular la Reserva?</h2>
+                                                <p style="color: #797979; font-size: 16px; font-weight: 300; position: relative; text-align: center; float: none; margin: 0; padding: 0; line-height: normal;">
+                                                </p>
+                                            </div>
+                                            <div class="modal-footer" style="text-align: center; padding-top: 0px;">
+                                                <asp:Button ID="btnCancelarAnular" runat="server" CssClass="btn btn-default" Text="Cancelar"
+                                                    Style="background-color: #D0D0D0; color: white; border: none; box-shadow: none; font-size: 17px; font-weight: 500; border-radius: 5px; padding: 10px 32px; margin: 26px 5px 0 5px; cursor: pointer;"
+                                                    data-dismiss="modal" />
+                                                <asp:Button ID="btnAnular" runat="server" CssClass="btn btn-danger" Text="Aceptar" Style="display: inline-block; box-shadow: rgba(221, 107, 85, 0.8) 0px 0px 2px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px inset; color: white; border: none; box-shadow: none; font-size: 17px; font-weight: 500; -webkit-border-radius: 4px; border-radius: 5px; padding: 10px 32px; margin: 26px 5px 0 5px; cursor: pointer; background-color: #558bdd"
+                                                    OnClick="BtnAnular_Click" />
+                                            </div>
+                                        </div>
+                                        <asp:HiddenField ID="hdIdReservaEdicionAnular" runat="server" Value="" />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -138,6 +166,9 @@
     </div>
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="script" runat="server">
+    <script type="text/javascript">
+        var hdIdReservaEdicionAnular = '#<%=hdIdReservaEdicionAnular.ClientID%>';
+    </script>
     <script type="text/javascript">
 
         if (window.jQuery) {
@@ -150,5 +181,11 @@
             $('.footable').footable();
         }
 
+        function CargarIdReservaAnular(control) {
+            if (window.jQuery) {
+                var loIdReservaEdicion = control.lastElementChild.defaultValue;
+                $(hdIdReservaEdicionAnular).val(loIdReservaEdicion);
+            }
+        }
     </script>
 </asp:Content>

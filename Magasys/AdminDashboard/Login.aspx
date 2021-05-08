@@ -35,7 +35,7 @@
                     <small>¿Se te olvid&oacute; tu contrase&ntilde;a?</small>
                 </a>
             </form>
-            <p class="m-t"><small>©2020 Magasys - Todos los derechos reservados.</small> </p>
+            <p class="m-t"><small>©2021 Magasys - Todos los derechos reservados.</small> </p>
         </div>
     </div>
 

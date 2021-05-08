@@ -103,6 +103,33 @@ namespace PL.CustomersWebSite {
         protected global::System.Web.UI.WebControls.ListView lsvReservaEdicion;
         
         /// <summary>
+        /// Control btnCancelarAnular.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelarAnular;
+        
+        /// <summary>
+        /// Control btnAnular.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAnular;
+        
+        /// <summary>
+        /// Control hdIdReservaEdicionAnular.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdIdReservaEdicionAnular;
+        
+        /// <summary>
         /// Propiedad Master.
         /// </summary>
         /// <remarks>

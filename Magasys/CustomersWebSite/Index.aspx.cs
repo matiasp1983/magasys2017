@@ -65,6 +65,7 @@ namespace PL.CustomersWebSite
         {
             try
             {
+                Session.Remove(Enums.Session.CodigoReserva.ToString());
                 Session.Add(Enums.Session.CodigoReserva.ToString(), Convert.ToInt64(((HtmlButton)sender).Attributes["value"]));
                 Response.Redirect("ConsultaReservaEdicion.aspx", false);
             }
