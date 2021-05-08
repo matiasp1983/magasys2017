@@ -30,15 +30,6 @@
                 <p>
                     Hacete cliente en nuestra plataforma web y ahorrá tiempo desde la comodidad de tu casa. Aprovechá para reservar todos los productos que quieras que te los llevamos a domicilio!
                 </p>
-
-<%--                <p>
-                    When an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                </p>--%>
-
-<%--                <p>
-                    <small>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</small>
-                </p>--%>
-
             </div>
             <div class="col-md-6">
                 <div class="ibox-content">
@@ -66,11 +57,8 @@
         <hr />
         <div class="row">
             <div class="col-md-6">                
-                ©2020 Magasys - Todos los derechos reservados.
+                ©2021 Magasys - Todos los derechos reservados.
             </div>
-<%--            <div class="col-md-6 text-right">
-                <small>©2020</small>
-            </div>--%>
         </div>
     </div>
 
