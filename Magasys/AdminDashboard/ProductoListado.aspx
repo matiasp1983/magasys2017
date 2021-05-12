@@ -100,12 +100,12 @@
                                 <LayoutTemplate>
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                         <thead>
-                                            <tr>
-                                                <th class="text-left">Código</th>
-                                                <th data-hide="phone,tablet">Tipo de Producto</th>
-                                                <th data-hide="phone,tablet">Nombre</th>
+                                            <tr>                                                                                               
+                                                <th class="text-left">Tipo de Producto</th>
+                                                <th class="text-left">Nombre</th>
+                                                <th data-hide="phone,tablet">Código</th>
                                                 <th data-hide="phone,tablet">Estado</th>
-                                                <th data-hide="phone,tablet">G&eacute;nero</th>
+                                                <th class="text-left">Género</th>
                                                 <th data-hide="phone,tablet">Proveedor</th>
                                                 <th class="text-right" data-sort-ignore="true">Acci&oacute;n</th>
                                             </tr>
@@ -124,23 +124,23 @@
                                 </LayoutTemplate>
                                 <ItemTemplate>
                                     <tr>
-                                        <td class="text-left">
-                                            <asp:Label ID="lblCodigo" runat="server" Text='<%#Eval("ID_PRODUCTO").ToString()%>'></asp:Label>
-                                        </td>
                                         <td>
                                             <asp:Label ID="lblTipoProducto" runat="server" Text='<%#Eval("DESC_TIPO_PRODUCTO").ToString()%>'></asp:Label>
                                         </td>
                                         <td>
                                             <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE").ToString().Length > 23 ? String.Format("{0}...", Eval("NOMBRE").ToString().Remove(23).TrimEnd()):Eval("NOMBRE")%>'></asp:Label>
                                         </td>
-                                        <td>
-                                            <asp:Label ID="lblEstado" runat="server" Text='<%#Eval("DESC_ESTADO").ToString().Length > 13 ? String.Format("{0}...", Eval("DESC_ESTADO").ToString().Remove(13).TrimEnd()):Eval("DESC_ESTADO")%>'></asp:Label>
+                                        <td class="text-left">
+                                            <asp:Label ID="lblCodigo" runat="server" Text='<%#Eval("ID_PRODUCTO").ToString()%>'></asp:Label>
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblGenero" runat="server" Text='<%#Eval("DESC_GENERO").ToString().Length > 13 ? String.Format("{0}...", Eval("DESC_GENERO").ToString().Remove(13).TrimEnd()):Eval("DESC_GENERO")%>'></asp:Label>
+                                            <asp:Label ID="lblEstado" runat="server" Text='<%#Eval("DESC_ESTADO").ToString().Length > 25 ? String.Format("{0}...", Eval("DESC_ESTADO").ToString().Remove(25).TrimEnd()):Eval("DESC_ESTADO")%>'></asp:Label>
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblProveedor" runat="server" Text='<%#Eval("DESC_PROVEEDOR").ToString().Length > 13 ? String.Format("{0}...", Eval("DESC_PROVEEDOR").ToString().Remove(13).TrimEnd()):Eval("DESC_PROVEEDOR")%>'></asp:Label>
+                                            <asp:Label ID="lblGenero" runat="server" Text='<%#Eval("DESC_GENERO").ToString().Length > 25 ? String.Format("{0}...", Eval("DESC_GENERO").ToString().Remove(25).TrimEnd()):Eval("DESC_GENERO")%>'></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label ID="lblProveedor" runat="server" Text='<%#Eval("DESC_PROVEEDOR").ToString().Length > 25 ? String.Format("{0}...", Eval("DESC_PROVEEDOR").ToString().Remove(25).TrimEnd()):Eval("DESC_PROVEEDOR")%>'></asp:Label>
                                         </td>
                                         <td class="text-right">
                                             <div class="btn-group">

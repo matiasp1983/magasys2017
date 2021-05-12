@@ -92,12 +92,13 @@ namespace PL.CustomersWebSite
                         {
                             var oUsuario = (BLL.DAL.Usuario)Session[CustomersWebSiteSessionBLL.DefaultSessionsId.Usuario.ToString()];
                             var oClienteSession = new ClienteBLL().ObtenerClientePorUsuario(oUsuario.ID_USUARIO);
+                            var oProducto = new ProductoBLL().ObtenerProductoPorCodigo(oProductoEdicion.COD_PRODUCTO);
 
                             // Informar al Cliente que la reserva fue anulada.
                             BLL.DAL.Mensaje oMensaje = new BLL.DAL.Mensaje()
                             {
                                 COD_CLIENTE = oClienteSession.ID_CLIENTE,
-                                DESCRIPCION = "Se anuló la reserva de la edición " + oProductoEdicion.EDICION + " del producto '" + txtNombreProducto.Text + "'.",
+                                DESCRIPCION = "Se anuló la reserva de la edición " + oProductoEdicion.EDICION + " del producto '" + oProducto.NOMBRE + "'.",
                                 TIPO_MENSAJE = "warning-element",
                                 FECHA_REGISTRO_MENSAJE = DateTime.Now
                             };
