@@ -59,8 +59,10 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="col-sm-10 control-label">Estado</label>
-                                            <asp:DropDownList ID="ddlEstado" runat="server" CssClass="select2_estado form-control"></asp:DropDownList>
+                                            <label class="col-sm-10 control-label">Proveedor</label>   
+                                            <div id="divProveedor">
+                                                <asp:DropDownList ID="ddlProveedor" runat="server" CssClass="select2_proveedor form-control"></asp:DropDownList>                                            
+                                            </div>   
                                         </div>
                                     </div>
                                 </div>
@@ -69,10 +71,14 @@
                                 <div class="col-sm-12">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="col-sm-10 control-label">Proveedor</label>   
-                                            <div id="divProveedor">
-                                                <asp:DropDownList ID="ddlProveedor" runat="server" CssClass="select2_proveedor form-control"></asp:DropDownList>                                            
-                                            </div>   
+                                            <label class="col-sm-10 control-label">Producto</label>
+                                            <asp:TextBox ID="txtProducto" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-10 control-label">Edición</label>
+                                            <asp:TextBox ID="txtEdicion" runat="server" CssClass="form-control" MaxLength="50" autocomplete="off"></asp:TextBox>
                                         </div>
                                     </div>
                                 </div>
@@ -191,13 +197,6 @@
             $(".select2_tipoproducto").select2(
                 {
                     placeholder: 'Seleccione un Tipo de Producto',
-                    width: '100%',
-                    allowClear: true
-                });
-
-            $(".select2_estado").select2(
-                {
-                    placeholder: 'Seleccione un Estado',
                     width: '100%',
                     allowClear: true
                 });

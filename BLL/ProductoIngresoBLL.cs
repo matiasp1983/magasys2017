@@ -83,9 +83,6 @@ namespace BLL
                     if (oIngresoProductoFiltro.CodTipoProducto > 0 && lstProductoIngreso.Count > 0)
                         lstProductoIngreso = lstProductoIngreso.FindAll(p => p.COD_TIPO_PRODUCTO == oIngresoProductoFiltro.CodTipoProducto);
 
-                    if (oIngresoProductoFiltro.CodEstado > 0 && lstProductoIngreso.Count > 0)
-                        lstProductoIngreso = lstProductoIngreso.FindAll(p => p.COD_ESTADO == oIngresoProductoFiltro.CodEstado);
-
                     if (oIngresoProductoFiltro.IdProveedor > 0 && lstProductoIngreso.Count > 0)
                         lstProductoIngreso = lstProductoIngreso.FindAll(p => p.COD_PROVEEDOR == oIngresoProductoFiltro.IdProveedor);
 
@@ -106,6 +103,12 @@ namespace BLL
                     {
                         foreach (var loProductoIngreso in lstProductoIngreso)
                         {
+                            if (!String.IsNullOrEmpty(oIngresoProductoFiltro.NombreProducto) || !String.IsNullOrEmpty(oIngresoProductoFiltro.Edicion))
+                            {
+                                if (!this.ExisteProductoIngresoPorProductoEdicion(loProductoIngreso.ID_INGRESO_PRODUCTOS, oIngresoProductoFiltro.NombreProducto, oIngresoProductoFiltro.Edicion))
+                                    continue;
+                            }
+
                             oProductoIngresoListado = new ProductoIngresoListado
                             {
                                 ID_INGRESO_PRODUCTOS = loProductoIngreso.ID_INGRESO_PRODUCTOS,
@@ -144,6 +147,34 @@ namespace BLL
             catch (Exception)
             {
                 throw;
+            }
+
+            return bRes;
+        }
+
+        private bool ExisteProductoIngresoPorProductoEdicion(long codIngresoProductos, string nombreProducto, string edicion)
+        {
+            var bRes = false;
+
+            try
+            {
+                using (var loRepDetalleProductoIngreso = new Repository<DetalleProductoIngreso>())
+                {
+                    var lstDetalleProductoIngreso = loRepDetalleProductoIngreso.Search(p => p.COD_INGRESO_PRODUCTO == codIngresoProductos);
+
+                    if (!String.IsNullOrEmpty(nombreProducto))
+                        lstDetalleProductoIngreso = lstDetalleProductoIngreso.FindAll(p => p.ProductoEdicion.Producto.NOMBRE.ToUpper().Contains(nombreProducto.ToUpper()));
+
+                    if (!String.IsNullOrEmpty(edicion) && lstDetalleProductoIngreso.Count > 0)
+                        lstDetalleProductoIngreso = lstDetalleProductoIngreso.FindAll(p => p.ProductoEdicion.EDICION.ToUpper().Contains(edicion.ToUpper()));
+
+                    if (lstDetalleProductoIngreso.Count > 0)
+                        bRes = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
 
             return bRes;

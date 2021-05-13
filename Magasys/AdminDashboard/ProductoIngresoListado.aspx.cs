@@ -22,7 +22,6 @@ namespace PL.AdminDashboard
                 txtFechaAltaDesde.Text = DateTime.Now.ToString("dd/MM/yyyy");
                 txtFechaAltaHasta.Text = DateTime.Now.ToString("dd/MM/yyyy");
                 CargarTiposProducto();
-                CargarEstados();
                 CargarProveedores();
                 CargarGrillaIngresos();
             }
@@ -119,25 +118,6 @@ namespace PL.AdminDashboard
             }
         }
 
-        private void CargarEstados()
-        {
-            var oEstado = new BLL.EstadoBLL();
-
-            try
-            {
-                ddlEstado.DataSource = oEstado.ObtenerEstados("GLOBAL");
-                ddlEstado.DataTextField = "NOMBRE";
-                ddlEstado.DataValueField = "ID_ESTADO";
-                ddlEstado.DataBind();
-                ddlEstado.Items.Insert(0, new ListItem(String.Empty, String.Empty));
-            }
-            catch (Exception ex)
-            {
-                Logger loLogger = LogManager.GetCurrentClassLogger();
-                loLogger.Error(ex);
-            }
-        }
-
         private void CargarProveedores()
         {
             var oProveedor = new BLL.ProveedorBLL();
@@ -168,9 +148,6 @@ namespace PL.AdminDashboard
                 if (!String.IsNullOrEmpty(ddlTipoProducto.SelectedValue))
                     oIngresoProductoFiltro.CodTipoProducto = Convert.ToInt32(ddlTipoProducto.SelectedValue);
 
-                if (!String.IsNullOrEmpty(ddlEstado.SelectedValue))
-                    oIngresoProductoFiltro.CodEstado = Convert.ToInt32(ddlEstado.SelectedValue);
-
                 if (!String.IsNullOrEmpty(ddlProveedor.SelectedValue))
                     oIngresoProductoFiltro.IdProveedor = Convert.ToInt32(ddlProveedor.SelectedValue);
 
@@ -179,6 +156,12 @@ namespace PL.AdminDashboard
 
                 if (!String.IsNullOrEmpty(txtFechaAltaHasta.Text))
                     oIngresoProductoFiltro.FechaAltaHasta = Convert.ToDateTime(txtFechaAltaHasta.Text);
+
+                if (!String.IsNullOrEmpty(txtProducto.Text))
+                    oIngresoProductoFiltro.NombreProducto = txtProducto.Text;
+
+                if (!String.IsNullOrEmpty(txtEdicion.Text))
+                    oIngresoProductoFiltro.Edicion = txtEdicion.Text;
             }
 
             return oIngresoProductoFiltro;

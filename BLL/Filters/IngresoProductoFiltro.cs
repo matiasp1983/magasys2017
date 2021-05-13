@@ -11,6 +11,8 @@ namespace BLL.Filters
         public long IdProveedor { get; set; }
         public DateTime? FechaAltaDesde { get; set; }
         public DateTime? FechaAltaHasta { get; set; }
+        public string NombreProducto { get; set; }
+        public string Edicion { get; set; }
 
         #endregion
     }

@@ -65,6 +65,13 @@
                             <li id="liCobroListado" runat="server"><a href="CobroListado.aspx">Listado de Cobros</a></li>
                         </ul>
                     </li>
+                    <li id="liVenta" runat="server">
+                        <a href="#"><i class="fa fa-gift"></i><span class="nav-label">Venta</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li id="liRegistrarVenta" runat="server"><a href="Venta.aspx">Registrar Venta</a></li>
+                            <li id="liVentaListado" runat="server"><a href="VentaListado.aspx">Listado de Ventas</a></li>
+                        </ul>
+                    </li>
                     <li id="liProductos" runat="server">
                         <a href="#"><i class="fa fa-newspaper-o"></i><span class="nav-label">Productos</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
@@ -73,13 +80,6 @@
                             <li id="liConsultarStock" runat="server"><a href="ConsultarStock.aspx">Consultar Stock</a></li>
                             <li id="liAltaGenero" runat="server"><a href="Genero.aspx">Nuevo Género</a></li>
                             <li id="liGeneroListado" runat="server"><a href="GeneroListado.aspx">Listado de Géneros</a></li>                            
-                        </ul>
-                    </li>
-                    <li id="liVenta" runat="server">
-                        <a href="#"><i class="fa fa-gift"></i><span class="nav-label">Venta</span><span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level collapse">
-                            <li id="liRegistrarVenta" runat="server"><a href="Venta.aspx">Registrar Venta</a></li>
-                            <li id="liVentaListado" runat="server"><a href="VentaListado.aspx">Listado de Ventas</a></li>
                         </ul>
                     </li>
                     <li id="liDeposito" runat="server">
