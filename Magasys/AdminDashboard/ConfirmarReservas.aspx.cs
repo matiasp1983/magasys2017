@@ -60,18 +60,19 @@ namespace PL.AdminDashboard
                         if (!loResutado)
                             break;
 
-                        // Consultar con los chicos: El siguiente código se comenta porque me parece que una Reserva Registrada no puede tener
-                        // ediciones
-                        //if (oReservaConfirmada.COD_TIPO_RESERVA == 1)
-                        //{
-                        //    BLL.DAL.ReservaEdicion oReservaEdicion = new BLL.ReservaEdicionBLL().ObtenerReservaEdicionDeReservaUnica(oReservaConfirmada.ID_RESERVA);
-                        //    if (oReservaEdicion != null)
-                        //    {
-                        //        oReservaEdicion.COD_ESTADO = 15;
-                        //        loResutado = new ReservaEdicionBLL().ModificarReservaEdidion(oReservaEdicion);
-                        //        loResutado = new ReservaBLL().ModificarReserva(oReservaConfirmada);
-                        //    }
-                        //}
+                        if (oReservaConfirmada.COD_TIPO_RESERVA == 1)
+                        {
+                            BLL.DAL.ReservaEdicion oReservaEdicion = new ReservaEdicionBLL().ObtenerReservaEdicionDeReservaUnica(oReservaConfirmada.ID_RESERVA);
+                            if (oReservaEdicion != null)
+                            {
+                                oReservaEdicion.COD_ESTADO = 15;
+                                loResutado = new ReservaEdicionBLL().ModificarReservaEdidion(oReservaEdicion);
+                                // Actualizar stock (se reserva stock)
+                                loResutado = new ProductoEdicionBLL().ActualizarCantidadDisponible(oReservaEdicion.COD_PROD_EDICION, 1);
+                                if (!loResutado)
+                                    break;
+                            }
+                        }
 
                         if (!loResutado)
                             break;
