@@ -506,6 +506,25 @@ namespace BLL
             }
         }
 
+        public Imagen ObtenerImagen(int codImagen)
+        {
+            Imagen oImagen = null;
+
+            try
+            {
+                using (var loRepImagen = new Repository<Imagen>())
+                {
+                    oImagen = loRepImagen.Find(p => p.ID_IMAGEN == codImagen);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return oImagen;
+        }
+
         #endregion
     }
 

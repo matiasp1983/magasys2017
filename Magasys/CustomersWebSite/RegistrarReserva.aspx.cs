@@ -203,10 +203,11 @@ namespace PL.CustomersWebSite
 
                     oReservaCustomerWebSite.IMAGEN = new Image();
 
-                    if (loProducto.Imagen != null)
+                    if (loProducto.COD_IMAGEN != 0)
                     {
+                        var oImagen = new ProductoBLL().ObtenerImagen(Convert.ToInt32(loProducto.COD_IMAGEN));
                         // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
-                        string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(loProducto.Imagen.IMAGEN1);
+                        string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oImagen.IMAGEN1);
                         oReservaCustomerWebSite.IMAGEN.ImageUrl = loImagenDataURL64;
                     }
                     else
@@ -214,8 +215,6 @@ namespace PL.CustomersWebSite
 
                     lstReservaCustomerWebSite.Add(oReservaCustomerWebSite);
                 }
-
-
             }
 
             if (lstReservaCustomerWebSite.Count > 0)
@@ -251,36 +250,6 @@ namespace PL.CustomersWebSite
             if (System.Web.HttpContext.Current.Session[Enums.Session.CantidadDePedidos.ToString()] != null)
                 System.Web.HttpContext.Current.Session.Remove(Enums.Session.CantidadDePedidos.ToString());
         }
-
-        //private List<ReservaCustomerWebSite> MapListViewToListObject(ListView pListView)
-        //{
-        //    List<ReservaCustomerWebSite> lstReservaCustomerWebSite = new List<ReservaCustomerWebSite>();
-
-        //    foreach (var loItem in pListView.Items)
-        //    {
-        //        ReservaCustomerWebSite oReservaCustomerWebSite = new ReservaCustomerWebSite
-        //        {
-        //            NOMBRE = ((Label)loItem.Controls[3]).Text,
-        //            COD_PRODUCTO = ((Label)loItem.Controls[5]).Text,
-        //            COD_PRODUCTO_EDICION = ((Label)loItem.Controls[7]).Text,
-        //            DESCRIPCION = ((Label)loItem.Controls[9]).Text,
-        //            FECHA_EDICION = ((Label)loItem.Controls[11]).Text,
-        //            PRECIO = ((Label)loItem.Controls[13]).Text,
-        //            RETIRA_LOCAL = ((RadioButton)loItem.Controls[17]).Checked,
-        //            ENVIO_DOMICILIO = ((RadioButton)loItem.Controls[20]).Checked,
-        //            CANTIDAD = Convert.ToInt32(((TextBox)loItem.Controls[24]).Text),
-        //            SUBTOTAL = ((Label)loItem.Controls[26]).Text
-        //        };
-
-        //        oReservaCustomerWebSite.IMAGEN = new Image();
-        //        if (!String.IsNullOrEmpty(((HtmlImage)loItem.Controls[1]).Src))
-        //            oReservaCustomerWebSite.IMAGEN.ImageUrl = ((HtmlImage)loItem.Controls[1]).Src;
-
-        //        lstReservaCustomerWebSite.Add(oReservaCustomerWebSite);
-        //    }
-
-        //    return lstReservaCustomerWebSite;
-        //}
 
         #endregion
 
