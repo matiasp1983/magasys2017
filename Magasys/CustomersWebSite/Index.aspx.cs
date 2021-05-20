@@ -145,7 +145,7 @@ namespace PL.CustomersWebSite
                         var oUsuario = (BLL.DAL.Usuario)Session[CustomersWebSiteSessionBLL.DefaultSessionsId.Usuario.ToString()];
                         var oClienteSession = new BLL.ClienteBLL().ObtenerClientePorUsuario(oUsuario.ID_USUARIO);
 
-                        // Informar al Cliente que la entrega a domicilio de la edición fue cancelada
+                        // Informar al Cliente
                         Mensaje oMensaje = new Mensaje()
                         {
                             COD_CLIENTE = oClienteSession.ID_CLIENTE,

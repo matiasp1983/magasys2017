@@ -149,7 +149,7 @@
                                                     <asp:Label ID="lblFechaAlta" runat="server" Text='<%#Convert.ToDateTime(Eval("FECHA")).ToString("dd/MM/yyyy")%>'></asp:Label>
                                                 </td>
                                                 <td class="text-left">
-                                                    <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE_PRODUCTO").ToString().Length > 23 ? String.Format("{0}...", Eval("NOMBRE_PRODUCTO").ToString().Remove(23).TrimEnd()):Eval("NOMBRE_PRODUCTO")%>'></asp:Label>
+                                                    <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE_PRODUCTO").ToString().Length > 21 ? String.Format("{0}...", Eval("NOMBRE_PRODUCTO").ToString().Remove(21).TrimEnd()):Eval("NOMBRE_PRODUCTO")%>'></asp:Label>
                                                 </td>  
                                                 <td class="text-left">
                                                     <asp:Label ID="lblEstado" runat="server" Text='<%#Eval("ESTADO").ToString()%>'></asp:Label>
@@ -169,7 +169,7 @@
                                                 <td class="text-right">
                                                     <div class="btn-group">
                                                         <button runat="server" id="btnVisualizar" class="btn btn-outline btn-success btn-xl" title="Visualizar" onserverclick="BtnVisualizar_Click"><i class="fa fa-search"></i></button>
-                                                        <a class="btn btn-outline btn-danger btn-xl" data-toggle="modal" data-target="#ModalReservaAnular" title="Eliminar" onclick="CargarIdReservaAnular(this);"><i class="fa fa-trash-o"></i>
+                                                        <a class="btn btn-outline btn-danger btn-xl" data-toggle="modal" data-target="#ModalReservaAnular" title="Anular reserva" onclick="CargarIdReservaAnular(this);"><i class="fa fa-trash-o"></i>
                                                             <asp:HiddenField ID="hdIdReserva" runat="server" />
                                                         </a>  
                                                     </div>
