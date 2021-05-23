@@ -97,8 +97,8 @@
                             <li id="liRegistrarReserva" runat="server"><a href="Reserva.aspx">Registrar Reserva</a></li>
                             <li id="liConfirmarReservas" runat="server"><a href="ConfirmarReservas.aspx">Confirmar Reservas</a></li>
                             <li id="liReservaFinalizar" runat="server"><a href="ReservaFinalizar.aspx">Finalizar Reserva</a></li>
-                            <li id="liReservaAnular" runat="server"><a href="ReservaAnular.aspx">Anular Reserva</a></li>
-                            <li id="liReservaEdicionAnular" runat="server"><a href="ReservaEdicionAnular.aspx">Anular Reserva de ediciones</a></li>
+                            <li id="liReservaAnular" runat="server"><a href="ReservaAnular.aspx">Anular Reservas</a></li>
+                            <li id="liReservaEdicionAnular" runat="server"><a href="ReservaEdicionAnular.aspx">Anular Reservas de ediciones</a></li>
                             <li id="liReservaListado" runat="server"><a href="ReservaListado.aspx">Listado de Reservas</a></li>                            
                         </ul>
                     </li>

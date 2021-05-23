@@ -61,7 +61,7 @@ namespace PL.CustomersWebSite
                     }
                     else if (oReservaEdicion.COD_ESTADO == 12)
                     {
-                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.InfoModal("La edición " + oProductoEdicion.EDICION + "' ya se encuentra Anulada."));
+                        Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.InfoModal("La reserva de la edición " + oProductoEdicion.EDICION + "' ya se encuentra Anulada."));
                         CargarReservasEdicion();
                         return;
                     }
