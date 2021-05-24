@@ -27,9 +27,11 @@
                         <div class="ibox">
                             <div class="ibox-content">
                                 <br />
+                                <input type="text" class="form-control input-sm m-b-xs" id="filter"
+                                       placeholder="Buscar ...">
                                 <asp:ListView ID="lsvReservaEdicion" runat="server" Visible="true">
                                     <LayoutTemplate>
-                                        <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
+                                        <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15" data-filter=#filter>
                                             <thead>
                                                 <tr>                                                    
                                                     <td>                                                        
