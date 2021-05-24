@@ -104,9 +104,11 @@
                                 </button>
                             </div>
                             <br />
+                            <input type="text" class="form-control input-sm m-b-xs" id="filter"
+                                   placeholder="Buscar ...">
                             <asp:ListView ID="lsvDiarios" runat="server" Visible="false">
                                 <LayoutTemplate>
-                                    <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
+                                    <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15" data-filter=#filter>
                                         <thead>
                                             <tr>
                                                 <th class="text-left" data-toggle="true">C&oacute;digo</th>
@@ -186,7 +188,7 @@
 
                             <asp:ListView ID="lsvRevistas" runat="server" Visible="false">
                                 <LayoutTemplate>
-                                    <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
+                                    <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15" data-filter=#filter>
                                         <thead>
                                             <tr>
                                                 <th class="text-left" data-toggle="true">C&oacute;digo</th>
@@ -268,12 +270,12 @@
 
                             <asp:ListView ID="lsvColecciones" runat="server" Visible="false">
                                 <LayoutTemplate>
-                                    <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
+                                    <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15" data-filter=#filter>
                                         <thead>
                                             <tr>
                                                 <th class="text-left" data-toggle="true">C&oacute;digo</th>
                                                 <th>Nombre</th>
-                                                <th data-hide="phone,tablet">Edici&oacute;n</th>
+                                                <th>Edición</th>
                                                 <th data-hide="phone,tablet">Descripci&oacute;n</th>
                                                 <th data-hide="all">Precio</th>
                                                 <th data-hide="all">Cantidad</th>
@@ -341,7 +343,7 @@
 
                             <asp:ListView ID="lsvLibros" runat="server" Visible="false">
                                 <LayoutTemplate>
-                                    <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
+                                    <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15" data-filter=#filter>
                                         <thead>
                                             <tr>
                                                 <th class="text-left" data-toggle="true">C&oacute;digo</th>
@@ -418,7 +420,7 @@
 
                             <asp:ListView ID="lsvSuplementos" runat="server" Visible="false">
                                 <LayoutTemplate>
-                                    <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
+                                    <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15" data-filter=#filter>
                                         <thead>
                                             <tr>
                                                 <th class="text-left" data-toggle="true">C&oacute;digo</th>
@@ -500,12 +502,12 @@
 
                             <asp:ListView ID="lsvPeliculas" runat="server" Visible="false">
                                 <LayoutTemplate>
-                                    <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
+                                    <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15" data-filter=#filter>
                                         <thead>
                                             <tr>
                                                 <th class="text-left" data-toggle="true">C&oacute;digo</th>
                                                 <th>Nombre</th>
-                                                <th data-hide="phone,tablet">Edici&oacute;n</th>
+                                                <th>Edición</th>
                                                 <th data-hide="phone,tablet">Fecha Edici&oacute;n</th>
                                                 <th data-hide="all">Descripci&oacute;n</th>
                                                 <th data-hide="all">Precio</th>
