@@ -20,9 +20,6 @@ namespace PL.AdminDashboard
 
             if (!Page.IsPostBack)
             {
-                txtCodigoDevolucion.Text = new ProductoDevolucionBLL().ObtenerUltimoProductodevolucion().ToString();
-                txtFechaDevoluion.Text = DateTime.Now.ToString("dd/MM/yyyy");
-
                 CargarTiposProducto();
                 CargarProveedores();
             }
@@ -170,23 +167,6 @@ namespace PL.AdminDashboard
                 COD_ESTADO = 1,
             };
 
-            //foreach (var loItem in lsvDetalleDevolucion.Items)
-            //{
-            //    BLL.DAL.DetalleProductoDevolucion oDetalleProductoDevolucion = new BLL.DAL.DetalleProductoDevolucion
-            //    {
-            //        CANTIDAD = Convert.ToInt32(((Label)loItem.Controls[9]).Text.ToString()),
-            //        COD_PRODUCTO_EDICION = Convert.ToInt32(((Label)loItem.Controls[13]).Text.ToString())
-            //    };
-
-            //    lstDetalleProductoDevolucion.Add(oDetalleProductoDevolucion);
-
-            //    // Actualizar Stock
-            //    loResutado = new ProductoEdicionBLL().ActualizarCantidadDisponible(oDetalleProductoDevolucion.COD_PRODUCTO_EDICION, oDetalleProductoDevolucion.CANTIDAD, DateTime.Now);
-
-            //    if (Convert.ToInt32(((Label)loItem.Controls[15]).Text.ToString()) > 0)
-            //        loHayReservaConfirmada = true;
-            //}
-
             if (loResutado)
                 loResutado = new ProductoDevolucionBLL().AltaDevolucion(oProductoDevolucion, lstDetalleProductoDevolucion);
 
@@ -314,7 +294,6 @@ namespace PL.AdminDashboard
 
         private void LimpiarPantalla()
         {
-            txtCodigoDevolucion.Text = new BLL.ProductoDevolucionBLL().ObtenerUltimoProductodevolucion().ToString();
             LimpiarSeleccionProductos();
         }
 

@@ -10,7 +10,7 @@
                 <li>
                     <a href="Index.aspx">Principal</a>
                 </li>
-                <li>Devoluciones
+                <li>Depósito
                 </li>
                 <li class="active">
                     <strong>Lista de Devoluciones</strong>

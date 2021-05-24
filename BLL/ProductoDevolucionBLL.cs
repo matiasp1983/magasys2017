@@ -102,15 +102,15 @@ namespace BLL
                                 NOMBRE = loDetalleProductoIngreso.ProductoEdicion.Producto.NOMBRE,
                                 TIPO_PRODUCTO = loDetalleProductoIngreso.ProductoEdicion.Producto.TipoProducto.DESCRIPCION,
                                 EDICION = loDetalleProductoIngreso.ProductoEdicion.EDICION,
-                                FECHA_EDICION = Convert.ToDateTime(loDetalleProductoIngreso.ProductoEdicion.FECHA_EDICION),
                                 CANTIDAD_DISPONIBLE = loDetalleProductoIngreso.ProductoEdicion.CANTIDAD_DISPONIBLE,
                                 CANTIDAD_RESERVAS = loCantidadReservaEdicionPorProdEdicion
                             };
 
+                            if (loDetalleProductoIngreso.ProductoEdicion.FECHA_EDICION != null)
+                                oDevolucion.FECHA_EDICION = loDetalleProductoIngreso.ProductoEdicion.FECHA_EDICION.ToString();
+
                             if (loDetalleProductoIngreso.FECHA_DEVOLUCION != null)
-                            {
                                 oDevolucion.FECHA_DEVOLUCION = loDetalleProductoIngreso.FECHA_DEVOLUCION.ToString();
-                            }
 
                             lstDevolucion.Add(oDevolucion);
                         }
@@ -150,14 +150,14 @@ namespace BLL
                                 NOMBRE = loDetalleProductoIngreso.ProductoEdicion.Producto.NOMBRE,
                                 TIPO_PRODUCTO = loDetalleProductoIngreso.ProductoEdicion.Producto.TipoProducto.DESCRIPCION,
                                 EDICION = loDetalleProductoIngreso.ProductoEdicion.EDICION,
-                                FECHA_EDICION = Convert.ToDateTime(loDetalleProductoIngreso.ProductoEdicion.FECHA_EDICION),
                                 CANTIDAD_DISPONIBLE = loDetalleProductoIngreso.ProductoEdicion.CANTIDAD_DISPONIBLE
                             };
 
+                            if (loDetalleProductoIngreso.ProductoEdicion.FECHA_EDICION != null)
+                                oDevolucion.FECHA_EDICION = loDetalleProductoIngreso.ProductoEdicion.FECHA_EDICION.ToString();
+
                             if (loDetalleProductoIngreso.FECHA_DEVOLUCION != null)
-                            {
                                 oDevolucion.FECHA_DEVOLUCION = loDetalleProductoIngreso.FECHA_DEVOLUCION.ToString();
-                            }
 
                             lstDevolucion.Add(oDevolucion);
                         }
@@ -298,7 +298,7 @@ namespace BLL
         public string NOMBRE { get; set; }
         public string TIPO_PRODUCTO { get; set; }
         public string EDICION { get; set; }
-        public DateTime FECHA_EDICION { get; set; }
+        public string FECHA_EDICION { get; set; }
         public string FECHA_DEVOLUCION { get; set; }
         public int CANTIDAD_DISPONIBLE { get; set; }
         public int CANTIDAD_RESERVAS { get; set; }
