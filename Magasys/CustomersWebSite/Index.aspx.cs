@@ -330,6 +330,7 @@ namespace PL.CustomersWebSite
         {
             FormIndex.Controls.OfType<DropDownList>().ToList().ForEach(x => x.SelectedIndex = -1);
             FormIndex.Controls.OfType<TextBox>().ToList().ForEach(x => x.Text = String.Empty);
+            CargarGrilla();
         }
 
         private void CargarCantidadDePedidosDesdeSession()
