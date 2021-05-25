@@ -345,6 +345,7 @@ namespace BLL
         public int COD_EDICION { get; set; }
         public string EDICION { get; set; }
         public string TIPO_PRODUCTO { get; set; }
+        public string PRODUCTO { get; set; }
         public DateTime FECHA { get; set; }
         public int? COD_CLIENTE { get; set; }
         public string CLIENTE { get; set; }

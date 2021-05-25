@@ -119,9 +119,10 @@
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                         <thead>
                                             <tr>
-                                                <th>C&oacute;digo Edici&oacute;n</th>
-                                                <th>Edici&oacute;n</th>
+                                                <th>Código Edición</th>
+                                                <th>Edición</th>
                                                 <th>Tipo de Producto</th>
+                                                <th>Producto</th>
                                                 <th data-hide="phone,tablet">Precio Unitario</th>
                                                 <th data-hide="phone,tablet">Cantidad</th>
                                                 <th data-hide="phone,tablet">Subtotal</th>
@@ -149,6 +150,9 @@
                                         </td>
                                         <td class="text-left">
                                             <asp:Label ID="lblTipoProducto" runat="server" Text='<%#Eval("TIPO_PRODUCTO").ToString()%>'></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label ID="lblProducto" runat="server" Text='<%#Eval("PRODUCTO").ToString()%>'></asp:Label>
                                         </td>
                                         <td class="text-left">
                                             <asp:Label ID="lblPrecioUnitario" runat="server" Text='<%#Eval("PRECIO_UNITARIO").ToString()%>'></asp:Label>

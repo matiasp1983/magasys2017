@@ -67,6 +67,7 @@ namespace PL.AdminDashboard
                                 ID_VENTA = loVenta.ID_VENTA,
                                 COD_EDICION = loDetalleVenta.COD_PRODUCTO_EDICION,
                                 EDICION = loDetalleVenta.ProductoEdicion.EDICION,
+                                PRODUCTO = loDetalleVenta.ProductoEdicion.Producto.NOMBRE,
                                 TIPO_PRODUCTO = loDetalleVenta.ProductoEdicion.Producto.TipoProducto.DESCRIPCION,
                                 PRECIO_UNITARIO = "$" + loDetalleVenta.PRECIO_UNIDAD.ToString(),
                                 CANTIDAD = loDetalleVenta.CANTIDAD,
