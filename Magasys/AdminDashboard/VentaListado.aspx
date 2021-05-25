@@ -153,9 +153,9 @@
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                         <thead>
                                             <tr>
-                                                <th class="text-left">Código</th>
-                                                <th class="text-left">Fecha Venta</th>
-                                                <th data-hide="phone,tablet">Código de Cliente</th>
+                                                <th class="text-left">Código venta</th>
+                                                <th class="text-left">Fecha venta</th>
+                                                <th>Cliente</th>
                                                 <th data-hide="phone,tablet">Forma de Pago</th>
                                                  <th data-hide="phone,tablet">Total</th>
                                                 <th class="text-right" data-sort-ignore="true">Acci&oacute;n</th>
@@ -181,8 +181,8 @@
                                         <td>
                                             <asp:Label ID="lblFechaVenta" runat="server" Text='<%#Convert.ToDateTime(Eval("FECHA")).ToString("dd/MM/yyyy")%>'></asp:Label>
                                         </td>    
-                                        <td class="text-left">
-                                            <asp:Label ID="lblCodigoCliente" runat="server" Text='<%#(Eval("COD_CLIENTE") != null) ? Eval("COD_CLIENTE").ToString():null%>'></asp:Label>
+                                        <td>
+                                            <asp:Label ID="lblCliente" runat="server" Text='<%#(Eval("CLIENTE") != null) ? Eval("CLIENTE").ToString():null%>'></asp:Label>
                                         </td>     
                                         <td class="text-left">
                                             <asp:Label ID="lblFormaPago" runat="server" Text='<%#Eval("FORMA_PAGO").ToString()%>'></asp:Label>

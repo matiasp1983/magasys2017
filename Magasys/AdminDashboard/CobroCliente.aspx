@@ -86,10 +86,10 @@
                                         <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-left">C&oacute;digo de Venta</th>
-                                                    <th data-hide="phone,tablet">Fecha de Venta</th>
-                                                    <th data-hide="phone,tablet">Total</th>
-                                                    <th data-hide="phone,tablet">Acci&oacute;n</th>
+                                                    <th class="text-left">Cód. Venta</th>
+                                                    <th>Fecha de Venta</th>
+                                                    <th>Total</th>
+                                                    <th>Acción</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -141,9 +141,9 @@
                                 <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                     <thead>
                                         <tr>
-                                            <th class="text-left">C&oacute;digo de Venta</th>
-                                            <th data-hide="phone,tablet">Total</th>
-                                            <th data-hide="phone,tablet">Acci&oacute;n</th>
+                                            <th class="text-left">Cód. Venta</th>
+                                            <th>Total</th>
+                                            <th>Acción</th>
                                         </tr>
                                     </thead>
                                     <tbody>

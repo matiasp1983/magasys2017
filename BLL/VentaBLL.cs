@@ -177,7 +177,7 @@ namespace BLL
                         };
 
                         if (loVenta.COD_CLIENTE != null)
-                            oVentaListado.COD_CLIENTE = Convert.ToInt32(loVenta.COD_CLIENTE);
+                            oVentaListado.CLIENTE = loVenta.COD_CLIENTE + " - " + loVenta.Cliente.NOMBRE + " " + loVenta.Cliente.APELLIDO;
 
                         lstVentaListado.Add(oVentaListado);
                     }
@@ -347,6 +347,7 @@ namespace BLL
         public string TIPO_PRODUCTO { get; set; }
         public DateTime FECHA { get; set; }
         public int? COD_CLIENTE { get; set; }
+        public string CLIENTE { get; set; }
         public string FORMA_PAGO { get; set; }
         public string PRECIO_UNITARIO { get; set; }
         public string SUBTOTAL { get; set; }
