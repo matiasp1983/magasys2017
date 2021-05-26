@@ -133,7 +133,7 @@
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                         <thead>
                                             <tr>
-                                                <th class="text-left">Código venta</th>
+                                                <th class="text-left">Cód. venta</th>
                                                 <th class="text-left">Fecha venta</th>
                                                 <th>Cliente</th>
                                                  <th data-hide="phone,tablet">Total</th>

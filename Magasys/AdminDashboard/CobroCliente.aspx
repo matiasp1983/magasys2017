@@ -86,8 +86,8 @@
                                         <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-left">Cód. Venta</th>
-                                                    <th>Fecha de Venta</th>
+                                                    <th class="text-left">Cód. venta</th>
+                                                    <th>Fecha venta</th>
                                                     <th>Total</th>
                                                     <th>Acción</th>
                                                 </tr>

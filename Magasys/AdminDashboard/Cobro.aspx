@@ -104,7 +104,7 @@
                                                     <td></td>
                                                     <th>Nombre del Cliente</th>
                                                     <th>Tipo de Documento</th>
-                                                    <th>N&uacute;mero de Documento</th>
+                                                    <th>Nro. Documento</th>
                                                     <th>Alias</th>
                                                 </tr>
                                             </thead>

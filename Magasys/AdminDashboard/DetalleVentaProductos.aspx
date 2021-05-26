@@ -119,11 +119,11 @@
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                         <thead>
                                             <tr>
-                                                <th>Código Edición</th>
+                                                <th>Cód. edición</th>
                                                 <th>Edición</th>
-                                                <th>Tipo de Producto</th>
+                                                <th>Tipo de producto</th>
                                                 <th>Producto</th>
-                                                <th data-hide="phone,tablet">Precio Unitario</th>
+                                                <th data-hide="phone,tablet">Precio unitario</th>
                                                 <th data-hide="phone,tablet">Cantidad</th>
                                                 <th data-hide="phone,tablet">Subtotal</th>
                                             </tr>

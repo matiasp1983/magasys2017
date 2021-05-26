@@ -141,11 +141,11 @@
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                         <thead>
                                             <tr>
-                                                <th class="text-left">Código</th>
-                                                <th class="text-left">Fecha Cobro</th>
-                                                <th data-hide="phone,tablet">Nombre del Cliente</th>
+                                                <th class="text-left">Cód. cobro</th>
+                                                <th class="text-left">Fecha cobro</th>
+                                                <th>Cliente</th>
                                                  <th data-hide="phone,tablet">Total</th>
-                                                <th class="text-right" data-sort-ignore="true">Acci&oacute;n</th>
+                                                <th class="text-right" data-sort-ignore="true">Acción</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -168,8 +168,8 @@
                                         <td>
                                             <asp:Label ID="lblFechaCobro" runat="server" Text='<%#Convert.ToDateTime(Eval("FECHA")).ToString("dd/MM/yyyy")%>'></asp:Label>
                                         </td>    
-                                        <td class="text-left">
-                                            <asp:Label ID="lblNombreCliente" runat="server" Text='<%#(Eval("NOMBRE_CLIENTE") != null) ? Eval("NOMBRE_CLIENTE").ToString():null%>'></asp:Label>
+                                        <td>
+                                            <asp:Label ID="lblCliente" runat="server" Text='<%#(Eval("CLIENTE") != null) ? Eval("CLIENTE").ToString():null%>'></asp:Label>
                                         </td>       
                                         <td class="text-left">
                                             <asp:Label ID="lblTotal" runat="server" Text='<%#Eval("TOTAL").ToString()%>'></asp:Label>

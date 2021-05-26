@@ -115,7 +115,7 @@ namespace BLL
                         };
 
                         if (loCobro.COD_CLIENTE != null)
-                            oCobroListado.NOMBRE_CLIENTE = loCobro.Cliente.APELLIDO + " " + loCobro.Cliente.NOMBRE;
+                            oCobroListado.CLIENTE = loCobro.COD_CLIENTE + " - " + loCobro.Cliente.NOMBRE + " " + loCobro.Cliente.APELLIDO;
 
                         lstCobroListado.Add(oCobroListado);
                     }
@@ -140,6 +140,7 @@ namespace BLL
         public int ID_COBRO { get; set; }
         public DateTime FECHA { get; set; }
         public String NOMBRE_CLIENTE { get; set; }
+        public string CLIENTE { get; set; }
         public string TOTAL { get; set; }
     }
 
