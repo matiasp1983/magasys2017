@@ -110,8 +110,8 @@
                                         <thead>
                                             <tr>
                                                 <th class="text-left">Proveedor</th>
-                                                <th class="text-left">Tipo Producto</th>  
-                                                <th class="text-left">Fecha de Ingreso</th>       
+                                                <th class="text-left">Tipo producto</th>  
+                                                <th class="text-left">Fecha de ingreso</th>       
                                                 <th class="text-right" data-sort-ignore="true">Acci&oacute;n</th>
                                             </tr>
                                         </thead>

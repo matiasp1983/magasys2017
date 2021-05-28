@@ -56,13 +56,13 @@
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                         <thead>
                                             <tr>
-                                                <th class="text-left" data-toggle="true">Código Producto</th>
+                                                <th class="text-left" data-toggle="true">Cód. producto</th>
                                                 <th>Producto</th>
                                                 <th>Edición</th>
-                                                <th data-hide="phone,tablet">Fecha Edición</th>
+                                                <th data-hide="phone,tablet">Fecha edición</th>
                                                 <th data-hide="all">Precio</th>
                                                 <th data-hide="all">Cantidad</th>
-                                                <th data-hide="all">Fecha Devolución</th>
+                                                <th>Fecha devolución</th>
                                                 <th data-hide="all">Imagen</th>
                                                 <th data-hide="all"></th>                                    
                                             </tr>
@@ -121,14 +121,14 @@
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                         <thead>
                                             <tr>
-                                                <th class="text-left" data-toggle="true">Código Producto</th>
+                                                <th class="text-left" data-toggle="true">Cód. producto</th>
                                                 <th>Producto</th>
                                                 <th>Edición</th>
-                                                <th data-hide="phone,tablet">Fecha Edición</th>
+                                                <th data-hide="phone,tablet">Fecha edición</th>
                                                 <th data-hide="all">Descripción</th>
                                                 <th data-hide="all">Precio</th>
                                                 <th data-hide="all">Cantidad</th>
-                                                <th data-hide="all">Fecha Devolución</th>
+                                                <th>Fecha devolución</th>
                                                 <th data-hide="all">Imagen</th>
                                                 <th data-hide="all"></th>                                           
                                             </tr>
@@ -190,13 +190,13 @@
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                         <thead>
                                             <tr>
-                                                <th class="text-left" data-toggle="true">Código Producto</th>
+                                                <th class="text-left" data-toggle="true">Cód. producto</th>
                                                 <th>Producto</th>
                                                 <th>Edición</th>
                                                 <th data-hide="phone,tablet">Descripción</th>
                                                 <th data-hide="all">Precio</th>
                                                 <th data-hide="all">Cantidad</th>
-                                                <th data-hide="all">Fecha Devolución</th>
+                                                <th>Fecha devolución</th>
                                                 <th data-hide="all">Imagen</th>
                                                 <th data-hide="all"></th>
                                             </tr>
@@ -255,14 +255,14 @@
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                         <thead>
                                             <tr>
-                                                <th class="text-left" data-toggle="true">Código Producto</th>
+                                                <th class="text-left" data-toggle="true">Cód. producto</th>
                                                 <th>Producto</th>
                                                 <th>Autor</th>
                                                 <th>Edición</th>
                                                 <th data-hide="all">Descripción</th>
                                                 <th data-hide="all">Precio</th>
                                                 <th data-hide="all">Cantidad</th>
-                                                <th data-hide="all">Fecha Devolución</th>
+                                                <th data-hide="all">Fecha devolución</th>
                                                 <th data-hide="all">Imagen</th>
                                                 <th data-hide="all"></th>                                              
                                             </tr>
@@ -324,14 +324,14 @@
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                         <thead>
                                             <tr>
-                                                <th class="text-left" data-toggle="true">Código Producto</th>
+                                                <th class="text-left" data-toggle="true">Cód. producto</th>
                                                 <th>Producto</th>
                                                 <th>Edición</th>
-                                                <th data-hide="phone,tablet">Fecha Edición</th>
+                                                <th data-hide="phone,tablet">Fecha edición</th>
                                                 <th data-hide="all">Descripción</th>
                                                 <th data-hide="all">Precio</th>
                                                 <th data-hide="all">Cantidad</th>
-                                                <th data-hide="all">Fecha Devolución</th>
+                                                <th>Fecha devolución</th>
                                                 <th data-hide="all">Imagen</th>
                                                 <th data-hide="all"></th>                                               
                                             </tr>
@@ -393,14 +393,14 @@
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                         <thead>
                                             <tr>
-                                                <th class="text-left" data-toggle="true">Código Producto</th>
+                                                <th class="text-left" data-toggle="true">Cód. producto</th>
                                                 <th>Producto</th>
                                                 <th>Edición</th>
-                                                <th data-hide="phone,tablet">Fecha Edición</th>
+                                                <th data-hide="phone,tablet">Fecha edición</th>
                                                 <th data-hide="all">Descripción</th>
                                                 <th data-hide="all">Precio</th>
                                                 <th data-hide="all">Cantidad</th>
-                                                <th data-hide="all">Fecha Devolución</th>
+                                                <th>Fecha devolución</th>
                                                 <th data-hide="all">Imagen</th>
                                                 <th data-hide="all"></th>                                             
                                             </tr>

@@ -31,18 +31,18 @@
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                         <thead>
                                             <tr>
-                                                <th class="text-left" data-toggle="true">C&oacute;digo</th>
+                                                <th class="text-left" data-toggle="true">Cód. producto</th>
                                                 <th>Nombre</th>
-                                                <th>Tipo de Producto</th>
-                                                <th data-hide="phone,tablet">Edici&oacute;n</th>
-                                                <th data-hide="phone,tablet">Fecha Edici&oacute;n</th>
+                                                <th>Tipo producto</th>
+                                                <th data-hide="phone,tablet">Edición</th>
+                                                <th data-hide="phone,tablet">Fecha edición</th>
                                                 <th data-hide="all">Precio</th>
                                                 <th data-hide="all">Cantidad</th>
-                                                <th data-hide="all">Fecha Devoluci&oacute;n</th>
+                                                <th data-hide="all">Fecha devolución</th>
                                                 <th data-hide="all">Imagen</th>
                                                 <th data-hide="all"></th>
                                                 <th data-hide="all"></th>                                             
-                                                <th data-hide="all">Eliminar Imagen</th>    
+                                                <th data-hide="all">Eliminar imagen</th>    
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -126,19 +126,19 @@
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                         <thead>
                                             <tr>
-                                                <th class="text-left" data-toggle="true">C&oacute;digo</th>
+                                                <th class="text-left" data-toggle="true">Cód. producto</th>
                                                 <th>Nombre</th>
-                                                <th>Tipo de Producto</th>
-                                                <th data-hide="phone,tablet">Edici&oacute;n</th>
-                                                <th data-hide="phone,tablet">Fecha Edici&oacute;n</th>
-                                                <th data-hide="all">Descripci&oacute;n</th>
+                                                <th>Tipo producto</th>
+                                                <th data-hide="phone,tablet">Edición</th>
+                                                <th data-hide="phone,tablet">Fecha edición</th>
+                                                <th data-hide="all">Descripción</th>
                                                 <th data-hide="all">Precio</th>
                                                 <th data-hide="all">Cantidad</th>
-                                                <th data-hide="all">Fecha Devoluci&oacute;n</th>
+                                                <th data-hide="all">Fecha devolución</th>
                                                 <th data-hide="all">Imagen</th>
                                                 <th data-hide="all"></th>
                                                 <th data-hide="all"></th>                                          
-                                                <th data-hide="all">Eliminar Imagen</th>                                       
+                                                <th data-hide="all">Eliminar imagen</th>                                       
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -227,18 +227,18 @@
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                         <thead>
                                             <tr>
-                                                <th class="text-left" data-toggle="true">C&oacute;digo</th>
+                                                <th class="text-left" data-toggle="true">Cód. producto</th>
                                                 <th>Nombre</th>
-                                                <th>Tipo de Producto</th>
-                                                <th data-hide="phone,tablet">Edici&oacute;n</th>
-                                                <th data-hide="phone,tablet">Descripci&oacute;n</th>
+                                                <th>Tipo producto</th>
+                                                <th data-hide="phone,tablet">Edición</th>
+                                                <th data-hide="phone,tablet">Descripción</th>
                                                 <th data-hide="all">Precio</th>
                                                 <th data-hide="all">Cantidad</th>
-                                                <th data-hide="all">Fecha Devoluci&oacute;n</th>
+                                                <th data-hide="all">Fecha devolución</th>
                                                 <th data-hide="all">Imagen</th>
                                                 <th data-hide="all"></th>
                                                 <th data-hide="all"></th>                                        
-                                                <th data-hide="all">Eliminar Imagen</th>                                               
+                                                <th data-hide="all">Eliminar imagen</th>                                               
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -319,19 +319,19 @@
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                         <thead>
                                             <tr>
-                                                <th class="text-left" data-toggle="true">C&oacute;digo</th>
+                                                <th class="text-left" data-toggle="true">Cód. producto</th>
                                                 <th>Nombre</th>
-                                                <th>Tipo de Producto</th>
+                                                <th>Tipo producto</th>
                                                 <th>Autor</th>
-                                                <th data-hide="phone,tablet">Edici&oacute;n</th>
-                                                <th data-hide="all">Descripci&oacute;n</th>
+                                                <th data-hide="phone,tablet">Edición</th>
+                                                <th data-hide="all">Descripción</th>
                                                 <th data-hide="all">Precio</th>
                                                 <th data-hide="all">Cantidad</th>
-                                                <th data-hide="all">Fecha Devoluci&oacute;n</th>
+                                                <th data-hide="all">Fecha devolución</th>
                                                 <th data-hide="all">Imagen</th>
                                                 <th data-hide="all"></th>
                                                 <th data-hide="all"></th>                                                
-                                                <th data-hide="all">Eliminar Imagen</th>                                
+                                                <th data-hide="all">Eliminar imagen</th>                                
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -415,19 +415,19 @@
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                         <thead>
                                             <tr>
-                                                <th class="text-left" data-toggle="true">C&oacute;digo</th>
+                                                <th class="text-left" data-toggle="true">Cód. producto</th>
                                                 <th>Nombre</th>
-                                                <th>Tipo de Producto</th>
-                                                <th data-hide="phone,tablet">Edici&oacute;n</th>
-                                                <th data-hide="phone,tablet">Fecha Edici&oacute;n</th>
-                                                <th data-hide="all">Descripci&oacute;n</th>
+                                                <th>Tipo producto</th>
+                                                <th data-hide="phone,tablet">Edición</th>
+                                                <th data-hide="phone,tablet">Fecha edición</th>
+                                                <th data-hide="all">Descripción</th>
                                                 <th data-hide="all">Precio</th>
                                                 <th data-hide="all">Cantidad</th>
-                                                <th data-hide="all">Fecha Devoluci&oacute;n</th>
+                                                <th data-hide="all">Fecha devolución</th>
                                                 <th data-hide="all">Imagen</th>
                                                 <th data-hide="all"></th>
                                                 <th data-hide="all"></th>                                                  
-                                                <th data-hide="all">Eliminar Imagen</th>                                                
+                                                <th data-hide="all">Eliminar imagen</th>                                                
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -516,19 +516,19 @@
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                         <thead>
                                             <tr>
-                                                <th class="text-left" data-toggle="true">C&oacute;digo</th>
+                                                <th class="text-left" data-toggle="true">Cód. producto</th>
                                                 <th>Nombre</th>
-                                                <th>Tipo de Producto</th>
-                                                <th data-hide="phone,tablet">Edici&oacute;n</th>
-                                                <th data-hide="phone,tablet">Fecha Edici&oacute;n</th>
-                                                <th data-hide="all">Descripci&oacute;n</th>
+                                                <th>Tipo producto</th>
+                                                <th data-hide="phone,tablet">Edición</th>
+                                                <th data-hide="phone,tablet">Fecha edición</th>
+                                                <th data-hide="all">Descripción</th>
                                                 <th data-hide="all">Precio</th>
                                                 <th data-hide="all">Cantidad</th>
-                                                <th data-hide="all">Fecha Devoluci&oacute;n</th>
+                                                <th data-hide="all">Fecha devolución</th>
                                                 <th data-hide="all">Imagen</th>
                                                 <th data-hide="all"></th>
                                                 <th data-hide="all"></th>                                                  
-                                                <th data-hide="all">Eliminar Imagen</th>                                             
+                                                <th data-hide="all">Eliminar imagen</th>                                             
                                             </tr>
                                         </thead>
                                         <tbody>
