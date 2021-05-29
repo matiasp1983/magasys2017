@@ -3,6 +3,7 @@ using BLL.Filters;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Linq;
 using System.Transactions;
 
 namespace BLL
@@ -78,7 +79,7 @@ namespace BLL
             {
                 using (var rep = new Repository<ProductoIngreso>())
                 {
-                    lstProductoIngreso = rep.Search(p => p.COD_ESTADO == 1);
+                    lstProductoIngreso = rep.Search(p => p.COD_ESTADO == 1).OrderByDescending(p => p.ID_INGRESO_PRODUCTOS).ToList();
 
                     if (oIngresoProductoFiltro.CodTipoProducto > 0 && lstProductoIngreso.Count > 0)
                         lstProductoIngreso = lstProductoIngreso.FindAll(p => p.COD_TIPO_PRODUCTO == oIngresoProductoFiltro.CodTipoProducto);
