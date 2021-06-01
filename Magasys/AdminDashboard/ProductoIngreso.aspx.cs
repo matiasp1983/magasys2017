@@ -900,7 +900,7 @@ namespace PL.AdminDashboard
             List<BLL.ReservaClienteListado> lstReservasConfirmar = new List<BLL.ReservaClienteListado>();
             ProductoEdicion oProductoEdicion = null;
             BLL.DAL.ProductoIngreso oProductoIngreso = null;
-            BLL.DAL.Imagen oImagen = null;
+            //BLL.DAL.Imagen oImagen = null;
             int lvCantidadProductoIngresado = 0;
 
             try
@@ -955,20 +955,20 @@ namespace PL.AdminDashboard
                     // Buscar nro. edición, si existe se actualiza la cantidad y los datos que se carguen, caso contrario, se crea la edición.
                     oProductoEdicion = new BLL.ProductoEdicionBLL().ConsultarExistenciaEdicion(Convert.ToInt32(((Label)loItem.Controls[1]).Text), Convert.ToString(((TextBox)loItem.Controls[7]).Text), Convert.ToInt32(ddlTipoProducto.SelectedValue));
 
-                    // Obtener tamaño de la IMAGEN seleccionada
-                    int loTamanioImagen = ((FileUpload)loItem.Controls[17]).PostedFile.ContentLength;
+                    //// Obtener tamaño de la IMAGEN seleccionada
+                    //int loTamanioImagen = ((FileUpload)loItem.Controls[17]).PostedFile.ContentLength;
 
-                    if (loTamanioImagen > 0)
-                    {
-                        // Obtener tamaño de la IMAGEN en byte
-                        byte[] loImagenOriginal = new byte[loTamanioImagen];
+                    //if (loTamanioImagen > 0)
+                    //{
+                    //    // Obtener tamaño de la IMAGEN en byte
+                    //    byte[] loImagenOriginal = new byte[loTamanioImagen];
 
-                        //// Asociar byte a IMAGEN
-                        ((FileUpload)loItem.Controls[17]).PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
+                    //    //// Asociar byte a IMAGEN
+                    //    ((FileUpload)loItem.Controls[17]).PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
 
-                        oImagen = new Imagen();
-                        oImagen.IMAGEN1 = loImagenOriginal;
-                    }
+                    //    oImagen = new Imagen();
+                    //    oImagen.IMAGEN1 = loImagenOriginal;
+                    //}
 
                     if (oProductoEdicion == null)
                     {
@@ -982,8 +982,8 @@ namespace PL.AdminDashboard
                         oProductoEdicion.CANTIDAD_DISPONIBLE = Convert.ToInt32(((TextBox)loItem.Controls[13]).Text);
                         if (!String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[9]).Text)))
                             oProductoEdicion.DESCRIPCION = Convert.ToString(((TextBox)loItem.Controls[9]).Text);
-                        if (oImagen != null) // Asociar de la Imagen
-                            oProductoEdicion.Imagen = oImagen;
+                        //if (oImagen != null) // Asociar de la Imagen
+                        //    oProductoEdicion.Imagen = oImagen;
                         oDetalleProductoIngreso.COD_PRODUCTO_EDICION = new BLL.ProductoEdicionBLL().AltaProductoEdicion(oProductoEdicion);
                         if (oDetalleProductoIngreso.COD_PRODUCTO_EDICION == 0)
                         {
@@ -999,11 +999,11 @@ namespace PL.AdminDashboard
                         oProductoEdicion.CANTIDAD_DISPONIBLE = oProductoEdicion.CANTIDAD_DISPONIBLE + Convert.ToInt32(((TextBox)loItem.Controls[13]).Text);
                         if (!String.IsNullOrEmpty(Convert.ToString(((TextBox)loItem.Controls[9]).Text)))
                             oProductoEdicion.DESCRIPCION = Convert.ToString(((TextBox)loItem.Controls[9]).Text);
-                        if (oImagen != null) // Asociar de la Imagen
-                        {
-                            oProductoEdicion.COD_IMAGEN = null;
-                            oProductoEdicion.Imagen = oImagen;
-                        }
+                        //if (oImagen != null) // Asociar de la Imagen
+                        //{
+                        //    oProductoEdicion.COD_IMAGEN = null;
+                        //    oProductoEdicion.Imagen = oImagen;
+                        //}
                         loResutado = new BLL.ProductoEdicionBLL().ModificarProductoEdicion(oProductoEdicion);
                         if (loResutado == false)
                             return loResutado;

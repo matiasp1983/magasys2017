@@ -263,7 +263,6 @@
                                                 <th data-hide="all">Precio</th>
                                                 <th data-hide="all">Cantidad</th>
                                                 <th data-hide="all">Fecha devolución</th>
-                                                <th data-hide="all">Imagen</th>
                                                 <th data-hide="all"></th>                                              
                                             </tr>
                                         </thead>
@@ -304,11 +303,6 @@
                                         </td>
                                         <td>
                                             <asp:Label ID="lblFechaDevolucion" runat="server" Text='<%#(Eval("FECHA_DEVOLUCION") != null) ? Convert.ToDateTime(Eval("FECHA_DEVOLUCION")).ToString("dd/MM/yyyy"):null%>'></asp:Label>
-                                        </td>
-                                        <td>
-                                            <div style="width: 100%">
-                                                <img src="<%#Eval("IMAGEN.ImageUrl")%>" style="width:200px"/>
-                                            </div>
                                         </td>
                                         <td>
                                             <div style="width: 100%">

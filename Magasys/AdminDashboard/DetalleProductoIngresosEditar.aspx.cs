@@ -214,14 +214,14 @@ namespace PL.AdminDashboard
                                         oLibroEdicion.DESCRIPCION = oProductoEdicion.DESCRIPCION;
                                     if (loDetalleProductoIngreso.FECHA_DEVOLUCION != null)
                                         oLibroEdicion.FECHA_DEVOLUCION = Convert.ToDateTime(loDetalleProductoIngreso.FECHA_DEVOLUCION);
-                                    if (oProductoEdicion.Imagen != null)
-                                    {
-                                        oLibroEdicion.IMAGEN = new System.Web.UI.WebControls.Image();
+                                    //if (oProductoEdicion.Imagen != null)
+                                    //{
+                                    //    oLibroEdicion.IMAGEN = new System.Web.UI.WebControls.Image();
 
-                                        // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
-                                        string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProductoEdicion.Imagen.IMAGEN1);
-                                        oLibroEdicion.IMAGEN.ImageUrl = loImagenDataURL64;
-                                    }
+                                    //    // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
+                                    //    string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProductoEdicion.Imagen.IMAGEN1);
+                                    //    oLibroEdicion.IMAGEN.ImageUrl = loImagenDataURL64;
+                                    //}
 
                                     break;
 
@@ -809,7 +809,7 @@ namespace PL.AdminDashboard
             ProductoEdicion oProductoEdicion = null;
             List<DetalleProductoIngreso> lstDetalleProductoIngreso = null;
             DetalleProductoIngreso oDetalleProductoIngreso = null;
-            BLL.DAL.Imagen oImagen = null;
+            //BLL.DAL.Imagen oImagen = null;
 
             lstDetalleProductoIngreso = new List<DetalleProductoIngreso>();
             lstDetalleProductoIngreso = (List<DetalleProductoIngreso>)Session[Enums.Session.DetalleIngresoProductos.ToString()];
@@ -882,31 +882,31 @@ namespace PL.AdminDashboard
                         loProductoEdicionModificado = loModificado = true;
                     }
 
-                    // Obtener tamaño de la IMAGEN seleccionada
-                    int loTamanioImagen = ((FileUpload)loItem.Controls[21]).PostedFile.ContentLength;
+                    //// Obtener tamaño de la IMAGEN seleccionada
+                    //int loTamanioImagen = ((FileUpload)loItem.Controls[21]).PostedFile.ContentLength;
                     // Para grabar la IMAGEN se verifica que esté seleccionada
-                    if (loTamanioImagen > 0)
-                    {
-                        // Obtener tamaño de la IMAGEN en byte
-                        byte[] loImagenOriginal = new byte[loTamanioImagen];
+                    //if (loTamanioImagen > 0)
+                    //{
+                    //    // Obtener tamaño de la IMAGEN en byte
+                    //    byte[] loImagenOriginal = new byte[loTamanioImagen];
 
-                        //// Asociar byte a IMAGEN
-                        ((FileUpload)loItem.Controls[21]).PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
+                    //    //// Asociar byte a IMAGEN
+                    //    ((FileUpload)loItem.Controls[21]).PostedFile.InputStream.Read(loImagenOriginal, 0, loTamanioImagen);
 
-                        oImagen = new Imagen();
-                        oImagen.IMAGEN1 = loImagenOriginal;
-                        oProductoEdicion.Imagen = oImagen;
-                        loProductoEdicionModificado = loModificado = true;
-                    }
-                    else if (((CheckBox)loItem.Controls[23]).Checked && oProductoEdicion.COD_IMAGEN != null)
-                    {
-                        oProductoEdicion.COD_IMAGEN = null;
-                        loProductoEdicionModificado = loModificado = true;
-                    }
+                    //    oImagen = new Imagen();
+                    //    oImagen.IMAGEN1 = loImagenOriginal;
+                    //    oProductoEdicion.Imagen = oImagen;
+                    //    loProductoEdicionModificado = loModificado = true;
+                    //}
+                    //else if (((CheckBox)loItem.Controls[23]).Checked && oProductoEdicion.COD_IMAGEN != null)
+                    //{
+                    //    oProductoEdicion.COD_IMAGEN = null;
+                    //    loProductoEdicionModificado = loModificado = true;
+                    //}
 
                     if (loProductoEdicionModificado)
                     {
-                        loResutado = new BLL.ProductoEdicionBLL().ModificarProductoEdicion(oProductoEdicion);
+                        loResutado = new ProductoEdicionBLL().ModificarProductoEdicion(oProductoEdicion);
                         if (loResutado == false)
                             return loResutado;
                     }

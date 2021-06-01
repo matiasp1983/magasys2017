@@ -354,7 +354,6 @@
                                                 <th data-hide="all">Precio</th>
                                                 <th data-hide="all">Cantidad</th>
                                                 <th data-hide="all">Fecha Devoluci&oacute;n</th>
-                                                <th data-hide="all">Imagen</th>
                                                 <th data-hide="all"></th>
                                             </tr>
                                         </thead>
@@ -410,9 +409,6 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <div style="width: 100%">
-                                                <asp:FileUpload ID="fuploadImagen" runat="server" CssClass="form-control" />
-                                            </div>
                                         </td>                                        
                                     </tr>
                                 </ItemTemplate>
