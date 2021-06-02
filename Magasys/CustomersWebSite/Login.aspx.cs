@@ -61,7 +61,8 @@ namespace PL.CustomersWebSite
             };
 
             var oUsuarioLoguin = new LoginBLL().IniciarSessionCustomersWebSite(oUsuario);
-            loResultado = new ClienteBLL().ObtenerClientePorUsuario(oUsuarioLoguin.ID_USUARIO) != null;
+            if (oUsuarioLoguin != null)
+                loResultado = new ClienteBLL().ObtenerClientePorUsuario(oUsuarioLoguin.ID_USUARIO) != null;
 
             return loResultado;
         }
