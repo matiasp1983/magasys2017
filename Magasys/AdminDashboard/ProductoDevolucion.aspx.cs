@@ -107,23 +107,29 @@ namespace PL.AdminDashboard
 
                 foreach (var loItem in lsvDevolucion.Items)
                 {
-                    if (((Label)loItem.Controls[1]).Text.ToString() == loCodigoProducto && ((Label)loItem.Controls[7]).Text.ToString() == loEdicion)
+                    if (((Label)loItem.Controls[7]).Text.ToString() == loCodigoProducto && ((Label)loItem.Controls[3]).Text.ToString() == loEdicion)
                     {
                         if (!String.IsNullOrEmpty(((TextBox)loItem.Controls[17]).Text.ToString()))
                         {
                             if (Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString()) > 0 && Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString()) <= Convert.ToInt32(((Label)loItem.Controls[13]).Text.ToString()) + Convert.ToInt32(((Label)loItem.Controls[15]).Text.ToString())) //"Cantidad" debe ser mayor a 0 y, menor o igual al "Sotck + Reservas Confirmadas".
                             {
+
+                                var oProducto = new ProductoBLL().ObtenerProductoPorCodigo(Convert.ToInt32(((Label)loItem.Controls[7]).Text.ToString()));
+
                                 DetalleDevolucion oDetalleDevolucion = new DetalleDevolucion
                                 {
-                                    COD_PRODUCTO = Convert.ToInt32(((Label)loItem.Controls[1]).Text.ToString()),
+                                    COD_PRODUCTO = Convert.ToInt32(((Label)loItem.Controls[7]).Text.ToString()),
                                     COD_PRODUCTO_EDICION = Convert.ToInt32(((Label)loItem.Controls[21]).Text.ToString()),
-                                    NOMBRE = ((Label)loItem.Controls[3]).Text.ToString(),
+                                    NOMBRE = ((Label)loItem.Controls[1]).Text.ToString(),
                                     TIPO_PRODUCTO = ((Label)loItem.Controls[5]).Text.ToString(),
-                                    EDICION = ((Label)loItem.Controls[7]).Text.ToString(),
+                                    EDICION = ((Label)loItem.Controls[3]).Text.ToString(),
                                     STOCK = Convert.ToInt32(((Label)loItem.Controls[13]).Text.ToString()),
                                     CANTIDAD = Convert.ToInt32(((TextBox)loItem.Controls[17]).Text.ToString()),
                                     CANTIDAD_RESERVAS = Convert.ToInt32(((Label)loItem.Controls[15]).Text.ToString())
                                 };
+
+                                if (oProducto.COD_TIPO_PRODUCTO == 1)
+                                    oDetalleDevolucion.NOMBRE = oProducto.NOMBRE + " - " + oProducto.DESCRIPCION;
 
                                 Session.Add(Enums.Session.DevolucionProducto.ToString(), oDetalleDevolucion);
                                 Response.Redirect("RegistrarReservadasConfirmadas.aspx", false);

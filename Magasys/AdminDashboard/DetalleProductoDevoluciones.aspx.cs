@@ -54,6 +54,9 @@ namespace PL.AdminDashboard
                                 CANTIDAD = loDetalleProductoDevolucion.CANTIDAD
                             };
 
+                            if (loDetalleProductoDevolucion.ProductoEdicion.Producto.COD_TIPO_PRODUCTO == 1)
+                                oDetalleProductoDevolucionListado.NOMBRE_PRODUCTO = loDetalleProductoDevolucion.ProductoEdicion.Producto.NOMBRE + " - " + loDetalleProductoDevolucion.ProductoEdicion.Producto.DESCRIPCION;
+
                             lstDetalleProductoDevolucionListado.Add(oDetalleProductoDevolucionListado);
                         }
 

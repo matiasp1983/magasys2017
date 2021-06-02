@@ -56,11 +56,11 @@
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                         <thead>
                                             <tr>
-                                                <th class="text-left">C&oacute;digo</th>
-                                                <th>C&oacute;digo Edici&oacute;n</th>
-                                                <th>Edici&oacute;n</th>
-                                                <th data-hide="phone,tablet">Tipo de Producto</th> 
-                                                <th data-hide="phone,tablet">Nombre del Producto</th> 
+                                                <th class="text-left">Código</th>
+                                                <th>Código edición</th>
+                                                <th>Edición</th>
+                                                <th data-hide="phone,tablet">Tipo producto</th> 
+                                                <th data-hide="phone,tablet">Producto</th> 
                                                 <th data-hide="phone,tablet">Cantidad</th> 
                                             </tr>
                                         </thead>

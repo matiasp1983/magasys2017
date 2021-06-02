@@ -88,8 +88,8 @@
                                         <thead>
                                             <tr>
                                                 <th class="text-left">Código</th>
-                                                <th data-hide="phone,tablet">Fecha de Devolución</th>      
-                                                <th class="text-right" data-sort-ignore="true">Acci&oacute;n</th>
+                                                <th>Fecha de devolución</th>      
+                                                <th class="text-right" data-sort-ignore="true">Acción</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -115,39 +115,12 @@
                                         <td class="text-right">
                                             <div class="btn-group">
                                                 <button runat="server" id="btnVisualizar" class="btn btn-outline btn-success btn-xl" title="Visualizar" onserverclick="BtnVisualizar_Click"><i class="fa fa-search"></i></button>
-<%--                                                <a class="btn btn-outline btn-danger btn-xl" data-toggle="modal" data-target="#ModalDevolucionAnular" title="Eliminar" onclick="CargarIdDevolucionAnular(this);"><i class="fa fa-trash-o"></i>
-                                                    <asp:HiddenField ID="hdIdDevolucion" runat="server" />
-                                                </a>  --%>
                                             </div>
                                         </td>
                                     </tr>
                                 </ItemTemplate>
                             </asp:ListView>
-                            <div id="dvMensajeLsvDevoluciones" runat="server" />                           
-<%--                            <div id="ModalDevolucionAnular" class="modal" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
-                                <div class="modal-dialog">
-                                    <div class="modal-content animated bounce">
-                                        <div class="modal-body">
-                                            <div style="display: block; width: 80px; height: 80px; border: 4px solid gray; border-radius: 50%; margin: 20px auto; padding: 0; position: relative; box-sizing: content-box; border-color: #F8BB86;">
-                                                <span style="position: absolute; width: 5px; height: 47px; left: 50%; top: 10px; -webkit-border-radius: 2px; border-radius: 2px; margin-left: -2px; background-color: #F8BB86;"></span>
-                                                <span style="position: absolute; width: 7px; height: 7px; -webkit-border-radius: 50%; border-radius: 50%; margin-left: -3px; left: 50%; bottom: 10px; background-color: #F8BB86;"></span>
-                                            </div>
-                                            <h2 style="color: #575757; font-size: 30px; text-align: center; font-weight: 600; text-transform: none; position: relative; margin: 25px 0; padding: 0; line-height: 40px; display: block;">¿Está seguro que quiere anular la Devolución?</h2>
-                                            <p style="color: #797979; font-size: 16px; font-weight: 300; position: relative; text-align: center; float: none; margin: 0; padding: 0; line-height: normal;">
-                                           
-                                            </p>
-                                        </div>
-                                        <div class="modal-footer" style="text-align: center; padding-top: 0px;">
-                                            <asp:Button ID="btnCancelar" runat="server" CssClass="btn btn-default" Text="Cancelar"
-                                                Style="background-color: #D0D0D0; color: white; border: none; box-shadow: none; font-size: 17px; font-weight: 500; border-radius: 5px; padding: 10px 32px; margin: 26px 5px 0 5px; cursor: pointer;"
-                                                data-dismiss="modal" />
-                                            <asp:Button ID="btnAnular" runat="server" CssClass="btn btn-danger" Text="Aceptar" Style="display: inline-block; box-shadow: rgba(221, 107, 85, 0.8) 0px 0px 2px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px inset; color: white; border: none; box-shadow: none; font-size: 17px; font-weight: 500; -webkit-border-radius: 4px; border-radius: 5px; padding: 10px 32px; margin: 26px 5px 0 5px; cursor: pointer; background-color: #DD6B55"
-                                                OnClick="BtnAnular_Click" />
-                                        </div>
-                                    </div>
-                                    <asp:HiddenField ID="hdIdDevolucionAnular" runat="server" Value="" />
-                                </div>
-                            </div> --%>   
+                            <div id="dvMensajeLsvDevoluciones" runat="server" />                             
                         </div>
                     </div>
                 </div>
@@ -157,7 +130,6 @@
 </asp:Content>
 <asp:Content ID="Content3" ContentPlaceHolderID="script" runat="server">
     <script type="text/javascript">
-        <%--var hdIdDevolucionAnular = '#<%=hdIdDevolucionAnular.ClientID%>';--%>
     </script>
     <script type="text/javascript">
         var FormProductoDevolucionListado = '#<%=FormProductoDevolucionListado.ClientID%>';
