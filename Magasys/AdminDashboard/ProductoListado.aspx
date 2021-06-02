@@ -103,9 +103,10 @@
                                             <tr>                                                                                               
                                                 <th class="text-left">Tipo de Producto</th>
                                                 <th class="text-left">Nombre</th>
+                                                <th>Descripción</th>
                                                 <th data-hide="phone,tablet">Código</th>
                                                 <th data-hide="phone,tablet">Estado</th>
-                                                <th class="text-left">Género</th>
+                                                <th data-hide="phone,tablet">Género</th>
                                                 <th data-hide="phone,tablet">Proveedor</th>
                                                 <th class="text-right" data-sort-ignore="true">Acci&oacute;n</th>
                                             </tr>
@@ -129,6 +130,9 @@
                                         </td>
                                         <td>
                                             <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE").ToString().Length > 23 ? String.Format("{0}...", Eval("NOMBRE").ToString().Remove(23).TrimEnd()):Eval("NOMBRE")%>'></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label ID="lblDescripcion" runat="server" Text='<%#(Eval("DESCRIPCION") != null) ? Eval("DESCRIPCION").ToString().Length > 25 ? String.Format("{0}...", Eval("DESCRIPCION").ToString().Remove(25).TrimEnd()):Eval("DESCRIPCION"):null%>'></asp:Label>
                                         </td>
                                         <td class="text-left">
                                             <asp:Label ID="lblCodigo" runat="server" Text='<%#Eval("ID_PRODUCTO").ToString()%>'></asp:Label>

@@ -52,6 +52,9 @@ namespace BLL
                             COD_TIPO_PRODUCTO = loProducto.COD_TIPO_PRODUCTO
                         };
 
+                        if (loProducto.DESCRIPCION != null)
+                            oProductoListado.DESCRIPCION = loProducto.DESCRIPCION;
+
                         using (var loRepEstadoProducto = new Repository<Estado>())
                             oProductoListado.DESC_ESTADO = loRepEstadoProducto.Find(p => p.ID_ESTADO == loProducto.COD_ESTADO).NOMBRE;
 

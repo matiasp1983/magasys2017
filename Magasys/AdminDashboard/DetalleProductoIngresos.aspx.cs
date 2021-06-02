@@ -90,7 +90,7 @@ namespace PL.AdminDashboard
                                     oDiarioEdicion = new DiarioEdicion
                                     {
                                         COD_PRODUCTO = oProductoEdicion.COD_PRODUCTO,
-                                        NOMBRE = loNombre,
+                                        NOMBRE = loNombre + " - " + oProductoEdicion.Producto.DESCRIPCION,
                                         EDICION = oProductoEdicion.EDICION,
                                         FECHA_EDICION = Convert.ToDateTime(oProductoEdicion.FECHA_EDICION),
                                         PRECIO = "$" + oProductoEdicion.PRECIO.ToString(),
@@ -98,14 +98,14 @@ namespace PL.AdminDashboard
                                     };
                                     if (loDetalleProductoIngreso.FECHA_DEVOLUCION != null)
                                         oDiarioEdicion.FECHA_DEVOLUCION = Convert.ToDateTime(loDetalleProductoIngreso.FECHA_DEVOLUCION);
-                                    if (oProductoEdicion.Imagen != null)
-                                    {
-                                        oDiarioEdicion.IMAGEN = new System.Web.UI.WebControls.Image();
+                                    //if (oProductoEdicion.Imagen != null)
+                                    //{
+                                    //    oDiarioEdicion.IMAGEN = new System.Web.UI.WebControls.Image();
 
-                                        // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
-                                        string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProductoEdicion.Imagen.IMAGEN1);
-                                        oDiarioEdicion.IMAGEN.ImageUrl = loImagenDataURL64;                                        
-                                    }
+                                    //    // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
+                                    //    string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProductoEdicion.Imagen.IMAGEN1);
+                                    //    oDiarioEdicion.IMAGEN.ImageUrl = loImagenDataURL64;                                        
+                                    //}
 
                                     break;
 
@@ -130,7 +130,7 @@ namespace PL.AdminDashboard
 
                                         // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
                                         string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProductoEdicion.Imagen.IMAGEN1);
-                                        oRevistaEdicion.IMAGEN.ImageUrl = loImagenDataURL64;                                        
+                                        oRevistaEdicion.IMAGEN.ImageUrl = loImagenDataURL64;
                                     }
 
                                     break;
@@ -156,7 +156,7 @@ namespace PL.AdminDashboard
 
                                         // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
                                         string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProductoEdicion.Imagen.IMAGEN1);
-                                        oColeccionEdicion.IMAGEN.ImageUrl = loImagenDataURL64;                                        
+                                        oColeccionEdicion.IMAGEN.ImageUrl = loImagenDataURL64;
                                     }
 
                                     break;
@@ -213,7 +213,7 @@ namespace PL.AdminDashboard
 
                                         // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
                                         string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProductoEdicion.Imagen.IMAGEN1);
-                                        oSuplementoEdicion.IMAGEN.ImageUrl = loImagenDataURL64;                                        
+                                        oSuplementoEdicion.IMAGEN.ImageUrl = loImagenDataURL64;
                                     }
 
                                     break;
@@ -242,7 +242,7 @@ namespace PL.AdminDashboard
 
                                         // Covertir la iamgen a un base 64 para mostrarlo en un dato binario
                                         string loImagenDataURL64 = "data:image/jpg;base64," + Convert.ToBase64String(oProductoEdicion.Imagen.IMAGEN1);
-                                        oPeliculaEdicion.IMAGEN.ImageUrl = loImagenDataURL64;                                        
+                                        oPeliculaEdicion.IMAGEN.ImageUrl = loImagenDataURL64;
                                     }
 
                                     break;

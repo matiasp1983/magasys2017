@@ -38,11 +38,7 @@
                                                 <th data-hide="phone,tablet">Fecha edición</th>
                                                 <th data-hide="all">Precio</th>
                                                 <th data-hide="all">Cantidad</th>
-                                                <th data-hide="all">Fecha devolución</th>
-                                                <th data-hide="all">Imagen</th>
-                                                <th data-hide="all"></th>
-                                                <th data-hide="all"></th>                                             
-                                                <th data-hide="all">Eliminar imagen</th>    
+                                                <th data-hide="all">Fecha devolución</th>  
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -95,26 +91,6 @@
                                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                                     <asp:TextBox ID="txtFechaDevolucion" runat="server" CssClass="form-control" MaxLength="10" autocomplete="off" Text='<%#(Eval("FECHA_DEVOLUCION") != null) ? Convert.ToDateTime(Eval("FECHA_DEVOLUCION")).ToString("dd/MM/yyyy"):null%>'></asp:TextBox>
                                                 </div>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div style="width: 100%">
-                                                <img src="<%#Eval("IMAGEN.ImageUrl")%>" style="width:200px"/>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div style="width: 100%">
-                                                <asp:Label ID="lblTitulo" runat="server" Text='<%#(Eval("TITULO") != null) ? Eval("TITULO").ToString().Length > 50 ? String.Format("{0}...", Eval("TITULO").ToString().Remove(50).TrimEnd()):Eval("TITULO"):null%>'></asp:Label>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div style="width: 100%">
-                                                <asp:FileUpload ID="fuploadImagen" accept=".jpg" runat="server" CssClass="form-control" />
-                                            </div>
-                                        </td>                                       
-                                        <td>                                            
-                                            <div style="width: 100%">                                               
-                                                <asp:CheckBox ID="chkEliminar" runat="server" class="i-checks" />
                                             </div>
                                         </td>
                                     </tr>
