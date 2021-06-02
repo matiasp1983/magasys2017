@@ -129,7 +129,7 @@
                                             <asp:Label ID="lblTipoProducto" runat="server" Text='<%#Eval("DESC_TIPO_PRODUCTO").ToString()%>'></asp:Label>
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE").ToString().Length > 23 ? String.Format("{0}...", Eval("NOMBRE").ToString().Remove(23).TrimEnd()):Eval("NOMBRE")%>'></asp:Label>
+                                            <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE").ToString().Length > 32 ? String.Format("{0}...", Eval("NOMBRE").ToString().Remove(32).TrimEnd()):Eval("NOMBRE")%>'></asp:Label>
                                         </td>
                                         <td>
                                             <asp:Label ID="lblDescripcion" runat="server" Text='<%#(Eval("DESCRIPCION") != null) ? Eval("DESCRIPCION").ToString().Length > 25 ? String.Format("{0}...", Eval("DESCRIPCION").ToString().Remove(25).TrimEnd()):Eval("DESCRIPCION"):null%>'></asp:Label>
