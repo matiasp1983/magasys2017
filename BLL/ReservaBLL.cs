@@ -318,6 +318,9 @@ namespace BLL
                             NOMBRE_PRODUCTO = loReserva.Producto.NOMBRE
                         };
 
+                        if (loReserva.Producto.COD_TIPO_PRODUCTO == 1)
+                            oReservaListado.NOMBRE_PRODUCTO = loReserva.Producto.NOMBRE + " - " + loReserva.Producto.DESCRIPCION;
+
                         oReservaListado.ESTADO = loReserva.Estado.NOMBRE;
 
                         if (loReserva.FECHA_INICIO != null)
@@ -367,7 +370,7 @@ namespace BLL
                                 var oReservaEdicion = loRepReservaEdicion.Find(p => p.COD_RESERVA == loReserva.ID_RESERVA && p.ProductoEdicion.COD_PRODUCTO == loReserva.COD_PRODUCTO && p.ProductoEdicion.EDICION == oReservaFiltro.EDICION);
                                 if (oReservaEdicion != null && oReservaEdicion.COD_ESTADO != 18)
                                     //if ((oReservaEdicion != null && oReservaEdicion.COD_ESTADO != 18) && !(oReservaEdicion != null && loReserva.COD_TIPO_RESERVA == 1 && oReservaEdicion.COD_ESTADO == 10))
-                                        continue;
+                                    continue;
                             }
 
                             ReservaListado oReservaListado = new ReservaListado

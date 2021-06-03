@@ -118,13 +118,13 @@
                                                 <thead>
                                                     <tr>
                                                         <th>Código</th>
-                                                        <th>Fecha de solicitud</th>
-                                                        <th data-hide="phone,tablet" >Producto</th>
+                                                        <th>Fecha solicitud</th>
+                                                        <th >Producto</th>
                                                         <th>Estado</th>
-                                                        <th>Tipo de Reserva</th>
-                                                        <th data-hide="phone">Forma de Entrega</th>
-                                                        <th data-hide="phone,tablet" >Inicio de Reserva</th>
-                                                        <th data-hide="phone,tablet" >Fin de Reserva</th>
+                                                        <th data-hide="phone">Tipo reserva</th>
+                                                        <th data-hide="phone">Forma entrega</th>
+                                                        <th data-hide="phone,tablet" >Inicio reserva</th>
+                                                        <th data-hide="phone,tablet" >Fin reserva</th>
                                                         <th class="text-right">Acción</th>
                                                     </tr>
                                                 </thead>
@@ -149,7 +149,7 @@
                                                     <asp:Label ID="lblFechaAlta" runat="server" Text='<%#Convert.ToDateTime(Eval("FECHA")).ToString("dd/MM/yyyy")%>'></asp:Label>
                                                 </td>
                                                 <td class="text-left">
-                                                    <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE_PRODUCTO").ToString().Length > 21 ? String.Format("{0}...", Eval("NOMBRE_PRODUCTO").ToString().Remove(21).TrimEnd()):Eval("NOMBRE_PRODUCTO")%>'></asp:Label>
+                                                    <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE_PRODUCTO").ToString().Length > 33 ? String.Format("{0}...", Eval("NOMBRE_PRODUCTO").ToString().Remove(33).TrimEnd()):Eval("NOMBRE_PRODUCTO")%>'></asp:Label>
                                                 </td>  
                                                 <td class="text-left">
                                                     <asp:Label ID="lblEstado" runat="server" Text='<%#Eval("ESTADO").ToString()%>'></asp:Label>
