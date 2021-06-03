@@ -273,7 +273,7 @@ namespace BLL
                             case 5:
                                 foreach (var item in loProduto.Suplemento)
                                 {
-                                    oProductoCustomersWebSite.NOMBRE_DIARIO = "Diario: " + item.DiarioDiaSemana.Producto.NOMBRE;
+                                    oProductoCustomersWebSite.NOMBRE_DIARIO = "Diario: " + item.DiarioDiaSemana.Producto.NOMBRE + " - " + item.DiarioDiaSemana.Producto.DESCRIPCION;
                                 }
                                 loExisteProducto = true;
 
