@@ -256,6 +256,9 @@ namespace BLL
                             ESTADO = loReserva.Estado.NOMBRE
                         };
 
+                        if (loReserva.Producto.COD_TIPO_PRODUCTO == 1)
+                            oReservaListado.NOMBRE_PRODUCTO = loReserva.Producto.NOMBRE + " - " + loReserva.Producto.DESCRIPCION;
+
                         if (loReserva.ENVIO_DOMICILIO == null)
                             oReservaListado.FORMA_ENTREGA = "Retira en Local";
                         else

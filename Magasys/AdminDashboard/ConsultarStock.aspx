@@ -101,10 +101,10 @@
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                         <thead>
                                             <tr>
-                                                <th class="text-left">Código Producto</th>
-                                                <th class="text-left">Tipo Producto</th>
+                                                <th class="text-left">Cód. producto</th>
+                                                <th class="text-left">Tipo producto</th>
                                                 <th class="text-left">Producto</th>
-                                                <th data-hide="phone,tablet">Descripción Producto</th>
+                                                <th data-hide="phone,tablet">Descripción</th>
                                                 <th data-hide="phone,tablet">Edición</th>
                                                 <th data-hide="phone,tablet">Cantidad</th>
                                             </tr>
@@ -130,7 +130,7 @@
                                             <asp:Label ID="lblTipoProducto" runat="server" Text='<%#Eval("TIPO_PRODUCTO").ToString()%>'></asp:Label>
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblNombreProducto" runat="server" Text='<%#(Eval("NOMBRE_PRODUCTO") != null) ? Eval("NOMBRE_PRODUCTO").ToString().Length > 30 ? String.Format("{0}...", Eval("NOMBRE_PRODUCTO").ToString().Remove(30).TrimEnd()):Eval("NOMBRE_PRODUCTO"):null%>'></asp:Label>
+                                            <asp:Label ID="lblNombreProducto" runat="server" Text='<%#(Eval("NOMBRE_PRODUCTO") != null) ? Eval("NOMBRE_PRODUCTO").ToString().Length > 33 ? String.Format("{0}...", Eval("NOMBRE_PRODUCTO").ToString().Remove(33).TrimEnd()):Eval("NOMBRE_PRODUCTO"):null%>'></asp:Label>
                                         </td>
                                         <td>
                                             <asp:Label ID="lblDescripcionProducto" runat="server" Text='<%#(Eval("DESCRIPCION") != null) ? Eval("DESCRIPCION").ToString().Length > 35 ? String.Format("{0}...", Eval("DESCRIPCION").ToString().Remove(35).TrimEnd()):Eval("DESCRIPCION"):null%>'></asp:Label>

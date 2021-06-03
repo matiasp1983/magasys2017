@@ -112,11 +112,11 @@
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
                                         <thead>
                                             <tr>
-                                                <th>C&oacute;digo Venta</th>
-                                                <th class="text-left">Fecha Venta</th>
-                                                <th data-hide="phone,tablet">Forma de Pago</th>
+                                                <th>Cód. venta</th>
+                                                <th class="text-left">Fecha venta</th>
+                                                <th data-hide="phone,tablet">Forma de pago</th>
                                                 <th data-hide="phone,tablet">Subtotal</th>
-                                                <th data-hide="phone,tablet">Detalle de Venta</th>
+                                                <th>Detalle</th>
                                             </tr>
                                         </thead>
                                         <tbody>

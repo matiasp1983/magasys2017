@@ -139,9 +139,11 @@
                                 </a>
                             </div>
                             <br />
+                            <input type="text" class="form-control input-sm m-b-xs" id="filter"
+                                    placeholder="Buscar ...">
                             <asp:ListView ID="lsvReservas" runat="server" Visible="true">
                                 <LayoutTemplate>
-                                    <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
+                                    <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15" data-filter=#filter>
                                         <thead>
                                             <tr>                                                    
                                                 <td>                                                        
@@ -150,7 +152,7 @@
                                                 <th class="text-left">Reserva</th>    
                                                 <th data-hide="phone,tablet">Cliente</th>
                                                 <th class="text-left">Producto</th>
-                                                <th data-hide="phone,tablet">Tipo de Reserva</th>
+                                                <th data-hide="phone,tablet">Tipo de reserva</th>
                                                 <th data-hide="phone,tablet">Estado</th>
                                             </tr>
                                         </thead>

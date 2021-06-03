@@ -184,13 +184,13 @@
                                         <thead>
                                             <tr>
                                                 <th class="text-left">Reserva</th>
-                                                <th data-hide="phone,tablet">Código de Cliente</th>
-                                                <th class="text-left">Nombre del Cliente</th>
+                                                <th data-hide="phone,tablet">Cód. de cliente</th>
+                                                <th class="text-left">Cliente</th>
                                                 <th class="text-left">Producto</th>
-                                                <th data-hide="phone,tablet">Tipo de Producto</th>
-                                                <th data-hide="phone,tablet">Tipo de Reserva</th>
-                                                 <th data-hide="phone,tablet">Forma de Entrega</th>
-                                                <th class="text-right" data-sort-ignore="true">Acci&oacute;n</th>
+                                                <th data-hide="phone,tablet">Tipo producto</th>
+                                                <th data-hide="phone,tablet">Tipo reserva</th>
+                                                 <th data-hide="phone,tablet">Forma de entrega</th>
+                                                <th class="text-right" data-sort-ignore="true">Acción</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -217,7 +217,7 @@
                                             <asp:Label ID="lblNombreCliente" runat="server" Text='<%#Eval("NOMBRE_CLIENTE").ToString()%>'></asp:Label>
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE_PRODUCTO").ToString().Length > 23 ? String.Format("{0}...", Eval("NOMBRE_PRODUCTO").ToString().Remove(23).TrimEnd()):Eval("NOMBRE_PRODUCTO")%>'></asp:Label>
+                                            <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE_PRODUCTO").ToString().Length > 33 ? String.Format("{0}...", Eval("NOMBRE_PRODUCTO").ToString().Remove(33).TrimEnd()):Eval("NOMBRE_PRODUCTO")%>'></asp:Label>
                                         </td>     
                                         <td class="text-left">
                                             <asp:Label ID="lblTipoProducto" runat="server" Text='<%#Eval("TIPO_PRODUCTO").ToString()%>'></asp:Label>

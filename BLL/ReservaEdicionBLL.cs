@@ -195,10 +195,13 @@ namespace BLL
                                                 EDICION = loReservaEdicion.ProductoEdicion.EDICION,
                                                 NOMBRE_EDICION = loReservaEdicion.ProductoEdicion.NOMBRE,
                                                 DESC_EDICION = loReservaEdicion.ProductoEdicion.DESCRIPCION,
-                                                PRECIO_EDICION = loReservaEdicion.ProductoEdicion.PRECIO.ToString()
+                                                PRECIO_EDICION = loReservaEdicion.ProductoEdicion.PRECIO.ToString(),
+                                                NOMBRE_PRODUCTO = loReservaEdicion.ProductoEdicion.Producto.NOMBRE
                                             };
-                                            //ProductoEdicion oProductoEdicion = new BLL.ProductoEdicionBLL().ObtenerEdicion(Convert.ToInt32(oReservaListado.COD_EDICION));
-                                            oReservaListado.NOMBRE_PRODUCTO = loReservaEdicion.ProductoEdicion.Producto.NOMBRE;
+
+                                            if (loReservaEdicion.ProductoEdicion.Producto.COD_TIPO_PRODUCTO == 1)
+                                                oReservaListado.NOMBRE_PRODUCTO = loReservaEdicion.ProductoEdicion.Producto.NOMBRE + " - " + loReservaEdicion.ProductoEdicion.Producto.DESCRIPCION;
+
                                             if (loReservaEdicion.Reserva.ENVIO_DOMICILIO == null)
                                                 oReservaListado.FORMA_ENTREGA = "Retira en Local";
                                             else
@@ -527,6 +530,9 @@ namespace BLL
                                 ID_RESERVA_EDICION = oReservaEdicion.ID_RESERVA_EDICION,
                                 COD_CLIENTE = oReservaEdicion.Reserva.COD_CLIENTE
                             };
+
+                            if (oReservaEdicion.ProductoEdicion.Producto.COD_TIPO_PRODUCTO == 1)
+                                oReservaEdicionListado.NOMBRE_PRODUCTO = oReservaEdicion.ProductoEdicion.Producto.NOMBRE + " - " + oReservaEdicion.ProductoEdicion.Producto.DESCRIPCION;
 
                             lstListReservaEdicionListado.Add(oReservaEdicionListado);
                         }

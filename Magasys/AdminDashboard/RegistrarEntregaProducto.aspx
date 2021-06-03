@@ -85,65 +85,67 @@
                     <div class="col-lg-12">
                         <div class="ibox">
                             <div class="ibox-content">    
-                            <div style="text-align: right;">
-                                <button type="button" id="btnEjecutar" runat="server" class="ladda-button btn btn-info" onserverclick="BtnGuardarEntrega_Click">
-                                    <i class="fas fa-clock"></i>&nbsp;&nbsp;<span>Ejecutar</span>
-                                </button>
-                            </div>
-                            <br />                                
+                                <div style="text-align: right;">
+                                    <button type="button" id="btnEjecutar" runat="server" class="ladda-button btn btn-info" onserverclick="BtnGuardarEntrega_Click">
+                                        <i class="fas fa-clock"></i>&nbsp;&nbsp;<span>Ejecutar</span>
+                                    </button>
+                                </div>
+                                <br />  
+                                <input type="text" class="form-control input-sm m-b-xs" id="filter"
+                                        placeholder="Buscar ...">                                
                                 <asp:ListView ID="lsvReservas" runat="server" OnItemDataBound="LsvReservas_ItemDataBound">
-                                    <LayoutTemplate>
-                                        <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
-                                            <thead>
-                                                <tr>
-                                                    <td>                                                        
-                                                        <button id="check-all" class="btn btn-sm btn-primary pull-left m-t-n-xs">Seleccionar todo</button>
-                                                    </td>
-                                                    <th class="text-left">Código de Reserva</th>
-                                                    <th class="text-left">Producto</th>
-                                                    <th data-hide="phone,tablet">Edición</th>
-                                                    <th data-hide="phone,tablet">Forma de Entrega</th>
-                                                    <th data-hide="phone,tablet">Precio</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr id="itemPlaceholder" runat="server"></tr>
-                                            </tbody>
-                                            <tfoot>
-                                                <tr>
-                                                    <td colspan="8">
-                                                        <ul class="pagination pull-right"></ul>
-                                                    </td>
-                                                </tr>
-                                            </tfoot>
-                                        </table>
-                                    </LayoutTemplate>
-                                    <ItemTemplate>
-                                        <tr>
-                                            <td>                                                
-                                                <input id="chkCodigoReserva" runat="server" class="i-checks" type="checkbox" title='<%#string.Format("{0}", Eval("PRECIO_EDICION").ToString())%>' />
-                                            </td>
-                                            <td class="text-left">
-                                                <asp:Label ID="lblCodigoReserva" runat="server" Text='<%#Eval("COD_RESERVA").ToString()%>'></asp:Label>
-                                            </td>
-                                            <td>
-                                                <asp:Label ID="lblNombreProducto" runat="server" Text='<%#(Eval("NOMBRE_PRODUCTO") != null) ? Eval("NOMBRE_PRODUCTO"):null%>'></asp:Label>
-                                            </td>
-                                            <td class="text-left">
-                                                <asp:Label ID="lblDescripcionEdicion" runat="server" Text='<%#(Eval("EDICION") != null) ? Eval("EDICION"):null%>'></asp:Label>
-                                            </td>
-                                            <td class="text-left">
-                                                <asp:Label ID="Label1" runat="server" Text='<%#Eval("FORMA_ENTREGA").ToString()%>'></asp:Label>
-                                            </td>
-                                            <td class="text-left">
-                                                <asp:Label ID="lblPrecio" runat="server" Text='<%#Eval("PRECIO_EDICION").ToString()%>'></asp:Label>
-                                            </td>
-                                            <td class="text-left">
-                                                <asp:Label ID="Label2" runat="server" Text='<%#Eval("ID_RESERVA_EDICION").ToString()%>' Visible ="false"></asp:Label>
-                                            </td>
-                                        </tr>
-                                    </ItemTemplate>
-                                </asp:ListView>    
+                                <LayoutTemplate>
+                                    <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15" data-filter=#filter>
+                                        <thead>
+                                            <tr>
+                                                <td>                                                        
+                                                    <button id="check-all" class="btn btn-sm btn-primary pull-left m-t-n-xs">Seleccionar todo</button>
+                                                </td>
+                                                <th class="text-left">Cód. de reserva</th>
+                                                <th class="text-left">Producto</th>
+                                                <th data-hide="phone,tablet">Edición</th>
+                                                <th data-hide="phone,tablet">Forma de entrega</th>
+                                                <th data-hide="phone,tablet">Precio</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr id="itemPlaceholder" runat="server"></tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="8">
+                                                    <ul class="pagination pull-right"></ul>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </LayoutTemplate>
+                                <ItemTemplate>
+                                    <tr>
+                                        <td>                                                
+                                            <input id="chkCodigoReserva" runat="server" class="i-checks" type="checkbox" title='<%#string.Format("{0}", Eval("PRECIO_EDICION").ToString())%>' />
+                                        </td>
+                                        <td class="text-left">
+                                            <asp:Label ID="lblCodigoReserva" runat="server" Text='<%#Eval("COD_RESERVA").ToString()%>'></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label ID="lblNombreProducto" runat="server" Text='<%#(Eval("NOMBRE_PRODUCTO") != null) ? Eval("NOMBRE_PRODUCTO"):null%>'></asp:Label>
+                                        </td>
+                                        <td class="text-left">
+                                            <asp:Label ID="lblDescripcionEdicion" runat="server" Text='<%#(Eval("EDICION") != null) ? Eval("EDICION"):null%>'></asp:Label>
+                                        </td>
+                                        <td class="text-left">
+                                            <asp:Label ID="Label1" runat="server" Text='<%#Eval("FORMA_ENTREGA").ToString()%>'></asp:Label>
+                                        </td>
+                                        <td class="text-left">
+                                            <asp:Label ID="lblPrecio" runat="server" Text='<%#Eval("PRECIO_EDICION").ToString()%>'></asp:Label>
+                                        </td>
+                                        <td class="text-left">
+                                            <asp:Label ID="Label2" runat="server" Text='<%#Eval("ID_RESERVA_EDICION").ToString()%>' Visible ="false"></asp:Label>
+                                        </td>
+                                    </tr>
+                                </ItemTemplate>
+                            </asp:ListView>    
                                 <asp:HiddenField ID="hfCodigoReserva" runat="server"/>                                
                                 <div class="row">
                                     <div class="col-md-4">
@@ -156,7 +158,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <hr />
                             </div>
                         </div>

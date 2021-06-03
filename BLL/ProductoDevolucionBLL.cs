@@ -106,6 +106,9 @@ namespace BLL
                                 CANTIDAD_RESERVAS = loCantidadReservaEdicionPorProdEdicion
                             };
 
+                            if (loDetalleProductoIngreso.ProductoEdicion.Producto.COD_TIPO_PRODUCTO == 1)
+                                oDevolucion.NOMBRE = loDetalleProductoIngreso.ProductoEdicion.Producto.NOMBRE + " - " + loDetalleProductoIngreso.ProductoEdicion.Producto.DESCRIPCION;
+
                             if (loDetalleProductoIngreso.ProductoEdicion.FECHA_EDICION != null)
                                 oDevolucion.FECHA_EDICION = loDetalleProductoIngreso.ProductoEdicion.FECHA_EDICION.ToString();
 

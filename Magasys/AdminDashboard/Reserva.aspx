@@ -27,7 +27,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Código de Reserva</label>
+                                <label class="col-sm-2 control-label">Código</label>
                                 <div class="col-sm-10">
                                     <asp:TextBox ID="txtCodigoReserva" runat="server" CssClass="form-control" Enabled="false" autocomplete="off"></asp:TextBox>
                                 </div>
@@ -35,7 +35,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label class="col-sm-2 control-label">Fecha de Reserva</label>
+                                <label class="col-sm-2 control-label">Fecha</label>
                                 <div class="col-sm-10">
                                     <asp:TextBox ID="txtFechaReserva" runat="server" CssClass="form-control" Enabled="false" autocomplete="off"></asp:TextBox>
                                 </div>
@@ -205,16 +205,18 @@
                         <div class="ibox">
                             <div class="ibox-content">
                                 <br />
+                                <input type="text" class="form-control input-sm m-b-xs" id="filter"
+                                       placeholder="Buscar ...">
                                 <asp:ListView ID="lsvProductos" runat="server" Visible="false">
                                     <LayoutTemplate>
-                                        <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
+                                        <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15" data-filter=#filter>
                                             <thead>
                                                 <tr>
                                                     <td></td>
-                                                    <th class="text-left">C&oacute;digo</th>
-                                                    <th>Nombre</th>
-                                                    <th>Tipo de Producto</th>
-                                                    <th data-hide="phone,tablet">Descripci&oacute;n</th>
+                                                    <th class="text-left">Código</th>
+                                                    <th>Producto</th>
+                                                    <th>Tipo producto</th>
+                                                    <th data-hide="phone,tablet">Descripción</th>
                                                 </tr>
                                             </thead>
                                             <tbody>

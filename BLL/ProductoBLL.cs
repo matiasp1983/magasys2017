@@ -131,6 +131,12 @@ namespace BLL
                         if (!String.IsNullOrEmpty(loProducto.DESCRIPCION))
                             oProductoListado.DESCRIPCION = loProducto.DESCRIPCION;
 
+                        if (loProducto.COD_TIPO_PRODUCTO == 1)
+                        {
+                            oProductoListado.NOMBRE = loProducto.NOMBRE + " - " + loProducto.DESCRIPCION;
+                            oProductoListado.DESCRIPCION = string.Empty;
+                        }
+
                         lstProductoListado.Add(oProductoListado);
                     }
                 }
@@ -382,6 +388,7 @@ namespace BLL
 
                     foreach (var loProducto in lstProducto)
                     {
+                        loProducto.ProductoEdicion = loProducto.ProductoEdicion.OrderByDescending(p => p.ID_PRODUCTO_EDICION).ToList();
                         foreach (var loProductoEdicion in loProducto.ProductoEdicion)
                         {
                             if (!String.IsNullOrEmpty(oProductoFiltro.NombreEdicion) && (!(!string.IsNullOrEmpty(loProductoEdicion.EDICION) && loProductoEdicion.EDICION.ToUpper().Contains(oProductoFiltro.NombreEdicion.ToUpper()))))
@@ -398,6 +405,12 @@ namespace BLL
                                 EDICION = loProductoEdicion.EDICION,
                                 CANTIDAD_DISPONIBLE = loProductoEdicion.CANTIDAD_DISPONIBLE
                             };
+
+                            if (loProducto.COD_TIPO_PRODUCTO == 1)
+                            {
+                                oProductoCustomersWebSite.NOMBRE_PRODUCTO = loProducto.NOMBRE + " - " + loProducto.DESCRIPCION;
+                                oProductoCustomersWebSite.DESCRIPCION = string.Empty;
+                            }
 
                             lstProductoCustomersWebSite.Add(oProductoCustomersWebSite);
                         }

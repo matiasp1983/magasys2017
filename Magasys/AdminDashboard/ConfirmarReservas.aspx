@@ -34,14 +34,14 @@
                                         <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15" data-filter=#filter>
                                             <thead>
                                                 <tr>                                                    
-                                                    <td>                                                        
+                                                    <td class="text-left">                                                        
                                                         <button id="check-all" class="btn btn-sm btn-primary pull-left m-t-n-xs">Seleccionar todo</button>
                                                     </td>
-                                                    <th>Reserva</th>
-                                                    <th>Fecha</th>
+                                                    <th class="text-left">Reserva</th>
+                                                    <th data-hide="phone,tablet">Fecha</th>
                                                     <th>Cliente</th>
                                                     <th>Producto</th>
-                                                    <th>Tipo de Reserva</th>
+                                                    <th data-hide="phone,tablet">Tipo de reserva</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -58,7 +58,7 @@
                                     </LayoutTemplate>
                                     <ItemTemplate>
                                         <tr>
-                                            <td>                                                
+                                            <td class="text-left">                                                
                                                 <input id="chkCodigoReserva" runat="server" class="i-checks" type="checkbox" Visible="true"/>
                                             </td>
                                             <td class="text-left">

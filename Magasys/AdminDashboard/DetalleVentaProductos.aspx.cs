@@ -74,6 +74,9 @@ namespace PL.AdminDashboard
                                 SUBTOTAL = "$" + loDetalleVenta.SUBTOTAL.ToString()
                             };
 
+                            if (loDetalleVenta.ProductoEdicion.Producto.COD_TIPO_PRODUCTO == 1)
+                                oVentaListado.PRODUCTO = loDetalleVenta.ProductoEdicion.Producto.NOMBRE + " - " + loDetalleVenta.ProductoEdicion.Producto.DESCRIPCION;
+
                             lstVentaListado.Add(oVentaListado);
                         }
 
