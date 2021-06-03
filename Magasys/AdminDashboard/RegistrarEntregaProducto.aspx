@@ -135,13 +135,13 @@
                                             <asp:Label ID="lblDescripcionEdicion" runat="server" Text='<%#(Eval("EDICION") != null) ? Eval("EDICION"):null%>'></asp:Label>
                                         </td>
                                         <td class="text-left">
-                                            <asp:Label ID="Label1" runat="server" Text='<%#Eval("FORMA_ENTREGA").ToString()%>'></asp:Label>
+                                            <asp:Label ID="lblFormaEntrega" runat="server" Text='<%#Eval("FORMA_ENTREGA").ToString()%>'></asp:Label>
                                         </td>
                                         <td class="text-left">
                                             <asp:Label ID="lblPrecio" runat="server" Text='<%#Eval("PRECIO_EDICION").ToString()%>'></asp:Label>
                                         </td>
                                         <td class="text-left">
-                                            <asp:Label ID="Label2" runat="server" Text='<%#Eval("ID_RESERVA_EDICION").ToString()%>' Visible ="false"></asp:Label>
+                                            <asp:Label ID="lblIdReservaEdicion" runat="server" Text='<%#Eval("ID_RESERVA_EDICION").ToString()%>' Visible ="false"></asp:Label>
                                         </td>
                                     </tr>
                                 </ItemTemplate>

@@ -89,16 +89,18 @@
                                 </button>
                             </div>
                             <br />
+                            <input type="text" class="form-control input-sm m-b-xs" id="filter"
+                                        placeholder="Buscar ...">
                             <asp:ListView ID="lsvReserva" runat="server">
                                 <LayoutTemplate>
-                                    <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15">
+                                    <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15" data-filter=#filter>
                                         <thead>
                                             <tr>
                                                 <td>
                                                     <button id="check-all" class="btn btn-sm btn-primary pull-left m-t-n-xs">Seleccionar todo</button>
                                                 </td>                                                
                                                 <th class="text-left">Cliente</th>
-                                                <th data-hide="phone,tablet">Tipo Producto</th>
+                                                <th data-hide="phone,tablet">Tipo producto</th>
                                                 <th data-hide="phone,tablet">Producto</th>
                                                 <th data-hide="phone,tablet">Edición</th>
                                             </tr>

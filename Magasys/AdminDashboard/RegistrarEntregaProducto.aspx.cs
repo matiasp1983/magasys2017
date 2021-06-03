@@ -80,10 +80,16 @@ namespace PL.AdminDashboard
                         DetalleVenta oDetalleVenta = new DetalleVenta
                         {
                             CANTIDAD = 1,
-                            COD_PRODUCTO_EDICION = oReservaEdicion.COD_PROD_EDICION,
-                            PRECIO_UNIDAD = Convert.ToInt32(((Label)loItem.Controls[11]).Text),
-                            SUBTOTAL = Convert.ToInt32(((Label)loItem.Controls[11]).Text)
+                            COD_PRODUCTO_EDICION = oReservaEdicion.COD_PROD_EDICION                  
                         };
+
+                        double loValorConvertido = 0;                       
+
+                        if(double.TryParse(((Label)loItem.Controls[11]).Text, out loValorConvertido))
+                        {
+                            oDetalleVenta.PRECIO_UNIDAD = loValorConvertido;
+                            oDetalleVenta.SUBTOTAL = loValorConvertido;
+                        }                        
 
                         lstDetalleVenta.Add(oDetalleVenta);
                         oVenta.TOTAL += oDetalleVenta.SUBTOTAL;

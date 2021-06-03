@@ -322,6 +322,9 @@ namespace BLL
                                 TIPO_PRODUCTO = item.ProductoEdicion.Producto.TipoProducto.DESCRIPCION
                             };
 
+                            if (item.Reserva.Producto.COD_TIPO_PRODUCTO == 1)
+                                oReservaEdicionReparto.PRODUCTO = item.Reserva.Producto.NOMBRE + " - " + item.Reserva.Producto.DESCRIPCION;
+
                             if (item.ProductoEdicion.NOMBRE == null)
                                 oReservaEdicionReparto.EDICION = item.ProductoEdicion.EDICION;
                             else
@@ -380,6 +383,9 @@ namespace BLL
                                 CODIGO_EDICION = item.COD_PROD_EDICION,
                                 TIPO_PRODUCTO = item.ProductoEdicion.Producto.TipoProducto.DESCRIPCION
                             };
+
+                            if (item.Reserva.Producto.COD_TIPO_PRODUCTO == 1)
+                                oReservaEdicionReparto.PRODUCTO = item.Reserva.Producto.NOMBRE + " - " + item.Reserva.Producto.DESCRIPCION;
 
                             if (item.ProductoEdicion.NOMBRE == null)
                                 oReservaEdicionReparto.EDICION = item.ProductoEdicion.EDICION;
