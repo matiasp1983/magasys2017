@@ -385,6 +385,9 @@ namespace BLL
                                 EDICION = oReservaFiltro.EDICION
                             };
 
+                            if (loReserva.Producto.COD_TIPO_PRODUCTO == 1)
+                                oReservaListado.NOMBRE_PRODUCTO = loReserva.Producto.NOMBRE + " - " + loReserva.Producto.DESCRIPCION;
+
                             lstReservaListado.Add(oReservaListado);
                         }
                     }
