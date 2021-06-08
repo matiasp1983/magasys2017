@@ -264,6 +264,12 @@ namespace BLL
                         else
                             oReservaListado.FORMA_ENTREGA = "Envío a Domicilio";
 
+                        if (loReserva.COD_TIPO_RESERVA == 1)
+                        {
+                            ReservaEdicion oReservaEdicion = new ReservaEdicionBLL().ObtenerReservaEdicionDeReservaUnica(loReserva.ID_RESERVA);
+                            oReservaListado.EDICION = new ProductoEdicionBLL().ObtenerProductoEdicionPorId(oReservaEdicion.COD_PROD_EDICION).EDICION;
+                        }
+
                         lstReservaListado.Add(oReservaListado);
                     }
                 }
