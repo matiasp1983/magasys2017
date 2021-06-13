@@ -69,6 +69,8 @@ public partial class MAGASYSEntities : DbContext
 
     public virtual DbSet<Localidad> Localidad { get; set; }
 
+    public virtual DbSet<Mensaje> Mensaje { get; set; }
+
     public virtual DbSet<Mes> Mes { get; set; }
 
     public virtual DbSet<Negocio> Negocio { get; set; }
@@ -110,8 +112,6 @@ public partial class MAGASYSEntities : DbContext
     public virtual DbSet<Usuario> Usuario { get; set; }
 
     public virtual DbSet<Venta> Venta { get; set; }
-
-    public virtual DbSet<Mensaje> Mensaje { get; set; }
 
 
     [DbFunction("MAGASYSEntities", "fn_Split")]
@@ -180,6 +180,18 @@ public partial class MAGASYSEntities : DbContext
 
 
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<VentaAnualXTipoProducto_Result>("VentaAnualXTipoProducto", anioParameter, codTipoProductoParameter);
+    }
+
+
+    public virtual int EliminarNotificacionesPorCiente(Nullable<int> idCliente)
+    {
+
+        var idClienteParameter = idCliente.HasValue ?
+            new ObjectParameter("IdCliente", idCliente) :
+            new ObjectParameter("IdCliente", typeof(int));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("EliminarNotificacionesPorCiente", idClienteParameter);
     }
 
 }

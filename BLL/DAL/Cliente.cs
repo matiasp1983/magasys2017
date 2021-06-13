@@ -24,11 +24,11 @@ public partial class Cliente
 
         this.Cobro = new HashSet<Cobro>();
 
+        this.Mensaje = new HashSet<Mensaje>();
+
         this.Reserva = new HashSet<Reserva>();
 
         this.Venta = new HashSet<Venta>();
-
-        this.Mensaje = new HashSet<Mensaje>();
 
     }
 
@@ -93,15 +93,15 @@ public partial class Cliente
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
+    public virtual ICollection<Mensaje> Mensaje { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
     public virtual ICollection<Reserva> Reserva { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Venta> Venta { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<Mensaje> Mensaje { get; set; }
 
 }
 
