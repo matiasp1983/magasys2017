@@ -80,36 +80,24 @@ namespace BLL
 
         public List<ProductoDiario> ObtenerDiarios()
         {
-            List<DiarioDiaSemana> lstDiarios = null;
-            List<ProductoDiario> lstDiariosProducto = null;
+            List<ProductoDiario> lstDiariosProducto = lstDiariosProducto = new List<ProductoDiario>();
 
             try
             {
-                using (var loRepDiario = new Repository<DiarioDiaSemana>())
-                {
-                    lstDiarios = loRepDiario.FindAll();
-                }
-
                 using (var loRepProducto = new Repository<Producto>())
                 {
-                    lstDiariosProducto = new List<ProductoDiario>();
+                    var lstProducto = loRepProducto.Search(p => p.COD_ESTADO == 1 && p.COD_TIPO_PRODUCTO == 1);
 
-                    foreach (var loItemDiario in lstDiarios)
+                    foreach (var item in lstProducto)
                     {
                         ProductoDiario oProductoDiario = new ProductoDiario
                         {
-                            ID_DIARIO = loItemDiario.COD_DIARIO,
-                            NOMBRE = new Producto
-                            {
-                                DESCRIPCION = loRepProducto.Find(x => x.ID_PRODUCTO == loItemDiario.COD_DIARIO).NOMBRE
-                            }.DESCRIPCION
+                            ID_DIARIO = item.ID_PRODUCTO,
+                            NOMBRE = item.NOMBRE + " - " + item.DESCRIPCION
                         };
 
                         lstDiariosProducto.Add(oProductoDiario);
                     }
-
-                    if (lstDiariosProducto.Count > 0)
-                        lstDiariosProducto.Sort((x, y) => String.Compare(x.NOMBRE, y.NOMBRE));
                 }
             }
             catch (Exception)

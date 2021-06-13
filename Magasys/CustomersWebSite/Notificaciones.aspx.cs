@@ -14,11 +14,19 @@ namespace PL.CustomersWebSite
             if (!Page.IsPostBack)
             {
                 var oUsuario = (BLL.DAL.Usuario)Session[CustomersWebSiteSessionBLL.DefaultSessionsId.Usuario.ToString()];
-                var oClienteSession = new BLL.ClienteBLL().ObtenerClientePorUsuario(oUsuario.ID_USUARIO);
-                MarcarNotificacionComoVisto(oClienteSession.ID_CLIENTE);
+                var oCliente = new BLL.ClienteBLL().ObtenerClientePorUsuario(oUsuario.ID_USUARIO);
+                MarcarNotificacionComoVisto(oCliente.ID_CLIENTE);
                 CargarNotificaciones();
             }
         }
+
+        protected void btnAceptar_Click(object sender, EventArgs e)
+        {
+            var oUsuario = (BLL.DAL.Usuario)Session[CustomersWebSiteSessionBLL.DefaultSessionsId.Usuario.ToString()];
+            var oCliente = new BLL.ClienteBLL().ObtenerClientePorUsuario(oUsuario.ID_USUARIO);
+            new BLL.DAL.MAGASYSEntities().EliminarNotificacionesPorCiente(oCliente.ID_CLIENTE);
+            CargarNotificaciones();
+        }        
 
         #endregion
 
@@ -33,11 +41,13 @@ namespace PL.CustomersWebSite
             {
                 lsvNotificaciones.DataSource = lstNotificaciones;
                 dvMensajeLsvNotificaciones.Visible = false;
+                btnEliminarNotificaciones.Visible = true;
             }
             else
             {
                 dvMensajeLsvNotificaciones.InnerHtml = MessageManager.Info(dvMensajeLsvNotificaciones, Message.MsjeListadoNotificacionSinResultados, false);
                 dvMensajeLsvNotificaciones.Visible = true;
+                btnEliminarNotificaciones.Visible = false;
             }
 
             lsvNotificaciones.DataBind();
@@ -64,6 +74,8 @@ namespace PL.CustomersWebSite
 
         #endregion
 
+        #region Métodos Públicos Estaticos
+
         [WebMethod]
         public static bool MarcarNotificacionComoEliminada(string pIdMensaje)
         {
@@ -82,6 +94,8 @@ namespace PL.CustomersWebSite
             }
 
             return loResultado;
-        }
+        } 
+
+        #endregion
     }
 }

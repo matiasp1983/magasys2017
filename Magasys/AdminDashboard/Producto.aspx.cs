@@ -258,7 +258,7 @@ namespace PL.AdminDashboard
                 Logger loLogger = LogManager.GetCurrentClassLogger();
                 loLogger.Error(ex);
             }
-        }        
+        }
 
         private BLL.DAL.Producto CargarProductoDesdeControles()
         {
@@ -348,9 +348,11 @@ namespace PL.AdminDashboard
             {
                 ID_DIA_SEMANA = Convert.ToInt32(ddlDiaDeEntregaSuplemento.SelectedValue),
                 COD_DIARIO = oDiarioSuplemento.ID_DIARIO_DIA_SEMAMA,
-                PRECIO = Convert.ToDouble(txtPrecioSuplemento.Text),
-                CANTIDAD_ENTREGAS = Convert.ToInt32(txtCantidadDeEntregaSuplemento.Text)
+                PRECIO = Convert.ToDouble(txtPrecioSuplemento.Text)
             };
+
+            if (!String.IsNullOrEmpty(txtCantidadDeEntregaSuplemento.Text))
+                oSuplemento.CANTIDAD_ENTREGAS = Convert.ToInt32(txtCantidadDeEntregaSuplemento.Text);
 
             return oSuplemento;
         }
@@ -404,7 +406,7 @@ namespace PL.AdminDashboard
                 ddlDiarioSuplemento.SelectedIndex = 0;
             divSuplemento.Controls.OfType<TextBox>().ToList().ForEach(x => x.Text = String.Empty);
             divPelicula.Controls.OfType<DropDownList>().ToList().ForEach(y => y.SelectedIndex = 0);
-            divPelicula.Controls.OfType<TextBox>().ToList().ForEach(x => x.Text = String.Empty);            
+            divPelicula.Controls.OfType<TextBox>().ToList().ForEach(x => x.Text = String.Empty);
             divColeccion.Attributes.Remove("style");
             divRevista.Style.Add("display", "none");
             divLibro.Style.Add("display", "none");
