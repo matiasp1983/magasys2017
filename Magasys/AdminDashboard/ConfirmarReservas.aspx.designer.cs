@@ -22,22 +22,22 @@ namespace PL.AdminDashboard {
         protected global::System.Web.UI.HtmlControls.HtmlForm FormReservaEdicion;
         
         /// <summary>
-        /// Control lsvReservaPeriodica.
+        /// Control lsvReservaEdicion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView lsvReservaPeriodica;
+        protected global::System.Web.UI.WebControls.ListView lsvReservaEdicion;
         
         /// <summary>
-        /// Control dvMensajeLsvReservasPriodicas.
+        /// Control dvMensajeLsvReservas.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvMensajeLsvReservasPriodicas;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvMensajeLsvReservas;
         
         /// <summary>
         /// Control hfCodigoReserva.
@@ -65,41 +65,5 @@ namespace PL.AdminDashboard {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCancelar;
-        
-        /// <summary>
-        /// Control lsvReservaUnica.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView lsvReservaUnica;
-        
-        /// <summary>
-        /// Control dvMensajeLsvReservasUnicas.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvMensajeLsvReservasUnicas;
-        
-        /// <summary>
-        /// Control btnGuardarUnica.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnGuardarUnica;
-        
-        /// <summary>
-        /// Control btnCancelarUnica.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnCancelarUnica;
     }
 }
