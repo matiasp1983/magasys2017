@@ -22,6 +22,35 @@ namespace PL.AdminDashboard
                 CargarGrilla();
         }
 
+        protected void lsvReservaEdicion_ItemDataBound(object sender, ListViewItemEventArgs e)
+        {
+            try
+            {
+                if (e.Item.ItemType != ListViewItemType.DataItem) return;
+
+                var loEdicion = ((BLL.ReservaListado)e.Item.DataItem).EDICION;
+                HtmlAnchor anclaEdicion = ((HtmlAnchor)e.Item.FindControl("anclaEdicion"));
+
+                if (!string.IsNullOrEmpty(loEdicion))
+                {
+                    
+                    anclaEdicion.Attributes.Add("data-target", "#ModalEdicion");
+                    HiddenField hdEdicion = ((HiddenField)e.Item.FindControl("hdEdicion"));
+                    hdEdicion.Value = loEdicion;
+                }
+                else
+                {
+                    anclaEdicion.Attributes.Add("disabled", "disabled");
+                    anclaEdicion.Style.Add("color", "white!important");
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger loLogger = LogManager.GetCurrentClassLogger();
+                loLogger.Error(ex);
+            }
+        }
+
         protected void BtnGuardar_Click(object sender, EventArgs e)
         {
             bool loResutado = false;
