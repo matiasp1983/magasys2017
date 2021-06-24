@@ -79,7 +79,7 @@ namespace PL.AdminDashboard
                         // Informar al Cliente que la edición ha sido entregada.
                         BLL.DAL.Mensaje oMensaje = new BLL.DAL.Mensaje()
                         {
-                            COD_CLIENTE = Convert.ToInt32(((Label)loItem.Controls[13]).Text),
+                            COD_CLIENTE = Convert.ToInt32(((Label)loItem.Controls[15]).Text),
                             DESCRIPCION = "La reserva " + ((Label)loItem.Controls[3]).Text + " del producto '" + ((Label)loItem.Controls[9]).Text + "' ha sido confirmada.",
                             TIPO_MENSAJE = "success-element",
                             FECHA_REGISTRO_MENSAJE = DateTime.Now
