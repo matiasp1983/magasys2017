@@ -466,7 +466,7 @@ namespace PL.AdminDashboard
 
                     // Consultar si existen reservas para ese producto
 
-                    var oReservaFiltro = CargarReservaFiltro(Convert.ToString(((Label)loItem.Controls[3]).Text), Convert.ToString(((TextBox)loItem.Controls[7]).Text));
+                    var oReservaFiltro = CargarReservaFiltro(Convert.ToString(((Label)loItem.Controls[17]).Text), Convert.ToString(((TextBox)loItem.Controls[7]).Text));
                     var lstReserva = new BLL.ReservaBLL().ObtenerReservaEdicionPorProducto(oReservaFiltro);
                     if (lstReserva != null)
                     {

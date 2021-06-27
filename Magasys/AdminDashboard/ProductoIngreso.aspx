@@ -111,14 +111,14 @@
                                     <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="15" data-filter=#filter>
                                         <thead>
                                             <tr>
-                                                <th class="text-left" data-toggle="true">C&oacute;digo</th>
-                                                <th>Nombre</th>
-                                                <th data-hide="phone,tablet">Día de Semana</th>
-                                                <th data-hide="phone,tablet">Edici&oacute;n</th>
-                                                <th data-hide="phone,tablet">Fecha edici&oacute;n</th>                                       
+                                                <th class="text-left" data-toggle="true">Código</th>
+                                                <th>Diario</th>
+                                                <th>Día de Semana</th>
+                                                <th>Edición</th>
+                                                <th data-hide="phone,tablet">Fecha Edición</th>                                       
                                                 <th data-hide="all">Precio</th>
                                                 <th data-hide="all">Cantidad</th>
-                                                <th data-hide="all">Fecha devoluci&oacute;n</th>
+                                                <th data-hide="all">Fecha devolución</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -139,7 +139,7 @@
                                             <asp:Label ID="lblCodigoProducto" runat="server" Text='<%#Eval("COD_PRODUCTO").ToString()%>'></asp:Label>
                                         </td>
                                         <td>
-                                            <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE").ToString().Length > 50 ? String.Format("{0}...", Eval("NOMBRE").ToString().Remove(50).TrimEnd()):Eval("NOMBRE")%>'></asp:Label>
+                                            <asp:Label ID="lblNombreDescripcion" runat="server" Text='<%#Eval("NOMBRE_DESCRIPCION").ToString().Length > 50 ? String.Format("{0}...", Eval("NOMBRE_DESCRIPCION").ToString().Remove(50).TrimEnd()):Eval("NOMBRE_DESCRIPCION")%>'></asp:Label>
                                         </td>
                                         <td>
                                             <asp:Label ID="lblDiaSemana" runat="server" Text='<%#Eval("DIA_SEMANA").ToString()%>'></asp:Label>
@@ -174,7 +174,10 @@
                                                     <asp:TextBox ID="txtFechaDevolucion" runat="server" CssClass="form-control" MaxLength="10" autocomplete="off"></asp:TextBox>
                                                 </div>
                                             </div>
-                                        </td>                                      
+                                        </td>      
+                                        <td>
+                                            <asp:Label ID="lblNombre" runat="server" Text='<%#Eval("NOMBRE").ToString()%>' Visible="false"></asp:Label>
+                                        </td>                                        
                                     </tr>
                                 </ItemTemplate>
                             </asp:ListView>

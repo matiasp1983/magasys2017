@@ -143,6 +143,7 @@ namespace BLL
                         {
                             COD_PRODUCTO = loProducto.ID_PRODUCTO,
                             NOMBRE = loProducto.NOMBRE,
+                            NOMBRE_DESCRIPCION = $"{ loProducto.NOMBRE } - { loProducto.DESCRIPCION }",
                             COD_DIARIO = loCodigoDiario
                         };
 
@@ -311,6 +312,7 @@ namespace BLL
         public int COD_PRODUCTO_EDICION { get; set; }
         public int COD_DIARIO { get; set; }
         public string NOMBRE { get; set; }
+        public string NOMBRE_DESCRIPCION { get; set; }
         public string TIPO_PRODUCTO { get; set; }
         public string DIA_SEMANA { get; set; }
         public string EDICION { get; set; }
