@@ -115,6 +115,9 @@
                                         <td class="text-right">
                                             <div class="btn-group">
                                                 <button runat="server" id="btnVisualizar" class="btn btn-outline btn-success btn-xl" title="Visualizar" onserverclick="BtnVisualizar_Click"><i class="fa fa-search"></i></button>
+                                                <a class="btn btn-outline btn-danger btn-xl" data-toggle="modal" data-target="#ModalDevolucionAnular" title="Eliminar"><i class="fa fa-trash-o"></i>
+                                                    <asp:HiddenField ID="hdIdDevolucion" runat="server" />
+                                                </a>
                                             </div>
                                         </td>
                                     </tr>
