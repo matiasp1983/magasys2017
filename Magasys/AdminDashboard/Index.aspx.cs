@@ -1,4 +1,5 @@
 ﻿using BLL;
+using BLL.DAL;
 using NLog;
 using System;
 using System.Collections.Generic;
@@ -18,8 +19,13 @@ namespace PL.AdminDashboard
             if (!Page.IsPostBack)
             {
                 CargarTiposProducto();
-                CargarAnio();
+                CargarProducto();
             }
+        }
+
+        protected void TipoProductoSeleccionado(object sender, EventArgs e)
+        {
+            CargarProducto();
         }
 
         #endregion
@@ -28,7 +34,7 @@ namespace PL.AdminDashboard
 
         private void CargarTiposProducto()
         {
-            var oTipoProducto = new BLL.TipoProductoBLL();
+            var oTipoProducto = new TipoProductoBLL();
 
             try
             {
@@ -36,7 +42,7 @@ namespace PL.AdminDashboard
                 ddlTipoProducto.DataTextField = "DESCRIPCION";
                 ddlTipoProducto.DataValueField = "ID_TIPO_PRODUCTO";
                 ddlTipoProducto.DataBind();
-                ddlTipoProducto.Items.Insert(0, new ListItem(String.Empty, String.Empty));
+                ddlTipoProducto.SelectedIndex = 1;
             }
             catch (Exception ex)
             {
@@ -45,146 +51,243 @@ namespace PL.AdminDashboard
             }
         }
 
-        private void CargarAnio()
+        private void CargarProducto()
         {
-            var oAnio = new BLL.AnioBLL();
-
-            try
+            if (!String.IsNullOrEmpty(ddlTipoProducto.SelectedValue))
             {
-                ddlAnio.DataSource = oAnio.ObtenerAnios(2018);
-                ddlAnio.DataTextField = "DESCRIPCION";
-                ddlAnio.DataValueField = "DESCRIPCION";
-                ddlAnio.DataBind();
-                ddlAnio.Items.Insert(0, new ListItem(String.Empty, String.Empty));
-            }
-            catch (Exception ex)
-            {
-                Logger loLogger = LogManager.GetCurrentClassLogger();
-                loLogger.Error(ex);
+                int codTipoProducto = Convert.ToInt32(ddlTipoProducto.SelectedValue);
+                ddlProducto.DataSource = new ProductoBLL().ObtenerProductosXTipoProducto(codTipoProducto);
+                ddlProducto.DataTextField = "NOMBRE";
+                ddlProducto.DataValueField = "ID_PRODUCTO";
+                ddlProducto.DataBind();
+                ddlProducto.Items.Insert(0, new ListItem(String.Empty, String.Empty));
             }
         }
 
         #endregion
 
         [WebMethod]
-        public static List<object> ObtenerVentasPorProducto(string[] pAnios, string pTipoProducto)
+        public static List<object> ObtenerVentasPorProducto(string[] pProductos, string pTipoProducto, string pOperacion)
         {
-            string loAnio = string.Empty;
-            int loCantidadAnios = 0;
-            int loContador = 0;
-
             List<object> chartData = new List<object>();
+            List<ObtenerVentasPorTipoProductoPorProductos_Result> lstDatosAux = null;
+            int cantidadProductos = 0;
+            int contador = 0;
+            int contadorFechas = 0;
+            DateTime fechaVenta = DateTime.MinValue;
+            DateTime fechaDesde = DateTime.Today;
+            DateTime fechaHasta = DateTime.Today.Date.AddHours(23).AddMinutes(59).AddSeconds(59);
+            var loProductos = string.Empty;
 
-            if (!(pAnios.Length == 0) && !string.IsNullOrEmpty(pTipoProducto))
+            if (!string.IsNullOrEmpty(pTipoProducto) && !String.IsNullOrEmpty(pOperacion))
             {
-                var loAnios = string.Empty;
-                var loListAnios = pAnios.ToList();
-                var loAniosTemp = string.Empty;
+                switch (pOperacion)
+                {
+                    case "7dias":
+                        fechaDesde = DateTime.Today.AddDays(-7);
+                        break;
+                    case "EsteMes":
+                        fechaDesde = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+                        break;
+                    case "30dias":
+                        fechaDesde = DateTime.Today.AddDays(-30);
+                        break;
+                    case "EsteAnio":
+                        fechaDesde = new DateTime(DateTime.Now.Year, 1, 1);
+                        break;
+                }
 
-                foreach (var item in loListAnios)
-                    loAniosTemp += string.Format("{0},", item);
+                foreach (var item in pProductos.ToList())
+                {
+                    if (!String.IsNullOrEmpty(item))
+                        loProductos += string.Format("{0},", item);
+                }
 
-                loAnios = loAniosTemp.Remove(loAniosTemp.Length - 1);
+                if (!String.IsNullOrEmpty(loProductos))
+                    loProductos = loProductos.Remove(loProductos.Length - 1);
 
-                var loProducto = new ProductoBLL();
-                var lstDatos = loProducto.ProductosMasVendidos(loAnios, pTipoProducto);
+                var lstDatos = new ProductoBLL().ObtenerVentasPorTipoProductoPorProductos(pTipoProducto, loProductos, fechaDesde, fechaHasta);
 
                 if (lstDatos.Count > 0)
                 {
-                    foreach (var item in lstDatos)
-                    {
-                        if (loAnio == item.ANIO.ToString())
-                            continue;
-                        loAnio = item.ANIO.ToString();
-                        loCantidadAnios++;
-                    }
-
-                    chartData.Add(new object[loCantidadAnios + 1]);
-                    ((object[])chartData[0])[0] = "Mes";
-                    chartData.Add(new object[loCantidadAnios + 1]);
-                    ((object[])chartData[1])[0] = "Enero";
-                    for (int i = 1; i < ((object[])chartData[1]).Length; i++)
-                    {
-                        ((object[])chartData[1])[i] = 0;
-                    }
-                    chartData.Add(new object[loCantidadAnios + 1]);
-                    ((object[])chartData[2])[0] = "Febrero";
-                    for (int i = 1; i < ((object[])chartData[2]).Length; i++)
-                    {
-                        ((object[])chartData[2])[i] = 0;
-                    }
-                    chartData.Add(new object[loCantidadAnios + 1]);
-                    ((object[])chartData[3])[0] = "Marzo";
-                    for (int i = 1; i < ((object[])chartData[3]).Length; i++)
-                    {
-                        ((object[])chartData[3])[i] = 0;
-                    }
-                    chartData.Add(new object[loCantidadAnios + 1]);
-                    ((object[])chartData[4])[0] = "Abril";
-                    for (int i = 1; i < ((object[])chartData[4]).Length; i++)
-                    {
-                        ((object[])chartData[4])[i] = 0;
-                    }
-                    chartData.Add(new object[loCantidadAnios + 1]);
-                    ((object[])chartData[5])[0] = "Mayo";
-                    for (int i = 1; i < ((object[])chartData[5]).Length; i++)
-                    {
-                        ((object[])chartData[5])[i] = 0;
-                    }
-                    chartData.Add(new object[loCantidadAnios + 1]);
-                    ((object[])chartData[6])[0] = "Junio";
-                    for (int i = 1; i < ((object[])chartData[6]).Length; i++)
-                    {
-                        ((object[])chartData[6])[i] = 0;
-                    }
-                    chartData.Add(new object[loCantidadAnios + 1]);
-                    ((object[])chartData[7])[0] = "Julio";
-                    for (int i = 1; i < ((object[])chartData[7]).Length; i++)
-                    {
-                        ((object[])chartData[7])[i] = 0;
-                    }
-                    chartData.Add(new object[loCantidadAnios + 1]);
-                    ((object[])chartData[8])[0] = "Agosto";
-                    for (int i = 1; i < ((object[])chartData[8]).Length; i++)
-                    {
-                        ((object[])chartData[8])[i] = 0;
-                    }
-                    chartData.Add(new object[loCantidadAnios + 1]);
-                    ((object[])chartData[9])[0] = "Septiembre";
-                    for (int i = 1; i < ((object[])chartData[9]).Length; i++)
-                    {
-                        ((object[])chartData[9])[i] = 0;
-                    }
-                    chartData.Add(new object[loCantidadAnios + 1]);
-                    ((object[])chartData[10])[0] = "Octubre";
-                    for (int i = 1; i < ((object[])chartData[10]).Length; i++)
-                    {
-                        ((object[])chartData[10])[i] = 0;
-                    }
-                    chartData.Add(new object[loCantidadAnios + 1]);
-                    ((object[])chartData[11])[0] = "Noviembre";
-                    for (int i = 1; i < ((object[])chartData[11]).Length; i++)
-                    {
-                        ((object[])chartData[11])[i] = 0;
-                    }
-                    chartData.Add(new object[loCantidadAnios + 1]);
-                    ((object[])chartData[12])[0] = "Diciembre";
-                    for (int i = 1; i < ((object[])chartData[12]).Length; i++)
-                    {
-                        ((object[])chartData[12])[i] = 0;
-                    }
-
-                    loAnio = string.Empty;
+                    lstDatosAux = new List<ObtenerVentasPorTipoProductoPorProductos_Result>();
 
                     foreach (var item in lstDatos)
                     {
-                        if (loAnio != item.ANIO.ToString())
+                        if (!lstDatosAux.Exists(p => p.ID_PRODUCTO == item.ID_PRODUCTO))
                         {
-                            loAnio = item.ANIO.ToString();
-                            loContador++;
-                            ((object[])chartData[0])[loContador] = item.ANIO.ToString();
+                            ObtenerVentasPorTipoProductoPorProductos_Result oDatosAux = new ObtenerVentasPorTipoProductoPorProductos_Result();
+                            oDatosAux = item;
+                            if (item.COD_TIPO_PRODUCTO == 1)
+                                oDatosAux.NOMBRE = $"{ item.NOMBRE } - { item.DESCRIPCION }";
+                            lstDatosAux.Add(oDatosAux);
                         }
-                        ((object[])chartData[Convert.ToInt32(item.MES)])[loContador] = item.CANTIDAD;
+                    }
+
+                    lstDatosAux = lstDatosAux.OrderBy(p => p.ID_PRODUCTO).ToList();
+                    cantidadProductos = lstDatosAux.Count;
+                    chartData.Add(new object[cantidadProductos + 1]);
+                    ((object[])chartData[0])[0] = "Fecha";
+
+                    foreach (var item in lstDatosAux)
+                    {
+                        contador++;
+                        ((object[])chartData[0])[contador] = item.NOMBRE;
+                    }
+
+                    contador = 0;
+
+                    foreach (var item in lstDatos)
+                    {
+                        if (fechaVenta != Convert.ToDateTime(item.FECHA_VENTA))
+                        {
+                            contadorFechas++;
+                            fechaVenta = Convert.ToDateTime(item.FECHA_VENTA);
+                            chartData.Add(new object[cantidadProductos + 1]);
+                            ((object[])chartData[contadorFechas])[0] = fechaVenta.ToString("dd-MMM-yyyy");
+                        }
+
+                        contador = 0;
+                        foreach (var itemAux in lstDatosAux)
+                        {
+                            contador++;
+                            if (itemAux.ID_PRODUCTO == item.ID_PRODUCTO)
+                                ((object[])chartData[contadorFechas])[contador] = item.CANTIDAD;
+                        }
+                    }
+                }
+            }
+            return chartData;
+        }
+
+        [WebMethod]
+        public static List<object> ObtenerVentasPorFiltro(string[] pProductos, string pTipoProducto, string pFechaDesde, string pFechaHasta)
+        {
+            List<object> chartData = new List<object>();
+            List<ObtenerVentasPorTipoProductoPorProductos_Result> lstDatosAux = null;
+            List<ObtenerVentasPorTipoProductoPorAnio_Result> lstDatosPorAnioAux = null;
+            int cantidadProductos = 0;
+            int contador = 0;
+            int contadorFechas = 0;
+            int anio = 0;
+            DateTime fechaVenta = DateTime.MinValue;
+            DateTime fechaDesde = DateTime.MinValue;
+            DateTime fechaHasta = DateTime.MinValue;
+            List<ObtenerVentasPorTipoProductoPorProductos_Result> lstDatos = new List<ObtenerVentasPorTipoProductoPorProductos_Result>();
+            List<ObtenerVentasPorTipoProductoPorAnio_Result> lstDatosPorAnio = new List<ObtenerVentasPorTipoProductoPorAnio_Result>();
+            var loProductos = string.Empty;
+
+            if (!String.IsNullOrEmpty(pFechaDesde) && !String.IsNullOrEmpty(pFechaHasta))
+            {
+                foreach (var item in pProductos.ToList())
+                {
+                    if (!String.IsNullOrEmpty(item))
+                        loProductos += string.Format("{0},", item);
+                }
+
+                fechaDesde = Convert.ToDateTime(pFechaDesde);
+                fechaHasta = Convert.ToDateTime(pFechaHasta).Date.AddHours(23).AddMinutes(59).AddSeconds(59);
+
+                if (fechaDesde.Year == fechaHasta.Year)
+                    lstDatos = new ProductoBLL().ObtenerVentasPorTipoProductoPorProductos(pTipoProducto, loProductos, fechaDesde, fechaHasta);
+                else
+                    lstDatosPorAnio = new ProductoBLL().ObtenerVentasPorTipoProductoPorAnio(pTipoProducto, loProductos, fechaDesde, fechaHasta);
+
+                if (lstDatos.Count > 0)
+                {
+                    lstDatosAux = new List<ObtenerVentasPorTipoProductoPorProductos_Result>();
+
+                    foreach (var item in lstDatos)
+                    {
+                        if (!lstDatosAux.Exists(p => p.ID_PRODUCTO == item.ID_PRODUCTO))
+                        {
+                            ObtenerVentasPorTipoProductoPorProductos_Result oDatosAux = new ObtenerVentasPorTipoProductoPorProductos_Result();
+                            oDatosAux = item;
+                            if (item.COD_TIPO_PRODUCTO == 1)
+                                oDatosAux.NOMBRE = $"{ item.NOMBRE } - { item.DESCRIPCION }";
+                            lstDatosAux.Add(oDatosAux);
+                        }
+                    }
+
+                    lstDatosAux = lstDatosAux.OrderBy(p => p.ID_PRODUCTO).ToList();
+                    cantidadProductos = lstDatosAux.Count;
+                    chartData.Add(new object[cantidadProductos + 1]);
+                    ((object[])chartData[0])[0] = "Fecha";
+
+                    foreach (var item in lstDatosAux)
+                    {
+                        contador++;
+                        ((object[])chartData[0])[contador] = item.NOMBRE;
+                    }
+
+                    contador = 0;
+
+                    foreach (var item in lstDatos)
+                    {
+                        if (fechaVenta != Convert.ToDateTime(item.FECHA_VENTA))
+                        {
+                            contadorFechas++;
+                            fechaVenta = Convert.ToDateTime(item.FECHA_VENTA);
+                            chartData.Add(new object[cantidadProductos + 1]);
+                            ((object[])chartData[contadorFechas])[0] = fechaVenta.ToString("dd-MMM-yyyy");
+                        }
+
+                        contador = 0;
+                        foreach (var itemAux in lstDatosAux)
+                        {
+                            contador++;
+                            if (itemAux.ID_PRODUCTO == item.ID_PRODUCTO)
+                                ((object[])chartData[contadorFechas])[contador] = item.CANTIDAD;
+                        }
+                    }
+                }
+
+                if (lstDatosPorAnio.Count > 0)
+                {
+                    lstDatosPorAnioAux = new List<ObtenerVentasPorTipoProductoPorAnio_Result>();
+
+                    foreach (var item in lstDatosPorAnio)
+                    {
+                        if (!lstDatosPorAnioAux.Exists(p => p.ID_PRODUCTO == item.ID_PRODUCTO))
+                        {
+                            ObtenerVentasPorTipoProductoPorAnio_Result oDatosAux = new ObtenerVentasPorTipoProductoPorAnio_Result();
+                            oDatosAux = item;
+                            if (item.COD_TIPO_PRODUCTO == 1)
+                                oDatosAux.NOMBRE = $"{ item.NOMBRE } - { item.DESCRIPCION }";
+                            lstDatosPorAnioAux.Add(oDatosAux);
+                        }
+                    }
+
+                    lstDatosPorAnioAux = lstDatosPorAnioAux.OrderBy(p => p.ID_PRODUCTO).ToList();
+                    cantidadProductos = lstDatosPorAnioAux.Count;
+                    chartData.Add(new object[cantidadProductos + 1]);
+                    ((object[])chartData[0])[0] = "Año";
+
+                    foreach (var item in lstDatosPorAnioAux)
+                    {
+                        contador++;
+                        ((object[])chartData[0])[contador] = item.NOMBRE;
+                    }
+
+                    contador = 0;
+
+                    foreach (var item in lstDatosPorAnio)
+                    {
+                        if (anio != Convert.ToInt32(item.ANIO))
+                        {
+                            contadorFechas++;
+                            anio = Convert.ToInt32(item.ANIO);
+                            chartData.Add(new object[cantidadProductos + 1]);
+                            ((object[])chartData[contadorFechas])[0] = item.ANIO.ToString();
+                        }
+
+                        contador = 0;
+                        foreach (var itemAux in lstDatosPorAnioAux)
+                        {
+                            contador++;
+                            if (itemAux.ID_PRODUCTO == item.ID_PRODUCTO)
+                                ((object[])chartData[contadorFechas])[contador] = item.CANTIDAD;
+                        }
                     }
                 }
             }

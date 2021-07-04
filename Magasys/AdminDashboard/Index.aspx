@@ -33,23 +33,55 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label class="col-sm-10 control-label">Tipo de Producto</label>
-                                            <asp:DropDownList ID="ddlTipoProducto" runat="server" CssClass="select2_tipoproducto form-control"></asp:DropDownList>
+                                            <asp:DropDownList ID="ddlTipoProducto" runat="server" CssClass="select2_tipoproducto form-control" OnSelectedIndexChanged="TipoProductoSeleccionado" AutoPostBack="true"></asp:DropDownList>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="col-sm-10 control-label">Selección múltiple</label>
+                                            <label class="col-sm-10 control-label">Selección de productos</label>
                                             <div>
-                                                 <asp:DropDownList ID="ddlAnio" runat="server"  data-placeholder="Seleccionar un Año..." CssClass="chosen-select" multiple=""></asp:DropDownList>
+                                                 <asp:DropDownList ID="ddlProducto" runat="server"  data-placeholder="Seleccionar un Producto..." CssClass="chosen-select" multiple="" OnSelectedIndexChanged="TipoProductoSeleccionado"></asp:DropDownList>
                                             </div>                                           
                                         </div>
                                     </div>
                                 </div>                            
                             </div>
                             <div class="row">
-                                <div class="form-group">
-                                    <div class="col-sm-10">
-                                        <input id="btnFiltrar" type="button" value="Filtrar" class="btn btn-success" />
+                                <div class="col-sm-12">
+                                    <div class="col-md-12">
+                                        <div class="form-group space-15" id="mode">
+                                            <button id="btnHoy" class="btn btn-outline btn-success dim m-l-xs active" type="button" onclick="graficoBar('Hoy')">Hoy</button>
+                                            <button id="btn7dias" class="btn btn-outline btn-success dim m-l-xs" type="button" onclick="graficoBar('7dias')">Últimos 7 días</button>
+                                            <button id="btnEsteMes" class="btn btn-outline btn-success dim m-l-xs" type="button" onclick="graficoBar('EsteMes')">Este mes</button>
+                                            <button id="btn30dias" class="btn btn-outline btn-success dim m-l-xs" type="button" onclick="graficoBar('30dias')">Últimos 30 días</button>
+                                            <button id="btnEsteAnio" class="btn btn-outline btn-success dim m-l-xs" type="button" onclick="graficoBar('EsteAnio')">Este año</button>
+                                            <button id="btnFiltro" class="btn btn-outline btn-success dim m-l-xs" type="button" onclick="botonSeleccionado('Filtro')" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Aplicar Filtro</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="collapse" id="collapseExample">
+                                        <div class="card card-body">
+                                            <div class="row">
+                                                <div class="col-sm-8 m-t-xs">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group" id="dpFecha">
+                                                            <label class="control-label">Selección de rango</label>
+                                                            <div style="display:flex; align-items:center">
+                                                                <div class="input-daterange input-group" id="datepicker">
+                                                                    <asp:TextBox ID="txtFechaDesde" runat="server" CssClass="input-sm form-control" autocomplete="off"></asp:TextBox>
+                                                                    <span class="input-group-addon">a</span>
+                                                                    <asp:TextBox ID="txtFechaHasta" runat="server" CssClass="input-sm form-control" autocomplete="off"></asp:TextBox>
+                                                                </div>
+                                                                <button id="btnFiltrar" class="btn btn-white m-l-xs" type="button" onclick="FiltrarPorRangoDeFecha()">Filtrar</button>
+                                                            </div>
+                                                        </div>                                                                                                              
+                                                    </div>                                                     
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -76,6 +108,7 @@
             $(document).ready(function () {                
                 Select2();
                 Chosen();
+                LoadDatePicker();
             });
         }      
 
@@ -85,22 +118,38 @@
                 placeholder: 'Seleccione un Tipo de Producto',
                 width: '100%',
                 allowClear: true
-            });            
+            });               
         }
 
         function Chosen() {
             $('.chosen-select').chosen({ width: "100%" });
         }
 
-        $('#btnFiltrar').click(function () {
+        function LoadDatePicker() {
+            $('#dpFecha .input-daterange').datepicker({
+                startView: 2,
+                todayBtn: "linked",
+                clearBtn: true,
+                forceParse: true,
+                autoclose: true,
+                language: "es",
+                format: "dd/mm/yyyy",
+                keyboardNavigation: false  
+            });
+        }
 
+        function graficoBar(pOperacion) {
+            $('#collapseExample').removeClass('collapse in');
+            $('#collapseExample').addClass('collapse');
             var loTipoProducto = $(".select2_tipoproducto").val();
-            var loAnio = $('.chosen-select').val();
+            var loProducto = $('.chosen-select').val();
+
+            botonSeleccionado(pOperacion);
 
             $.ajax({
                 type: "POST",
                 url: "Index.aspx/ObtenerVentasPorProducto",
-                data: JSON.stringify({ 'pAnios': loAnio, 'pTipoProducto':loTipoProducto}),
+                data: JSON.stringify({'pProductos':loProducto, 'pTipoProducto':loTipoProducto, 'pOperacion':pOperacion}),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {                   
@@ -117,8 +166,98 @@
                     });
                 }
             });
-        });      
+        }
 
+        function FiltrarPorRangoDeFecha() {
+            var loTipoProducto = $(".select2_tipoproducto").val();
+            var loProducto = $('.chosen-select').val();
+            var txtFechaDesde = $(<%=txtFechaDesde.ClientID%>).val();
+            var txtFechaHasta = $(<%=txtFechaHasta.ClientID%>).val();
+
+            $.ajax({
+                type: "POST",
+                url: "Index.aspx/ObtenerVentasPorFiltro",
+                data: JSON.stringify({'pProductos':loProducto,'pTipoProducto':loTipoProducto, 'pFechaDesde':txtFechaDesde, 'pFechaHasta':txtFechaHasta}),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {                   
+                    if (data.d != "") {
+                        drawChart(data.d);
+                    }
+                },
+                failure: function (data) {
+                    swal({
+                        title: "Generación de Gráfico",
+                        text: "El gráfico no se puedo generar.",
+                        type: "warning",
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+            });
+        }
+
+        function botonSeleccionado(pOperacion) {
+            if (pOperacion == undefined) {                
+                return;
+            }
+            if (pOperacion == "Hoy") {
+                $('#btnHoy').attr('class', 'btn btn-outline btn-success dim m-l-xs active');
+                $('#btn7dias').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+                $('#btnEsteMes').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+                $('#btn30dias').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+                $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+                $('#btnFiltro').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+            } else {
+                if (pOperacion == "7dias") {
+                    $('#btnHoy').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+                    $('#btn7dias').attr('class', 'btn btn-outline btn-success dim m-l-xs active');
+                    $('#btnEsteMes').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+                    $('#btn30dias').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+                    $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+                    $('#btnFiltro').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+                }
+                else {   
+                    if (pOperacion == "EsteMes") {
+                        $('#btnHoy').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+                        $('#btn7dias').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+                        $('#btnEsteMes').attr('class', 'btn btn-outline btn-success dim m-l-xs active');
+                        $('#btn30dias').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+                        $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+                        $('#btnFiltro').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+                    }
+                    else {
+                        if (pOperacion == "30dias") {
+                            $('#btnHoy').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+                            $('#btn7dias').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+                            $('#btnEsteMes').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+                            $('#btn30dias').attr('class', 'btn btn-outline btn-success dim m-l-xs active');
+                            $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+                            $('#btnFiltro').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+                        }
+                        else {
+                            if (pOperacion == "EsteAnio") {
+                                $('#btnHoy').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+                                $('#btn7dias').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+                                $('#btnEsteMes').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+                                $('#btn30dias').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+                                $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success dim m-l-xs active');
+                                $('#btnFiltro').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+                            }
+                            else {
+                                if (pOperacion == "Filtro") {
+                                    $('#btnHoy').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+                                    $('#btn7dias').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+                                    $('#btnEsteMes').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+                                    $('#btn30dias').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+                                    $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+                                    $('#btnFiltro').attr('class', 'btn btn-outline btn-success dim m-l-xs active');
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     </script>
     <script type="text/javascript">
         google.charts.load('current', { 'packages': ['bar'] });
@@ -130,10 +269,15 @@
             var data = new google.visualization.arrayToDataTable(loData);
 
             var options = {
-                title: "Ventas por año y tipo de producto",
+                title: "Ventas por tipo de producto",
                 vAxis: { // Valores verticales
                     title:"Cantidad"
-                }
+                },
+                width: 600,
+                height: 400,
+                legend: { position: 'top', maxLines: 3 },
+                bar: { groupWidth: '75%' },
+                isStacked: true,
             };
 
             var chart = new google.charts.Bar(document.getElementById('columnchart'));

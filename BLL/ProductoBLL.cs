@@ -161,7 +161,7 @@ namespace BLL
 
                     foreach (var item in lstProducto)
                     {
-                        if (item.COD_TIPO_PRODUCTO == 1)                          
+                        if (item.COD_TIPO_PRODUCTO == 1)
                             item.NOMBRE = $"{ item.NOMBRE } - { item.DESCRIPCION }";
                     }
                 }
@@ -480,6 +480,32 @@ namespace BLL
             {
                 MAGASYSEntities loContext = new MAGASYSEntities();
                 return loContext.ProductoMasVendido(pAnio, pCodTipoProducto).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<ObtenerVentasPorTipoProductoPorProductos_Result> ObtenerVentasPorTipoProductoPorProductos(string pCodTipoProducto, string pProductos, DateTime pFechaDede, DateTime pFechaHasta)
+        {
+            try
+            {
+                MAGASYSEntities loContext = new MAGASYSEntities();
+                return loContext.ObtenerVentasPorTipoProductoPorProductos(Convert.ToInt32(pCodTipoProducto), pProductos, pFechaDede, pFechaHasta).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<ObtenerVentasPorTipoProductoPorAnio_Result> ObtenerVentasPorTipoProductoPorAnio(string pCodTipoProducto, string pProductos, DateTime pFechaDede, DateTime pFechaHasta)
+        {
+            try
+            {
+                MAGASYSEntities loContext = new MAGASYSEntities();
+                return loContext.ObtenerVentasPorTipoProductoPorAnio(Convert.ToInt32(pCodTipoProducto), pProductos, pFechaDede, pFechaHasta).ToList();
             }
             catch (Exception ex)
             {
