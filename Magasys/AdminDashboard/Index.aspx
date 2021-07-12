@@ -25,7 +25,7 @@
                 <div class="col-lg-12">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                            <h5>Reporte</h5>
+                            <h5>Ventas por tipo de producto</h5>
                         </div>
                         <div class="ibox-content">
                             <div class="row">
@@ -50,12 +50,12 @@
                                 <div class="col-sm-12">
                                     <div class="col-md-12">
                                         <div class="form-group space-15" id="mode">
-                                            <button id="btnHoy" class="btn btn-outline btn-success dim m-l-xs active" type="button" onclick="graficoBar('Hoy')">Hoy</button>
-                                            <button id="btn7dias" class="btn btn-outline btn-success dim m-l-xs" type="button" onclick="graficoBar('7dias')">Últimos 7 días</button>
-                                            <button id="btnEsteMes" class="btn btn-outline btn-success dim m-l-xs" type="button" onclick="graficoBar('EsteMes')">Este mes</button>
-                                            <button id="btn30dias" class="btn btn-outline btn-success dim m-l-xs" type="button" onclick="graficoBar('30dias')">Últimos 30 días</button>
-                                            <button id="btnEsteAnio" class="btn btn-outline btn-success dim m-l-xs" type="button" onclick="graficoBar('EsteAnio')">Este año</button>
-                                            <button id="btnFiltro" class="btn btn-outline btn-success dim m-l-xs" type="button" onclick="botonSeleccionado('Filtro')" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Aplicar Filtro</button>
+                                            <button id="btnHoy" class="btn btn-outline btn-success m-l-xs active" type="button" onclick="grafico('Hoy')">Hoy</button>
+                                            <button id="btn7dias" class="btn btn-outline btn-success m-l-xs" type="button" onclick="grafico('7dias')">Últimos 7 días</button>
+                                            <button id="btnEsteMes" class="btn btn-outline btn-success m-l-xs" type="button" onclick="grafico('EsteMes')">Este mes</button>
+                                            <button id="btn30dias" class="btn btn-outline btn-success m-l-xs" type="button" onclick="grafico('30dias')">Últimos 30 días</button>
+                                            <button id="btnEsteAnio" class="btn btn-outline btn-success m-l-xs" type="button" onclick="grafico('EsteAnio')">Este año</button>
+                                            <button id="btnFiltro" class="btn btn-outline btn-success m-l-xs" type="button" onclick="botonSeleccionado('Filtro')" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Aplicar Filtro</button>
                                         </div>
                                     </div>
                                 </div>
@@ -89,6 +89,12 @@
                                 <div class="col-sm-12">
                                     <div class="hr-line-dashed"></div>
                                     <div id="columnchart" style="width: 1000px; height: 500px"></div>
+                                </div>                               
+                            </div>
+                            <div class="row">    
+                                <div class="col-sm-12">
+                                    <div class="hr-line-dashed"></div>
+                                    <div id="piechart" style="width: 1000px; height: 500px;"></div>
                                 </div>                                
                             </div>
                         </div>
@@ -138,13 +144,23 @@
             });
         }
 
-        function graficoBar(pOperacion) {
+        function grafico(pOperacion) {
             $('#collapseExample').removeClass('collapse in');
             $('#collapseExample').addClass('collapse');
-            var loTipoProducto = $(".select2_tipoproducto").val();
-            var loProducto = $('.chosen-select').val();
 
             botonSeleccionado(pOperacion);
+            graficoBar(pOperacion);
+            graficoPie(pOperacion);
+        }
+
+        function FiltrarPorRangoDeFecha() {
+            FiltrarPorRangoDeFechaBar();
+            FiltrarPorRangoDeFechaPie();
+        }
+
+        function graficoBar(pOperacion) {
+            var loTipoProducto = $(".select2_tipoproducto").val();
+            var loProducto = $('.chosen-select').val();           
 
             $.ajax({
                 type: "POST",
@@ -168,9 +184,35 @@
             });
         }
 
-        function FiltrarPorRangoDeFecha() {
+        function graficoPie(pOperacion) {
             var loTipoProducto = $(".select2_tipoproducto").val();
             var loProducto = $('.chosen-select').val();
+
+            $.ajax({
+                type: "POST",
+                url: "Index.aspx/ObtenerVentasPorProductoPieChart",
+                data: JSON.stringify({'pProductos':loProducto, 'pTipoProducto':loTipoProducto, 'pOperacion':pOperacion}),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {                   
+                    if (data.d != "") {
+                        drawPieChart(data.d);
+                    }
+                },
+                failure: function (data) {
+                    swal({
+                        title: "Generación de Gráfico",
+                        text: "El gráfico no se puedo generar.",
+                        type: "warning",
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+            });
+        }
+
+        function FiltrarPorRangoDeFechaBar() {
+            var loProducto = $('.chosen-select').val();
+            var loTipoProducto = $(".select2_tipoproducto").val();
             var txtFechaDesde = $(<%=txtFechaDesde.ClientID%>).val();
             var txtFechaHasta = $(<%=txtFechaHasta.ClientID%>).val();
 
@@ -196,61 +238,89 @@
             });
         }
 
+        function FiltrarPorRangoDeFechaPie() {
+            var loProducto = $('.chosen-select').val();
+            var loTipoProducto = $(".select2_tipoproducto").val();
+            var txtFechaDesde = $(<%=txtFechaDesde.ClientID%>).val();
+            var txtFechaHasta = $(<%=txtFechaHasta.ClientID%>).val();
+
+            $.ajax({
+                type: "POST",
+                url: "Index.aspx/ObtenerVentasPorProductoPieChartFiltro",
+                data: JSON.stringify({'pProductos':loProducto,'pTipoProducto':loTipoProducto, 'pFechaDesde':txtFechaDesde, 'pFechaHasta':txtFechaHasta}),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {                   
+                    if (data.d != "") {
+                        drawPieChart(data.d);
+                    }
+                },
+                failure: function (data) {
+                    swal({
+                        title: "Generación de Gráfico",
+                        text: "El gráfico no se puedo generar.",
+                        type: "warning",
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+            });
+        }
+
         function botonSeleccionado(pOperacion) {
             if (pOperacion == undefined) {                
                 return;
             }
             if (pOperacion == "Hoy") {
-                $('#btnHoy').attr('class', 'btn btn-outline btn-success dim m-l-xs active');
-                $('#btn7dias').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-                $('#btnEsteMes').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-                $('#btn30dias').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-                $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-                $('#btnFiltro').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+                $('#btnHoy').attr('class', 'btn btn-outline btn-success m-l-xs active');
+                $('#btn7dias').attr('class', 'btn btn-outline btn-success m-l-xs');
+                $('#btnEsteMes').attr('class', 'btn btn-outline btn-success m-l-xs');
+                $('#btn30dias').attr('class', 'btn btn-outline btn-success m-l-xs');
+                $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success m-l-xs');
+                $('#btnFiltro').attr('class', 'btn btn-outline btn-success m-l-xs');
             } else {
                 if (pOperacion == "7dias") {
-                    $('#btnHoy').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-                    $('#btn7dias').attr('class', 'btn btn-outline btn-success dim m-l-xs active');
-                    $('#btnEsteMes').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-                    $('#btn30dias').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-                    $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-                    $('#btnFiltro').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+                    $('#btnHoy').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btn7dias').attr('class', 'btn btn-outline btn-success m-l-xs active');
+                    $('#btnEsteMes').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btn30dias').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btnFiltro').attr('class', 'btn btn-outline btn-success m-l-xs');
                 }
                 else {   
                     if (pOperacion == "EsteMes") {
-                        $('#btnHoy').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-                        $('#btn7dias').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-                        $('#btnEsteMes').attr('class', 'btn btn-outline btn-success dim m-l-xs active');
-                        $('#btn30dias').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-                        $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-                        $('#btnFiltro').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+                        $('#btnHoy').attr('class', 'btn btn-outline btn-success m-l-xs');
+                        $('#btn7dias').attr('class', 'btn btn-outline btn-success m-l-xs');
+                        $('#btnEsteMes').attr('class', 'btn btn-outline btn-success m-l-xs active');
+                        $('#btn30dias').attr('class', 'btn btn-outline btn-success m-l-xs');
+                        $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success m-l-xs');
+                        $('#btnFiltro').attr('class', 'btn btn-outline btn-success m-l-xs');
                     }
                     else {
                         if (pOperacion == "30dias") {
-                            $('#btnHoy').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-                            $('#btn7dias').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-                            $('#btnEsteMes').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-                            $('#btn30dias').attr('class', 'btn btn-outline btn-success dim m-l-xs active');
-                            $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-                            $('#btnFiltro').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+                            $('#btnHoy').attr('class', 'btn btn-outline btn-success m-l-xs');
+                            $('#btn7dias').attr('class', 'btn btn-outline btn-success m-l-xs');
+                            $('#btnEsteMes').attr('class', 'btn btn-outline btn-success m-l-xs');
+                            $('#btn30dias').attr('class', 'btn btn-outline btn-success m-l-xs active');
+                            $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success m-l-xs');
+                            $('#btnFiltro').attr('class', 'btn btn-outline btn-success m-l-xs');
                         }
                         else {
                             if (pOperacion == "EsteAnio") {
-                                $('#btnHoy').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-                                $('#btn7dias').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-                                $('#btnEsteMes').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-                                $('#btn30dias').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-                                $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success dim m-l-xs active');
-                                $('#btnFiltro').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+                                $('#btnHoy').attr('class', 'btn btn-outline btn-success m-l-xs');
+                                $('#btn7dias').attr('class', 'btn btn-outline btn-success m-l-xs');
+                                $('#btnEsteMes').attr('class', 'btn btn-outline btn-success m-l-xs');
+                                $('#btn30dias').attr('class', 'btn btn-outline btn-success m-l-xs');
+                                $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success m-l-xs active');
+                                $('#btnFiltro').attr('class', 'btn btn-outline btn-success m-l-xs');
                             }
                             else {
                                 if (pOperacion == "Filtro") {
-                                    $('#btnHoy').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-                                    $('#btn7dias').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-                                    $('#btnEsteMes').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-                                    $('#btn30dias').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-                                    $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-                                    $('#btnFiltro').attr('class', 'btn btn-outline btn-success dim m-l-xs active');
+                                    $('#btnHoy').attr('class', 'btn btn-outline btn-success m-l-xs');
+                                    $('#btn7dias').attr('class', 'btn btn-outline btn-success m-l-xs');
+                                    $('#btnEsteMes').attr('class', 'btn btn-outline btn-success m-l-xs');
+                                    $('#btn30dias').attr('class', 'btn btn-outline btn-success m-l-xs');
+                                    $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success m-l-xs');
+                                    $('#btnFiltro').attr('class', 'btn btn-outline btn-success m-l-xs active');
                                 }
                             }
                         }
@@ -258,10 +328,76 @@
                 }
             }
         }
+
+        //function botonSeleccionado(pOperacion) {
+        //    if (pOperacion == undefined) {                
+        //        return;
+        //    }
+        //    if (pOperacion == "Hoy") {
+        //        $('#btnHoy').attr('class', 'btn btn-outline btn-success dim m-l-xs active');
+        //        $('#btn7dias').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+        //        $('#btnEsteMes').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+        //        $('#btn30dias').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+        //        $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+        //        $('#btnFiltro').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+        //    } else {
+        //        if (pOperacion == "7dias") {
+        //            $('#btnHoy').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+        //            $('#btn7dias').attr('class', 'btn btn-outline btn-success dim m-l-xs active');
+        //            $('#btnEsteMes').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+        //            $('#btn30dias').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+        //            $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+        //            $('#btnFiltro').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+        //        }
+        //        else {   
+        //            if (pOperacion == "EsteMes") {
+        //                $('#btnHoy').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+        //                $('#btn7dias').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+        //                $('#btnEsteMes').attr('class', 'btn btn-outline btn-success dim m-l-xs active');
+        //                $('#btn30dias').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+        //                $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+        //                $('#btnFiltro').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+        //            }
+        //            else {
+        //                if (pOperacion == "30dias") {
+        //                    $('#btnHoy').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+        //                    $('#btn7dias').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+        //                    $('#btnEsteMes').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+        //                    $('#btn30dias').attr('class', 'btn btn-outline btn-success dim m-l-xs active');
+        //                    $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+        //                    $('#btnFiltro').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+        //                }
+        //                else {
+        //                    if (pOperacion == "EsteAnio") {
+        //                        $('#btnHoy').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+        //                        $('#btn7dias').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+        //                        $('#btnEsteMes').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+        //                        $('#btn30dias').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+        //                        $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success dim m-l-xs active');
+        //                        $('#btnFiltro').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+        //                    }
+        //                    else {
+        //                        if (pOperacion == "Filtro") {
+        //                            $('#btnHoy').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+        //                            $('#btn7dias').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+        //                            $('#btnEsteMes').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+        //                            $('#btn30dias').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+        //                            $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success dim m-l-xs');
+        //                            $('#btnFiltro').attr('class', 'btn btn-outline btn-success dim m-l-xs active');
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
     </script>
     <script type="text/javascript">
         google.charts.load('current', { 'packages': ['bar'] });
-        google.charts.setOnLoadCallback(drawChart);
+        //google.charts.setOnLoadCallback(drawChart);
+
+        google.charts.load('current', {'packages':['corechart']});
+        //google.charts.setOnLoadCallback(drawPieChart);
 
         function drawChart(pData) {
 
@@ -269,7 +405,7 @@
             var data = new google.visualization.arrayToDataTable(loData);
 
             var options = {
-                title: "Ventas por tipo de producto",
+                //title: "Ventas por tipo de producto",
                 vAxis: { // Valores verticales
                     title:"Cantidad"
                 },
@@ -283,6 +419,21 @@
             var chart = new google.charts.Bar(document.getElementById('columnchart'));
             chart.draw(data, google.charts.Bar.convertOptions(options));
         };
+
+        function drawPieChart(pData) {
+
+            var loData = pData;
+            var data = google.visualization.arrayToDataTable(loData);
+
+            var options = {
+                //title: 'Ventas por tipo de producto',
+                width: 800,
+                height: 300
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+            chart.draw(data, options);
+        }
     </script>
    
 </asp:Content>

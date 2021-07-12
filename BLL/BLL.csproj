@@ -171,6 +171,9 @@
     <Compile Include="DAL\ObtenerVentasPorTipoProductoPorAnio_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
+    <Compile Include="DAL\ObtenerVentasPorTipoProductoPorProductosPieChart_Result.cs">
+      <DependentUpon>Model.tt</DependentUpon>
+    </Compile>
     <Compile Include="DAL\ObtenerVentasPorTipoProductoPorProductos_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>

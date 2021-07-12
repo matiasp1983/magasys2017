@@ -185,6 +185,9 @@ namespace PL.AdminDashboard
                         loProductos += string.Format("{0},", item);
                 }
 
+                if (!String.IsNullOrEmpty(loProductos))
+                    loProductos = loProductos.Remove(loProductos.Length - 1);
+
                 fechaDesde = Convert.ToDateTime(pFechaDesde);
                 fechaHasta = Convert.ToDateTime(pFechaHasta).Date.AddHours(23).AddMinutes(59).AddSeconds(59);
 
@@ -292,6 +295,115 @@ namespace PL.AdminDashboard
                 }
             }
 
+            return chartData;
+        }
+
+        [WebMethod]
+        public static List<object> ObtenerVentasPorProductoPieChart(string[] pProductos, string pTipoProducto, string pOperacion)
+        {
+            List<object> chartData = new List<object>();;
+            int contador = 0;
+            DateTime fechaDesde = DateTime.Today;
+            DateTime fechaHasta = DateTime.Today.Date.AddHours(23).AddMinutes(59).AddSeconds(59);
+            var loProductos = string.Empty;
+
+            if (!string.IsNullOrEmpty(pTipoProducto) && !String.IsNullOrEmpty(pOperacion))
+            {
+                switch (pOperacion)
+                {
+                    case "7dias":
+                        fechaDesde = DateTime.Today.AddDays(-7);
+                        break;
+                    case "EsteMes":
+                        fechaDesde = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+                        break;
+                    case "30dias":
+                        fechaDesde = DateTime.Today.AddDays(-30);
+                        break;
+                    case "EsteAnio":
+                        fechaDesde = new DateTime(DateTime.Now.Year, 1, 1);
+                        break;
+                }
+
+                foreach (var item in pProductos.ToList())
+                {
+                    if (!String.IsNullOrEmpty(item))
+                        loProductos += string.Format("{0},", item);
+                }
+
+                if (!String.IsNullOrEmpty(loProductos))
+                    loProductos = loProductos.Remove(loProductos.Length - 1);
+
+                var lstDatos = new ProductoBLL().ObtenerVentasPorTipoProductoPorProductosPieChart(pTipoProducto, loProductos, fechaDesde, fechaHasta);
+
+                if (lstDatos.Count > 0)
+                {
+                    chartData.Add(new object[2]);
+                    ((object[])chartData[0])[0] = "Producto";
+                    ((object[])chartData[0])[1] = "Cantidad";
+
+                    foreach (var item in lstDatos)
+                    {
+                        contador++;
+                        chartData.Add(new object[2]);
+
+                        if (item.COD_TIPO_PRODUCTO == 1)
+                            ((object[])chartData[contador])[0] = $"{ item.NOMBRE } - { item.DESCRIPCION }";
+                        else
+                            ((object[])chartData[contador])[0] = item.NOMBRE;
+
+                        ((object[])chartData[contador])[1] = item.CANTIDAD;
+                    }
+                }
+            }
+            return chartData;
+        }
+
+        [WebMethod]
+        public static List<object> ObtenerVentasPorProductoPieChartFiltro(string[] pProductos, string pTipoProducto, string pFechaDesde, string pFechaHasta)
+        {
+            List<object> chartData = new List<object>(); ;
+            int contador = 0;
+            DateTime fechaDesde = DateTime.MinValue;
+            DateTime fechaHasta = DateTime.MinValue;
+            var loProductos = string.Empty;
+
+            if (!String.IsNullOrEmpty(pFechaDesde) && !String.IsNullOrEmpty(pFechaHasta))
+            {
+                fechaDesde = Convert.ToDateTime(pFechaDesde);
+                fechaHasta = Convert.ToDateTime(pFechaHasta).Date.AddHours(23).AddMinutes(59).AddSeconds(59);
+
+                foreach (var item in pProductos.ToList())
+                {
+                    if (!String.IsNullOrEmpty(item))
+                        loProductos += string.Format("{0},", item);
+                }
+
+                if (!String.IsNullOrEmpty(loProductos))
+                    loProductos = loProductos.Remove(loProductos.Length - 1);
+
+                var lstDatos = new ProductoBLL().ObtenerVentasPorTipoProductoPorProductosPieChart(pTipoProducto, loProductos, fechaDesde, fechaHasta);
+
+                if (lstDatos.Count > 0)
+                {
+                    chartData.Add(new object[2]);
+                    ((object[])chartData[0])[0] = "Producto";
+                    ((object[])chartData[0])[1] = "Cantidad";
+
+                    foreach (var item in lstDatos)
+                    {
+                        contador++;
+                        chartData.Add(new object[2]);
+
+                        if (item.COD_TIPO_PRODUCTO == 1)
+                            ((object[])chartData[contador])[0] = $"{ item.NOMBRE } - { item.DESCRIPCION }";
+                        else
+                            ((object[])chartData[contador])[0] = item.NOMBRE;
+
+                        ((object[])chartData[contador])[1] = item.CANTIDAD;
+                    }
+                }
+            }
             return chartData;
         }
     }

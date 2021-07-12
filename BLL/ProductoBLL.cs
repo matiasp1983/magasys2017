@@ -513,6 +513,19 @@ namespace BLL
             }
         }
 
+        public List<ObtenerVentasPorTipoProductoPorProductosPieChart_Result> ObtenerVentasPorTipoProductoPorProductosPieChart(string pCodTipoProducto, string pProductos, DateTime pFechaDede, DateTime pFechaHasta)
+        {
+            try
+            {
+                MAGASYSEntities loContext = new MAGASYSEntities();
+                return loContext.ObtenerVentasPorTipoProductoPorProductosPieChart(Convert.ToInt32(pCodTipoProducto), pProductos, pFechaDede, pFechaHasta).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public List<VentaAnualXTipoProducto_Result> VentaAnualPorTipoProducto(string pAnio, string pCodTipoProducto)
         {
             try

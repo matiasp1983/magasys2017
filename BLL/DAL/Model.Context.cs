@@ -248,6 +248,33 @@ public partial class MAGASYSEntities : DbContext
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ObtenerVentasPorTipoProductoPorProductos_Result>("ObtenerVentasPorTipoProductoPorProductos", codTipoProductoParameter, productoParameter, fechaDesdeParameter, fechaHastaParameter);
     }
 
+
+    public virtual ObjectResult<ObtenerVentasPorTipoProductoPorProductosPieChart_Result> ObtenerVentasPorTipoProductoPorProductosPieChart(Nullable<int> codTipoProducto, string producto, Nullable<System.DateTime> fechaDesde, Nullable<System.DateTime> fechaHasta)
+    {
+
+        var codTipoProductoParameter = codTipoProducto.HasValue ?
+            new ObjectParameter("CodTipoProducto", codTipoProducto) :
+            new ObjectParameter("CodTipoProducto", typeof(int));
+
+
+        var productoParameter = producto != null ?
+            new ObjectParameter("Producto", producto) :
+            new ObjectParameter("Producto", typeof(string));
+
+
+        var fechaDesdeParameter = fechaDesde.HasValue ?
+            new ObjectParameter("FechaDesde", fechaDesde) :
+            new ObjectParameter("FechaDesde", typeof(System.DateTime));
+
+
+        var fechaHastaParameter = fechaHasta.HasValue ?
+            new ObjectParameter("FechaHasta", fechaHasta) :
+            new ObjectParameter("FechaHasta", typeof(System.DateTime));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ObtenerVentasPorTipoProductoPorProductosPieChart_Result>("ObtenerVentasPorTipoProductoPorProductosPieChart", codTipoProductoParameter, productoParameter, fechaDesdeParameter, fechaHastaParameter);
+    }
+
 }
 
 }

@@ -1119,6 +1119,12 @@
           <Parameter Name="FechaDesde" Type="datetime" Mode="In" />
           <Parameter Name="FechaHasta" Type="datetime" Mode="In" />
         </Function>
+        <Function Name="ObtenerVentasPorTipoProductoPorProductosPieChart" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CodTipoProducto" Type="int" Mode="In" />
+          <Parameter Name="Producto" Type="nvarchar" Mode="In" />
+          <Parameter Name="FechaDesde" Type="datetime" Mode="In" />
+          <Parameter Name="FechaHasta" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="ProductoMasVendido" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="anio" Type="nvarchar" Mode="In" />
           <Parameter Name="CodTipoProducto" Type="nvarchar" Mode="In" />
@@ -1682,6 +1688,12 @@
             <Parameter Name="FechaHasta" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="ObtenerVentasPorTipoProductoPorProductos" ReturnType="Collection(MAGASYSModel.ObtenerVentasPorTipoProductoPorProductos_Result)">
+            <Parameter Name="CodTipoProducto" Mode="In" Type="Int32" />
+            <Parameter Name="Producto" Mode="In" Type="String" />
+            <Parameter Name="FechaDesde" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaHasta" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="ObtenerVentasPorTipoProductoPorProductosPieChart" ReturnType="Collection(MAGASYSModel.ObtenerVentasPorTipoProductoPorProductosPieChart_Result)">
             <Parameter Name="CodTipoProducto" Mode="In" Type="Int32" />
             <Parameter Name="Producto" Mode="In" Type="String" />
             <Parameter Name="FechaDesde" Mode="In" Type="DateTime" />
@@ -2922,6 +2934,13 @@
           <Property Type="Int32" Name="COD_TIPO_PRODUCTO" Nullable="false" />
           <Property Type="Int32" Name="CANTIDAD" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="ObtenerVentasPorTipoProductoPorProductosPieChart_Result">
+          <Property Type="Int32" Name="ID_PRODUCTO" Nullable="false" />
+          <Property Type="String" Name="NOMBRE" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="DESCRIPCION" Nullable="true" />
+          <Property Type="Int32" Name="COD_TIPO_PRODUCTO" Nullable="false" />
+          <Property Type="Int32" Name="CANTIDAD" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3448,6 +3467,17 @@
             <ResultMapping>
               <ComplexTypeMapping TypeName="MAGASYSModel.ObtenerVentasPorTipoProductoPorProductos_Result">
                 <ScalarProperty Name="FECHA_VENTA" ColumnName="FECHA_VENTA" />
+                <ScalarProperty Name="ID_PRODUCTO" ColumnName="ID_PRODUCTO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="COD_TIPO_PRODUCTO" ColumnName="COD_TIPO_PRODUCTO" />
+                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ObtenerVentasPorTipoProductoPorProductosPieChart" FunctionName="MAGASYSModel.Store.ObtenerVentasPorTipoProductoPorProductosPieChart">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MAGASYSModel.ObtenerVentasPorTipoProductoPorProductosPieChart_Result">
                 <ScalarProperty Name="ID_PRODUCTO" ColumnName="ID_PRODUCTO" />
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
                 <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
