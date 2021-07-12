@@ -88,12 +88,12 @@
                             <div class="row">    
                                 <div class="col-sm-12">
                                     <div class="hr-line-dashed"></div>
-                                    <div id="columnchart" style="width: 1000px; height: 500px"></div>
+                                    <div id="columnchart" style="width: 1000px; height: 400px"></div>
                                 </div>                               
                             </div>
                             <div class="row">    
                                 <div class="col-sm-12">
-                                    <div class="hr-line-dashed"></div>
+                                    <%--<div class="hr-line-dashed"></div>--%>
                                     <div id="piechart" style="width: 1000px; height: 500px;"></div>
                                 </div>                                
                             </div>
