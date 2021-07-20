@@ -1107,6 +1107,17 @@
             </CollectionType>
           </ReturnType>
         </Function>
+        <Function Name="ObtenerDevolucionesPorTipoProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CodTipoProducto" Type="int" Mode="In" />
+          <Parameter Name="Producto" Type="nvarchar" Mode="In" />
+          <Parameter Name="FechaDesde" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="ObtenerIngresosPorTipoProducto" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CodTipoProducto" Type="int" Mode="In" />
+          <Parameter Name="Producto" Type="nvarchar" Mode="In" />
+          <Parameter Name="FechaDesde" Type="datetime" Mode="In" />
+          <Parameter Name="FechaHasta" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="ObtenerVentasPorTipoProductoPorAnio" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CodTipoProducto" Type="int" Mode="In" />
           <Parameter Name="Producto" Type="nvarchar" Mode="In" />
@@ -1694,6 +1705,17 @@
             <Parameter Name="FechaHasta" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="ObtenerVentasPorTipoProductoPorProductosPieChart" ReturnType="Collection(MAGASYSModel.ObtenerVentasPorTipoProductoPorProductosPieChart_Result)">
+            <Parameter Name="CodTipoProducto" Mode="In" Type="Int32" />
+            <Parameter Name="Producto" Mode="In" Type="String" />
+            <Parameter Name="FechaDesde" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaHasta" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="ObtenerDevolucionesPorTipoProducto" ReturnType="Collection(MAGASYSModel.ObtenerDevolucionesPorTipoProducto_Result)">
+            <Parameter Name="CodTipoProducto" Mode="In" Type="Int32" />
+            <Parameter Name="Producto" Mode="In" Type="String" />
+            <Parameter Name="FechaDesde" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="ObtenerIngresosPorTipoProducto" ReturnType="Collection(MAGASYSModel.ObtenerIngresosPorTipoProducto_Result)">
             <Parameter Name="CodTipoProducto" Mode="In" Type="Int32" />
             <Parameter Name="Producto" Mode="In" Type="String" />
             <Parameter Name="FechaDesde" Mode="In" Type="DateTime" />
@@ -2941,6 +2963,18 @@
           <Property Type="Int32" Name="COD_TIPO_PRODUCTO" Nullable="false" />
           <Property Type="Int32" Name="CANTIDAD" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="ObtenerDevolucionesPorTipoProducto_Result">
+          <Property Type="Int32" Name="COD_PRODUCTO" Nullable="false" />
+          <Property Type="String" Name="NOMBRE" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="DESCRIPCION" Nullable="true" />
+          <Property Type="Int32" Name="CANTIDAD" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="ObtenerIngresosPorTipoProducto_Result">
+          <Property Type="Int32" Name="COD_PRODUCTO" Nullable="false" />
+          <Property Type="String" Name="NOMBRE" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="DESCRIPCION" Nullable="true" />
+          <Property Type="Int32" Name="CANTIDAD" Nullable="true" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3482,6 +3516,26 @@
                 <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
                 <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
                 <ScalarProperty Name="COD_TIPO_PRODUCTO" ColumnName="COD_TIPO_PRODUCTO" />
+                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ObtenerDevolucionesPorTipoProducto" FunctionName="MAGASYSModel.Store.ObtenerDevolucionesPorTipoProducto">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MAGASYSModel.ObtenerDevolucionesPorTipoProducto_Result">
+                <ScalarProperty Name="COD_PRODUCTO" ColumnName="COD_PRODUCTO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
+                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ObtenerIngresosPorTipoProducto" FunctionName="MAGASYSModel.Store.ObtenerIngresosPorTipoProducto">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="MAGASYSModel.ObtenerIngresosPorTipoProducto_Result">
+                <ScalarProperty Name="COD_PRODUCTO" ColumnName="COD_PRODUCTO" />
+                <ScalarProperty Name="NOMBRE" ColumnName="NOMBRE" />
+                <ScalarProperty Name="DESCRIPCION" ColumnName="DESCRIPCION" />
                 <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
               </ComplexTypeMapping>
             </ResultMapping>

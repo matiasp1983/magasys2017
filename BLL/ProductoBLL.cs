@@ -539,6 +539,32 @@ namespace BLL
             }
         }
 
+        public List<ObtenerIngresosPorTipoProducto_Result> ObtenerIngresosPorTipoProducto(string pCodTipoProducto, string pProductos, DateTime pFechaDede, DateTime pFechaHasta)
+        {
+            try
+            {
+                MAGASYSEntities loContext = new MAGASYSEntities();
+                return loContext.ObtenerIngresosPorTipoProducto(Convert.ToInt32(pCodTipoProducto), pProductos, pFechaDede, pFechaHasta).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<ObtenerDevolucionesPorTipoProducto_Result> ObtenerDevolucionesPorTipoProducto(string pCodTipoProducto, string pProductos, DateTime pFechaDede)
+        {
+            try
+            {
+                MAGASYSEntities loContext = new MAGASYSEntities();
+                return loContext.ObtenerDevolucionesPorTipoProducto(Convert.ToInt32(pCodTipoProducto), pProductos, pFechaDede).ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public Imagen ObtenerImagen(int codImagen)
         {
             Imagen oImagen = null;
@@ -595,6 +621,13 @@ namespace BLL
         public string AUTOR { get; set; }
         public string ANIO { get; set; }
         public string NOMBRE_DIARIO { get; set; }
+    }
+
+    public class ValorRatio
+    {
+        public int COD_PRODUCTO { get; set; }
+        public string VALOR { get; set; }
+        public string NOMBRE { get; set; }
     }
 
     #endregion

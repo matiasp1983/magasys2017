@@ -67,6 +67,11 @@ namespace PL.AdminDashboard
             {
                 liPrincipal.Attributes["class"] = "active";
             }
+            if (loActivePage.Equals("ReporteIngresoDevolucion.aspx"))
+            {
+                liReportes.Attributes["class"] = "active";
+                liReporteIngresoDevolucion.Attributes["class"] = "active";
+            }
             //if (loActivePage.Equals("ReporteVentaAnualTipoProducto.aspx"))
             //{
             //    liReportes.Attributes["class"] = "active";
