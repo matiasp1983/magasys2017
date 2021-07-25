@@ -40,15 +40,6 @@ namespace PL.AdminDashboard {
         protected global::System.Web.UI.WebControls.Label lblUsuarioLogout;
         
         /// <summary>
-        /// Control liPrincipal.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liPrincipal;
-        
-        /// <summary>
         /// Control liReportes.
         /// </summary>
         /// <remarks>
@@ -56,6 +47,15 @@ namespace PL.AdminDashboard {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl liReportes;
+        
+        /// <summary>
+        /// Control liIndex.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liIndex;
         
         /// <summary>
         /// Control liReporteIngresoDevolucion.

@@ -38,13 +38,14 @@
                             M+                       
                         </div>
                     </li>
-                    <li id="liPrincipal" runat="server">
+<%--                    <li id="liPrincipal" runat="server">
                         <a href="Index.aspx"><i class="fa fa-home"></i><span class="nav-label">Principal</span> <span class="fa arrow"></span></a>
-                    </li>
+                    </li>--%>
                     <li id="liReportes" runat="server">
-                        <a href="#"><i class="fa fa-line-chart"></i><span class="nav-label">Reportes</span><span class="fa arrow"></span></a>
+                        <a href="Index.aspx"><i class="fa fa-line-chart"></i><span class="nav-label">Reportes</span><span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level collapse">
-                            <li id="liReporteIngresoDevolucion" runat="server"><a href="ReporteIngresoDevolucion.aspx">Ratio</a></li>
+                            <li id="liIndex" runat="server"><a href="Index.aspx">Ventas por tipo de producto</a></li>
+                            <li id="liReporteIngresoDevolucion" runat="server"><a href="ReporteIngresoDevolucion.aspx">Devolución / Ingreso - Ratio</a></li>
 <%--                            <li id="liReporteVentaAnualTipoProducto" runat="server"><a href="ReporteVentaAnualTipoProducto.aspx">Venta anual por tipo de producto</a></li>
                             <li id="liDevolucionProductos" runat="server"><a href="ReporteProductoDevolucion.aspx">Devolución de productos</a></li>--%>
                         </ul>

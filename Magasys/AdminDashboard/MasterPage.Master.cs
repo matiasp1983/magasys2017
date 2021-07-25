@@ -63,9 +63,14 @@ namespace PL.AdminDashboard
         private void MenuPrincipal(BLL.DAL.Usuario pUsuario)
         {
             String loActivePage = Request.Url.Segments[2];
+            //if (loActivePage.Equals("Index.aspx"))
+            //{
+            //    liPrincipal.Attributes["class"] = "active";
+            //}
             if (loActivePage.Equals("Index.aspx"))
             {
-                liPrincipal.Attributes["class"] = "active";
+                liReportes.Attributes["class"] = "active";
+                liIndex.Attributes["class"] = "active";
             }
             if (loActivePage.Equals("ReporteIngresoDevolucion.aspx"))
             {

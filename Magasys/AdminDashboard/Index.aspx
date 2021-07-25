@@ -6,7 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="contentMaster" runat="server">
     <div class="row wrapper border-bottom white-bg page-heading">
         <div class="col-lg-10">
-            <h2>Reportes</h2>
+            <h2>Reporte</h2>
 <%--            <ol class="breadcrumb">
                 <li>
                     <a href="Index.aspx">Principal</a>
