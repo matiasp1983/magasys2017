@@ -76,7 +76,7 @@ namespace PL.AdminDashboard
             List<ValorRatio> lstDatos = null;
             var loProductos = string.Empty;
             int contador = 0;
-            double ratioValor = 0;
+            //double ratioValor = 0;
 
             if (!string.IsNullOrEmpty(pTipoProducto) && !String.IsNullOrEmpty(pFechaDesde) && !String.IsNullOrEmpty(pFechaHasta))
             {
@@ -106,13 +106,13 @@ namespace PL.AdminDashboard
                         else
                             continue;
 
-                        ratioValor = Math.Round((double)Convert.ToInt32(oDevolucion.CANTIDAD) / Convert.ToInt32(item.CANTIDAD), 2);
+                        //ratioValor = Math.Round((double)Convert.ToInt32(oDevolucion.CANTIDAD) / Convert.ToInt32(item.CANTIDAD), 2);
 
                         ValorRatio oDatos = new ValorRatio()
                         {
                             COD_PRODUCTO = oDevolucion.COD_PRODUCTO,
-                            VALOR = ratioValor.ToString()
-                        };
+                            VALOR = Math.Round((double)Convert.ToInt32(oDevolucion.CANTIDAD) / Convert.ToInt32(item.CANTIDAD), 2)
+                    };
 
                         if (pTipoProducto == "1")
                             oDatos.NOMBRE = $"{ oDevolucion.NOMBRE } - { oDevolucion.DESCRIPCION }";
@@ -124,6 +124,7 @@ namespace PL.AdminDashboard
 
                     if (lstDatos.Count > 0)
                     {
+                        lstDatos = lstDatos.OrderBy(p => p.VALOR).ToList();
                         chartData.Add(new object[2]);
                         ((object[])chartData[0])[0] = "Productos";
                         ((object[])chartData[0])[1] = new TipoProductoBLL().ObtenerTipoProducto(Convert.ToInt32(pTipoProducto)).DESCRIPCION;

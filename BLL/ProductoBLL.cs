@@ -626,7 +626,7 @@ namespace BLL
     public class ValorRatio
     {
         public int COD_PRODUCTO { get; set; }
-        public string VALOR { get; set; }
+        public double VALOR { get; set; }
         public string NOMBRE { get; set; }
     }
 
