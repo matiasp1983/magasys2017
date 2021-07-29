@@ -75,8 +75,12 @@ namespace PL.AdminDashboard
             ObtenerDevolucionesPorTipoProducto_Result oDevolucion = null;
             List<ValorRatio> lstDatos = null;
             var loProductos = string.Empty;
+            var loCodEdiciones = string.Empty;
+            int codProducto = 0;
+            int contRatio = 0;
+            double acumRatio = 0;
+            double valorRatio = 0;
             int contador = 0;
-            //double ratioValor = 0;
 
             if (!string.IsNullOrEmpty(pTipoProducto) && !String.IsNullOrEmpty(pFechaDesde) && !String.IsNullOrEmpty(pFechaHasta))
             {
@@ -93,48 +97,70 @@ namespace PL.AdminDashboard
                     loProductos = loProductos.Remove(loProductos.Length - 1);
 
                 var lstIngresos = new ProductoBLL().ObtenerIngresosPorTipoProducto(pTipoProducto, loProductos, fechaDesde, fechaHasta);
-                var lstDevoluciones = new ProductoBLL().ObtenerDevolucionesPorTipoProducto(pTipoProducto, loProductos, fechaDesde);
 
-                if (lstIngresos.Count > 0 && lstDevoluciones.Count > 0) // VER SI MOSTRAR MENSAJE CUANDO NO HAY DATOS PARA MOSTRAR .....
+                if (lstIngresos.Count > 0) // VER SI MOSTRAR MENSAJE CUANDO NO HAY DATOS PARA MOSTRAR .....
                 {
-                    lstDatos = new List<ValorRatio>();
-
                     foreach (var item in lstIngresos)
                     {
-                        if (lstDevoluciones.Exists(p => p.COD_PRODUCTO == item.COD_PRODUCTO) == true)
-                            oDevolucion = lstDevoluciones.Where(p => p.COD_PRODUCTO == item.COD_PRODUCTO).First();
-                        else
-                            continue;
-
-                        //ratioValor = Math.Round((double)Convert.ToInt32(oDevolucion.CANTIDAD) / Convert.ToInt32(item.CANTIDAD), 2);
-
-                        ValorRatio oDatos = new ValorRatio()
-                        {
-                            COD_PRODUCTO = oDevolucion.COD_PRODUCTO,
-                            VALOR = Math.Round((double)Convert.ToInt32(oDevolucion.CANTIDAD) / Convert.ToInt32(item.CANTIDAD), 2)
-                    };
-
-                        if (pTipoProducto == "1")
-                            oDatos.NOMBRE = $"{ oDevolucion.NOMBRE } - { oDevolucion.DESCRIPCION }";
-                        else
-                            oDatos.NOMBRE = oDevolucion.NOMBRE;
-
-                        lstDatos.Add(oDatos);
+                        loCodEdiciones += string.Format("{0},", item.ID_PRODUCTO_EDICION);
                     }
 
-                    if (lstDatos.Count > 0)
-                    {
-                        lstDatos = lstDatos.OrderBy(p => p.VALOR).ToList();
-                        chartData.Add(new object[2]);
-                        ((object[])chartData[0])[0] = "Productos";
-                        ((object[])chartData[0])[1] = new TipoProductoBLL().ObtenerTipoProducto(Convert.ToInt32(pTipoProducto)).DESCRIPCION;
+                    if (!String.IsNullOrEmpty(loCodEdiciones))
+                        loCodEdiciones = loCodEdiciones.Remove(loCodEdiciones.Length - 1);
 
-                        foreach (var item in lstDatos)
+                    var lstDevoluciones = new ProductoBLL().ObtenerDevolucionesPorTipoProducto(loCodEdiciones);
+
+                    if (lstDevoluciones.Count > 0)
+                    {
+                        lstDatos = new List<ValorRatio>();
+
+                        foreach (var item in lstDevoluciones)
                         {
-                            contador++;
+                            if (codProducto != item.COD_PRODUCTO)
+                            {
+                                codProducto = item.COD_PRODUCTO;
+
+                                if (acumRatio > 0)
+                                {
+                                    ValorRatio oDatos = new ValorRatio();
+                                    oDatos.VALOR = Math.Round((double)acumRatio / contRatio, 2);
+                                    oDatos.COD_PRODUCTO = item.COD_PRODUCTO;
+                                    if (pTipoProducto == "1")
+                                        oDatos.NOMBRE = $"{ oDevolucion.NOMBRE } - { oDevolucion.DESCRIPCION }";
+                                    else
+                                        oDatos.NOMBRE = oDevolucion.NOMBRE;
+
+                                    lstDatos.Add(oDatos);
+                                    acumRatio = 0;
+                                    contRatio = 0;
+                                }
+                            }
+
+                            var ingresoProducto = lstIngresos.Find(p => p.ID_PRODUCTO_EDICION == item.ID_PRODUCTO_EDICION);
+                            valorRatio = Math.Round((double)Convert.ToInt32(item.CANTIDAD) / Convert.ToInt32(ingresoProducto.CANTIDAD), 2);
+                            acumRatio = acumRatio + valorRatio;
+                            contRatio++;
+                        }
+
+                        if (acumRatio > 0)
+                        {
+
+                        }
+
+                        if (lstDatos.Count > 0)
+                        {
+                            lstDatos = lstDatos.OrderBy(p => p.VALOR).ToList();
                             chartData.Add(new object[2]);
-                            ((object[])chartData[contador])[0] = item.NOMBRE;
-                            ((object[])chartData[contador])[1] = item.VALOR;
+                            ((object[])chartData[0])[0] = "Productos";
+                            ((object[])chartData[0])[1] = new TipoProductoBLL().ObtenerTipoProducto(Convert.ToInt32(pTipoProducto)).DESCRIPCION;
+
+                            foreach (var item in lstDatos)
+                            {
+                                contador++;
+                                chartData.Add(new object[2]);
+                                ((object[])chartData[contador])[0] = item.NOMBRE;
+                                ((object[])chartData[contador])[1] = item.VALOR;
+                            }
                         }
                     }
                 }
