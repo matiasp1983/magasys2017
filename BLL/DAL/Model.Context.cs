@@ -276,7 +276,7 @@ public partial class MAGASYSEntities : DbContext
     }
 
 
-    public virtual ObjectResult<ObtenerDevolucionesPorTipoProducto_Result> ObtenerDevolucionesPorTipoProducto(string codEdicion)
+    public virtual ObjectResult<ObtenerDevolucionesPorTipoProducto1_Result> ObtenerDevolucionesPorTipoProducto(string codEdicion)
     {
 
         var codEdicionParameter = codEdicion != null ?
@@ -284,11 +284,11 @@ public partial class MAGASYSEntities : DbContext
             new ObjectParameter("CodEdicion", typeof(string));
 
 
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ObtenerDevolucionesPorTipoProducto_Result>("ObtenerDevolucionesPorTipoProducto", codEdicionParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ObtenerDevolucionesPorTipoProducto1_Result>("ObtenerDevolucionesPorTipoProducto", codEdicionParameter);
     }
 
 
-    public virtual ObjectResult<ObtenerIngresosPorTipoProducto_Result> ObtenerIngresosPorTipoProducto(Nullable<int> codTipoProducto, string producto, Nullable<System.DateTime> fechaDesde, Nullable<System.DateTime> fechaHasta)
+    public virtual ObjectResult<ObtenerIngresosPorTipoProducto1_Result> ObtenerIngresosPorTipoProducto(Nullable<int> codTipoProducto, string producto, Nullable<System.DateTime> fechaDesde, Nullable<System.DateTime> fechaHasta)
     {
 
         var codTipoProductoParameter = codTipoProducto.HasValue ?
@@ -311,7 +311,46 @@ public partial class MAGASYSEntities : DbContext
             new ObjectParameter("FechaHasta", typeof(System.DateTime));
 
 
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ObtenerIngresosPorTipoProducto_Result>("ObtenerIngresosPorTipoProducto", codTipoProductoParameter, productoParameter, fechaDesdeParameter, fechaHastaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ObtenerIngresosPorTipoProducto1_Result>("ObtenerIngresosPorTipoProducto", codTipoProductoParameter, productoParameter, fechaDesdeParameter, fechaHastaParameter);
+    }
+
+
+    public virtual ObjectResult<ObtenerDevolucionesPorTipoProducto1_Result> ObtenerDevolucionesPorTipoProducto1(string codEdicion)
+    {
+
+        var codEdicionParameter = codEdicion != null ?
+            new ObjectParameter("CodEdicion", codEdicion) :
+            new ObjectParameter("CodEdicion", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ObtenerDevolucionesPorTipoProducto1_Result>("ObtenerDevolucionesPorTipoProducto1", codEdicionParameter);
+    }
+
+
+    public virtual ObjectResult<ObtenerIngresosPorTipoProducto1_Result> ObtenerIngresosPorTipoProducto1(Nullable<int> codTipoProducto, string producto, Nullable<System.DateTime> fechaDesde, Nullable<System.DateTime> fechaHasta)
+    {
+
+        var codTipoProductoParameter = codTipoProducto.HasValue ?
+            new ObjectParameter("CodTipoProducto", codTipoProducto) :
+            new ObjectParameter("CodTipoProducto", typeof(int));
+
+
+        var productoParameter = producto != null ?
+            new ObjectParameter("Producto", producto) :
+            new ObjectParameter("Producto", typeof(string));
+
+
+        var fechaDesdeParameter = fechaDesde.HasValue ?
+            new ObjectParameter("FechaDesde", fechaDesde) :
+            new ObjectParameter("FechaDesde", typeof(System.DateTime));
+
+
+        var fechaHastaParameter = fechaHasta.HasValue ?
+            new ObjectParameter("FechaHasta", fechaHasta) :
+            new ObjectParameter("FechaHasta", typeof(System.DateTime));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ObtenerIngresosPorTipoProducto1_Result>("ObtenerIngresosPorTipoProducto1", codTipoProductoParameter, productoParameter, fechaDesdeParameter, fechaHastaParameter);
     }
 
 }

@@ -539,7 +539,7 @@ namespace BLL
             }
         }
 
-        public List<ObtenerIngresosPorTipoProducto_Result> ObtenerIngresosPorTipoProducto(string pCodTipoProducto, string pProductos, DateTime pFechaDede, DateTime pFechaHasta)
+        public List<ObtenerIngresosPorTipoProducto1_Result> ObtenerIngresosPorTipoProducto(string pCodTipoProducto, string pProductos, DateTime pFechaDede, DateTime pFechaHasta)
         {
             try
             {
@@ -552,7 +552,7 @@ namespace BLL
             }
         }
 
-        public List<ObtenerDevolucionesPorTipoProducto_Result> ObtenerDevolucionesPorTipoProducto(string pCodProductoEdicion)
+        public List<ObtenerDevolucionesPorTipoProducto1_Result> ObtenerDevolucionesPorTipoProducto(string pCodProductoEdicion)
         {
             try
             {
