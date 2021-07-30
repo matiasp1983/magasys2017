@@ -276,25 +276,15 @@ public partial class MAGASYSEntities : DbContext
     }
 
 
-    public virtual ObjectResult<ObtenerDevolucionesPorTipoProducto_Result> ObtenerDevolucionesPorTipoProducto(Nullable<int> codTipoProducto, string producto, Nullable<System.DateTime> fechaDesde)
+    public virtual ObjectResult<ObtenerDevolucionesPorTipoProducto_Result> ObtenerDevolucionesPorTipoProducto(string codEdicion)
     {
 
-        var codTipoProductoParameter = codTipoProducto.HasValue ?
-            new ObjectParameter("CodTipoProducto", codTipoProducto) :
-            new ObjectParameter("CodTipoProducto", typeof(int));
+        var codEdicionParameter = codEdicion != null ?
+            new ObjectParameter("CodEdicion", codEdicion) :
+            new ObjectParameter("CodEdicion", typeof(string));
 
 
-        var productoParameter = producto != null ?
-            new ObjectParameter("Producto", producto) :
-            new ObjectParameter("Producto", typeof(string));
-
-
-        var fechaDesdeParameter = fechaDesde.HasValue ?
-            new ObjectParameter("FechaDesde", fechaDesde) :
-            new ObjectParameter("FechaDesde", typeof(System.DateTime));
-
-
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ObtenerDevolucionesPorTipoProducto_Result>("ObtenerDevolucionesPorTipoProducto", codTipoProductoParameter, productoParameter, fechaDesdeParameter);
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ObtenerDevolucionesPorTipoProducto_Result>("ObtenerDevolucionesPorTipoProducto", codEdicionParameter);
     }
 
 

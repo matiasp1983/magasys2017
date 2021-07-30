@@ -168,12 +168,6 @@
     <Compile Include="DAL\Negocio.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
-    <Compile Include="DAL\ObtenerDevolucionesPorTipoProducto_Result.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
-    <Compile Include="DAL\ObtenerIngresosPorTipoProducto_Result.cs">
-      <DependentUpon>Model.tt</DependentUpon>
-    </Compile>
     <Compile Include="DAL\ObtenerVentasPorTipoProductoPorAnio_Result.cs">
       <DependentUpon>Model.tt</DependentUpon>
     </Compile>
