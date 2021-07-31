@@ -544,7 +544,7 @@ namespace BLL
             try
             {
                 MAGASYSEntities loContext = new MAGASYSEntities();
-                return loContext.ObtenerIngresosPorTipoProducto(Convert.ToInt32(pCodTipoProducto), pProductos, pFechaDede, pFechaHasta).ToList();
+                return loContext.ObtenerIngresosPorTipoProducto1(Convert.ToInt32(pCodTipoProducto), pProductos, pFechaDede, pFechaHasta).ToList();
             }
             catch (Exception ex)
             {
@@ -557,7 +557,7 @@ namespace BLL
             try
             {
                 MAGASYSEntities loContext = new MAGASYSEntities();
-                return loContext.ObtenerDevolucionesPorTipoProducto(pCodProductoEdicion).ToList();
+                return loContext.ObtenerDevolucionesPorTipoProducto1(pCodProductoEdicion).ToList();
             }
             catch (Exception ex)
             {

@@ -72,7 +72,6 @@ namespace PL.AdminDashboard
             List<object> chartData = new List<object>();
             DateTime fechaDesde = DateTime.Today;
             DateTime fechaHasta = DateTime.Today.Date.AddHours(23).AddMinutes(59).AddSeconds(59);
-            ObtenerDevolucionesPorTipoProducto_Result oDevolucion = null;
             List<ValorRatio> lstDatos = null;
             var loProductos = string.Empty;
             var loCodEdiciones = string.Empty;
@@ -81,6 +80,10 @@ namespace PL.AdminDashboard
             double acumRatio = 0;
             double valorRatio = 0;
             int contador = 0;
+            int contadorDevoluciones = 0;
+            int codProductoAux = 0;
+            string nombreProductoAux = string.Empty;
+            string DescripProductoAux = string.Empty;
 
             if (!string.IsNullOrEmpty(pTipoProducto) && !String.IsNullOrEmpty(pFechaDesde) && !String.IsNullOrEmpty(pFechaHasta))
             {
@@ -124,27 +127,38 @@ namespace PL.AdminDashboard
                                 {
                                     ValorRatio oDatos = new ValorRatio();
                                     oDatos.VALOR = Math.Round((double)acumRatio / contRatio, 2);
-                                    oDatos.COD_PRODUCTO = item.COD_PRODUCTO;
+                                    oDatos.COD_PRODUCTO = codProductoAux;
                                     if (pTipoProducto == "1")
-                                        oDatos.NOMBRE = $"{ oDevolucion.NOMBRE } - { oDevolucion.DESCRIPCION }";
+                                        oDatos.NOMBRE = $"{ nombreProductoAux } - { DescripProductoAux }";
                                     else
-                                        oDatos.NOMBRE = oDevolucion.NOMBRE;
+                                        oDatos.NOMBRE = nombreProductoAux;
 
                                     lstDatos.Add(oDatos);
                                     acumRatio = 0;
                                     contRatio = 0;
                                 }
+
+                                codProductoAux = item.COD_PRODUCTO;
+                                nombreProductoAux = item.NOMBRE;
+                                DescripProductoAux = item.DESCRIPCION;
                             }
 
                             var ingresoProducto = lstIngresos.Find(p => p.ID_PRODUCTO_EDICION == item.ID_PRODUCTO_EDICION);
                             valorRatio = Math.Round((double)Convert.ToInt32(item.CANTIDAD) / Convert.ToInt32(ingresoProducto.CANTIDAD), 2);
                             acumRatio = acumRatio + valorRatio;
                             contRatio++;
-                        }
-
-                        if (acumRatio > 0)
-                        {
-
+                            contadorDevoluciones++;
+                            if (contadorDevoluciones == lstDevoluciones.Count && acumRatio > 0)
+                            {
+                                ValorRatio oDatos = new ValorRatio();
+                                oDatos.VALOR = Math.Round((double)acumRatio / contRatio, 2);
+                                oDatos.COD_PRODUCTO = item.COD_PRODUCTO;
+                                if (pTipoProducto == "1")
+                                    oDatos.NOMBRE = $"{ item.NOMBRE } - { item.DESCRIPCION }";
+                                else
+                                    oDatos.NOMBRE = item.NOMBRE;
+                                lstDatos.Add(oDatos);
+                            }
                         }
 
                         if (lstDatos.Count > 0)
