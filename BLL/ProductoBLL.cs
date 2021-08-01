@@ -552,12 +552,12 @@ namespace BLL
             }
         }
 
-        public List<ObtenerDevolucionesPorTipoProducto1_Result> ObtenerDevolucionesPorTipoProducto(string pCodProductoEdicion)
+        public List<ObtenerDevolucionesPorTipoProducto_V2_Result> ObtenerDevolucionesPorTipoProducto(string pCodProductoEdicion, DateTime pFechaDede)
         {
             try
             {
                 MAGASYSEntities loContext = new MAGASYSEntities();
-                return loContext.ObtenerDevolucionesPorTipoProducto1(pCodProductoEdicion).ToList();
+                return loContext.ObtenerDevolucionesPorTipoProducto_V2(pCodProductoEdicion, pFechaDede).ToList();
             }
             catch (Exception ex)
             {

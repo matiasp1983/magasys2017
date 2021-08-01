@@ -111,7 +111,7 @@ namespace PL.AdminDashboard
                     if (!String.IsNullOrEmpty(loCodEdiciones))
                         loCodEdiciones = loCodEdiciones.Remove(loCodEdiciones.Length - 1);
 
-                    var lstDevoluciones = new ProductoBLL().ObtenerDevolucionesPorTipoProducto(loCodEdiciones);
+                    var lstDevoluciones = new ProductoBLL().ObtenerDevolucionesPorTipoProducto(loCodEdiciones, fechaDesde);
 
                     if (lstDevoluciones.Count > 0)
                     {
@@ -241,7 +241,7 @@ namespace PL.AdminDashboard
                     if (!String.IsNullOrEmpty(loCodEdiciones))
                         loCodEdiciones = loCodEdiciones.Remove(loCodEdiciones.Length - 1);
 
-                    var lstDevoluciones = new ProductoBLL().ObtenerDevolucionesPorTipoProducto(loCodEdiciones);
+                    var lstDevoluciones = new ProductoBLL().ObtenerDevolucionesPorTipoProducto(loCodEdiciones, fechaDesde);
 
                     if (lstDevoluciones.Count > 0)
                     {
