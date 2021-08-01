@@ -270,62 +270,60 @@
             if (pOperacion == undefined) {                
                 return;
             }
-            if (pOperacion == "Hoy") {
-                $('#btnHoy').attr('class', 'btn btn-outline btn-success m-l-xs active');
-                $('#btn7dias').attr('class', 'btn btn-outline btn-success m-l-xs');
-                $('#btnEsteMes').attr('class', 'btn btn-outline btn-success m-l-xs');
-                $('#btn30dias').attr('class', 'btn btn-outline btn-success m-l-xs');
-                $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success m-l-xs');
-                $('#btnFiltro').attr('class', 'btn btn-outline btn-success m-l-xs');
-            } else {
-                if (pOperacion == "7dias") {
+
+            switch (pOperacion) {
+                case "Hoy":
+                    $('#btnHoy').attr('class', 'btn btn-outline btn-success m-l-xs active');
+                    $('#btn7dias').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btnEsteMes').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btn30dias').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btnFiltro').attr('class', 'btn btn-outline btn-success m-l-xs');        
+                    break;
+
+                case "7dias":
                     $('#btnHoy').attr('class', 'btn btn-outline btn-success m-l-xs');
                     $('#btn7dias').attr('class', 'btn btn-outline btn-success m-l-xs active');
                     $('#btnEsteMes').attr('class', 'btn btn-outline btn-success m-l-xs');
                     $('#btn30dias').attr('class', 'btn btn-outline btn-success m-l-xs');
                     $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success m-l-xs');
                     $('#btnFiltro').attr('class', 'btn btn-outline btn-success m-l-xs');
-                }
-                else {   
-                    if (pOperacion == "EsteMes") {
-                        $('#btnHoy').attr('class', 'btn btn-outline btn-success m-l-xs');
-                        $('#btn7dias').attr('class', 'btn btn-outline btn-success m-l-xs');
-                        $('#btnEsteMes').attr('class', 'btn btn-outline btn-success m-l-xs active');
-                        $('#btn30dias').attr('class', 'btn btn-outline btn-success m-l-xs');
-                        $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success m-l-xs');
-                        $('#btnFiltro').attr('class', 'btn btn-outline btn-success m-l-xs');
-                    }
-                    else {
-                        if (pOperacion == "30dias") {
-                            $('#btnHoy').attr('class', 'btn btn-outline btn-success m-l-xs');
-                            $('#btn7dias').attr('class', 'btn btn-outline btn-success m-l-xs');
-                            $('#btnEsteMes').attr('class', 'btn btn-outline btn-success m-l-xs');
-                            $('#btn30dias').attr('class', 'btn btn-outline btn-success m-l-xs active');
-                            $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success m-l-xs');
-                            $('#btnFiltro').attr('class', 'btn btn-outline btn-success m-l-xs');
-                        }
-                        else {
-                            if (pOperacion == "EsteAnio") {
-                                $('#btnHoy').attr('class', 'btn btn-outline btn-success m-l-xs');
-                                $('#btn7dias').attr('class', 'btn btn-outline btn-success m-l-xs');
-                                $('#btnEsteMes').attr('class', 'btn btn-outline btn-success m-l-xs');
-                                $('#btn30dias').attr('class', 'btn btn-outline btn-success m-l-xs');
-                                $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success m-l-xs active');
-                                $('#btnFiltro').attr('class', 'btn btn-outline btn-success m-l-xs');
-                            }
-                            else {
-                                if (pOperacion == "Filtro") {
-                                    $('#btnHoy').attr('class', 'btn btn-outline btn-success m-l-xs');
-                                    $('#btn7dias').attr('class', 'btn btn-outline btn-success m-l-xs');
-                                    $('#btnEsteMes').attr('class', 'btn btn-outline btn-success m-l-xs');
-                                    $('#btn30dias').attr('class', 'btn btn-outline btn-success m-l-xs');
-                                    $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success m-l-xs');
-                                    $('#btnFiltro').attr('class', 'btn btn-outline btn-success m-l-xs active');
-                                }
-                            }
-                        }
-                    }
-                }
+                    break;
+
+                case "EsteMes":
+                    $('#btnHoy').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btn7dias').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btnEsteMes').attr('class', 'btn btn-outline btn-success m-l-xs active');
+                    $('#btn30dias').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btnFiltro').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    break;
+
+                case "30dias":
+                    $('#btnHoy').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btn7dias').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btnEsteMes').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btn30dias').attr('class', 'btn btn-outline btn-success m-l-xs active');
+                    $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btnFiltro').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    break;
+
+                case "EsteAnio":
+                    $('#btnHoy').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btn7dias').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btnEsteMes').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btn30dias').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success m-l-xs active');
+                    $('#btnFiltro').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    break;
+
+                default:
+                    $('#btnHoy').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btn7dias').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btnEsteMes').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btn30dias').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btnFiltro').attr('class', 'btn btn-outline btn-success m-l-xs active');
             }
         }
 

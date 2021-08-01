@@ -48,18 +48,40 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <div class="col-md-6">
-                                        <div class="form-group" id="dpFecha">
-                                            <label class="control-label">Selección de rango</label>
-                                            <div style="display:flex; align-items:center">
-                                                <div class="input-daterange input-group" id="datepicker">
-                                                    <asp:TextBox ID="txtFechaDesde" runat="server" CssClass="input-sm form-control" autocomplete="off"></asp:TextBox>
-                                                    <span class="input-group-addon">a</span>
-                                                    <asp:TextBox ID="txtFechaHasta" runat="server" CssClass="input-sm form-control" autocomplete="off"></asp:TextBox>
+                                    <div class="col-md-12">
+                                        <div class="form-group space-15" id="mode">
+                                            <button id="btnHoy" class="btn btn-outline btn-success m-l-xs active" type="button" onclick="grafico('Hoy')">Hoy</button>
+                                            <button id="btn7dias" class="btn btn-outline btn-success m-l-xs" type="button" onclick="grafico('7dias')">Últimos 7 días</button>
+                                            <button id="btnEsteMes" class="btn btn-outline btn-success m-l-xs" type="button" onclick="grafico('EsteMes')">Este mes</button>
+                                            <button id="btn30dias" class="btn btn-outline btn-success m-l-xs" type="button" onclick="grafico('30dias')">Últimos 30 días</button>
+                                            <button id="btnEsteAnio" class="btn btn-outline btn-success m-l-xs" type="button" onclick="grafico('EsteAnio')">Este año</button>
+                                            <button id="btnFiltro" class="btn btn-outline btn-success m-l-xs" type="button" onclick="botonSeleccionado('Filtro')" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Aplicar Filtro</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="collapse" id="collapseExample">
+                                        <div class="card card-body">
+                                            <div class="row">
+                                                <div class="col-sm-8 m-t-xs">
+                                                    <div class="col-md-6">
+                                                        <div class="form-group" id="dpFecha">
+                                                            <label class="control-label">Selección de rango</label>
+                                                            <div style="display:flex; align-items:center">
+                                                                <div class="input-daterange input-group" id="datepicker">
+                                                                    <asp:TextBox ID="txtFechaDesde" runat="server" CssClass="input-sm form-control" autocomplete="off"></asp:TextBox>
+                                                                    <span class="input-group-addon">a</span>
+                                                                    <asp:TextBox ID="txtFechaHasta" runat="server" CssClass="input-sm form-control" autocomplete="off"></asp:TextBox>
+                                                                </div>
+                                                                <button id="btnFiltrar" class="btn btn-white m-l-xs" type="button" onclick="FiltrarPorRangoDeFecha()">Filtrar</button>
+                                                            </div>
+                                                        </div>                                                                                                              
+                                                    </div>                                                     
                                                 </div>
-                                                <button id="btnFiltrar" class="btn btn-white m-l-xs" type="button" onclick="grafico()">Filtrar</button>
                                             </div>
-                                        </div>  
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -116,7 +138,38 @@
             });
         }
 
-        function grafico() {
+        function grafico(pOperacion) {
+            $('#collapseExample').removeClass('collapse in');
+            $('#collapseExample').addClass('collapse');
+            var loTipoProducto = $(".select2_tipoproducto").val();
+            var loProducto = $('.chosen-select').val(); 
+
+            botonSeleccionado(pOperacion);
+
+            $.ajax({
+                type: "POST",
+                url: "ReporteIngresoDevolucion.aspx/ObtenerRatioIngresosDevoluciones",
+                data: JSON.stringify({'pProductos':loProducto,'pTipoProducto':loTipoProducto, 'pOperacion':pOperacion}),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {                   
+                    if (data.d != "") {
+                        drawChart(data.d);
+                    }
+                },
+                failure: function (data) {
+                    swal({
+                        title: "Generación de Gráfico",
+                        text: "El gráfico no se puedo generar.",
+                        type: "warning",
+                        confirmButtonText: 'Aceptar'
+                    });
+                }
+            });
+
+        }
+
+        function FiltrarPorRangoDeFecha() {
             var loProducto = $('.chosen-select').val();
             var loTipoProducto = $(".select2_tipoproducto").val();
             var txtFechaDesde = $(<%=txtFechaDesde.ClientID%>).val();
@@ -124,7 +177,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "ReporteIngresoDevolucion.aspx/ObtenerRatioIngresosDevoluciones",
+                url: "ReporteIngresoDevolucion.aspx/ObtenerRatioIngresosDevolucionesPorFiltro",
                 data: JSON.stringify({'pProductos':loProducto,'pTipoProducto':loTipoProducto, 'pFechaDesde':txtFechaDesde, 'pFechaHasta':txtFechaHasta}),
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -142,6 +195,67 @@
                     });
                 }
             });
+        }
+
+        function botonSeleccionado(pOperacion) {
+            if (pOperacion == undefined) {                
+                return;
+            }
+
+            switch (pOperacion) {
+                case "Hoy":
+                    $('#btnHoy').attr('class', 'btn btn-outline btn-success m-l-xs active');
+                    $('#btn7dias').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btnEsteMes').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btn30dias').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btnFiltro').attr('class', 'btn btn-outline btn-success m-l-xs');        
+                    break;
+
+                case "7dias":
+                    $('#btnHoy').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btn7dias').attr('class', 'btn btn-outline btn-success m-l-xs active');
+                    $('#btnEsteMes').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btn30dias').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btnFiltro').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    break;
+
+                case "EsteMes":
+                    $('#btnHoy').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btn7dias').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btnEsteMes').attr('class', 'btn btn-outline btn-success m-l-xs active');
+                    $('#btn30dias').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btnFiltro').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    break;
+
+                case "30dias":
+                    $('#btnHoy').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btn7dias').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btnEsteMes').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btn30dias').attr('class', 'btn btn-outline btn-success m-l-xs active');
+                    $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btnFiltro').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    break;
+
+                case "EsteAnio":
+                    $('#btnHoy').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btn7dias').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btnEsteMes').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btn30dias').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success m-l-xs active');
+                    $('#btnFiltro').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    break;
+
+                default:
+                    $('#btnHoy').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btn7dias').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btnEsteMes').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btn30dias').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success m-l-xs');
+                    $('#btnFiltro').attr('class', 'btn btn-outline btn-success m-l-xs active');
+            }
         }
     </script>
     <script type="text/javascript">
