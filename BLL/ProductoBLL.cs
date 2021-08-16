@@ -379,7 +379,7 @@ namespace BLL
                                 COD_PRODUCTO = loProducto.ID_PRODUCTO,
                                 TIPO_PRODUCTO = loProducto.TipoProducto.DESCRIPCION,
                                 NOMBRE_PRODUCTO = loProducto.NOMBRE,
-                                DESCRIPCION = loProducto.DESCRIPCION,
+                                DESCRIPCION = loProductoEdicion.DESCRIPCION,
                                 EDICION = loProductoEdicion.EDICION,
                                 CANTIDAD_DISPONIBLE = loProductoEdicion.CANTIDAD_DISPONIBLE
                             };

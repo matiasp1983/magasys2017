@@ -9,7 +9,7 @@
         <EntityTypeShape EntityType="MAGASYSModel.Cliente" Width="1.5" PointX="14.25" PointY="23.875" />
         <EntityTypeShape EntityType="MAGASYSModel.Cobro" Width="1.5" PointX="6" PointY="27" />
         <EntityTypeShape EntityType="MAGASYSModel.Coleccion" Width="1.5" PointX="10.5" PointY="49" />
-        <EntityTypeShape EntityType="MAGASYSModel.DetalleCobro" Width="1.5" PointX="8.25" PointY="27.25" />
+        <EntityTypeShape EntityType="MAGASYSModel.DetalleCobro" Width="1.5" PointX="9" PointY="27.25" />
         <EntityTypeShape EntityType="MAGASYSModel.DetalleProductoDevolucion" Width="1.5" PointX="11.25" PointY="31.375" />
         <EntityTypeShape EntityType="MAGASYSModel.DetalleProductoIngreso" Width="1.5" PointX="11.25" PointY="39.125" />
         <EntityTypeShape EntityType="MAGASYSModel.DetalleVenta" Width="1.5" PointX="11.25" PointY="35" />

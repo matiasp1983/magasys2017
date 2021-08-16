@@ -87,11 +87,7 @@ namespace PL.AdminDashboard
             //    liReportes.Attributes["class"] = "active";
             //    liDevolucionProductos.Attributes["class"] = "active";
             //}
-            if (loActivePage.Equals("Proveedor.aspx"))
-            {
-                liProveedores.Attributes["class"] = "active";
-                liAltaProveedor.Attributes["class"] = "active";
-            }
+
             if (loActivePage.Equals("ProveedorListado.aspx"))
             {
                 liProveedores.Attributes["class"] = "active";
@@ -232,9 +228,16 @@ namespace PL.AdminDashboard
             {
                 if (pUsuario.ID_ROL.Equals(RolUsuario.Administrador))
                 {
+                    liAltaProveedor.Visible = true;
                     liUsuarios.Visible = true;
                     liNegocio.Visible = true;
                     liEmpleado.Visible = true;
+
+                    if (loActivePage.Equals("Proveedor.aspx"))
+                    {
+                        liProveedores.Attributes["class"] = "active";
+                        liAltaProveedor.Attributes["class"] = "active";
+                    }
 
                     if (loActivePage.Equals("Usuario.aspx"))
                     {

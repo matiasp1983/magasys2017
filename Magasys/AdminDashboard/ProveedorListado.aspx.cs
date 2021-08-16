@@ -82,6 +82,14 @@ namespace PL.AdminDashboard
         {
             try
             {
+                BLL.DAL.Usuario loUsuario = loUsuario = (BLL.DAL.Usuario)Session[AdminDashboardSessionBLL.DefaultSessionsId.Usuario.ToString()];
+
+                if (loUsuario.ID_ROL.Equals(RolUsuario.Empleado))
+                {
+                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.InfoModal(Message.MsjeUsuarioSinAcceso)); //"El usuario no tiene autorización para la acción seleccionada."
+                    return;
+                }
+
                 var oProveedor = new BLL.ProveedorBLL().ObtenerProveedor(Convert.ToInt64(((HtmlButton)sender).Attributes["value"]));
                 Session.Add(Enums.Session.Proveedor.ToString(), oProveedor);
                 Response.Redirect("ProveedorEditar.aspx", false);
@@ -99,6 +107,14 @@ namespace PL.AdminDashboard
 
             try
             {
+                BLL.DAL.Usuario loUsuario = loUsuario = (BLL.DAL.Usuario)Session[AdminDashboardSessionBLL.DefaultSessionsId.Usuario.ToString()];
+
+                if (loUsuario.ID_ROL.Equals(RolUsuario.Empleado))
+                {
+                    Page.ClientScript.RegisterStartupScript(GetType(), "Modal", MessageManager.InfoModal(Message.MsjeUsuarioSinAcceso)); //"El usuario no tiene autorización para la acción seleccionada."
+                    return;
+                }
+
                 if (!String.IsNullOrEmpty(hdIdProveedorBaja.Value))
                 {
                     var loIdProveedor = Convert.ToInt64(hdIdProveedorBaja.Value);

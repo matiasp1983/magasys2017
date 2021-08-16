@@ -11,6 +11,7 @@
         #region Mensajes Generales
 
         public const string MsjeSinResultados = "No se encontraron datos para la búsqueda seleccionada.";
+        public const string MsjeUsuarioSinAcceso = "El usuario no tiene autorización para la acción seleccionada.";
 
         #endregion
 
