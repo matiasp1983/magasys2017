@@ -277,6 +277,7 @@ namespace PL.AdminDashboard
                 ddlEstado.DataTextField = "NOMBRE";
                 ddlEstado.DataValueField = "ID_ESTADO";
                 ddlEstado.DataBind();
+                ddlEstado.Items.Insert(0, new ListItem(String.Empty, String.Empty));
             }
             catch (Exception ex)
             {

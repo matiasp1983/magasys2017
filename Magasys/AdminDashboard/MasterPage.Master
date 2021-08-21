@@ -89,8 +89,8 @@
                         <ul class="nav nav-second-level collapse">
                             <li id="liProductoIngreso" runat="server"><a href="ProductoIngreso.aspx">Ingreso de Producto</a></li>
                             <li id="liProductoIngresoListado" runat="server"><a href="ProductoIngresoListado.aspx">Listado Ingreso de Producto</a></li>
-                            <li id="liProductoDevolucion" runat="server"><a href="ProductoDevolucion.aspx">Registrar Devoluciones</a></li>
-                            <li id="liProductoDevolucionListado" runat="server"><a href="ProductoDevolucionListado.aspx">Listado de Devoluciones</a></li>
+                            <li id="liProductoDevolucion" runat="server"><a href="ProductoDevolucion.aspx">Registrar Devoluciones a proveedores</a></li>
+                            <li id="liProductoDevolucionListado" runat="server"><a href="ProductoDevolucionListado.aspx">Listado de Devoluciones a proveedores</a></li>
                         </ul>
                     </li>
                     <li id="liReserva" runat="server">

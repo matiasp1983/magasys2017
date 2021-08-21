@@ -197,7 +197,10 @@ namespace BLL
             {
                 using (var loRepReserva = new Repository<Reserva>())
                 {
-                    lstReserva = loRepReserva.Search(p => p.COD_ESTADO == oReservaFiltro.COD_ESTADO).OrderByDescending(p => p.ID_RESERVA).ToList();
+                    if (oReservaFiltro.COD_ESTADO != 0)
+                        lstReserva = loRepReserva.Search(p => p.COD_ESTADO == oReservaFiltro.COD_ESTADO).OrderByDescending(p => p.ID_RESERVA).ToList();
+                    else
+                        lstReserva = loRepReserva.FindAll().OrderByDescending(p => p.ID_RESERVA).ToList();
 
                     if (lstReserva.Count > 0)
                     {
@@ -267,6 +270,8 @@ namespace BLL
                         if (loReserva.COD_TIPO_RESERVA == 1)
                         {
                             ReservaEdicion oReservaEdicion = new ReservaEdicionBLL().ObtenerReservaEdicionDeReservaUnica(loReserva.ID_RESERVA);
+                            if (oReservaEdicion == null)
+                                continue;
                             oReservaListado.EDICION = new ProductoEdicionBLL().ObtenerProductoEdicionPorId(oReservaEdicion.COD_PROD_EDICION).EDICION;
                         }
 

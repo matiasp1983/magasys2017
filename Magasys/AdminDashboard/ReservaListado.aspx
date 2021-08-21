@@ -189,7 +189,8 @@
                                                 <th class="text-left">Producto</th>
                                                 <th data-hide="phone,tablet">Tipo producto</th>
                                                 <th data-hide="phone,tablet">Tipo reserva</th>
-                                                 <th data-hide="phone,tablet">Forma de entrega</th>
+                                                <th data-hide="phone,tablet">Forma de entrega</th>
+                                                <th class="text-left">Estado</th>
                                                 <th class="text-right" data-sort-ignore="true">Acción</th>
                                             </tr>
                                         </thead>
@@ -198,7 +199,7 @@
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <td colspan="8">
+                                                <td colspan="9">
                                                     <ul class="pagination pull-right"></ul>
                                                 </td>
                                             </tr>
@@ -227,7 +228,10 @@
                                         </td>     
                                         <td class="text-left">
                                             <asp:Label ID="lblFormaEntrega" runat="server" Text='<%#Eval("FORMA_ENTREGA").ToString()%>'></asp:Label>
-                                        </td>                                          
+                                        </td>       
+                                        <td class="text-left">
+                                            <asp:Label ID="lblEstado" runat="server" Text='<%#Eval("ESTADO").ToString()%>'></asp:Label>
+                                        </td>                                        
                                         <td class="text-right">
                                             <div class="btn-group">
                                                 <button runat="server" id="btnVisualizar" class="btn btn-outline btn-success btn-xl" title="Visualizar" onserverclick="BtnVisualizar_Click"><i class="fa fa-search"></i></button>
