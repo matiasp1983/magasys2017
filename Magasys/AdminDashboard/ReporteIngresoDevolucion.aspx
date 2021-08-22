@@ -134,7 +134,8 @@
                 autoclose: true,
                 language: "es",
                 format: "dd/mm/yyyy",
-                keyboardNavigation: false  
+                keyboardNavigation: false,
+                endDate: "today"
             });
         }
 

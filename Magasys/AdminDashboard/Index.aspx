@@ -140,7 +140,8 @@
                 autoclose: true,
                 language: "es",
                 format: "dd/mm/yyyy",
-                keyboardNavigation: false  
+                keyboardNavigation: false,
+                endDate: "today"
             });
         }
 
@@ -326,69 +327,6 @@
                     $('#btnFiltro').attr('class', 'btn btn-outline btn-success m-l-xs active');
             }
         }
-
-        //function botonSeleccionado(pOperacion) {
-        //    if (pOperacion == undefined) {                
-        //        return;
-        //    }
-        //    if (pOperacion == "Hoy") {
-        //        $('#btnHoy').attr('class', 'btn btn-outline btn-success dim m-l-xs active');
-        //        $('#btn7dias').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-        //        $('#btnEsteMes').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-        //        $('#btn30dias').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-        //        $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-        //        $('#btnFiltro').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-        //    } else {
-        //        if (pOperacion == "7dias") {
-        //            $('#btnHoy').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-        //            $('#btn7dias').attr('class', 'btn btn-outline btn-success dim m-l-xs active');
-        //            $('#btnEsteMes').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-        //            $('#btn30dias').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-        //            $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-        //            $('#btnFiltro').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-        //        }
-        //        else {   
-        //            if (pOperacion == "EsteMes") {
-        //                $('#btnHoy').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-        //                $('#btn7dias').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-        //                $('#btnEsteMes').attr('class', 'btn btn-outline btn-success dim m-l-xs active');
-        //                $('#btn30dias').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-        //                $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-        //                $('#btnFiltro').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-        //            }
-        //            else {
-        //                if (pOperacion == "30dias") {
-        //                    $('#btnHoy').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-        //                    $('#btn7dias').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-        //                    $('#btnEsteMes').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-        //                    $('#btn30dias').attr('class', 'btn btn-outline btn-success dim m-l-xs active');
-        //                    $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-        //                    $('#btnFiltro').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-        //                }
-        //                else {
-        //                    if (pOperacion == "EsteAnio") {
-        //                        $('#btnHoy').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-        //                        $('#btn7dias').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-        //                        $('#btnEsteMes').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-        //                        $('#btn30dias').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-        //                        $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success dim m-l-xs active');
-        //                        $('#btnFiltro').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-        //                    }
-        //                    else {
-        //                        if (pOperacion == "Filtro") {
-        //                            $('#btnHoy').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-        //                            $('#btn7dias').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-        //                            $('#btnEsteMes').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-        //                            $('#btn30dias').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-        //                            $('#btnEsteAnio').attr('class', 'btn btn-outline btn-success dim m-l-xs');
-        //                            $('#btnFiltro').attr('class', 'btn btn-outline btn-success dim m-l-xs active');
-        //                        }
-        //                    }
-        //                }
-        //            }
-        //        }
-        //    }
-        //}
     </script>
     <script type="text/javascript">
         google.charts.load('current', { 'packages': ['bar'] });
