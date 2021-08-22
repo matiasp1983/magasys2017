@@ -77,7 +77,7 @@
                     <div class="ibox">
                         <div class="ibox-content">
                             <div style="text-align: right;">                                
-                                <label class="m-r"><input id="chkRegresarAlKiosco" runat="server" type="checkbox" class="js-switch" checked />&nbsp;&nbsp;&nbsp;Regresar al Kiosco</label>&nbsp;
+                                <label class="m-r"><input id="chkRegresarAlKiosco" runat="server" type="checkbox" class="js-switch" />&nbsp;&nbsp;&nbsp;Regresar al Kiosco</label>&nbsp;
                                 <button type="button" id="btnNuevo" runat="server" class="ladda-button btn btn-info" onserverclick="BtnGenerarHojaRuta_Click">
                                     <i class="fa fa-map-o"></i>&nbsp;&nbsp;<span>Generar hoja de ruta</span>
                                 </button>                                
