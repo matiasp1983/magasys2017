@@ -51,7 +51,7 @@ namespace BLL
 
             using (var loRepMensaje = new Repository<Mensaje>())
             {
-                lstMensaje = loRepMensaje.Search(p => p.COD_CLIENTE == codCliente && p.FECHA_MODIFICACION_MENSAJE == null).OrderByDescending(p => p.ID_MENSAJE).ToList();
+                lstMensaje = loRepMensaje.Search(p => p.COD_CLIENTE == codCliente && p.FECHA_MODIFICACION_MENSAJE == null).OrderByDescending(p => p.ID_MENSAJE).Take(10).ToList();
             }
 
             return lstMensaje;
