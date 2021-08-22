@@ -45,13 +45,20 @@ namespace BLL
         /// </summary>
         /// <param name="codCliente"></param>
         /// <returns></returns>
-        public List<Mensaje> ObtenerMensajes(long codCliente)
+        public List<Mensaje> ObtenerMensajes(long codCliente, string pTake)
         {
             List<Mensaje> lstMensaje = null;
+            int lvTake = 0;
 
             using (var loRepMensaje = new Repository<Mensaje>())
             {
-                lstMensaje = loRepMensaje.Search(p => p.COD_CLIENTE == codCliente && p.FECHA_MODIFICACION_MENSAJE == null).OrderByDescending(p => p.ID_MENSAJE).Take(10).ToList();
+                if (pTake != "Todas")
+                {
+                    lvTake = Convert.ToInt32(pTake);
+                    lstMensaje = loRepMensaje.Search(p => p.COD_CLIENTE == codCliente && p.FECHA_MODIFICACION_MENSAJE == null).OrderByDescending(p => p.ID_MENSAJE).Take(lvTake).ToList();
+                }
+                else
+                    lstMensaje = loRepMensaje.Search(p => p.COD_CLIENTE == codCliente && p.FECHA_MODIFICACION_MENSAJE == null).OrderByDescending(p => p.ID_MENSAJE).ToList();
             }
 
             return lstMensaje;

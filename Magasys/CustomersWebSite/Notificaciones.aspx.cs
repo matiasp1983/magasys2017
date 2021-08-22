@@ -26,7 +26,7 @@ namespace PL.CustomersWebSite
             var oCliente = new BLL.ClienteBLL().ObtenerClientePorUsuario(oUsuario.ID_USUARIO);
             new BLL.DAL.MAGASYSEntities().EliminarNotificacionesPorCiente(oCliente.ID_CLIENTE);
             CargarNotificaciones();
-        }        
+        }
 
         #endregion
 
@@ -36,7 +36,7 @@ namespace PL.CustomersWebSite
         {
             var oUsuario = (BLL.DAL.Usuario)Session[CustomersWebSiteSessionBLL.DefaultSessionsId.Usuario.ToString()];
             var oClienteSession = new BLL.ClienteBLL().ObtenerClientePorUsuario(oUsuario.ID_USUARIO);
-            var lstNotificaciones = new BLL.MensajeBLL().ObtenerMensajes(oClienteSession.ID_CLIENTE);
+            var lstNotificaciones = new BLL.MensajeBLL().ObtenerMensajes(oClienteSession.ID_CLIENTE, ddlNotificaciones.SelectedValue);
             if (lstNotificaciones != null && lstNotificaciones.Count > 0)
             {
                 lsvNotificaciones.DataSource = lstNotificaciones;
@@ -94,8 +94,13 @@ namespace PL.CustomersWebSite
             }
 
             return loResultado;
-        } 
+        }
 
         #endregion
+
+        protected void ddlNotificaciones_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CargarNotificaciones();
+        }
     }
 }

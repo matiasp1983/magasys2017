@@ -11,11 +11,18 @@
                         <div class="ibox-title">
                             <h5>Notificaciones</h5>
                         </div>
-                        <div class="ibox-content">
+                        <div class="ibox-content">                            
                             <a class="pull-right btn btn-xs btn-white" data-toggle="modal" data-target="#ModalEliminarNotificaciones" runat="server" visible="false" id="btnEliminarNotificaciones">Eliminar Todos</a>
                             <p>
-                                Te informamos las novedades sobre el estado de tus reservas.
-                            </p>                            
+                                Te informamos las novedades sobre el estado de tus reservas.                                
+                            </p>
+                            <asp:DropDownList ID="ddlNotificaciones" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlNotificaciones_SelectedIndexChanged">
+                                <asp:ListItem Value="10">10 notificaciones</asp:ListItem>
+                                <asp:ListItem Value="50">50 notificaciones</asp:ListItem>
+                                <asp:ListItem Value="100">100 notificaciones</asp:ListItem>
+                                <asp:ListItem Value="150">150 notificaciones</asp:ListItem>
+                                <asp:ListItem>Todas</asp:ListItem>
+                            </asp:DropDownList>
                             <div class="sk-spinner sk-spinner-double-bounce">
                                 <div class="sk-double-bounce1"></div>
                                 <div class="sk-double-bounce2"></div>
