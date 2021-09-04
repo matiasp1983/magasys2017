@@ -92,7 +92,7 @@
                                 </div>                               
                             </div>
                             <div class="row">    
-                                <div class="col-sm-12">
+                                <div class="col-sm-12" style="padding-top: 100px;">
                                     <%--<div class="hr-line-dashed"></div>--%>
                                     <div id="piechart" style="width: 1000px; height: 500px;"></div>
                                 </div>                                
@@ -345,8 +345,8 @@
                 vAxis: { // Valores verticales
                     title:"Cantidad"
                 },
-                width: 600,
-                height: 400,
+                width: 1000,
+                height: 500,
                 legend: { position: 'top', maxLines: 3 },
                 bar: { groupWidth: '75%' },
                 isStacked: true,
@@ -363,8 +363,8 @@
 
             var options = {
                 //title: 'Ventas por tipo de producto',
-                width: 800,
-                height: 300
+                width: 900,
+                height: 400
             };
 
             var chart = new google.visualization.PieChart(document.getElementById('piechart'));
